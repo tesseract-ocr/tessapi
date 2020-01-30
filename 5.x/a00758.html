@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/cutil/oldlist.h File Reference</title>
+<title>tesseract: /tesseract/src/classify/picofeat.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,520 +87,223 @@ $(document).ready(function(){initNavTree('a00758.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Macros</a> &#124;
-<a href="#typedef-members">Typedefs</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
-<div class="title">oldlist.h File Reference</div>  </div>
+<div class="title">picofeat.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
+<div class="textblock"><code>#include &quot;<a class="el" href="a00746_source.html">ocrfeatures.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00554_source.html">params.h</a>&quot;</code><br />
+</div>
 <p><a href="a00758_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02920.html">list_rec</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:ae212530ca629c67513698e988c705a5a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00758.html#ae212530ca629c67513698e988c705a5a">NIL_LIST</a>&#160;&#160;&#160;static_cast&lt;<a class="el" href="a00758.html#a5a5301af82c2874d80478a89424eb475">LIST</a>&gt;(nullptr)</td></tr>
-<tr class="separator:ae212530ca629c67513698e988c705a5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb120d4c08ce52b5dfe524f0419a9154"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00758.html#adb120d4c08ce52b5dfe524f0419a9154">list_rest</a>(l)&#160;&#160;&#160;((l) ? (l)-&gt;next : <a class="el" href="a00758.html#ae212530ca629c67513698e988c705a5a">NIL_LIST</a>)</td></tr>
-<tr class="separator:adb120d4c08ce52b5dfe524f0419a9154"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69547be764424f18b0be535400747978"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00758.html#a69547be764424f18b0be535400747978">first_node</a>(l)&#160;&#160;&#160;((l) ? (l)-&gt;node : <a class="el" href="a00758.html#ae212530ca629c67513698e988c705a5a">NIL_LIST</a>)</td></tr>
-<tr class="separator:a69547be764424f18b0be535400747978"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2cf19ba78be6b54f66823d58f34f2a53"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00758.html#a2cf19ba78be6b54f66823d58f34f2a53">iterate</a>(l)&#160;&#160;&#160;for (; (l) != <a class="el" href="a00758.html#ae212530ca629c67513698e988c705a5a">NIL_LIST</a>; (l) = <a class="el" href="a00758.html#adb120d4c08ce52b5dfe524f0419a9154">list_rest</a>(l))</td></tr>
-<tr class="separator:a2cf19ba78be6b54f66823d58f34f2a53"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a42cc2d9c5eabb2193e2e64df41adedf4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00758.html#a42cc2d9c5eabb2193e2e64df41adedf4">set_rest</a>(l,  cell)&#160;&#160;&#160;((l)-&gt;next = (cell))</td></tr>
-<tr class="separator:a42cc2d9c5eabb2193e2e64df41adedf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a547a9b8f4afa51bb6c9066d5848c068d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00758.html#a547a9b8f4afa51bb6c9066d5848c068d">MAX_PICO_FEATURES</a>&#160;&#160;&#160;(1000)</td></tr>
+<tr class="separator:a547a9b8f4afa51bb6c9066d5848c068d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35f5a174efc9c6197837aaf5544c78f2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00758.html#a35f5a174efc9c6197837aaf5544c78f2">GetPicoFeatureLength</a>()&#160;&#160;&#160;(<a class="el" href="a00758.html#a5fb0325a4196a4ea24ba3d256844e467">PicoFeatureLength</a>)</td></tr>
+<tr class="separator:a35f5a174efc9c6197837aaf5544c78f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:a7fbe993c37b3887d37d12ef37484dcc3"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00758.html#a7fbe993c37b3887d37d12ef37484dcc3">int_compare</a> = int(*)(void *, void *)</td></tr>
-<tr class="separator:a7fbe993c37b3887d37d12ef37484dcc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1323134202faaef1ddc50eab59bafa33"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00758.html#a1323134202faaef1ddc50eab59bafa33">void_dest</a> = void(*)(void *)</td></tr>
-<tr class="separator:a1323134202faaef1ddc50eab59bafa33"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a5301af82c2874d80478a89424eb475"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00758.html#a5a5301af82c2874d80478a89424eb475">LIST</a> = <a class="el" href="a02920.html">list_rec</a> *</td></tr>
-<tr class="separator:a5a5301af82c2874d80478a89424eb475"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a25c105f6b5ef77e1565388f318056f8c"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00758.html#a25c105f6b5ef77e1565388f318056f8c">IntParams</a> { <a class="el" href="a00758.html#a25c105f6b5ef77e1565388f318056f8ca52fc06c8638074204be3a7f9a35d65b1">IntX</a>, 
+<a class="el" href="a00758.html#a25c105f6b5ef77e1565388f318056f8ca87c5652cf1b4b1a9a7f7b91a9bc48808">IntY</a>, 
+<a class="el" href="a00758.html#a25c105f6b5ef77e1565388f318056f8ca37a015c1bac0b61d97b95193172240ed">IntDir</a>
+ }</td></tr>
+<tr class="separator:a25c105f6b5ef77e1565388f318056f8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41a4b5a66040b8b2deb004bd33909009"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00758.html#a41a4b5a66040b8b2deb004bd33909009">GeoParams</a> { <a class="el" href="a00758.html#a41a4b5a66040b8b2deb004bd33909009a45ab6326da25c47511791071ad13f62a">GeoBottom</a>, 
+<a class="el" href="a00758.html#a41a4b5a66040b8b2deb004bd33909009af270e2a7660aa4121f6693faa62de67c">GeoTop</a>, 
+<a class="el" href="a00758.html#a41a4b5a66040b8b2deb004bd33909009a1840e5fe9bffa7db328236bd0ad20bd7">GeoWidth</a>, 
+<a class="el" href="a00758.html#a41a4b5a66040b8b2deb004bd33909009af5bbc18811bb7a574c082e4a6f654db7">GeoCount</a>
+ }</td></tr>
+<tr class="separator:a41a4b5a66040b8b2deb004bd33909009"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac00e1c5d2ac3096e0928e2186aee1aac"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00758.html#ac00e1c5d2ac3096e0928e2186aee1aac">PICO_FEAT_PARAM_NAME</a> { <a class="el" href="a00758.html#ac00e1c5d2ac3096e0928e2186aee1aaca43884de5e2e87be26f9642b50135f98a">PicoFeatY</a>, 
+<a class="el" href="a00758.html#ac00e1c5d2ac3096e0928e2186aee1aaca9895f2baa648985ab8ee5586c1563511">PicoFeatDir</a>, 
+<a class="el" href="a00758.html#ac00e1c5d2ac3096e0928e2186aee1aacaf28d56154a908256d7b3beb62977e2fc">PicoFeatX</a>
+ }</td></tr>
+<tr class="separator:ac00e1c5d2ac3096e0928e2186aee1aac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:acd4ea858d7133e40518e0832ff9d94b2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00758.html#acd4ea858d7133e40518e0832ff9d94b2">count</a> (<a class="el" href="a00758.html#a5a5301af82c2874d80478a89424eb475">LIST</a> var_list)</td></tr>
-<tr class="separator:acd4ea858d7133e40518e0832ff9d94b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1fa3ecce52a0563f595b8f1428cc1211"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00758.html#a5a5301af82c2874d80478a89424eb475">LIST</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00758.html#a1fa3ecce52a0563f595b8f1428cc1211">delete_d</a> (<a class="el" href="a00758.html#a5a5301af82c2874d80478a89424eb475">LIST</a> list, void *key, <a class="el" href="a00758.html#a7fbe993c37b3887d37d12ef37484dcc3">int_compare</a> <a class="el" href="a01499.html#a7ee72f89f415da05b3dec8190ba140ef">is_equal</a>)</td></tr>
-<tr class="separator:a1fa3ecce52a0563f595b8f1428cc1211"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a338e68bdadcbdf51db4c7268c4529409"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00758.html#a5a5301af82c2874d80478a89424eb475">LIST</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00758.html#a338e68bdadcbdf51db4c7268c4529409">destroy</a> (<a class="el" href="a00758.html#a5a5301af82c2874d80478a89424eb475">LIST</a> list)</td></tr>
-<tr class="separator:a338e68bdadcbdf51db4c7268c4529409"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a1efc1a269e5bb5bf16c1a174363ba4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00758.html#a1a1efc1a269e5bb5bf16c1a174363ba4">destroy_nodes</a> (<a class="el" href="a00758.html#a5a5301af82c2874d80478a89424eb475">LIST</a> list, <a class="el" href="a00758.html#a1323134202faaef1ddc50eab59bafa33">void_dest</a> destructor)</td></tr>
-<tr class="separator:a1a1efc1a269e5bb5bf16c1a174363ba4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad9ec1d10cbd07fc3376ef300df603418"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00758.html#a5a5301af82c2874d80478a89424eb475">LIST</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00758.html#ad9ec1d10cbd07fc3376ef300df603418">last</a> (<a class="el" href="a00758.html#a5a5301af82c2874d80478a89424eb475">LIST</a> var_list)</td></tr>
-<tr class="separator:ad9ec1d10cbd07fc3376ef300df603418"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4a16ea0d766f4b3bc697142d5303a62c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00758.html#a5a5301af82c2874d80478a89424eb475">LIST</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00758.html#a4a16ea0d766f4b3bc697142d5303a62c">pop</a> (<a class="el" href="a00758.html#a5a5301af82c2874d80478a89424eb475">LIST</a> list)</td></tr>
-<tr class="separator:a4a16ea0d766f4b3bc697142d5303a62c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c4294375af81ab4c133b6b5a3679a16"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00758.html#a5a5301af82c2874d80478a89424eb475">LIST</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00758.html#a9c4294375af81ab4c133b6b5a3679a16">push</a> (<a class="el" href="a00758.html#a5a5301af82c2874d80478a89424eb475">LIST</a> list, void *element)</td></tr>
-<tr class="separator:a9c4294375af81ab4c133b6b5a3679a16"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1019c2e1108695bb4f33f83e02ee62ad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00758.html#a5a5301af82c2874d80478a89424eb475">LIST</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00758.html#a1019c2e1108695bb4f33f83e02ee62ad">push_last</a> (<a class="el" href="a00758.html#a5a5301af82c2874d80478a89424eb475">LIST</a> list, void *item)</td></tr>
-<tr class="separator:a1019c2e1108695bb4f33f83e02ee62ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d8af9328f064a9df6d6f88336dd054e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00758.html#a5a5301af82c2874d80478a89424eb475">LIST</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00758.html#a1d8af9328f064a9df6d6f88336dd054e">search</a> (<a class="el" href="a00758.html#a5a5301af82c2874d80478a89424eb475">LIST</a> list, void *key, <a class="el" href="a00758.html#a7fbe993c37b3887d37d12ef37484dcc3">int_compare</a> <a class="el" href="a01499.html#a7ee72f89f415da05b3dec8190ba140ef">is_equal</a>)</td></tr>
-<tr class="separator:a1d8af9328f064a9df6d6f88336dd054e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:ade0cbc6650cd99b83ecc2c1a828a4bee"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00758.html#ade0cbc6650cd99b83ecc2c1a828a4bee">classify_pico_feature_length</a> = 0.05</td></tr>
+<tr class="separator:ade0cbc6650cd99b83ecc2c1a828a4bee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fb0325a4196a4ea24ba3d256844e467"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00029.html#a86e51270628c53ce7e2c23b1c2b4490e">TESS_API</a> float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00758.html#a5fb0325a4196a4ea24ba3d256844e467">PicoFeatureLength</a></td></tr>
+<tr class="separator:a5fb0325a4196a4ea24ba3d256844e467"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a69547be764424f18b0be535400747978"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a69547be764424f18b0be535400747978">&#9670;&nbsp;</a></span>first_node</h2>
+<a id="a35f5a174efc9c6197837aaf5544c78f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35f5a174efc9c6197837aaf5544c78f2">&#9670;&nbsp;</a></span>GetPicoFeatureLength</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define first_node</td>
+          <td class="memname">#define GetPicoFeatureLength</td>
           <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">l</td><td>)</td>
-          <td>&#160;&#160;&#160;((l) ? (l)-&gt;node : <a class="el" href="a00758.html#ae212530ca629c67513698e988c705a5a">NIL_LIST</a>)</td>
+          <td class="paramname"></td><td>)</td>
+          <td>&#160;&#160;&#160;(<a class="el" href="a00758.html#a5fb0325a4196a4ea24ba3d256844e467">PicoFeatureLength</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<hr  />
+ <h2><a class="anchor" id="autotoc_md32"></a>
+Public Function Prototypes</h2>
 
-<p class="definition">Definition at line <a class="el" href="a00758_source.html#l00084">84</a> of file <a class="el" href="a00758_source.html">oldlist.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00758_source.html#l00056">56</a> of file <a class="el" href="a00758_source.html">picofeat.h</a>.</p>
 
 </div>
 </div>
-<a id="a2cf19ba78be6b54f66823d58f34f2a53"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2cf19ba78be6b54f66823d58f34f2a53">&#9670;&nbsp;</a></span>iterate</h2>
+<a id="a547a9b8f4afa51bb6c9066d5848c068d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a547a9b8f4afa51bb6c9066d5848c068d">&#9670;&nbsp;</a></span>MAX_PICO_FEATURES</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define iterate</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">l</td><td>)</td>
-          <td>&#160;&#160;&#160;for (; (l) != <a class="el" href="a00758.html#ae212530ca629c67513698e988c705a5a">NIL_LIST</a>; (l) = <a class="el" href="a00758.html#adb120d4c08ce52b5dfe524f0419a9154">list_rest</a>(l))</td>
+          <td class="memname">#define MAX_PICO_FEATURES&#160;&#160;&#160;(1000)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00758_source.html#l00092">92</a> of file <a class="el" href="a00758_source.html">oldlist.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00758_source.html#l00045">45</a> of file <a class="el" href="a00758_source.html">picofeat.h</a>.</p>
 
 </div>
 </div>
-<a id="adb120d4c08ce52b5dfe524f0419a9154"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adb120d4c08ce52b5dfe524f0419a9154">&#9670;&nbsp;</a></span>list_rest</h2>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="a41a4b5a66040b8b2deb004bd33909009"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41a4b5a66040b8b2deb004bd33909009">&#9670;&nbsp;</a></span>GeoParams</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define list_rest</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">l</td><td>)</td>
-          <td>&#160;&#160;&#160;((l) ? (l)-&gt;next : <a class="el" href="a00758.html#ae212530ca629c67513698e988c705a5a">NIL_LIST</a>)</td>
+          <td class="memname">enum <a class="el" href="a00758.html#a41a4b5a66040b8b2deb004bd33909009">GeoParams</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a41a4b5a66040b8b2deb004bd33909009a45ab6326da25c47511791071ad13f62a"></a>GeoBottom&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a41a4b5a66040b8b2deb004bd33909009af270e2a7660aa4121f6693faa62de67c"></a>GeoTop&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a41a4b5a66040b8b2deb004bd33909009a1840e5fe9bffa7db328236bd0ad20bd7"></a>GeoWidth&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a41a4b5a66040b8b2deb004bd33909009af5bbc18811bb7a574c082e4a6f654db7"></a>GeoCount&#160;</td><td class="fielddoc"></td></tr>
+</table>
 
-<p class="definition">Definition at line <a class="el" href="a00758_source.html#l00083">83</a> of file <a class="el" href="a00758_source.html">oldlist.h</a>.</p>
-
-</div>
-</div>
-<a id="ae212530ca629c67513698e988c705a5a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae212530ca629c67513698e988c705a5a">&#9670;&nbsp;</a></span>NIL_LIST</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define NIL_LIST&#160;&#160;&#160;static_cast&lt;<a class="el" href="a00758.html#a5a5301af82c2874d80478a89424eb475">LIST</a>&gt;(nullptr)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00758_source.html#l00068">68</a> of file <a class="el" href="a00758_source.html">oldlist.h</a>.</p>
-
-</div>
-</div>
-<a id="a42cc2d9c5eabb2193e2e64df41adedf4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a42cc2d9c5eabb2193e2e64df41adedf4">&#9670;&nbsp;</a></span>set_rest</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define set_rest</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">l, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">cell&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>&#160;&#160;&#160;((l)-&gt;next = (cell))</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00758_source.html#l00101">101</a> of file <a class="el" href="a00758_source.html">oldlist.h</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Typedef Documentation</h2>
-<a id="a7fbe993c37b3887d37d12ef37484dcc3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7fbe993c37b3887d37d12ef37484dcc3">&#9670;&nbsp;</a></span>int_compare</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="a00758.html#a7fbe993c37b3887d37d12ef37484dcc3">int_compare</a> =  int (*)(void*, void*)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00758_source.html#l00070">70</a> of file <a class="el" href="a00758_source.html">oldlist.h</a>.</p>
-
-</div>
-</div>
-<a id="a5a5301af82c2874d80478a89424eb475"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a5301af82c2874d80478a89424eb475">&#9670;&nbsp;</a></span>LIST</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="a00758.html#a5a5301af82c2874d80478a89424eb475">LIST</a> =  <a class="el" href="a02920.html">list_rec</a>*</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00758_source.html#l00077">77</a> of file <a class="el" href="a00758_source.html">oldlist.h</a>.</p>
-
-</div>
-</div>
-<a id="a1323134202faaef1ddc50eab59bafa33"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1323134202faaef1ddc50eab59bafa33">&#9670;&nbsp;</a></span>void_dest</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="a00758.html#a1323134202faaef1ddc50eab59bafa33">void_dest</a> =  void (*)(void*)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00758_source.html#l00071">71</a> of file <a class="el" href="a00758_source.html">oldlist.h</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="acd4ea858d7133e40518e0832ff9d94b2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acd4ea858d7133e40518e0832ff9d94b2">&#9670;&nbsp;</a></span>count()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int count </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00758.html#a5a5301af82c2874d80478a89424eb475">LIST</a>&#160;</td>
-          <td class="paramname"><em>var_list</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00755_source.html#l00079">79</a> of file <a class="el" href="a00755_source.html">oldlist.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                         {</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <span class="keywordtype">int</span> temp = 0;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  <a class="code" href="a00758.html#a2cf19ba78be6b54f66823d58f34f2a53">iterate</a>(var_list) temp += 1;</div>
+<p class="definition">Definition at line <a class="el" href="a00758_source.html#l00035">35</a> of file <a class="el" href="a00758_source.html">picofeat.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;               {</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <a class="code" href="a00758.html#a41a4b5a66040b8b2deb004bd33909009a45ab6326da25c47511791071ad13f62a">GeoBottom</a>,  <span class="comment">// Bounding box bottom in baseline space (0-255).</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <a class="code" href="a00758.html#a41a4b5a66040b8b2deb004bd33909009af270e2a7660aa4121f6693faa62de67c">GeoTop</a>,     <span class="comment">// Bounding box top in baseline space (0-255).</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <a class="code" href="a00758.html#a41a4b5a66040b8b2deb004bd33909009a1840e5fe9bffa7db328236bd0ad20bd7">GeoWidth</a>,   <span class="comment">// Bounding box width in baseline space (0-255).</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <a class="code" href="a00758.html#a41a4b5a66040b8b2deb004bd33909009af5bbc18811bb7a574c082e4a6f654db7">GeoCount</a>  <span class="comment">// Number of geo features.</span></div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a1fa3ecce52a0563f595b8f1428cc1211"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1fa3ecce52a0563f595b8f1428cc1211">&#9670;&nbsp;</a></span>delete_d()</h2>
+<a id="a25c105f6b5ef77e1565388f318056f8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25c105f6b5ef77e1565388f318056f8c">&#9670;&nbsp;</a></span>IntParams</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00758.html#a5a5301af82c2874d80478a89424eb475">LIST</a> delete_d </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00758.html#a5a5301af82c2874d80478a89424eb475">LIST</a>&#160;</td>
-          <td class="paramname"><em>list</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>key</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a00758.html#a7fbe993c37b3887d37d12ef37484dcc3">int_compare</a>&#160;</td>
-          <td class="paramname"><em>is_equal</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="memname">enum <a class="el" href="a00758.html#a25c105f6b5ef77e1565388f318056f8c">IntParams</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
+<hr  />
+ <h2><a class="anchor" id="autotoc_md31"></a>
+Include Files and Type Defines</h2>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a25c105f6b5ef77e1565388f318056f8ca52fc06c8638074204be3a7f9a35d65b1"></a>IntX&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a25c105f6b5ef77e1565388f318056f8ca87c5652cf1b4b1a9a7f7b91a9bc48808"></a>IntY&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a25c105f6b5ef77e1565388f318056f8ca37a015c1bac0b61d97b95193172240ed"></a>IntDir&#160;</td><td class="fielddoc"></td></tr>
+</table>
 
-<p class="definition">Definition at line <a class="el" href="a00755_source.html#l00093">93</a> of file <a class="el" href="a00755_source.html">oldlist.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                                                          {</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  <a class="code" href="a02920.html">LIST</a> result = <a class="code" href="a00758.html#ae212530ca629c67513698e988c705a5a">NIL_LIST</a>;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  <a class="code" href="a02920.html">LIST</a> last_one = <a class="code" href="a00758.html#ae212530ca629c67513698e988c705a5a">NIL_LIST</a>;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  <span class="keywordflow">if</span> (<a class="code" href="a01499.html#a7ee72f89f415da05b3dec8190ba140ef">is_equal</a> == <span class="keyword">nullptr</span>) <a class="code" href="a01499.html#a7ee72f89f415da05b3dec8190ba140ef">is_equal</a> = is_same;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  <span class="keywordflow">while</span> (list != <a class="code" href="a00758.html#ae212530ca629c67513698e988c705a5a">NIL_LIST</a>) {</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keywordflow">if</span> (!(*<a class="code" href="a01499.html#a7ee72f89f415da05b3dec8190ba140ef">is_equal</a>)(<a class="code" href="a00758.html#a69547be764424f18b0be535400747978">first_node</a>(list), key)) {</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;      <span class="keywordflow">if</span> (last_one == <a class="code" href="a00758.html#ae212530ca629c67513698e988c705a5a">NIL_LIST</a>) {</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        last_one = list;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        list = <a class="code" href="a00758.html#adb120d4c08ce52b5dfe524f0419a9154">list_rest</a>(list);</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        result = last_one;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        <a class="code" href="a00758.html#a42cc2d9c5eabb2193e2e64df41adedf4">set_rest</a>(last_one, <a class="code" href="a00758.html#ae212530ca629c67513698e988c705a5a">NIL_LIST</a>);</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;      } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        <a class="code" href="a00758.html#a42cc2d9c5eabb2193e2e64df41adedf4">set_rest</a>(last_one, list);</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        last_one = list;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        list = <a class="code" href="a00758.html#adb120d4c08ce52b5dfe524f0419a9154">list_rest</a>(list);</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        <a class="code" href="a00758.html#a42cc2d9c5eabb2193e2e64df41adedf4">set_rest</a>(last_one, <a class="code" href="a00758.html#ae212530ca629c67513698e988c705a5a">NIL_LIST</a>);</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;      }</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;      list = <a class="code" href="a00755.html#a4a16ea0d766f4b3bc697142d5303a62c">pop</a>(list);</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    }</div>
+<p class="definition">Definition at line <a class="el" href="a00758_source.html#l00028">28</a> of file <a class="el" href="a00758_source.html">picofeat.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;               {</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <a class="code" href="a00758.html#a25c105f6b5ef77e1565388f318056f8ca52fc06c8638074204be3a7f9a35d65b1">IntX</a>,   <span class="comment">// x-position (0-255).</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <a class="code" href="a00758.html#a25c105f6b5ef77e1565388f318056f8ca87c5652cf1b4b1a9a7f7b91a9bc48808">IntY</a>,   <span class="comment">// y-position (0-255).</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <a class="code" href="a00758.html#a25c105f6b5ef77e1565388f318056f8ca37a015c1bac0b61d97b95193172240ed">IntDir</a>  <span class="comment">// Direction (0-255, circular).</span></div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a338e68bdadcbdf51db4c7268c4529409"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a338e68bdadcbdf51db4c7268c4529409">&#9670;&nbsp;</a></span>destroy()</h2>
+<a id="ac00e1c5d2ac3096e0928e2186aee1aac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac00e1c5d2ac3096e0928e2186aee1aac">&#9670;&nbsp;</a></span>PICO_FEAT_PARAM_NAME</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00758.html#a5a5301af82c2874d80478a89424eb475">LIST</a> destroy </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00758.html#a5a5301af82c2874d80478a89424eb475">LIST</a>&#160;</td>
-          <td class="paramname"><em>list</em></td><td>)</td>
-          <td></td>
+          <td class="memname">enum <a class="el" href="a00758.html#ac00e1c5d2ac3096e0928e2186aee1aac">PICO_FEAT_PARAM_NAME</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ac00e1c5d2ac3096e0928e2186aee1aaca43884de5e2e87be26f9642b50135f98a"></a>PicoFeatY&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ac00e1c5d2ac3096e0928e2186aee1aaca9895f2baa648985ab8ee5586c1563511"></a>PicoFeatDir&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ac00e1c5d2ac3096e0928e2186aee1aacaf28d56154a908256d7b3beb62977e2fc"></a>PicoFeatX&#160;</td><td class="fielddoc"></td></tr>
+</table>
 
-<p class="definition">Definition at line <a class="el" href="a00755_source.html#l00123">123</a> of file <a class="el" href="a00755_source.html">oldlist.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;                        {</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;  <a class="code" href="a02920.html">LIST</a> next;</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;  <span class="keywordflow">while</span> (list != <a class="code" href="a00758.html#ae212530ca629c67513698e988c705a5a">NIL_LIST</a>) {</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    next = <a class="code" href="a00758.html#adb120d4c08ce52b5dfe524f0419a9154">list_rest</a>(list);</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <span class="keyword">delete</span> list;</div>
+<p class="definition">Definition at line <a class="el" href="a00758_source.html#l00043">43</a> of file <a class="el" href="a00758_source.html">picofeat.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;{ <a class="code" href="a00758.html#ac00e1c5d2ac3096e0928e2186aee1aaca43884de5e2e87be26f9642b50135f98a">PicoFeatY</a>, <a class="code" href="a00758.html#ac00e1c5d2ac3096e0928e2186aee1aaca9895f2baa648985ab8ee5586c1563511">PicoFeatDir</a>, <a class="code" href="a00758.html#ac00e1c5d2ac3096e0928e2186aee1aacaf28d56154a908256d7b3beb62977e2fc">PicoFeatX</a> } <a class="code" href="a00758.html#ac00e1c5d2ac3096e0928e2186aee1aac">PICO_FEAT_PARAM_NAME</a>;</div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a1a1efc1a269e5bb5bf16c1a174363ba4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1a1efc1a269e5bb5bf16c1a174363ba4">&#9670;&nbsp;</a></span>destroy_nodes()</h2>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="ade0cbc6650cd99b83ecc2c1a828a4bee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade0cbc6650cd99b83ecc2c1a828a4bee">&#9670;&nbsp;</a></span>classify_pico_feature_length</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void destroy_nodes </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00758.html#a5a5301af82c2874d80478a89424eb475">LIST</a>&#160;</td>
-          <td class="paramname"><em>list</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a00758.html#a1323134202faaef1ddc50eab59bafa33">void_dest</a>&#160;</td>
-          <td class="paramname"><em>destructor</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="memname">double classify_pico_feature_length = 0.05</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>"Pico Feature Length" <br  />
+ </p>
 
-<p class="definition">Definition at line <a class="el" href="a00755_source.html#l00138">138</a> of file <a class="el" href="a00755_source.html">oldlist.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;                                                    {</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;  <a class="code" href="a00464.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a>(destructor != <span class="keyword">nullptr</span>);</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
-</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="a00755_source.html#l00036">36</a> of file <a class="el" href="a00755_source.html">picofeat.cpp</a>.</p>
+
 </div>
 </div>
-<a id="ad9ec1d10cbd07fc3376ef300df603418"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad9ec1d10cbd07fc3376ef300df603418">&#9670;&nbsp;</a></span>last()</h2>
+<a id="a5fb0325a4196a4ea24ba3d256844e467"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5fb0325a4196a4ea24ba3d256844e467">&#9670;&nbsp;</a></span>PicoFeatureLength</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00758.html#a5a5301af82c2874d80478a89424eb475">LIST</a> last </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00758.html#a5a5301af82c2874d80478a89424eb475">LIST</a>&#160;</td>
-          <td class="paramname"><em>var_list</em></td><td>)</td>
-          <td></td>
+          <td class="memname"><a class="el" href="a00029.html#a86e51270628c53ce7e2c23b1c2b4490e">TESS_API</a> float PicoFeatureLength</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<hr  />
+ <h2><a class="anchor" id="autotoc_md33"></a>
+Global Data Definitions and Declarations</h2>
 
-<p class="definition">Definition at line <a class="el" href="a00755_source.html#l00151">151</a> of file <a class="el" href="a00755_source.html">oldlist.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;                         {</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a4a16ea0d766f4b3bc697142d5303a62c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4a16ea0d766f4b3bc697142d5303a62c">&#9670;&nbsp;</a></span>pop()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00758.html#a5a5301af82c2874d80478a89424eb475">LIST</a> pop </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00758.html#a5a5301af82c2874d80478a89424eb475">LIST</a>&#160;</td>
-          <td class="paramname"><em>list</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00755_source.html#l00161">161</a> of file <a class="el" href="a00755_source.html">oldlist.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;                    {</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a9c4294375af81ab4c133b6b5a3679a16"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9c4294375af81ab4c133b6b5a3679a16">&#9670;&nbsp;</a></span>push()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00758.html#a5a5301af82c2874d80478a89424eb475">LIST</a> push </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00758.html#a5a5301af82c2874d80478a89424eb475">LIST</a>&#160;</td>
-          <td class="paramname"><em>list</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>element</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00755_source.html#l00172">172</a> of file <a class="el" href="a00755_source.html">oldlist.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;                                    {</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a1019c2e1108695bb4f33f83e02ee62ad"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1019c2e1108695bb4f33f83e02ee62ad">&#9670;&nbsp;</a></span>push_last()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00758.html#a5a5301af82c2874d80478a89424eb475">LIST</a> push_last </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00758.html#a5a5301af82c2874d80478a89424eb475">LIST</a>&#160;</td>
-          <td class="paramname"><em>list</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>item</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00755_source.html#l00185">185</a> of file <a class="el" href="a00755_source.html">oldlist.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;                                      {</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a1d8af9328f064a9df6d6f88336dd054e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1d8af9328f064a9df6d6f88336dd054e">&#9670;&nbsp;</a></span>search()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00758.html#a5a5301af82c2874d80478a89424eb475">LIST</a> search </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00758.html#a5a5301af82c2874d80478a89424eb475">LIST</a>&#160;</td>
-          <td class="paramname"><em>list</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>key</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a00758.html#a7fbe993c37b3887d37d12ef37484dcc3">int_compare</a>&#160;</td>
-          <td class="paramname"><em>is_equal</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00755_source.html#l00202">202</a> of file <a class="el" href="a00755_source.html">oldlist.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;                                                        {</div>
-</div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa00758_html_ae212530ca629c67513698e988c705a5a"><div class="ttname"><a href="a00758.html#ae212530ca629c67513698e988c705a5a">NIL_LIST</a></div><div class="ttdeci">#define NIL_LIST</div><div class="ttdef"><b>Definition:</b> <a href="a00758_source.html#l00068">oldlist.h:68</a></div></div>
-<div class="ttc" id="aa00755_html_a4a16ea0d766f4b3bc697142d5303a62c"><div class="ttname"><a href="a00755.html#a4a16ea0d766f4b3bc697142d5303a62c">pop</a></div><div class="ttdeci">LIST pop(LIST list)</div><div class="ttdef"><b>Definition:</b> <a href="a00755_source.html#l00161">oldlist.cpp:161</a></div></div>
-<div class="ttc" id="aa00758_html_a2cf19ba78be6b54f66823d58f34f2a53"><div class="ttname"><a href="a00758.html#a2cf19ba78be6b54f66823d58f34f2a53">iterate</a></div><div class="ttdeci">#define iterate(l)</div><div class="ttdef"><b>Definition:</b> <a href="a00758_source.html#l00092">oldlist.h:92</a></div></div>
-<div class="ttc" id="aa00758_html_a42cc2d9c5eabb2193e2e64df41adedf4"><div class="ttname"><a href="a00758.html#a42cc2d9c5eabb2193e2e64df41adedf4">set_rest</a></div><div class="ttdeci">#define set_rest(l, cell)</div><div class="ttdef"><b>Definition:</b> <a href="a00758_source.html#l00101">oldlist.h:101</a></div></div>
-<div class="ttc" id="aa01499_html_a7ee72f89f415da05b3dec8190ba140ef"><div class="ttname"><a href="a01499.html#a7ee72f89f415da05b3dec8190ba140ef">is_equal</a></div><div class="ttdeci">#define is_equal(p1, p2)</div><div class="ttdef"><b>Definition:</b> <a href="a01499_source.html#l00097">outlines.h:97</a></div></div>
-<div class="ttc" id="aa00758_html_a69547be764424f18b0be535400747978"><div class="ttname"><a href="a00758.html#a69547be764424f18b0be535400747978">first_node</a></div><div class="ttdeci">#define first_node(l)</div><div class="ttdef"><b>Definition:</b> <a href="a00758_source.html#l00084">oldlist.h:84</a></div></div>
-<div class="ttc" id="aa00464_html_a93a603f4063a6b9403d81caa245a583b"><div class="ttname"><a href="a00464.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a></div><div class="ttdeci">#define ASSERT_HOST(x)</div><div class="ttdef"><b>Definition:</b> <a href="a00464_source.html#l00087">errcode.h:87</a></div></div>
-<div class="ttc" id="aa02920_html"><div class="ttname"><a href="a02920.html">list_rec</a></div><div class="ttdef"><b>Definition:</b> <a href="a00758_source.html#l00073">oldlist.h:73</a></div></div>
-<div class="ttc" id="aa00758_html_adb120d4c08ce52b5dfe524f0419a9154"><div class="ttname"><a href="a00758.html#adb120d4c08ce52b5dfe524f0419a9154">list_rest</a></div><div class="ttdeci">#define list_rest(l)</div><div class="ttdef"><b>Definition:</b> <a href="a00758_source.html#l00083">oldlist.h:83</a></div></div>
+<div class="ttc" id="aa00758_html_a25c105f6b5ef77e1565388f318056f8ca87c5652cf1b4b1a9a7f7b91a9bc48808"><div class="ttname"><a href="a00758.html#a25c105f6b5ef77e1565388f318056f8ca87c5652cf1b4b1a9a7f7b91a9bc48808">IntY</a></div><div class="ttdef"><b>Definition:</b> <a href="a00758_source.html#l00045">picofeat.h:45</a></div></div>
+<div class="ttc" id="aa00758_html_ac00e1c5d2ac3096e0928e2186aee1aaca43884de5e2e87be26f9642b50135f98a"><div class="ttname"><a href="a00758.html#ac00e1c5d2ac3096e0928e2186aee1aaca43884de5e2e87be26f9642b50135f98a">PicoFeatY</a></div><div class="ttdef"><b>Definition:</b> <a href="a00758_source.html#l00043">picofeat.h:43</a></div></div>
+<div class="ttc" id="aa00758_html_a41a4b5a66040b8b2deb004bd33909009a1840e5fe9bffa7db328236bd0ad20bd7"><div class="ttname"><a href="a00758.html#a41a4b5a66040b8b2deb004bd33909009a1840e5fe9bffa7db328236bd0ad20bd7">GeoWidth</a></div><div class="ttdef"><b>Definition:</b> <a href="a00758_source.html#l00038">picofeat.h:38</a></div></div>
+<div class="ttc" id="aa00758_html_ac00e1c5d2ac3096e0928e2186aee1aacaf28d56154a908256d7b3beb62977e2fc"><div class="ttname"><a href="a00758.html#ac00e1c5d2ac3096e0928e2186aee1aacaf28d56154a908256d7b3beb62977e2fc">PicoFeatX</a></div><div class="ttdef"><b>Definition:</b> <a href="a00758_source.html#l00043">picofeat.h:43</a></div></div>
+<div class="ttc" id="aa00758_html_ac00e1c5d2ac3096e0928e2186aee1aaca9895f2baa648985ab8ee5586c1563511"><div class="ttname"><a href="a00758.html#ac00e1c5d2ac3096e0928e2186aee1aaca9895f2baa648985ab8ee5586c1563511">PicoFeatDir</a></div><div class="ttdef"><b>Definition:</b> <a href="a00758_source.html#l00043">picofeat.h:43</a></div></div>
+<div class="ttc" id="aa00758_html_a25c105f6b5ef77e1565388f318056f8ca52fc06c8638074204be3a7f9a35d65b1"><div class="ttname"><a href="a00758.html#a25c105f6b5ef77e1565388f318056f8ca52fc06c8638074204be3a7f9a35d65b1">IntX</a></div><div class="ttdef"><b>Definition:</b> <a href="a00758_source.html#l00044">picofeat.h:44</a></div></div>
+<div class="ttc" id="aa00758_html_a25c105f6b5ef77e1565388f318056f8ca37a015c1bac0b61d97b95193172240ed"><div class="ttname"><a href="a00758.html#a25c105f6b5ef77e1565388f318056f8ca37a015c1bac0b61d97b95193172240ed">IntDir</a></div><div class="ttdef"><b>Definition:</b> <a href="a00758_source.html#l00046">picofeat.h:46</a></div></div>
+<div class="ttc" id="aa00758_html_a41a4b5a66040b8b2deb004bd33909009af270e2a7660aa4121f6693faa62de67c"><div class="ttname"><a href="a00758.html#a41a4b5a66040b8b2deb004bd33909009af270e2a7660aa4121f6693faa62de67c">GeoTop</a></div><div class="ttdef"><b>Definition:</b> <a href="a00758_source.html#l00037">picofeat.h:37</a></div></div>
+<div class="ttc" id="aa00758_html_ac00e1c5d2ac3096e0928e2186aee1aac"><div class="ttname"><a href="a00758.html#ac00e1c5d2ac3096e0928e2186aee1aac">PICO_FEAT_PARAM_NAME</a></div><div class="ttdeci">PICO_FEAT_PARAM_NAME</div><div class="ttdef"><b>Definition:</b> <a href="a00758_source.html#l00043">picofeat.h:43</a></div></div>
+<div class="ttc" id="aa00758_html_a41a4b5a66040b8b2deb004bd33909009af5bbc18811bb7a574c082e4a6f654db7"><div class="ttname"><a href="a00758.html#a41a4b5a66040b8b2deb004bd33909009af5bbc18811bb7a574c082e4a6f654db7">GeoCount</a></div><div class="ttdef"><b>Definition:</b> <a href="a00758_source.html#l00040">picofeat.h:40</a></div></div>
+<div class="ttc" id="aa00758_html_a41a4b5a66040b8b2deb004bd33909009a45ab6326da25c47511791071ad13f62a"><div class="ttname"><a href="a00758.html#a41a4b5a66040b8b2deb004bd33909009a45ab6326da25c47511791071ad13f62a">GeoBottom</a></div><div class="ttdef"><b>Definition:</b> <a href="a00758_source.html#l00036">picofeat.h:36</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_26a98b1b7a71b8b8c9c7d7743e94ea74.html">cutil</a></li><li class="navelem"><a class="el" href="a00758.html">oldlist.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b8f5fb7b736ee5431a221bc7b817d6e0.html">classify</a></li><li class="navelem"><a class="el" href="a00758.html">picofeat.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

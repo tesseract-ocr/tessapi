@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/classify/cutoffs.cpp File Reference</title>
+<title>tesseract: /tesseract/src/ccutil/unicharset.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,56 +87,118 @@ $(document).ready(function(){initNavTree('a00605.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#define-members">Macros</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#enum-members">Enumerations</a>  </div>
   <div class="headertitle">
-<div class="title">cutoffs.cpp File Reference</div>  </div>
+<div class="title">unicharset.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;cstdio&gt;</code><br />
-<code>#include &lt;sstream&gt;</code><br />
-<code>#include &lt;string&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00590_source.html">classify.h</a>&quot;</code><br />
-<code>#include &lt;tesseract/helpers.h&gt;</code><br />
-<code>#include &lt;tesseract/serialis.h&gt;</code><br />
-<code>#include &lt;tesseract/unichar.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;functional&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00515_source.html">errcode.h</a>&quot;</code><br />
+<code>#include &lt;<a class="el" href="a00011_source.html">tesseract/genericvector.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00014_source.html">tesseract/helpers.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00041_source.html">tesseract/serialis.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00044_source.html">tesseract/strngs.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00050_source.html">tesseract/unichar.h</a>&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00599_source.html">unicharmap.h</a>&quot;</code><br />
 </div>
 <p><a href="a00605_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:a01539"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html">tesseract</a></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03114.html">CHAR_FRAGMENT</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03118.html">UNICHARSET</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:a5243f4a6e700ddc871cc53130efbea1b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00605.html#a5243f4a6e700ddc871cc53130efbea1b">MAX_CUTOFF</a>&#160;&#160;&#160;1000</td></tr>
-<tr class="separator:a5243f4a6e700ddc871cc53130efbea1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a08fdf52fb8650b2a0752cfd7bd236871"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00605.html#a08fdf52fb8650b2a0752cfd7bd236871">SpecialUnicharCodes</a> { <a class="el" href="a00605.html#a08fdf52fb8650b2a0752cfd7bd236871af05dfe36988b7a26764e26e820873a71">UNICHAR_SPACE</a>, 
+<a class="el" href="a00605.html#a08fdf52fb8650b2a0752cfd7bd236871a9c6d78fc413dca0f399f839b7c22f027">UNICHAR_JOINED</a>, 
+<a class="el" href="a00605.html#a08fdf52fb8650b2a0752cfd7bd236871a86058e6c2d07846af0a45c7778f3027b">UNICHAR_BROKEN</a>, 
+<a class="el" href="a00605.html#a08fdf52fb8650b2a0752cfd7bd236871a8540b0ebc6d41518429e513986a2e522">SPECIAL_UNICHAR_CODES_COUNT</a>
+ }</td></tr>
+<tr class="separator:a08fdf52fb8650b2a0752cfd7bd236871"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac02dd4bef57fd7a3804c1ce60e9ea867"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00605.html#ac02dd4bef57fd7a3804c1ce60e9ea867">OldUncleanUnichars</a> { <a class="el" href="a00605.html#ac02dd4bef57fd7a3804c1ce60e9ea867af564c2bfece5a7928f8860f983c50098">OldUncleanUnichars::kFalse</a>, 
+<a class="el" href="a00605.html#ac02dd4bef57fd7a3804c1ce60e9ea867a66e2fa9ba4f5420341b16f9d6365f428">OldUncleanUnichars::kTrue</a>
+ }</td></tr>
+<tr class="separator:ac02dd4bef57fd7a3804c1ce60e9ea867"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a5243f4a6e700ddc871cc53130efbea1b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5243f4a6e700ddc871cc53130efbea1b">&#9670;&nbsp;</a></span>MAX_CUTOFF</h2>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="ac02dd4bef57fd7a3804c1ce60e9ea867"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac02dd4bef57fd7a3804c1ce60e9ea867">&#9670;&nbsp;</a></span>OldUncleanUnichars</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="a00605.html#ac02dd4bef57fd7a3804c1ce60e9ea867">OldUncleanUnichars</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ac02dd4bef57fd7a3804c1ce60e9ea867af564c2bfece5a7928f8860f983c50098"></a>kFalse&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ac02dd4bef57fd7a3804c1ce60e9ea867a66e2fa9ba4f5420341b16f9d6365f428"></a>kTrue&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="a00605_source.html#l00043">43</a> of file <a class="el" href="a00605_source.html">unicharset.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                              {</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <a class="code" href="a00605.html#ac02dd4bef57fd7a3804c1ce60e9ea867af564c2bfece5a7928f8860f983c50098">kFalse</a>,</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <a class="code" href="a00605.html#ac02dd4bef57fd7a3804c1ce60e9ea867a66e2fa9ba4f5420341b16f9d6365f428">kTrue</a>,</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;};</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a08fdf52fb8650b2a0752cfd7bd236871"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08fdf52fb8650b2a0752cfd7bd236871">&#9670;&nbsp;</a></span>SpecialUnicharCodes</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define MAX_CUTOFF&#160;&#160;&#160;1000</td>
+          <td class="memname">enum <a class="el" href="a00605.html#a08fdf52fb8650b2a0752cfd7bd236871">SpecialUnicharCodes</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a08fdf52fb8650b2a0752cfd7bd236871af05dfe36988b7a26764e26e820873a71"></a>UNICHAR_SPACE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a08fdf52fb8650b2a0752cfd7bd236871a9c6d78fc413dca0f399f839b7c22f027"></a>UNICHAR_JOINED&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a08fdf52fb8650b2a0752cfd7bd236871a86058e6c2d07846af0a45c7778f3027b"></a>UNICHAR_BROKEN&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a08fdf52fb8650b2a0752cfd7bd236871a8540b0ebc6d41518429e513986a2e522"></a>SPECIAL_UNICHAR_CODES_COUNT&#160;</td><td class="fielddoc"></td></tr>
+</table>
 
-<p class="definition">Definition at line <a class="el" href="a00605_source.html#l00029">29</a> of file <a class="el" href="a00605_source.html">cutoffs.cpp</a>.</p>
-
+<p class="definition">Definition at line <a class="el" href="a00605_source.html#l00033">33</a> of file <a class="el" href="a00605_source.html">unicharset.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;                         {</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <a class="code" href="a00605.html#a08fdf52fb8650b2a0752cfd7bd236871af05dfe36988b7a26764e26e820873a71">UNICHAR_SPACE</a>,</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <a class="code" href="a00605.html#a08fdf52fb8650b2a0752cfd7bd236871a9c6d78fc413dca0f399f839b7c22f027">UNICHAR_JOINED</a>,</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <a class="code" href="a00605.html#a08fdf52fb8650b2a0752cfd7bd236871a86058e6c2d07846af0a45c7778f3027b">UNICHAR_BROKEN</a>,</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <a class="code" href="a00605.html#a08fdf52fb8650b2a0752cfd7bd236871a8540b0ebc6d41518429e513986a2e522">SPECIAL_UNICHAR_CODES_COUNT</a></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;};</div>
+</div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="aa00605_html_ac02dd4bef57fd7a3804c1ce60e9ea867a66e2fa9ba4f5420341b16f9d6365f428"><div class="ttname"><a href="a00605.html#ac02dd4bef57fd7a3804c1ce60e9ea867a66e2fa9ba4f5420341b16f9d6365f428">OldUncleanUnichars::kTrue</a></div></div>
+<div class="ttc" id="aa00605_html_a08fdf52fb8650b2a0752cfd7bd236871a86058e6c2d07846af0a45c7778f3027b"><div class="ttname"><a href="a00605.html#a08fdf52fb8650b2a0752cfd7bd236871a86058e6c2d07846af0a45c7778f3027b">UNICHAR_BROKEN</a></div><div class="ttdef"><b>Definition:</b> <a href="a00605_source.html#l00036">unicharset.h:36</a></div></div>
+<div class="ttc" id="aa00605_html_ac02dd4bef57fd7a3804c1ce60e9ea867af564c2bfece5a7928f8860f983c50098"><div class="ttname"><a href="a00605.html#ac02dd4bef57fd7a3804c1ce60e9ea867af564c2bfece5a7928f8860f983c50098">OldUncleanUnichars::kFalse</a></div></div>
+<div class="ttc" id="aa00605_html_a08fdf52fb8650b2a0752cfd7bd236871af05dfe36988b7a26764e26e820873a71"><div class="ttname"><a href="a00605.html#a08fdf52fb8650b2a0752cfd7bd236871af05dfe36988b7a26764e26e820873a71">UNICHAR_SPACE</a></div><div class="ttdef"><b>Definition:</b> <a href="a00605_source.html#l00034">unicharset.h:34</a></div></div>
+<div class="ttc" id="aa00605_html_a08fdf52fb8650b2a0752cfd7bd236871a8540b0ebc6d41518429e513986a2e522"><div class="ttname"><a href="a00605.html#a08fdf52fb8650b2a0752cfd7bd236871a8540b0ebc6d41518429e513986a2e522">SPECIAL_UNICHAR_CODES_COUNT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00605_source.html#l00038">unicharset.h:38</a></div></div>
+<div class="ttc" id="aa00605_html_a08fdf52fb8650b2a0752cfd7bd236871a9c6d78fc413dca0f399f839b7c22f027"><div class="ttname"><a href="a00605.html#a08fdf52fb8650b2a0752cfd7bd236871a9c6d78fc413dca0f399f839b7c22f027">UNICHAR_JOINED</a></div><div class="ttdef"><b>Definition:</b> <a href="a00605_source.html#l00035">unicharset.h:35</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b8f5fb7b736ee5431a221bc7b817d6e0.html">classify</a></li><li class="navelem"><a class="el" href="a00605.html">cutoffs.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_be21c9400dd14e513865608c9a8a7e5a.html">ccutil</a></li><li class="navelem"><a class="el" href="a00605.html">unicharset.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

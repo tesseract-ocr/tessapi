@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/textord/devanagari_processing.cpp File Reference</title>
+<title>tesseract: /tesseract/src/textord/bbgrid.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,76 +87,67 @@ $(document).ready(function(){initNavTree('a01001.html','');});
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">devanagari_processing.cpp File Reference</div>  </div>
+<div class="title">bbgrid.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;allheaders.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00245_source.html">debugpixa.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a01004_source.html">devanagari_processing.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00404_source.html">statistc.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a01142_source.html">tordmain.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;unordered_set&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00494_source.html">clst.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00290_source.html">coutln.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00431_source.html">rect.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a01469_source.html">scrollview.h</a>&quot;</code><br />
+<code>#include &quot;allheaders.h&quot;</code><br />
 </div>
 <p><a href="a01001_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:a01539"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html">tesseract</a></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03634.html">tesseract::GridSearch&lt; BBC, BBC_CLIST, BBC_C_IT &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03638.html">tesseract::GridBase</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03642.html">tesseract::IntGrid</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03646.html">tesseract::BBGrid&lt; BBC, BBC_CLIST, BBC_C_IT &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03650.html">tesseract::PtrHash&lt; T &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03634.html">tesseract::GridSearch&lt; BBC, BBC_CLIST, BBC_C_IT &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03654.html">tesseract::TabEventHandler&lt; G &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:ad6b4d3ded1df0799766c874662d63050"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01001.html#ad6b4d3ded1df0799766c874662d63050">devanagari_split_debuglevel</a> = 0</td></tr>
-<tr class="separator:ad6b4d3ded1df0799766c874662d63050"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9687e850f464694be20c21d93e891801"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01001.html#a9687e850f464694be20c21d93e891801">devanagari_split_debugimage</a> = 0</td></tr>
-<tr class="separator:a9687e850f464694be20c21d93e891801"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:a01818"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html">tesseract</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a904ab4d9c9e49e83c5d3800d57d433cb"><td class="memItemLeft" align="right" valign="top">Pix *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a904ab4d9c9e49e83c5d3800d57d433cb">tesseract::TraceOutlineOnReducedPix</a> (<a class="el" href="a02710.html">C_OUTLINE</a> *outline, int gridsize, <a class="el" href="a02858.html">ICOORD</a> bleft, int *left, int *bottom)</td></tr>
+<tr class="separator:a904ab4d9c9e49e83c5d3800d57d433cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cee1dea0a3fdece76728ad65ab48563"><td class="memItemLeft" align="right" valign="top">Pix *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a6cee1dea0a3fdece76728ad65ab48563">tesseract::TraceBlockOnReducedPix</a> (<a class="el" href="a02802.html">BLOCK</a> *block, int gridsize, <a class="el" href="a02858.html">ICOORD</a> bleft, int *left, int *bottom)</td></tr>
+<tr class="separator:a6cee1dea0a3fdece76728ad65ab48563"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78a7f55303493ead36192ae0c6aaaf87"><td class="memTemplParams" colspan="2">template&lt;class BBC &gt; </td></tr>
+<tr class="memitem:a78a7f55303493ead36192ae0c6aaaf87"><td class="memTemplItemLeft" align="right" valign="top">int&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a01818.html#a78a7f55303493ead36192ae0c6aaaf87">tesseract::SortByBoxLeft</a> (const void *void1, const void *void2)</td></tr>
+<tr class="separator:a78a7f55303493ead36192ae0c6aaaf87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa6a2fa0337896bda9eebeaa226b2da4"><td class="memTemplParams" colspan="2">template&lt;class BBC &gt; </td></tr>
+<tr class="memitem:afa6a2fa0337896bda9eebeaa226b2da4"><td class="memTemplItemLeft" align="right" valign="top">int&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a01818.html#afa6a2fa0337896bda9eebeaa226b2da4">tesseract::SortRightToLeft</a> (const void *void1, const void *void2)</td></tr>
+<tr class="separator:afa6a2fa0337896bda9eebeaa226b2da4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a531d67167395e03fae5373a3b45539c0"><td class="memTemplParams" colspan="2">template&lt;class BBC &gt; </td></tr>
+<tr class="memitem:a531d67167395e03fae5373a3b45539c0"><td class="memTemplItemLeft" align="right" valign="top">int&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a01818.html#a531d67167395e03fae5373a3b45539c0">tesseract::SortByBoxBottom</a> (const void *void1, const void *void2)</td></tr>
+<tr class="separator:a531d67167395e03fae5373a3b45539c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="a9687e850f464694be20c21d93e891801"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9687e850f464694be20c21d93e891801">&#9670;&nbsp;</a></span>devanagari_split_debugimage</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool devanagari_split_debugimage = 0</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>"Whether to create a debug image for split shiro-rekha process." <br  />
- </p>
-
-<p class="definition">Definition at line <a class="el" href="a01001_source.html#l00037">37</a> of file <a class="el" href="a01001_source.html">devanagari_processing.cpp</a>.</p>
-
-</div>
-</div>
-<a id="ad6b4d3ded1df0799766c874662d63050"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad6b4d3ded1df0799766c874662d63050">&#9670;&nbsp;</a></span>devanagari_split_debuglevel</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int devanagari_split_debuglevel = 0</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>"Debug level for split shiro-rekha process." <br  />
- </p>
-
-<p class="definition">Definition at line <a class="el" href="a01001_source.html#l00034">34</a> of file <a class="el" href="a01001_source.html">devanagari_processing.cpp</a>.</p>
-
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_930fe0a3c40775bbdbdb97cea0f56396.html">textord</a></li><li class="navelem"><a class="el" href="a01001.html">devanagari_processing.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_930fe0a3c40775bbdbdb97cea0f56396.html">textord</a></li><li class="navelem"><a class="el" href="a01001.html">bbgrid.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/classify/cluster.h Source File</title>
+<title>tesseract: /tesseract/src/ccutil/unicharmap.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,188 +87,153 @@ $(document).ready(function(){initNavTree('a00596_source.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">cluster.h</div>  </div>
+<div class="title">unicharmap.cpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00596.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/******************************************************************************</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> ** Filename:   cluster.h</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> ** Purpose:    Definition of feature space clustering routines</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> ** Author:     Dan Johnson</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> **</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> ** (c) Copyright Hewlett-Packard Company, 1988.</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> ** Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> ** you may not use this file except in compliance with the License.</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> ** You may obtain a copy of the License at</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> ** http://www.apache.org/licenses/LICENSE-2.0</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> ** Unless required by applicable law or agreed to in writing, software</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> ** distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> ** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> ** See the License for the specific language governing permissions and</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> ** limitations under the License.</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> *****************************************************************************/</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#ifndef CLUSTER_H</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#define CLUSTER_H</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00653.html">kdtree.h</a>&quot;</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00758.html">oldlist.h</a>&quot;</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">struct </span><a class="code" href="a02720.html">BUCKETS</a>;</div>
-<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="a00596.html#a759b3b99f54d92a0c6c5471a4c87c42b">   25</a></span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="a00596.html#a17645698964d2a3c89b72281594c58a3">   26</a></span>&#160;<span class="preprocessor">#define MINBUCKETS 5</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#define MAXBUCKETS 39</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">/*----------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">          Types</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="a02732.html">   31</a></span>&#160;<span class="comment">----------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="a02732.html#a91415d9a86209ff4a3f0cfeb1c9fb3f4">   32</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="a02732.html">sample</a> {</div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="a02732.html#a4de6e924a7600a98e5f1fa8f613527a6">   33</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="a02732.html#a91415d9a86209ff4a3f0cfeb1c9fb3f4">Clustered</a> : 1;         <span class="comment">// true if included in a higher cluster</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="a02732.html#a71cac0608666e1abfdfb3ab40e26b249">   34</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="a02732.html#a4de6e924a7600a98e5f1fa8f613527a6">Prototype</a> : 1;         <span class="comment">// true if cluster represented by a proto</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="a02732.html#ae6abb40063761a77d4275c79c5c0bb49">   35</a></span>&#160;  <span class="keywordtype">unsigned</span> <a class="code" href="a02732.html#a71cac0608666e1abfdfb3ab40e26b249">SampleCount</a> : 30;  <span class="comment">// number of samples in this cluster</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="a02732.html#a2d66168da8fd6b92aed011277f54843a">   36</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="a02732.html">sample</a>* <a class="code" href="a02732.html#ae6abb40063761a77d4275c79c5c0bb49">Left</a>;        <span class="comment">// ptr to left sub-cluster</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="a02732.html#a4848f35755dbd85b47c1a540c93f213f">   37</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="a02732.html">sample</a>* <a class="code" href="a02732.html#a2d66168da8fd6b92aed011277f54843a">Right</a>;       <span class="comment">// ptr to right sub-cluster</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="a02732.html#a9ba1a2ff48a921f1146a248f76ecbc66">   38</a></span>&#160;  int32_t <a class="code" href="a02732.html#a4848f35755dbd85b47c1a540c93f213f">CharID</a>;             <span class="comment">// identifier of char sample came from</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <span class="keywordtype">float</span> <a class="code" href="a02732.html#a9ba1a2ff48a921f1146a248f76ecbc66">Mean</a>[1];              <span class="comment">// mean of cluster - SampleSize floats</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;} <a class="code" href="a00596.html#a883b4f4e7113af06f96a7b11492256d1">CLUSTER</a>;</div>
-<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="a00596.html#abb425e12cc6462501bfdcd82f9b75f08">   41</a></span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">using</span> <a class="code" href="a02732.html">SAMPLE</a> = <a class="code" href="a00596.html#a883b4f4e7113af06f96a7b11492256d1">CLUSTER</a>;  <span class="comment">// can refer to as either sample or cluster</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="a00596.html#a2bf647f23b4a059a559e4d991437c9eaa93d6901f160899d15f69322530595f4f">   43</a></span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span> { <a class="code" href="a00596.html#a2bf647f23b4a059a559e4d991437c9eaa93d6901f160899d15f69322530595f4f">spherical</a>, <a class="code" href="a00596.html#a2bf647f23b4a059a559e4d991437c9eaa39d32ff639641ca169c9729c58614459">elliptical</a>, <a class="code" href="a00596.html#a2bf647f23b4a059a559e4d991437c9eaab164032fff82a847826b4887d9e7be58">mixed</a>, <a class="code" href="a00596.html#a2bf647f23b4a059a559e4d991437c9eaa9761086e420b925e438327ad385b304d">automatic</a> } <a class="code" href="a00596.html#a2bf647f23b4a059a559e4d991437c9ea">PROTOSTYLE</a>;</div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="a02736.html">   45</a></span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="a02736.html#a53c426e655c701e99f7744a35ecced70">   46</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>{          <span class="comment">// parameters to control clustering</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="a02736.html#a58474e7a7fbd9e0948aac1beaf578c34">   47</a></span>&#160;  <a class="code" href="a00596.html#a2bf647f23b4a059a559e4d991437c9ea">PROTOSTYLE</a> ProtoStyle;  <span class="comment">// specifies types of protos to be made</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="a02736.html#a6c250344ba654d88d2f3f59b9301432e">   48</a></span>&#160;  <span class="keywordtype">float</span> MinSamples;       <span class="comment">// min # of samples per proto - % of total</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keywordtype">float</span> MaxIllegal;       <span class="comment">// max percentage of samples in a cluster which</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="a02736.html#a3d4b4afe31132a2bb3019ec449335fa9">   50</a></span>&#160;                          <span class="comment">// have more than 1 feature in that cluster</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="a02736.html#acf5241fcdee065634f8e092c4493b52d">   51</a></span>&#160;  <span class="keywordtype">float</span> Independence;     <span class="comment">// desired independence between dimensions</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="a02736.html#a3578d77905f03b8d4321568be8f030c2">   52</a></span>&#160;  <span class="keywordtype">double</span> Confidence;      <span class="comment">// desired confidence in prototypes created</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="keywordtype">int</span> MagicSamples;       <span class="comment">// Ideal number of samples in a cluster.</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;} <a class="code" href="a02736.html">CLUSTERCONFIG</a>;</div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="a00596.html#ade80fdcd8f2dde57393f56d0cdfaeed0a56013d9ac59a24fb94d9acb932a04b2f">   55</a></span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span> { <a class="code" href="a00596.html#ade80fdcd8f2dde57393f56d0cdfaeed0aebc81705969b8c5ae986b0b2ec08d1d5">normal</a>, <a class="code" href="a00596.html#ade80fdcd8f2dde57393f56d0cdfaeed0a56013d9ac59a24fb94d9acb932a04b2f">uniform</a>, <a class="code" href="a00596.html#ade80fdcd8f2dde57393f56d0cdfaeed0a21504929e31ddde091641bb817e32320">D_random</a>, <a class="code" href="a00596.html#ade80fdcd8f2dde57393f56d0cdfaeed0a1223ae56d204b110bd185b7dbdda258e">DISTRIBUTION_COUNT</a> } <a class="code" href="a00596.html#ade80fdcd8f2dde57393f56d0cdfaeed0">DISTRIBUTION</a>;</div>
-<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="a02740.html">   57</a></span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="a02740.html#a7bc5443951233bcccc5f13d5959dfa27">   58</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">union </span>{</div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="a02740.html#aac67dbd3e7e8d6f21810bafc51313cc6">   59</a></span>&#160;  <span class="keywordtype">float</span> Spherical;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <span class="keywordtype">float</span>* Elliptical;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;} <a class="code" href="a02740.html">FLOATUNION</a>;</div>
-<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="a02744.html">   62</a></span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="a02744.html#abe68ea2bc484a6f5abf36f3bbd6fe2ce">   63</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
-<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="a02744.html#ac21ca4eb4f566b062b587718b158cc4f">   64</a></span>&#160;  <span class="keywordtype">bool</span> Significant : 1;      <span class="comment">// true if prototype is significant</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="keywordtype">bool</span> Merged : 1;           <span class="comment">// Merged after clustering so do not output</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                             <span class="comment">// but kept for display purposes. If it has no</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                             <span class="comment">// samples then it was actually merged.</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                             <span class="comment">// Otherwise it matched an already significant</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="a02744.html#aad81f08b6e171698866b445c0b3d4b35">   69</a></span>&#160;                             <span class="comment">// cluster.</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="a02744.html#a2ba6bfd64f308a26cdd0a75c52e002f5">   70</a></span>&#160;  <span class="keywordtype">unsigned</span> Style : 2;        <span class="comment">// spherical, elliptical, or mixed</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="a02744.html#aff59384612de343b799b92a5d80282b7">   71</a></span>&#160;  <span class="keywordtype">unsigned</span> NumSamples : 28;  <span class="comment">// number of samples in the cluster</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="a02744.html#ae53408c33cdd473a9ed1f028e8172b0b">   72</a></span>&#160;  <a class="code" href="a02732.html">CLUSTER</a>* Cluster;          <span class="comment">// ptr to cluster which made prototype</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="a02744.html#aaf23ee38e17c1bf39f4ac6a47584f8ac">   73</a></span>&#160;  <a class="code" href="a00596.html#ade80fdcd8f2dde57393f56d0cdfaeed0">DISTRIBUTION</a>* Distrib;     <span class="comment">// different distribution for each dimension</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="a02744.html#ad8d31d8abdb08f62cd529c7a973b47d8">   74</a></span>&#160;  <span class="keywordtype">float</span>* <a class="code" href="a00596.html#a3f6cc9c21973dbc06e11bff91fe1e776">Mean</a>;               <span class="comment">// prototype mean</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="a02744.html#ab776edf6df935a83b22a6b435c91319c">   75</a></span>&#160;  <span class="keywordtype">float</span> TotalMagnitude;      <span class="comment">// total magnitude over all dimensions</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="a02744.html#a35cf2e2dd8cc8b0e9476ad49f36abd24">   76</a></span>&#160;  <span class="keywordtype">float</span> LogMagnitude;        <span class="comment">// log base e of TotalMagnitude</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="a02744.html#a0b016afed9c049598aa41feb3770fc15">   77</a></span>&#160;  <a class="code" href="a02740.html">FLOATUNION</a> Variance;       <span class="comment">// prototype variance</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="a02744.html#af202ff952380614068536ea0b504285e">   78</a></span>&#160;  <a class="code" href="a02740.html">FLOATUNION</a> <a class="code" href="a00650.html#adbeb54abd64e764a1b38688776d36f77">Magnitude</a>;      <span class="comment">// magnitude of density function</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <a class="code" href="a02740.html">FLOATUNION</a> Weight;         <span class="comment">// weight of density function</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;} <a class="code" href="a02744.html">PROTOTYPE</a>;</div>
-<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="a02748.html">   81</a></span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="a02748.html#ac106d560d67893d8c05c31da22dc0869">   82</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
-<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="a02748.html#af44850047e9f5b3648871d7517c04316">   83</a></span>&#160;  int16_t SampleSize;       <span class="comment">// number of parameters per sample</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="a02748.html#a58db154e92fa80d19b62da67ef68acb0">   84</a></span>&#160;  <a class="code" href="a02856.html">PARAM_DESC</a>* ParamDesc;    <span class="comment">// description of each parameter</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="a02748.html#af2c9040008b80775815320a327f21242">   85</a></span>&#160;  int32_t NumberOfSamples;  <span class="comment">// total number of samples being clustered</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="a02748.html#a0178d3dfedb397870384f599d809c54d">   86</a></span>&#160;  <a class="code" href="a02844.html">KDTREE</a>* KDTree;           <span class="comment">// for optimal nearest neighbor searching</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="a02748.html#af6bd9758400f9a886e8fde8d009de70f">   87</a></span>&#160;  <a class="code" href="a02732.html">CLUSTER</a>* Root;            <span class="comment">// ptr to root cluster of cluster tree</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="a02748.html#af0ed01845596080fcc1379763d02a0fe">   88</a></span>&#160;  <a class="code" href="a02920.html">LIST</a> ProtoList;           <span class="comment">// list of prototypes</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  int32_t NumChar;          <span class="comment">// # of characters represented by samples</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="a02748.html#adfe74e76873ffd1884a9ec03f5b54f98">   90</a></span>&#160;  <span class="comment">// cache of reusable histograms by distribution type and number of buckets.</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  <a class="code" href="a02720.html">BUCKETS</a>* bucket_cache[<a class="code" href="a00596.html#ade80fdcd8f2dde57393f56d0cdfaeed0a1223ae56d204b110bd185b7dbdda258e">DISTRIBUTION_COUNT</a>][<a class="code" href="a00596.html#a17645698964d2a3c89b72281594c58a3">MAXBUCKETS</a> + 1 - <a class="code" href="a00596.html#a759b3b99f54d92a0c6c5471a4c87c42b">MINBUCKETS</a>];</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;} <a class="code" href="a02748.html">CLUSTERER</a>;</div>
-<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="a02752.html">   93</a></span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="a02752.html#a2421bd08408349e8700001a7d588e1b9">   94</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
-<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="a02752.html#a533898989ac0367055c30c1d74a37b84">   95</a></span>&#160;  int32_t NumSamples;     <span class="comment">// number of samples in list</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="a02752.html#aee7b23bef7e0cdd87974d3c9d36e9d73">   96</a></span>&#160;  int32_t MaxNumSamples;  <span class="comment">// maximum size of list</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  <a class="code" href="a02732.html">SAMPLE</a>* Sample[1];      <span class="comment">// array of ptrs to sample data structures</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;} <a class="code" href="a02752.html">SAMPLELIST</a>;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
-<div class="line"><a name="l00100"></a><span class="lineno"><a class="line" href="a00596.html#af125589eadf8dca87cf904ebcb77c896">  100</a></span>&#160;<span class="comment">// low level cluster tree analysis routines.</span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="preprocessor">#define InitSampleSearch(S, C) \</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="preprocessor">  (((C) == nullptr) ? (S = NIL_LIST) : (S = push(NIL_LIST, (C))))</span></div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">/*--------------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">        Public Function Prototypes</span></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">--------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<a class="code" href="a02748.html">CLUSTERER</a>* <a class="code" href="a00596.html#a66138ac058b72b885d51f14e7d4870fb">MakeClusterer</a>(int16_t SampleSize, <span class="keyword">const</span> <a class="code" href="a02856.html">PARAM_DESC</a> ParamDesc[]);</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<a class="code" href="a02732.html">SAMPLE</a>* <a class="code" href="a00596.html#a20f04ce55271496391358b71c5491795">MakeSample</a>(<a class="code" href="a02748.html">CLUSTERER</a>* Clusterer, <span class="keyword">const</span> <span class="keywordtype">float</span>* Feature, int32_t CharID);</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<a class="code" href="a02920.html">LIST</a> <a class="code" href="a00596.html#ac7c6943d214b9c60e0f37cbb1a2111b4">ClusterSamples</a>(<a class="code" href="a02748.html">CLUSTERER</a>* Clusterer, <a class="code" href="a02736.html">CLUSTERCONFIG</a>* <a class="code" href="a01199.html#a1630a3dc82a9a7cef07bb6153df9eb9c">Config</a>);</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00596.html#aa5b6309260cd2d1acac25bd9cc9e9a66">FreeClusterer</a>(<a class="code" href="a02748.html">CLUSTERER</a>* Clusterer);</div>
+<a href="a00596.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// File:        unicharmap.cpp</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// Description: Unicode character/ligature to integer id class.</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// Author:      Thomas Kielbus</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">// (C) Copyright 2006, Google Inc.</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// you may not use this file except in compliance with the License.</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">// You may obtain a copy of the License at</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// http://www.apache.org/licenses/LICENSE-2.0</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">// Unless required by applicable law or agreed to in writing, software</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">// See the License for the specific language governing permissions and</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">// limitations under the License.</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;cassert&gt;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00050.html">tesseract/unichar.h</a>&gt;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00599.html">unicharmap.h</a>&quot;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="a03102.html#a1d967e078291984427cc95d60ad61c11">   23</a></span>&#160;<a class="code" href="a03102.html#a1d967e078291984427cc95d60ad61c11">UNICHARMAP::UNICHARMAP</a>() :</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;nodes(nullptr) {</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;}</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="a03102.html#acb69ce2363844e6082995a1c4c4832e0">   27</a></span>&#160;<a class="code" href="a03102.html#acb69ce2363844e6082995a1c4c4832e0">UNICHARMAP::~UNICHARMAP</a>() {</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <span class="keyword">delete</span>[] nodes;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;}</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">// Search the given unichar representation in the tree, using length characters</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">// from it maximum. Each character in the string is interpreted as an index in</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">// an array of nodes.</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="a03102.html#a2816fc8ede02ba9a8e92ea0ecbb7f000">   34</a></span>&#160;<a class="code" href="a00050.html#afedceee7ea132dae3d224db2cf8b5618">UNICHAR_ID</a> <a class="code" href="a03102.html#a2816fc8ede02ba9a8e92ea0ecbb7f000">UNICHARMAP::unichar_to_id</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* <span class="keyword">const</span> unichar_repr,</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                                     <span class="keywordtype">int</span> length)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  UNICHARMAP_NODE* current_nodes = nodes;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  assert(*unichar_repr != <span class="charliteral">&#39;\0&#39;</span>);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  assert(length &gt; 0 &amp;&amp; length &lt;= <a class="code" href="a00050.html#a902bc40c9d89802bc063afe30ce9e708">UNICHAR_LEN</a>);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <span class="keywordtype">int</span> index = 0;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <span class="keywordflow">if</span> (length &lt;= 0 || unichar_repr[index] == <span class="charliteral">&#39;\0&#39;</span>) <span class="keywordflow">return</span> INVALID_UNICHAR_ID;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="keywordflow">do</span> {</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordflow">if</span> (index + 1 &gt;= length || unichar_repr[index + 1] == <span class="charliteral">&#39;\0&#39;</span>)</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;      <span class="keywordflow">return</span> current_nodes[static_cast&lt;unsigned char&gt;(unichar_repr[index])].id;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    current_nodes =</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        current_nodes[static_cast&lt;unsigned char&gt;(unichar_repr[index])].children;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    ++index;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  } <span class="keywordflow">while</span> (<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;}</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">// Search the given unichar representation in the tree, creating the possibly</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">// missing nodes. Once the right place has been found, insert the given id and</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">// update the inserted flag to keep track of the insert. Each character in the</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">// string is interpreted as an index in an array of nodes.</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="a03102.html#a83ec56c382b3f94f31400ff884bbcf87">   56</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a03102.html#a83ec56c382b3f94f31400ff884bbcf87">UNICHARMAP::insert</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* <span class="keyword">const</span> unichar_repr, <a class="code" href="a00050.html#afedceee7ea132dae3d224db2cf8b5618">UNICHAR_ID</a> <span class="keywordtype">id</span>) {</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span>* current_char = unichar_repr;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="keywordflow">if</span> (*current_char == <span class="charliteral">&#39;\0&#39;</span>) <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  UNICHARMAP_NODE** current_nodes_pointer = &amp;nodes;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <span class="keywordflow">do</span> {</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordflow">if</span> (*current_nodes_pointer == <span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;      *current_nodes_pointer = <span class="keyword">new</span> UNICHARMAP_NODE[256];</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordflow">if</span> (current_char[1] == <span class="charliteral">&#39;\0&#39;</span>) {</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;      (*current_nodes_pointer)</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;          [static_cast&lt;unsigned char&gt;(*current_char)].id = id;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;      <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    }</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    current_nodes_pointer =</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        &amp;((*current_nodes_pointer)</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;          [static_cast&lt;unsigned char&gt;(*current_char)].children);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    ++current_char;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  } <span class="keywordflow">while</span> (<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;}</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">// Search the given unichar representation in the tree, using length characters</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">// from it maximum. Each character in the string is interpreted as an index in</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">// an array of nodes. Stop once the tree does not have anymore nodes or once we</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">// found the right unichar_repr.</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="a03102.html#a08ea4470f34530a46d9d9b26ce23c98d">   79</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a03102.html#a08ea4470f34530a46d9d9b26ce23c98d">UNICHARMAP::contains</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* <span class="keyword">const</span> unichar_repr,</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                          <span class="keywordtype">int</span> length)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  <span class="keywordflow">if</span> (unichar_repr == <span class="keyword">nullptr</span> || *unichar_repr == <span class="charliteral">&#39;\0&#39;</span>) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <span class="keywordflow">if</span> (length &lt;= 0 || length &gt; <a class="code" href="a00050.html#a902bc40c9d89802bc063afe30ce9e708">UNICHAR_LEN</a>) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  <span class="keywordtype">int</span> index = 0;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  <span class="keywordflow">if</span> (unichar_repr[index] == <span class="charliteral">&#39;\0&#39;</span>) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  UNICHARMAP_NODE* current_nodes = nodes;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  <span class="keywordflow">while</span> (current_nodes != <span class="keyword">nullptr</span> &amp;&amp; index + 1 &lt; length &amp;&amp;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;         unichar_repr[index + 1] != <span class="charliteral">&#39;\0&#39;</span>) {</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    current_nodes =</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        current_nodes[static_cast&lt;unsigned char&gt;(unichar_repr[index])].children;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    ++index;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  }</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <span class="keywordflow">return</span> current_nodes != <span class="keyword">nullptr</span> &amp;&amp;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;         (index + 1 &gt;= length || unichar_repr[index + 1] == <span class="charliteral">&#39;\0&#39;</span>) &amp;&amp;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;         current_nodes[static_cast&lt;unsigned char&gt;(unichar_repr[index])].id &gt;= 0;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;}</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">// Return the minimum number of characters that must be used from this string</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">// to obtain a match in the UNICHARMAP.</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno"><a class="line" href="a03102.html#a2e608c3298f0e0735436fe6b3927b0bd">  100</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="a03102.html#a2e608c3298f0e0735436fe6b3927b0bd">UNICHARMAP::minmatch</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* <span class="keyword">const</span> unichar_repr)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span>* current_char = unichar_repr;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  <span class="keywordflow">if</span> (*current_char == <span class="charliteral">&#39;\0&#39;</span>) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  UNICHARMAP_NODE* current_nodes = nodes;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  <span class="keywordflow">while</span> (current_nodes != <span class="keyword">nullptr</span> &amp;&amp; *current_char != <span class="charliteral">&#39;\0&#39;</span>) {</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordflow">if</span> (current_nodes[static_cast&lt;unsigned char&gt;(*current_char)].<span class="keywordtype">id</span> &gt;= 0)</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;      <span class="keywordflow">return</span> current_char + 1 - unichar_repr;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    current_nodes =</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        current_nodes[static_cast&lt;unsigned char&gt;(*current_char)].children;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    ++current_char;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  }</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;}</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00596.html#a7e5357920f0bded023b15d29ddf15ebf">FreeProtoList</a>(<a class="code" href="a02920.html">LIST</a>* ProtoList);</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00596.html#aa5d7083be183c7a4e2b2fa746a560a7b">FreePrototype</a>(<span class="keywordtype">void</span>* arg);  <span class="comment">// PROTOTYPE *Prototype);</span></div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<a class="code" href="a02732.html">CLUSTER</a>* <a class="code" href="a00596.html#abf5d9e3b151ac51b27bd9dc797ac261c">NextSample</a>(<a class="code" href="a02920.html">LIST</a>* SearchState);</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="keywordtype">float</span> <a class="code" href="a00596.html#a3f6cc9c21973dbc06e11bff91fe1e776">Mean</a>(<a class="code" href="a02744.html">PROTOTYPE</a>* Proto, uint16_t Dimension);</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="keywordtype">float</span> <a class="code" href="a00596.html#a694801f17005233b19c4ab29ebe4e63e">StandardDeviation</a>(<a class="code" href="a02744.html">PROTOTYPE</a>* Proto, uint16_t Dimension);</div>
+<div class="line"><a name="l00115"></a><span class="lineno"><a class="line" href="a03102.html#a03d0b5a94f3b73fb17183e4bbf6a90d4">  115</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a03102.html#a03d0b5a94f3b73fb17183e4bbf6a90d4">UNICHARMAP::clear</a>() {</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  <span class="keyword">delete</span>[] nodes;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  nodes = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;}</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;UNICHARMAP::UNICHARMAP_NODE::UNICHARMAP_NODE() :</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;children(nullptr),</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;id(-1) {</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;}</div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;int32_t <a class="code" href="a00596.html#a5f2e7fb45793eaa81dd8bd55efe8f998">MergeClusters</a>(int16_t N, <a class="code" href="a02856.html">PARAM_DESC</a> ParamDesc[], int32_t n1, int32_t n2,</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;                      <span class="keywordtype">float</span> m[], <span class="keywordtype">float</span> m1[], <span class="keywordtype">float</span> m2[]);</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">// Recursively delete the children</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;UNICHARMAP::UNICHARMAP_NODE::~UNICHARMAP_NODE() {</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;  <span class="keyword">delete</span>[] children;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa00758_html"><div class="ttname"><a href="a00758.html">oldlist.h</a></div></div>
-<div class="ttc" id="aa02748_html"><div class="ttname"><a href="a02748.html">CLUSTERER</a></div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00081">cluster.h:81</a></div></div>
-<div class="ttc" id="aa02736_html"><div class="ttname"><a href="a02736.html">CLUSTERCONFIG</a></div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00045">cluster.h:45</a></div></div>
-<div class="ttc" id="aa00596_html_a2bf647f23b4a059a559e4d991437c9eaab164032fff82a847826b4887d9e7be58"><div class="ttname"><a href="a00596.html#a2bf647f23b4a059a559e4d991437c9eaab164032fff82a847826b4887d9e7be58">mixed</a></div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00043">cluster.h:43</a></div></div>
-<div class="ttc" id="aa02732_html_a71cac0608666e1abfdfb3ab40e26b249"><div class="ttname"><a href="a02732.html#a71cac0608666e1abfdfb3ab40e26b249">sample::SampleCount</a></div><div class="ttdeci">unsigned SampleCount</div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00034">cluster.h:34</a></div></div>
-<div class="ttc" id="aa02844_html"><div class="ttname"><a href="a02844.html">KDTREE</a></div><div class="ttdef"><b>Definition:</b> <a href="a00653_source.html#l00047">kdtree.h:47</a></div></div>
-<div class="ttc" id="aa02744_html"><div class="ttname"><a href="a02744.html">PROTOTYPE</a></div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00062">cluster.h:62</a></div></div>
-<div class="ttc" id="aa02732_html_ae6abb40063761a77d4275c79c5c0bb49"><div class="ttname"><a href="a02732.html#ae6abb40063761a77d4275c79c5c0bb49">sample::Left</a></div><div class="ttdeci">struct sample * Left</div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00035">cluster.h:35</a></div></div>
-<div class="ttc" id="aa00596_html_a2bf647f23b4a059a559e4d991437c9eaa93d6901f160899d15f69322530595f4f"><div class="ttname"><a href="a00596.html#a2bf647f23b4a059a559e4d991437c9eaa93d6901f160899d15f69322530595f4f">spherical</a></div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00043">cluster.h:43</a></div></div>
-<div class="ttc" id="aa00596_html_ade80fdcd8f2dde57393f56d0cdfaeed0"><div class="ttname"><a href="a00596.html#ade80fdcd8f2dde57393f56d0cdfaeed0">DISTRIBUTION</a></div><div class="ttdeci">DISTRIBUTION</div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00055">cluster.h:55</a></div></div>
-<div class="ttc" id="aa00596_html_a883b4f4e7113af06f96a7b11492256d1"><div class="ttname"><a href="a00596.html#a883b4f4e7113af06f96a7b11492256d1">CLUSTER</a></div><div class="ttdeci">struct sample CLUSTER</div></div>
-<div class="ttc" id="aa02752_html"><div class="ttname"><a href="a02752.html">SAMPLELIST</a></div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00093">cluster.h:93</a></div></div>
-<div class="ttc" id="aa00596_html_aa5b6309260cd2d1acac25bd9cc9e9a66"><div class="ttname"><a href="a00596.html#aa5b6309260cd2d1acac25bd9cc9e9a66">FreeClusterer</a></div><div class="ttdeci">void FreeClusterer(CLUSTERER *Clusterer)</div><div class="ttdef"><b>Definition:</b> <a href="a00593_source.html#l00514">cluster.cpp:514</a></div></div>
-<div class="ttc" id="aa00596_html_a20f04ce55271496391358b71c5491795"><div class="ttname"><a href="a00596.html#a20f04ce55271496391358b71c5491795">MakeSample</a></div><div class="ttdeci">SAMPLE * MakeSample(CLUSTERER *Clusterer, const float *Feature, int32_t CharID)</div><div class="ttdef"><b>Definition:</b> <a href="a00593_source.html#l00429">cluster.cpp:429</a></div></div>
-<div class="ttc" id="aa02732_html_a4848f35755dbd85b47c1a540c93f213f"><div class="ttname"><a href="a02732.html#a4848f35755dbd85b47c1a540c93f213f">sample::CharID</a></div><div class="ttdeci">int32_t CharID</div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00037">cluster.h:37</a></div></div>
-<div class="ttc" id="aa02732_html_a91415d9a86209ff4a3f0cfeb1c9fb3f4"><div class="ttname"><a href="a02732.html#a91415d9a86209ff4a3f0cfeb1c9fb3f4">sample::Clustered</a></div><div class="ttdeci">bool Clustered</div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00032">cluster.h:32</a></div></div>
-<div class="ttc" id="aa01199_html_a1630a3dc82a9a7cef07bb6153df9eb9c"><div class="ttname"><a href="a01199.html#a1630a3dc82a9a7cef07bb6153df9eb9c">Config</a></div><div class="ttdeci">CLUSTERCONFIG Config</div><div class="ttdef"><b>Definition:</b> <a href="a01199_source.html#l00088">commontraining.cpp:88</a></div></div>
-<div class="ttc" id="aa00596_html_ade80fdcd8f2dde57393f56d0cdfaeed0a1223ae56d204b110bd185b7dbdda258e"><div class="ttname"><a href="a00596.html#ade80fdcd8f2dde57393f56d0cdfaeed0a1223ae56d204b110bd185b7dbdda258e">DISTRIBUTION_COUNT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00055">cluster.h:55</a></div></div>
-<div class="ttc" id="aa00596_html_aa5d7083be183c7a4e2b2fa746a560a7b"><div class="ttname"><a href="a00596.html#aa5d7083be183c7a4e2b2fa746a560a7b">FreePrototype</a></div><div class="ttdeci">void FreePrototype(void *arg)</div><div class="ttdef"><b>Definition:</b> <a href="a00593_source.html#l00549">cluster.cpp:549</a></div></div>
-<div class="ttc" id="aa00596_html_a2bf647f23b4a059a559e4d991437c9ea"><div class="ttname"><a href="a00596.html#a2bf647f23b4a059a559e4d991437c9ea">PROTOSTYLE</a></div><div class="ttdeci">PROTOSTYLE</div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00043">cluster.h:43</a></div></div>
-<div class="ttc" id="aa00596_html_a2bf647f23b4a059a559e4d991437c9eaa9761086e420b925e438327ad385b304d"><div class="ttname"><a href="a00596.html#a2bf647f23b4a059a559e4d991437c9eaa9761086e420b925e438327ad385b304d">automatic</a></div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00043">cluster.h:43</a></div></div>
-<div class="ttc" id="aa00596_html_ade80fdcd8f2dde57393f56d0cdfaeed0a21504929e31ddde091641bb817e32320"><div class="ttname"><a href="a00596.html#ade80fdcd8f2dde57393f56d0cdfaeed0a21504929e31ddde091641bb817e32320">D_random</a></div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00055">cluster.h:55</a></div></div>
-<div class="ttc" id="aa02732_html_a2d66168da8fd6b92aed011277f54843a"><div class="ttname"><a href="a02732.html#a2d66168da8fd6b92aed011277f54843a">sample::Right</a></div><div class="ttdeci">struct sample * Right</div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00036">cluster.h:36</a></div></div>
-<div class="ttc" id="aa02732_html"><div class="ttname"><a href="a02732.html">sample</a></div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00031">cluster.h:31</a></div></div>
-<div class="ttc" id="aa02732_html_a4de6e924a7600a98e5f1fa8f613527a6"><div class="ttname"><a href="a02732.html#a4de6e924a7600a98e5f1fa8f613527a6">sample::Prototype</a></div><div class="ttdeci">bool Prototype</div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00033">cluster.h:33</a></div></div>
-<div class="ttc" id="aa00596_html_a759b3b99f54d92a0c6c5471a4c87c42b"><div class="ttname"><a href="a00596.html#a759b3b99f54d92a0c6c5471a4c87c42b">MINBUCKETS</a></div><div class="ttdeci">#define MINBUCKETS</div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00025">cluster.h:25</a></div></div>
-<div class="ttc" id="aa00596_html_a17645698964d2a3c89b72281594c58a3"><div class="ttname"><a href="a00596.html#a17645698964d2a3c89b72281594c58a3">MAXBUCKETS</a></div><div class="ttdeci">#define MAXBUCKETS</div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00026">cluster.h:26</a></div></div>
-<div class="ttc" id="aa00596_html_abf5d9e3b151ac51b27bd9dc797ac261c"><div class="ttname"><a href="a00596.html#abf5d9e3b151ac51b27bd9dc797ac261c">NextSample</a></div><div class="ttdeci">CLUSTER * NextSample(LIST *SearchState)</div><div class="ttdef"><b>Definition:</b> <a href="a00593_source.html#l00580">cluster.cpp:580</a></div></div>
-<div class="ttc" id="aa02856_html"><div class="ttname"><a href="a02856.html">PARAM_DESC</a></div><div class="ttdef"><b>Definition:</b> <a href="a00695_source.html#l00041">ocrfeatures.h:41</a></div></div>
-<div class="ttc" id="aa00596_html_ade80fdcd8f2dde57393f56d0cdfaeed0aebc81705969b8c5ae986b0b2ec08d1d5"><div class="ttname"><a href="a00596.html#ade80fdcd8f2dde57393f56d0cdfaeed0aebc81705969b8c5ae986b0b2ec08d1d5">normal</a></div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00055">cluster.h:55</a></div></div>
-<div class="ttc" id="aa00596_html_ac7c6943d214b9c60e0f37cbb1a2111b4"><div class="ttname"><a href="a00596.html#ac7c6943d214b9c60e0f37cbb1a2111b4">ClusterSamples</a></div><div class="ttdeci">LIST ClusterSamples(CLUSTERER *Clusterer, CLUSTERCONFIG *Config)</div><div class="ttdef"><b>Definition:</b> <a href="a00593_source.html#l00483">cluster.cpp:483</a></div></div>
-<div class="ttc" id="aa00596_html_a2bf647f23b4a059a559e4d991437c9eaa39d32ff639641ca169c9729c58614459"><div class="ttname"><a href="a00596.html#a2bf647f23b4a059a559e4d991437c9eaa39d32ff639641ca169c9729c58614459">elliptical</a></div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00043">cluster.h:43</a></div></div>
-<div class="ttc" id="aa00650_html_adbeb54abd64e764a1b38688776d36f77"><div class="ttname"><a href="a00650.html#adbeb54abd64e764a1b38688776d36f77">Magnitude</a></div><div class="ttdeci">#define Magnitude(X)</div><div class="ttdef"><b>Definition:</b> <a href="a00650_source.html#l00028">kdtree.cpp:28</a></div></div>
-<div class="ttc" id="aa02740_html"><div class="ttname"><a href="a02740.html">FLOATUNION</a></div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00057">cluster.h:57</a></div></div>
-<div class="ttc" id="aa00596_html_a7e5357920f0bded023b15d29ddf15ebf"><div class="ttname"><a href="a00596.html#a7e5357920f0bded023b15d29ddf15ebf">FreeProtoList</a></div><div class="ttdeci">void FreeProtoList(LIST *ProtoList)</div><div class="ttdef"><b>Definition:</b> <a href="a00593_source.html#l00538">cluster.cpp:538</a></div></div>
-<div class="ttc" id="aa00596_html_ade80fdcd8f2dde57393f56d0cdfaeed0a56013d9ac59a24fb94d9acb932a04b2f"><div class="ttname"><a href="a00596.html#ade80fdcd8f2dde57393f56d0cdfaeed0a56013d9ac59a24fb94d9acb932a04b2f">uniform</a></div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00055">cluster.h:55</a></div></div>
-<div class="ttc" id="aa00596_html_a3f6cc9c21973dbc06e11bff91fe1e776"><div class="ttname"><a href="a00596.html#a3f6cc9c21973dbc06e11bff91fe1e776">Mean</a></div><div class="ttdeci">float Mean(PROTOTYPE *Proto, uint16_t Dimension)</div><div class="ttdef"><b>Definition:</b> <a href="a00593_source.html#l00602">cluster.cpp:602</a></div></div>
-<div class="ttc" id="aa02720_html"><div class="ttname"><a href="a02720.html">BUCKETS</a></div><div class="ttdef"><b>Definition:</b> <a href="a00593_source.html#l00179">cluster.cpp:179</a></div></div>
-<div class="ttc" id="aa02920_html"><div class="ttname"><a href="a02920.html">list_rec</a></div><div class="ttdef"><b>Definition:</b> <a href="a00758_source.html#l00073">oldlist.h:73</a></div></div>
-<div class="ttc" id="aa02732_html_a9ba1a2ff48a921f1146a248f76ecbc66"><div class="ttname"><a href="a02732.html#a9ba1a2ff48a921f1146a248f76ecbc66">sample::Mean</a></div><div class="ttdeci">float Mean[1]</div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00038">cluster.h:38</a></div></div>
-<div class="ttc" id="aa00596_html_a5f2e7fb45793eaa81dd8bd55efe8f998"><div class="ttname"><a href="a00596.html#a5f2e7fb45793eaa81dd8bd55efe8f998">MergeClusters</a></div><div class="ttdeci">int32_t MergeClusters(int16_t N, PARAM_DESC ParamDesc[], int32_t n1, int32_t n2, float m[], float m1[], float m2[])</div><div class="ttdef"><b>Definition:</b> <a href="a00593_source.html#l00824">cluster.cpp:824</a></div></div>
-<div class="ttc" id="aa00653_html"><div class="ttname"><a href="a00653.html">kdtree.h</a></div></div>
-<div class="ttc" id="aa00596_html_a66138ac058b72b885d51f14e7d4870fb"><div class="ttname"><a href="a00596.html#a66138ac058b72b885d51f14e7d4870fb">MakeClusterer</a></div><div class="ttdeci">CLUSTERER * MakeClusterer(int16_t SampleSize, const PARAM_DESC ParamDesc[])</div><div class="ttdef"><b>Definition:</b> <a href="a00593_source.html#l00376">cluster.cpp:376</a></div></div>
-<div class="ttc" id="aa00596_html_a694801f17005233b19c4ab29ebe4e63e"><div class="ttname"><a href="a00596.html#a694801f17005233b19c4ab29ebe4e63e">StandardDeviation</a></div><div class="ttdeci">float StandardDeviation(PROTOTYPE *Proto, uint16_t Dimension)</div><div class="ttdef"><b>Definition:</b> <a href="a00593_source.html#l00613">cluster.cpp:613</a></div></div>
+<div class="ttc" id="aa00599_html"><div class="ttname"><a href="a00599.html">unicharmap.h</a></div></div>
+<div class="ttc" id="aa03102_html_a08ea4470f34530a46d9d9b26ce23c98d"><div class="ttname"><a href="a03102.html#a08ea4470f34530a46d9d9b26ce23c98d">UNICHARMAP::contains</a></div><div class="ttdeci">bool contains(const char *const unichar_repr, int length) const</div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00079">unicharmap.cpp:79</a></div></div>
+<div class="ttc" id="aa03102_html_a03d0b5a94f3b73fb17183e4bbf6a90d4"><div class="ttname"><a href="a03102.html#a03d0b5a94f3b73fb17183e4bbf6a90d4">UNICHARMAP::clear</a></div><div class="ttdeci">void clear()</div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00115">unicharmap.cpp:115</a></div></div>
+<div class="ttc" id="aa03102_html_a2816fc8ede02ba9a8e92ea0ecbb7f000"><div class="ttname"><a href="a03102.html#a2816fc8ede02ba9a8e92ea0ecbb7f000">UNICHARMAP::unichar_to_id</a></div><div class="ttdeci">UNICHAR_ID unichar_to_id(const char *const unichar_repr, int length) const</div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00034">unicharmap.cpp:34</a></div></div>
+<div class="ttc" id="aa03102_html_a2e608c3298f0e0735436fe6b3927b0bd"><div class="ttname"><a href="a03102.html#a2e608c3298f0e0735436fe6b3927b0bd">UNICHARMAP::minmatch</a></div><div class="ttdeci">int minmatch(const char *const unichar_repr) const</div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00100">unicharmap.cpp:100</a></div></div>
+<div class="ttc" id="aa00050_html_afedceee7ea132dae3d224db2cf8b5618"><div class="ttname"><a href="a00050.html#afedceee7ea132dae3d224db2cf8b5618">UNICHAR_ID</a></div><div class="ttdeci">int UNICHAR_ID</div><div class="ttdef"><b>Definition:</b> <a href="a00050_source.html#l00036">unichar.h:36</a></div></div>
+<div class="ttc" id="aa00050_html_a902bc40c9d89802bc063afe30ce9e708"><div class="ttname"><a href="a00050.html#a902bc40c9d89802bc063afe30ce9e708">UNICHAR_LEN</a></div><div class="ttdeci">#define UNICHAR_LEN</div><div class="ttdef"><b>Definition:</b> <a href="a00050_source.html#l00032">unichar.h:32</a></div></div>
+<div class="ttc" id="aa03102_html_a1d967e078291984427cc95d60ad61c11"><div class="ttname"><a href="a03102.html#a1d967e078291984427cc95d60ad61c11">UNICHARMAP::UNICHARMAP</a></div><div class="ttdeci">UNICHARMAP()</div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00023">unicharmap.cpp:23</a></div></div>
+<div class="ttc" id="aa03102_html_acb69ce2363844e6082995a1c4c4832e0"><div class="ttname"><a href="a03102.html#acb69ce2363844e6082995a1c4c4832e0">UNICHARMAP::~UNICHARMAP</a></div><div class="ttdeci">~UNICHARMAP()</div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00027">unicharmap.cpp:27</a></div></div>
+<div class="ttc" id="aa00050_html"><div class="ttname"><a href="a00050.html">unichar.h</a></div></div>
+<div class="ttc" id="aa03102_html_a83ec56c382b3f94f31400ff884bbcf87"><div class="ttname"><a href="a03102.html#a83ec56c382b3f94f31400ff884bbcf87">UNICHARMAP::insert</a></div><div class="ttdeci">void insert(const char *const unichar_repr, UNICHAR_ID id)</div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00056">unicharmap.cpp:56</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b8f5fb7b736ee5431a221bc7b817d6e0.html">classify</a></li><li class="navelem"><a class="el" href="a00596.html">cluster.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:14 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_be21c9400dd14e513865608c9a8a7e5a.html">ccutil</a></li><li class="navelem"><a class="el" href="a00596.html">unicharmap.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:20 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

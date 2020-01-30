@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/lstm/plumbing.cpp File Reference</title>
+<title>tesseract: /tesseract/src/lstm/functions.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,27 +87,125 @@ $(document).ready(function(){initNavTree('a00869.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#define-members">Macros</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
-<div class="title">plumbing.cpp File Reference</div>  </div>
+<div class="title">functions.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="a00872_source.html">plumbing.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="a00014_source.html">tesseract/helpers.h</a>&gt;</code><br />
 </div>
 <p><a href="a00869_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03442.html">tesseract::FFunc</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03446.html">tesseract::FPrime</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03450.html">tesseract::ClipFFunc</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03454.html">tesseract::ClipFPrime</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03458.html">tesseract::Relu</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03462.html">tesseract::ReluPrime</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03466.html">tesseract::GFunc</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03470.html">tesseract::GPrime</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03474.html">tesseract::ClipGFunc</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03478.html">tesseract::ClipGPrime</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03482.html">tesseract::HFunc</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03486.html">tesseract::HPrime</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03490.html">tesseract::UnityFunc</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03494.html">tesseract::IdentityFunc</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a01539"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html">tesseract</a></td></tr>
+<tr class="memitem:a01818"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html">tesseract</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a32bda381eb3fed8144a88bdf79c348a6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00869.html#a32bda381eb3fed8144a88bdf79c348a6">DEBUG_DETAIL</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:a32bda381eb3fed8144a88bdf79c348a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:acee86620294db47b3b09477dabd67363"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#acee86620294db47b3b09477dabd67363">tesseract::Tanh</a> (double x)</td></tr>
+<tr class="separator:acee86620294db47b3b09477dabd67363"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72eed9bd9f10c8c87cde9eb041e58f6c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a72eed9bd9f10c8c87cde9eb041e58f6c">tesseract::Logistic</a> (double x)</td></tr>
+<tr class="separator:a72eed9bd9f10c8c87cde9eb041e58f6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab012d9679386280423faa901b7c0f14c"><td class="memTemplParams" colspan="2">template&lt;class Func &gt; </td></tr>
+<tr class="memitem:ab012d9679386280423faa901b7c0f14c"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a01818.html#ab012d9679386280423faa901b7c0f14c">tesseract::FuncInplace</a> (int n, double *inout)</td></tr>
+<tr class="separator:ab012d9679386280423faa901b7c0f14c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d532b4ba4ef60ba5edbc1a11db9145e"><td class="memTemplParams" colspan="2">template&lt;class Func &gt; </td></tr>
+<tr class="memitem:a3d532b4ba4ef60ba5edbc1a11db9145e"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a01818.html#a3d532b4ba4ef60ba5edbc1a11db9145e">tesseract::FuncMultiply</a> (const double *u, const double *v, int n, double *out)</td></tr>
+<tr class="separator:a3d532b4ba4ef60ba5edbc1a11db9145e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65a7d7d845913850ca0df042d53fec23"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a65a7d7d845913850ca0df042d53fec23"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a01818.html#a65a7d7d845913850ca0df042d53fec23">tesseract::SoftmaxInPlace</a> (int n, T *inout)</td></tr>
+<tr class="separator:a65a7d7d845913850ca0df042d53fec23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6cbe2757a3123ace511cbd6b5d159c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#ad6cbe2757a3123ace511cbd6b5d159c6">tesseract::CopyVector</a> (int n, const double *src, double *dest)</td></tr>
+<tr class="separator:ad6cbe2757a3123ace511cbd6b5d159c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46d55f52219b3fabab74cf7a5e42dff7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a46d55f52219b3fabab74cf7a5e42dff7">tesseract::AccumulateVector</a> (int n, const double *src, double *dest)</td></tr>
+<tr class="separator:a46d55f52219b3fabab74cf7a5e42dff7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0938bae167b62f05d8220345ec83631"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#ac0938bae167b62f05d8220345ec83631">tesseract::MultiplyVectorsInPlace</a> (int n, const double *src, double *inout)</td></tr>
+<tr class="separator:ac0938bae167b62f05d8220345ec83631"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae773484d15c3015527af6ba4e5e1b0c0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#ae773484d15c3015527af6ba4e5e1b0c0">tesseract::MultiplyAccumulate</a> (int n, const double *u, const double *v, double *out)</td></tr>
+<tr class="separator:ae773484d15c3015527af6ba4e5e1b0c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32bdd84df61f0f5ec77b076783a33af0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a32bdd84df61f0f5ec77b076783a33af0">tesseract::SumVectors</a> (int n, const double *v1, const double *v2, const double *v3, const double *v4, const double *v5, double *sum)</td></tr>
+<tr class="separator:a32bdd84df61f0f5ec77b076783a33af0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef214bcf70936c92bcbf8f63566603e7"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:aef214bcf70936c92bcbf8f63566603e7"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a01818.html#aef214bcf70936c92bcbf8f63566603e7">tesseract::ZeroVector</a> (int n, T *vec)</td></tr>
+<tr class="separator:aef214bcf70936c92bcbf8f63566603e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1f299de70937f07317c923b8907958c"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ae1f299de70937f07317c923b8907958c"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a01818.html#ae1f299de70937f07317c923b8907958c">tesseract::ClipVector</a> (int n, T lower, T upper, T *vec)</td></tr>
+<tr class="separator:ae1f299de70937f07317c923b8907958c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69edc86184a96e1bccf08e88baab1e87"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a69edc86184a96e1bccf08e88baab1e87">tesseract::CodeInBinary</a> (int n, int nf, double *vec)</td></tr>
+<tr class="separator:a69edc86184a96e1bccf08e88baab1e87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:ad93a766761bb5a56422d5090ff8d4540"><td class="memItemLeft" align="right" valign="top">constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#ad93a766761bb5a56422d5090ff8d4540">tesseract::kTableSize</a> = 4096</td></tr>
+<tr class="separator:ad93a766761bb5a56422d5090ff8d4540"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29b8b612b2fab38fece9a52a27f56b4e"><td class="memItemLeft" align="right" valign="top">constexpr double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a29b8b612b2fab38fece9a52a27f56b4e">tesseract::kScaleFactor</a> = 256.0</td></tr>
+<tr class="separator:a29b8b612b2fab38fece9a52a27f56b4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a32bda381eb3fed8144a88bdf79c348a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32bda381eb3fed8144a88bdf79c348a6">&#9670;&nbsp;</a></span>DEBUG_DETAIL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DEBUG_DETAIL&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00869_source.html#l00026">26</a> of file <a class="el" href="a00869_source.html">functions.h</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_57c32823bf7301c39893cc8d5b3eca8e.html">lstm</a></li><li class="navelem"><a class="el" href="a00869.html">plumbing.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_57c32823bf7301c39893cc8d5b3eca8e.html">lstm</a></li><li class="navelem"><a class="el" href="a00869.html">functions.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

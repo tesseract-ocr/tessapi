@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/ccstruct/rejctmap.cpp Source File</title>
+<title>tesseract: /tesseract/src/ccstruct/pdblock.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,15 +87,15 @@ $(document).ready(function(){initNavTree('a00383_source.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">rejctmap.cpp</div>  </div>
+<div class="title">pdblock.cpp</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="a00383.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**********************************************************************</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * File:        rejctmap.cpp  (Formerly rejmap.c)</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * Description: REJ and REJMAP class functions.</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * Author:      Phil Cheatle</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * File:        pdblock.cpp</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * Description: PDBLK member functions and iterator functions.</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * Author:      Ray Smith</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> * (C) Copyright 1994, Hewlett-Packard Ltd.</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> * (C) Copyright 1991, Hewlett-Packard Ltd.</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> ** Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> ** you may not use this file except in compliance with the License.</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> ** You may obtain a copy of the License at</span></div>
@@ -108,529 +108,431 @@ $(document).ready(function(){initNavTree('a00383_source.html','');});
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> **********************************************************************/</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00386.html">rejctmap.h</a>&quot;</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00503.html">params.h</a>&quot;</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="a02444.html#aaf1e632d675eb808f894c9691d7604f7">   21</a></span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a02444.html#aaf1e632d675eb808f894c9691d7604f7">REJ::perm_rejected</a>() {  <span class="comment">//Is char perm reject?</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <span class="keywordflow">return</span> (<a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaaa9e90cb27400daeb65262f465ca55963">R_TESS_FAILURE</a>) ||</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaae9c3faa247c71799d9f6955badf19cda">R_SMALL_XHT</a>) ||</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaad945e4640b308e36e058dbb01ccf6b1d">R_EDGE_CHAR</a>) ||</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa8b8798f4f516ddb31037b563cfd7a90c">R_1IL_CONFLICT</a>) ||</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaaae5be3ca821456d1d53ac803798b4e4c">R_POSTNN_1IL</a>) ||</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa74d4cf8b2b5fe113ebf7b9c420343c58">R_REJ_CBLOB</a>) ||</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa6c2902cc320e6ef874dba77400096bb3">R_BAD_REPETITION</a>) || <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa3290f139840ec68d0ad1b800580bd5d0">R_MM_REJECT</a>));</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;}</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &quot;allheaders.h&quot;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00386.html">pdblock.h</a>&quot;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;cstdlib&gt;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span>  <span class="comment">// std::unique_ptr</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;cinttypes&gt;</span>  <span class="comment">// for PRId32</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">// Include automatically generated configuration file if running autoconf.</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#ifdef HAVE_CONFIG_H</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;config_auto.h&quot;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="a00383.html#ad0e3ca9368f7687b1a72cf083cad3033">   29</a></span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#define BLOCK_LABEL_HEIGHT  150  //char height of block id</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keywordtype">bool</span> REJ::rej_before_nn_accept() {</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaabe17879df6434d3ac363864cea5cff70">R_POOR_MATCH</a>) ||</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa3af2da59ca30ea4d9f678582cb765943">R_NOT_TESS_ACCEPTED</a>) ||</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaab9972fc9fdd8fc7a8631aa23624477bf">R_CONTAINS_BLANKS</a>) || <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa816e9eb92c84abac4a0c84d7855e96ca">R_BAD_PERMUTER</a>);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;}</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keywordtype">bool</span> REJ::rej_between_nn_and_mm() {</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaabafae36f4ac3eceb1c60790b25216d9d">R_HYPHEN</a>) ||</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa4b904a542092cac49d42ada569aeb366">R_DUBIOUS</a>) ||</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa760cb3b743fba29a24ceada590cb28a5">R_NO_ALPHANUMS</a>) || <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa28267d098ae5e5dd9234e8225990fa5e">R_MOSTLY_REJ</a>) || <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa32f016f7b77aeb8d4891753c68b42eba">R_XHT_FIXUP</a>);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;}</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keywordtype">bool</span> REJ::rej_between_mm_and_quality_accept() {</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa9449830b9b3be69359e29ba073dbab97">R_BAD_QUALITY</a>);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;}</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keywordtype">bool</span> REJ::rej_between_quality_and_minimal_rej_accept() {</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaabd4893be9fca38674051ba596a12c866">R_DOC_REJ</a>) ||</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa6b379b13e52686bb924a2a474962e3c7">R_BLOCK_REJ</a>) || <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa53b165bbee2790e76a7ef35c6acbe3ba">R_ROW_REJ</a>) || <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaae288e8069feabdb927e4f77587d2a5f8">R_UNLV_REJ</a>);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;}</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keywordtype">bool</span> REJ::rej_before_mm_accept() {</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="keywordflow">return</span> rej_between_nn_and_mm () ||</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    (rej_before_nn_accept () &amp;&amp;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    !<a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaaf84e25f4e0bf0071671efeb73099ae35">R_NN_ACCEPT</a>) &amp;&amp; !<a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaab95636d09447ad2994bc856d21dd22e1">R_HYPHEN_ACCEPT</a>));</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;}</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keywordtype">bool</span> REJ::rej_before_quality_accept() {</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <span class="keywordflow">return</span> rej_between_mm_and_quality_accept () ||</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    (!<a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa72f00243433a6558a28fbab640343213">R_MM_ACCEPT</a>) &amp;&amp; rej_before_mm_accept ());</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;}</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="a02444.html#a7730d3b3330cac0b98bf7f906bfff7fa">   70</a></span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a02444.html#a7730d3b3330cac0b98bf7f906bfff7fa">REJ::rejected</a>() {  <span class="comment">//Is char rejected?</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <span class="keywordflow">if</span> (<a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa4182d71325acc2fe2eaf014e5c8770c4">R_MINIMAL_REJ_ACCEPT</a>))</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordflow">return</span> (<a class="code" href="a02444.html#aaf1e632d675eb808f894c9691d7604f7">perm_rejected</a> () ||</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;      rej_between_quality_and_minimal_rej_accept () ||</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;      (!<a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa9893d23c118ad4a6a3554a1efe084db5">R_QUALITY_ACCEPT</a>) &amp;&amp; rej_before_quality_accept ()));</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;}</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="a02444.html#adbe54ec1784781797a6a22287ad2d9bc">   80</a></span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a02444.html#adbe54ec1784781797a6a22287ad2d9bc">REJ::accept_if_good_quality</a>() {  <span class="comment">//potential rej?</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <span class="keywordflow">return</span> (<a class="code" href="a02444.html#a7730d3b3330cac0b98bf7f906bfff7fa">rejected</a> () &amp;&amp;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    !<a class="code" href="a02444.html#aaf1e632d675eb808f894c9691d7604f7">perm_rejected</a> () &amp;&amp;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa816e9eb92c84abac4a0c84d7855e96ca">R_BAD_PERMUTER</a>) &amp;&amp;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    !<a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaabe17879df6434d3ac363864cea5cff70">R_POOR_MATCH</a>) &amp;&amp;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    !<a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa3af2da59ca30ea4d9f678582cb765943">R_NOT_TESS_ACCEPTED</a>) &amp;&amp;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    !<a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaab9972fc9fdd8fc7a8631aa23624477bf">R_CONTAINS_BLANKS</a>) &amp;&amp;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    (!rej_between_nn_and_mm () &amp;&amp;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;     !rej_between_mm_and_quality_accept () &amp;&amp;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;     !rej_between_quality_and_minimal_rej_accept ()));</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;}</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="a02444.html#a77174dfda3ff0eab311885d181e91616">   93</a></span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02444.html#a77174dfda3ff0eab311885d181e91616">REJ::setrej_tess_failure</a>() {  <span class="comment">//Tess generated blank</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  set_flag(<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaaa9e90cb27400daeb65262f465ca55963">R_TESS_FAILURE</a>);</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;}</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="a02444.html#a3203871d23c1ed0d2607cc3abe80d312">   98</a></span>&#160; </div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02444.html#a3203871d23c1ed0d2607cc3abe80d312">REJ::setrej_small_xht</a>() {  <span class="comment">//Small xht char/wd</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  set_flag(<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaae9c3faa247c71799d9f6955badf19cda">R_SMALL_XHT</a>);</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;}</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
-<div class="line"><a name="l00103"></a><span class="lineno"><a class="line" href="a02444.html#a175d0b00d29f7497ba1ed02e372812a0">  103</a></span>&#160; </div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02444.html#a175d0b00d29f7497ba1ed02e372812a0">REJ::setrej_edge_char</a>() {  <span class="comment">//Close to image edge</span></div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  set_flag(<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaad945e4640b308e36e058dbb01ccf6b1d">R_EDGE_CHAR</a>);</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;}</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
-<div class="line"><a name="l00108"></a><span class="lineno"><a class="line" href="a02444.html#a7d85f8d0b757ddc4bd51d369a9288005">  108</a></span>&#160; </div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02444.html#a7d85f8d0b757ddc4bd51d369a9288005">REJ::setrej_1Il_conflict</a>() {  <span class="comment">//Initial reject map</span></div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  set_flag(<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa8b8798f4f516ddb31037b563cfd7a90c">R_1IL_CONFLICT</a>);</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;}</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;constexpr <a class="code" href="a02994.html">ERRCODE</a> <a class="code" href="a00383.html#ac2ef5a666afa27f1bc7a1847459dc0b9">BADBLOCKLINE</a>(<span class="stringliteral">&quot;Y coordinate in block out of bounds&quot;</span>);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;constexpr <a class="code" href="a02994.html">ERRCODE</a> <a class="code" href="a00383.html#aef554a002a62904bb697a6f6fa99985c">LOSTBLOCKLINE</a>(<span class="stringliteral">&quot;Can&#39;t find rectangle for line&quot;</span>);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<a class="code" href="a00371.html#afcdfaedb32b1f0fcfb0a3e5cd4ec788c">CLISTIZE</a> (<a class="code" href="a02846.html">PDBLK</a>)</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">/**********************************************************************</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"> * PDBLK::PDBLK</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="a02846.html#abea19fb28f42f1eba72477bb039f2951">   39</a></span>&#160;<span class="comment"> * Constructor for a simple rectangular block.</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment"> **********************************************************************/</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<a class="code" href="a02846.html">PDBLK</a>::<a class="code" href="a02846.html">PDBLK</a> (                   <span class="comment">//rectangular block</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;int16_t xmin,                      <span class="comment">//bottom left</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;int16_t ymin, int16_t xmax,          <span class="comment">//top right</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;int16_t ymax):    box (<a class="code" href="a02858.html">ICOORD</a> (xmin, ymin), <a class="code" href="a02858.html">ICOORD</a> (xmax, ymax)) {</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                                 <span class="comment">//boundaries</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  ICOORDELT_IT left_it = &amp;leftside;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  ICOORDELT_IT right_it = &amp;rightside;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  hand_poly = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  left_it.set_to_list (&amp;leftside);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  right_it.set_to_list (&amp;rightside);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                                 <span class="comment">//make default box</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  left_it.add_to_end (<span class="keyword">new</span> <a class="code" href="a02862.html">ICOORDELT</a> (xmin, ymin));</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  left_it.add_to_end (<span class="keyword">new</span> <a class="code" href="a02862.html">ICOORDELT</a> (xmin, ymax));</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  right_it.add_to_end (<span class="keyword">new</span> <a class="code" href="a02862.html">ICOORDELT</a> (xmax, ymin));</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  right_it.add_to_end (<span class="keyword">new</span> <a class="code" href="a02862.html">ICOORDELT</a> (xmax, ymax));</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  index_ = 0;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;}</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">/**********************************************************************</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment"> * PDBLK::set_sides</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="a02846.html#a8d8fa823bf5878ef0b020572fea424e9">   64</a></span>&#160;<span class="comment"> * Sets left and right vertex lists</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment"> **********************************************************************/</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02846.html#a8d8fa823bf5878ef0b020572fea424e9">PDBLK::set_sides</a>(                       <span class="comment">//set vertex lists</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                      ICOORDELT_LIST *left,  <span class="comment">//left vertices</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                      ICOORDELT_LIST *right  <span class="comment">//right vertices</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                     ) {</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                                 <span class="comment">//boundaries</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  ICOORDELT_IT left_it = &amp;<a class="code" href="a02846.html#af00bb4a4ee2e805324672b19e088e06a">leftside</a>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  ICOORDELT_IT right_it = &amp;<a class="code" href="a02846.html#a87a08537c120e669c825d147a5650a55">rightside</a>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <a class="code" href="a02846.html#af00bb4a4ee2e805324672b19e088e06a">leftside</a>.clear();</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  left_it.move_to_first();</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  left_it.add_list_before(left);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  <a class="code" href="a02846.html#a87a08537c120e669c825d147a5650a55">rightside</a>.clear();</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  right_it.move_to_first();</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  right_it.add_list_before(right);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;}</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">/**********************************************************************</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment"> * PDBLK::contains</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="a02846.html#a59e927633d1e50490083ce00673682d0">   85</a></span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment"> * Return true if the given point is within the block.</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment"> **********************************************************************/</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a02846.html#a59e927633d1e50490083ce00673682d0">PDBLK::contains</a>(           <span class="comment">//test containment</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <a class="code" href="a02858.html">ICOORD</a> pt  <span class="comment">//point to test</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;) {</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  <a class="code" href="a02850.html">BLOCK_RECT_IT</a> it = <span class="keyword">this</span>;       <span class="comment">//rectangle iterator</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <a class="code" href="a02858.html">ICOORD</a> bleft, tright;          <span class="comment">//corners of rectangle</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  <span class="keywordflow">for</span> (it.<a class="code" href="a02850.html#a74b1d75085d9f1ba313439ddbd9bc320">start_block</a>(); !it.<a class="code" href="a02850.html#a90e1ef52e7e80c2308768e11a432efe2">cycled_rects</a>(); it.<a class="code" href="a02850.html#ab56b686d27e5eea704424470024456f4">forward</a>()) {</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                                 <span class="comment">//get rectangle</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    it.<a class="code" href="a02850.html#a1e3195249b6b6934be9060f1d5ee60c2">bounding_box</a> (bleft, tright);</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                                 <span class="comment">//inside rect</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordflow">if</span> (pt.<a class="code" href="a02858.html#aabf3d2cbd535df26ebcac17def628216">x</a>() &gt;= bleft.<a class="code" href="a02858.html#aabf3d2cbd535df26ebcac17def628216">x</a>() &amp;&amp; pt.<a class="code" href="a02858.html#aabf3d2cbd535df26ebcac17def628216">x</a>() &lt;= tright.<a class="code" href="a02858.html#aabf3d2cbd535df26ebcac17def628216">x</a>()</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;      &amp;&amp; pt.<a class="code" href="a02858.html#a27df9d66085dcf65ead7f620d68a91ac">y</a>() &gt;= bleft.<a class="code" href="a02858.html#a27df9d66085dcf65ead7f620d68a91ac">y</a>() &amp;&amp; pt.<a class="code" href="a02858.html#a27df9d66085dcf65ead7f620d68a91ac">y</a>() &lt;= tright.<a class="code" href="a02858.html#a27df9d66085dcf65ead7f620d68a91ac">y</a>())</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;      <span class="keywordflow">return</span> <span class="keyword">true</span>;               <span class="comment">//is inside</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  }</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  <span class="keywordflow">return</span> <span class="keyword">false</span>;                  <span class="comment">//not inside</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;}</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">/**********************************************************************</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno"><a class="line" href="a02846.html#a59ff88ca1db21b00c42c4e2a47700c74">  108</a></span>&#160;<span class="comment"> * PDBLK::move</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment"> * Reposition block</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment"> **********************************************************************/</span></div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
-<div class="line"><a name="l00113"></a><span class="lineno"><a class="line" href="a02444.html#a3fafae1106eb9830eb03f7314ac36535">  113</a></span>&#160; </div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02444.html#a3fafae1106eb9830eb03f7314ac36535">REJ::setrej_postNN_1Il</a>() {  <span class="comment">//1Il after NN</span></div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  set_flag(<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaaae5be3ca821456d1d53ac803798b4e4c">R_POSTNN_1IL</a>);</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;}</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02846.html#a59ff88ca1db21b00c42c4e2a47700c74">PDBLK::move</a>(                  <span class="comment">// reposition block</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                 <span class="keyword">const</span> <a class="code" href="a02858.html">ICOORD</a> vec  <span class="comment">// by vector</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                ) {</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  ICOORDELT_IT it(&amp;<a class="code" href="a02846.html#af00bb4a4ee2e805324672b19e088e06a">leftside</a>);</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
-<div class="line"><a name="l00118"></a><span class="lineno"><a class="line" href="a02444.html#aebf4e756b9238d8eb8c219d801ae4c53">  118</a></span>&#160; </div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02444.html#aebf4e756b9238d8eb8c219d801ae4c53">REJ::setrej_rej_cblob</a>() {  <span class="comment">//Insert duff blob</span></div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  set_flag(<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa74d4cf8b2b5fe113ebf7b9c420343c58">R_REJ_CBLOB</a>);</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;}</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  <span class="keywordflow">for</span> (it.mark_cycle_pt (); !it.cycled_list (); it.forward ())</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    *(it.data ()) += vec;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;  it.set_to_list (&amp;<a class="code" href="a02846.html#a87a08537c120e669c825d147a5650a55">rightside</a>);</div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
-<div class="line"><a name="l00123"></a><span class="lineno"><a class="line" href="a02444.html#a14ae6323c519acf76b81ddb49067f6c6">  123</a></span>&#160; </div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02444.html#a14ae6323c519acf76b81ddb49067f6c6">REJ::setrej_mm_reject</a>() {  <span class="comment">//Matrix matcher</span></div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;  set_flag(<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa3290f139840ec68d0ad1b800580bd5d0">R_MM_REJECT</a>);</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;}</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
-<div class="line"><a name="l00128"></a><span class="lineno"><a class="line" href="a02444.html#aefa0d052fb581f7ab12aa4d76b18fb6a">  128</a></span>&#160; </div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02444.html#aefa0d052fb581f7ab12aa4d76b18fb6a">REJ::setrej_bad_repetition</a>() {  <span class="comment">//Odd repeated char</span></div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;  set_flag(<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa6c2902cc320e6ef874dba77400096bb3">R_BAD_REPETITION</a>);</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;}</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
-<div class="line"><a name="l00133"></a><span class="lineno"><a class="line" href="a02444.html#a6097f2eb5fca3913f95c979c64024d94">  133</a></span>&#160; </div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02444.html#a6097f2eb5fca3913f95c979c64024d94">REJ::setrej_poor_match</a>() {  <span class="comment">//Failed Rays heuristic</span></div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;  set_flag(<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaabe17879df6434d3ac363864cea5cff70">R_POOR_MATCH</a>);</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;}</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
-<div class="line"><a name="l00138"></a><span class="lineno"><a class="line" href="a02444.html#ab34edb92d2007cb70e221c00ca9b7690">  138</a></span>&#160; </div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02444.html#ab34edb92d2007cb70e221c00ca9b7690">REJ::setrej_not_tess_accepted</a>() {</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;                                 <span class="comment">//TEMP reject_word</span></div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;  set_flag(<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa3af2da59ca30ea4d9f678582cb765943">R_NOT_TESS_ACCEPTED</a>);</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;}</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
-<div class="line"><a name="l00144"></a><span class="lineno"><a class="line" href="a02444.html#a5ddc940717935d506e6454991f096bb0">  144</a></span>&#160; </div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02444.html#a5ddc940717935d506e6454991f096bb0">REJ::setrej_contains_blanks</a>() {</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;                                 <span class="comment">//TEMP reject_word</span></div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;  set_flag(<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaab9972fc9fdd8fc7a8631aa23624477bf">R_CONTAINS_BLANKS</a>);</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;}</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
-<div class="line"><a name="l00150"></a><span class="lineno"><a class="line" href="a02444.html#a051db6890b347a2cf695d7e10baa54bf">  150</a></span>&#160; </div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02444.html#a051db6890b347a2cf695d7e10baa54bf">REJ::setrej_bad_permuter</a>() {  <span class="comment">//POTENTIAL reject_word</span></div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;  set_flag(<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa816e9eb92c84abac4a0c84d7855e96ca">R_BAD_PERMUTER</a>);</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;}</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160; </div>
-<div class="line"><a name="l00155"></a><span class="lineno"><a class="line" href="a02444.html#ac54a7b0ba6da6a0a28d15b6588948997">  155</a></span>&#160; </div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02444.html#ac54a7b0ba6da6a0a28d15b6588948997">REJ::setrej_hyphen</a>() {  <span class="comment">//PostNN dubious hyphen or .</span></div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;  set_flag(<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaabafae36f4ac3eceb1c60790b25216d9d">R_HYPHEN</a>);</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;}</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
-<div class="line"><a name="l00160"></a><span class="lineno"><a class="line" href="a02444.html#a5c0e4fee00ac77b3d636a3a57010f828">  160</a></span>&#160; </div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02444.html#a5c0e4fee00ac77b3d636a3a57010f828">REJ::setrej_dubious</a>() {  <span class="comment">//PostNN dubious limit</span></div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;  set_flag(<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa4b904a542092cac49d42ada569aeb366">R_DUBIOUS</a>);</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;}</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; </div>
-<div class="line"><a name="l00165"></a><span class="lineno"><a class="line" href="a02444.html#a08d65cd7853e3b7ca907e27fc444e465">  165</a></span>&#160; </div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02444.html#a08d65cd7853e3b7ca907e27fc444e465">REJ::setrej_no_alphanums</a>() {  <span class="comment">//TEMP reject_word</span></div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;  set_flag(<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa760cb3b743fba29a24ceada590cb28a5">R_NO_ALPHANUMS</a>);</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;}</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
-<div class="line"><a name="l00170"></a><span class="lineno"><a class="line" href="a02444.html#a44e295be30bb374f6b698fb5fc4b9c54">  170</a></span>&#160; </div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02444.html#a44e295be30bb374f6b698fb5fc4b9c54">REJ::setrej_mostly_rej</a>() {  <span class="comment">//TEMP reject_word</span></div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;  set_flag(<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa28267d098ae5e5dd9234e8225990fa5e">R_MOSTLY_REJ</a>);</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;}</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160; </div>
-<div class="line"><a name="l00175"></a><span class="lineno"><a class="line" href="a02444.html#a844bb22fce303e9da216decd4e1c2026">  175</a></span>&#160; </div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02444.html#a844bb22fce303e9da216decd4e1c2026">REJ::setrej_xht_fixup</a>() {  <span class="comment">//xht fixup</span></div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;  set_flag(<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa32f016f7b77aeb8d4891753c68b42eba">R_XHT_FIXUP</a>);</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;}</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160; </div>
-<div class="line"><a name="l00180"></a><span class="lineno"><a class="line" href="a02444.html#a336ae72a6abff5419d99f6bd5bc0de2e">  180</a></span>&#160; </div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02444.html#a336ae72a6abff5419d99f6bd5bc0de2e">REJ::setrej_bad_quality</a>() {  <span class="comment">//TEMP reject_word</span></div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;  set_flag(<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa9449830b9b3be69359e29ba073dbab97">R_BAD_QUALITY</a>);</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;}</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160; </div>
-<div class="line"><a name="l00185"></a><span class="lineno"><a class="line" href="a02444.html#a75e2aaff1c54a39d54702c7cd645ec99">  185</a></span>&#160; </div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02444.html#a75e2aaff1c54a39d54702c7cd645ec99">REJ::setrej_doc_rej</a>() {  <span class="comment">//TEMP reject_word</span></div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;  set_flag(<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaabd4893be9fca38674051ba596a12c866">R_DOC_REJ</a>);</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;}</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  <span class="keywordflow">for</span> (it.mark_cycle_pt (); !it.cycled_list (); it.forward ())</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    *(it.data ()) += vec;</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
+<div class="line"><a name="l00126"></a><span class="lineno"><a class="line" href="a02846.html#a54c0978d55aed55d2cfae6da2afdf282">  126</a></span>&#160;  <a class="code" href="a02846.html#ac59bc5dc2b038f44294271a6356cbff6">box</a>.<a class="code" href="a02898.html#a5fb1ce0d624392f72f82933e63f20e71">move</a> (vec);</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;}</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment">// Returns a binary Pix mask with a 1 pixel for every pixel within the</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment">// block. Rotates the coordinate system by rerotation prior to rendering.</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;Pix* <a class="code" href="a02846.html#a54c0978d55aed55d2cfae6da2afdf282">PDBLK::render_mask</a>(<span class="keyword">const</span> <a class="code" href="a02866.html">FCOORD</a>&amp; rerotation, <a class="code" href="a02898.html">TBOX</a>* mask_box) {</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;  <a class="code" href="a02898.html">TBOX</a> rotated_box(<a class="code" href="a02846.html#ac59bc5dc2b038f44294271a6356cbff6">box</a>);</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;  rotated_box.<a class="code" href="a02898.html#a428e14544aeb44064bc8637d920211a0">rotate</a>(rerotation);</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;  Pix* pix = pixCreate(rotated_box.<a class="code" href="a02898.html#a70ef69630cbdc605b7b7d5434549d38c">width</a>(), rotated_box.<a class="code" href="a02898.html#a72fcb736ed0ddeae95e6a51b3bf8d979">height</a>(), 1);</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;  <span class="keywordflow">if</span> (<a class="code" href="a02846.html#a4c1b3a88242771bf55372f44c0d4ca88">hand_poly</a> != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    <span class="comment">// We are going to rotate, so get a deep copy of the points and</span></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    <span class="comment">// make a new POLY_BLOCK with it.</span></div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    ICOORDELT_LIST polygon;</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    polygon.deep_copy(<a class="code" href="a02846.html#a4c1b3a88242771bf55372f44c0d4ca88">hand_poly</a>-&gt;<a class="code" href="a02870.html#a0835a8ea39e763d6a229603d5532c879">points</a>(), <a class="code" href="a02862.html#a36ea9c054f12a5f047b48a93878d6ccc">ICOORDELT::deep_copy</a>);</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    <a class="code" href="a02870.html">POLY_BLOCK</a> image_block(&amp;polygon, <a class="code" href="a02846.html#a4c1b3a88242771bf55372f44c0d4ca88">hand_poly</a>-&gt;<a class="code" href="a02870.html#a8a28b31c2bfa53533a23acf1d7679cca">isA</a>());</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    image_block.<a class="code" href="a02870.html#af93c6f325d6a4d981e884dc0c5d77819">rotate</a>(rerotation);</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    <span class="comment">// Block outline is a polygon, so use a PB_LINE_IT to get the</span></div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    <span class="comment">// rasterized interior. (Runs of interior pixels on a line.)</span></div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    <span class="keyword">auto</span> *lines = <span class="keyword">new</span> <a class="code" href="a02874.html">PB_LINE_IT</a>(&amp;image_block);</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> y = <a class="code" href="a02846.html#ac59bc5dc2b038f44294271a6356cbff6">box</a>.<a class="code" href="a02898.html#a9fee4521e71300975cb34ebb21e3fca5">bottom</a>(); y &lt; <a class="code" href="a02846.html#ac59bc5dc2b038f44294271a6356cbff6">box</a>.<a class="code" href="a02898.html#a5dc64d0677b5d65385bc07a78cf49c4d">top</a>(); ++y) {</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;      <span class="keyword">const</span> std::unique_ptr&lt;<span class="comment">/*non-const*/</span> ICOORDELT_LIST&gt; segments(</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;          lines-&gt;get_line(y));</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;      <span class="keywordflow">if</span> (!segments-&gt;empty()) {</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        ICOORDELT_IT s_it(segments.get());</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        <span class="comment">// Each element of segments is a start x and x size of the</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        <span class="comment">// run of interior pixels.</span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;        <span class="keywordflow">for</span> (s_it.mark_cycle_pt(); !s_it.cycled_list(); s_it.forward()) {</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;          <span class="keywordtype">int</span> start = s_it.data()-&gt;x();</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;          <span class="keywordtype">int</span> xext = s_it.data()-&gt;y();</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;          <span class="comment">// Set the run of pixels to 1.</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;          pixRasterop(pix, start - rotated_box.<a class="code" href="a02898.html#a8e9dce0d30d2213598cd4befe0028c99">left</a>(),</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;                      rotated_box.<a class="code" href="a02898.html#a72fcb736ed0ddeae95e6a51b3bf8d979">height</a>() - 1 - (y - rotated_box.<a class="code" href="a02898.html#a9fee4521e71300975cb34ebb21e3fca5">bottom</a>()),</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                      xext, 1, PIX_SET, <span class="keyword">nullptr</span>, 0, 0);</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        }</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;      }</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    }</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    <span class="keyword">delete</span> lines;</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;  } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    <span class="comment">// Just fill the whole block as there is only a bounding box.</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    pixRasterop(pix, 0, 0, rotated_box.<a class="code" href="a02898.html#a70ef69630cbdc605b7b7d5434549d38c">width</a>(), rotated_box.<a class="code" href="a02898.html#a72fcb736ed0ddeae95e6a51b3bf8d979">height</a>(),</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                PIX_SET, <span class="keyword">nullptr</span>, 0, 0);</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;  }</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;  <span class="keywordflow">if</span> (mask_box != <span class="keyword">nullptr</span>) *mask_box = rotated_box;</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;  <span class="keywordflow">return</span> pix;</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;}</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; </div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160; </div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="comment">/**********************************************************************</span></div>
+<div class="line"><a name="l00174"></a><span class="lineno"><a class="line" href="a02846.html#a6d1e10da021eb64f99977a60cc7ec2f0">  174</a></span>&#160;<span class="comment"> * PDBLK::plot</span></div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="comment"> * Plot the outline of a block in the given colour.</span></div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="comment"> **********************************************************************/</span></div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="preprocessor">#ifndef GRAPHICS_DISABLED</span></div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02846.html#a6d1e10da021eb64f99977a60cc7ec2f0">PDBLK::plot</a>(                <span class="comment">//draw outline</span></div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;                 <a class="code" href="a03978.html">ScrollView</a>* window,  <span class="comment">//window to draw in</span></div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;                 int32_t serial,   <span class="comment">//serial number</span></div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;                 <a class="code" href="a03978.html#a100504544a5423a94222149ee9ed0fe8">ScrollView::Color</a> colour   <span class="comment">//colour to draw in</span></div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;                ) {</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;  <a class="code" href="a02858.html">ICOORD</a> startpt;                <span class="comment">//start of outline</span></div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;  <a class="code" href="a02858.html">ICOORD</a> endpt;                  <span class="comment">//end of outline</span></div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;  <a class="code" href="a02858.html">ICOORD</a> prevpt;                 <span class="comment">//previous point</span></div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;  ICOORDELT_IT it = &amp;<a class="code" href="a02846.html#af00bb4a4ee2e805324672b19e088e06a">leftside</a>;   <span class="comment">//iterator</span></div>
 <div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160; </div>
-<div class="line"><a name="l00190"></a><span class="lineno"><a class="line" href="a02444.html#ab327b4a6585504669ac9c20acbc9df02">  190</a></span>&#160; </div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02444.html#ab327b4a6585504669ac9c20acbc9df02">REJ::setrej_block_rej</a>() {  <span class="comment">//TEMP reject_word</span></div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;  set_flag(<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa6b379b13e52686bb924a2a474962e3c7">R_BLOCK_REJ</a>);</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;}</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160; </div>
-<div class="line"><a name="l00195"></a><span class="lineno"><a class="line" href="a02444.html#ab047fe90130b0696f8797d378a4c86b6">  195</a></span>&#160; </div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02444.html#ab047fe90130b0696f8797d378a4c86b6">REJ::setrej_row_rej</a>() {  <span class="comment">//TEMP reject_word</span></div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;  set_flag(<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa53b165bbee2790e76a7ef35c6acbe3ba">R_ROW_REJ</a>);</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;}</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; </div>
-<div class="line"><a name="l00200"></a><span class="lineno"><a class="line" href="a02444.html#a62bc51ab39f1e39ce693fb0d4da9a15d">  200</a></span>&#160; </div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02444.html#a62bc51ab39f1e39ce693fb0d4da9a15d">REJ::setrej_unlv_rej</a>() {  <span class="comment">//TEMP reject_word</span></div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;  set_flag(<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaae288e8069feabdb927e4f77587d2a5f8">R_UNLV_REJ</a>);</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;}</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160; </div>
-<div class="line"><a name="l00205"></a><span class="lineno"><a class="line" href="a02444.html#a8c3d7465218c94a5fb3d2e5bdee69cfa">  205</a></span>&#160; </div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02444.html#a8c3d7465218c94a5fb3d2e5bdee69cfa">REJ::setrej_hyphen_accept</a>() {  <span class="comment">//NN Flipped a char</span></div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;  set_flag(<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaab95636d09447ad2994bc856d21dd22e1">R_HYPHEN_ACCEPT</a>);</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;}</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160; </div>
-<div class="line"><a name="l00210"></a><span class="lineno"><a class="line" href="a02444.html#aff0b496738e698811f9716d138be483c">  210</a></span>&#160; </div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02444.html#aff0b496738e698811f9716d138be483c">REJ::setrej_nn_accept</a>() {  <span class="comment">//NN Flipped a char</span></div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;  set_flag(<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaaf84e25f4e0bf0071671efeb73099ae35">R_NN_ACCEPT</a>);</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;}</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160; </div>
-<div class="line"><a name="l00215"></a><span class="lineno"><a class="line" href="a02444.html#a4622ab0998b32200ec39801d529b578c">  215</a></span>&#160; </div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02444.html#a4622ab0998b32200ec39801d529b578c">REJ::setrej_mm_accept</a>() {  <span class="comment">//Matrix matcher</span></div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;  set_flag(<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa72f00243433a6558a28fbab640343213">R_MM_ACCEPT</a>);</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;}</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160; </div>
-<div class="line"><a name="l00220"></a><span class="lineno"><a class="line" href="a02444.html#a61afa3942cfb20d46ee6fcaeeb142bf1">  220</a></span>&#160; </div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02444.html#a61afa3942cfb20d46ee6fcaeeb142bf1">REJ::setrej_quality_accept</a>() {  <span class="comment">//Quality flip a char</span></div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;  set_flag(<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa9893d23c118ad4a6a3554a1efe084db5">R_QUALITY_ACCEPT</a>);</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;}</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160; </div>
-<div class="line"><a name="l00225"></a><span class="lineno"><a class="line" href="a02444.html#ae18d03ebf1d913fff692ccc7a9a87348">  225</a></span>&#160; </div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02444.html#ae18d03ebf1d913fff692ccc7a9a87348">REJ::setrej_minimal_rej_accept</a>() {</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;                                 <span class="comment">//Accept all except blank</span></div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;  set_flag(<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa4182d71325acc2fe2eaf014e5c8770c4">R_MINIMAL_REJ_ACCEPT</a>);</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;}</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160; </div>
-<div class="line"><a name="l00231"></a><span class="lineno"><a class="line" href="a02444.html#ae41360113ba4db9b14d26df6a10611b1">  231</a></span>&#160; </div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02444.html#ae41360113ba4db9b14d26df6a10611b1">REJ::full_print</a>(FILE *fp) {</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;  fprintf (fp, <span class="stringliteral">&quot;R_TESS_FAILURE: %s\n&quot;</span>, <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaaa9e90cb27400daeb65262f465ca55963">R_TESS_FAILURE</a>) ? <span class="stringliteral">&quot;T&quot;</span> : <span class="stringliteral">&quot;F&quot;</span>);</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;  fprintf (fp, <span class="stringliteral">&quot;R_SMALL_XHT: %s\n&quot;</span>, <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaae9c3faa247c71799d9f6955badf19cda">R_SMALL_XHT</a>) ? <span class="stringliteral">&quot;T&quot;</span> : <span class="stringliteral">&quot;F&quot;</span>);</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;  fprintf (fp, <span class="stringliteral">&quot;R_EDGE_CHAR: %s\n&quot;</span>, <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaad945e4640b308e36e058dbb01ccf6b1d">R_EDGE_CHAR</a>) ? <span class="stringliteral">&quot;T&quot;</span> : <span class="stringliteral">&quot;F&quot;</span>);</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;  fprintf (fp, <span class="stringliteral">&quot;R_1IL_CONFLICT: %s\n&quot;</span>, <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa8b8798f4f516ddb31037b563cfd7a90c">R_1IL_CONFLICT</a>) ? <span class="stringliteral">&quot;T&quot;</span> : <span class="stringliteral">&quot;F&quot;</span>);</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;  fprintf (fp, <span class="stringliteral">&quot;R_POSTNN_1IL: %s\n&quot;</span>, <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaaae5be3ca821456d1d53ac803798b4e4c">R_POSTNN_1IL</a>) ? <span class="stringliteral">&quot;T&quot;</span> : <span class="stringliteral">&quot;F&quot;</span>);</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;  fprintf (fp, <span class="stringliteral">&quot;R_REJ_CBLOB: %s\n&quot;</span>, <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa74d4cf8b2b5fe113ebf7b9c420343c58">R_REJ_CBLOB</a>) ? <span class="stringliteral">&quot;T&quot;</span> : <span class="stringliteral">&quot;F&quot;</span>);</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;  fprintf (fp, <span class="stringliteral">&quot;R_MM_REJECT: %s\n&quot;</span>, <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa3290f139840ec68d0ad1b800580bd5d0">R_MM_REJECT</a>) ? <span class="stringliteral">&quot;T&quot;</span> : <span class="stringliteral">&quot;F&quot;</span>);</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;  fprintf (fp, <span class="stringliteral">&quot;R_BAD_REPETITION: %s\n&quot;</span>, <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa6c2902cc320e6ef874dba77400096bb3">R_BAD_REPETITION</a>) ? <span class="stringliteral">&quot;T&quot;</span> : <span class="stringliteral">&quot;F&quot;</span>);</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;  fprintf (fp, <span class="stringliteral">&quot;R_POOR_MATCH: %s\n&quot;</span>, <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaabe17879df6434d3ac363864cea5cff70">R_POOR_MATCH</a>) ? <span class="stringliteral">&quot;T&quot;</span> : <span class="stringliteral">&quot;F&quot;</span>);</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;  fprintf (fp, <span class="stringliteral">&quot;R_NOT_TESS_ACCEPTED: %s\n&quot;</span>,</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa3af2da59ca30ea4d9f678582cb765943">R_NOT_TESS_ACCEPTED</a>) ? <span class="stringliteral">&quot;T&quot;</span> : <span class="stringliteral">&quot;F&quot;</span>);</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;  fprintf (fp, <span class="stringliteral">&quot;R_CONTAINS_BLANKS: %s\n&quot;</span>,</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaab9972fc9fdd8fc7a8631aa23624477bf">R_CONTAINS_BLANKS</a>) ? <span class="stringliteral">&quot;T&quot;</span> : <span class="stringliteral">&quot;F&quot;</span>);</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;  fprintf (fp, <span class="stringliteral">&quot;R_BAD_PERMUTER: %s\n&quot;</span>, <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa816e9eb92c84abac4a0c84d7855e96ca">R_BAD_PERMUTER</a>) ? <span class="stringliteral">&quot;T&quot;</span> : <span class="stringliteral">&quot;F&quot;</span>);</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;  fprintf (fp, <span class="stringliteral">&quot;R_HYPHEN: %s\n&quot;</span>, <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaabafae36f4ac3eceb1c60790b25216d9d">R_HYPHEN</a>) ? <span class="stringliteral">&quot;T&quot;</span> : <span class="stringliteral">&quot;F&quot;</span>);</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;  fprintf (fp, <span class="stringliteral">&quot;R_DUBIOUS: %s\n&quot;</span>, <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa4b904a542092cac49d42ada569aeb366">R_DUBIOUS</a>) ? <span class="stringliteral">&quot;T&quot;</span> : <span class="stringliteral">&quot;F&quot;</span>);</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;  fprintf (fp, <span class="stringliteral">&quot;R_NO_ALPHANUMS: %s\n&quot;</span>, <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa760cb3b743fba29a24ceada590cb28a5">R_NO_ALPHANUMS</a>) ? <span class="stringliteral">&quot;T&quot;</span> : <span class="stringliteral">&quot;F&quot;</span>);</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;  fprintf (fp, <span class="stringliteral">&quot;R_MOSTLY_REJ: %s\n&quot;</span>, <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa28267d098ae5e5dd9234e8225990fa5e">R_MOSTLY_REJ</a>) ? <span class="stringliteral">&quot;T&quot;</span> : <span class="stringliteral">&quot;F&quot;</span>);</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;  fprintf (fp, <span class="stringliteral">&quot;R_XHT_FIXUP: %s\n&quot;</span>, <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa32f016f7b77aeb8d4891753c68b42eba">R_XHT_FIXUP</a>) ? <span class="stringliteral">&quot;T&quot;</span> : <span class="stringliteral">&quot;F&quot;</span>);</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;  fprintf (fp, <span class="stringliteral">&quot;R_BAD_QUALITY: %s\n&quot;</span>, <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa9449830b9b3be69359e29ba073dbab97">R_BAD_QUALITY</a>) ? <span class="stringliteral">&quot;T&quot;</span> : <span class="stringliteral">&quot;F&quot;</span>);</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;  fprintf (fp, <span class="stringliteral">&quot;R_DOC_REJ: %s\n&quot;</span>, <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaabd4893be9fca38674051ba596a12c866">R_DOC_REJ</a>) ? <span class="stringliteral">&quot;T&quot;</span> : <span class="stringliteral">&quot;F&quot;</span>);</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;  fprintf (fp, <span class="stringliteral">&quot;R_BLOCK_REJ: %s\n&quot;</span>, <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa6b379b13e52686bb924a2a474962e3c7">R_BLOCK_REJ</a>) ? <span class="stringliteral">&quot;T&quot;</span> : <span class="stringliteral">&quot;F&quot;</span>);</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;  fprintf (fp, <span class="stringliteral">&quot;R_ROW_REJ: %s\n&quot;</span>, <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa53b165bbee2790e76a7ef35c6acbe3ba">R_ROW_REJ</a>) ? <span class="stringliteral">&quot;T&quot;</span> : <span class="stringliteral">&quot;F&quot;</span>);</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;  fprintf (fp, <span class="stringliteral">&quot;R_UNLV_REJ: %s\n&quot;</span>, <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaae288e8069feabdb927e4f77587d2a5f8">R_UNLV_REJ</a>) ? <span class="stringliteral">&quot;T&quot;</span> : <span class="stringliteral">&quot;F&quot;</span>);</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;  fprintf (fp, <span class="stringliteral">&quot;R_HYPHEN_ACCEPT: %s\n&quot;</span>, <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaab95636d09447ad2994bc856d21dd22e1">R_HYPHEN_ACCEPT</a>) ? <span class="stringliteral">&quot;T&quot;</span> : <span class="stringliteral">&quot;F&quot;</span>);</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;  fprintf (fp, <span class="stringliteral">&quot;R_NN_ACCEPT: %s\n&quot;</span>, <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaaf84e25f4e0bf0071671efeb73099ae35">R_NN_ACCEPT</a>) ? <span class="stringliteral">&quot;T&quot;</span> : <span class="stringliteral">&quot;F&quot;</span>);</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;  fprintf (fp, <span class="stringliteral">&quot;R_MM_ACCEPT: %s\n&quot;</span>, <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa72f00243433a6558a28fbab640343213">R_MM_ACCEPT</a>) ? <span class="stringliteral">&quot;T&quot;</span> : <span class="stringliteral">&quot;F&quot;</span>);</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;  fprintf (fp, <span class="stringliteral">&quot;R_QUALITY_ACCEPT: %s\n&quot;</span>, <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa9893d23c118ad4a6a3554a1efe084db5">R_QUALITY_ACCEPT</a>) ? <span class="stringliteral">&quot;T&quot;</span> : <span class="stringliteral">&quot;F&quot;</span>);</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;  fprintf (fp, <span class="stringliteral">&quot;R_MINIMAL_REJ_ACCEPT: %s\n&quot;</span>,</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    <a class="code" href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">flag</a> (<a class="code" href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa4182d71325acc2fe2eaf014e5c8770c4">R_MINIMAL_REJ_ACCEPT</a>) ? <span class="stringliteral">&quot;T&quot;</span> : <span class="stringliteral">&quot;F&quot;</span>);</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;}</div>
-<div class="line"><a name="l00264"></a><span class="lineno"><a class="line" href="a02448.html#a495e91f8ad6cee2217cb27b8367b6cd0">  264</a></span>&#160; </div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<a class="code" href="a02448.html">REJMAP</a> &amp;<a class="code" href="a02448.html#a495e91f8ad6cee2217cb27b8367b6cd0">REJMAP::operator=</a>(<span class="keyword">const</span> <a class="code" href="a02448.html">REJMAP</a> &amp;source) {</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;  <a class="code" href="a02448.html#a798c11e002b9421b26a748f5186bdae9">initialise</a>(source.len);</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; len; i++) {</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    ptr[i] = source.ptr[i];</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;  }</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;}</div>
-<div class="line"><a name="l00272"></a><span class="lineno"><a class="line" href="a02448.html#a798c11e002b9421b26a748f5186bdae9">  272</a></span>&#160; </div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02448.html#a798c11e002b9421b26a748f5186bdae9">REJMAP::initialise</a>(int16_t length) {</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;  ptr.reset(<span class="keyword">new</span> <a class="code" href="a02444.html">REJ</a>[<a class="code" href="a02448.html#adb462d55dc4b682e0a77090185a58011">length</a>]);</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;  len = <a class="code" href="a02448.html#adb462d55dc4b682e0a77090185a58011">length</a>;</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;}</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160; </div>
-<div class="line"><a name="l00278"></a><span class="lineno"><a class="line" href="a02448.html#a56942b5d4ddd0096c7624d382b1fef90">  278</a></span>&#160; </div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;int16_t <a class="code" href="a02448.html#a56942b5d4ddd0096c7624d382b1fef90">REJMAP::accept_count</a>() {  <span class="comment">//How many accepted?</span></div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;  <span class="keywordtype">int</span> i;</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;  int16_t <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a> = 0;</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160; </div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;  <span class="keywordflow">for</span> (i = 0; i &lt; len; i++) {</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    <span class="keywordflow">if</span> (ptr[i].accepted ())</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;      <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>++;</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;  }</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>;</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;                                 <span class="comment">//set the colour</span></div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;  window-&gt;<a class="code" href="a03978.html#a79855c525ec660b452382e9813d2edb5">Pen</a>(colour);</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;  window-&gt;<a class="code" href="a03978.html#a2e1d3849b95cecdcb2026b48d8f38cde">TextAttributes</a>(<span class="stringliteral">&quot;Times&quot;</span>, <a class="code" href="a00383.html#ad0e3ca9368f7687b1a72cf083cad3033">BLOCK_LABEL_HEIGHT</a>, <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160; </div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;  <span class="keywordflow">if</span> (<a class="code" href="a02846.html#a4c1b3a88242771bf55372f44c0d4ca88">hand_poly</a> != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    <a class="code" href="a02846.html#a4c1b3a88242771bf55372f44c0d4ca88">hand_poly</a>-&gt;<a class="code" href="a02870.html#afdff361301e7f7aab1e74fdfda4eac55">plot</a>(window, serial);</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (!<a class="code" href="a02846.html#af00bb4a4ee2e805324672b19e088e06a">leftside</a>.empty ()) {</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    startpt = *(it.data ());     <span class="comment">//bottom left corner</span></div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    <span class="comment">//              tprintf(&quot;Block %d bottom left is (%d,%d)\n&quot;,</span></div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    <span class="comment">//                      serial,startpt.x(),startpt.y());</span></div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    <span class="keywordtype">char</span> temp_buff[34];</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="preprocessor">#if !defined(_WIN32) || defined(__MINGW32__)</span></div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    snprintf(temp_buff, <span class="keyword">sizeof</span>(temp_buff), <span class="stringliteral">&quot;%&quot;</span> PRId32, serial);</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    _ultoa(serial, temp_buff, 10);</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    window-&gt;<a class="code" href="a03978.html#a4c5cb55d6eab9d7d996d25ed8922593d">Text</a>(startpt.<a class="code" href="a02858.html#aabf3d2cbd535df26ebcac17def628216">x</a> (), startpt.<a class="code" href="a02858.html#a27df9d66085dcf65ead7f620d68a91ac">y</a> (), temp_buff);</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160; </div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    window-&gt;<a class="code" href="a03978.html#a730b182e350dfe37b0986d7f0591fee5">SetCursor</a>(startpt.<a class="code" href="a02858.html#aabf3d2cbd535df26ebcac17def628216">x</a> (), startpt.<a class="code" href="a02858.html#a27df9d66085dcf65ead7f620d68a91ac">y</a> ());</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    <span class="keywordflow">do</span> {</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;      prevpt = *(it.data ());    <span class="comment">//previous point</span></div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;      it.forward ();             <span class="comment">//move to next point</span></div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;                                 <span class="comment">//draw round corner</span></div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    window-&gt;<a class="code" href="a03978.html#a101de80a4722fe821969f61f6e7303a6">DrawTo</a>(prevpt.<a class="code" href="a02858.html#aabf3d2cbd535df26ebcac17def628216">x</a> (), it.data ()-&gt;y ());</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;    window-&gt;<a class="code" href="a03978.html#a101de80a4722fe821969f61f6e7303a6">DrawTo</a>(it.data ()-&gt;x (), it.data ()-&gt;y ());</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    }</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    <span class="keywordflow">while</span> (!it.at_last ());      <span class="comment">//until end of list</span></div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    endpt = *(it.data ());       <span class="comment">//end point</span></div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160; </div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;                                 <span class="comment">//other side of boundary</span></div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    window-&gt;<a class="code" href="a03978.html#a730b182e350dfe37b0986d7f0591fee5">SetCursor</a>(startpt.<a class="code" href="a02858.html#aabf3d2cbd535df26ebcac17def628216">x</a> (), startpt.<a class="code" href="a02858.html#a27df9d66085dcf65ead7f620d68a91ac">y</a> ());</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    it.set_to_list (&amp;<a class="code" href="a02846.html#a87a08537c120e669c825d147a5650a55">rightside</a>);</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    prevpt = startpt;</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    <span class="keywordflow">for</span> (it.mark_cycle_pt (); !it.cycled_list (); it.forward ()) {</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;                                 <span class="comment">//draw round corner</span></div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    window-&gt;<a class="code" href="a03978.html#a101de80a4722fe821969f61f6e7303a6">DrawTo</a>(prevpt.<a class="code" href="a02858.html#aabf3d2cbd535df26ebcac17def628216">x</a> (), it.data ()-&gt;y ());</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    window-&gt;<a class="code" href="a03978.html#a101de80a4722fe821969f61f6e7303a6">DrawTo</a>(it.data ()-&gt;x (), it.data ()-&gt;y ());</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;      prevpt = *(it.data ());    <span class="comment">//previous point</span></div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    }</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;                                 <span class="comment">//close boundary</span></div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    window-&gt;<a class="code" href="a03978.html#a101de80a4722fe821969f61f6e7303a6">DrawTo</a>(endpt.<a class="code" href="a02858.html#aabf3d2cbd535df26ebcac17def628216">x</a>(), endpt.<a class="code" href="a02858.html#a27df9d66085dcf65ead7f620d68a91ac">y</a>());</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;  }</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;}</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00234"></a><span class="lineno"><a class="line" href="a02846.html#abea460ba0744a48300ad506f82819952">  234</a></span>&#160; </div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="comment">/**********************************************************************</span></div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="comment"> * PDBLK::operator=</span></div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="comment"> * Assignment - duplicate the block structure, but with an EMPTY row list.</span></div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;<span class="comment"> **********************************************************************/</span></div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160; </div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;<a class="code" href="a02846.html">PDBLK</a> &amp; <a class="code" href="a02846.html#abea460ba0744a48300ad506f82819952">PDBLK::operator= </a>(       <span class="comment">//assignment</span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="keyword">const</span> <a class="code" href="a02846.html">PDBLK</a> &amp; source             <span class="comment">//from this</span></div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;) {</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;  <span class="comment">//      this-&gt;ELIST_LINK::operator=(source);</span></div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;  <span class="keywordflow">if</span> (!<a class="code" href="a02846.html#af00bb4a4ee2e805324672b19e088e06a">leftside</a>.empty ())</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    <a class="code" href="a02846.html#af00bb4a4ee2e805324672b19e088e06a">leftside</a>.clear ();</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;  <span class="keywordflow">if</span> (!<a class="code" href="a02846.html#a87a08537c120e669c825d147a5650a55">rightside</a>.empty ())</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    <a class="code" href="a02846.html#a87a08537c120e669c825d147a5650a55">rightside</a>.clear ();</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;  <a class="code" href="a02846.html#af00bb4a4ee2e805324672b19e088e06a">leftside</a>.deep_copy(&amp;source.<a class="code" href="a02846.html#af00bb4a4ee2e805324672b19e088e06a">leftside</a>, &amp;<a class="code" href="a02862.html#a36ea9c054f12a5f047b48a93878d6ccc">ICOORDELT::deep_copy</a>);</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;  <a class="code" href="a02846.html#a87a08537c120e669c825d147a5650a55">rightside</a>.deep_copy(&amp;source.<a class="code" href="a02846.html#a87a08537c120e669c825d147a5650a55">rightside</a>, &amp;<a class="code" href="a02862.html#a36ea9c054f12a5f047b48a93878d6ccc">ICOORDELT::deep_copy</a>);</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;  <a class="code" href="a02846.html#ac59bc5dc2b038f44294271a6356cbff6">box</a> = source.<a class="code" href="a02846.html#ac59bc5dc2b038f44294271a6356cbff6">box</a>;</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;}</div>
+<div class="line"><a name="l00254"></a><span class="lineno"><a class="line" href="a02850.html#a1344f314e5e85908725bac7a15726802">  254</a></span>&#160; </div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160; </div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="comment">/**********************************************************************</span></div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="comment"> * BLOCK_RECT_IT::BLOCK_RECT_IT</span></div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;<span class="comment"> * Construct a block rectangle iterator.</span></div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;<span class="comment"> **********************************************************************/</span></div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160; </div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;<a class="code" href="a02850.html#a1344f314e5e85908725bac7a15726802">BLOCK_RECT_IT::BLOCK_RECT_IT</a> (</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="comment">//iterate rectangles</span></div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;<a class="code" href="a02846.html">PDBLK</a> * blkptr                   <span class="comment">//from block</span></div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;):left_it (&amp;blkptr-&gt;leftside), right_it (&amp;blkptr-&gt;rightside) {</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;  block = blkptr;                <span class="comment">//remember block</span></div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;                                 <span class="comment">//non empty list</span></div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;  <span class="keywordflow">if</span> (!blkptr-&gt;<a class="code" href="a02846.html#af00bb4a4ee2e805324672b19e088e06a">leftside</a>.empty ()) {</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    <a class="code" href="a02850.html#a74b1d75085d9f1ba313439ddbd9bc320">start_block</a>();  <span class="comment">//ready for iteration</span></div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;  }</div>
+<div class="line"><a name="l00271"></a><span class="lineno"><a class="line" href="a02850.html#a67e8a119f8c28be404bd1770fa22ce7f">  271</a></span>&#160;}</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160; </div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160; </div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="comment">/**********************************************************************</span></div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="comment"> * BLOCK_RECT_IT::set_to_block</span></div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;<span class="comment"> * Start a new block.</span></div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;<span class="comment"> **********************************************************************/</span></div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160; </div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02850.html#a67e8a119f8c28be404bd1770fa22ce7f">BLOCK_RECT_IT::set_to_block</a>(                  <span class="comment">//start (new) block</span></div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;                                 <a class="code" href="a02846.html">PDBLK</a> *blkptr) {  <span class="comment">//block to start</span></div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;  block = blkptr;                <span class="comment">//remember block</span></div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;                                 <span class="comment">//set iterators</span></div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;  left_it.set_to_list (&amp;blkptr-&gt;<a class="code" href="a02846.html#af00bb4a4ee2e805324672b19e088e06a">leftside</a>);</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;  right_it.set_to_list (&amp;blkptr-&gt;<a class="code" href="a02846.html#a87a08537c120e669c825d147a5650a55">rightside</a>);</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;  <span class="keywordflow">if</span> (!blkptr-&gt;<a class="code" href="a02846.html#af00bb4a4ee2e805324672b19e088e06a">leftside</a>.empty ())</div>
+<div class="line"><a name="l00287"></a><span class="lineno"><a class="line" href="a02850.html#a74b1d75085d9f1ba313439ddbd9bc320">  287</a></span>&#160;    <a class="code" href="a02850.html#a74b1d75085d9f1ba313439ddbd9bc320">start_block</a>();  <span class="comment">//ready for iteration</span></div>
 <div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;}</div>
 <div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160; </div>
-<div class="line"><a name="l00290"></a><span class="lineno"><a class="line" href="a02448.html#a062da7b6d62e08ee44303bea1b214dc7">  290</a></span>&#160; </div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a02448.html#a062da7b6d62e08ee44303bea1b214dc7">REJMAP::recoverable_rejects</a>() {  <span class="comment">//Any non perm rejs?</span></div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; len; i++) {</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    <span class="keywordflow">if</span> (ptr[i].recoverable ())</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;      <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;  }</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;  <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;}</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160; </div>
-<div class="line"><a name="l00299"></a><span class="lineno"><a class="line" href="a02448.html#ad48f4dc7ca8fb95f7d938d834f4cbb38">  299</a></span>&#160; </div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a02448.html#ad48f4dc7ca8fb95f7d938d834f4cbb38">REJMAP::quality_recoverable_rejects</a>() {  <span class="comment">//Any potential rejs?</span></div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; len; i++) {</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    <span class="keywordflow">if</span> (ptr[i].accept_if_good_quality ())</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;      <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;  }</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;  <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;}</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160; </div>
-<div class="line"><a name="l00308"></a><span class="lineno"><a class="line" href="a02448.html#ac1dc2d51408f18105d663ccf86fedf8a">  308</a></span>&#160; </div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02448.html#ac1dc2d51408f18105d663ccf86fedf8a">REJMAP::remove_pos</a>(           <span class="comment">//Cut out an element</span></div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;                        int16_t pos  <span class="comment">//element to remove</span></div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;                       ) {</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;  <a class="code" href="a00464.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a> (pos &gt;= 0);</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;  <a class="code" href="a00464.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a> (pos &lt; len);</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;  <a class="code" href="a00464.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a> (len &gt; 0);</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160; </div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="comment">/**********************************************************************</span></div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;<span class="comment"> * BLOCK_RECT_IT::start_block</span></div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="comment"> * Restart a block.</span></div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="comment"> **********************************************************************/</span></div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160; </div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02850.html#a74b1d75085d9f1ba313439ddbd9bc320">BLOCK_RECT_IT::start_block</a>() {  <span class="comment">//start (new) block</span></div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;  left_it.move_to_first ();</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;  right_it.move_to_first ();</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;  left_it.mark_cycle_pt ();</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;  right_it.mark_cycle_pt ();</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;  ymin = left_it.data ()-&gt;y ();  <span class="comment">//bottom of first box</span></div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;  ymax = left_it.data_relative (1)-&gt;y ();</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;  <span class="keywordflow">if</span> (right_it.data_relative (1)-&gt;y () &lt; ymax)</div>
+<div class="line"><a name="l00305"></a><span class="lineno"><a class="line" href="a02850.html#ab56b686d27e5eea704424470024456f4">  305</a></span>&#160;                                 <span class="comment">//smallest step</span></div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;    ymax = right_it.data_relative (1)-&gt;y ();</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;}</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160; </div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160; </div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;<span class="comment">/**********************************************************************</span></div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;<span class="comment"> * BLOCK_RECT_IT::forward</span></div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;<span class="comment"> * Move to the next rectangle in the block.</span></div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;<span class="comment"> **********************************************************************/</span></div>
 <div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160; </div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;  len--;</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;  <span class="keywordflow">for</span> (; pos &lt; len; pos++) ptr[pos] = ptr[pos + 1];</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;}</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160; </div>
-<div class="line"><a name="l00320"></a><span class="lineno"><a class="line" href="a02448.html#a124889539460b8c200b3186da4a692e0">  320</a></span>&#160; </div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02448.html#a124889539460b8c200b3186da4a692e0">REJMAP::print</a>(FILE *fp) {</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;  <span class="keywordtype">int</span> i;</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;  <span class="keywordtype">char</span> buff[512];</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160; </div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;  <span class="keywordflow">for</span> (i = 0; i &lt; len; i++) {</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;    buff[i] = ptr[i].display_char ();</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;  }</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;  buff[i] = <span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;  fprintf (fp, <span class="stringliteral">&quot;\&quot;%s\&quot;&quot;</span>, buff);</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;}</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160; </div>
-<div class="line"><a name="l00332"></a><span class="lineno"><a class="line" href="a02448.html#a476689acf6a0c07a0f09452ef5ff79e8">  332</a></span>&#160; </div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02448.html#a476689acf6a0c07a0f09452ef5ff79e8">REJMAP::full_print</a>(FILE *fp) {</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;  <span class="keywordtype">int</span> i;</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160; </div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;  <span class="keywordflow">for</span> (i = 0; i &lt; len; i++) {</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    ptr[i].full_print (fp);</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;    fprintf (fp, <span class="stringliteral">&quot;\n&quot;</span>);</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;  }</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;}</div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160; </div>
-<div class="line"><a name="l00342"></a><span class="lineno"><a class="line" href="a02448.html#a7f6528c1228002276d930ed9407c556b">  342</a></span>&#160; </div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02448.html#a7f6528c1228002276d930ed9407c556b">REJMAP::rej_word_small_xht</a>() {  <span class="comment">//Reject whole word</span></div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;  <span class="keywordtype">int</span> i;</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160; </div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;  <span class="keywordflow">for</span> (i = 0; i &lt; len; i++) {</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;    ptr[i].setrej_small_xht ();</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;  }</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;}</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160; </div>
-<div class="line"><a name="l00351"></a><span class="lineno"><a class="line" href="a02448.html#ac1d7e8e50b633e7c1b9e25904567f86b">  351</a></span>&#160; </div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02448.html#ac1d7e8e50b633e7c1b9e25904567f86b">REJMAP::rej_word_tess_failure</a>() {  <span class="comment">//Reject whole word</span></div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;  <span class="keywordtype">int</span> i;</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160; </div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;  <span class="keywordflow">for</span> (i = 0; i &lt; len; i++) {</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;    ptr[i].setrej_tess_failure ();</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;  }</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;}</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160; </div>
-<div class="line"><a name="l00360"></a><span class="lineno"><a class="line" href="a02448.html#a776b94463f9c008020c8cdf69c89b8c4">  360</a></span>&#160; </div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02448.html#a776b94463f9c008020c8cdf69c89b8c4">REJMAP::rej_word_not_tess_accepted</a>() {  <span class="comment">//Reject whole word</span></div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;  <span class="keywordtype">int</span> i;</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160; </div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;  <span class="keywordflow">for</span> (i = 0; i &lt; len; i++) {</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    <span class="keywordflow">if</span> (ptr[i].accepted()) ptr[i].setrej_not_tess_accepted();</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;  }</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;}</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160; </div>
-<div class="line"><a name="l00369"></a><span class="lineno"><a class="line" href="a02448.html#acb01c2a1d8d28ecffdb51c6a7c3d22da">  369</a></span>&#160; </div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02448.html#acb01c2a1d8d28ecffdb51c6a7c3d22da">REJMAP::rej_word_contains_blanks</a>() {  <span class="comment">//Reject whole word</span></div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;  <span class="keywordtype">int</span> i;</div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160; </div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;  <span class="keywordflow">for</span> (i = 0; i &lt; len; i++) {</div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;    <span class="keywordflow">if</span> (ptr[i].accepted()) ptr[i].setrej_contains_blanks();</div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;  }</div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;}</div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160; </div>
-<div class="line"><a name="l00378"></a><span class="lineno"><a class="line" href="a02448.html#a36d38c0c25d9792a85b5cb4b01e251fa">  378</a></span>&#160; </div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02448.html#a36d38c0c25d9792a85b5cb4b01e251fa">REJMAP::rej_word_bad_permuter</a>() {  <span class="comment">//Reject whole word</span></div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;  <span class="keywordtype">int</span> i;</div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160; </div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;  <span class="keywordflow">for</span> (i = 0; i &lt; len; i++) {</div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;    <span class="keywordflow">if</span> (ptr[i].accepted()) ptr[i].setrej_bad_permuter ();</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;  }</div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;}</div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160; </div>
-<div class="line"><a name="l00387"></a><span class="lineno"><a class="line" href="a02448.html#a70c042d067a9901e39f11d40633eacce">  387</a></span>&#160; </div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02448.html#a70c042d067a9901e39f11d40633eacce">REJMAP::rej_word_xht_fixup</a>() {  <span class="comment">//Reject whole word</span></div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;  <span class="keywordtype">int</span> i;</div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160; </div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;  <span class="keywordflow">for</span> (i = 0; i &lt; len; i++) {</div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;    <span class="keywordflow">if</span> (ptr[i].accepted()) ptr[i].setrej_xht_fixup();</div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;  }</div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;}</div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160; </div>
-<div class="line"><a name="l00396"></a><span class="lineno"><a class="line" href="a02448.html#a91ab357641e2a2a37aa98c2bacd03e2c">  396</a></span>&#160; </div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02448.html#a91ab357641e2a2a37aa98c2bacd03e2c">REJMAP::rej_word_no_alphanums</a>() {  <span class="comment">//Reject whole word</span></div>
-<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;  <span class="keywordtype">int</span> i;</div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160; </div>
-<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;  <span class="keywordflow">for</span> (i = 0; i &lt; len; i++) {</div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;    <span class="keywordflow">if</span> (ptr[i].accepted()) ptr[i].setrej_no_alphanums();</div>
-<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;  }</div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;}</div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160; </div>
-<div class="line"><a name="l00405"></a><span class="lineno"><a class="line" href="a02448.html#a10eb4f474df5983cdc0705f189c3f19b">  405</a></span>&#160; </div>
-<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02448.html#a10eb4f474df5983cdc0705f189c3f19b">REJMAP::rej_word_mostly_rej</a>() {  <span class="comment">//Reject whole word</span></div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;  <span class="keywordtype">int</span> i;</div>
-<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160; </div>
-<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;  <span class="keywordflow">for</span> (i = 0; i &lt; len; i++) {</div>
-<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;    <span class="keywordflow">if</span> (ptr[i].accepted()) ptr[i].setrej_mostly_rej();</div>
-<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;  }</div>
-<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;}</div>
-<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160; </div>
-<div class="line"><a name="l00414"></a><span class="lineno"><a class="line" href="a02448.html#aa0e131c139fe56b044b20cc8fd2a645c">  414</a></span>&#160; </div>
-<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02448.html#aa0e131c139fe56b044b20cc8fd2a645c">REJMAP::rej_word_bad_quality</a>() {  <span class="comment">//Reject whole word</span></div>
-<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;  <span class="keywordtype">int</span> i;</div>
-<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160; </div>
-<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;  <span class="keywordflow">for</span> (i = 0; i &lt; len; i++) {</div>
-<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;    <span class="keywordflow">if</span> (ptr[i].accepted()) ptr[i].setrej_bad_quality();</div>
-<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;  }</div>
-<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;}</div>
-<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160; </div>
-<div class="line"><a name="l00423"></a><span class="lineno"><a class="line" href="a02448.html#a9fb4a691f24ea06370b55650c197db8b">  423</a></span>&#160; </div>
-<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02448.html#a9fb4a691f24ea06370b55650c197db8b">REJMAP::rej_word_doc_rej</a>() {  <span class="comment">//Reject whole word</span></div>
-<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;  <span class="keywordtype">int</span> i;</div>
-<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160; </div>
-<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;  <span class="keywordflow">for</span> (i = 0; i &lt; len; i++) {</div>
-<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;    <span class="keywordflow">if</span> (ptr[i].accepted()) ptr[i].setrej_doc_rej();</div>
-<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;  }</div>
-<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;}</div>
-<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160; </div>
-<div class="line"><a name="l00432"></a><span class="lineno"><a class="line" href="a02448.html#aa86752e4e9277f2a616df08459ea08e3">  432</a></span>&#160; </div>
-<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02448.html#aa86752e4e9277f2a616df08459ea08e3">REJMAP::rej_word_block_rej</a>() {  <span class="comment">//Reject whole word</span></div>
-<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;  <span class="keywordtype">int</span> i;</div>
-<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160; </div>
-<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;  <span class="keywordflow">for</span> (i = 0; i &lt; len; i++) {</div>
-<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;    <span class="keywordflow">if</span> (ptr[i].accepted()) ptr[i].setrej_block_rej();</div>
-<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;  }</div>
-<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;}</div>
-<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160; </div>
-<div class="line"><a name="l00441"></a><span class="lineno"><a class="line" href="a02448.html#a03037d4a12a4ea33a377cf21c9400139">  441</a></span>&#160; </div>
-<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02448.html#a03037d4a12a4ea33a377cf21c9400139">REJMAP::rej_word_row_rej</a>() {  <span class="comment">//Reject whole word</span></div>
-<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;  <span class="keywordtype">int</span> i;</div>
-<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160; </div>
-<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;  <span class="keywordflow">for</span> (i = 0; i &lt; len; i++) {</div>
-<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;    <span class="keywordflow">if</span> (ptr[i].accepted()) ptr[i].setrej_row_rej();</div>
-<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;  }</div>
-<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;}</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02850.html#ab56b686d27e5eea704424470024456f4">BLOCK_RECT_IT::forward</a>() {  <span class="comment">//next rectangle</span></div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;  <span class="keywordflow">if</span> (!left_it.empty ()) {       <span class="comment">//non-empty list</span></div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    <span class="keywordflow">if</span> (left_it.data_relative (1)-&gt;y () == ymax)</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;      left_it.forward ();        <span class="comment">//move to meet top</span></div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;    <span class="keywordflow">if</span> (right_it.data_relative (1)-&gt;y () == ymax)</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;      right_it.forward ();</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;                                 <span class="comment">//last is special</span></div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;    <span class="keywordflow">if</span> (left_it.at_last () || right_it.at_last ()) {</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;      left_it.move_to_first ();  <span class="comment">//restart</span></div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;      right_it.move_to_first ();</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;                                 <span class="comment">//now at bottom</span></div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;      ymin = left_it.data ()-&gt;y ();</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;    }</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;    <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;      ymin = ymax;               <span class="comment">//new bottom</span></div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;    }</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;                                 <span class="comment">//next point</span></div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    ymax = left_it.data_relative (1)-&gt;y ();</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;    <span class="keywordflow">if</span> (right_it.data_relative (1)-&gt;y () &lt; ymax)</div>
+<div class="line"><a name="l00335"></a><span class="lineno"><a class="line" href="a02854.html#abc2efac91f0ac4ac623977db5d3ec9b8">  335</a></span>&#160;                                 <span class="comment">//least step forward</span></div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;      ymax = right_it.data_relative (1)-&gt;y ();</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;  }</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;}</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160; </div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160; </div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;<span class="comment">/**********************************************************************</span></div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;<span class="comment"> * BLOCK_LINE_IT::get_line</span></div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;<span class="comment"> * Get the the start and width of a line in the block.</span></div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;<span class="comment"> **********************************************************************/</span></div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160; </div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;int16_t <a class="code" href="a02854.html#abc2efac91f0ac4ac623977db5d3ec9b8">BLOCK_LINE_IT::get_line</a>(             <span class="comment">//get a line</span></div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;                              int16_t y,     <span class="comment">//line to get</span></div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;                              int16_t &amp;xext  <span class="comment">//output extent</span></div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;                             ) {</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;  <a class="code" href="a02858.html">ICOORD</a> bleft;                  <span class="comment">//bounding box</span></div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;  <a class="code" href="a02858.html">ICOORD</a> tright;                 <span class="comment">//of block &amp; rect</span></div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160; </div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;                                 <span class="comment">//get block box</span></div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;  block-&gt;<a class="code" href="a02846.html#a3f06f8e34fc5962f342daff9623463e9">bounding_box</a> (bleft, tright);</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;  <span class="keywordflow">if</span> (y &lt; bleft.<a class="code" href="a02858.html#a27df9d66085dcf65ead7f620d68a91ac">y</a> () || y &gt;= tright.<a class="code" href="a02858.html#a27df9d66085dcf65ead7f620d68a91ac">y</a> ()) {</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;    <span class="comment">//              block-&gt;print(stderr,false);</span></div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;    <a class="code" href="a00383.html#ac2ef5a666afa27f1bc7a1847459dc0b9">BADBLOCKLINE</a>.<a class="code" href="a02994.html#adba51110893a3527402dabadc89c0c62">error</a> (<span class="stringliteral">&quot;BLOCK_LINE_IT::get_line&quot;</span>, <a class="code" href="a00515.html#a8a3a2e51383909b357fcdf8eda803637a781ad2788df9e25c59a70894c7832096">ABORT</a>, <span class="stringliteral">&quot;Y=%d&quot;</span>, y);</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;  }</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160; </div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;                                 <span class="comment">//get rectangle box</span></div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;  rect_it.<a class="code" href="a02850.html#a1e3195249b6b6934be9060f1d5ee60c2">bounding_box</a> (bleft, tright);</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;                                 <span class="comment">//inside rectangle</span></div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;  <span class="keywordflow">if</span> (y &gt;= bleft.<a class="code" href="a02858.html#a27df9d66085dcf65ead7f620d68a91ac">y</a> () &amp;&amp; y &lt; tright.<a class="code" href="a02858.html#a27df9d66085dcf65ead7f620d68a91ac">y</a> ()) {</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;                                 <span class="comment">//width of line</span></div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;    xext = tright.<a class="code" href="a02858.html#aabf3d2cbd535df26ebcac17def628216">x</a> () - bleft.<a class="code" href="a02858.html#aabf3d2cbd535df26ebcac17def628216">x</a> ();</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;    <span class="keywordflow">return</span> bleft.<a class="code" href="a02858.html#aabf3d2cbd535df26ebcac17def628216">x</a> ();           <span class="comment">//start of line</span></div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;  }</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;  <span class="keywordflow">for</span> (rect_it.<a class="code" href="a02850.html#a74b1d75085d9f1ba313439ddbd9bc320">start_block</a> (); !rect_it.<a class="code" href="a02850.html#a90e1ef52e7e80c2308768e11a432efe2">cycled_rects</a> (); rect_it.<a class="code" href="a02850.html#ab56b686d27e5eea704424470024456f4">forward</a> ()) {</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;                                 <span class="comment">//get rectangle box</span></div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;    rect_it.<a class="code" href="a02850.html#a1e3195249b6b6934be9060f1d5ee60c2">bounding_box</a> (bleft, tright);</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;                                 <span class="comment">//inside rectangle</span></div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;    <span class="keywordflow">if</span> (y &gt;= bleft.<a class="code" href="a02858.html#a27df9d66085dcf65ead7f620d68a91ac">y</a> () &amp;&amp; y &lt; tright.<a class="code" href="a02858.html#a27df9d66085dcf65ead7f620d68a91ac">y</a> ()) {</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;                                 <span class="comment">//width of line</span></div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;      xext = tright.<a class="code" href="a02858.html#aabf3d2cbd535df26ebcac17def628216">x</a> () - bleft.<a class="code" href="a02858.html#aabf3d2cbd535df26ebcac17def628216">x</a> ();</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;      <span class="keywordflow">return</span> bleft.<a class="code" href="a02858.html#aabf3d2cbd535df26ebcac17def628216">x</a> ();         <span class="comment">//start of line</span></div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;    }</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;  }</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;  <a class="code" href="a00383.html#aef554a002a62904bb697a6f6fa99985c">LOSTBLOCKLINE</a>.<a class="code" href="a02994.html#adba51110893a3527402dabadc89c0c62">error</a> (<span class="stringliteral">&quot;BLOCK_LINE_IT::get_line&quot;</span>, <a class="code" href="a00515.html#a8a3a2e51383909b357fcdf8eda803637a781ad2788df9e25c59a70894c7832096">ABORT</a>, <span class="stringliteral">&quot;Y=%d&quot;</span>, y);</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;  <span class="keywordflow">return</span> 0;                      <span class="comment">//dummy to stop warning</span></div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa00386_html_aa0904e8de5c106907554ad8a64cd75aaa74d4cf8b2b5fe113ebf7b9c420343c58"><div class="ttname"><a href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa74d4cf8b2b5fe113ebf7b9c420343c58">R_REJ_CBLOB</a></div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00092">rejctmap.h:92</a></div></div>
-<div class="ttc" id="aa00386_html_aa0904e8de5c106907554ad8a64cd75aaabd4893be9fca38674051ba596a12c866"><div class="ttname"><a href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaabd4893be9fca38674051ba596a12c866">R_DOC_REJ</a></div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00113">rejctmap.h:113</a></div></div>
-<div class="ttc" id="aa00503_html"><div class="ttname"><a href="a00503.html">params.h</a></div></div>
-<div class="ttc" id="aa00386_html_aa0904e8de5c106907554ad8a64cd75aaae288e8069feabdb927e4f77587d2a5f8"><div class="ttname"><a href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaae288e8069feabdb927e4f77587d2a5f8">R_UNLV_REJ</a></div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00116">rejctmap.h:116</a></div></div>
-<div class="ttc" id="aa02448_html_a10eb4f474df5983cdc0705f189c3f19b"><div class="ttname"><a href="a02448.html#a10eb4f474df5983cdc0705f189c3f19b">REJMAP::rej_word_mostly_rej</a></div><div class="ttdeci">void rej_word_mostly_rej()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00405">rejctmap.cpp:405</a></div></div>
-<div class="ttc" id="aa00386_html"><div class="ttname"><a href="a00386.html">rejctmap.h</a></div></div>
-<div class="ttc" id="aa02448_html"><div class="ttname"><a href="a02448.html">REJMAP</a></div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00200">rejctmap.h:200</a></div></div>
-<div class="ttc" id="aa02444_html_a61afa3942cfb20d46ee6fcaeeb142bf1"><div class="ttname"><a href="a02444.html#a61afa3942cfb20d46ee6fcaeeb142bf1">REJ::setrej_quality_accept</a></div><div class="ttdeci">void setrej_quality_accept()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00220">rejctmap.cpp:220</a></div></div>
-<div class="ttc" id="aa02444_html_a051db6890b347a2cf695d7e10baa54bf"><div class="ttname"><a href="a02444.html#a051db6890b347a2cf695d7e10baa54bf">REJ::setrej_bad_permuter</a></div><div class="ttdeci">void setrej_bad_permuter()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00150">rejctmap.cpp:150</a></div></div>
-<div class="ttc" id="aa02444_html_a7730d3b3330cac0b98bf7f906bfff7fa"><div class="ttname"><a href="a02444.html#a7730d3b3330cac0b98bf7f906bfff7fa">REJ::rejected</a></div><div class="ttdeci">bool rejected()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00070">rejctmap.cpp:70</a></div></div>
-<div class="ttc" id="aa02444_html_aebf4e756b9238d8eb8c219d801ae4c53"><div class="ttname"><a href="a02444.html#aebf4e756b9238d8eb8c219d801ae4c53">REJ::setrej_rej_cblob</a></div><div class="ttdeci">void setrej_rej_cblob()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00118">rejctmap.cpp:118</a></div></div>
-<div class="ttc" id="aa00386_html_aa0904e8de5c106907554ad8a64cd75aaa4182d71325acc2fe2eaf014e5c8770c4"><div class="ttname"><a href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa4182d71325acc2fe2eaf014e5c8770c4">R_MINIMAL_REJ_ACCEPT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00123">rejctmap.h:123</a></div></div>
-<div class="ttc" id="aa02444_html_ae41360113ba4db9b14d26df6a10611b1"><div class="ttname"><a href="a02444.html#ae41360113ba4db9b14d26df6a10611b1">REJ::full_print</a></div><div class="ttdeci">void full_print(FILE *fp)</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00231">rejctmap.cpp:231</a></div></div>
-<div class="ttc" id="aa02448_html_a7f6528c1228002276d930ed9407c556b"><div class="ttname"><a href="a02448.html#a7f6528c1228002276d930ed9407c556b">REJMAP::rej_word_small_xht</a></div><div class="ttdeci">void rej_word_small_xht()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00342">rejctmap.cpp:342</a></div></div>
-<div class="ttc" id="aa00386_html_aa0904e8de5c106907554ad8a64cd75aaa32f016f7b77aeb8d4891753c68b42eba"><div class="ttname"><a href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa32f016f7b77aeb8d4891753c68b42eba">R_XHT_FIXUP</a></div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00107">rejctmap.h:107</a></div></div>
-<div class="ttc" id="aa02444_html_a14ae6323c519acf76b81ddb49067f6c6"><div class="ttname"><a href="a02444.html#a14ae6323c519acf76b81ddb49067f6c6">REJ::setrej_mm_reject</a></div><div class="ttdeci">void setrej_mm_reject()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00123">rejctmap.cpp:123</a></div></div>
-<div class="ttc" id="aa02444_html_ab327b4a6585504669ac9c20acbc9df02"><div class="ttname"><a href="a02444.html#ab327b4a6585504669ac9c20acbc9df02">REJ::setrej_block_rej</a></div><div class="ttdeci">void setrej_block_rej()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00190">rejctmap.cpp:190</a></div></div>
-<div class="ttc" id="aa00386_html_aa0904e8de5c106907554ad8a64cd75aaa3290f139840ec68d0ad1b800580bd5d0"><div class="ttname"><a href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa3290f139840ec68d0ad1b800580bd5d0">R_MM_REJECT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00093">rejctmap.h:93</a></div></div>
-<div class="ttc" id="aa02444_html"><div class="ttname"><a href="a02444.html">REJ</a></div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00096">rejctmap.h:96</a></div></div>
-<div class="ttc" id="aa02448_html_a70c042d067a9901e39f11d40633eacce"><div class="ttname"><a href="a02448.html#a70c042d067a9901e39f11d40633eacce">REJMAP::rej_word_xht_fixup</a></div><div class="ttdeci">void rej_word_xht_fixup()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00387">rejctmap.cpp:387</a></div></div>
-<div class="ttc" id="aa00386_html_aa0904e8de5c106907554ad8a64cd75aaa3af2da59ca30ea4d9f678582cb765943"><div class="ttname"><a href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa3af2da59ca30ea4d9f678582cb765943">R_NOT_TESS_ACCEPTED</a></div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00098">rejctmap.h:98</a></div></div>
-<div class="ttc" id="aa02444_html_ae18d03ebf1d913fff692ccc7a9a87348"><div class="ttname"><a href="a02444.html#ae18d03ebf1d913fff692ccc7a9a87348">REJ::setrej_minimal_rej_accept</a></div><div class="ttdeci">void setrej_minimal_rej_accept()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00225">rejctmap.cpp:225</a></div></div>
-<div class="ttc" id="aa02448_html_a9fb4a691f24ea06370b55650c197db8b"><div class="ttname"><a href="a02448.html#a9fb4a691f24ea06370b55650c197db8b">REJMAP::rej_word_doc_rej</a></div><div class="ttdeci">void rej_word_doc_rej()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00423">rejctmap.cpp:423</a></div></div>
-<div class="ttc" id="aa02448_html_a776b94463f9c008020c8cdf69c89b8c4"><div class="ttname"><a href="a02448.html#a776b94463f9c008020c8cdf69c89b8c4">REJMAP::rej_word_not_tess_accepted</a></div><div class="ttdeci">void rej_word_not_tess_accepted()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00360">rejctmap.cpp:360</a></div></div>
-<div class="ttc" id="aa02444_html_a3fafae1106eb9830eb03f7314ac36535"><div class="ttname"><a href="a02444.html#a3fafae1106eb9830eb03f7314ac36535">REJ::setrej_postNN_1Il</a></div><div class="ttdeci">void setrej_postNN_1Il()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00113">rejctmap.cpp:113</a></div></div>
-<div class="ttc" id="aa00386_html_aa0904e8de5c106907554ad8a64cd75aaa72f00243433a6558a28fbab640343213"><div class="ttname"><a href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa72f00243433a6558a28fbab640343213">R_MM_ACCEPT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00121">rejctmap.h:121</a></div></div>
-<div class="ttc" id="aa00386_html_aa0904e8de5c106907554ad8a64cd75aaab95636d09447ad2994bc856d21dd22e1"><div class="ttname"><a href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaab95636d09447ad2994bc856d21dd22e1">R_HYPHEN_ACCEPT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00120">rejctmap.h:120</a></div></div>
-<div class="ttc" id="aa00386_html_aa0904e8de5c106907554ad8a64cd75aaa53b165bbee2790e76a7ef35c6acbe3ba"><div class="ttname"><a href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa53b165bbee2790e76a7ef35c6acbe3ba">R_ROW_REJ</a></div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00115">rejctmap.h:115</a></div></div>
-<div class="ttc" id="aa02448_html_ac1dc2d51408f18105d663ccf86fedf8a"><div class="ttname"><a href="a02448.html#ac1dc2d51408f18105d663ccf86fedf8a">REJMAP::remove_pos</a></div><div class="ttdeci">void remove_pos(int16_t pos)</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00308">rejctmap.cpp:308</a></div></div>
-<div class="ttc" id="aa02448_html_aa86752e4e9277f2a616df08459ea08e3"><div class="ttname"><a href="a02448.html#aa86752e4e9277f2a616df08459ea08e3">REJMAP::rej_word_block_rej</a></div><div class="ttdeci">void rej_word_block_rej()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00432">rejctmap.cpp:432</a></div></div>
-<div class="ttc" id="aa00386_html_aa0904e8de5c106907554ad8a64cd75aaa6b379b13e52686bb924a2a474962e3c7"><div class="ttname"><a href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa6b379b13e52686bb924a2a474962e3c7">R_BLOCK_REJ</a></div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00114">rejctmap.h:114</a></div></div>
-<div class="ttc" id="aa02444_html_a7d85f8d0b757ddc4bd51d369a9288005"><div class="ttname"><a href="a02444.html#a7d85f8d0b757ddc4bd51d369a9288005">REJ::setrej_1Il_conflict</a></div><div class="ttdeci">void setrej_1Il_conflict()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00108">rejctmap.cpp:108</a></div></div>
-<div class="ttc" id="aa02444_html_a3203871d23c1ed0d2607cc3abe80d312"><div class="ttname"><a href="a02444.html#a3203871d23c1ed0d2607cc3abe80d312">REJ::setrej_small_xht</a></div><div class="ttdeci">void setrej_small_xht()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00098">rejctmap.cpp:98</a></div></div>
-<div class="ttc" id="aa00755_html_acd4ea858d7133e40518e0832ff9d94b2"><div class="ttname"><a href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a></div><div class="ttdeci">int count(LIST var_list)</div><div class="ttdef"><b>Definition:</b> <a href="a00755_source.html#l00079">oldlist.cpp:79</a></div></div>
-<div class="ttc" id="aa00386_html_aa0904e8de5c106907554ad8a64cd75aaa760cb3b743fba29a24ceada590cb28a5"><div class="ttname"><a href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa760cb3b743fba29a24ceada590cb28a5">R_NO_ALPHANUMS</a></div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00105">rejctmap.h:105</a></div></div>
-<div class="ttc" id="aa02444_html_ab047fe90130b0696f8797d378a4c86b6"><div class="ttname"><a href="a02444.html#ab047fe90130b0696f8797d378a4c86b6">REJ::setrej_row_rej</a></div><div class="ttdeci">void setrej_row_rej()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00195">rejctmap.cpp:195</a></div></div>
-<div class="ttc" id="aa02444_html_aefa0d052fb581f7ab12aa4d76b18fb6a"><div class="ttname"><a href="a02444.html#aefa0d052fb581f7ab12aa4d76b18fb6a">REJ::setrej_bad_repetition</a></div><div class="ttdeci">void setrej_bad_repetition()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00128">rejctmap.cpp:128</a></div></div>
-<div class="ttc" id="aa02448_html_a495e91f8ad6cee2217cb27b8367b6cd0"><div class="ttname"><a href="a02448.html#a495e91f8ad6cee2217cb27b8367b6cd0">REJMAP::operator=</a></div><div class="ttdeci">REJMAP &amp; operator=(const REJMAP &amp;source)</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00264">rejctmap.cpp:264</a></div></div>
-<div class="ttc" id="aa02444_html_a7bc5a7a58497cb6df4bca08c1f3df2d0"><div class="ttname"><a href="a02444.html#a7bc5a7a58497cb6df4bca08c1f3df2d0">REJ::flag</a></div><div class="ttdeci">bool flag(REJ_FLAGS rej_flag)</div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00131">rejctmap.h:131</a></div></div>
-<div class="ttc" id="aa02444_html_a8c3d7465218c94a5fb3d2e5bdee69cfa"><div class="ttname"><a href="a02444.html#a8c3d7465218c94a5fb3d2e5bdee69cfa">REJ::setrej_hyphen_accept</a></div><div class="ttdeci">void setrej_hyphen_accept()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00205">rejctmap.cpp:205</a></div></div>
-<div class="ttc" id="aa02444_html_a175d0b00d29f7497ba1ed02e372812a0"><div class="ttname"><a href="a02444.html#a175d0b00d29f7497ba1ed02e372812a0">REJ::setrej_edge_char</a></div><div class="ttdeci">void setrej_edge_char()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00103">rejctmap.cpp:103</a></div></div>
-<div class="ttc" id="aa02444_html_a44e295be30bb374f6b698fb5fc4b9c54"><div class="ttname"><a href="a02444.html#a44e295be30bb374f6b698fb5fc4b9c54">REJ::setrej_mostly_rej</a></div><div class="ttdeci">void setrej_mostly_rej()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00170">rejctmap.cpp:170</a></div></div>
-<div class="ttc" id="aa00386_html_aa0904e8de5c106907554ad8a64cd75aaaae5be3ca821456d1d53ac803798b4e4c"><div class="ttname"><a href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaaae5be3ca821456d1d53ac803798b4e4c">R_POSTNN_1IL</a></div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00091">rejctmap.h:91</a></div></div>
-<div class="ttc" id="aa02448_html_a062da7b6d62e08ee44303bea1b214dc7"><div class="ttname"><a href="a02448.html#a062da7b6d62e08ee44303bea1b214dc7">REJMAP::recoverable_rejects</a></div><div class="ttdeci">bool recoverable_rejects()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00290">rejctmap.cpp:290</a></div></div>
-<div class="ttc" id="aa02444_html_ac54a7b0ba6da6a0a28d15b6588948997"><div class="ttname"><a href="a02444.html#ac54a7b0ba6da6a0a28d15b6588948997">REJ::setrej_hyphen</a></div><div class="ttdeci">void setrej_hyphen()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00155">rejctmap.cpp:155</a></div></div>
-<div class="ttc" id="aa00386_html_aa0904e8de5c106907554ad8a64cd75aaaa9e90cb27400daeb65262f465ca55963"><div class="ttname"><a href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaaa9e90cb27400daeb65262f465ca55963">R_TESS_FAILURE</a></div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00087">rejctmap.h:87</a></div></div>
-<div class="ttc" id="aa02444_html_aaf1e632d675eb808f894c9691d7604f7"><div class="ttname"><a href="a02444.html#aaf1e632d675eb808f894c9691d7604f7">REJ::perm_rejected</a></div><div class="ttdeci">bool perm_rejected()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00021">rejctmap.cpp:21</a></div></div>
-<div class="ttc" id="aa00386_html_aa0904e8de5c106907554ad8a64cd75aaa816e9eb92c84abac4a0c84d7855e96ca"><div class="ttname"><a href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa816e9eb92c84abac4a0c84d7855e96ca">R_BAD_PERMUTER</a></div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00100">rejctmap.h:100</a></div></div>
-<div class="ttc" id="aa02444_html_aff0b496738e698811f9716d138be483c"><div class="ttname"><a href="a02444.html#aff0b496738e698811f9716d138be483c">REJ::setrej_nn_accept</a></div><div class="ttdeci">void setrej_nn_accept()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00210">rejctmap.cpp:210</a></div></div>
-<div class="ttc" id="aa02444_html_ab34edb92d2007cb70e221c00ca9b7690"><div class="ttname"><a href="a02444.html#ab34edb92d2007cb70e221c00ca9b7690">REJ::setrej_not_tess_accepted</a></div><div class="ttdeci">void setrej_not_tess_accepted()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00138">rejctmap.cpp:138</a></div></div>
-<div class="ttc" id="aa02444_html_a5ddc940717935d506e6454991f096bb0"><div class="ttname"><a href="a02444.html#a5ddc940717935d506e6454991f096bb0">REJ::setrej_contains_blanks</a></div><div class="ttdeci">void setrej_contains_blanks()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00144">rejctmap.cpp:144</a></div></div>
-<div class="ttc" id="aa02444_html_a62bc51ab39f1e39ce693fb0d4da9a15d"><div class="ttname"><a href="a02444.html#a62bc51ab39f1e39ce693fb0d4da9a15d">REJ::setrej_unlv_rej</a></div><div class="ttdeci">void setrej_unlv_rej()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00200">rejctmap.cpp:200</a></div></div>
-<div class="ttc" id="aa02448_html_a03037d4a12a4ea33a377cf21c9400139"><div class="ttname"><a href="a02448.html#a03037d4a12a4ea33a377cf21c9400139">REJMAP::rej_word_row_rej</a></div><div class="ttdeci">void rej_word_row_rej()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00441">rejctmap.cpp:441</a></div></div>
-<div class="ttc" id="aa02444_html_a4622ab0998b32200ec39801d529b578c"><div class="ttname"><a href="a02444.html#a4622ab0998b32200ec39801d529b578c">REJ::setrej_mm_accept</a></div><div class="ttdeci">void setrej_mm_accept()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00215">rejctmap.cpp:215</a></div></div>
-<div class="ttc" id="aa02448_html_ac1d7e8e50b633e7c1b9e25904567f86b"><div class="ttname"><a href="a02448.html#ac1d7e8e50b633e7c1b9e25904567f86b">REJMAP::rej_word_tess_failure</a></div><div class="ttdeci">void rej_word_tess_failure()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00351">rejctmap.cpp:351</a></div></div>
-<div class="ttc" id="aa02444_html_a77174dfda3ff0eab311885d181e91616"><div class="ttname"><a href="a02444.html#a77174dfda3ff0eab311885d181e91616">REJ::setrej_tess_failure</a></div><div class="ttdeci">void setrej_tess_failure()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00093">rejctmap.cpp:93</a></div></div>
-<div class="ttc" id="aa02444_html_a336ae72a6abff5419d99f6bd5bc0de2e"><div class="ttname"><a href="a02444.html#a336ae72a6abff5419d99f6bd5bc0de2e">REJ::setrej_bad_quality</a></div><div class="ttdeci">void setrej_bad_quality()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00180">rejctmap.cpp:180</a></div></div>
-<div class="ttc" id="aa00386_html_aa0904e8de5c106907554ad8a64cd75aaad945e4640b308e36e058dbb01ccf6b1d"><div class="ttname"><a href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaad945e4640b308e36e058dbb01ccf6b1d">R_EDGE_CHAR</a></div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00089">rejctmap.h:89</a></div></div>
-<div class="ttc" id="aa02444_html_a08d65cd7853e3b7ca907e27fc444e465"><div class="ttname"><a href="a02444.html#a08d65cd7853e3b7ca907e27fc444e465">REJ::setrej_no_alphanums</a></div><div class="ttdeci">void setrej_no_alphanums()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00165">rejctmap.cpp:165</a></div></div>
-<div class="ttc" id="aa00464_html_a93a603f4063a6b9403d81caa245a583b"><div class="ttname"><a href="a00464.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a></div><div class="ttdeci">#define ASSERT_HOST(x)</div><div class="ttdef"><b>Definition:</b> <a href="a00464_source.html#l00087">errcode.h:87</a></div></div>
-<div class="ttc" id="aa02448_html_acb01c2a1d8d28ecffdb51c6a7c3d22da"><div class="ttname"><a href="a02448.html#acb01c2a1d8d28ecffdb51c6a7c3d22da">REJMAP::rej_word_contains_blanks</a></div><div class="ttdeci">void rej_word_contains_blanks()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00369">rejctmap.cpp:369</a></div></div>
-<div class="ttc" id="aa02444_html_a844bb22fce303e9da216decd4e1c2026"><div class="ttname"><a href="a02444.html#a844bb22fce303e9da216decd4e1c2026">REJ::setrej_xht_fixup</a></div><div class="ttdeci">void setrej_xht_fixup()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00175">rejctmap.cpp:175</a></div></div>
-<div class="ttc" id="aa02448_html_a124889539460b8c200b3186da4a692e0"><div class="ttname"><a href="a02448.html#a124889539460b8c200b3186da4a692e0">REJMAP::print</a></div><div class="ttdeci">void print(FILE *fp)</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00320">rejctmap.cpp:320</a></div></div>
-<div class="ttc" id="aa02448_html_a36d38c0c25d9792a85b5cb4b01e251fa"><div class="ttname"><a href="a02448.html#a36d38c0c25d9792a85b5cb4b01e251fa">REJMAP::rej_word_bad_permuter</a></div><div class="ttdeci">void rej_word_bad_permuter()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00378">rejctmap.cpp:378</a></div></div>
-<div class="ttc" id="aa00386_html_aa0904e8de5c106907554ad8a64cd75aaa28267d098ae5e5dd9234e8225990fa5e"><div class="ttname"><a href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa28267d098ae5e5dd9234e8225990fa5e">R_MOSTLY_REJ</a></div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00106">rejctmap.h:106</a></div></div>
-<div class="ttc" id="aa02448_html_a798c11e002b9421b26a748f5186bdae9"><div class="ttname"><a href="a02448.html#a798c11e002b9421b26a748f5186bdae9">REJMAP::initialise</a></div><div class="ttdeci">void initialise(int16_t length)</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00272">rejctmap.cpp:272</a></div></div>
-<div class="ttc" id="aa00386_html_aa0904e8de5c106907554ad8a64cd75aaabe17879df6434d3ac363864cea5cff70"><div class="ttname"><a href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaabe17879df6434d3ac363864cea5cff70">R_POOR_MATCH</a></div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00097">rejctmap.h:97</a></div></div>
-<div class="ttc" id="aa02448_html_adb462d55dc4b682e0a77090185a58011"><div class="ttname"><a href="a02448.html#adb462d55dc4b682e0a77090185a58011">REJMAP::length</a></div><div class="ttdeci">int32_t length() const</div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00222">rejctmap.h:222</a></div></div>
-<div class="ttc" id="aa02444_html_a75e2aaff1c54a39d54702c7cd645ec99"><div class="ttname"><a href="a02444.html#a75e2aaff1c54a39d54702c7cd645ec99">REJ::setrej_doc_rej</a></div><div class="ttdeci">void setrej_doc_rej()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00185">rejctmap.cpp:185</a></div></div>
-<div class="ttc" id="aa00386_html_aa0904e8de5c106907554ad8a64cd75aaa4b904a542092cac49d42ada569aeb366"><div class="ttname"><a href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa4b904a542092cac49d42ada569aeb366">R_DUBIOUS</a></div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00104">rejctmap.h:104</a></div></div>
-<div class="ttc" id="aa00386_html_aa0904e8de5c106907554ad8a64cd75aaabafae36f4ac3eceb1c60790b25216d9d"><div class="ttname"><a href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaabafae36f4ac3eceb1c60790b25216d9d">R_HYPHEN</a></div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00103">rejctmap.h:103</a></div></div>
-<div class="ttc" id="aa00386_html_aa0904e8de5c106907554ad8a64cd75aaae9c3faa247c71799d9f6955badf19cda"><div class="ttname"><a href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaae9c3faa247c71799d9f6955badf19cda">R_SMALL_XHT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00088">rejctmap.h:88</a></div></div>
-<div class="ttc" id="aa02448_html_a476689acf6a0c07a0f09452ef5ff79e8"><div class="ttname"><a href="a02448.html#a476689acf6a0c07a0f09452ef5ff79e8">REJMAP::full_print</a></div><div class="ttdeci">void full_print(FILE *fp)</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00332">rejctmap.cpp:332</a></div></div>
-<div class="ttc" id="aa00386_html_aa0904e8de5c106907554ad8a64cd75aaa9449830b9b3be69359e29ba073dbab97"><div class="ttname"><a href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa9449830b9b3be69359e29ba073dbab97">R_BAD_QUALITY</a></div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00110">rejctmap.h:110</a></div></div>
-<div class="ttc" id="aa02448_html_a91ab357641e2a2a37aa98c2bacd03e2c"><div class="ttname"><a href="a02448.html#a91ab357641e2a2a37aa98c2bacd03e2c">REJMAP::rej_word_no_alphanums</a></div><div class="ttdeci">void rej_word_no_alphanums()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00396">rejctmap.cpp:396</a></div></div>
-<div class="ttc" id="aa00386_html_aa0904e8de5c106907554ad8a64cd75aaa9893d23c118ad4a6a3554a1efe084db5"><div class="ttname"><a href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa9893d23c118ad4a6a3554a1efe084db5">R_QUALITY_ACCEPT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00122">rejctmap.h:122</a></div></div>
-<div class="ttc" id="aa00386_html_aa0904e8de5c106907554ad8a64cd75aaaf84e25f4e0bf0071671efeb73099ae35"><div class="ttname"><a href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaaf84e25f4e0bf0071671efeb73099ae35">R_NN_ACCEPT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00119">rejctmap.h:119</a></div></div>
-<div class="ttc" id="aa02444_html_adbe54ec1784781797a6a22287ad2d9bc"><div class="ttname"><a href="a02444.html#adbe54ec1784781797a6a22287ad2d9bc">REJ::accept_if_good_quality</a></div><div class="ttdeci">bool accept_if_good_quality()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00080">rejctmap.cpp:80</a></div></div>
-<div class="ttc" id="aa02444_html_a5c0e4fee00ac77b3d636a3a57010f828"><div class="ttname"><a href="a02444.html#a5c0e4fee00ac77b3d636a3a57010f828">REJ::setrej_dubious</a></div><div class="ttdeci">void setrej_dubious()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00160">rejctmap.cpp:160</a></div></div>
-<div class="ttc" id="aa02448_html_ad48f4dc7ca8fb95f7d938d834f4cbb38"><div class="ttname"><a href="a02448.html#ad48f4dc7ca8fb95f7d938d834f4cbb38">REJMAP::quality_recoverable_rejects</a></div><div class="ttdeci">bool quality_recoverable_rejects()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00299">rejctmap.cpp:299</a></div></div>
-<div class="ttc" id="aa02448_html_aa0e131c139fe56b044b20cc8fd2a645c"><div class="ttname"><a href="a02448.html#aa0e131c139fe56b044b20cc8fd2a645c">REJMAP::rej_word_bad_quality</a></div><div class="ttdeci">void rej_word_bad_quality()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00414">rejctmap.cpp:414</a></div></div>
-<div class="ttc" id="aa02444_html_a6097f2eb5fca3913f95c979c64024d94"><div class="ttname"><a href="a02444.html#a6097f2eb5fca3913f95c979c64024d94">REJ::setrej_poor_match</a></div><div class="ttdeci">void setrej_poor_match()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00133">rejctmap.cpp:133</a></div></div>
-<div class="ttc" id="aa00386_html_aa0904e8de5c106907554ad8a64cd75aaa8b8798f4f516ddb31037b563cfd7a90c"><div class="ttname"><a href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa8b8798f4f516ddb31037b563cfd7a90c">R_1IL_CONFLICT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00090">rejctmap.h:90</a></div></div>
-<div class="ttc" id="aa00386_html_aa0904e8de5c106907554ad8a64cd75aaab9972fc9fdd8fc7a8631aa23624477bf"><div class="ttname"><a href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaab9972fc9fdd8fc7a8631aa23624477bf">R_CONTAINS_BLANKS</a></div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00099">rejctmap.h:99</a></div></div>
-<div class="ttc" id="aa02448_html_a56942b5d4ddd0096c7624d382b1fef90"><div class="ttname"><a href="a02448.html#a56942b5d4ddd0096c7624d382b1fef90">REJMAP::accept_count</a></div><div class="ttdeci">int16_t accept_count()</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00278">rejctmap.cpp:278</a></div></div>
-<div class="ttc" id="aa00386_html_aa0904e8de5c106907554ad8a64cd75aaa6c2902cc320e6ef874dba77400096bb3"><div class="ttname"><a href="a00386.html#aa0904e8de5c106907554ad8a64cd75aaa6c2902cc320e6ef874dba77400096bb3">R_BAD_REPETITION</a></div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00094">rejctmap.h:94</a></div></div>
+<div class="ttc" id="aa03978_html"><div class="ttname"><a href="a03978.html">ScrollView</a></div><div class="ttdef"><b>Definition:</b> <a href="a01469_source.html#l00097">scrollview.h:97</a></div></div>
+<div class="ttc" id="aa02850_html_a1e3195249b6b6934be9060f1d5ee60c2"><div class="ttname"><a href="a02850.html#a1e3195249b6b6934be9060f1d5ee60c2">BLOCK_RECT_IT::bounding_box</a></div><div class="ttdeci">void bounding_box(ICOORD &amp;bleft, ICOORD &amp;tright)</div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00126">pdblock.h:126</a></div></div>
+<div class="ttc" id="aa02898_html_a5fb1ce0d624392f72f82933e63f20e71"><div class="ttname"><a href="a02898.html#a5fb1ce0d624392f72f82933e63f20e71">TBOX::move</a></div><div class="ttdeci">void move(const ICOORD vec)</div><div class="ttdef"><b>Definition:</b> <a href="a00431_source.html#l00156">rect.h:156</a></div></div>
+<div class="ttc" id="aa00386_html"><div class="ttname"><a href="a00386.html">pdblock.h</a></div></div>
+<div class="ttc" id="aa02846_html_a3f06f8e34fc5962f342daff9623463e9"><div class="ttname"><a href="a02846.html#a3f06f8e34fc5962f342daff9623463e9">PDBLK::bounding_box</a></div><div class="ttdeci">void bounding_box(ICOORD &amp;bottom_left, ICOORD &amp;top_right) const</div><div class="ttdoc">get box</div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00058">pdblock.h:58</a></div></div>
+<div class="ttc" id="aa02994_html"><div class="ttname"><a href="a02994.html">ERRCODE</a></div><div class="ttdef"><b>Definition:</b> <a href="a00515_source.html#l00067">errcode.h:67</a></div></div>
+<div class="ttc" id="aa02846_html_a59ff88ca1db21b00c42c4e2a47700c74"><div class="ttname"><a href="a02846.html#a59ff88ca1db21b00c42c4e2a47700c74">PDBLK::move</a></div><div class="ttdeci">void move(const ICOORD vec)</div><div class="ttdoc">reposition block</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00108">pdblock.cpp:108</a></div></div>
+<div class="ttc" id="aa02858_html"><div class="ttname"><a href="a02858.html">ICOORD</a></div><div class="ttdoc">integer coordinate</div><div class="ttdef"><b>Definition:</b> <a href="a00392_source.html#l00030">points.h:30</a></div></div>
+<div class="ttc" id="aa02854_html_abc2efac91f0ac4ac623977db5d3ec9b8"><div class="ttname"><a href="a02854.html#abc2efac91f0ac4ac623977db5d3ec9b8">BLOCK_LINE_IT::get_line</a></div><div class="ttdeci">int16_t get_line(int16_t y, int16_t &amp;xext)</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00335">pdblock.cpp:335</a></div></div>
+<div class="ttc" id="aa02898_html_a5dc64d0677b5d65385bc07a78cf49c4d"><div class="ttname"><a href="a02898.html#a5dc64d0677b5d65385bc07a78cf49c4d">TBOX::top</a></div><div class="ttdeci">int16_t top() const</div><div class="ttdef"><b>Definition:</b> <a href="a00431_source.html#l00057">rect.h:57</a></div></div>
+<div class="ttc" id="aa02874_html"><div class="ttname"><a href="a02874.html">PB_LINE_IT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00404_source.html#l00090">polyblk.h:90</a></div></div>
+<div class="ttc" id="aa02850_html_a90e1ef52e7e80c2308768e11a432efe2"><div class="ttname"><a href="a02850.html#a90e1ef52e7e80c2308768e11a432efe2">BLOCK_RECT_IT::cycled_rects</a></div><div class="ttdeci">bool cycled_rects()</div><div class="ttdoc">test end</div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00119">pdblock.h:119</a></div></div>
+<div class="ttc" id="aa03978_html_a79855c525ec660b452382e9813d2edb5"><div class="ttname"><a href="a03978.html#a79855c525ec660b452382e9813d2edb5">ScrollView::Pen</a></div><div class="ttdeci">void Pen(Color color)</div><div class="ttdef"><b>Definition:</b> <a href="a01466_source.html#l00717">scrollview.cpp:717</a></div></div>
+<div class="ttc" id="aa03978_html_a101de80a4722fe821969f61f6e7303a6"><div class="ttname"><a href="a03978.html#a101de80a4722fe821969f61f6e7303a6">ScrollView::DrawTo</a></div><div class="ttdeci">void DrawTo(int x, int y)</div><div class="ttdef"><b>Definition:</b> <a href="a01466_source.html#l00524">scrollview.cpp:524</a></div></div>
+<div class="ttc" id="aa00383_html_ac2ef5a666afa27f1bc7a1847459dc0b9"><div class="ttname"><a href="a00383.html#ac2ef5a666afa27f1bc7a1847459dc0b9">BADBLOCKLINE</a></div><div class="ttdeci">constexpr ERRCODE BADBLOCKLINE(&quot;Y coordinate in block out of bounds&quot;)</div></div>
+<div class="ttc" id="aa02846_html_a87a08537c120e669c825d147a5650a55"><div class="ttname"><a href="a02846.html#a87a08537c120e669c825d147a5650a55">PDBLK::rightside</a></div><div class="ttdeci">ICOORDELT_LIST rightside</div><div class="ttdoc">right side vertices</div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00096">pdblock.h:96</a></div></div>
+<div class="ttc" id="aa00383_html_aef554a002a62904bb697a6f6fa99985c"><div class="ttname"><a href="a00383.html#aef554a002a62904bb697a6f6fa99985c">LOSTBLOCKLINE</a></div><div class="ttdeci">constexpr ERRCODE LOSTBLOCKLINE(&quot;Can't find rectangle for line&quot;)</div></div>
+<div class="ttc" id="aa02858_html_aabf3d2cbd535df26ebcac17def628216"><div class="ttname"><a href="a02858.html#aabf3d2cbd535df26ebcac17def628216">ICOORD::x</a></div><div class="ttdeci">int16_t x() const</div><div class="ttdoc">access function</div><div class="ttdef"><b>Definition:</b> <a href="a00392_source.html#l00051">points.h:51</a></div></div>
+<div class="ttc" id="aa02866_html"><div class="ttname"><a href="a02866.html">FCOORD</a></div><div class="ttdef"><b>Definition:</b> <a href="a00392_source.html#l00187">points.h:187</a></div></div>
+<div class="ttc" id="aa02846_html_af00bb4a4ee2e805324672b19e088e06a"><div class="ttname"><a href="a02846.html#af00bb4a4ee2e805324672b19e088e06a">PDBLK::leftside</a></div><div class="ttdeci">ICOORDELT_LIST leftside</div><div class="ttdoc">left side vertices</div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00095">pdblock.h:95</a></div></div>
+<div class="ttc" id="aa02850_html_a1344f314e5e85908725bac7a15726802"><div class="ttname"><a href="a02850.html#a1344f314e5e85908725bac7a15726802">BLOCK_RECT_IT::BLOCK_RECT_IT</a></div><div class="ttdeci">BLOCK_RECT_IT(PDBLK *blkptr)</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00254">pdblock.cpp:254</a></div></div>
+<div class="ttc" id="aa02898_html_a428e14544aeb44064bc8637d920211a0"><div class="ttname"><a href="a02898.html#a428e14544aeb44064bc8637d920211a0">TBOX::rotate</a></div><div class="ttdeci">void rotate(const FCOORD &amp;vec)</div><div class="ttdef"><b>Definition:</b> <a href="a00431_source.html#l00196">rect.h:196</a></div></div>
+<div class="ttc" id="aa02898_html_a72fcb736ed0ddeae95e6a51b3bf8d979"><div class="ttname"><a href="a02898.html#a72fcb736ed0ddeae95e6a51b3bf8d979">TBOX::height</a></div><div class="ttdeci">int16_t height() const</div><div class="ttdef"><b>Definition:</b> <a href="a00431_source.html#l00107">rect.h:107</a></div></div>
+<div class="ttc" id="aa02870_html_af93c6f325d6a4d981e884dc0c5d77819"><div class="ttname"><a href="a02870.html#af93c6f325d6a4d981e884dc0c5d77819">POLY_BLOCK::rotate</a></div><div class="ttdeci">void rotate(FCOORD rotation)</div><div class="ttdef"><b>Definition:</b> <a href="a00401_source.html#l00183">polyblk.cpp:183</a></div></div>
+<div class="ttc" id="aa02870_html_afdff361301e7f7aab1e74fdfda4eac55"><div class="ttname"><a href="a02870.html#afdff361301e7f7aab1e74fdfda4eac55">POLY_BLOCK::plot</a></div><div class="ttdeci">void plot(ScrollView *window, int32_t num)</div><div class="ttdef"><b>Definition:</b> <a href="a00401_source.html#l00243">polyblk.cpp:243</a></div></div>
+<div class="ttc" id="aa02994_html_adba51110893a3527402dabadc89c0c62"><div class="ttname"><a href="a02994.html#adba51110893a3527402dabadc89c0c62">ERRCODE::error</a></div><div class="ttdeci">void error(const char *caller, TessErrorLogCode action, const char *format,...) const</div><div class="ttdef"><b>Definition:</b> <a href="a00512_source.html#l00033">errcode.cpp:33</a></div></div>
+<div class="ttc" id="aa00383_html_ad0e3ca9368f7687b1a72cf083cad3033"><div class="ttname"><a href="a00383.html#ad0e3ca9368f7687b1a72cf083cad3033">BLOCK_LABEL_HEIGHT</a></div><div class="ttdeci">#define BLOCK_LABEL_HEIGHT</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00029">pdblock.cpp:29</a></div></div>
+<div class="ttc" id="aa02862_html_a36ea9c054f12a5f047b48a93878d6ccc"><div class="ttname"><a href="a02862.html#a36ea9c054f12a5f047b48a93878d6ccc">ICOORDELT::deep_copy</a></div><div class="ttdeci">static ICOORDELT * deep_copy(const ICOORDELT *src)</div><div class="ttdef"><b>Definition:</b> <a href="a00392_source.html#l00178">points.h:178</a></div></div>
+<div class="ttc" id="aa02846_html_a8d8fa823bf5878ef0b020572fea424e9"><div class="ttname"><a href="a02846.html#a8d8fa823bf5878ef0b020572fea424e9">PDBLK::set_sides</a></div><div class="ttdeci">void set_sides(ICOORDELT_LIST *left, ICOORDELT_LIST *right)</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00064">pdblock.cpp:64</a></div></div>
+<div class="ttc" id="aa02898_html_a70ef69630cbdc605b7b7d5434549d38c"><div class="ttname"><a href="a02898.html#a70ef69630cbdc605b7b7d5434549d38c">TBOX::width</a></div><div class="ttdeci">int16_t width() const</div><div class="ttdef"><b>Definition:</b> <a href="a00431_source.html#l00114">rect.h:114</a></div></div>
+<div class="ttc" id="aa02898_html_a9fee4521e71300975cb34ebb21e3fca5"><div class="ttname"><a href="a02898.html#a9fee4521e71300975cb34ebb21e3fca5">TBOX::bottom</a></div><div class="ttdeci">int16_t bottom() const</div><div class="ttdef"><b>Definition:</b> <a href="a00431_source.html#l00064">rect.h:64</a></div></div>
+<div class="ttc" id="aa02846_html_a59e927633d1e50490083ce00673682d0"><div class="ttname"><a href="a02846.html#a59e927633d1e50490083ce00673682d0">PDBLK::contains</a></div><div class="ttdeci">bool contains(ICOORD pt)</div><div class="ttdoc">is pt inside block</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00085">pdblock.cpp:85</a></div></div>
+<div class="ttc" id="aa00371_html_afcdfaedb32b1f0fcfb0a3e5cd4ec788c"><div class="ttname"><a href="a00371.html#afcdfaedb32b1f0fcfb0a3e5cd4ec788c">CLISTIZE</a></div><div class="ttdeci">CLISTIZE(BLOCK_RES) ELISTIZE(ROW_RES) ELISTIZE(WERD_RES) static const double kStopperAmbiguityThresholdGain</div></div>
+<div class="ttc" id="aa02850_html_ab56b686d27e5eea704424470024456f4"><div class="ttname"><a href="a02850.html#ab56b686d27e5eea704424470024456f4">BLOCK_RECT_IT::forward</a></div><div class="ttdeci">void forward()</div><div class="ttdoc">next rectangle</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00305">pdblock.cpp:305</a></div></div>
+<div class="ttc" id="aa02846_html_abea460ba0744a48300ad506f82819952"><div class="ttname"><a href="a02846.html#abea460ba0744a48300ad506f82819952">PDBLK::operator=</a></div><div class="ttdeci">PDBLK &amp; operator=(const PDBLK &amp;source)</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00234">pdblock.cpp:234</a></div></div>
+<div class="ttc" id="aa02846_html"><div class="ttname"><a href="a02846.html">PDBLK</a></div><div class="ttdoc">page block</div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00030">pdblock.h:30</a></div></div>
+<div class="ttc" id="aa02870_html_a0835a8ea39e763d6a229603d5532c879"><div class="ttname"><a href="a02870.html#a0835a8ea39e763d6a229603d5532c879">POLY_BLOCK::points</a></div><div class="ttdeci">ICOORDELT_LIST * points()</div><div class="ttdef"><b>Definition:</b> <a href="a00404_source.html#l00052">polyblk.h:52</a></div></div>
+<div class="ttc" id="aa02846_html_ac59bc5dc2b038f44294271a6356cbff6"><div class="ttname"><a href="a02846.html#ac59bc5dc2b038f44294271a6356cbff6">PDBLK::box</a></div><div class="ttdeci">TBOX box</div><div class="ttdoc">bounding box</div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00097">pdblock.h:97</a></div></div>
+<div class="ttc" id="aa03978_html_a2e1d3849b95cecdcb2026b48d8f38cde"><div class="ttname"><a href="a03978.html#a2e1d3849b95cecdcb2026b48d8f38cde">ScrollView::TextAttributes</a></div><div class="ttdeci">void TextAttributes(const char *font, int pixel_size, bool bold, bool italic, bool underlined)</div><div class="ttdef"><b>Definition:</b> <a href="a01466_source.html#l00634">scrollview.cpp:634</a></div></div>
+<div class="ttc" id="aa02898_html_a8e9dce0d30d2213598cd4befe0028c99"><div class="ttname"><a href="a02898.html#a8e9dce0d30d2213598cd4befe0028c99">TBOX::left</a></div><div class="ttdeci">int16_t left() const</div><div class="ttdef"><b>Definition:</b> <a href="a00431_source.html#l00071">rect.h:71</a></div></div>
+<div class="ttc" id="aa02846_html_a6d1e10da021eb64f99977a60cc7ec2f0"><div class="ttname"><a href="a02846.html#a6d1e10da021eb64f99977a60cc7ec2f0">PDBLK::plot</a></div><div class="ttdeci">void plot(ScrollView *window, int32_t serial, ScrollView::Color colour)</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00174">pdblock.cpp:174</a></div></div>
+<div class="ttc" id="aa02870_html"><div class="ttname"><a href="a02870.html">POLY_BLOCK</a></div><div class="ttdef"><b>Definition:</b> <a href="a00404_source.html#l00026">polyblk.h:26</a></div></div>
+<div class="ttc" id="aa02846_html_a4c1b3a88242771bf55372f44c0d4ca88"><div class="ttname"><a href="a02846.html#a4c1b3a88242771bf55372f44c0d4ca88">PDBLK::hand_poly</a></div><div class="ttdeci">POLY_BLOCK * hand_poly</div><div class="ttdoc">weird as well</div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00094">pdblock.h:94</a></div></div>
+<div class="ttc" id="aa03978_html_a730b182e350dfe37b0986d7f0591fee5"><div class="ttname"><a href="a03978.html#a730b182e350dfe37b0986d7f0591fee5">ScrollView::SetCursor</a></div><div class="ttdeci">void SetCursor(int x, int y)</div><div class="ttdef"><b>Definition:</b> <a href="a01466_source.html#l00518">scrollview.cpp:518</a></div></div>
+<div class="ttc" id="aa00515_html_a8a3a2e51383909b357fcdf8eda803637a781ad2788df9e25c59a70894c7832096"><div class="ttname"><a href="a00515.html#a8a3a2e51383909b357fcdf8eda803637a781ad2788df9e25c59a70894c7832096">ABORT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00515_source.html#l00043">errcode.h:43</a></div></div>
+<div class="ttc" id="aa03978_html_a4c5cb55d6eab9d7d996d25ed8922593d"><div class="ttname"><a href="a03978.html#a4c5cb55d6eab9d7d996d25ed8922593d">ScrollView::Text</a></div><div class="ttdeci">void Text(int x, int y, const char *mystring)</div><div class="ttdef"><b>Definition:</b> <a href="a01466_source.html#l00651">scrollview.cpp:651</a></div></div>
+<div class="ttc" id="aa03978_html_a100504544a5423a94222149ee9ed0fe8"><div class="ttname"><a href="a03978.html#a100504544a5423a94222149ee9ed0fe8">ScrollView::Color</a></div><div class="ttdeci">Color</div><div class="ttdef"><b>Definition:</b> <a href="a01469_source.html#l00100">scrollview.h:100</a></div></div>
+<div class="ttc" id="aa02870_html_a8a28b31c2bfa53533a23acf1d7679cca"><div class="ttname"><a href="a02870.html#a8a28b31c2bfa53533a23acf1d7679cca">POLY_BLOCK::isA</a></div><div class="ttdeci">PolyBlockType isA() const</div><div class="ttdef"><b>Definition:</b> <a href="a00404_source.html#l00058">polyblk.h:58</a></div></div>
+<div class="ttc" id="aa02862_html"><div class="ttname"><a href="a02862.html">ICOORDELT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00392_source.html#l00160">points.h:160</a></div></div>
+<div class="ttc" id="aa02850_html_a67e8a119f8c28be404bd1770fa22ce7f"><div class="ttname"><a href="a02850.html#a67e8a119f8c28be404bd1770fa22ce7f">BLOCK_RECT_IT::set_to_block</a></div><div class="ttdeci">void set_to_block(PDBLK *blkptr)</div><div class="ttdoc">start (new) block</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00271">pdblock.cpp:271</a></div></div>
+<div class="ttc" id="aa02850_html"><div class="ttname"><a href="a02850.html">BLOCK_RECT_IT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00386_source.html#l00101">pdblock.h:101</a></div></div>
+<div class="ttc" id="aa02850_html_a74b1d75085d9f1ba313439ddbd9bc320"><div class="ttname"><a href="a02850.html#a74b1d75085d9f1ba313439ddbd9bc320">BLOCK_RECT_IT::start_block</a></div><div class="ttdeci">void start_block()</div><div class="ttdoc">start iteration</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00287">pdblock.cpp:287</a></div></div>
+<div class="ttc" id="aa02858_html_a27df9d66085dcf65ead7f620d68a91ac"><div class="ttname"><a href="a02858.html#a27df9d66085dcf65ead7f620d68a91ac">ICOORD::y</a></div><div class="ttdeci">int16_t y() const</div><div class="ttdoc">access_function</div><div class="ttdef"><b>Definition:</b> <a href="a00392_source.html#l00055">points.h:55</a></div></div>
+<div class="ttc" id="aa02898_html"><div class="ttname"><a href="a02898.html">TBOX</a></div><div class="ttdef"><b>Definition:</b> <a href="a00431_source.html#l00033">rect.h:33</a></div></div>
+<div class="ttc" id="aa02846_html_a54c0978d55aed55d2cfae6da2afdf282"><div class="ttname"><a href="a02846.html#a54c0978d55aed55d2cfae6da2afdf282">PDBLK::render_mask</a></div><div class="ttdeci">Pix * render_mask(const FCOORD &amp;rerotation, TBOX *mask_box)</div><div class="ttdef"><b>Definition:</b> <a href="a00383_source.html#l00126">pdblock.cpp:126</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_27285da2200a3bef8a8e2dba4d21412a.html">ccstruct</a></li><li class="navelem"><a class="el" href="a00383.html">rejctmap.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:14 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_27285da2200a3bef8a8e2dba4d21412a.html">ccstruct</a></li><li class="navelem"><a class="el" href="a00383.html">pdblock.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:20 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/classify/blobclass.cpp File Reference</title>
+<title>tesseract: /tesseract/src/ccutil/tprintf.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,38 +87,117 @@ $(document).ready(function(){initNavTree('a00581.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#namespaces">Namespaces</a> &#124;
+<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">blobclass.cpp File Reference</div>  </div>
+<div class="title">tprintf.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="a00584_source.html">blobclass.h</a>&quot;</code><br />
-<code>#include &lt;cstdio&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00590_source.html">classify.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00611_source.html">featdefs.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00659_source.html">mf.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00683_source.html">normfeat.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;cstdio&gt;</code><br />
+<code>#include &lt;cstdarg&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00554_source.html">params.h</a>&quot;</code><br />
+<code>#include &lt;<a class="el" href="a00044_source.html">tesseract/strngs.h</a>&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00584_source.html">tprintf.h</a>&quot;</code><br />
 </div>
 <p><a href="a00581_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:a01539"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html">tesseract</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a51d90ea93d4b55e086cb490f7478e684"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00581.html#a51d90ea93d4b55e086cb490f7478e684">MAX_MSG_LEN</a>&#160;&#160;&#160;2048</td></tr>
+<tr class="separator:a51d90ea93d4b55e086cb490f7478e684"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aa011b40b5e90b4087d0e42ea5fcce12c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#aa011b40b5e90b4087d0e42ea5fcce12c">tesseract::ExtractFontName</a> (const STRING &amp;filename, STRING *fontname)</td></tr>
-<tr class="separator:aa011b40b5e90b4087d0e42ea5fcce12c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c2bcd4462ec67ab0971b34a0f610f55"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00029.html#ab90d161af4ce92c48d61bb06c325308f">DLLSYM</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a> (const char *format,...)</td></tr>
+<tr class="separator:a0c2bcd4462ec67ab0971b34a0f610f55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a51d90ea93d4b55e086cb490f7478e684"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51d90ea93d4b55e086cb490f7478e684">&#9670;&nbsp;</a></span>MAX_MSG_LEN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MAX_MSG_LEN&#160;&#160;&#160;2048</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00581_source.html#l00029">29</a> of file <a class="el" href="a00581_source.html">tprintf.cpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a0c2bcd4462ec67ab0971b34a0f610f55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c2bcd4462ec67ab0971b34a0f610f55">&#9670;&nbsp;</a></span>tprintf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00029.html#ab90d161af4ce92c48d61bb06c325308f">DLLSYM</a> void tprintf </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>format</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00581_source.html#l00034">34</a> of file <a class="el" href="a00581_source.html">tprintf.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;{</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span>* debug_file_name = debug_file.c_str();</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <span class="keyword">static</span> FILE *debugfp = <span class="keyword">nullptr</span>;   <span class="comment">// debug file</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <span class="keywordflow">if</span> (debug_file_name == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="comment">// This should not happen.</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  }</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#ifdef _WIN32</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="comment">// Replace /dev/null by nul for Windows.</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="keywordflow">if</span> (strcmp(debug_file_name, <span class="stringliteral">&quot;/dev/null&quot;</span>) == 0) {</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    debug_file_name = <span class="stringliteral">&quot;nul&quot;</span>;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    debug_file.set_value(debug_file_name);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  }</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="keywordflow">if</span> (debugfp == <span class="keyword">nullptr</span> &amp;&amp; debug_file_name[0] != <span class="charliteral">&#39;\0&#39;</span>) {</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    debugfp = fopen(debug_file_name, <span class="stringliteral">&quot;wb&quot;</span>);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (debugfp != <span class="keyword">nullptr</span> &amp;&amp; debug_file_name[0] == <span class="charliteral">&#39;\0&#39;</span>) {</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    fclose(debugfp);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    debugfp = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  }</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  va_list args;            <span class="comment">// variable args</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  va_start(args, format);  <span class="comment">// variable list</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <span class="keywordflow">if</span> (debugfp != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    vfprintf(debugfp, format, args);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    vfprintf(stderr, format, args);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  }</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  va_end(args);</div>
+</div><!-- fragment -->
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b8f5fb7b736ee5431a221bc7b817d6e0.html">classify</a></li><li class="navelem"><a class="el" href="a00581.html">blobclass.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_be21c9400dd14e513865608c9a8a7e5a.html">ccutil</a></li><li class="navelem"><a class="el" href="a00581.html">tprintf.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

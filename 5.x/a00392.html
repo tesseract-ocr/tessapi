@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/ccstruct/seam.h File Reference</title>
+<title>tesseract: /tesseract/src/ccstruct/points.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -88,67 +88,167 @@ $(document).ready(function(){initNavTree('a00392.html','');});
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">seam.h File Reference</div>  </div>
+<div class="title">points.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="a00209_source.html">blobs.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00398_source.html">split.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;cmath&gt;</code><br />
+<code>#include &lt;cstdio&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00503_source.html">elst.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00515_source.html">errcode.h</a>&quot;</code><br />
+<code>#include &lt;<a class="el" href="a00029_source.html">tesseract/platform.h</a>&gt;</code><br />
 </div>
 <p><a href="a00392_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02452.html">SEAM</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02858.html">ICOORD</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">integer coordinate  <a href="a02858.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:a64c977704107e265e5997b915a83ccf2"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00392.html#a64c977704107e265e5997b915a83ccf2">PRIORITY</a> = float</td></tr>
-<tr class="separator:a64c977704107e265e5997b915a83ccf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02862.html">ICOORDELT</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02866.html">FCOORD</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a7a7eb511f9a83da65455fe0a2668bc6b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00392.html#a7a7eb511f9a83da65455fe0a2668bc6b">start_seam_list</a> (<a class="el" href="a02236.html">TWERD</a> *word, <a class="el" href="a02108.html">GenericVector</a>&lt; <a class="el" href="a02452.html">SEAM</a> * &gt; *seam_array)</td></tr>
-<tr class="separator:a7a7eb511f9a83da65455fe0a2668bc6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb66baa7a75a9e30cd2c1160406ef6f6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a02858.html">ICOORD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00392.html#adb66baa7a75a9e30cd2c1160406ef6f6">operator!</a> (const <a class="el" href="a02858.html">ICOORD</a> &amp;src)</td></tr>
+<tr class="separator:adb66baa7a75a9e30cd2c1160406ef6f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7ef7709c4047ce463a3ff3d61c0d965"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a02858.html">ICOORD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00392.html#ad7ef7709c4047ce463a3ff3d61c0d965">operator-</a> (const <a class="el" href="a02858.html">ICOORD</a> &amp;src)</td></tr>
+<tr class="separator:ad7ef7709c4047ce463a3ff3d61c0d965"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb03632aa6602c5193bf4af7964e6751"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a02858.html">ICOORD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00392.html#afb03632aa6602c5193bf4af7964e6751">operator+</a> (const <a class="el" href="a02858.html">ICOORD</a> &amp;op1, const <a class="el" href="a02858.html">ICOORD</a> &amp;op2)</td></tr>
+<tr class="separator:afb03632aa6602c5193bf4af7964e6751"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bdc2726e11ac29db02c5152d33ed9bd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a02858.html">ICOORD</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00392.html#a7bdc2726e11ac29db02c5152d33ed9bd">operator+=</a> (<a class="el" href="a02858.html">ICOORD</a> &amp;op1, const <a class="el" href="a02858.html">ICOORD</a> &amp;op2)</td></tr>
+<tr class="separator:a7bdc2726e11ac29db02c5152d33ed9bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9a15dd7b99152f9e14b6cd8a28a4eb3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a02858.html">ICOORD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00392.html#ab9a15dd7b99152f9e14b6cd8a28a4eb3">operator-</a> (const <a class="el" href="a02858.html">ICOORD</a> &amp;op1, const <a class="el" href="a02858.html">ICOORD</a> &amp;op2)</td></tr>
+<tr class="separator:ab9a15dd7b99152f9e14b6cd8a28a4eb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51f78f57ddbe92ea9119ec05e0a2440d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a02858.html">ICOORD</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00392.html#a51f78f57ddbe92ea9119ec05e0a2440d">operator-=</a> (<a class="el" href="a02858.html">ICOORD</a> &amp;op1, const <a class="el" href="a02858.html">ICOORD</a> &amp;op2)</td></tr>
+<tr class="separator:a51f78f57ddbe92ea9119ec05e0a2440d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa72e22db3f437cbe5c71f9ffb98fe99d"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00392.html#aa72e22db3f437cbe5c71f9ffb98fe99d">operator%</a> (const <a class="el" href="a02858.html">ICOORD</a> &amp;op1, const <a class="el" href="a02858.html">ICOORD</a> &amp;op2)</td></tr>
+<tr class="separator:aa72e22db3f437cbe5c71f9ffb98fe99d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1afde4ca4db12bd495a9b77d0d6359fd"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00392.html#a1afde4ca4db12bd495a9b77d0d6359fd">operator*</a> (const <a class="el" href="a02858.html">ICOORD</a> &amp;op1, const <a class="el" href="a02858.html">ICOORD</a> &amp;op2)</td></tr>
+<tr class="separator:a1afde4ca4db12bd495a9b77d0d6359fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9f927820402f297b30cb707d29298fb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a02858.html">ICOORD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00392.html#ad9f927820402f297b30cb707d29298fb">operator*</a> (const <a class="el" href="a02858.html">ICOORD</a> &amp;op1, int16_t scale)</td></tr>
+<tr class="separator:ad9f927820402f297b30cb707d29298fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e82ada467eb92dd5c68818747ea88fd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a02858.html">ICOORD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00392.html#a3e82ada467eb92dd5c68818747ea88fd">operator*</a> (int16_t scale, const <a class="el" href="a02858.html">ICOORD</a> &amp;op1)</td></tr>
+<tr class="separator:a3e82ada467eb92dd5c68818747ea88fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e9a749707e0c2e155b58f21c3a8aa03"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a02858.html">ICOORD</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00392.html#a3e9a749707e0c2e155b58f21c3a8aa03">operator*=</a> (<a class="el" href="a02858.html">ICOORD</a> &amp;op1, int16_t scale)</td></tr>
+<tr class="separator:a3e9a749707e0c2e155b58f21c3a8aa03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b2ec486dd840f200952dbf566c742c3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a02858.html">ICOORD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00392.html#a9b2ec486dd840f200952dbf566c742c3">operator/</a> (const <a class="el" href="a02858.html">ICOORD</a> &amp;op1, int16_t scale)</td></tr>
+<tr class="separator:a9b2ec486dd840f200952dbf566c742c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6dafda5c6add611e40cf74fd5bb3c02e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a02858.html">ICOORD</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00392.html#a6dafda5c6add611e40cf74fd5bb3c02e">operator/=</a> (<a class="el" href="a02858.html">ICOORD</a> &amp;op1, int16_t scale)</td></tr>
+<tr class="separator:a6dafda5c6add611e40cf74fd5bb3c02e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7c6e3433850394bff1cde53f51b70f3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a02866.html">FCOORD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00392.html#aa7c6e3433850394bff1cde53f51b70f3">operator!</a> (const <a class="el" href="a02866.html">FCOORD</a> &amp;src)</td></tr>
+<tr class="separator:aa7c6e3433850394bff1cde53f51b70f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4f0ee803a74deb221ffdb4bb27df2bd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a02866.html">FCOORD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00392.html#ab4f0ee803a74deb221ffdb4bb27df2bd">operator-</a> (const <a class="el" href="a02866.html">FCOORD</a> &amp;src)</td></tr>
+<tr class="separator:ab4f0ee803a74deb221ffdb4bb27df2bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3407de919f1bbcde13608526c3449fcf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a02866.html">FCOORD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00392.html#a3407de919f1bbcde13608526c3449fcf">operator+</a> (const <a class="el" href="a02866.html">FCOORD</a> &amp;op1, const <a class="el" href="a02866.html">FCOORD</a> &amp;op2)</td></tr>
+<tr class="separator:a3407de919f1bbcde13608526c3449fcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2eaa6b8ca4ca606f352e10acf64a1c16"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a02866.html">FCOORD</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00392.html#a2eaa6b8ca4ca606f352e10acf64a1c16">operator+=</a> (<a class="el" href="a02866.html">FCOORD</a> &amp;op1, const <a class="el" href="a02866.html">FCOORD</a> &amp;op2)</td></tr>
+<tr class="separator:a2eaa6b8ca4ca606f352e10acf64a1c16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9dd91936917a1b070c509f14ea5c6f6c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a02866.html">FCOORD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00392.html#a9dd91936917a1b070c509f14ea5c6f6c">operator-</a> (const <a class="el" href="a02866.html">FCOORD</a> &amp;op1, const <a class="el" href="a02866.html">FCOORD</a> &amp;op2)</td></tr>
+<tr class="separator:a9dd91936917a1b070c509f14ea5c6f6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2396de94267cb60fb628dde25b340e0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a02866.html">FCOORD</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00392.html#ad2396de94267cb60fb628dde25b340e0">operator-=</a> (<a class="el" href="a02866.html">FCOORD</a> &amp;op1, const <a class="el" href="a02866.html">FCOORD</a> &amp;op2)</td></tr>
+<tr class="separator:ad2396de94267cb60fb628dde25b340e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0030744614a08aa765730942724339d9"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00392.html#a0030744614a08aa765730942724339d9">operator%</a> (const <a class="el" href="a02866.html">FCOORD</a> &amp;op1, const <a class="el" href="a02866.html">FCOORD</a> &amp;op2)</td></tr>
+<tr class="separator:a0030744614a08aa765730942724339d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad82594734c3f7b48fcf30bfa2453f3c4"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00392.html#ad82594734c3f7b48fcf30bfa2453f3c4">operator*</a> (const <a class="el" href="a02866.html">FCOORD</a> &amp;op1, const <a class="el" href="a02866.html">FCOORD</a> &amp;op2)</td></tr>
+<tr class="separator:ad82594734c3f7b48fcf30bfa2453f3c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae49d94e2d4773774716c0769f4514923"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a02866.html">FCOORD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00392.html#ae49d94e2d4773774716c0769f4514923">operator*</a> (const <a class="el" href="a02866.html">FCOORD</a> &amp;op1, float scale)</td></tr>
+<tr class="separator:ae49d94e2d4773774716c0769f4514923"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9f8d3fa3aa83fc58bad4b31d2f7c920"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a02866.html">FCOORD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00392.html#aa9f8d3fa3aa83fc58bad4b31d2f7c920">operator*</a> (float scale, const <a class="el" href="a02866.html">FCOORD</a> &amp;op1)</td></tr>
+<tr class="separator:aa9f8d3fa3aa83fc58bad4b31d2f7c920"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af54c4ea7b287f1c80af4def1ae3a26b3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a02866.html">FCOORD</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00392.html#af54c4ea7b287f1c80af4def1ae3a26b3">operator*=</a> (<a class="el" href="a02866.html">FCOORD</a> &amp;op1, float scale)</td></tr>
+<tr class="separator:af54c4ea7b287f1c80af4def1ae3a26b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab2a4133b74ee9382c7e1fbcaefdbb6d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a02866.html">FCOORD</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00392.html#aab2a4133b74ee9382c7e1fbcaefdbb6d">operator/</a> (const <a class="el" href="a02866.html">FCOORD</a> &amp;op1, float scale)</td></tr>
+<tr class="separator:aab2a4133b74ee9382c7e1fbcaefdbb6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04eaa47986004a5460928ee12e6e80e2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a02866.html">FCOORD</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00392.html#a04eaa47986004a5460928ee12e6e80e2">operator/=</a> (<a class="el" href="a02866.html">FCOORD</a> &amp;op1, float scale)</td></tr>
+<tr class="separator:a04eaa47986004a5460928ee12e6e80e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Typedef Documentation</h2>
-<a id="a64c977704107e265e5997b915a83ccf2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a64c977704107e265e5997b915a83ccf2">&#9670;&nbsp;</a></span>PRIORITY</h2>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="aa7c6e3433850394bff1cde53f51b70f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7c6e3433850394bff1cde53f51b70f3">&#9670;&nbsp;</a></span>operator!() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="a00392.html#a64c977704107e265e5997b915a83ccf2">PRIORITY</a> =  float</td>
+          <td class="memname"><a class="el" href="a02866.html">FCOORD</a> operator! </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="a02866.html">FCOORD</a> &amp;&#160;</td>
+          <td class="paramname"><em>src</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00392_source.html#l00034">34</a> of file <a class="el" href="a00392_source.html">seam.h</a>.</p>
-
+<p class="definition">Definition at line <a class="el" href="a00392_source.html#l00538">538</a> of file <a class="el" href="a00392_source.html">points.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00555"></a><span class="lineno">  555</span>&#160;  {</div>
+</div><!-- fragment -->
 </div>
 </div>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="a7a7eb511f9a83da65455fe0a2668bc6b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7a7eb511f9a83da65455fe0a2668bc6b">&#9670;&nbsp;</a></span>start_seam_list()</h2>
+<a id="adb66baa7a75a9e30cd2c1160406ef6f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb66baa7a75a9e30cd2c1160406ef6f6">&#9670;&nbsp;</a></span>operator!() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void start_seam_list </td>
+          <td class="memname"><a class="el" href="a02858.html">ICOORD</a> operator! </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="a02236.html">TWERD</a> *&#160;</td>
-          <td class="paramname"><em>word</em>, </td>
+          <td class="paramtype">const <a class="el" href="a02858.html">ICOORD</a> &amp;&#160;</td>
+          <td class="paramname"><em>src</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00392_source.html#l00325">325</a> of file <a class="el" href="a00392_source.html">points.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;  {</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;  <a class="code" href="a02858.html">ICOORD</a> result;                 <span class="comment">//output</span></div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160; </div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;  result.<a class="code" href="a02858.html#aa883b0a068fca2b0aa465678082b0a30">xcoord</a> = -src.<a class="code" href="a02858.html#a2b744a3e19517cdb2a020c4f6ac5bc39">ycoord</a>;</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;  result.<a class="code" href="a02858.html#a2b744a3e19517cdb2a020c4f6ac5bc39">ycoord</a> = src.<a class="code" href="a02858.html#aa883b0a068fca2b0aa465678082b0a30">xcoord</a>;</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a0030744614a08aa765730942724339d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0030744614a08aa765730942724339d9">&#9670;&nbsp;</a></span>operator%() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float operator% </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="a02866.html">FCOORD</a> &amp;&#160;</td>
+          <td class="paramname"><em>op1</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="a02108.html">GenericVector</a>&lt; <a class="el" href="a02452.html">SEAM</a> * &gt; *&#160;</td>
-          <td class="paramname"><em>seam_array</em>&#160;</td>
+          <td class="paramtype">const <a class="el" href="a02866.html">FCOORD</a> &amp;&#160;</td>
+          <td class="paramname"><em>op2</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -156,41 +256,951 @@ Functions</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00389_source.html#l00261">261</a> of file <a class="el" href="a00389_source.html">seam.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;                                                                    {</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;  seam_array-&gt;truncate(0);</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;  <a class="code" href="a02220.html">TPOINT</a> location;</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160; </div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> b = 1; b &lt; word-&gt;<a class="code" href="a02236.html#a0d5347723ece084faf8f3d0dba6dd219">NumBlobs</a>(); ++b) {</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    <a class="code" href="a02440.html">TBOX</a> bbox = word-&gt;<a class="code" href="a02236.html#a52fba22521039a79d8c1c8182f602dcc">blobs</a>[b - 1]-&gt;bounding_box();</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    <a class="code" href="a02440.html">TBOX</a> nbox = word-&gt;<a class="code" href="a02236.html#a52fba22521039a79d8c1c8182f602dcc">blobs</a>[b]-&gt;bounding_box();</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    location.<a class="code" href="a02220.html#a5ed4f3edb251c99c2de6cb33645af1fe">x</a> = (bbox.<a class="code" href="a02440.html#af74fa3bf628c9426cd6f1141a87dc2e0">right</a>() + nbox.<a class="code" href="a02440.html#a8e9dce0d30d2213598cd4befe0028c99">left</a>()) / 2;</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    location.<a class="code" href="a02220.html#a82f12e26621cfe8386bf08d11e9819c1">y</a> = (bbox.<a class="code" href="a02440.html#a9fee4521e71300975cb34ebb21e3fca5">bottom</a>() + bbox.<a class="code" href="a02440.html#a5dc64d0677b5d65385bc07a78cf49c4d">top</a>() + nbox.<a class="code" href="a02440.html#a9fee4521e71300975cb34ebb21e3fca5">bottom</a>() + nbox.<a class="code" href="a02440.html#a5dc64d0677b5d65385bc07a78cf49c4d">top</a>()) / 4;</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    seam_array-&gt;push_back(<span class="keyword">new</span> <a class="code" href="a02452.html">SEAM</a>(0.0f, location));</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;  }</div>
+<p class="definition">Definition at line <a class="el" href="a00392_source.html#l00636">636</a> of file <a class="el" href="a00392_source.html">points.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00643"></a><span class="lineno">  643</span>&#160;                    {</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aa72e22db3f437cbe5c71f9ffb98fe99d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa72e22db3f437cbe5c71f9ffb98fe99d">&#9670;&nbsp;</a></span>operator%() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int32_t operator% </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="a02858.html">ICOORD</a> &amp;&#160;</td>
+          <td class="paramname"><em>op1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="a02858.html">ICOORD</a> &amp;&#160;</td>
+          <td class="paramname"><em>op2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00392_source.html#l00423">423</a> of file <a class="el" href="a00392_source.html">points.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;                    {</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ad82594734c3f7b48fcf30bfa2453f3c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad82594734c3f7b48fcf30bfa2453f3c4">&#9670;&nbsp;</a></span>operator*() <span class="overload">[1/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float operator* </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="a02866.html">FCOORD</a> &amp;&#160;</td>
+          <td class="paramname"><em>op1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="a02866.html">FCOORD</a> &amp;&#160;</td>
+          <td class="paramname"><em>op2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00392_source.html#l00648">648</a> of file <a class="el" href="a00392_source.html">points.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00659"></a><span class="lineno">  659</span>&#160;                    {</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ae49d94e2d4773774716c0769f4514923"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae49d94e2d4773774716c0769f4514923">&#9670;&nbsp;</a></span>operator*() <span class="overload">[2/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a02866.html">FCOORD</a> operator* </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="a02866.html">FCOORD</a> &amp;&#160;</td>
+          <td class="paramname"><em>op1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>scale</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00392_source.html#l00660">660</a> of file <a class="el" href="a00392_source.html">points.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;                                           {</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a1afde4ca4db12bd495a9b77d0d6359fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1afde4ca4db12bd495a9b77d0d6359fd">&#9670;&nbsp;</a></span>operator*() <span class="overload">[3/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int32_t operator* </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="a02858.html">ICOORD</a> &amp;&#160;</td>
+          <td class="paramname"><em>op1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="a02858.html">ICOORD</a> &amp;&#160;</td>
+          <td class="paramname"><em>op2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00392_source.html#l00435">435</a> of file <a class="el" href="a00392_source.html">points.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;                                           {</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ad9f927820402f297b30cb707d29298fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9f927820402f297b30cb707d29298fb">&#9670;&nbsp;</a></span>operator*() <span class="overload">[4/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a02858.html">ICOORD</a> operator* </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="a02858.html">ICOORD</a> &amp;&#160;</td>
+          <td class="paramname"><em>op1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int16_t&#160;</td>
+          <td class="paramname"><em>scale</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00392_source.html#l00447">447</a> of file <a class="el" href="a00392_source.html">points.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;                                        {</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aa9f8d3fa3aa83fc58bad4b31d2f7c920"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9f8d3fa3aa83fc58bad4b31d2f7c920">&#9670;&nbsp;</a></span>operator*() <span class="overload">[5/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a02866.html">FCOORD</a> operator* </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>scale</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="a02866.html">FCOORD</a> &amp;&#160;</td>
+          <td class="paramname"><em>op1</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00392_source.html#l00671">671</a> of file <a class="el" href="a00392_source.html">points.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;                                           {</div>
+<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160;  <span class="keywordflow">return</span> op1.xcoord * op2.ycoord - op1.ycoord * op2.xcoord;</div>
+<div class="line"><a name="l00674"></a><span class="lineno">  674</span>&#160;}</div>
+<div class="line"><a name="l00675"></a><span class="lineno">  675</span>&#160; </div>
+<div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160; </div>
+<div class="line"><a name="l00677"></a><span class="lineno">  677</span>&#160;<span class="comment">/**********************************************************************</span></div>
+<div class="line"><a name="l00678"></a><span class="lineno">  678</span>&#160;<span class="comment"> * operator*</span></div>
+<div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00680"></a><span class="lineno">  680</span>&#160;<span class="comment"> * Scalar multiply of an FCOORD.</span></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a3e82ada467eb92dd5c68818747ea88fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e82ada467eb92dd5c68818747ea88fd">&#9670;&nbsp;</a></span>operator*() <span class="overload">[6/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a02858.html">ICOORD</a> operator* </td>
+          <td>(</td>
+          <td class="paramtype">int16_t&#160;</td>
+          <td class="paramname"><em>scale</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="a02858.html">ICOORD</a> &amp;&#160;</td>
+          <td class="paramname"><em>op1</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00392_source.html#l00458">458</a> of file <a class="el" href="a00392_source.html">points.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;                                        {</div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;  <a class="code" href="a02858.html">ICOORD</a> result;                 <span class="comment">//output</span></div>
+<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160; </div>
+<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;  result.<a class="code" href="a02858.html#aa883b0a068fca2b0aa465678082b0a30">xcoord</a> = op1.<a class="code" href="a02858.html#aa883b0a068fca2b0aa465678082b0a30">xcoord</a> * scale;</div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;  result.<a class="code" href="a02858.html#a2b744a3e19517cdb2a020c4f6ac5bc39">ycoord</a> = op1.<a class="code" href="a02858.html#a2b744a3e19517cdb2a020c4f6ac5bc39">ycoord</a> * scale;</div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;  <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;}</div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160; </div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160; </div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="af54c4ea7b287f1c80af4def1ae3a26b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af54c4ea7b287f1c80af4def1ae3a26b3">&#9670;&nbsp;</a></span>operator*=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a02866.html">FCOORD</a>&amp; operator*= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a02866.html">FCOORD</a> &amp;&#160;</td>
+          <td class="paramname"><em>op1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>scale</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00392_source.html#l00689">689</a> of file <a class="el" href="a00392_source.html">points.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00697"></a><span class="lineno">  697</span>&#160;                          {</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a3e9a749707e0c2e155b58f21c3a8aa03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e9a749707e0c2e155b58f21c3a8aa03">&#9670;&nbsp;</a></span>operator*=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a02858.html">ICOORD</a>&amp; operator*= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a02858.html">ICOORD</a> &amp;&#160;</td>
+          <td class="paramname"><em>op1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int16_t&#160;</td>
+          <td class="paramname"><em>scale</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00392_source.html#l00476">476</a> of file <a class="el" href="a00392_source.html">points.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;               {</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a3407de919f1bbcde13608526c3449fcf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3407de919f1bbcde13608526c3449fcf">&#9670;&nbsp;</a></span>operator+() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a02866.html">FCOORD</a> operator+ </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="a02866.html">FCOORD</a> &amp;&#160;</td>
+          <td class="paramname"><em>op1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="a02866.html">FCOORD</a> &amp;&#160;</td>
+          <td class="paramname"><em>op2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00392_source.html#l00572">572</a> of file <a class="el" href="a00392_source.html">points.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00573"></a><span class="lineno">  573</span>&#160;  {</div>
+<div class="line"><a name="l00574"></a><span class="lineno">  574</span>&#160;  <a class="code" href="a02866.html">FCOORD</a> result;                 <span class="comment">//output</span></div>
+<div class="line"><a name="l00575"></a><span class="lineno">  575</span>&#160; </div>
+<div class="line"><a name="l00576"></a><span class="lineno">  576</span>&#160;  result.xcoord = -src.xcoord;</div>
+<div class="line"><a name="l00577"></a><span class="lineno">  577</span>&#160;  result.ycoord = -src.ycoord;</div>
+<div class="line"><a name="l00578"></a><span class="lineno">  578</span>&#160;  <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00579"></a><span class="lineno">  579</span>&#160;}</div>
+<div class="line"><a name="l00580"></a><span class="lineno">  580</span>&#160; </div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="afb03632aa6602c5193bf4af7964e6751"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb03632aa6602c5193bf4af7964e6751">&#9670;&nbsp;</a></span>operator+() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a02858.html">ICOORD</a> operator+ </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="a02858.html">ICOORD</a> &amp;&#160;</td>
+          <td class="paramname"><em>op1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="a02858.html">ICOORD</a> &amp;&#160;</td>
+          <td class="paramname"><em>op2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00392_source.html#l00359">359</a> of file <a class="el" href="a00392_source.html">points.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;                    {</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;  <a class="code" href="a02858.html">ICOORD</a> sum;                    <span class="comment">//result</span></div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160; </div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a2eaa6b8ca4ca606f352e10acf64a1c16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2eaa6b8ca4ca606f352e10acf64a1c16">&#9670;&nbsp;</a></span>operator+=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a02866.html">FCOORD</a>&amp; operator+= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a02866.html">FCOORD</a> &amp;&#160;</td>
+          <td class="paramname"><em>op1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="a02866.html">FCOORD</a> &amp;&#160;</td>
+          <td class="paramname"><em>op2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00392_source.html#l00589">589</a> of file <a class="el" href="a00392_source.html">points.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00591"></a><span class="lineno">  591</span>&#160;                    {</div>
+<div class="line"><a name="l00592"></a><span class="lineno">  592</span>&#160;  <a class="code" href="a02866.html">FCOORD</a> sum;                    <span class="comment">//result</span></div>
+<div class="line"><a name="l00593"></a><span class="lineno">  593</span>&#160; </div>
+<div class="line"><a name="l00594"></a><span class="lineno">  594</span>&#160;  sum.xcoord = op1.xcoord + op2.xcoord;</div>
+<div class="line"><a name="l00595"></a><span class="lineno">  595</span>&#160;  sum.ycoord = op1.ycoord + op2.ycoord;</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a7bdc2726e11ac29db02c5152d33ed9bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7bdc2726e11ac29db02c5152d33ed9bd">&#9670;&nbsp;</a></span>operator+=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a02858.html">ICOORD</a>&amp; operator+= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a02858.html">ICOORD</a> &amp;&#160;</td>
+          <td class="paramname"><em>op1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="a02858.html">ICOORD</a> &amp;&#160;</td>
+          <td class="paramname"><em>op2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00392_source.html#l00376">376</a> of file <a class="el" href="a00392_source.html">points.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;                    {</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a9dd91936917a1b070c509f14ea5c6f6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9dd91936917a1b070c509f14ea5c6f6c">&#9670;&nbsp;</a></span>operator-() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a02866.html">FCOORD</a> operator- </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="a02866.html">FCOORD</a> &amp;&#160;</td>
+          <td class="paramname"><em>op1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="a02866.html">FCOORD</a> &amp;&#160;</td>
+          <td class="paramname"><em>op2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00392_source.html#l00604">604</a> of file <a class="el" href="a00392_source.html">points.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00609"></a><span class="lineno">  609</span>&#160;                    {</div>
+<div class="line"><a name="l00610"></a><span class="lineno">  610</span>&#160;  op1.xcoord += op2.xcoord;</div>
+<div class="line"><a name="l00611"></a><span class="lineno">  611</span>&#160;  op1.ycoord += op2.ycoord;</div>
+<div class="line"><a name="l00612"></a><span class="lineno">  612</span>&#160;  <span class="keywordflow">return</span> op1;</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ab4f0ee803a74deb221ffdb4bb27df2bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4f0ee803a74deb221ffdb4bb27df2bd">&#9670;&nbsp;</a></span>operator-() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a02866.html">FCOORD</a> operator- </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="a02866.html">FCOORD</a> &amp;&#160;</td>
+          <td class="paramname"><em>src</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00392_source.html#l00555">555</a> of file <a class="el" href="a00392_source.html">points.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00555"></a><span class="lineno">  555</span>&#160;  {</div>
+<div class="line"><a name="l00556"></a><span class="lineno">  556</span>&#160;  <a class="code" href="a02866.html">FCOORD</a> result;                 <span class="comment">//output</span></div>
+<div class="line"><a name="l00557"></a><span class="lineno">  557</span>&#160; </div>
+<div class="line"><a name="l00558"></a><span class="lineno">  558</span>&#160;  result.xcoord = -src.ycoord;</div>
+<div class="line"><a name="l00559"></a><span class="lineno">  559</span>&#160;  result.ycoord = src.xcoord;</div>
+<div class="line"><a name="l00560"></a><span class="lineno">  560</span>&#160;  <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00561"></a><span class="lineno">  561</span>&#160;}</div>
+<div class="line"><a name="l00562"></a><span class="lineno">  562</span>&#160; </div>
+<div class="line"><a name="l00563"></a><span class="lineno">  563</span>&#160; </div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ab9a15dd7b99152f9e14b6cd8a28a4eb3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9a15dd7b99152f9e14b6cd8a28a4eb3">&#9670;&nbsp;</a></span>operator-() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a02858.html">ICOORD</a> operator- </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="a02858.html">ICOORD</a> &amp;&#160;</td>
+          <td class="paramname"><em>op1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="a02858.html">ICOORD</a> &amp;&#160;</td>
+          <td class="paramname"><em>op2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00392_source.html#l00391">391</a> of file <a class="el" href="a00392_source.html">points.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;                    {</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ad7ef7709c4047ce463a3ff3d61c0d965"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7ef7709c4047ce463a3ff3d61c0d965">&#9670;&nbsp;</a></span>operator-() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a02858.html">ICOORD</a> operator- </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="a02858.html">ICOORD</a> &amp;&#160;</td>
+          <td class="paramname"><em>src</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00392_source.html#l00342">342</a> of file <a class="el" href="a00392_source.html">points.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;  {</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;  <a class="code" href="a02858.html">ICOORD</a> result;                 <span class="comment">//output</span></div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160; </div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;  result.<a class="code" href="a02858.html#aa883b0a068fca2b0aa465678082b0a30">xcoord</a> = -src.<a class="code" href="a02858.html#aa883b0a068fca2b0aa465678082b0a30">xcoord</a>;</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ad2396de94267cb60fb628dde25b340e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2396de94267cb60fb628dde25b340e0">&#9670;&nbsp;</a></span>operator-=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a02866.html">FCOORD</a>&amp; operator-= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a02866.html">FCOORD</a> &amp;&#160;</td>
+          <td class="paramname"><em>op1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="a02866.html">FCOORD</a> &amp;&#160;</td>
+          <td class="paramname"><em>op2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00392_source.html#l00621">621</a> of file <a class="el" href="a00392_source.html">points.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00625"></a><span class="lineno">  625</span>&#160;                    {</div>
+<div class="line"><a name="l00626"></a><span class="lineno">  626</span>&#160;  <a class="code" href="a02866.html">FCOORD</a> sum;                    <span class="comment">//result</span></div>
+<div class="line"><a name="l00627"></a><span class="lineno">  627</span>&#160; </div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a51f78f57ddbe92ea9119ec05e0a2440d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51f78f57ddbe92ea9119ec05e0a2440d">&#9670;&nbsp;</a></span>operator-=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a02858.html">ICOORD</a>&amp; operator-= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a02858.html">ICOORD</a> &amp;&#160;</td>
+          <td class="paramname"><em>op1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="a02858.html">ICOORD</a> &amp;&#160;</td>
+          <td class="paramname"><em>op2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00392_source.html#l00408">408</a> of file <a class="el" href="a00392_source.html">points.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;                    {</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aab2a4133b74ee9382c7e1fbcaefdbb6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab2a4133b74ee9382c7e1fbcaefdbb6d">&#9670;&nbsp;</a></span>operator/() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a02866.html">FCOORD</a> operator/ </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="a02866.html">FCOORD</a> &amp;&#160;</td>
+          <td class="paramname"><em>op1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>scale</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00392_source.html#l00704">704</a> of file <a class="el" href="a00392_source.html">points.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160;             {</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a9b2ec486dd840f200952dbf566c742c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b2ec486dd840f200952dbf566c742c3">&#9670;&nbsp;</a></span>operator/() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a02858.html">ICOORD</a> operator/ </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="a02858.html">ICOORD</a> &amp;&#160;</td>
+          <td class="paramname"><em>op1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int16_t&#160;</td>
+          <td class="paramname"><em>scale</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00392_source.html#l00491">491</a> of file <a class="el" href="a00392_source.html">points.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160;               {</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a04eaa47986004a5460928ee12e6e80e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04eaa47986004a5460928ee12e6e80e2">&#9670;&nbsp;</a></span>operator/=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a02866.html">FCOORD</a>&amp; operator/= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a02866.html">FCOORD</a> &amp;&#160;</td>
+          <td class="paramname"><em>op1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>scale</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00392_source.html#l00721">721</a> of file <a class="el" href="a00392_source.html">points.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00731"></a><span class="lineno">  731</span>&#160;             {</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a6dafda5c6add611e40cf74fd5bb3c02e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6dafda5c6add611e40cf74fd5bb3c02e">&#9670;&nbsp;</a></span>operator/=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a02858.html">ICOORD</a>&amp; operator/= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a02858.html">ICOORD</a> &amp;&#160;</td>
+          <td class="paramname"><em>op1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int16_t&#160;</td>
+          <td class="paramname"><em>scale</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00392_source.html#l00508">508</a> of file <a class="el" href="a00392_source.html">points.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160;               {</div>
 </div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa02440_html_af74fa3bf628c9426cd6f1141a87dc2e0"><div class="ttname"><a href="a02440.html#af74fa3bf628c9426cd6f1141a87dc2e0">TBOX::right</a></div><div class="ttdeci">int16_t right() const</div><div class="ttdef"><b>Definition:</b> <a href="a00380_source.html#l00078">rect.h:78</a></div></div>
-<div class="ttc" id="aa02452_html"><div class="ttname"><a href="a02452.html">SEAM</a></div><div class="ttdef"><b>Definition:</b> <a href="a00392_source.html#l00036">seam.h:36</a></div></div>
-<div class="ttc" id="aa02440_html_a5dc64d0677b5d65385bc07a78cf49c4d"><div class="ttname"><a href="a02440.html#a5dc64d0677b5d65385bc07a78cf49c4d">TBOX::top</a></div><div class="ttdeci">int16_t top() const</div><div class="ttdef"><b>Definition:</b> <a href="a00380_source.html#l00057">rect.h:57</a></div></div>
-<div class="ttc" id="aa02440_html_a9fee4521e71300975cb34ebb21e3fca5"><div class="ttname"><a href="a02440.html#a9fee4521e71300975cb34ebb21e3fca5">TBOX::bottom</a></div><div class="ttdeci">int16_t bottom() const</div><div class="ttdef"><b>Definition:</b> <a href="a00380_source.html#l00064">rect.h:64</a></div></div>
-<div class="ttc" id="aa02440_html_a8e9dce0d30d2213598cd4befe0028c99"><div class="ttname"><a href="a02440.html#a8e9dce0d30d2213598cd4befe0028c99">TBOX::left</a></div><div class="ttdeci">int16_t left() const</div><div class="ttdef"><b>Definition:</b> <a href="a00380_source.html#l00071">rect.h:71</a></div></div>
-<div class="ttc" id="aa02440_html"><div class="ttname"><a href="a02440.html">TBOX</a></div><div class="ttdef"><b>Definition:</b> <a href="a00380_source.html#l00033">rect.h:33</a></div></div>
-<div class="ttc" id="aa02220_html_a82f12e26621cfe8386bf08d11e9819c1"><div class="ttname"><a href="a02220.html#a82f12e26621cfe8386bf08d11e9819c1">TPOINT::y</a></div><div class="ttdeci">int16_t y</div><div class="ttdef"><b>Definition:</b> <a href="a00209_source.html#l00092">blobs.h:92</a></div></div>
-<div class="ttc" id="aa02220_html"><div class="ttname"><a href="a02220.html">TPOINT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00209_source.html#l00049">blobs.h:49</a></div></div>
-<div class="ttc" id="aa02236_html_a52fba22521039a79d8c1c8182f602dcc"><div class="ttname"><a href="a02236.html#a52fba22521039a79d8c1c8182f602dcc">TWERD::blobs</a></div><div class="ttdeci">GenericVector&lt; TBLOB * &gt; blobs</div><div class="ttdef"><b>Definition:</b> <a href="a00209_source.html#l00457">blobs.h:457</a></div></div>
-<div class="ttc" id="aa02236_html_a0d5347723ece084faf8f3d0dba6dd219"><div class="ttname"><a href="a02236.html#a0d5347723ece084faf8f3d0dba6dd219">TWERD::NumBlobs</a></div><div class="ttdeci">int NumBlobs() const</div><div class="ttdef"><b>Definition:</b> <a href="a00209_source.html#l00446">blobs.h:446</a></div></div>
-<div class="ttc" id="aa02220_html_a5ed4f3edb251c99c2de6cb33645af1fe"><div class="ttname"><a href="a02220.html#a5ed4f3edb251c99c2de6cb33645af1fe">TPOINT::x</a></div><div class="ttdeci">int16_t x</div><div class="ttdef"><b>Definition:</b> <a href="a00209_source.html#l00091">blobs.h:91</a></div></div>
+<div class="ttc" id="aa02858_html"><div class="ttname"><a href="a02858.html">ICOORD</a></div><div class="ttdoc">integer coordinate</div><div class="ttdef"><b>Definition:</b> <a href="a00392_source.html#l00030">points.h:30</a></div></div>
+<div class="ttc" id="aa02866_html"><div class="ttname"><a href="a02866.html">FCOORD</a></div><div class="ttdef"><b>Definition:</b> <a href="a00392_source.html#l00187">points.h:187</a></div></div>
+<div class="ttc" id="aa02858_html_aa883b0a068fca2b0aa465678082b0a30"><div class="ttname"><a href="a02858.html#aa883b0a068fca2b0aa465678082b0a30">ICOORD::xcoord</a></div><div class="ttdeci">int16_t xcoord</div><div class="ttdoc">x value</div><div class="ttdef"><b>Definition:</b> <a href="a00392_source.html#l00156">points.h:156</a></div></div>
+<div class="ttc" id="aa02858_html_a2b744a3e19517cdb2a020c4f6ac5bc39"><div class="ttname"><a href="a02858.html#a2b744a3e19517cdb2a020c4f6ac5bc39">ICOORD::ycoord</a></div><div class="ttdeci">int16_t ycoord</div><div class="ttdoc">y value</div><div class="ttdef"><b>Definition:</b> <a href="a00392_source.html#l00157">points.h:157</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_27285da2200a3bef8a8e2dba4d21412a.html">ccstruct</a></li><li class="navelem"><a class="el" href="a00392.html">seam.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_27285da2200a3bef8a8e2dba4d21412a.html">ccstruct</a></li><li class="navelem"><a class="el" href="a00392.html">points.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

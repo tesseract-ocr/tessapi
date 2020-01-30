@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/textord/baselinedetect.h Source File</title>
+<title>tesseract: /tesseract/src/lstm/series.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,333 +87,256 @@ $(document).ready(function(){initNavTree('a00944_source.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">baselinedetect.h</div>  </div>
+<div class="title">series.cpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00944.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// File:        baselinedetect.h</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// Description: Initial Baseline Determination.</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// Copyright 2012 Google Inc. All Rights Reserved.</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">// Author:      rays@google.com (Ray Smith)</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">// Created:     Mon Apr 30 10:03:19 PDT 2012</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">//</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">// you may not use this file except in compliance with the License.</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// You may obtain a copy of the License at</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">// http://www.apache.org/licenses/LICENSE-2.0</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// Unless required by applicable law or agreed to in writing, software</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">// See the License for the specific language governing permissions and</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">// limitations under the License.</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">//</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#ifndef TESSERACT_TEXTORD_BASELINEDETECT_H_</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#define TESSERACT_TEXTORD_BASELINEDETECT_H_</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00251.html">detlinefit.h</a>&quot;</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &lt;tesseract/genericvector.h&gt;</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00341.html">points.h</a>&quot;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00380.html">rect.h</a>&quot;</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &lt;tesseract/strngs.h&gt;</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">class </span>BLOBNBOX_LIST;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">class </span><a class="code" href="a02216.html">TO_BLOCK</a>;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">class </span>TO_BLOCK_LIST;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">class </span><a class="code" href="a02212.html">TO_ROW</a>;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">struct </span>Pix;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">namespace </span><a class="code" href="a01539.html">tesseract</a> {</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">class </span>Textord;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">// Class to compute and hold baseline data for a TO_ROW.</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="a03168.html">   40</a></span>&#160;<span class="keyword">class </span><a class="code" href="a03168.html">BaselineRow</a> {</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <a class="code" href="a03168.html#a9f18eec108377775507d2715186593cd">BaselineRow</a>(<span class="keywordtype">double</span> line_size, <a class="code" href="a02212.html">TO_ROW</a>* to_row);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="a03168.html#a3e0d9742d9e012d895f7f6d3e402ed93">   44</a></span>&#160;  <span class="keyword">const</span> <a class="code" href="a02440.html">TBOX</a>&amp; <a class="code" href="a03168.html#a3e0d9742d9e012d895f7f6d3e402ed93">bounding_box</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordflow">return</span> bounding_box_;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  }</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="comment">// Sets the TO_ROW with the output straight line.</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a03168.html#adb63829f17ab14cfea6215b64ecf589e">SetupOldLineParameters</a>(<a class="code" href="a02212.html">TO_ROW</a>* row) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="comment">// Outputs diagnostic information.</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a03168.html#a1b1af2359af16a1a44ec5dcf74114142">Print</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="comment">// Returns the skew angle (in radians) of the current baseline in [-pi,pi].</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="keywordtype">double</span> <a class="code" href="a03168.html#a4634cd0cd05e8292d80c1d396d598b17">BaselineAngle</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <span class="comment">// Computes and returns the linespacing at the middle of the overlap</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="comment">// between this and other.</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="keywordtype">double</span> <a class="code" href="a03168.html#a9089618e6511471f74427da4d9a2eb22">SpaceBetween</a>(<span class="keyword">const</span> <a class="code" href="a03168.html">BaselineRow</a>&amp; other) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="comment">// Computes and returns the displacement of the center of the line</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="comment">// perpendicular to the given direction.</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <span class="keywordtype">double</span> <a class="code" href="a03168.html#a31f1ab3eb5a4d39c7956b9ad7fba07b0">PerpDisp</a>(<span class="keyword">const</span> <a class="code" href="a02408.html">FCOORD</a>&amp; direction) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <span class="comment">// Computes the y coordinate at the given x using the straight baseline</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <span class="comment">// defined by baseline1_ and baseline2_.</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <span class="keywordtype">double</span> <a class="code" href="a03168.html#aa0f2797e274179798e95e7e2cafb424f">StraightYAtX</a>(<span class="keywordtype">double</span> x) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="comment">// Fits a straight baseline to the points. Returns true if it had enough</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <span class="comment">// points to be reasonably sure of the fitted baseline.</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <span class="comment">// If use_box_bottoms is false, baselines positions are formed by</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <span class="comment">// considering the outlines of the blobs.</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="a03168.html#a0abf3f82fd5ab3b3a79a23a2c030547e">FitBaseline</a>(<span class="keywordtype">bool</span> use_box_bottoms);</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="comment">// Modifies an existing result of FitBaseline to be parallel to the given</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <span class="comment">// vector if that produces a better result.</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a03168.html#a6907a2bb647448ef6ed5b6789b7e1440">AdjustBaselineToParallel</a>(<span class="keywordtype">int</span> debug, <span class="keyword">const</span> <a class="code" href="a02408.html">FCOORD</a>&amp; direction);</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  <span class="comment">// Modifies the baseline to snap to the textline grid if the existing</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <span class="comment">// result is not good enough.</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <span class="keywordtype">double</span> <a class="code" href="a03168.html#ac81135eb24c3d936f7c1d9e81567cae8">AdjustBaselineToGrid</a>(<span class="keywordtype">int</span> debug, <span class="keyword">const</span> <a class="code" href="a02408.html">FCOORD</a>&amp; direction,</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                              <span class="keywordtype">double</span> line_spacing, <span class="keywordtype">double</span> line_offset);</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <span class="comment">// Sets up displacement_modes_ with the top few modes of the perpendicular</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  <span class="comment">// distance of each blob from the given direction vector, after rounding.</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  <span class="keywordtype">void</span> SetupBlobDisplacements(<span class="keyword">const</span> <a class="code" href="a02408.html">FCOORD</a>&amp; direction);</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  <span class="comment">// Fits a line in the given direction to blobs that are close to the given</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  <span class="comment">// target_offset perpendicular displacement from the direction. The fit</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  <span class="comment">// error is allowed to be cheat_allowance worse than the existing fit, and</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  <span class="comment">// will still be used.</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  <span class="comment">// If cheat_allowance &gt; 0, the new fit will be good and replace the current</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  <span class="comment">// fit if it has better fit (with cheat) OR its error is below</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  <span class="comment">// max_baseline_error_ and the old fit is marked bad.</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  <span class="comment">// Otherwise the new fit will only replace the old if it is really better,</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  <span class="comment">// or the old fit is marked bad and the new fit has sufficient points, as</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  <span class="comment">// well as being within the max_baseline_error_.</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <span class="keywordtype">void</span> FitConstrainedIfBetter(<span class="keywordtype">int</span> debug, <span class="keyword">const</span> <a class="code" href="a02408.html">FCOORD</a>&amp; direction,</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                              <span class="keywordtype">double</span> cheat_allowance,</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                              <span class="keywordtype">double</span> target_offset);</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  <span class="comment">// Returns the perpendicular distance of the point from the straight</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  <span class="comment">// baseline.</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  <span class="keywordtype">double</span> PerpDistanceFromBaseline(<span class="keyword">const</span> <a class="code" href="a02408.html">FCOORD</a>&amp; pt) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  <span class="comment">// Computes the bounding box of the row.</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  <span class="keywordtype">void</span> ComputeBoundingBox();</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  <span class="comment">// The blobs of the row to which this BaselineRow adds extra information</span></div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  <span class="comment">// during baseline fitting. Note that blobs_ could easily come from either</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  <span class="comment">// a TO_ROW or a ColPartition.</span></div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  BLOBNBOX_LIST* blobs_;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  <span class="comment">// Bounding box of all the blobs.</span></div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;  <a class="code" href="a02440.html">TBOX</a> bounding_box_;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  <span class="comment">// Fitter used to fit lines to the blobs.</span></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;  <a class="code" href="a02264.html">DetLineFit</a> fitter_;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  <span class="comment">// 2 points on the straight baseline.</span></div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  <a class="code" href="a02408.html">FCOORD</a> baseline_pt1_;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  <a class="code" href="a02408.html">FCOORD</a> baseline_pt2_;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  <span class="comment">// Set of modes of displacements. They indicate preferable baseline positions.</span></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  <a class="code" href="a02108.html">GenericVector&lt;double&gt;</a> displacement_modes_;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  <span class="comment">// Quantization factor used for displacement_modes_.</span></div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  <span class="keywordtype">double</span> disp_quant_factor_;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  <span class="comment">// Half the acceptance range of blob displacements for computing the</span></div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  <span class="comment">// error during a constrained fit.</span></div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;  <span class="keywordtype">double</span> fit_halfrange_;</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  <span class="comment">// Max baseline error before a line is regarded as fitting badly.</span></div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;  <span class="keywordtype">double</span> max_baseline_error_;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;  <span class="comment">// The error of fit of the baseline.</span></div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  <span class="keywordtype">double</span> baseline_error_;</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;  <span class="comment">// True if this row seems to have a good baseline.</span></div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;  <span class="keywordtype">bool</span> good_baseline_;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;};</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment">// Class to compute and hold baseline data for a TO_BLOCK.</span></div>
-<div class="line"><a name="l00129"></a><span class="lineno"><a class="line" href="a03172.html">  129</a></span>&#160;<span class="keyword">class </span><a class="code" href="a03172.html">BaselineBlock</a> {</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;  <a class="code" href="a03172.html#a4866856efe373c4b48769899e38846b6">BaselineBlock</a>(<span class="keywordtype">int</span> debug_level, <span class="keywordtype">bool</span> non_text, <a class="code" href="a02216.html">TO_BLOCK</a>* <a class="code" href="a03172.html#a381942ef00fcff77a75d036fac9b3fa5">block</a>);</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
-<div class="line"><a name="l00133"></a><span class="lineno"><a class="line" href="a03172.html#a381942ef00fcff77a75d036fac9b3fa5">  133</a></span>&#160;  <a class="code" href="a02216.html">TO_BLOCK</a>* <a class="code" href="a03172.html#a381942ef00fcff77a75d036fac9b3fa5">block</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <span class="keywordflow">return</span> block_;</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;  }</div>
-<div class="line"><a name="l00136"></a><span class="lineno"><a class="line" href="a03172.html#a1445079bbeaaf0e81ab124288cc6ecf3">  136</a></span>&#160;  <span class="keywordtype">double</span> <a class="code" href="a03172.html#a1445079bbeaaf0e81ab124288cc6ecf3">skew_angle</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    <span class="keywordflow">return</span> skew_angle_;</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;  }</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; </div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;  <span class="comment">// Computes and returns the absolute error of the given perp_disp from the</span></div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;  <span class="comment">// given linespacing model.</span></div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">double</span> <a class="code" href="a03172.html#ac12d056a2cc07b32b381d836126c4fa8">SpacingModelError</a>(<span class="keywordtype">double</span> perp_disp, <span class="keywordtype">double</span> line_spacing,</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;                                  <span class="keywordtype">double</span> line_offset);</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160; </div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;  <span class="comment">// Fits straight line baselines and computes the skew angle from the</span></div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;  <span class="comment">// median angle. Returns true if a good angle is found.</span></div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;  <span class="comment">// If use_box_bottoms is false, baseline positions are formed by</span></div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;  <span class="comment">// considering the outlines of the blobs.</span></div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="a03172.html#a1e27f4aaf66c7e7aae4062c590fd8f3f">FitBaselinesAndFindSkew</a>(<span class="keywordtype">bool</span> use_box_bottoms);</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;  <span class="comment">// Refits the baseline to a constrained angle, using the stored block</span></div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;  <span class="comment">// skew if good enough, otherwise the supplied default skew.</span></div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a03172.html#a8a7ab56dd7abc0421cff9680b6634b85">ParallelizeBaselines</a>(<span class="keywordtype">double</span> default_block_skew);</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160; </div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;  <span class="comment">// Sets the parameters in TO_BLOCK that are needed by subsequent processes.</span></div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a03172.html#a0619e15482a4ed11dce15bc5d8cbe0be">SetupBlockParameters</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;  <span class="comment">// Processing that is required before fitting baseline splines, but requires</span></div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;  <span class="comment">// linear baselines in order to be successful:</span></div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;  <span class="comment">//   Removes noise if required</span></div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;  <span class="comment">//   Separates out underlines</span></div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;  <span class="comment">//   Pre-associates blob fragments.</span></div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;  <span class="comment">// TODO(rays/joeliu) This entire section of code is inherited from the past</span></div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;  <span class="comment">// and could be improved/eliminated.</span></div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;  <span class="comment">// page_tr is used to size a debug window.</span></div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a03172.html#ab6e80c4b218c94c056659659a4d5e59b">PrepareForSplineFitting</a>(<a class="code" href="a02400.html">ICOORD</a> page_tr, <span class="keywordtype">bool</span> remove_noise);</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160; </div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;  <span class="comment">// Fits splines to the textlines, or creates fake QSPLINES from the straight</span></div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;  <span class="comment">// baselines that are already on the TO_ROWs.</span></div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;  <span class="comment">// As a side-effect, computes the xheights of the rows and the block.</span></div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;  <span class="comment">// Although x-height estimation is conceptually separate, it is part of</span></div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;  <span class="comment">// detecting perspective distortion and therefore baseline fitting.</span></div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a03172.html#a198bcc873e579e4798f4a8ed82fdb543">FitBaselineSplines</a>(<span class="keywordtype">bool</span> enable_splines, <span class="keywordtype">bool</span> show_final_rows,</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;                          <a class="code" href="a03352.html">Textord</a>* textord);</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160; </div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;  <span class="comment">// Draws the (straight) baselines and final blobs colored according to</span></div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;  <span class="comment">// what was discarded as noise and what is associated with each row.</span></div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a03172.html#a682d76ce63cdca26f2a1b33d57ffc2ab">DrawFinalRows</a>(<span class="keyword">const</span> <a class="code" href="a02400.html">ICOORD</a>&amp; page_tr);</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160; </div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;  <span class="comment">// Render the generated spline baselines for this block on pix_in.</span></div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a03172.html#a858165c88e4c695fa2136bac7ed97b7f">DrawPixSpline</a>(Pix* pix_in);</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160; </div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;  <span class="comment">// Top-level line-spacing calculation. Computes an estimate of the line-</span></div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;  <span class="comment">// spacing, using the current baselines in the TO_ROWS of the block, and</span></div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;  <span class="comment">// then refines it by fitting a regression line to the baseline positions</span></div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;  <span class="comment">// as a function of their integer index.</span></div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;  <span class="comment">// Returns true if it seems that the model is a reasonable fit to the</span></div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;  <span class="comment">// observations.</span></div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;  <span class="keywordtype">bool</span> ComputeLineSpacing();</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; </div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;  <span class="comment">// Computes the deskewed vertical position of each baseline in the block and</span></div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;  <span class="comment">// stores them in the given vector.</span></div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;  <span class="keywordtype">void</span> ComputeBaselinePositions(<span class="keyword">const</span> <a class="code" href="a02408.html">FCOORD</a>&amp; direction,</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;                                <a class="code" href="a02108.html">GenericVector&lt;double&gt;</a>* positions);</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160; </div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;  <span class="comment">// Computes an estimate of the line spacing of the block from the median</span></div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;  <span class="comment">// of the spacings between adjacent overlapping textlines.</span></div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;  <span class="keywordtype">void</span> EstimateLineSpacing();</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160; </div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;  <span class="comment">// Refines the line spacing of the block by fitting a regression</span></div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;  <span class="comment">// line to the deskewed y-position of each baseline as a function of its</span></div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;  <span class="comment">// estimated line index, allowing for a small error in the initial linespacing</span></div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;  <span class="comment">// and choosing the best available model.</span></div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;  <span class="keywordtype">void</span> RefineLineSpacing(<span class="keyword">const</span> <a class="code" href="a02108.html">GenericVector&lt;double&gt;</a>&amp; positions);</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160; </div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;  <span class="comment">// Given an initial estimate of line spacing (m_in) and the positions of each</span></div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;  <span class="comment">// baseline, computes the line spacing of the block more accurately in m_out,</span></div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;  <span class="comment">// and the corresponding intercept in c_out, and the number of spacings seen</span></div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;  <span class="comment">// in index_delta. Returns the error of fit to the line spacing model.</span></div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;  <span class="keywordtype">double</span> FitLineSpacingModel(<span class="keyword">const</span> <a class="code" href="a02108.html">GenericVector&lt;double&gt;</a>&amp; positions,</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;                             <span class="keywordtype">double</span> m_in, <span class="keywordtype">double</span>* m_out, <span class="keywordtype">double</span>* c_out,</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;                             <span class="keywordtype">int</span>* index_delta);</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160; </div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160; </div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;  <span class="comment">// The block to which this class adds extra information used during baseline</span></div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;  <span class="comment">// calculation.</span></div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;  <a class="code" href="a02216.html">TO_BLOCK</a>* block_;</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;  <span class="comment">// The rows in the block that we will be working with.</span></div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;  <a class="code" href="a02880.html">PointerVector&lt;BaselineRow&gt;</a> rows_;</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;  <span class="comment">// Amount of debugging output to provide.</span></div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;  <span class="keywordtype">int</span> debug_level_;</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;  <span class="comment">// True if the block is non-text (graphic).</span></div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;  <span class="keywordtype">bool</span> non_text_block_;</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;  <span class="comment">// True if the block has at least one good enough baseline to compute the</span></div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;  <span class="comment">// skew angle and therefore skew_angle_ is valid.</span></div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;  <span class="keywordtype">bool</span> good_skew_angle_;</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;  <span class="comment">// Angle of skew in radians using the conventional anticlockwise from x-axis.</span></div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;  <span class="keywordtype">double</span> skew_angle_;</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;  <span class="comment">// Current best estimate line spacing in pixels perpendicular to skew_angle_.</span></div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;  <span class="keywordtype">double</span> line_spacing_;</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;  <span class="comment">// Offset for baseline positions, in pixels. Each baseline is at</span></div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;  <span class="comment">// line_spacing_ * n + line_offset_ for integer n, which represents</span></div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;  <span class="comment">// [textline] line number in a line numbering system that has line 0 on or</span></div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;  <span class="comment">// at least near the x-axis. Not equal to the actual line number of a line</span></div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;  <span class="comment">// within a block as most blocks are not near the x-axis.</span></div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;  <span class="keywordtype">double</span> line_offset_;</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;  <span class="comment">// The error of the line spacing model.</span></div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;  <span class="keywordtype">double</span> model_error_;</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;};</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160; </div>
-<div class="line"><a name="l00242"></a><span class="lineno"><a class="line" href="a03176.html">  242</a></span>&#160;<span class="keyword">class </span><a class="code" href="a03176.html">BaselineDetect</a> {</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;  <a class="code" href="a03176.html#a358fd732758ac23b5a20413344204087">BaselineDetect</a>(<span class="keywordtype">int</span> debug_level, <span class="keyword">const</span> <a class="code" href="a02408.html">FCOORD</a>&amp; page_skew,</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;                 TO_BLOCK_LIST* blocks);</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160; </div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;  <a class="code" href="a03176.html#add0b738a17be0b186dea47bf3b8ea267">~BaselineDetect</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160; </div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;  <span class="comment">// Finds the initial baselines for each TO_ROW in each TO_BLOCK, gathers</span></div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;  <span class="comment">// block-wise and page-wise data to smooth small blocks/rows, and applies</span></div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;  <span class="comment">// smoothing based on block/page-level skew and block-level linespacing.</span></div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a03176.html#a9eaa0eba10b5abb2a9813f521c9dba50">ComputeStraightBaselines</a>(<span class="keywordtype">bool</span> use_box_bottoms);</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160; </div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;  <span class="comment">// Computes the baseline splines for each TO_ROW in each TO_BLOCK and</span></div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;  <span class="comment">// other associated side-effects, including pre-associating blobs, computing</span></div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;  <span class="comment">// x-heights and displaying debug information.</span></div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;  <span class="comment">// NOTE that ComputeStraightBaselines must have been called first as this</span></div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;  <span class="comment">// sets up data in the TO_ROWs upon which this function depends.</span></div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a03176.html#a62154b468dd5af9b00a158542be42b6c">ComputeBaselineSplinesAndXheights</a>(<span class="keyword">const</span> <a class="code" href="a02400.html">ICOORD</a>&amp; page_tr,</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;                                         <span class="keywordtype">bool</span> enable_splines,</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;                                         <span class="keywordtype">bool</span> remove_noise,</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;                                         <span class="keywordtype">bool</span> show_final_rows,</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;                                         <a class="code" href="a03352.html">Textord</a>* textord);</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160; </div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;  <span class="comment">// Average (median) skew of the blocks on the page among those that have</span></div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;  <span class="comment">// a good angle of their own.</span></div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;  <a class="code" href="a02408.html">FCOORD</a> page_skew_;</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;  <span class="comment">// Amount of debug output to produce.</span></div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;  <span class="keywordtype">int</span> debug_level_;</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;  <span class="comment">// The blocks that we are working with.</span></div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;  <a class="code" href="a02880.html">PointerVector&lt;BaselineBlock&gt;</a> blocks_;</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;};</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160; </div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;}  <span class="comment">// namespace tesseract</span></div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160; </div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;<span class="preprocessor">#endif  // TESSERACT_TEXTORD_BASELINEDETECT_H_</span></div>
+<a href="a00944.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// File:        series.cpp</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// Description: Runs networks in series on the same input.</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// Author:      Ray Smith</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">// (C) Copyright 2013, Google Inc.</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// you may not use this file except in compliance with the License.</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">// You may obtain a copy of the License at</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// http://www.apache.org/licenses/LICENSE-2.0</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">// Unless required by applicable law or agreed to in writing, software</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">// See the License for the specific language governing permissions and</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">// limitations under the License.</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00947.html">series.h</a>&quot;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00863.html">fullyconnected.h</a>&quot;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00911.html">networkscratch.h</a>&quot;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a01469.html">scrollview.h</a>&quot;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00584.html">tprintf.h</a>&quot;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">namespace </span><a class="code" href="a01818.html">tesseract</a> {</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">// ni_ and no_ will be set by AddToStack.</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="a03574.html#a437a7bd7a0ba62e9fb2560c4641cd8cf">   28</a></span>&#160;<a class="code" href="a03574.html#a437a7bd7a0ba62e9fb2560c4641cd8cf">Series::Series</a>(<span class="keyword">const</span> <a class="code" href="a02542.html">STRING</a>&amp; name) : <a class="code" href="a03546.html">Plumbing</a>(name) {</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <a class="code" href="a03514.html#a1bdf9fdfb7ed0d4962f4193dff5cd5ee">type_</a> = <a class="code" href="a01818.html#a9c90202f597e58fba8911e0d29d9b198aa8f65aa7ff6e3300e56389aa28c52f04">NT_SERIES</a>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;}</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">// Returns the shape output from the network given an input shape (which may</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">// be partially unknown ie zero).</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="a03574.html#aacf2ab6808e11c5b5dda489d4b81045c">   34</a></span>&#160;<a class="code" href="a03578.html">StaticShape</a> <a class="code" href="a03574.html#aacf2ab6808e11c5b5dda489d4b81045c">Series::OutputShape</a>(<span class="keyword">const</span> <a class="code" href="a03578.html">StaticShape</a>&amp; input_shape)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <a class="code" href="a03578.html">StaticShape</a> result(input_shape);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <span class="keywordtype">int</span> stack_size = <a class="code" href="a03546.html#a0c99262aaa769cfd313c3cf5c0a97876">stack_</a>.size();</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; stack_size; ++i) {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    result = <a class="code" href="a03546.html#a0c99262aaa769cfd313c3cf5c0a97876">stack_</a>[i]-&gt;OutputShape(result);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  }</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;}</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">// Sets up the network for training. Initializes weights using weights of</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">// scale `range` picked according to the random number generator `randomizer`.</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">// Note that series has its own implementation just for debug purposes.</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="a03574.html#ad2a486da814dc0bc62c30ff4291da2db">   46</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="a03574.html#ad2a486da814dc0bc62c30ff4291da2db">Series::InitWeights</a>(<span class="keywordtype">float</span> range, <a class="code" href="a02450.html">TRand</a>* randomizer) {</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <a class="code" href="a03514.html#ac50b6dadac578a9a754eb4a7d5416ce5">num_weights_</a> = 0;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Num outputs,weights in Series:\n&quot;</span>);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="a03546.html#a0c99262aaa769cfd313c3cf5c0a97876">stack_</a>.size(); ++i) {</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">int</span> weights = <a class="code" href="a03546.html#a0c99262aaa769cfd313c3cf5c0a97876">stack_</a>[i]-&gt;InitWeights(range, randomizer);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;  %s:%d, %d\n&quot;</span>,</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            <a class="code" href="a03546.html#a0c99262aaa769cfd313c3cf5c0a97876">stack_</a>[i]-&gt;<a class="code" href="a03574.html#a0b2243d7f9feff371b073999d373fb97">spec</a>().c_str(), <a class="code" href="a03546.html#a0c99262aaa769cfd313c3cf5c0a97876">stack_</a>[i]-&gt;<a class="code" href="a03514.html#a3cb608bfc2c144366eab3fc43c37848e">NumOutputs</a>(), weights);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <a class="code" href="a03514.html#ac50b6dadac578a9a754eb4a7d5416ce5">num_weights_</a> += weights;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  }</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Total weights = %d\n&quot;</span>, <a class="code" href="a03514.html#ac50b6dadac578a9a754eb4a7d5416ce5">num_weights_</a>);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="a03514.html#ac50b6dadac578a9a754eb4a7d5416ce5">num_weights_</a>;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;}</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">// Recursively searches the network for softmaxes with old_no outputs,</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">// and remaps their outputs according to code_map. See network.h for details.</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="a03574.html#af39fd26a2966f0a35945ecd04698dae7">   61</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="a03574.html#af39fd26a2966f0a35945ecd04698dae7">Series::RemapOutputs</a>(<span class="keywordtype">int</span> old_no, <span class="keyword">const</span> std::vector&lt;int&gt;&amp; code_map) {</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <a class="code" href="a03514.html#ac50b6dadac578a9a754eb4a7d5416ce5">num_weights_</a> = 0;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Num (Extended) outputs,weights in Series:\n&quot;</span>);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="a03546.html#a0c99262aaa769cfd313c3cf5c0a97876">stack_</a>.size(); ++i) {</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">int</span> weights = <a class="code" href="a03546.html#a0c99262aaa769cfd313c3cf5c0a97876">stack_</a>[i]-&gt;RemapOutputs(old_no, code_map);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;  %s:%d, %d\n&quot;</span>, <a class="code" href="a03546.html#a0c99262aaa769cfd313c3cf5c0a97876">stack_</a>[i]-&gt;<a class="code" href="a03574.html#a0b2243d7f9feff371b073999d373fb97">spec</a>().c_str(),</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            <a class="code" href="a03546.html#a0c99262aaa769cfd313c3cf5c0a97876">stack_</a>[i]-&gt;<a class="code" href="a03514.html#a3cb608bfc2c144366eab3fc43c37848e">NumOutputs</a>(), weights);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <a class="code" href="a03514.html#ac50b6dadac578a9a754eb4a7d5416ce5">num_weights_</a> += weights;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  }</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Total weights = %d\n&quot;</span>, <a class="code" href="a03514.html#ac50b6dadac578a9a754eb4a7d5416ce5">num_weights_</a>);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <a class="code" href="a03514.html#a4ecd3cbeaa6195ca0fa2ecd5878bc404">no_</a> = <a class="code" href="a03546.html#a0c99262aaa769cfd313c3cf5c0a97876">stack_</a>.back()-&gt;NumOutputs();</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="a03514.html#ac50b6dadac578a9a754eb4a7d5416ce5">num_weights_</a>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;}</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">// Sets needs_to_backprop_ to needs_backprop and returns true if</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">// needs_backprop || any weights in this network so the next layer forward</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">// can be told to produce backprop for this layer if needed.</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="a03574.html#a0ce6d2c8ab7d5699fc20a1afaca02562">   78</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a03574.html#a0ce6d2c8ab7d5699fc20a1afaca02562">Series::SetupNeedsBackprop</a>(<span class="keywordtype">bool</span> needs_backprop) {</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <a class="code" href="a03514.html#a4f873badcbdbace50d87721084d8d313">needs_to_backprop_</a> = needs_backprop;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="a03546.html#a0c99262aaa769cfd313c3cf5c0a97876">stack_</a>.size(); ++i)</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    needs_backprop = <a class="code" href="a03546.html#a0c99262aaa769cfd313c3cf5c0a97876">stack_</a>[i]-&gt;<a class="code" href="a03574.html#a0ce6d2c8ab7d5699fc20a1afaca02562">SetupNeedsBackprop</a>(needs_backprop);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <span class="keywordflow">return</span> needs_backprop;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;}</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">// Returns an integer reduction factor that the network applies to the</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment">// time sequence. Assumes that any 2-d is already eliminated. Used for</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment">// scaling bounding boxes of truth data.</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">// WARNING: if GlobalMinimax is used to vary the scale, this will return</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">// the last used scale factor. Call it before any forward, and it will return</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">// the minimum scale factor of the paths through the GlobalMinimax.</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="a03574.html#a3bc490b4666a9a0d3bd1f87fbf379e6b">   91</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="a03574.html#a3bc490b4666a9a0d3bd1f87fbf379e6b">Series::XScaleFactor</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  <span class="keywordtype">int</span> factor = 1;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="a03546.html#a0c99262aaa769cfd313c3cf5c0a97876">stack_</a>.size(); ++i)</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;      factor *= <a class="code" href="a03546.html#a0c99262aaa769cfd313c3cf5c0a97876">stack_</a>[i]-&gt;<a class="code" href="a03574.html#a3bc490b4666a9a0d3bd1f87fbf379e6b">XScaleFactor</a>();</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  <span class="keywordflow">return</span> factor;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;}</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">// Provides the (minimum) x scale factor to the network (of interest only to</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">// input units) so they can determine how to scale bounding boxes.</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno"><a class="line" href="a03574.html#ab2660cb65ba83f6aeb8024da29f08493">  100</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a03574.html#ab2660cb65ba83f6aeb8024da29f08493">Series::CacheXScaleFactor</a>(<span class="keywordtype">int</span> factor) {</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  <a class="code" href="a03546.html#a0c99262aaa769cfd313c3cf5c0a97876">stack_</a>[0]-&gt;CacheXScaleFactor(factor);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;}</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">// Runs forward propagation of activations on the input line.</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">// See NetworkCpp for a detailed discussion of the arguments.</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno"><a class="line" href="a03574.html#afc01bace38ca1e99232995a0161037b1">  106</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a03574.html#afc01bace38ca1e99232995a0161037b1">Series::Forward</a>(<span class="keywordtype">bool</span> debug, <span class="keyword">const</span> <a class="code" href="a03518.html">NetworkIO</a>&amp; input,</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                     <span class="keyword">const</span> <a class="code" href="a03606.html">TransposedArray</a>* input_transpose,</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                     <a class="code" href="a03522.html">NetworkScratch</a>* scratch, <a class="code" href="a03518.html">NetworkIO</a>* output) {</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;  <span class="keywordtype">int</span> stack_size = <a class="code" href="a03546.html#a0c99262aaa769cfd313c3cf5c0a97876">stack_</a>.size();</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  <a class="code" href="a00515.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a>(stack_size &gt; 1);</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  <span class="comment">// Revolving intermediate buffers.</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  <a class="code" href="a03526.html">NetworkScratch::IO</a> buffer1(input, scratch);</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  <a class="code" href="a03526.html">NetworkScratch::IO</a> buffer2(input, scratch);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  <span class="comment">// Run each network in turn, giving the output of n as the input to n + 1,</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  <span class="comment">// with the final network providing the real output.</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  <a class="code" href="a03546.html#a0c99262aaa769cfd313c3cf5c0a97876">stack_</a>[0]-&gt;Forward(debug, input, input_transpose, scratch, buffer1);</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 1; i &lt; stack_size; i += 2) {</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <a class="code" href="a03546.html#a0c99262aaa769cfd313c3cf5c0a97876">stack_</a>[i]-&gt;Forward(debug, *buffer1, <span class="keyword">nullptr</span>, scratch,</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                       i + 1 &lt; stack_size ? buffer2 : output);</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="keywordflow">if</span> (i + 1 == stack_size) <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <a class="code" href="a03546.html#a0c99262aaa769cfd313c3cf5c0a97876">stack_</a>[i + 1]-&gt;Forward(debug, *buffer2, <span class="keyword">nullptr</span>, scratch,</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                           i + 2 &lt; stack_size ? buffer1 : output);</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  }</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;}</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment">// Runs backward propagation of errors on the deltas line.</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment">// See NetworkCpp for a detailed discussion of the arguments.</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno"><a class="line" href="a03574.html#a14107e24aaeb7776d5102210be53bd8c">  128</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a03574.html#a14107e24aaeb7776d5102210be53bd8c">Series::Backward</a>(<span class="keywordtype">bool</span> debug, <span class="keyword">const</span> <a class="code" href="a03518.html">NetworkIO</a>&amp; fwd_deltas,</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                      <a class="code" href="a03522.html">NetworkScratch</a>* scratch,</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                      <a class="code" href="a03518.html">NetworkIO</a>* back_deltas) {</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;  <span class="keywordflow">if</span> (!<a class="code" href="a03514.html#a799ee867583cbebd7fdcb1e1d0e5344e">IsTraining</a>()) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;  <span class="keywordtype">int</span> stack_size = <a class="code" href="a03546.html#a0c99262aaa769cfd313c3cf5c0a97876">stack_</a>.size();</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;  <a class="code" href="a00515.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a>(stack_size &gt; 1);</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;  <span class="comment">// Revolving intermediate buffers.</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;  <a class="code" href="a03526.html">NetworkScratch::IO</a> buffer1(fwd_deltas, scratch);</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;  <a class="code" href="a03526.html">NetworkScratch::IO</a> buffer2(fwd_deltas, scratch);</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;  <span class="comment">// Run each network in reverse order, giving the back_deltas output of n as</span></div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;  <span class="comment">// the fwd_deltas input to n-1, with the 0 network providing the real output.</span></div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;  <span class="keywordflow">if</span> (!<a class="code" href="a03546.html#a0c99262aaa769cfd313c3cf5c0a97876">stack_</a>.back()-&gt;IsTraining() ||</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;      !<a class="code" href="a03546.html#a0c99262aaa769cfd313c3cf5c0a97876">stack_</a>.back()-&gt;Backward(debug, fwd_deltas, scratch, buffer1))</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = stack_size - 2; i &gt;= 0; i -= 2) {</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    <span class="keywordflow">if</span> (!<a class="code" href="a03546.html#a0c99262aaa769cfd313c3cf5c0a97876">stack_</a>[i]-&gt;<a class="code" href="a03514.html#a799ee867583cbebd7fdcb1e1d0e5344e">IsTraining</a>() ||</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        !<a class="code" href="a03546.html#a0c99262aaa769cfd313c3cf5c0a97876">stack_</a>[i]-&gt;Backward(debug, *buffer1, scratch,</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;                             i &gt; 0 ? buffer2 : back_deltas))</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    <span class="keywordflow">if</span> (i == 0) <span class="keywordflow">return</span> <a class="code" href="a03514.html#a4f873badcbdbace50d87721084d8d313">needs_to_backprop_</a>;</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    <span class="keywordflow">if</span> (!<a class="code" href="a03546.html#a0c99262aaa769cfd313c3cf5c0a97876">stack_</a>[i - 1]-&gt;<a class="code" href="a03514.html#a799ee867583cbebd7fdcb1e1d0e5344e">IsTraining</a>() ||</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        !<a class="code" href="a03546.html#a0c99262aaa769cfd313c3cf5c0a97876">stack_</a>[i - 1]-&gt;Backward(debug, *buffer2, scratch,</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;                                 i &gt; 1 ? buffer1 : back_deltas))</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;  }</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="a03514.html#a4f873badcbdbace50d87721084d8d313">needs_to_backprop_</a>;</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;}</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160; </div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="comment">// Splits the series after the given index, returning the two parts and</span></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="comment">// deletes itself. The first part, up to network with index last_start, goes</span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="comment">// into start, and the rest goes into end.</span></div>
+<div class="line"><a name="l00159"></a><span class="lineno"><a class="line" href="a03574.html#ad2fb2e76e8bf6af9fd4f0e2b7b4bce1c">  159</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a03574.html#ad2fb2e76e8bf6af9fd4f0e2b7b4bce1c">Series::SplitAt</a>(<span class="keywordtype">int</span> last_start, <a class="code" href="a03574.html">Series</a>** start, <a class="code" href="a03574.html">Series</a>** end) {</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;  *start = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;  *end = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;  <span class="keywordflow">if</span> (last_start &lt; 0 || last_start &gt;= <a class="code" href="a03546.html#a0c99262aaa769cfd313c3cf5c0a97876">stack_</a>.size()) {</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Invalid split index %d must be in range [0,%d]!\n&quot;</span>,</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;            last_start, <a class="code" href="a03546.html#a0c99262aaa769cfd313c3cf5c0a97876">stack_</a>.size() - 1);</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;  }</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;  <a class="code" href="a03574.html">Series</a>* master_series = <span class="keyword">new</span> <a class="code" href="a03574.html#a437a7bd7a0ba62e9fb2560c4641cd8cf">Series</a>(<span class="stringliteral">&quot;MasterSeries&quot;</span>);</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;  <a class="code" href="a03574.html">Series</a>* boosted_series = <span class="keyword">new</span> <a class="code" href="a03574.html#a437a7bd7a0ba62e9fb2560c4641cd8cf">Series</a>(<span class="stringliteral">&quot;BoostedSeries&quot;</span>);</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> s = 0; s &lt;= last_start; ++s) {</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    <span class="keywordflow">if</span> (s + 1 == <a class="code" href="a03546.html#a0c99262aaa769cfd313c3cf5c0a97876">stack_</a>.size() &amp;&amp; <a class="code" href="a03546.html#a0c99262aaa769cfd313c3cf5c0a97876">stack_</a>[s]-&gt;type() == <a class="code" href="a01818.html#a9c90202f597e58fba8911e0d29d9b198a3949f2865c2ab2dd533f6d26065b32c8">NT_SOFTMAX</a>) {</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;      <span class="comment">// Change the softmax to a tanh.</span></div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;      <span class="keyword">auto</span>* fc = static_cast&lt;FullyConnected*&gt;(<a class="code" href="a03546.html#a0c99262aaa769cfd313c3cf5c0a97876">stack_</a>[s]);</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;      fc-&gt;ChangeType(<a class="code" href="a01818.html#a9c90202f597e58fba8911e0d29d9b198ad501a0811a40ec36658696e6b76f6334">NT_TANH</a>);</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    }</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    master_series-&gt;<a class="code" href="a03546.html#aa02630e7885bc4ec85c7d6de3b099a6d">AddToStack</a>(<a class="code" href="a03546.html#a0c99262aaa769cfd313c3cf5c0a97876">stack_</a>[s]);</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    <a class="code" href="a03546.html#a0c99262aaa769cfd313c3cf5c0a97876">stack_</a>[s] = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;  }</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> s = last_start + 1; s &lt; <a class="code" href="a03546.html#a0c99262aaa769cfd313c3cf5c0a97876">stack_</a>.size(); ++s) {</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    boosted_series-&gt;<a class="code" href="a03546.html#aa02630e7885bc4ec85c7d6de3b099a6d">AddToStack</a>(<a class="code" href="a03546.html#a0c99262aaa769cfd313c3cf5c0a97876">stack_</a>[s]);</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    <a class="code" href="a03546.html#a0c99262aaa769cfd313c3cf5c0a97876">stack_</a>[s] = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;  }</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;  *start = master_series;</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;  *end = boosted_series;</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;  <span class="keyword">delete</span> <span class="keyword">this</span>;</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;}</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160; </div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="comment">// Appends the elements of the src series to this, removing from src and</span></div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="comment">// deleting it.</span></div>
+<div class="line"><a name="l00189"></a><span class="lineno"><a class="line" href="a03574.html#a2fcc2087af2ecf97256715f85613c4bb">  189</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a03574.html#a2fcc2087af2ecf97256715f85613c4bb">Series::AppendSeries</a>(<a class="code" href="a03514.html">Network</a>* src) {</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;  <a class="code" href="a00515.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a>(src-&gt;<a class="code" href="a03514.html#ad675bc281466d59898f9bfd73ea34e43">type</a>() == <a class="code" href="a01818.html#a9c90202f597e58fba8911e0d29d9b198aa8f65aa7ff6e3300e56389aa28c52f04">NT_SERIES</a>);</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;  <span class="keyword">auto</span>* src_series = static_cast&lt;Series*&gt;(src);</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> s = 0; s &lt; src_series-&gt;stack_.size(); ++s) {</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    <a class="code" href="a03546.html#aa02630e7885bc4ec85c7d6de3b099a6d">AddToStack</a>(src_series-&gt;stack_[s]);</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    src_series-&gt;stack_[s] = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;  }</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;  <span class="keyword">delete</span> src;</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;}</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160; </div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; </div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;}  <span class="comment">// namespace tesseract.</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa03172_html_a8a7ab56dd7abc0421cff9680b6634b85"><div class="ttname"><a href="a03172.html#a8a7ab56dd7abc0421cff9680b6634b85">tesseract::BaselineBlock::ParallelizeBaselines</a></div><div class="ttdeci">void ParallelizeBaselines(double default_block_skew)</div><div class="ttdef"><b>Definition:</b> <a href="a00941_source.html#l00463">baselinedetect.cpp:463</a></div></div>
-<div class="ttc" id="aa03168_html_a3e0d9742d9e012d895f7f6d3e402ed93"><div class="ttname"><a href="a03168.html#a3e0d9742d9e012d895f7f6d3e402ed93">tesseract::BaselineRow::bounding_box</a></div><div class="ttdeci">const TBOX &amp; bounding_box() const</div><div class="ttdef"><b>Definition:</b> <a href="a00944_source.html#l00044">baselinedetect.h:44</a></div></div>
-<div class="ttc" id="aa03172_html_a4866856efe373c4b48769899e38846b6"><div class="ttname"><a href="a03172.html#a4866856efe373c4b48769899e38846b6">tesseract::BaselineBlock::BaselineBlock</a></div><div class="ttdeci">BaselineBlock(int debug_level, bool non_text, TO_BLOCK *block)</div><div class="ttdef"><b>Definition:</b> <a href="a00941_source.html#l00408">baselinedetect.cpp:408</a></div></div>
-<div class="ttc" id="aa03172_html"><div class="ttname"><a href="a03172.html">tesseract::BaselineBlock</a></div><div class="ttdef"><b>Definition:</b> <a href="a00944_source.html#l00129">baselinedetect.h:129</a></div></div>
-<div class="ttc" id="aa03176_html_a358fd732758ac23b5a20413344204087"><div class="ttname"><a href="a03176.html#a358fd732758ac23b5a20413344204087">tesseract::BaselineDetect::BaselineDetect</a></div><div class="ttdeci">BaselineDetect(int debug_level, const FCOORD &amp;page_skew, TO_BLOCK_LIST *blocks)</div><div class="ttdef"><b>Definition:</b> <a href="a00941_source.html#l00790">baselinedetect.cpp:790</a></div></div>
-<div class="ttc" id="aa02216_html"><div class="ttname"><a href="a02216.html">TO_BLOCK</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00691">blobbox.h:691</a></div></div>
-<div class="ttc" id="aa00380_html"><div class="ttname"><a href="a00380.html">rect.h</a></div></div>
-<div class="ttc" id="aa03168_html_a9089618e6511471f74427da4d9a2eb22"><div class="ttname"><a href="a03168.html#a9089618e6511471f74427da4d9a2eb22">tesseract::BaselineRow::SpaceBetween</a></div><div class="ttdeci">double SpaceBetween(const BaselineRow &amp;other) const</div><div class="ttdef"><b>Definition:</b> <a href="a00941_source.html#l00107">baselinedetect.cpp:107</a></div></div>
-<div class="ttc" id="aa02408_html"><div class="ttname"><a href="a02408.html">FCOORD</a></div><div class="ttdef"><b>Definition:</b> <a href="a00341_source.html#l00187">points.h:187</a></div></div>
-<div class="ttc" id="aa02108_html"><div class="ttname"><a href="a02108.html">GenericVector&lt; double &gt;</a></div></div>
-<div class="ttc" id="aa03352_html"><div class="ttname"><a href="a03352.html">tesseract::Textord</a></div><div class="ttdef"><b>Definition:</b> <a href="a01130_source.html#l00068">textord.h:68</a></div></div>
-<div class="ttc" id="aa03168_html_a6907a2bb647448ef6ed5b6789b7e1440"><div class="ttname"><a href="a03168.html#a6907a2bb647448ef6ed5b6789b7e1440">tesseract::BaselineRow::AdjustBaselineToParallel</a></div><div class="ttdeci">void AdjustBaselineToParallel(int debug, const FCOORD &amp;direction)</div><div class="ttdef"><b>Definition:</b> <a href="a00941_source.html#l00213">baselinedetect.cpp:213</a></div></div>
-<div class="ttc" id="aa02880_html"><div class="ttname"><a href="a02880.html">tesseract::PointerVector</a></div><div class="ttdef"><b>Definition:</b> <a href="a00719_source.html#l00035">shapeclassifier.h:35</a></div></div>
-<div class="ttc" id="aa03172_html_a0619e15482a4ed11dce15bc5d8cbe0be"><div class="ttname"><a href="a03172.html#a0619e15482a4ed11dce15bc5d8cbe0be">tesseract::BaselineBlock::SetupBlockParameters</a></div><div class="ttdeci">void SetupBlockParameters() const</div><div class="ttdef"><b>Definition:</b> <a href="a00941_source.html#l00505">baselinedetect.cpp:505</a></div></div>
-<div class="ttc" id="aa03172_html_a1e27f4aaf66c7e7aae4062c590fd8f3f"><div class="ttname"><a href="a03172.html#a1e27f4aaf66c7e7aae4062c590fd8f3f">tesseract::BaselineBlock::FitBaselinesAndFindSkew</a></div><div class="ttdeci">bool FitBaselinesAndFindSkew(bool use_box_bottoms)</div><div class="ttdef"><b>Definition:</b> <a href="a00941_source.html#l00434">baselinedetect.cpp:434</a></div></div>
-<div class="ttc" id="aa03176_html_add0b738a17be0b186dea47bf3b8ea267"><div class="ttname"><a href="a03176.html#add0b738a17be0b186dea47bf3b8ea267">tesseract::BaselineDetect::~BaselineDetect</a></div><div class="ttdeci">~BaselineDetect()=default</div></div>
-<div class="ttc" id="aa03172_html_a381942ef00fcff77a75d036fac9b3fa5"><div class="ttname"><a href="a03172.html#a381942ef00fcff77a75d036fac9b3fa5">tesseract::BaselineBlock::block</a></div><div class="ttdeci">TO_BLOCK * block() const</div><div class="ttdef"><b>Definition:</b> <a href="a00944_source.html#l00133">baselinedetect.h:133</a></div></div>
-<div class="ttc" id="aa03168_html_a0abf3f82fd5ab3b3a79a23a2c030547e"><div class="ttname"><a href="a03168.html#a0abf3f82fd5ab3b3a79a23a2c030547e">tesseract::BaselineRow::FitBaseline</a></div><div class="ttdeci">bool FitBaseline(bool use_box_bottoms)</div><div class="ttdef"><b>Definition:</b> <a href="a00941_source.html#l00141">baselinedetect.cpp:141</a></div></div>
-<div class="ttc" id="aa03172_html_a1445079bbeaaf0e81ab124288cc6ecf3"><div class="ttname"><a href="a03172.html#a1445079bbeaaf0e81ab124288cc6ecf3">tesseract::BaselineBlock::skew_angle</a></div><div class="ttdeci">double skew_angle() const</div><div class="ttdef"><b>Definition:</b> <a href="a00944_source.html#l00136">baselinedetect.h:136</a></div></div>
-<div class="ttc" id="aa03176_html"><div class="ttname"><a href="a03176.html">tesseract::BaselineDetect</a></div><div class="ttdef"><b>Definition:</b> <a href="a00944_source.html#l00242">baselinedetect.h:242</a></div></div>
-<div class="ttc" id="aa03168_html_ac81135eb24c3d936f7c1d9e81567cae8"><div class="ttname"><a href="a03168.html#ac81135eb24c3d936f7c1d9e81567cae8">tesseract::BaselineRow::AdjustBaselineToGrid</a></div><div class="ttdeci">double AdjustBaselineToGrid(int debug, const FCOORD &amp;direction, double line_spacing, double line_offset)</div><div class="ttdef"><b>Definition:</b> <a href="a00941_source.html#l00228">baselinedetect.cpp:228</a></div></div>
-<div class="ttc" id="aa03172_html_a198bcc873e579e4798f4a8ed82fdb543"><div class="ttname"><a href="a03172.html#a198bcc873e579e4798f4a8ed82fdb543">tesseract::BaselineBlock::FitBaselineSplines</a></div><div class="ttdeci">void FitBaselineSplines(bool enable_splines, bool show_final_rows, Textord *textord)</div><div class="ttdef"><b>Definition:</b> <a href="a00941_source.html#l00548">baselinedetect.cpp:548</a></div></div>
-<div class="ttc" id="aa03168_html"><div class="ttname"><a href="a03168.html">tesseract::BaselineRow</a></div><div class="ttdef"><b>Definition:</b> <a href="a00944_source.html#l00040">baselinedetect.h:40</a></div></div>
-<div class="ttc" id="aa03168_html_adb63829f17ab14cfea6215b64ecf589e"><div class="ttname"><a href="a03168.html#adb63829f17ab14cfea6215b64ecf589e">tesseract::BaselineRow::SetupOldLineParameters</a></div><div class="ttdeci">void SetupOldLineParameters(TO_ROW *row) const</div><div class="ttdef"><b>Definition:</b> <a href="a00941_source.html#l00076">baselinedetect.cpp:76</a></div></div>
-<div class="ttc" id="aa01539_html"><div class="ttname"><a href="a01539.html">tesseract</a></div><div class="ttdef"><b>Definition:</b> <a href="a00002_source.html#l00025">altorenderer.cpp:25</a></div></div>
-<div class="ttc" id="aa03168_html_a1b1af2359af16a1a44ec5dcf74114142"><div class="ttname"><a href="a03168.html#a1b1af2359af16a1a44ec5dcf74114142">tesseract::BaselineRow::Print</a></div><div class="ttdeci">void Print() const</div><div class="ttdef"><b>Definition:</b> <a href="a00941_source.html#l00086">baselinedetect.cpp:86</a></div></div>
-<div class="ttc" id="aa03172_html_ab6e80c4b218c94c056659659a4d5e59b"><div class="ttname"><a href="a03172.html#ab6e80c4b218c94c056659659a4d5e59b">tesseract::BaselineBlock::PrepareForSplineFitting</a></div><div class="ttdeci">void PrepareForSplineFitting(ICOORD page_tr, bool remove_noise)</div><div class="ttdef"><b>Definition:</b> <a href="a00941_source.html#l00532">baselinedetect.cpp:532</a></div></div>
-<div class="ttc" id="aa03172_html_a682d76ce63cdca26f2a1b33d57ffc2ab"><div class="ttname"><a href="a03172.html#a682d76ce63cdca26f2a1b33d57ffc2ab">tesseract::BaselineBlock::DrawFinalRows</a></div><div class="ttdeci">void DrawFinalRows(const ICOORD &amp;page_tr)</div><div class="ttdef"><b>Definition:</b> <a href="a00941_source.html#l00577">baselinedetect.cpp:577</a></div></div>
-<div class="ttc" id="aa03168_html_a9f18eec108377775507d2715186593cd"><div class="ttname"><a href="a03168.html#a9f18eec108377775507d2715186593cd">tesseract::BaselineRow::BaselineRow</a></div><div class="ttdeci">BaselineRow(double line_size, TO_ROW *to_row)</div><div class="ttdef"><b>Definition:</b> <a href="a00941_source.html#l00064">baselinedetect.cpp:64</a></div></div>
-<div class="ttc" id="aa02212_html"><div class="ttname"><a href="a02212.html">TO_ROW</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00543">blobbox.h:543</a></div></div>
-<div class="ttc" id="aa03168_html_a31f1ab3eb5a4d39c7956b9ad7fba07b0"><div class="ttname"><a href="a03168.html#a31f1ab3eb5a4d39c7956b9ad7fba07b0">tesseract::BaselineRow::PerpDisp</a></div><div class="ttdeci">double PerpDisp(const FCOORD &amp;direction) const</div><div class="ttdef"><b>Definition:</b> <a href="a00941_source.html#l00120">baselinedetect.cpp:120</a></div></div>
-<div class="ttc" id="aa02440_html"><div class="ttname"><a href="a02440.html">TBOX</a></div><div class="ttdef"><b>Definition:</b> <a href="a00380_source.html#l00033">rect.h:33</a></div></div>
-<div class="ttc" id="aa03172_html_ac12d056a2cc07b32b381d836126c4fa8"><div class="ttname"><a href="a03172.html#ac12d056a2cc07b32b381d836126c4fa8">tesseract::BaselineBlock::SpacingModelError</a></div><div class="ttdeci">static double SpacingModelError(double perp_disp, double line_spacing, double line_offset)</div><div class="ttdef"><b>Definition:</b> <a href="a00941_source.html#l00422">baselinedetect.cpp:422</a></div></div>
-<div class="ttc" id="aa03168_html_aa0f2797e274179798e95e7e2cafb424f"><div class="ttname"><a href="a03168.html#aa0f2797e274179798e95e7e2cafb424f">tesseract::BaselineRow::StraightYAtX</a></div><div class="ttdeci">double StraightYAtX(double x) const</div><div class="ttdef"><b>Definition:</b> <a href="a00941_source.html#l00128">baselinedetect.cpp:128</a></div></div>
-<div class="ttc" id="aa00341_html"><div class="ttname"><a href="a00341.html">points.h</a></div></div>
-<div class="ttc" id="aa03176_html_a9eaa0eba10b5abb2a9813f521c9dba50"><div class="ttname"><a href="a03176.html#a9eaa0eba10b5abb2a9813f521c9dba50">tesseract::BaselineDetect::ComputeStraightBaselines</a></div><div class="ttdeci">void ComputeStraightBaselines(bool use_box_bottoms)</div><div class="ttdef"><b>Definition:</b> <a href="a00941_source.html#l00812">baselinedetect.cpp:812</a></div></div>
-<div class="ttc" id="aa02264_html"><div class="ttname"><a href="a02264.html">tesseract::DetLineFit</a></div><div class="ttdef"><b>Definition:</b> <a href="a00251_source.html#l00056">detlinefit.h:56</a></div></div>
-<div class="ttc" id="aa03168_html_a4634cd0cd05e8292d80c1d396d598b17"><div class="ttname"><a href="a03168.html#a4634cd0cd05e8292d80c1d396d598b17">tesseract::BaselineRow::BaselineAngle</a></div><div class="ttdeci">double BaselineAngle() const</div><div class="ttdef"><b>Definition:</b> <a href="a00941_source.html#l00097">baselinedetect.cpp:97</a></div></div>
-<div class="ttc" id="aa03172_html_a858165c88e4c695fa2136bac7ed97b7f"><div class="ttname"><a href="a03172.html#a858165c88e4c695fa2136bac7ed97b7f">tesseract::BaselineBlock::DrawPixSpline</a></div><div class="ttdeci">void DrawPixSpline(Pix *pix_in)</div><div class="ttdef"><b>Definition:</b> <a href="a00941_source.html#l00602">baselinedetect.cpp:602</a></div></div>
-<div class="ttc" id="aa00251_html"><div class="ttname"><a href="a00251.html">detlinefit.h</a></div></div>
-<div class="ttc" id="aa02400_html"><div class="ttname"><a href="a02400.html">ICOORD</a></div><div class="ttdoc">integer coordinate</div><div class="ttdef"><b>Definition:</b> <a href="a00341_source.html#l00030">points.h:30</a></div></div>
-<div class="ttc" id="aa03176_html_a62154b468dd5af9b00a158542be42b6c"><div class="ttname"><a href="a03176.html#a62154b468dd5af9b00a158542be42b6c">tesseract::BaselineDetect::ComputeBaselineSplinesAndXheights</a></div><div class="ttdeci">void ComputeBaselineSplinesAndXheights(const ICOORD &amp;page_tr, bool enable_splines, bool remove_noise, bool show_final_rows, Textord *textord)</div><div class="ttdef"><b>Definition:</b> <a href="a00941_source.html#l00844">baselinedetect.cpp:844</a></div></div>
+<div class="ttc" id="aa03574_html_ad2fb2e76e8bf6af9fd4f0e2b7b4bce1c"><div class="ttname"><a href="a03574.html#ad2fb2e76e8bf6af9fd4f0e2b7b4bce1c">tesseract::Series::SplitAt</a></div><div class="ttdeci">void SplitAt(int last_start, Series **start, Series **end)</div><div class="ttdef"><b>Definition:</b> <a href="a00944_source.html#l00159">series.cpp:159</a></div></div>
+<div class="ttc" id="aa03578_html"><div class="ttname"><a href="a03578.html">tesseract::StaticShape</a></div><div class="ttdef"><b>Definition:</b> <a href="a00950_source.html#l00038">static_shape.h:38</a></div></div>
+<div class="ttc" id="aa03546_html_aa02630e7885bc4ec85c7d6de3b099a6d"><div class="ttname"><a href="a03546.html#aa02630e7885bc4ec85c7d6de3b099a6d">tesseract::Plumbing::AddToStack</a></div><div class="ttdeci">virtual void AddToStack(Network *network)</div><div class="ttdef"><b>Definition:</b> <a href="a00920_source.html#l00082">plumbing.cpp:82</a></div></div>
+<div class="ttc" id="aa00515_html_a93a603f4063a6b9403d81caa245a583b"><div class="ttname"><a href="a00515.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a></div><div class="ttdeci">#define ASSERT_HOST(x)</div><div class="ttdef"><b>Definition:</b> <a href="a00515_source.html#l00087">errcode.h:87</a></div></div>
+<div class="ttc" id="aa03574_html"><div class="ttname"><a href="a03574.html">tesseract::Series</a></div><div class="ttdef"><b>Definition:</b> <a href="a00947_source.html#l00027">series.h:27</a></div></div>
+<div class="ttc" id="aa03574_html_a14107e24aaeb7776d5102210be53bd8c"><div class="ttname"><a href="a03574.html#a14107e24aaeb7776d5102210be53bd8c">tesseract::Series::Backward</a></div><div class="ttdeci">bool Backward(bool debug, const NetworkIO &amp;fwd_deltas, NetworkScratch *scratch, NetworkIO *back_deltas) override</div><div class="ttdef"><b>Definition:</b> <a href="a00944_source.html#l00128">series.cpp:128</a></div></div>
+<div class="ttc" id="aa02542_html"><div class="ttname"><a href="a02542.html">STRING</a></div><div class="ttdef"><b>Definition:</b> <a href="a00044_source.html#l00045">strngs.h:45</a></div></div>
+<div class="ttc" id="aa03574_html_a3bc490b4666a9a0d3bd1f87fbf379e6b"><div class="ttname"><a href="a03574.html#a3bc490b4666a9a0d3bd1f87fbf379e6b">tesseract::Series::XScaleFactor</a></div><div class="ttdeci">int XScaleFactor() const override</div><div class="ttdef"><b>Definition:</b> <a href="a00944_source.html#l00091">series.cpp:91</a></div></div>
+<div class="ttc" id="aa03522_html"><div class="ttname"><a href="a03522.html">tesseract::NetworkScratch</a></div><div class="ttdef"><b>Definition:</b> <a href="a00911_source.html#l00034">networkscratch.h:34</a></div></div>
+<div class="ttc" id="aa03514_html_ad675bc281466d59898f9bfd73ea34e43"><div class="ttname"><a href="a03514.html#ad675bc281466d59898f9bfd73ea34e43">tesseract::Network::type</a></div><div class="ttdeci">NetworkType type() const</div><div class="ttdef"><b>Definition:</b> <a href="a00902_source.html#l00112">network.h:112</a></div></div>
+<div class="ttc" id="aa03514_html_a4f873badcbdbace50d87721084d8d313"><div class="ttname"><a href="a03514.html#a4f873badcbdbace50d87721084d8d313">tesseract::Network::needs_to_backprop_</a></div><div class="ttdeci">bool needs_to_backprop_</div><div class="ttdef"><b>Definition:</b> <a href="a00902_source.html#l00295">network.h:295</a></div></div>
+<div class="ttc" id="aa03546_html_a0c99262aaa769cfd313c3cf5c0a97876"><div class="ttname"><a href="a03546.html#a0c99262aaa769cfd313c3cf5c0a97876">tesseract::Plumbing::stack_</a></div><div class="ttdeci">PointerVector&lt; Network &gt; stack_</div><div class="ttdef"><b>Definition:</b> <a href="a00923_source.html#l00136">plumbing.h:136</a></div></div>
+<div class="ttc" id="aa03514_html_a799ee867583cbebd7fdcb1e1d0e5344e"><div class="ttname"><a href="a03514.html#a799ee867583cbebd7fdcb1e1d0e5344e">tesseract::Network::IsTraining</a></div><div class="ttdeci">bool IsTraining() const</div><div class="ttdef"><b>Definition:</b> <a href="a00902_source.html#l00115">network.h:115</a></div></div>
+<div class="ttc" id="aa00911_html"><div class="ttname"><a href="a00911.html">networkscratch.h</a></div></div>
+<div class="ttc" id="aa03574_html_a437a7bd7a0ba62e9fb2560c4641cd8cf"><div class="ttname"><a href="a03574.html#a437a7bd7a0ba62e9fb2560c4641cd8cf">tesseract::Series::Series</a></div><div class="ttdeci">Series(const STRING &amp;name)</div><div class="ttdef"><b>Definition:</b> <a href="a00944_source.html#l00028">series.cpp:28</a></div></div>
+<div class="ttc" id="aa03574_html_aacf2ab6808e11c5b5dda489d4b81045c"><div class="ttname"><a href="a03574.html#aacf2ab6808e11c5b5dda489d4b81045c">tesseract::Series::OutputShape</a></div><div class="ttdeci">StaticShape OutputShape(const StaticShape &amp;input_shape) const override</div><div class="ttdef"><b>Definition:</b> <a href="a00944_source.html#l00034">series.cpp:34</a></div></div>
+<div class="ttc" id="aa01818_html_a9c90202f597e58fba8911e0d29d9b198aa8f65aa7ff6e3300e56389aa28c52f04"><div class="ttname"><a href="a01818.html#a9c90202f597e58fba8911e0d29d9b198aa8f65aa7ff6e3300e56389aa28c52f04">tesseract::NT_SERIES</a></div><div class="ttdef"><b>Definition:</b> <a href="a00902_source.html#l00054">network.h:54</a></div></div>
+<div class="ttc" id="aa03574_html_ad2a486da814dc0bc62c30ff4291da2db"><div class="ttname"><a href="a03574.html#ad2a486da814dc0bc62c30ff4291da2db">tesseract::Series::InitWeights</a></div><div class="ttdeci">int InitWeights(float range, TRand *randomizer) override</div><div class="ttdef"><b>Definition:</b> <a href="a00944_source.html#l00046">series.cpp:46</a></div></div>
+<div class="ttc" id="aa03514_html_a1bdf9fdfb7ed0d4962f4193dff5cd5ee"><div class="ttname"><a href="a03514.html#a1bdf9fdfb7ed0d4962f4193dff5cd5ee">tesseract::Network::type_</a></div><div class="ttdeci">NetworkType type_</div><div class="ttdef"><b>Definition:</b> <a href="a00902_source.html#l00293">network.h:293</a></div></div>
+<div class="ttc" id="aa01818_html_a9c90202f597e58fba8911e0d29d9b198ad501a0811a40ec36658696e6b76f6334"><div class="ttname"><a href="a01818.html#a9c90202f597e58fba8911e0d29d9b198ad501a0811a40ec36658696e6b76f6334">tesseract::NT_TANH</a></div><div class="ttdef"><b>Definition:</b> <a href="a00902_source.html#l00065">network.h:65</a></div></div>
+<div class="ttc" id="aa03518_html"><div class="ttname"><a href="a03518.html">tesseract::NetworkIO</a></div><div class="ttdef"><b>Definition:</b> <a href="a00908_source.html#l00039">networkio.h:39</a></div></div>
+<div class="ttc" id="aa03546_html"><div class="ttname"><a href="a03546.html">tesseract::Plumbing</a></div><div class="ttdef"><b>Definition:</b> <a href="a00923_source.html#l00030">plumbing.h:30</a></div></div>
+<div class="ttc" id="aa03574_html_a0b2243d7f9feff371b073999d373fb97"><div class="ttname"><a href="a03574.html#a0b2243d7f9feff371b073999d373fb97">tesseract::Series::spec</a></div><div class="ttdeci">STRING spec() const override</div><div class="ttdef"><b>Definition:</b> <a href="a00947_source.html#l00037">series.h:37</a></div></div>
+<div class="ttc" id="aa01818_html"><div class="ttname"><a href="a01818.html">tesseract</a></div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00065">baseapi.h:65</a></div></div>
+<div class="ttc" id="aa03574_html_ab2660cb65ba83f6aeb8024da29f08493"><div class="ttname"><a href="a03574.html#ab2660cb65ba83f6aeb8024da29f08493">tesseract::Series::CacheXScaleFactor</a></div><div class="ttdeci">void CacheXScaleFactor(int factor) override</div><div class="ttdef"><b>Definition:</b> <a href="a00944_source.html#l00100">series.cpp:100</a></div></div>
+<div class="ttc" id="aa03514_html_a3cb608bfc2c144366eab3fc43c37848e"><div class="ttname"><a href="a03514.html#a3cb608bfc2c144366eab3fc43c37848e">tesseract::Network::NumOutputs</a></div><div class="ttdeci">int NumOutputs() const</div><div class="ttdef"><b>Definition:</b> <a href="a00902_source.html#l00123">network.h:123</a></div></div>
+<div class="ttc" id="aa00584_html"><div class="ttname"><a href="a00584.html">tprintf.h</a></div></div>
+<div class="ttc" id="aa03526_html"><div class="ttname"><a href="a03526.html">tesseract::NetworkScratch::IO</a></div><div class="ttdef"><b>Definition:</b> <a href="a00911_source.html#l00051">networkscratch.h:51</a></div></div>
+<div class="ttc" id="aa03574_html_a2fcc2087af2ecf97256715f85613c4bb"><div class="ttname"><a href="a03574.html#a2fcc2087af2ecf97256715f85613c4bb">tesseract::Series::AppendSeries</a></div><div class="ttdeci">void AppendSeries(Network *src)</div><div class="ttdef"><b>Definition:</b> <a href="a00944_source.html#l00189">series.cpp:189</a></div></div>
+<div class="ttc" id="aa03514_html"><div class="ttname"><a href="a03514.html">tesseract::Network</a></div><div class="ttdef"><b>Definition:</b> <a href="a00902_source.html#l00105">network.h:105</a></div></div>
+<div class="ttc" id="aa03514_html_ac50b6dadac578a9a754eb4a7d5416ce5"><div class="ttname"><a href="a03514.html#ac50b6dadac578a9a754eb4a7d5416ce5">tesseract::Network::num_weights_</a></div><div class="ttdeci">int32_t num_weights_</div><div class="ttdef"><b>Definition:</b> <a href="a00902_source.html#l00299">network.h:299</a></div></div>
+<div class="ttc" id="aa00947_html"><div class="ttname"><a href="a00947.html">series.h</a></div></div>
+<div class="ttc" id="aa00863_html"><div class="ttname"><a href="a00863.html">fullyconnected.h</a></div></div>
+<div class="ttc" id="aa03606_html"><div class="ttname"><a href="a03606.html">tesseract::TransposedArray</a></div><div class="ttdef"><b>Definition:</b> <a href="a00974_source.html#l00032">weightmatrix.h:32</a></div></div>
+<div class="ttc" id="aa03574_html_afc01bace38ca1e99232995a0161037b1"><div class="ttname"><a href="a03574.html#afc01bace38ca1e99232995a0161037b1">tesseract::Series::Forward</a></div><div class="ttdeci">void Forward(bool debug, const NetworkIO &amp;input, const TransposedArray *input_transpose, NetworkScratch *scratch, NetworkIO *output) override</div><div class="ttdef"><b>Definition:</b> <a href="a00944_source.html#l00106">series.cpp:106</a></div></div>
+<div class="ttc" id="aa03574_html_af39fd26a2966f0a35945ecd04698dae7"><div class="ttname"><a href="a03574.html#af39fd26a2966f0a35945ecd04698dae7">tesseract::Series::RemapOutputs</a></div><div class="ttdeci">int RemapOutputs(int old_no, const std::vector&lt; int &gt; &amp;code_map) override</div><div class="ttdef"><b>Definition:</b> <a href="a00944_source.html#l00061">series.cpp:61</a></div></div>
+<div class="ttc" id="aa00581_html_a0c2bcd4462ec67ab0971b34a0f610f55"><div class="ttname"><a href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a></div><div class="ttdeci">DLLSYM void tprintf(const char *format,...)</div><div class="ttdef"><b>Definition:</b> <a href="a00581_source.html#l00034">tprintf.cpp:34</a></div></div>
+<div class="ttc" id="aa03574_html_a0ce6d2c8ab7d5699fc20a1afaca02562"><div class="ttname"><a href="a03574.html#a0ce6d2c8ab7d5699fc20a1afaca02562">tesseract::Series::SetupNeedsBackprop</a></div><div class="ttdeci">bool SetupNeedsBackprop(bool needs_backprop) override</div><div class="ttdef"><b>Definition:</b> <a href="a00944_source.html#l00078">series.cpp:78</a></div></div>
+<div class="ttc" id="aa03514_html_a4ecd3cbeaa6195ca0fa2ecd5878bc404"><div class="ttname"><a href="a03514.html#a4ecd3cbeaa6195ca0fa2ecd5878bc404">tesseract::Network::no_</a></div><div class="ttdeci">int32_t no_</div><div class="ttdef"><b>Definition:</b> <a href="a00902_source.html#l00298">network.h:298</a></div></div>
+<div class="ttc" id="aa02450_html"><div class="ttname"><a href="a02450.html">tesseract::TRand</a></div><div class="ttdef"><b>Definition:</b> <a href="a00014_source.html#l00050">helpers.h:50</a></div></div>
+<div class="ttc" id="aa01469_html"><div class="ttname"><a href="a01469.html">scrollview.h</a></div></div>
+<div class="ttc" id="aa01818_html_a9c90202f597e58fba8911e0d29d9b198a3949f2865c2ab2dd533f6d26065b32c8"><div class="ttname"><a href="a01818.html#a9c90202f597e58fba8911e0d29d9b198a3949f2865c2ab2dd533f6d26065b32c8">tesseract::NT_SOFTMAX</a></div><div class="ttdef"><b>Definition:</b> <a href="a00902_source.html#l00068">network.h:68</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_930fe0a3c40775bbdbdb97cea0f56396.html">textord</a></li><li class="navelem"><a class="el" href="a00944.html">baselinedetect.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:15 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_57c32823bf7301c39893cc8d5b3eca8e.html">lstm</a></li><li class="navelem"><a class="el" href="a00944.html">series.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:20 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

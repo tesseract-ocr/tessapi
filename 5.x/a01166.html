@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/textord/workingpartset.cpp File Reference</title>
+<title>tesseract: /tesseract/src/textord/tabvector.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,28 +87,59 @@ $(document).ready(function(){initNavTree('a01166.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
-<div class="title">workingpartset.cpp File Reference</div>  </div>
+<div class="title">tabvector.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="a01169_source.html">workingpartset.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00986_source.html">colpartition.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a01169_source.html">tabvector.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00254_source.html">blobbox.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a01031_source.html">colfind.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a01049_source.html">colpartitionset.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00302_source.html">detlinefit.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00455_source.html">statistc.h</a>&quot;</code><br />
+<code>#include &lt;algorithm&gt;</code><br />
 </div>
 <p><a href="a01166_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a01539"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html">tesseract</a></td></tr>
+<tr class="memitem:a01818"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html">tesseract</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a5e5c88d73de712626bb45049f05bf935"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a5e5c88d73de712626bb45049f05bf935">tesseract::kGutterMultiple</a> = 4</td></tr>
+<tr class="separator:a5e5c88d73de712626bb45049f05bf935"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae01d1c3ecd3191b3fd9b5df6fc7329c1"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#ae01d1c3ecd3191b3fd9b5df6fc7329c1">tesseract::kGutterToNeighbourRatio</a> = 3</td></tr>
+<tr class="separator:ae01d1c3ecd3191b3fd9b5df6fc7329c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70fef17dce833d756ce25024339559ab"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a70fef17dce833d756ce25024339559ab">tesseract::kSimilarVectorDist</a> = 10</td></tr>
+<tr class="separator:a70fef17dce833d756ce25024339559ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe209ead2031e46e5acc7e412edbb078"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#afe209ead2031e46e5acc7e412edbb078">tesseract::kSimilarRaggedDist</a> = 50</td></tr>
+<tr class="separator:afe209ead2031e46e5acc7e412edbb078"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac71cf6db3acc20786941d1146f15bf2b"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#ac71cf6db3acc20786941d1146f15bf2b">tesseract::kMaxFillinMultiple</a> = 11</td></tr>
+<tr class="separator:ac71cf6db3acc20786941d1146f15bf2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adde25237f36db6088af89a6a01a903df"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#adde25237f36db6088af89a6a01a903df">tesseract::kMinGutterFraction</a> = 0.5</td></tr>
+<tr class="separator:adde25237f36db6088af89a6a01a903df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa71fcc94da61f06092ac41c1000092b"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#aaa71fcc94da61f06092ac41c1000092b">tesseract::kLineCountReciprocal</a> = 4.0</td></tr>
+<tr class="separator:aaa71fcc94da61f06092ac41c1000092b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e54ca6764ad8a50cdbc42ebe335784e"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a1e54ca6764ad8a50cdbc42ebe335784e">tesseract::kMinAlignedGutter</a> = 0.25</td></tr>
+<tr class="separator:a1e54ca6764ad8a50cdbc42ebe335784e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a2e596e8a74bfa615969413f2059244"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a8a2e596e8a74bfa615969413f2059244">tesseract::kMinRaggedGutter</a> = 1.5</td></tr>
+<tr class="separator:a8a2e596e8a74bfa615969413f2059244"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16144e0f0ec50aeee39322c29e5ef4c7"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a16144e0f0ec50aeee39322c29e5ef4c7">tesseract::textord_tabvector_vertical_gap_fraction</a> = 0.5</td></tr>
+<tr class="separator:a16144e0f0ec50aeee39322c29e5ef4c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affa406b99ade671948f293ba7d274184"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#affa406b99ade671948f293ba7d274184">tesseract::textord_tabvector_vertical_box_ratio</a> = 0.5</td></tr>
+<tr class="separator:affa406b99ade671948f293ba7d274184"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_930fe0a3c40775bbdbdb97cea0f56396.html">textord</a></li><li class="navelem"><a class="el" href="a01166.html">workingpartset.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_930fe0a3c40775bbdbdb97cea0f56396.html">textord</a></li><li class="navelem"><a class="el" href="a01166.html">tabvector.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

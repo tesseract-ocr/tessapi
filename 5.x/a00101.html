@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/ccmain/mutableiterator.cpp File Reference</title>
+<title>tesseract: /tesseract/src/arch/intsimdmatrixavx2.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,27 +87,45 @@ $(document).ready(function(){initNavTree('a00101.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
-<div class="title">mutableiterator.cpp File Reference</div>  </div>
+<div class="title">intsimdmatrixavx2.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="a00104_source.html">mutableiterator.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a00098_source.html">intsimdmatrix.h</a>&quot;</code><br />
+<code>#include &lt;immintrin.h&gt;</code><br />
+<code>#include &lt;cstdint&gt;</code><br />
+<code>#include &lt;algorithm&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
 </div>
 <p><a href="a00101_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a01539"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html">tesseract</a></td></tr>
+<tr class="memitem:a01818"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html">tesseract</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:abcbe63165f52d9626a5cdc9d2852906a"><td class="memItemLeft" align="right" valign="top">constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#abcbe63165f52d9626a5cdc9d2852906a">tesseract::kNumOutputsPerRegister</a> = 8</td></tr>
+<tr class="separator:abcbe63165f52d9626a5cdc9d2852906a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d4d601cb7f4a519864c16f5cd56c603"><td class="memItemLeft" align="right" valign="top">constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a4d4d601cb7f4a519864c16f5cd56c603">tesseract::kMaxOutputRegisters</a> = 8</td></tr>
+<tr class="separator:a4d4d601cb7f4a519864c16f5cd56c603"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cb50bf1112eb61e168c90650e1f0470"><td class="memItemLeft" align="right" valign="top">constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a7cb50bf1112eb61e168c90650e1f0470">tesseract::kNumInputsPerRegister</a> = 32</td></tr>
+<tr class="separator:a7cb50bf1112eb61e168c90650e1f0470"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefdd9144e7cd1dc3e55e288831e28fed"><td class="memItemLeft" align="right" valign="top">constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#aefdd9144e7cd1dc3e55e288831e28fed">tesseract::kNumInputsPerGroup</a> = 4</td></tr>
+<tr class="separator:aefdd9144e7cd1dc3e55e288831e28fed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab28b34d75194f4302fb4ea3519f50fec"><td class="memItemLeft" align="right" valign="top">constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#ab28b34d75194f4302fb4ea3519f50fec">tesseract::kNumInputGroups</a> = kNumInputsPerRegister / kNumInputsPerGroup</td></tr>
+<tr class="separator:ab28b34d75194f4302fb4ea3519f50fec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_43edf6714a3bf7b9dbcd0e0e50a1a1a7.html">ccmain</a></li><li class="navelem"><a class="el" href="a00101.html">mutableiterator.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_70d5e250c66d001b18da37689179cade.html">arch</a></li><li class="navelem"><a class="el" href="a00101.html">intsimdmatrixavx2.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

@@ -1,4 +1,25 @@
 var a00179 =
 [
-    [ "debug_fp", "a00179.html#adff672a9cdb59d57a0d142954a6a3899", null ]
+    [ "UnicodeSpanSkipper", "a02590.html", "a02590" ],
+    [ "Cluster", "a02594.html", "a02594" ],
+    [ "SimpleClusterer", "a02598.html", "a02598" ],
+    [ "GeometricClassifierState", "a02602.html", "a02602" ],
+    [ "Interval", "a02606.html", "a02606" ],
+    [ "AsciiLikelyListItem", "a00179.html#a4b153a6c7f9116c12cffe35964cf6ba3", null ],
+    [ "CanonicalizeDetectionResults", "a00179.html#a9cafdf34c1f6a37446d3e656da69afdc", null ],
+    [ "CrownCompatible", "a00179.html#a2327e0fae9f7527a805d6cb2ac9bfc16", null ],
+    [ "DetectParagraphs", "a00179.html#a7fb9da5e21dab182f4ac89730a421443", null ],
+    [ "DetectParagraphs", "a00179.html#ac3edfcbb6042dffc461c6e5737c72643", null ],
+    [ "FirstWordWouldHaveFit", "a00179.html#a95092769d51f59c291291e7397895a23", null ],
+    [ "FirstWordWouldHaveFit", "a00179.html#a5d73136a6cc816e7f51fcfbfe99d52c1", null ],
+    [ "InterwordSpace", "a00179.html#adf0128a0f8d13a8183820ce034d56122", null ],
+    [ "LeftWordAttributes", "a00179.html#a04498cd763cc4a381f1b7c2d0e17f020", null ],
+    [ "RecomputeMarginsAndClearHypotheses", "a00179.html#a8f083a56b3a7be7431cea88c86f49216", null ],
+    [ "RightWordAttributes", "a00179.html#aa0bc43fa3c52639420ed7eeb1093aa24", null ],
+    [ "RowsFitModel", "a00179.html#ac1812316831faad241ffadb840e9a21e", null ],
+    [ "UnicodeFor", "a00179.html#abe22d992db19f44c79906b66dc846eaa", null ],
+    [ "ValidBodyLine", "a00179.html#a7933d5b144ff81c13320bfb6f32e0264", null ],
+    [ "ValidFirstLine", "a00179.html#a8f44dde2641dd1047debf38c4429dc2b", null ],
+    [ "kCrownLeft", "a00179.html#a98233252a018dc9eb158c8223e2db208", null ],
+    [ "kCrownRight", "a00179.html#a9fec475017947c91c5cdb29b160f4453", null ]
 ];

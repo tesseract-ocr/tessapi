@@ -1,10 +1,8 @@
 var a00725 =
 [
-    [ "UnicharRating", "a02888.html", "a02888" ],
-    [ "ShapeRating", "a02892.html", "a02892" ],
-    [ "ShapeQueueEntry", "a02896.html", "a02896" ],
-    [ "UnicharAndFonts", "a02900.html", "a02900" ],
-    [ "Shape", "a02904.html", "a02904" ],
-    [ "ShapeTable", "a02908.html", "a02908" ],
-    [ "ShapeQueue", "a00725.html#a96f413a3b16eb45cce7e72ee243b93cd", null ]
+    [ "BlobMicroFeatures", "a00725.html#a807f06b47c5b936507ee2895e1452afa", null ],
+    [ "ConvertToMicroFeatures", "a00725.html#ae9693813f30b3c834f46191be843b750", null ],
+    [ "ExtractMicroFeature", "a00725.html#aff6e1b00e3fdbcf73ecee608c906f6f8", null ],
+    [ "classify_max_slope", "a00725.html#a7a76f272add43800ab97ff8aeb0184a9", null ],
+    [ "classify_min_slope", "a00725.html#afc77a0a04110e77db4b31bb16800a207", null ]
 ];

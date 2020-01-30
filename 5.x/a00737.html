@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/classify/trainingsample.h File Reference</title>
+<title>tesseract: /tesseract/src/classify/normmatch.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,38 +90,105 @@ $(document).ready(function(){initNavTree('a00737.html','');});
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle">
-<div class="title">trainingsample.h File Reference</div>  </div>
+<div class="title">normmatch.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="a00452_source.html">elst.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00611_source.html">featdefs.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00635_source.html">intfx.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00641_source.html">intmatcher.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00281_source.html">matrix.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00659_source.html">mf.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00707_source.html">picofeat.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00725_source.html">shapetable.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00554_source.html">unicharset.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a00740_source.html">normmatch.h</a>&quot;</code><br />
+<code>#include &lt;cstdio&gt;</code><br />
+<code>#include &lt;cmath&gt;</code><br />
+<code>#include &lt;sstream&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00641_source.html">classify.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00653_source.html">clusttool.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00803_source.html">emalloc.h</a>&quot;</code><br />
+<code>#include &lt;<a class="el" href="a00014_source.html">tesseract/helpers.h</a>&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00734_source.html">normfeat.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00605_source.html">unicharset.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00554_source.html">params.h</a>&quot;</code><br />
 </div>
 <p><a href="a00737_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02916.html">tesseract::TrainingSample</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03310.html">NORM_PROTOS</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a01539"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html">tesseract</a></td></tr>
+<tr class="memitem:a01818"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html">tesseract</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="member-group"></a>
+NormEvidenceOf</h2></td></tr>
+<tr><td class="ititle" colspan="2"><p><a class="anchor" id="amgrpeb5fc46c1b31348c41864ec6f6b47c61"></a>Return the new type of evidence number corresponding to this normalization adjustment. The equation that represents the transform is: 1 / (1 + (NormAdj / midpoint) ^ curl) </p>
+</td></tr>
+<tr class="memitem:a5b39e06af338d5d0623762a84246e7a6"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00737.html#a5b39e06af338d5d0623762a84246e7a6">classify_norm_adj_midpoint</a> = 32.0</td></tr>
+<tr class="separator:a5b39e06af338d5d0623762a84246e7a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9f63df566aa3f4d4405918d1b1af0b3"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00737.html#ae9f63df566aa3f4d4405918d1b1af0b3">classify_norm_adj_curl</a> = 2.0</td></tr>
+<tr class="separator:ae9f63df566aa3f4d4405918d1b1af0b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3882ddbdbe2c0e1c7f84ef7f01aae0a2"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00737.html#a3882ddbdbe2c0e1c7f84ef7f01aae0a2">kWidthErrorWeighting</a> = 0.125</td></tr>
+<tr class="separator:a3882ddbdbe2c0e1c7f84ef7f01aae0a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="ae9f63df566aa3f4d4405918d1b1af0b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9f63df566aa3f4d4405918d1b1af0b3">&#9670;&nbsp;</a></span>classify_norm_adj_curl</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double classify_norm_adj_curl = 2.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>"Norm adjust curl ..." <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="a00737_source.html#l00071">71</a> of file <a class="el" href="a00737_source.html">normmatch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a5b39e06af338d5d0623762a84246e7a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b39e06af338d5d0623762a84246e7a6">&#9670;&nbsp;</a></span>classify_norm_adj_midpoint</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double classify_norm_adj_midpoint = 32.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>control knobs used to control the normalization adjustment process "Norm adjust midpoint ..." <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="a00737_source.html#l00070">70</a> of file <a class="el" href="a00737_source.html">normmatch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a3882ddbdbe2c0e1c7f84ef7f01aae0a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3882ddbdbe2c0e1c7f84ef7f01aae0a2">&#9670;&nbsp;</a></span>kWidthErrorWeighting</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const double kWidthErrorWeighting = 0.125</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Weight of width variance against height and vertical position. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00737_source.html#l00073">73</a> of file <a class="el" href="a00737_source.html">normmatch.cpp</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b8f5fb7b736ee5431a221bc7b817d6e0.html">classify</a></li><li class="navelem"><a class="el" href="a00737.html">trainingsample.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b8f5fb7b736ee5431a221bc7b817d6e0.html">classify</a></li><li class="navelem"><a class="el" href="a00737.html">normmatch.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

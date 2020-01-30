@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/ccmain/applybox.cpp File Reference</title>
+<title>tesseract: /tesseract/src/api/lstmboxrenderer.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,79 +87,29 @@ $(document).ready(function(){initNavTree('a00065.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle">
-<div class="title">applybox.cpp File Reference</div>  </div>
+<div class="title">lstmboxrenderer.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;cctype&gt;</code><br />
-<code>#include &lt;cerrno&gt;</code><br />
-<code>#include &lt;cstring&gt;</code><br />
-<code>#include &quot;allheaders.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00221_source.html">boxread.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00323_source.html">pageres.h</a>&quot;</code><br />
-<code>#include &lt;tesseract/unichar.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00554_source.html">unicharset.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00173_source.html">tesseractclass.h</a>&quot;</code><br />
-<code>#include &lt;tesseract/genericvector.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="a00005_source.html">tesseract/baseapi.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00035_source.html">tesseract/renderer.h</a>&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00224_source.html">tesseractclass.h</a>&quot;</code><br />
 </div>
 <p><a href="a00065_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a01539"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html">tesseract</a></td></tr>
+<tr class="memitem:a01818"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html">tesseract</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:a1ecfbb8dde381ffc9c672e569cb1a1d2"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00065.html#a1ecfbb8dde381ffc9c672e569cb1a1d2">kMaxGroupSize</a> = 4</td></tr>
-<tr class="separator:a1ecfbb8dde381ffc9c672e569cb1a1d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c746c8c99aa2b6f10f7c26838290da0"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00065.html#a7c746c8c99aa2b6f10f7c26838290da0">kMaxXHeightDeviationFraction</a> = 0.125</td></tr>
-<tr class="separator:a7c746c8c99aa2b6f10f7c26838290da0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="a1ecfbb8dde381ffc9c672e569cb1a1d2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1ecfbb8dde381ffc9c672e569cb1a1d2">&#9670;&nbsp;</a></span>kMaxGroupSize</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const int kMaxGroupSize = 4</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Max number of blobs to classify together in FindSegmentation. </p>
-
-<p class="definition">Definition at line <a class="el" href="a00065_source.html#l00030">30</a> of file <a class="el" href="a00065_source.html">applybox.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a7c746c8c99aa2b6f10f7c26838290da0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7c746c8c99aa2b6f10f7c26838290da0">&#9670;&nbsp;</a></span>kMaxXHeightDeviationFraction</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const double kMaxXHeightDeviationFraction = 0.125</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Max fraction of median allowed as deviation in xheight before switching to median. </p>
-
-<p class="definition">Definition at line <a class="el" href="a00065_source.html#l00033">33</a> of file <a class="el" href="a00065_source.html">applybox.cpp</a>.</p>
-
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_43edf6714a3bf7b9dbcd0e0e50a1a1a7.html">ccmain</a></li><li class="navelem"><a class="el" href="a00065.html">applybox.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_da61e3e9a357748887e3ca8d7c5a0c16.html">api</a></li><li class="navelem"><a class="el" href="a00065.html">lstmboxrenderer.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

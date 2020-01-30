@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/wordrec/findseam.h Source File</title>
+<title>tesseract: /tesseract/src/training/wordlist2dawg.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,60 +87,143 @@ $(document).ready(function(){initNavTree('a01463_source.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">findseam.h</div>  </div>
+<div class="title">wordlist2dawg.cpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a01463.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/******************************************************************************</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * File:        findseam.h</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * Author:      Mark Seaman, SW Productivity</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> * (c) Copyright 1987, Hewlett-Packard Company.</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> ** Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> ** you may not use this file except in compliance with the License.</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> ** You may obtain a copy of the License at</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> ** http://www.apache.org/licenses/LICENSE-2.0</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> ** Unless required by applicable law or agreed to in writing, software</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> ** distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> ** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> ** See the License for the specific language governing permissions and</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> ** limitations under the License.</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> *****************************************************************************/</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#ifndef FINDSEAM_H</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#define FINDSEAM_H</span></div>
+<a href="a01463.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// File:        wordlist2dawg.cpp</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// Description: Program to generate a DAWG from a word list file</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// Author:      Thomas Kielbus</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">// (C) Copyright 2006, Google Inc.</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// you may not use this file except in compliance with the License.</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">// You may obtain a copy of the License at</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// http://www.apache.org/licenses/LICENSE-2.0</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">// Unless required by applicable law or agreed to in writing, software</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">// See the License for the specific language governing permissions and</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">// limitations under the License.</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">// Given a file that contains a list of words (one word per line) this program</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">// generates the corresponding squished DAWG file.</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">/*----------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">              I n c l u d e s</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">----------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00392.html">seam.h</a>&quot;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00470.html">genericheap.h</a>&quot;</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00488.html">kdpair.h</a>&quot;</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a01448.html">chop.h</a>&quot;</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="a01463.html#ae7f82456c8e7ab23b2a7e9525a096248">   30</a></span>&#160;<span class="comment">// The SeamPair elements own their SEAMs and delete them upon destruction.</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="a01463.html#a59c55ffd84e0961a6cbc4869f36c8ce5">   31</a></span>&#160;<span class="keyword">using</span> <a class="code" href="a02568.html">SeamPair</a> = <a class="code" href="a02568.html">tesseract::KDPtrPairInc&lt;float, SEAM&gt;</a>;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">using</span> <a class="code" href="a02540.html">SeamQueue</a> = <a class="code" href="a02540.html">tesseract::GenericHeap&lt;SeamPair&gt;</a>;</div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="a01463.html#ac79ab0d2ef73225372ad8bc160f05bb8">   33</a></span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="a01463.html#a83c96ebc37f8c5d331411d9965c38088">   34</a></span>&#160;<span class="keyword">using</span> <a class="code" href="a02572.html">SeamDecPair</a> = <a class="code" href="a02572.html">tesseract::KDPtrPairDec&lt;float, SEAM&gt;</a>;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">using</span> <a class="code" href="a02540.html">SeamPile</a> = <a class="code" href="a02540.html">tesseract::GenericHeap&lt;SeamDecPair&gt;</a>;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00641.html">classify.h</a>&quot;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a01253.html">commontraining.h</a>&quot;</span>     <span class="comment">// CheckSharedLibraryVersion</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00818.html">dawg.h</a>&quot;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00830.html">dict.h</a>&quot;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00014.html">tesseract/helpers.h</a>&gt;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00041.html">tesseract/serialis.h</a>&gt;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00851.html">trie.h</a>&quot;</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00605.html">unicharset.h</a>&quot;</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="a01463.html#a3c04138a5bfe5d72780bb7e82a18e627">   31</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="a01463.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>** argv) {</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  tesseract::CheckSharedLibraryVersion();</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <span class="keywordflow">if</span> (argc &gt; 1 &amp;&amp; (!strcmp(argv[1], <span class="stringliteral">&quot;-v&quot;</span>) || !strcmp(argv[1], <span class="stringliteral">&quot;--version&quot;</span>))) {</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    printf(<span class="stringliteral">&quot;%s\n&quot;</span>, <a class="code" href="a02438.html#a3785779c909fcdd77e24b340f5913e4b">tesseract::TessBaseAPI::Version</a>());</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (!(argc == 4 || (argc == 5 &amp;&amp; strcmp(argv[1], <span class="stringliteral">&quot;-t&quot;</span>) == 0) ||</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;             (argc == 6 &amp;&amp; strcmp(argv[1], <span class="stringliteral">&quot;-r&quot;</span>) == 0))) {</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    printf(<span class="stringliteral">&quot;Usage: %s -v | --version |\n&quot;</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;           <span class="stringliteral">&quot;       %s [-t | -r [reverse policy] ] word_list_file&quot;</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;           <span class="stringliteral">&quot; dawg_file unicharset_file\n&quot;</span>, argv[0], argv[0]);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  }</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <a class="code" href="a03166.html">tesseract::Classify</a> *classify = <span class="keyword">new</span> <a class="code" href="a03166.html">tesseract::Classify</a>();</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <span class="keywordtype">int</span> argv_index = 0;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="keywordflow">if</span> (argc == 5) ++argv_index;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <a class="code" href="a03430.html#a920adf78e22cbdb661e0c2aef58a8c80">tesseract::Trie::RTLReversePolicy</a> reverse_policy =</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;      <a class="code" href="a03430.html#a920adf78e22cbdb661e0c2aef58a8c80ae8a8310ee84c647dc1f9a4f289a0dc8b">tesseract::Trie::RRP_DO_NO_REVERSE</a>;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keywordflow">if</span> (argc == 6) {</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    ++argv_index;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">int</span> tmp_int;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    sscanf(argv[++argv_index], <span class="stringliteral">&quot;%d&quot;</span>, &amp;tmp_int);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    reverse_policy = static_cast&lt;tesseract::Trie::RTLReversePolicy&gt;(tmp_int);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Set reverse_policy to %s\n&quot;</span>,</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            <a class="code" href="a03430.html#abd47ba165316b0d3218a61af590ddc25">tesseract::Trie::get_reverse_policy_name</a>(reverse_policy));</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  }</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span>* wordlist_filename = argv[++argv_index];</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span>* dawg_filename = argv[++argv_index];</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span>* unicharset_file = argv[++argv_index];</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Loading unicharset from &#39;%s&#39;\n&quot;</span>, unicharset_file);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <span class="keywordflow">if</span> (!classify-&gt;<a class="code" href="a03166.html#ad0137683f38d768798a0b56fbee94a15">getDict</a>().<a class="code" href="a03414.html#a3ed04d9d9419ce413e9e495b5c5001ad">getUnicharset</a>().<a class="code" href="a03118.html#af066ba55fdc20f996eaaed05618b377e">load_from_file</a>(unicharset_file)) {</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Failed to load unicharset from &#39;%s&#39;\n&quot;</span>, unicharset_file);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keyword">delete</span> classify;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  }</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <span class="keyword">const</span> <a class="code" href="a03118.html">UNICHARSET</a> &amp;unicharset = classify-&gt;<a class="code" href="a03166.html#ad0137683f38d768798a0b56fbee94a15">getDict</a>().<a class="code" href="a03414.html#a3ed04d9d9419ce413e9e495b5c5001ad">getUnicharset</a>();</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <span class="keywordflow">if</span> (argc == 4 || argc == 6) {</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <a class="code" href="a03430.html">tesseract::Trie</a> trie(</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="comment">// the first 3 arguments are not used in this case</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <a class="code" href="a01818.html#a07c41f251f1782c60df4e626c35d2151a9c67e397ff6d57a705cd4cd4524a2b34">tesseract::DAWG_TYPE_WORD</a>, <span class="stringliteral">&quot;&quot;</span>, <a class="code" href="a00425.html#a18e2c75cefe9e5b78e8ce41aa5fa25bca616bdbcaed7dd414823b303af5c8b1f1">SYSTEM_DAWG_PERM</a>,</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        unicharset.<a class="code" href="a03118.html#adb332692009836a2d89e5fdf63f9765f">size</a>(), classify-&gt;<a class="code" href="a03166.html#ad0137683f38d768798a0b56fbee94a15">getDict</a>().<a class="code" href="a03414.html#a1971c014e816a08c8deaa45fc8d6fff4">dawg_debug_level</a>);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Reading word list from &#39;%s&#39;\n&quot;</span>, wordlist_filename);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">if</span> (!trie.read_and_add_word_list(wordlist_filename, unicharset,</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                                     reverse_policy)) {</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;      <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Failed to add word list from &#39;%s&#39;\n&quot;</span>, wordlist_filename);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;      exit(1);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    }</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Reducing Trie to SquishedDawg\n&quot;</span>);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <a class="code" href="a03394.html">tesseract::SquishedDawg</a> *dawg = trie.trie_to_dawg();</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordflow">if</span> (dawg != <span class="keyword">nullptr</span> &amp;&amp; dawg-&gt;<a class="code" href="a03394.html#ac31f8bc5673fbda1ec05208f9b8caacc">NumEdges</a>() &gt; 0) {</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;      <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Writing squished DAWG to &#39;%s&#39;\n&quot;</span>, dawg_filename);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;      dawg-&gt;<a class="code" href="a03394.html#a82b0b44730528e67798f97418cb96864">write_squished_dawg</a>(dawg_filename);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;      <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Dawg is empty, skip producing the output file\n&quot;</span>);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    }</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keyword">delete</span> dawg;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (argc == 5) {</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Loading dawg DAWG from &#39;%s&#39;\n&quot;</span>, dawg_filename);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <a class="code" href="a03394.html">tesseract::SquishedDawg</a> words(</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        dawg_filename,</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <span class="comment">// these 3 arguments are not used in this case</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <a class="code" href="a01818.html#a07c41f251f1782c60df4e626c35d2151a9c67e397ff6d57a705cd4cd4524a2b34">tesseract::DAWG_TYPE_WORD</a>, <span class="stringliteral">&quot;&quot;</span>, <a class="code" href="a00425.html#a18e2c75cefe9e5b78e8ce41aa5fa25bca616bdbcaed7dd414823b303af5c8b1f1">SYSTEM_DAWG_PERM</a>,</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        classify-&gt;<a class="code" href="a03166.html#ad0137683f38d768798a0b56fbee94a15">getDict</a>().<a class="code" href="a03414.html#a1971c014e816a08c8deaa45fc8d6fff4">dawg_debug_level</a>);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Checking word list from &#39;%s&#39;\n&quot;</span>, wordlist_filename);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    words.check_for_words(wordlist_filename, unicharset, <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  } <span class="keywordflow">else</span> {  <span class="comment">// should never get here</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Invalid command-line options\n&quot;</span>);</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    exit(1);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  }</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  <span class="keyword">delete</span> classify;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa01448_html"><div class="ttname"><a href="a01448.html">chop.h</a></div></div>
-<div class="ttc" id="aa02572_html"><div class="ttname"><a href="a02572.html">tesseract::KDPtrPairDec</a></div><div class="ttdef"><b>Definition:</b> <a href="a00488_source.html#l00162">kdpair.h:162</a></div></div>
-<div class="ttc" id="aa00488_html"><div class="ttname"><a href="a00488.html">kdpair.h</a></div></div>
-<div class="ttc" id="aa00470_html"><div class="ttname"><a href="a00470.html">genericheap.h</a></div></div>
-<div class="ttc" id="aa02568_html"><div class="ttname"><a href="a02568.html">tesseract::KDPtrPairInc</a></div><div class="ttdef"><b>Definition:</b> <a href="a00488_source.html#l00145">kdpair.h:145</a></div></div>
-<div class="ttc" id="aa02540_html"><div class="ttname"><a href="a02540.html">tesseract::GenericHeap</a></div><div class="ttdef"><b>Definition:</b> <a href="a00470_source.html#l00058">genericheap.h:58</a></div></div>
-<div class="ttc" id="aa00392_html"><div class="ttname"><a href="a00392.html">seam.h</a></div></div>
+<div class="ttc" id="aa03118_html_af066ba55fdc20f996eaaed05618b377e"><div class="ttname"><a href="a03118.html#af066ba55fdc20f996eaaed05618b377e">UNICHARSET::load_from_file</a></div><div class="ttdeci">bool load_from_file(const char *const filename, bool skip_fragments)</div><div class="ttdef"><b>Definition:</b> <a href="a00605_source.html#l00378">unicharset.h:378</a></div></div>
+<div class="ttc" id="aa01463_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="a01463.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdef"><b>Definition:</b> <a href="a01463_source.html#l00031">wordlist2dawg.cpp:31</a></div></div>
+<div class="ttc" id="aa03394_html"><div class="ttname"><a href="a03394.html">tesseract::SquishedDawg</a></div><div class="ttdef"><b>Definition:</b> <a href="a00818_source.html#l00405">dawg.h:405</a></div></div>
+<div class="ttc" id="aa01253_html"><div class="ttname"><a href="a01253.html">commontraining.h</a></div></div>
+<div class="ttc" id="aa00830_html"><div class="ttname"><a href="a00830.html">dict.h</a></div></div>
+<div class="ttc" id="aa00425_html_a18e2c75cefe9e5b78e8ce41aa5fa25bca616bdbcaed7dd414823b303af5c8b1f1"><div class="ttname"><a href="a00425.html#a18e2c75cefe9e5b78e8ce41aa5fa25bca616bdbcaed7dd414823b303af5c8b1f1">SYSTEM_DAWG_PERM</a></div><div class="ttdef"><b>Definition:</b> <a href="a00425_source.html#l00239">ratngs.h:239</a></div></div>
+<div class="ttc" id="aa03430_html"><div class="ttname"><a href="a03430.html">tesseract::Trie</a></div><div class="ttdef"><b>Definition:</b> <a href="a00851_source.html#l00054">trie.h:54</a></div></div>
+<div class="ttc" id="aa03394_html_ac31f8bc5673fbda1ec05208f9b8caacc"><div class="ttname"><a href="a03394.html#ac31f8bc5673fbda1ec05208f9b8caacc">tesseract::SquishedDawg::NumEdges</a></div><div class="ttdeci">int NumEdges()</div><div class="ttdef"><b>Definition:</b> <a href="a00818_source.html#l00437">dawg.h:437</a></div></div>
+<div class="ttc" id="aa03166_html"><div class="ttname"><a href="a03166.html">tesseract::Classify</a></div><div class="ttdef"><b>Definition:</b> <a href="a00641_source.html#l00103">classify.h:103</a></div></div>
+<div class="ttc" id="aa01818_html_a07c41f251f1782c60df4e626c35d2151a9c67e397ff6d57a705cd4cd4524a2b34"><div class="ttname"><a href="a01818.html#a07c41f251f1782c60df4e626c35d2151a9c67e397ff6d57a705cd4cd4524a2b34">tesseract::DAWG_TYPE_WORD</a></div><div class="ttdef"><b>Definition:</b> <a href="a00818_source.html#l00068">dawg.h:68</a></div></div>
+<div class="ttc" id="aa03166_html_ad0137683f38d768798a0b56fbee94a15"><div class="ttname"><a href="a03166.html#ad0137683f38d768798a0b56fbee94a15">tesseract::Classify::getDict</a></div><div class="ttdeci">virtual Dict &amp; getDict()</div><div class="ttdef"><b>Definition:</b> <a href="a00641_source.html#l00107">classify.h:107</a></div></div>
+<div class="ttc" id="aa00605_html"><div class="ttname"><a href="a00605.html">unicharset.h</a></div></div>
+<div class="ttc" id="aa00818_html"><div class="ttname"><a href="a00818.html">dawg.h</a></div></div>
+<div class="ttc" id="aa03430_html_a920adf78e22cbdb661e0c2aef58a8c80ae8a8310ee84c647dc1f9a4f289a0dc8b"><div class="ttname"><a href="a03430.html#a920adf78e22cbdb661e0c2aef58a8c80ae8a8310ee84c647dc1f9a4f289a0dc8b">tesseract::Trie::RRP_DO_NO_REVERSE</a></div><div class="ttdef"><b>Definition:</b> <a href="a00851_source.html#l00057">trie.h:57</a></div></div>
+<div class="ttc" id="aa03118_html"><div class="ttname"><a href="a03118.html">UNICHARSET</a></div><div class="ttdef"><b>Definition:</b> <a href="a00605_source.html#l00145">unicharset.h:145</a></div></div>
+<div class="ttc" id="aa03414_html_a1971c014e816a08c8deaa45fc8d6fff4"><div class="ttname"><a href="a03414.html#a1971c014e816a08c8deaa45fc8d6fff4">tesseract::Dict::dawg_debug_level</a></div><div class="ttdeci">int dawg_debug_level</div><div class="ttdef"><b>Definition:</b> <a href="a00830_source.html#l00622">dict.h:622</a></div></div>
+<div class="ttc" id="aa02438_html_a3785779c909fcdd77e24b340f5913e4b"><div class="ttname"><a href="a02438.html#a3785779c909fcdd77e24b340f5913e4b">tesseract::TessBaseAPI::Version</a></div><div class="ttdeci">static const char * Version()</div><div class="ttdef"><b>Definition:</b> <a href="a00056_source.html#l00233">baseapi.cpp:233</a></div></div>
+<div class="ttc" id="aa00014_html"><div class="ttname"><a href="a00014.html">helpers.h</a></div></div>
+<div class="ttc" id="aa03430_html_a920adf78e22cbdb661e0c2aef58a8c80"><div class="ttname"><a href="a03430.html#a920adf78e22cbdb661e0c2aef58a8c80">tesseract::Trie::RTLReversePolicy</a></div><div class="ttdeci">RTLReversePolicy</div><div class="ttdef"><b>Definition:</b> <a href="a00851_source.html#l00056">trie.h:56</a></div></div>
+<div class="ttc" id="aa03430_html_abd47ba165316b0d3218a61af590ddc25"><div class="ttname"><a href="a03430.html#abd47ba165316b0d3218a61af590ddc25">tesseract::Trie::get_reverse_policy_name</a></div><div class="ttdeci">static const char * get_reverse_policy_name(RTLReversePolicy reverse_policy)</div><div class="ttdef"><b>Definition:</b> <a href="a00848_source.html#l00066">trie.cpp:66</a></div></div>
+<div class="ttc" id="aa00581_html_a0c2bcd4462ec67ab0971b34a0f610f55"><div class="ttname"><a href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a></div><div class="ttdeci">DLLSYM void tprintf(const char *format,...)</div><div class="ttdef"><b>Definition:</b> <a href="a00581_source.html#l00034">tprintf.cpp:34</a></div></div>
+<div class="ttc" id="aa03414_html_a3ed04d9d9419ce413e9e495b5c5001ad"><div class="ttname"><a href="a03414.html#a3ed04d9d9419ce413e9e495b5c5001ad">tesseract::Dict::getUnicharset</a></div><div class="ttdeci">const UNICHARSET &amp; getUnicharset() const</div><div class="ttdef"><b>Definition:</b> <a href="a00830_source.html#l00101">dict.h:101</a></div></div>
+<div class="ttc" id="aa00041_html"><div class="ttname"><a href="a00041.html">serialis.h</a></div></div>
+<div class="ttc" id="aa03394_html_a82b0b44730528e67798f97418cb96864"><div class="ttname"><a href="a03394.html#a82b0b44730528e67798f97418cb96864">tesseract::SquishedDawg::write_squished_dawg</a></div><div class="ttdeci">bool write_squished_dawg(TFile *file)</div><div class="ttdoc">Writes the squished/reduced Dawg to a file.</div><div class="ttdef"><b>Definition:</b> <a href="a00815_source.html#l00382">dawg.cpp:382</a></div></div>
+<div class="ttc" id="aa00641_html"><div class="ttname"><a href="a00641.html">classify.h</a></div></div>
+<div class="ttc" id="aa03118_html_adb332692009836a2d89e5fdf63f9765f"><div class="ttname"><a href="a03118.html#adb332692009836a2d89e5fdf63f9765f">UNICHARSET::size</a></div><div class="ttdeci">int size() const</div><div class="ttdef"><b>Definition:</b> <a href="a00605_source.html#l00341">unicharset.h:341</a></div></div>
+<div class="ttc" id="aa00851_html"><div class="ttname"><a href="a00851.html">trie.h</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7b2482c39089bf50e281ccfac06b23cd.html">wordrec</a></li><li class="navelem"><a class="el" href="a01463.html">findseam.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7c7ae07dd2a999045cb78bf7ff8dcbc7.html">training</a></li><li class="navelem"><a class="el" href="a01463.html">wordlist2dawg.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:21 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/wordrec/findseam.cpp File Reference</title>
+<title>tesseract: /tesseract/src/training/validator.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,130 +87,66 @@ $(document).ready(function(){initNavTree('a01460.html','');});
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#define-members">Macros</a>  </div>
+<a href="#enum-members">Enumerations</a>  </div>
   <div class="headertitle">
-<div class="title">findseam.cpp File Reference</div>  </div>
+<div class="title">validator.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="a01463_source.html">findseam.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a01514_source.html">plotedges.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a01499_source.html">outlines.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00392_source.html">seam.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a01535_source.html">wordrec.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;memory&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00050_source.html">tesseract/unichar.h</a>&gt;</code><br />
 </div>
 <p><a href="a01460_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:a01539"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html">tesseract</a></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03962.html">tesseract::Validator</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:a89f8eb5089f8bf157471ccab31e5c54b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01460.html#a89f8eb5089f8bf157471ccab31e5c54b">partial_split_priority</a>(split)&#160;&#160;&#160;(grade_split_length(split) + grade_sharpness(split))</td></tr>
-<tr class="separator:a89f8eb5089f8bf157471ccab31e5c54b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a137ecd53cc1a098b2943e48aff99c6b6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01460.html#a137ecd53cc1a098b2943e48aff99c6b6">SPLIT_CLOSENESS</a>&#160;&#160;&#160;20/* Difference in x value */</td></tr>
-<tr class="separator:a137ecd53cc1a098b2943e48aff99c6b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec46796fda71456341a9591d1b42b5f8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01460.html#aec46796fda71456341a9591d1b42b5f8">MAX_NUM_SEAMS</a>&#160;&#160;&#160;150</td></tr>
-<tr class="separator:aec46796fda71456341a9591d1b42b5f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a149d8b9e54f546955de3fa68bf5bf521"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01460.html#a149d8b9e54f546955de3fa68bf5bf521">NO_FULL_PRIORITY</a>&#160;&#160;&#160;-1/* Special marker for pri. */</td></tr>
-<tr class="separator:a149d8b9e54f546955de3fa68bf5bf521"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3fd320d93290a64ff24687ec596f1f61"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01460.html#a3fd320d93290a64ff24687ec596f1f61">BAD_PRIORITY</a>&#160;&#160;&#160;9999.0</td></tr>
-<tr class="separator:a3fd320d93290a64ff24687ec596f1f61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:a01818"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html">tesseract</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a10f762d2953b01593e4da21f9c3eae68"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a10f762d2953b01593e4da21f9c3eae68">tesseract::GraphemeNormMode</a> { <a class="el" href="a01818.html#a10f762d2953b01593e4da21f9c3eae68a7b4864d7eec9f9fbfe1f31611b3694f0">tesseract::GraphemeNormMode::kSingleString</a>, 
+<a class="el" href="a01818.html#a10f762d2953b01593e4da21f9c3eae68ab6478482a1841fc3ef2d3e5af27f0cc7">tesseract::GraphemeNormMode::kCombined</a>, 
+<a class="el" href="a01818.html#a10f762d2953b01593e4da21f9c3eae68a2f0bcc37606e590d5a033ac8f25915fa">tesseract::GraphemeNormMode::kGlyphSplit</a>, 
+<a class="el" href="a01818.html#a10f762d2953b01593e4da21f9c3eae68a342e0061773db763cde259043b78c3e6">tesseract::GraphemeNormMode::kIndividualUnicodes</a>
+ }</td></tr>
+<tr class="separator:a10f762d2953b01593e4da21f9c3eae68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6cc6bc2b0c67458c52c7f5f419fddd4"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#ac6cc6bc2b0c67458c52c7f5f419fddd4">tesseract::ViramaScript</a> : char32 { <br />
+&#160;&#160;<a class="el" href="a01818.html#ac6cc6bc2b0c67458c52c7f5f419fddd4ad211ac1cd0a3a376cf3b8eac571e4b3f">tesseract::ViramaScript::kNonVirama</a> = 0, 
+<a class="el" href="a01818.html#ac6cc6bc2b0c67458c52c7f5f419fddd4a26940b58f829a8eceb5d0dca08cb2c92">tesseract::ViramaScript::kDevanagari</a> = 0x900, 
+<a class="el" href="a01818.html#ac6cc6bc2b0c67458c52c7f5f419fddd4ae46fe1c8b26379574ee0f0553168abad">tesseract::ViramaScript::kBengali</a> = 0x980, 
+<a class="el" href="a01818.html#ac6cc6bc2b0c67458c52c7f5f419fddd4a3cb324bf89e2b0c7de8a2b29b3573fd8">tesseract::ViramaScript::kGurmukhi</a> = 0xa00, 
+<br />
+&#160;&#160;<a class="el" href="a01818.html#ac6cc6bc2b0c67458c52c7f5f419fddd4ab2b46dc3eaa6a1fddcb119a465b00475">tesseract::ViramaScript::kGujarati</a> = 0xa80, 
+<a class="el" href="a01818.html#ac6cc6bc2b0c67458c52c7f5f419fddd4a045eff360570800ea1d9f8fd28d639fc">tesseract::ViramaScript::kOriya</a> = 0xb00, 
+<a class="el" href="a01818.html#ac6cc6bc2b0c67458c52c7f5f419fddd4a82ab5a0ffa69431059453bb1c3f27bb2">tesseract::ViramaScript::kTamil</a> = 0xb80, 
+<a class="el" href="a01818.html#ac6cc6bc2b0c67458c52c7f5f419fddd4a4e60c209bbf7b79cbc0e2b4a552647c0">tesseract::ViramaScript::kTelugu</a> = 0xc00, 
+<br />
+&#160;&#160;<a class="el" href="a01818.html#ac6cc6bc2b0c67458c52c7f5f419fddd4ae27df9f45481e7206d7982f2cad5a9e8">tesseract::ViramaScript::kKannada</a> = 0xc80, 
+<a class="el" href="a01818.html#ac6cc6bc2b0c67458c52c7f5f419fddd4a4785eb67c79126428c5587c79d145fef">tesseract::ViramaScript::kMalayalam</a> = 0xd00, 
+<a class="el" href="a01818.html#ac6cc6bc2b0c67458c52c7f5f419fddd4af865d60ea018d22bfdc317638c601427">tesseract::ViramaScript::kSinhala</a> = 0xd80, 
+<a class="el" href="a01818.html#ac6cc6bc2b0c67458c52c7f5f419fddd4ac19eab0b94478a1e4761327af850856d">tesseract::ViramaScript::kMyanmar</a> = 0x1000, 
+<br />
+&#160;&#160;<a class="el" href="a01818.html#ac6cc6bc2b0c67458c52c7f5f419fddd4ad29d0abbdf274958af18633ec3979e4e">tesseract::ViramaScript::kKhmer</a> = 0x1780, 
+<a class="el" href="a01818.html#ac6cc6bc2b0c67458c52c7f5f419fddd4aa5a9962a966aed4830c43eee70f10896">tesseract::ViramaScript::kJavanese</a> = 0xa980
+<br />
+ }</td></tr>
+<tr class="separator:ac6cc6bc2b0c67458c52c7f5f419fddd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a3fd320d93290a64ff24687ec596f1f61"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3fd320d93290a64ff24687ec596f1f61">&#9670;&nbsp;</a></span>BAD_PRIORITY</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define BAD_PRIORITY&#160;&#160;&#160;9999.0</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a01460_source.html#l00050">50</a> of file <a class="el" href="a01460_source.html">findseam.cpp</a>.</p>
-
-</div>
-</div>
-<a id="aec46796fda71456341a9591d1b42b5f8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aec46796fda71456341a9591d1b42b5f8">&#9670;&nbsp;</a></span>MAX_NUM_SEAMS</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define MAX_NUM_SEAMS&#160;&#160;&#160;150</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a01460_source.html#l00046">46</a> of file <a class="el" href="a01460_source.html">findseam.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a149d8b9e54f546955de3fa68bf5bf521"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a149d8b9e54f546955de3fa68bf5bf521">&#9670;&nbsp;</a></span>NO_FULL_PRIORITY</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define NO_FULL_PRIORITY&#160;&#160;&#160;-1/* Special marker for pri. */</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a01460_source.html#l00048">48</a> of file <a class="el" href="a01460_source.html">findseam.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a89f8eb5089f8bf157471ccab31e5c54b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a89f8eb5089f8bf157471ccab31e5c54b">&#9670;&nbsp;</a></span>partial_split_priority</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define partial_split_priority</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">split</td><td>)</td>
-          <td>&#160;&#160;&#160;(grade_split_length(split) + grade_sharpness(split))</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a01460_source.html#l00038">38</a> of file <a class="el" href="a01460_source.html">findseam.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a137ecd53cc1a098b2943e48aff99c6b6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a137ecd53cc1a098b2943e48aff99c6b6">&#9670;&nbsp;</a></span>SPLIT_CLOSENESS</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define SPLIT_CLOSENESS&#160;&#160;&#160;20/* Difference in x value */</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a01460_source.html#l00044">44</a> of file <a class="el" href="a01460_source.html">findseam.cpp</a>.</p>
-
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7b2482c39089bf50e281ccfac06b23cd.html">wordrec</a></li><li class="navelem"><a class="el" href="a01460.html">findseam.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7c7ae07dd2a999045cb78bf7ff8dcbc7.html">training</a></li><li class="navelem"><a class="el" href="a01460.html">validator.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

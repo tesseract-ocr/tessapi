@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/wordrec/lm_pain_points.cpp Source File</title>
+<title>tesseract: /tesseract/src/viewer/svutil.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,292 +87,372 @@ $(document).ready(function(){initNavTree('a01481_source.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">lm_pain_points.cpp</div>  </div>
+<div class="title">svutil.cpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a01481.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// File:        pain_points.cpp</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// Description: Functions that utilize the knowledge about the properties</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//              of the paths explored by the segmentation search in order</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//              to &quot;pain points&quot; - the locations in the ratings matrix</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">//              which should be classified next.</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">// Author:      Rika Antonova</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// Created:     Mon Jun 20 11:26:43 PST 2012</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">//</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// (C) Copyright 2012, Google Inc.</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// you may not use this file except in compliance with the License.</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// You may obtain a copy of the License at</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">// http://www.apache.org/licenses/LICENSE-2.0</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">// Unless required by applicable law or agreed to in writing, software</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">// distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">// See the License for the specific language governing permissions and</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">// limitations under the License.</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">//</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a01484.html">lm_pain_points.h</a>&quot;</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a01442.html">associate.h</a>&quot;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00779.html">dict.h</a>&quot;</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00470.html">genericheap.h</a>&quot;</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a01490.html">lm_state.h</a>&quot;</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00281.html">matrix.h</a>&quot;</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00323.html">pageres.h</a>&quot;</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &lt;algorithm&gt;</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">namespace </span><a class="code" href="a01539.html">tesseract</a> {</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">const</span> <span class="keywordtype">float</span> <a class="code" href="a03564.html#aa5fad6a23055be6204ef48e8561de4ce">LMPainPoints::kDefaultPainPointPriorityAdjustment</a> = 2.0f;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">const</span> <span class="keywordtype">float</span> <a class="code" href="a03564.html#a96492f75e54896c3b4f67630c7d8ce71">LMPainPoints::kLooseMaxCharWhRatio</a> = 2.5f;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="a03564.html#af1b5c2478722e1161f8940539410c0ad">   39</a></span>&#160;<a class="code" href="a01539.html#a33257cc4f2900d971b2fa9fb6808837b">LMPainPointsType</a> <a class="code" href="a03564.html#af1b5c2478722e1161f8940539410c0ad">LMPainPoints::Deque</a>(<a class="code" href="a02332.html">MATRIX_COORD</a> *pp, <span class="keywordtype">float</span> *priority) {</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> h = 0; h &lt; <a class="code" href="a01539.html#a33257cc4f2900d971b2fa9fb6808837ba710532fc052e65d63841775e1fe0f26d">LM_PPTYPE_NUM</a>; ++h) {</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordflow">if</span> (pain_points_heaps_[h].empty()) <span class="keywordflow">continue</span>;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    *priority = pain_points_heaps_[h].<a class="code" href="a02540.html#a69c1d7916b848a66ac9c473769e92989">PeekTop</a>().<a class="code" href="a02552.html#a0d26774f49567160f75fb9ad422f86db">key</a>;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    *pp = pain_points_heaps_[h].<a class="code" href="a02540.html#a69c1d7916b848a66ac9c473769e92989">PeekTop</a>().<a class="code" href="a02552.html#a1eb0fe4be23a765672c220d76d3a9569">data</a>;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    pain_points_heaps_[h].<a class="code" href="a02540.html#a65f73703e294dddf82497c483584f5f9">Pop</a>(<span class="keyword">nullptr</span>);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordflow">return</span> static_cast&lt;LMPainPointsType&gt;(h);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  }</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="a01539.html#a33257cc4f2900d971b2fa9fb6808837ba710532fc052e65d63841775e1fe0f26d">LM_PPTYPE_NUM</a>;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;}</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="a03564.html#a64102af07ada2de84d92418e92dd370a">   50</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a03564.html#a64102af07ada2de84d92418e92dd370a">LMPainPoints::GenerateInitial</a>(<a class="code" href="a02372.html">WERD_RES</a> *word_res) {</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <a class="code" href="a02328.html">MATRIX</a> *ratings = word_res-&gt;<a class="code" href="a02372.html#af7454f140688a32b2bebb60ab36e91ee">ratings</a>;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <a class="code" href="a03548.html">AssociateStats</a> associate_stats;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> col = 0; col &lt; ratings-&gt;<a class="code" href="a02324.html#ad414e7f436cdf0a07cbe8434b6c712c3">dimension</a>(); ++col) {</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">int</span> row_end = std::min(ratings-&gt;<a class="code" href="a02324.html#ad414e7f436cdf0a07cbe8434b6c712c3">dimension</a>(), col + ratings-&gt;<a class="code" href="a02324.html#a922677b7937cfb84ba19c568cda25fbf">bandwidth</a>() + 1);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> row = col + 1; row &lt; row_end; ++row) {</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;      <a class="code" href="a02332.html">MATRIX_COORD</a> coord(col, row);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;      <span class="keywordflow">if</span> (coord.<a class="code" href="a02332.html#aaf9577184ea7737011964f106c285c6a">Valid</a>(*ratings) &amp;&amp;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;          ratings-&gt;<a class="code" href="a02104.html#a9cd45e53c06a989c4b462a3df0cedf48">get</a>(col, row) != <a class="code" href="a00281.html#a5c21a86b19e78482e6c7384c47c2457d">NOT_CLASSIFIED</a>) <span class="keywordflow">continue</span>;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;      <span class="comment">// Add an initial pain point if needed.</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;      <span class="keywordflow">if</span> (ratings-&gt;<a class="code" href="a02328.html#a66a3fcaec67c08f8d8db3368d1f0ddc1">Classified</a>(col, row - 1, dict_-&gt;<a class="code" href="a02960.html#a186478bd83cc72ea5440e2e95e9da18b">WildcardID</a>()) ||</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;          (col + 1 &lt; ratings-&gt;<a class="code" href="a02324.html#ad414e7f436cdf0a07cbe8434b6c712c3">dimension</a>() &amp;&amp;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;              ratings-&gt;<a class="code" href="a02328.html#a66a3fcaec67c08f8d8db3368d1f0ddc1">Classified</a>(col + 1, row, dict_-&gt;<a class="code" href="a02960.html#a186478bd83cc72ea5440e2e95e9da18b">WildcardID</a>()))) {</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <a class="code" href="a03564.html#a0dfc50854f8354543fd67a2447287e33">GeneratePainPoint</a>(col, row, <a class="code" href="a01539.html#a33257cc4f2900d971b2fa9fb6808837baeb45425f236d45675cd7641d4f87ae2d">LM_PPTYPE_SHAPE</a>, 0.0,</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                          <span class="keyword">true</span>, max_char_wh_ratio_, word_res);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;      }</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    }</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  }</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;}</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="a03564.html#a8489e28beba45729566cad142f6d8c12">   70</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a03564.html#a8489e28beba45729566cad142f6d8c12">LMPainPoints::GenerateFromPath</a>(<span class="keywordtype">float</span> rating_cert_scale,</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                                    <a class="code" href="a03576.html">ViterbiStateEntry</a> *vse,</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                                    <a class="code" href="a02372.html">WERD_RES</a> *word_res) {</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  <a class="code" href="a03576.html">ViterbiStateEntry</a> *curr_vse = vse;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <a class="code" href="a02432.html">BLOB_CHOICE</a> *curr_b = vse-&gt;<a class="code" href="a03576.html#a206d0b5c6c9294191b7a553a8109f1d7">curr_b</a>;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <span class="comment">// The following pain point generation and priority calculation approaches</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  <span class="comment">// prioritize exploring paths with low average rating of the known part of</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  <span class="comment">// the path, while not relying on the ratings of the pieces to be combined.</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  <span class="comment">//</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <span class="comment">// A pain point to combine the neighbors is generated for each pair of</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  <span class="comment">// neighboring blobs on the path (the path is represented by vse argument</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  <span class="comment">// given to GenerateFromPath()). The priority of each pain point is set to</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <span class="comment">// the average rating (per outline length) of the path, not including the</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  <span class="comment">// ratings of the blobs to be combined.</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  <span class="comment">// The ratings of the blobs to be combined are not used to calculate the</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  <span class="comment">// priority, since it is not possible to determine from their magnitude</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  <span class="comment">// whether it will be beneficial to combine the blobs. The reason is that</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  <span class="comment">// chopped junk blobs (/ | - &#39;) can have very good (low) ratings, however</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  <span class="comment">// combining them will be beneficial. Blobs with high ratings might be</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  <span class="comment">// over-joined pieces of characters, but also could be blobs from an unseen</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  <span class="comment">// font or chopped pieces of complex characters.</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  <span class="keywordflow">while</span> (curr_vse-&gt;<a class="code" href="a03576.html#a8fafa528c3935768a6fe19501c619d5b">parent_vse</a> != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <a class="code" href="a03576.html">ViterbiStateEntry</a>* parent_vse = curr_vse-&gt;<a class="code" href="a03576.html#a8fafa528c3935768a6fe19501c619d5b">parent_vse</a>;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keyword">const</span> <a class="code" href="a02332.html">MATRIX_COORD</a>&amp; curr_cell = curr_b-&gt;<a class="code" href="a02432.html#ad3d14608128f7074b40927cbb0bee855">matrix_cell</a>();</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keyword">const</span> <a class="code" href="a02332.html">MATRIX_COORD</a>&amp; parent_cell = parent_vse-&gt;<a class="code" href="a03576.html#a206d0b5c6c9294191b7a553a8109f1d7">curr_b</a>-&gt;<a class="code" href="a02432.html#ad3d14608128f7074b40927cbb0bee855">matrix_cell</a>();</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <a class="code" href="a02332.html">MATRIX_COORD</a> pain_coord(parent_cell.<a class="code" href="a02332.html#a22a122ba151628fafb64b2957c4690fd">col</a>, curr_cell.<a class="code" href="a02332.html#abde52ca4976ce8acc4e70215df074ff5">row</a>);</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordflow">if</span> (!pain_coord.<a class="code" href="a02332.html#aaf9577184ea7737011964f106c285c6a">Valid</a>(*word_res-&gt;<a class="code" href="a02372.html#af7454f140688a32b2bebb60ab36e91ee">ratings</a>) ||</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        !word_res-&gt;<a class="code" href="a02372.html#af7454f140688a32b2bebb60ab36e91ee">ratings</a>-&gt;<a class="code" href="a02328.html#a66a3fcaec67c08f8d8db3368d1f0ddc1">Classified</a>(parent_cell.<a class="code" href="a02332.html#a22a122ba151628fafb64b2957c4690fd">col</a>, curr_cell.<a class="code" href="a02332.html#abde52ca4976ce8acc4e70215df074ff5">row</a>,</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                                       dict_-&gt;<a class="code" href="a02960.html#a186478bd83cc72ea5440e2e95e9da18b">WildcardID</a>())) {</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;      <span class="comment">// rat_subtr contains ratings sum of the two adjacent blobs to be merged.</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;      <span class="comment">// rat_subtr will be subtracted from the ratings sum of the path, since</span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;      <span class="comment">// the blobs will be joined into a new blob, whose rating is yet unknown.</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;      <span class="keywordtype">float</span> rat_subtr = curr_b-&gt;<a class="code" href="a02432.html#ab90b9f9f303420fee80622acd9d268f2">rating</a>() + parent_vse-&gt;<a class="code" href="a03576.html#a206d0b5c6c9294191b7a553a8109f1d7">curr_b</a>-&gt;<a class="code" href="a02432.html#ab90b9f9f303420fee80622acd9d268f2">rating</a>();</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;      <span class="comment">// ol_subtr contains the outline length of the blobs that will be joined.</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;      <span class="keywordtype">float</span> ol_subtr =</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;          <a class="code" href="a03552.html#a3ee6888a09d72d761762afd0b9089ca2">AssociateUtils::ComputeOutlineLength</a>(rating_cert_scale, *curr_b) +</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;          <a class="code" href="a03552.html#a3ee6888a09d72d761762afd0b9089ca2">AssociateUtils::ComputeOutlineLength</a>(rating_cert_scale,</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                                               *(parent_vse-&gt;<a class="code" href="a03576.html#a206d0b5c6c9294191b7a553a8109f1d7">curr_b</a>));</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;      <span class="comment">// ol_dif is the outline of the path without the two blobs to be joined.</span></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;      <span class="keywordtype">float</span> ol_dif = vse-&gt;<a class="code" href="a03576.html#a0d9fd89bf692438d65cf25221f428752">outline_length</a> - ol_subtr;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;      <span class="comment">// priority is set to the average rating of the path per unit of outline,</span></div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;      <span class="comment">// not counting the ratings of the pieces to be joined.</span></div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;      <span class="keywordtype">float</span> priority = ol_dif &gt; 0 ? (vse-&gt;<a class="code" href="a03576.html#acd6b9c11d6023860d01167a0ebfb0077">ratings_sum</a>-rat_subtr)/ol_dif : 0.0;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;      <a class="code" href="a03564.html#a0dfc50854f8354543fd67a2447287e33">GeneratePainPoint</a>(pain_coord.<a class="code" href="a02332.html#a22a122ba151628fafb64b2957c4690fd">col</a>, pain_coord.<a class="code" href="a02332.html#abde52ca4976ce8acc4e70215df074ff5">row</a>, <a class="code" href="a01539.html#a33257cc4f2900d971b2fa9fb6808837bad3f099562f0acb1e9f883b9fb5ec56d7">LM_PPTYPE_PATH</a>,</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                        priority, <span class="keyword">true</span>, max_char_wh_ratio_, word_res);</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (debug_level_ &gt; 3) {</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;      <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;NO pain point (Classified) for col=%d row=%d type=%s\n&quot;</span>,</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;              pain_coord.<a class="code" href="a02332.html#a22a122ba151628fafb64b2957c4690fd">col</a>, pain_coord.<a class="code" href="a02332.html#abde52ca4976ce8acc4e70215df074ff5">row</a>,</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;              LMPainPointsTypeName[<a class="code" href="a01539.html#a33257cc4f2900d971b2fa9fb6808837bad3f099562f0acb1e9f883b9fb5ec56d7">LM_PPTYPE_PATH</a>]);</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;      BLOB_CHOICE_IT b_it(word_res-&gt;<a class="code" href="a02372.html#af7454f140688a32b2bebb60ab36e91ee">ratings</a>-&gt;<a class="code" href="a02104.html#a9cd45e53c06a989c4b462a3df0cedf48">get</a>(pain_coord.<a class="code" href="a02332.html#a22a122ba151628fafb64b2957c4690fd">col</a>,</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                                                 pain_coord.<a class="code" href="a02332.html#abde52ca4976ce8acc4e70215df074ff5">row</a>));</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;      <span class="keywordflow">for</span> (b_it.mark_cycle_pt(); !b_it.cycled_list(); b_it.forward()) {</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        <a class="code" href="a02432.html">BLOB_CHOICE</a>* choice = b_it.data();</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        choice-&gt;<a class="code" href="a02432.html#ae0a65afa81ba0908798355ec29582098">print_full</a>();</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;      }</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    }</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    curr_vse = parent_vse;</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    curr_b = curr_vse-&gt;<a class="code" href="a03576.html#a206d0b5c6c9294191b7a553a8109f1d7">curr_b</a>;</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;  }</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;}</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
-<div class="line"><a name="l00132"></a><span class="lineno"><a class="line" href="a03564.html#ae57974e3fb1531675e967f79883645f8">  132</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a03564.html#ae57974e3fb1531675e967f79883645f8">LMPainPoints::GenerateFromAmbigs</a>(<span class="keyword">const</span> <a class="code" href="a02108.html">DANGERR</a> &amp;fixpt,</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                                      <a class="code" href="a03576.html">ViterbiStateEntry</a> *vse,</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                                      <a class="code" href="a02372.html">WERD_RES</a> *word_res) {</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;  <span class="comment">// Begins and ends in DANGERR vector now record the blob indices as used</span></div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;  <span class="comment">// by the ratings matrix.</span></div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> d = 0; d &lt; fixpt.size(); ++d) {</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <span class="keyword">const</span> <a class="code" href="a02968.html">DANGERR_INFO</a> &amp;danger = fixpt[d];</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    <span class="comment">// Only use dangerous ambiguities.</span></div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    <span class="keywordflow">if</span> (danger.<a class="code" href="a02968.html#af8bd75c848bf8c8c43b4d6ae8350c96b">dangerous</a>) {</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;      <a class="code" href="a03564.html#a0dfc50854f8354543fd67a2447287e33">GeneratePainPoint</a>(danger.<a class="code" href="a02968.html#a7fb0c9a1b1a22a2b3c308011a207e2c0">begin</a>, danger.<a class="code" href="a02968.html#adfaf65ffc0f21a2fa0cbc56817b2549a">end</a> - 1,</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;                        <a class="code" href="a01539.html#a33257cc4f2900d971b2fa9fb6808837ba736679507b8fc503641d2e185d7c885e">LM_PPTYPE_AMBIG</a>, vse-&gt;<a class="code" href="a03576.html#a9ec1876660a123fef8540c419032db14">cost</a>, <span class="keyword">true</span>,</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;                        <a class="code" href="a03564.html#a96492f75e54896c3b4f67630c7d8ce71">kLooseMaxCharWhRatio</a>, word_res);</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    }</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;  }</div>
+<a href="a01481.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// File:        svutil.cpp</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// Description: ScrollView Utilities</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// Author:      Joern Wanke</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">// (C) Copyright 2007, Google Inc.</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// you may not use this file except in compliance with the License.</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">// You may obtain a copy of the License at</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// http://www.apache.org/licenses/LICENSE-2.0</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">// Unless required by applicable law or agreed to in writing, software</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">// See the License for the specific language governing permissions and</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">// limitations under the License.</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"></span><span class="comment">//</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">// SVUtil contains the SVSync and SVNetwork classes, which are used for</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">// thread/process creation &amp; synchronization and network connection.</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">// Include automatically generated configuration file if running autoconf.</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#ifdef HAVE_CONFIG_H</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#  include &quot;config_auto.h&quot;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a01484.html">svutil.h</a>&quot;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &lt;cstdio&gt;</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include &lt;cstdlib&gt;</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &lt;cstring&gt;</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &lt;thread&gt;</span>        <span class="comment">// for std::this_thread</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#ifdef _WIN32</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#pragma comment(lib, &quot;Ws2_32.lib&quot;)</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#  include &lt;winsock2.h&gt;</span>  <span class="comment">// for fd_set, send, ..</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#  include &lt;ws2tcpip.h&gt;</span>  <span class="comment">// for addrinfo</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#include &lt;arpa/inet.h&gt;</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#include &lt;netdb.h&gt;</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#include &lt;netinet/in.h&gt;</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#include &lt;semaphore.h&gt;</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#include &lt;csignal&gt;</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#include &lt;sys/select.h&gt;</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#include &lt;sys/socket.h&gt;</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#ifdef __linux__</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#include &lt;sys/prctl.h&gt;</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#include &lt;unistd.h&gt;</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#ifndef GRAPHICS_DISABLED</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="a01481.html#a4a4ce82f9687ca37d149b0a62c5ed379">   57</a></span>&#160;<span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="a01481.html#a4a4ce82f9687ca37d149b0a62c5ed379">kMaxMsgSize</a> = 4096;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">// Starts a new process.</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="a03990.html#aea4f2c7847c7c165fba1a60aadec3e05">   60</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a03990.html#aea4f2c7847c7c165fba1a60aadec3e05">SVSync::StartProcess</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* executable, <span class="keyword">const</span> <span class="keywordtype">char</span>* args) {</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <a class="code" href="a01622.html#aca454f84dd198a937af6499dd758aa3d">std::string</a> proc;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  proc.append(executable);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  proc.append(<span class="stringliteral">&quot; &quot;</span>);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  proc.append(args);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  std::cout &lt;&lt; <span class="stringliteral">&quot;Starting &quot;</span> &lt;&lt; proc &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor">#ifdef _WIN32</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  STARTUPINFO start_info;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  PROCESS_INFORMATION proc_info;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  GetStartupInfo(&amp;start_info);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="keywordflow">if</span> (!CreateProcess(<span class="keyword">nullptr</span>, const_cast&lt;char*&gt;(proc.c_str()), <span class="keyword">nullptr</span>, <span class="keyword">nullptr</span>, <a class="code" href="a00008.html#aa93f0eb578d23995850d61f7d61c55c1">FALSE</a>,</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                CREATE_NO_WINDOW | DETACHED_PROCESS, <span class="keyword">nullptr</span>, <span class="keyword">nullptr</span>,</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                &amp;start_info, &amp;proc_info))</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <span class="keywordtype">int</span> pid = fork();</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  <span class="keywordflow">if</span> (pid != 0) {   <span class="comment">// The father process returns</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">#ifdef __linux__</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="comment">// Make sure the java process terminates on exit, since its</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="comment">// broken socket detection seems to be useless.</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    prctl(PR_SET_PDEATHSIG, 2, 0, 0, 0);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordtype">char</span>* mutable_args = strdup(args);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordtype">int</span> argc = 1;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; mutable_args[i]; ++i) {</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;      <span class="keywordflow">if</span> (mutable_args[i] == <span class="charliteral">&#39; &#39;</span>) {</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        ++argc;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;      }</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    }</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    std::unique_ptr&lt;char*[]&gt; argv(<span class="keyword">new</span> <span class="keywordtype">char</span>*[argc + 2]);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    argv[0] = strdup(executable);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    argv[1] = mutable_args;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    argc = 2;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordtype">bool</span> inquote = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; mutable_args[i]; ++i) {</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;      <span class="keywordflow">if</span> (!inquote &amp;&amp; mutable_args[i] == <span class="charliteral">&#39; &#39;</span>) {</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        mutable_args[i] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        argv[argc++] = mutable_args + i + 1;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;      } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (mutable_args[i] == <span class="charliteral">&#39;&quot;&#39;</span>) {</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        inquote = !inquote;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        mutable_args[i] = <span class="charliteral">&#39; &#39;</span>;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;      }</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    }</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    argv[argc] = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    execvp(executable, argv.get());</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    free(argv[0]);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    free(argv[1]);</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  }</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;}</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
+<div class="line"><a name="l00112"></a><span class="lineno"><a class="line" href="a03994.html#a7eb21152bfeffb6e2d78207269838058">  112</a></span>&#160;<a class="code" href="a03994.html#a7eb21152bfeffb6e2d78207269838058">SVSemaphore::SVSemaphore</a>() {</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="preprocessor">#ifdef _WIN32</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  semaphore_ = CreateSemaphore(0, 0, 10, 0);</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="preprocessor">#elif defined(__APPLE__)</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  <span class="keywordtype">char</span> name[50];</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  snprintf(name, <span class="keyword">sizeof</span>(name), <span class="stringliteral">&quot;%ld&quot;</span>, random());</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  sem_unlink(name);</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;  semaphore_ = sem_open(name, O_CREAT , S_IWUSR, 0);</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  <span class="keywordflow">if</span> (semaphore_ == SEM_FAILED) {</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    perror(<span class="stringliteral">&quot;sem_open&quot;</span>);</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;  }</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;  sem_init(&amp;semaphore_, 0, 0);</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;}</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
+<div class="line"><a name="l00128"></a><span class="lineno"><a class="line" href="a03994.html#aed4f0b877daff9550350035478a2356c">  128</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a03994.html#aed4f0b877daff9550350035478a2356c">SVSemaphore::Signal</a>() {</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="preprocessor">#ifdef _WIN32</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;  ReleaseSemaphore(semaphore_, 1, <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="preprocessor">#elif defined(__APPLE__)</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;  sem_post(semaphore_);</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;  sem_post(&amp;semaphore_);</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;}</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
+<div class="line"><a name="l00138"></a><span class="lineno"><a class="line" href="a03994.html#a83a06106c3881b8248fd907029583902">  138</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a03994.html#a83a06106c3881b8248fd907029583902">SVSemaphore::Wait</a>() {</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="preprocessor">#ifdef _WIN32</span></div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;  WaitForSingleObject(semaphore_, INFINITE);</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="preprocessor">#elif defined(__APPLE__)</span></div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;  sem_wait(semaphore_);</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;  sem_wait(&amp;semaphore_);</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;}</div>
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160; </div>
-<div class="line"><a name="l00148"></a><span class="lineno"><a class="line" href="a03564.html#a0dfc50854f8354543fd67a2447287e33">  148</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a03564.html#a0dfc50854f8354543fd67a2447287e33">LMPainPoints::GeneratePainPoint</a>(</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    <span class="keywordtype">int</span> col, <span class="keywordtype">int</span> row, <a class="code" href="a01539.html#a33257cc4f2900d971b2fa9fb6808837b">LMPainPointsType</a> pp_type, <span class="keywordtype">float</span> special_priority,</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    <span class="keywordtype">bool</span> ok_to_extend, <span class="keywordtype">float</span> max_char_wh_ratio,</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    <a class="code" href="a02372.html">WERD_RES</a> *word_res) {</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;  <a class="code" href="a02332.html">MATRIX_COORD</a> coord(col, row);</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;  <span class="keywordflow">if</span> (coord.<a class="code" href="a02332.html#aaf9577184ea7737011964f106c285c6a">Valid</a>(*word_res-&gt;<a class="code" href="a02372.html#af7454f140688a32b2bebb60ab36e91ee">ratings</a>) &amp;&amp;</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;      word_res-&gt;<a class="code" href="a02372.html#af7454f140688a32b2bebb60ab36e91ee">ratings</a>-&gt;<a class="code" href="a02328.html#a66a3fcaec67c08f8d8db3368d1f0ddc1">Classified</a>(col, row, dict_-&gt;<a class="code" href="a02960.html#a186478bd83cc72ea5440e2e95e9da18b">WildcardID</a>())) {</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;  }</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;  <span class="keywordflow">if</span> (debug_level_ &gt; 3) {</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Generating pain point for col=%d row=%d type=%s\n&quot;</span>,</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;            col, row, LMPainPointsTypeName[pp_type]);</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="comment">// Place a message in the message buffer (and flush it).</span></div>
+<div class="line"><a name="l00149"></a><span class="lineno"><a class="line" href="a03998.html#a2de9fb634926d1ffc46b617e87d129f6">  149</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a03998.html#a2de9fb634926d1ffc46b617e87d129f6">SVNetwork::Send</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* msg) {</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;  std::lock_guard&lt;std::mutex&gt; guard(mutex_send_);</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;  msg_buffer_out_.append(msg);</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;}</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; </div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="comment">// Send the whole buffer.</span></div>
+<div class="line"><a name="l00155"></a><span class="lineno"><a class="line" href="a03998.html#ad89f207ad0f1b7fa764e2edb37c0e2c0">  155</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a03998.html#ad89f207ad0f1b7fa764e2edb37c0e2c0">SVNetwork::Flush</a>() {</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;  std::lock_guard&lt;std::mutex&gt; guard(mutex_send_);</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;  <span class="keywordflow">while</span> (!msg_buffer_out_.empty()) {</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    <span class="keywordtype">int</span> i = send(stream_, msg_buffer_out_.c_str(), msg_buffer_out_.length(), 0);</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    msg_buffer_out_.erase(0, i);</div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;  }</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;  <span class="comment">// Compute associate stats.</span></div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;  <a class="code" href="a03548.html">AssociateStats</a> associate_stats;</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;  <a class="code" href="a03552.html#addbd0b3d90043ef77d53523d3591dd59">AssociateUtils::ComputeStats</a>(col, row, <span class="keyword">nullptr</span>, 0, fixed_pitch_,</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;                               max_char_wh_ratio, word_res, debug_level_,</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;                               &amp;associate_stats);</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;  <span class="comment">// For fixed-pitch fonts/languages: if the current combined blob overlaps</span></div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;  <span class="comment">// the next blob on the right and it is ok to extend the blob, try extending</span></div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;  <span class="comment">// the blob until there is no overlap with the next blob on the right or</span></div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;  <span class="comment">// until the width-to-height ratio becomes too large.</span></div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;  <span class="keywordflow">if</span> (ok_to_extend) {</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    <span class="keywordflow">while</span> (associate_stats.<a class="code" href="a03548.html#aef322d855f9233bee2fc73f5420c054f">bad_fixed_pitch_right_gap</a> &amp;&amp;</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;           row + 1 &lt; word_res-&gt;<a class="code" href="a02372.html#af7454f140688a32b2bebb60ab36e91ee">ratings</a>-&gt;<a class="code" href="a02324.html#ad414e7f436cdf0a07cbe8434b6c712c3">dimension</a>() &amp;&amp;</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;           !associate_stats.<a class="code" href="a03548.html#aa481c463d4d14928cd59615464581412">bad_fixed_pitch_wh_ratio</a>) {</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;      <a class="code" href="a03552.html#addbd0b3d90043ef77d53523d3591dd59">AssociateUtils::ComputeStats</a>(col, ++row, <span class="keyword">nullptr</span>, 0, fixed_pitch_,</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;                                   max_char_wh_ratio, word_res, debug_level_,</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;                                   &amp;associate_stats);</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    }</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;  }</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;  <span class="keywordflow">if</span> (associate_stats.<a class="code" href="a03548.html#a477458043cffc5f8f1387b53616e1148">bad_shape</a>) {</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    <span class="keywordflow">if</span> (debug_level_ &gt; 3) {</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;      <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Discarded pain point with a bad shape\n&quot;</span>);</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    }</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;  }</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;}</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160; </div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="comment">// Receive a message from the server.</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="comment">// This will always return one line of char* (denoted by \n).</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno"><a class="line" href="a03998.html#a6cf1cd38c287bdce0ed8594ed9076c2d">  165</a></span>&#160;<span class="keywordtype">char</span>* <a class="code" href="a03998.html#a6cf1cd38c287bdce0ed8594ed9076c2d">SVNetwork::Receive</a>() {</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;  <span class="keywordtype">char</span>* result = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="preprocessor">#if defined(_WIN32) || defined(__CYGWIN__)</span></div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;  <span class="keywordflow">if</span> (has_content) { result = strtok (<span class="keyword">nullptr</span>, <span class="stringliteral">&quot;\n&quot;</span>); }</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;  <span class="keywordflow">if</span> (buffer_ptr_ != <span class="keyword">nullptr</span>) { result = strtok_r(<span class="keyword">nullptr</span>, <span class="stringliteral">&quot;\n&quot;</span>, &amp;buffer_ptr_); }</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160; </div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;  <span class="comment">// This means there is something left in the buffer and we return it.</span></div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;  <span class="keywordflow">if</span> (result != <span class="keyword">nullptr</span>) { <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;  <span class="comment">// Otherwise, we read from the stream_.</span></div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;  } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    buffer_ptr_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    has_content = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160; </div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    <span class="comment">// The timeout length is not really important since we are looping anyway</span></div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    <span class="comment">// until a new message is delivered.</span></div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    <span class="keyword">struct </span>timeval tv;</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    tv.tv_sec = 10;</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    tv.tv_usec = 0;</div>
 <div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160; </div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;  <span class="comment">// Insert the new pain point into pain_points_heap_.</span></div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;  <span class="keywordflow">if</span> (pain_points_heaps_[pp_type].size() &lt; max_heap_size_) {</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    <span class="comment">// Compute pain point priority.</span></div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    <span class="keywordtype">float</span> priority;</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    <span class="keywordflow">if</span> (pp_type == <a class="code" href="a01539.html#a33257cc4f2900d971b2fa9fb6808837bad3f099562f0acb1e9f883b9fb5ec56d7">LM_PPTYPE_PATH</a>) {</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;      priority = special_priority;</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;      priority = associate_stats.<a class="code" href="a03548.html#a9350993c1c0e901679569dcc1c7a2027">gap_sum</a>;</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    }</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    <a class="code" href="a02556.html">MatrixCoordPair</a> pain_point(priority, <a class="code" href="a02332.html">MATRIX_COORD</a>(col, row));</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    pain_points_heaps_[pp_type].<a class="code" href="a02540.html#af0fc3154029c1c8d584f0e26d55fe03b">Push</a>(&amp;pain_point);</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    <span class="keywordflow">if</span> (debug_level_) {</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;      <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Added pain point with priority %g\n&quot;</span>, priority);</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    }</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;  } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    <span class="keywordflow">if</span> (debug_level_) <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Pain points heap is full\n&quot;</span>);</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;  }</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;}</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160; </div>
-<div class="line"><a name="l00211"></a><span class="lineno"><a class="line" href="a03564.html#a4abf43f1384872660cf5a93453da4da0">  211</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a03564.html#a4abf43f1384872660cf5a93453da4da0">LMPainPoints::RemapForSplit</a>(<span class="keywordtype">int</span> index) {</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;  <span class="keywordflow">for</span> (<span class="keyword">auto</span> &amp; pain_points_heap : pain_points_heaps_) {</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    <a class="code" href="a02108.html">GenericVector&lt;MatrixCoordPair&gt;</a>* heap = pain_points_heap.heap();</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; heap-&gt;size(); ++j)</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;      (*heap)[j].data.MapForSplit(index);</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;  }</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;}</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160; </div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;}  <span class="comment">//  namespace tesseract</span></div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    <span class="comment">// Set the flags to return when the stream_ is ready to be read.</span></div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    fd_set readfds;</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    FD_ZERO(&amp;readfds);</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    FD_SET(stream_, &amp;readfds);</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160; </div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    <span class="keywordtype">int</span> i = select(stream_+1, &amp;readfds, <span class="keyword">nullptr</span>, <span class="keyword">nullptr</span>, &amp;tv);</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160; </div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    <span class="comment">// The stream_ died.</span></div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    <span class="keywordflow">if</span> (i == 0) { <span class="keywordflow">return</span> <span class="keyword">nullptr</span>; }</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160; </div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    <span class="comment">// Read the message buffer.</span></div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    i = recv(stream_, msg_buffer_in_, <a class="code" href="a01481.html#a4a4ce82f9687ca37d149b0a62c5ed379">kMaxMsgSize</a>, 0);</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160; </div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    <span class="comment">// Server quit (0) or error (-1).</span></div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    <span class="keywordflow">if</span> (i &lt;= 0) { <span class="keywordflow">return</span> <span class="keyword">nullptr</span>; }</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    msg_buffer_in_[i] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    has_content = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="preprocessor">#ifdef _WIN32</span></div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    <span class="keywordflow">return</span> strtok(msg_buffer_in_, <span class="stringliteral">&quot;\n&quot;</span>);</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    <span class="comment">// Setup a new string tokenizer.</span></div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    <span class="keywordflow">return</span> strtok_r(msg_buffer_in_, <span class="stringliteral">&quot;\n&quot;</span>, &amp;buffer_ptr_);</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;  }</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;}</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160; </div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;<span class="comment">// Close the connection to the server.</span></div>
+<div class="line"><a name="l00213"></a><span class="lineno"><a class="line" href="a03998.html#ac42718fcb9311770b737210a5ab14b27">  213</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a03998.html#ac42718fcb9311770b737210a5ab14b27">SVNetwork::Close</a>() {</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="preprocessor">#ifdef _WIN32</span></div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;  closesocket(stream_);</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;  close(stream_);</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;  <span class="comment">// Mark stream_ as invalid.</span></div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;  stream_ = -1;</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;}</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160; </div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160; </div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="comment">// The program to invoke to start ScrollView</span></div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* ScrollViewProg() {</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;<span class="preprocessor">#ifdef _WIN32</span></div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span>* prog = <span class="stringliteral">&quot;java -Xms512m -Xmx1024m&quot;</span>;</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span>* prog = <span class="stringliteral">&quot;sh&quot;</span>;</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;  <span class="keywordflow">return</span> prog;</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;}</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160; </div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160; </div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="comment">// The arguments to the program to invoke to start ScrollView</span></div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="keyword">static</span> <a class="code" href="a01622.html#aca454f84dd198a937af6499dd758aa3d">std::string</a> ScrollViewCommand(<a class="code" href="a01622.html#aca454f84dd198a937af6499dd758aa3d">std::string</a> scrollview_path) {</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;  <span class="comment">// The following ugly ifdef is to enable the output of the java runtime</span></div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;  <span class="comment">// to be sent down a black hole on non-windows to ignore all the</span></div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;  <span class="comment">// exceptions in piccolo. Ideally piccolo would be debugged to make</span></div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;  <span class="comment">// this unnecessary.</span></div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;  <span class="comment">// Also the path has to be separated by ; on windows and : otherwise.</span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="preprocessor">#ifdef _WIN32</span></div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> cmd_template[] = <span class="stringliteral">&quot;-Djava.library.path=\&quot;%s\&quot; -jar \&quot;%s/ScrollView.jar\&quot;&quot;</span>;</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160; </div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> cmd_template[] =</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;      <span class="stringliteral">&quot;-c \&quot;trap &#39;kill %%1&#39; 0 1 2 ; java &quot;</span></div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;      <span class="stringliteral">&quot;-Xms1024m -Xmx2048m -jar %s/ScrollView.jar&quot;</span></div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;      <span class="stringliteral">&quot; &amp; wait\&quot;&quot;</span>;</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;  <span class="keywordtype">size_t</span> cmdlen = <span class="keyword">sizeof</span>(cmd_template) + 2 * scrollview_path.size() + 1;</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;  std::vector&lt;char&gt; cmd(cmdlen);</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span>* sv_path = scrollview_path.c_str();</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="preprocessor">#ifdef _WIN32</span></div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;  snprintf(&amp;cmd[0], cmdlen, cmd_template, sv_path, sv_path);</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;  snprintf(&amp;cmd[0], cmdlen, cmd_template, sv_path);</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;  <a class="code" href="a01622.html#aca454f84dd198a937af6499dd758aa3d">std::string</a> command(&amp;cmd[0]);</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;  <span class="keywordflow">return</span> command;</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;}</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160; </div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="comment">// Set up a connection to a ScrollView on hostname:port.</span></div>
+<div class="line"><a name="l00264"></a><span class="lineno"><a class="line" href="a03998.html#a72f0c73a7d3a610035043d10f552d462">  264</a></span>&#160;<a class="code" href="a03998.html#a72f0c73a7d3a610035043d10f552d462">SVNetwork::SVNetwork</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* hostname, <span class="keywordtype">int</span> port) {</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;  msg_buffer_in_ = <span class="keyword">new</span> <span class="keywordtype">char</span>[<a class="code" href="a01481.html#a4a4ce82f9687ca37d149b0a62c5ed379">kMaxMsgSize</a> + 1];</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;  msg_buffer_in_[0] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160; </div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;  has_content = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;  buffer_ptr_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160; </div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;  <span class="keyword">struct </span>addrinfo *addr_info = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;  <span class="keywordtype">char</span> port_str[40];</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;  snprintf(port_str, 40, <span class="stringliteral">&quot;%d&quot;</span>, port);</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="preprocessor">#ifdef _WIN32</span></div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;  <span class="comment">// Initialize Winsock</span></div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;  WSADATA wsaData;</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;  <span class="keywordtype">int</span> iResult = WSAStartup(MAKEWORD(2, 2), &amp;wsaData);</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;  <span class="keywordflow">if</span> (iResult != 0) {</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    std::cerr &lt;&lt; <span class="stringliteral">&quot;WSAStartup failed: &quot;</span> &lt;&lt; iResult &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;  }</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;<span class="preprocessor">#endif  // _WIN32</span></div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160; </div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;  <span class="keywordflow">if</span> (getaddrinfo(hostname, port_str, <span class="keyword">nullptr</span>, &amp;addr_info) != 0) {</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    std::cerr &lt;&lt; <span class="stringliteral">&quot;Error resolving name for ScrollView host &quot;</span></div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;              &lt;&lt; <a class="code" href="a01622.html#aca454f84dd198a937af6499dd758aa3d">std::string</a>(hostname) &lt;&lt; <span class="stringliteral">&quot;:&quot;</span> &lt;&lt; port &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;<span class="preprocessor">#ifdef _WIN32</span></div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    WSACleanup();</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;<span class="preprocessor">#endif  // _WIN32</span></div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;  }</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160; </div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;  stream_ = socket(addr_info-&gt;ai_family, addr_info-&gt;ai_socktype,</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;                   addr_info-&gt;ai_protocol);</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160; </div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;  <span class="keywordflow">if</span> (stream_ &lt; 0) {</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    std::cerr &lt;&lt; <span class="stringliteral">&quot;Failed to open socket&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (connect(stream_, addr_info-&gt;ai_addr, addr_info-&gt;ai_addrlen) &lt; 0) {</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    <span class="comment">// If server is not there, we will start a new server as local child process.</span></div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span>* scrollview_path = getenv(<span class="stringliteral">&quot;SCROLLVIEW_PATH&quot;</span>);</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    <span class="keywordflow">if</span> (scrollview_path == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;<span class="preprocessor">#ifdef SCROLLVIEW_PATH</span></div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;<span class="preprocessor">#define _STR(a) #a</span></div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;<span class="preprocessor">#define _XSTR(a) _STR(a)</span></div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;      scrollview_path = _XSTR(SCROLLVIEW_PATH);</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;<span class="preprocessor">#undef _XSTR</span></div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;<span class="preprocessor">#undef _STR</span></div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;      scrollview_path = <span class="stringliteral">&quot;.&quot;</span>;</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;    }</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *prog = ScrollViewProg();</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    <a class="code" href="a01622.html#aca454f84dd198a937af6499dd758aa3d">std::string</a> command = ScrollViewCommand(scrollview_path);</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;    <a class="code" href="a03990.html#aea4f2c7847c7c165fba1a60aadec3e05">SVSync::StartProcess</a>(prog, command.c_str());</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160; </div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;    <span class="comment">// Wait for server to show up.</span></div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    <span class="comment">// Note: There is no exception handling in case the server never turns up.</span></div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160; </div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    <a class="code" href="a03998.html#ac42718fcb9311770b737210a5ab14b27">Close</a>();</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    <span class="keywordflow">for</span> (;;) {</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;      stream_ = socket(addr_info-&gt;ai_family, addr_info-&gt;ai_socktype,</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;                       addr_info-&gt;ai_protocol);</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;      <span class="keywordflow">if</span> (stream_ &gt;= 0) {</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;        <span class="keywordflow">if</span> (connect(stream_, addr_info-&gt;ai_addr, addr_info-&gt;ai_addrlen) == 0) {</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;          <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;        }</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160; </div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;        <a class="code" href="a03998.html#ac42718fcb9311770b737210a5ab14b27">Close</a>();</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160; </div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;        std::cout &lt;&lt; <span class="stringliteral">&quot;ScrollView: Waiting for server...\n&quot;</span>;</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;        std::this_thread::sleep_for(std::chrono::seconds(1));</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;      }</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;    }</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;  }</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;<span class="preprocessor">#ifdef _WIN32</span></div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;  <span class="comment">// WSACleanup();  // This cause ScrollView windows is not displayed</span></div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;<span class="preprocessor">#endif  // _WIN32</span></div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;  freeaddrinfo(addr_info);</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;}</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160; </div>
+<div class="line"><a name="l00339"></a><span class="lineno"><a class="line" href="a03998.html#a85f11ef0f1e673319ec4cdd740eddbfa">  339</a></span>&#160;<a class="code" href="a03998.html#a85f11ef0f1e673319ec4cdd740eddbfa">SVNetwork::~SVNetwork</a>() {</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;  <a class="code" href="a03998.html#ac42718fcb9311770b737210a5ab14b27">Close</a>();</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;  <span class="keyword">delete</span>[] msg_buffer_in_;</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;}</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160; </div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;<span class="preprocessor">#endif  // GRAPHICS_DISABLED</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa02552_html_a1eb0fe4be23a765672c220d76d3a9569"><div class="ttname"><a href="a02552.html#a1eb0fe4be23a765672c220d76d3a9569">tesseract::KDPair::data</a></div><div class="ttdeci">Data data</div><div class="ttdef"><b>Definition:</b> <a href="a00488_source.html#l00045">kdpair.h:45</a></div></div>
-<div class="ttc" id="aa03564_html_aa5fad6a23055be6204ef48e8561de4ce"><div class="ttname"><a href="a03564.html#aa5fad6a23055be6204ef48e8561de4ce">tesseract::LMPainPoints::kDefaultPainPointPriorityAdjustment</a></div><div class="ttdeci">static const float kDefaultPainPointPriorityAdjustment</div><div class="ttdef"><b>Definition:</b> <a href="a01484_source.html#l00059">lm_pain_points.h:59</a></div></div>
-<div class="ttc" id="aa02324_html_a922677b7937cfb84ba19c568cda25fbf"><div class="ttname"><a href="a02324.html#a922677b7937cfb84ba19c568cda25fbf">BandTriMatrix::bandwidth</a></div><div class="ttdeci">int bandwidth() const</div><div class="ttdef"><b>Definition:</b> <a href="a00281_source.html#l00534">matrix.h:534</a></div></div>
-<div class="ttc" id="aa01539_html_a33257cc4f2900d971b2fa9fb6808837baeb45425f236d45675cd7641d4f87ae2d"><div class="ttname"><a href="a01539.html#a33257cc4f2900d971b2fa9fb6808837baeb45425f236d45675cd7641d4f87ae2d">tesseract::LM_PPTYPE_SHAPE</a></div><div class="ttdef"><b>Definition:</b> <a href="a01484_source.html#l00044">lm_pain_points.h:44</a></div></div>
-<div class="ttc" id="aa03564_html_a96492f75e54896c3b4f67630c7d8ce71"><div class="ttname"><a href="a03564.html#a96492f75e54896c3b4f67630c7d8ce71">tesseract::LMPainPoints::kLooseMaxCharWhRatio</a></div><div class="ttdeci">static const float kLooseMaxCharWhRatio</div><div class="ttdef"><b>Definition:</b> <a href="a01484_source.html#l00063">lm_pain_points.h:63</a></div></div>
-<div class="ttc" id="aa03576_html_a9ec1876660a123fef8540c419032db14"><div class="ttname"><a href="a03576.html#a9ec1876660a123fef8540c419032db14">tesseract::ViterbiStateEntry::cost</a></div><div class="ttdeci">float cost</div><div class="ttdef"><b>Definition:</b> <a href="a01490_source.html#l00178">lm_state.h:178</a></div></div>
-<div class="ttc" id="aa02540_html_a65f73703e294dddf82497c483584f5f9"><div class="ttname"><a href="a02540.html#a65f73703e294dddf82497c483584f5f9">tesseract::GenericHeap::Pop</a></div><div class="ttdeci">bool Pop(Pair *entry)</div><div class="ttdef"><b>Definition:</b> <a href="a00470_source.html#l00118">genericheap.h:118</a></div></div>
-<div class="ttc" id="aa02432_html_ab90b9f9f303420fee80622acd9d268f2"><div class="ttname"><a href="a02432.html#ab90b9f9f303420fee80622acd9d268f2">BLOB_CHOICE::rating</a></div><div class="ttdeci">float rating() const</div><div class="ttdef"><b>Definition:</b> <a href="a00374_source.html#l00078">ratngs.h:78</a></div></div>
-<div class="ttc" id="aa02104_html_a9cd45e53c06a989c4b462a3df0cedf48"><div class="ttname"><a href="a02104.html#a9cd45e53c06a989c4b462a3df0cedf48">GENERIC_2D_ARRAY::get</a></div><div class="ttdeci">T get(ICOORD pos) const</div><div class="ttdef"><b>Definition:</b> <a href="a00281_source.html#l00227">matrix.h:227</a></div></div>
-<div class="ttc" id="aa01539_html_a33257cc4f2900d971b2fa9fb6808837bad3f099562f0acb1e9f883b9fb5ec56d7"><div class="ttname"><a href="a01539.html#a33257cc4f2900d971b2fa9fb6808837bad3f099562f0acb1e9f883b9fb5ec56d7">tesseract::LM_PPTYPE_PATH</a></div><div class="ttdef"><b>Definition:</b> <a href="a01484_source.html#l00043">lm_pain_points.h:43</a></div></div>
-<div class="ttc" id="aa02328_html"><div class="ttname"><a href="a02328.html">MATRIX</a></div><div class="ttdef"><b>Definition:</b> <a href="a00281_source.html#l00574">matrix.h:574</a></div></div>
-<div class="ttc" id="aa00779_html"><div class="ttname"><a href="a00779.html">dict.h</a></div></div>
-<div class="ttc" id="aa03548_html_a9350993c1c0e901679569dcc1c7a2027"><div class="ttname"><a href="a03548.html#a9350993c1c0e901679569dcc1c7a2027">tesseract::AssociateStats::gap_sum</a></div><div class="ttdeci">int gap_sum</div><div class="ttdef"><b>Definition:</b> <a href="a01442_source.html#l00062">associate.h:62</a></div></div>
-<div class="ttc" id="aa03564_html_a8489e28beba45729566cad142f6d8c12"><div class="ttname"><a href="a03564.html#a8489e28beba45729566cad142f6d8c12">tesseract::LMPainPoints::GenerateFromPath</a></div><div class="ttdeci">void GenerateFromPath(float rating_cert_scale, ViterbiStateEntry *vse, WERD_RES *word_res)</div><div class="ttdef"><b>Definition:</b> <a href="a01481_source.html#l00070">lm_pain_points.cpp:70</a></div></div>
-<div class="ttc" id="aa02540_html_a69c1d7916b848a66ac9c473769e92989"><div class="ttname"><a href="a02540.html#a69c1d7916b848a66ac9c473769e92989">tesseract::GenericHeap::PeekTop</a></div><div class="ttdeci">const Pair &amp; PeekTop() const</div><div class="ttdef"><b>Definition:</b> <a href="a00470_source.html#l00108">genericheap.h:108</a></div></div>
-<div class="ttc" id="aa01442_html"><div class="ttname"><a href="a01442.html">associate.h</a></div></div>
-<div class="ttc" id="aa02324_html_ad414e7f436cdf0a07cbe8434b6c712c3"><div class="ttname"><a href="a02324.html#ad414e7f436cdf0a07cbe8434b6c712c3">BandTriMatrix::dimension</a></div><div class="ttdeci">int dimension() const</div><div class="ttdef"><b>Definition:</b> <a href="a00281_source.html#l00532">matrix.h:532</a></div></div>
-<div class="ttc" id="aa02372_html_af7454f140688a32b2bebb60ab36e91ee"><div class="ttname"><a href="a02372.html#af7454f140688a32b2bebb60ab36e91ee">WERD_RES::ratings</a></div><div class="ttdeci">MATRIX * ratings</div><div class="ttdef"><b>Definition:</b> <a href="a00323_source.html#l00231">pageres.h:231</a></div></div>
-<div class="ttc" id="aa02372_html"><div class="ttname"><a href="a02372.html">WERD_RES</a></div><div class="ttdef"><b>Definition:</b> <a href="a00323_source.html#l00160">pageres.h:160</a></div></div>
-<div class="ttc" id="aa02108_html"><div class="ttname"><a href="a02108.html">GenericVector&lt; DANGERR_INFO &gt;</a></div></div>
-<div class="ttc" id="aa02328_html_a66a3fcaec67c08f8d8db3368d1f0ddc1"><div class="ttname"><a href="a02328.html#a66a3fcaec67c08f8d8db3368d1f0ddc1">MATRIX::Classified</a></div><div class="ttdeci">bool Classified(int col, int row, int wildcard_id) const</div><div class="ttdef"><b>Definition:</b> <a href="a00278_source.html#l00034">matrix.cpp:34</a></div></div>
-<div class="ttc" id="aa01539_html_a33257cc4f2900d971b2fa9fb6808837ba736679507b8fc503641d2e185d7c885e"><div class="ttname"><a href="a01539.html#a33257cc4f2900d971b2fa9fb6808837ba736679507b8fc503641d2e185d7c885e">tesseract::LM_PPTYPE_AMBIG</a></div><div class="ttdef"><b>Definition:</b> <a href="a01484_source.html#l00042">lm_pain_points.h:42</a></div></div>
-<div class="ttc" id="aa03564_html_af1b5c2478722e1161f8940539410c0ad"><div class="ttname"><a href="a03564.html#af1b5c2478722e1161f8940539410c0ad">tesseract::LMPainPoints::Deque</a></div><div class="ttdeci">LMPainPointsType Deque(MATRIX_COORD *pp, float *priority)</div><div class="ttdef"><b>Definition:</b> <a href="a01481_source.html#l00039">lm_pain_points.cpp:39</a></div></div>
-<div class="ttc" id="aa02960_html_a186478bd83cc72ea5440e2e95e9da18b"><div class="ttname"><a href="a02960.html#a186478bd83cc72ea5440e2e95e9da18b">tesseract::Dict::WildcardID</a></div><div class="ttdeci">UNICHAR_ID WildcardID() const</div><div class="ttdef"><b>Definition:</b> <a href="a00779_source.html#l00428">dict.h:428</a></div></div>
-<div class="ttc" id="aa03576_html_acd6b9c11d6023860d01167a0ebfb0077"><div class="ttname"><a href="a03576.html#acd6b9c11d6023860d01167a0ebfb0077">tesseract::ViterbiStateEntry::ratings_sum</a></div><div class="ttdeci">float ratings_sum</div><div class="ttdoc">sum of ratings of character on the path</div><div class="ttdef"><b>Definition:</b> <a href="a01490_source.html#l00182">lm_state.h:182</a></div></div>
-<div class="ttc" id="aa00281_html"><div class="ttname"><a href="a00281.html">matrix.h</a></div></div>
-<div class="ttc" id="aa02552_html_a0d26774f49567160f75fb9ad422f86db"><div class="ttname"><a href="a02552.html#a0d26774f49567160f75fb9ad422f86db">tesseract::KDPair::key</a></div><div class="ttdeci">Key key</div><div class="ttdef"><b>Definition:</b> <a href="a00488_source.html#l00046">kdpair.h:46</a></div></div>
-<div class="ttc" id="aa03564_html_ae57974e3fb1531675e967f79883645f8"><div class="ttname"><a href="a03564.html#ae57974e3fb1531675e967f79883645f8">tesseract::LMPainPoints::GenerateFromAmbigs</a></div><div class="ttdeci">void GenerateFromAmbigs(const DANGERR &amp;fixpt, ViterbiStateEntry *vse, WERD_RES *word_res)</div><div class="ttdef"><b>Definition:</b> <a href="a01481_source.html#l00132">lm_pain_points.cpp:132</a></div></div>
-<div class="ttc" id="aa00530_html_a0c2bcd4462ec67ab0971b34a0f610f55"><div class="ttname"><a href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a></div><div class="ttdeci">DLLSYM void tprintf(const char *format,...)</div><div class="ttdef"><b>Definition:</b> <a href="a00530_source.html#l00034">tprintf.cpp:34</a></div></div>
-<div class="ttc" id="aa03576_html_a0d9fd89bf692438d65cf25221f428752"><div class="ttname"><a href="a03576.html#a0d9fd89bf692438d65cf25221f428752">tesseract::ViterbiStateEntry::outline_length</a></div><div class="ttdeci">float outline_length</div><div class="ttdoc">length of the outline so far</div><div class="ttdef"><b>Definition:</b> <a href="a01490_source.html#l00186">lm_state.h:186</a></div></div>
-<div class="ttc" id="aa02968_html_af8bd75c848bf8c8c43b4d6ae8350c96b"><div class="ttname"><a href="a02968.html#af8bd75c848bf8c8c43b4d6ae8350c96b">DANGERR_INFO::dangerous</a></div><div class="ttdeci">bool dangerous</div><div class="ttdef"><b>Definition:</b> <a href="a00794_source.html#l00041">stopper.h:41</a></div></div>
-<div class="ttc" id="aa03564_html_a64102af07ada2de84d92418e92dd370a"><div class="ttname"><a href="a03564.html#a64102af07ada2de84d92418e92dd370a">tesseract::LMPainPoints::GenerateInitial</a></div><div class="ttdeci">void GenerateInitial(WERD_RES *word_res)</div><div class="ttdef"><b>Definition:</b> <a href="a01481_source.html#l00050">lm_pain_points.cpp:50</a></div></div>
-<div class="ttc" id="aa03576_html_a8fafa528c3935768a6fe19501c619d5b"><div class="ttname"><a href="a03576.html#a8fafa528c3935768a6fe19501c619d5b">tesseract::ViterbiStateEntry::parent_vse</a></div><div class="ttdeci">ViterbiStateEntry * parent_vse</div><div class="ttdef"><b>Definition:</b> <a href="a01490_source.html#l00159">lm_state.h:159</a></div></div>
-<div class="ttc" id="aa03564_html_a4abf43f1384872660cf5a93453da4da0"><div class="ttname"><a href="a03564.html#a4abf43f1384872660cf5a93453da4da0">tesseract::LMPainPoints::RemapForSplit</a></div><div class="ttdeci">void RemapForSplit(int index)</div><div class="ttdef"><b>Definition:</b> <a href="a01481_source.html#l00211">lm_pain_points.cpp:211</a></div></div>
-<div class="ttc" id="aa03548_html_a477458043cffc5f8f1387b53616e1148"><div class="ttname"><a href="a03548.html#a477458043cffc5f8f1387b53616e1148">tesseract::AssociateStats::bad_shape</a></div><div class="ttdeci">bool bad_shape</div><div class="ttdef"><b>Definition:</b> <a href="a01442_source.html#l00053">associate.h:53</a></div></div>
-<div class="ttc" id="aa02332_html_aaf9577184ea7737011964f106c285c6a"><div class="ttname"><a href="a02332.html#aaf9577184ea7737011964f106c285c6a">MATRIX_COORD::Valid</a></div><div class="ttdeci">bool Valid(const MATRIX &amp;m) const</div><div class="ttdef"><b>Definition:</b> <a href="a00281_source.html#l00614">matrix.h:614</a></div></div>
-<div class="ttc" id="aa03576_html"><div class="ttname"><a href="a03576.html">tesseract::ViterbiStateEntry</a></div><div class="ttdef"><b>Definition:</b> <a href="a01490_source.html#l00091">lm_state.h:91</a></div></div>
-<div class="ttc" id="aa03548_html_aa481c463d4d14928cd59615464581412"><div class="ttname"><a href="a03548.html#aa481c463d4d14928cd59615464581412">tesseract::AssociateStats::bad_fixed_pitch_wh_ratio</a></div><div class="ttdeci">bool bad_fixed_pitch_wh_ratio</div><div class="ttdef"><b>Definition:</b> <a href="a01442_source.html#l00060">associate.h:60</a></div></div>
-<div class="ttc" id="aa03564_html_a0dfc50854f8354543fd67a2447287e33"><div class="ttname"><a href="a03564.html#a0dfc50854f8354543fd67a2447287e33">tesseract::LMPainPoints::GeneratePainPoint</a></div><div class="ttdeci">bool GeneratePainPoint(int col, int row, LMPainPointsType pp_type, float special_priority, bool ok_to_extend, float max_char_wh_ratio, WERD_RES *word_res)</div><div class="ttdef"><b>Definition:</b> <a href="a01481_source.html#l00148">lm_pain_points.cpp:148</a></div></div>
-<div class="ttc" id="aa02432_html_ae0a65afa81ba0908798355ec29582098"><div class="ttname"><a href="a02432.html#ae0a65afa81ba0908798355ec29582098">BLOB_CHOICE::print_full</a></div><div class="ttdeci">void print_full() const</div><div class="ttdef"><b>Definition:</b> <a href="a00374_source.html#l00175">ratngs.h:175</a></div></div>
-<div class="ttc" id="aa00470_html"><div class="ttname"><a href="a00470.html">genericheap.h</a></div></div>
-<div class="ttc" id="aa02432_html"><div class="ttname"><a href="a02432.html">BLOB_CHOICE</a></div><div class="ttdef"><b>Definition:</b> <a href="a00374_source.html#l00049">ratngs.h:49</a></div></div>
-<div class="ttc" id="aa02332_html"><div class="ttname"><a href="a02332.html">MATRIX_COORD</a></div><div class="ttdef"><b>Definition:</b> <a href="a00281_source.html#l00604">matrix.h:604</a></div></div>
-<div class="ttc" id="aa00281_html_a5c21a86b19e78482e6c7384c47c2457d"><div class="ttname"><a href="a00281.html#a5c21a86b19e78482e6c7384c47c2457d">NOT_CLASSIFIED</a></div><div class="ttdeci">#define NOT_CLASSIFIED</div><div class="ttdef"><b>Definition:</b> <a href="a00281_source.html#l00040">matrix.h:40</a></div></div>
-<div class="ttc" id="aa03552_html_addbd0b3d90043ef77d53523d3591dd59"><div class="ttname"><a href="a03552.html#addbd0b3d90043ef77d53523d3591dd59">tesseract::AssociateUtils::ComputeStats</a></div><div class="ttdeci">static void ComputeStats(int col, int row, const AssociateStats *parent_stats, int parent_path_length, bool fixed_pitch, float max_char_wh_ratio, WERD_RES *word_res, bool debug, AssociateStats *stats)</div><div class="ttdef"><b>Definition:</b> <a href="a01439_source.html#l00034">associate.cpp:34</a></div></div>
-<div class="ttc" id="aa01490_html"><div class="ttname"><a href="a01490.html">lm_state.h</a></div></div>
-<div class="ttc" id="aa01539_html"><div class="ttname"><a href="a01539.html">tesseract</a></div><div class="ttdef"><b>Definition:</b> <a href="a00002_source.html#l00025">altorenderer.cpp:25</a></div></div>
-<div class="ttc" id="aa01484_html"><div class="ttname"><a href="a01484.html">lm_pain_points.h</a></div></div>
-<div class="ttc" id="aa02968_html"><div class="ttname"><a href="a02968.html">DANGERR_INFO</a></div><div class="ttdef"><b>Definition:</b> <a href="a00794_source.html#l00033">stopper.h:33</a></div></div>
-<div class="ttc" id="aa03548_html_aef322d855f9233bee2fc73f5420c054f"><div class="ttname"><a href="a03548.html#aef322d855f9233bee2fc73f5420c054f">tesseract::AssociateStats::bad_fixed_pitch_right_gap</a></div><div class="ttdeci">bool bad_fixed_pitch_right_gap</div><div class="ttdef"><b>Definition:</b> <a href="a01442_source.html#l00058">associate.h:58</a></div></div>
-<div class="ttc" id="aa02556_html"><div class="ttname"><a href="a02556.html">tesseract::KDPairInc</a></div><div class="ttdef"><b>Definition:</b> <a href="a00488_source.html#l00051">kdpair.h:51</a></div></div>
-<div class="ttc" id="aa02332_html_abde52ca4976ce8acc4e70215df074ff5"><div class="ttname"><a href="a02332.html#abde52ca4976ce8acc4e70215df074ff5">MATRIX_COORD::row</a></div><div class="ttdeci">int row</div><div class="ttdef"><b>Definition:</b> <a href="a00281_source.html#l00633">matrix.h:633</a></div></div>
-<div class="ttc" id="aa02332_html_a22a122ba151628fafb64b2957c4690fd"><div class="ttname"><a href="a02332.html#a22a122ba151628fafb64b2957c4690fd">MATRIX_COORD::col</a></div><div class="ttdeci">int col</div><div class="ttdef"><b>Definition:</b> <a href="a00281_source.html#l00632">matrix.h:632</a></div></div>
-<div class="ttc" id="aa01539_html_a33257cc4f2900d971b2fa9fb6808837b"><div class="ttname"><a href="a01539.html#a33257cc4f2900d971b2fa9fb6808837b">tesseract::LMPainPointsType</a></div><div class="ttdeci">LMPainPointsType</div><div class="ttdef"><b>Definition:</b> <a href="a01484_source.html#l00040">lm_pain_points.h:40</a></div></div>
-<div class="ttc" id="aa02432_html_ad3d14608128f7074b40927cbb0bee855"><div class="ttname"><a href="a02432.html#ad3d14608128f7074b40927cbb0bee855">BLOB_CHOICE::matrix_cell</a></div><div class="ttdeci">const MATRIX_COORD &amp; matrix_cell()</div><div class="ttdef"><b>Definition:</b> <a href="a00374_source.html#l00115">ratngs.h:115</a></div></div>
-<div class="ttc" id="aa03552_html_a3ee6888a09d72d761762afd0b9089ca2"><div class="ttname"><a href="a03552.html#a3ee6888a09d72d761762afd0b9089ca2">tesseract::AssociateUtils::ComputeOutlineLength</a></div><div class="ttdeci">static float ComputeOutlineLength(float rating_cert_scale, const BLOB_CHOICE &amp;b)</div><div class="ttdef"><b>Definition:</b> <a href="a01442_source.html#l00080">associate.h:80</a></div></div>
-<div class="ttc" id="aa03576_html_a206d0b5c6c9294191b7a553a8109f1d7"><div class="ttname"><a href="a03576.html#a206d0b5c6c9294191b7a553a8109f1d7">tesseract::ViterbiStateEntry::curr_b</a></div><div class="ttdeci">BLOB_CHOICE * curr_b</div><div class="ttdoc">Pointers to BLOB_CHOICE and parent ViterbiStateEntry (not owned by this).</div><div class="ttdef"><b>Definition:</b> <a href="a01490_source.html#l00158">lm_state.h:158</a></div></div>
-<div class="ttc" id="aa00323_html"><div class="ttname"><a href="a00323.html">pageres.h</a></div></div>
-<div class="ttc" id="aa01539_html_a33257cc4f2900d971b2fa9fb6808837ba710532fc052e65d63841775e1fe0f26d"><div class="ttname"><a href="a01539.html#a33257cc4f2900d971b2fa9fb6808837ba710532fc052e65d63841775e1fe0f26d">tesseract::LM_PPTYPE_NUM</a></div><div class="ttdef"><b>Definition:</b> <a href="a01484_source.html#l00046">lm_pain_points.h:46</a></div></div>
-<div class="ttc" id="aa02540_html_af0fc3154029c1c8d584f0e26d55fe03b"><div class="ttname"><a href="a02540.html#af0fc3154029c1c8d584f0e26d55fe03b">tesseract::GenericHeap::Push</a></div><div class="ttdeci">void Push(Pair *entry)</div><div class="ttdef"><b>Definition:</b> <a href="a00470_source.html#l00095">genericheap.h:95</a></div></div>
-<div class="ttc" id="aa02968_html_adfaf65ffc0f21a2fa0cbc56817b2549a"><div class="ttname"><a href="a02968.html#adfaf65ffc0f21a2fa0cbc56817b2549a">DANGERR_INFO::end</a></div><div class="ttdeci">int end</div><div class="ttdef"><b>Definition:</b> <a href="a00794_source.html#l00040">stopper.h:40</a></div></div>
-<div class="ttc" id="aa02968_html_a7fb0c9a1b1a22a2b3c308011a207e2c0"><div class="ttname"><a href="a02968.html#a7fb0c9a1b1a22a2b3c308011a207e2c0">DANGERR_INFO::begin</a></div><div class="ttdeci">int begin</div><div class="ttdef"><b>Definition:</b> <a href="a00794_source.html#l00039">stopper.h:39</a></div></div>
-<div class="ttc" id="aa03548_html"><div class="ttname"><a href="a03548.html">tesseract::AssociateStats</a></div><div class="ttdef"><b>Definition:</b> <a href="a01442_source.html#l00036">associate.h:36</a></div></div>
+<div class="ttc" id="aa01622_html_aca454f84dd198a937af6499dd758aa3d"><div class="ttname"><a href="a01622.html#aca454f84dd198a937af6499dd758aa3d">string</a></div><div class="ttdeci">std::string string</div><div class="ttdef"><b>Definition:</b> <a href="a01622_source.html#l00021">equationdetect_test.cc:21</a></div></div>
+<div class="ttc" id="aa03998_html_ad89f207ad0f1b7fa764e2edb37c0e2c0"><div class="ttname"><a href="a03998.html#ad89f207ad0f1b7fa764e2edb37c0e2c0">SVNetwork::Flush</a></div><div class="ttdeci">void Flush()</div><div class="ttdoc">Flush the buffer.</div><div class="ttdef"><b>Definition:</b> <a href="a01481_source.html#l00155">svutil.cpp:155</a></div></div>
+<div class="ttc" id="aa01481_html_a4a4ce82f9687ca37d149b0a62c5ed379"><div class="ttname"><a href="a01481.html#a4a4ce82f9687ca37d149b0a62c5ed379">kMaxMsgSize</a></div><div class="ttdeci">const int kMaxMsgSize</div><div class="ttdef"><b>Definition:</b> <a href="a01481_source.html#l00057">svutil.cpp:57</a></div></div>
+<div class="ttc" id="aa03994_html_aed4f0b877daff9550350035478a2356c"><div class="ttname"><a href="a03994.html#aed4f0b877daff9550350035478a2356c">SVSemaphore::Signal</a></div><div class="ttdeci">void Signal()</div><div class="ttdoc">Signal a semaphore.</div><div class="ttdef"><b>Definition:</b> <a href="a01481_source.html#l00128">svutil.cpp:128</a></div></div>
+<div class="ttc" id="aa03990_html_aea4f2c7847c7c165fba1a60aadec3e05"><div class="ttname"><a href="a03990.html#aea4f2c7847c7c165fba1a60aadec3e05">SVSync::StartProcess</a></div><div class="ttdeci">static void StartProcess(const char *executable, const char *args)</div><div class="ttdoc">Starts a new process.</div><div class="ttdef"><b>Definition:</b> <a href="a01481_source.html#l00060">svutil.cpp:60</a></div></div>
+<div class="ttc" id="aa03998_html_ac42718fcb9311770b737210a5ab14b27"><div class="ttname"><a href="a03998.html#ac42718fcb9311770b737210a5ab14b27">SVNetwork::Close</a></div><div class="ttdeci">void Close()</div><div class="ttdoc">Close the connection to the server.</div><div class="ttdef"><b>Definition:</b> <a href="a01481_source.html#l00213">svutil.cpp:213</a></div></div>
+<div class="ttc" id="aa03998_html_a6cf1cd38c287bdce0ed8594ed9076c2d"><div class="ttname"><a href="a03998.html#a6cf1cd38c287bdce0ed8594ed9076c2d">SVNetwork::Receive</a></div><div class="ttdeci">char * Receive()</div><div class="ttdef"><b>Definition:</b> <a href="a01481_source.html#l00165">svutil.cpp:165</a></div></div>
+<div class="ttc" id="aa03994_html_a7eb21152bfeffb6e2d78207269838058"><div class="ttname"><a href="a03994.html#a7eb21152bfeffb6e2d78207269838058">SVSemaphore::SVSemaphore</a></div><div class="ttdeci">SVSemaphore()</div><div class="ttdoc">Sets up a semaphore.</div><div class="ttdef"><b>Definition:</b> <a href="a01481_source.html#l00112">svutil.cpp:112</a></div></div>
+<div class="ttc" id="aa03994_html_a83a06106c3881b8248fd907029583902"><div class="ttname"><a href="a03994.html#a83a06106c3881b8248fd907029583902">SVSemaphore::Wait</a></div><div class="ttdeci">void Wait()</div><div class="ttdoc">Wait on a semaphore.</div><div class="ttdef"><b>Definition:</b> <a href="a01481_source.html#l00138">svutil.cpp:138</a></div></div>
+<div class="ttc" id="aa03998_html_a85f11ef0f1e673319ec4cdd740eddbfa"><div class="ttname"><a href="a03998.html#a85f11ef0f1e673319ec4cdd740eddbfa">SVNetwork::~SVNetwork</a></div><div class="ttdeci">~SVNetwork()</div><div class="ttdoc">Destructor.</div><div class="ttdef"><b>Definition:</b> <a href="a01481_source.html#l00339">svutil.cpp:339</a></div></div>
+<div class="ttc" id="aa01484_html"><div class="ttname"><a href="a01484.html">svutil.h</a></div></div>
+<div class="ttc" id="aa00008_html_aa93f0eb578d23995850d61f7d61c55c1"><div class="ttname"><a href="a00008.html#aa93f0eb578d23995850d61f7d61c55c1">FALSE</a></div><div class="ttdeci">#define FALSE</div><div class="ttdef"><b>Definition:</b> <a href="a00008_source.html#l00045">capi.h:45</a></div></div>
+<div class="ttc" id="aa03998_html_a72f0c73a7d3a610035043d10f552d462"><div class="ttname"><a href="a03998.html#a72f0c73a7d3a610035043d10f552d462">SVNetwork::SVNetwork</a></div><div class="ttdeci">SVNetwork(const char *hostname, int port)</div><div class="ttdoc">Set up a connection to hostname on port.</div><div class="ttdef"><b>Definition:</b> <a href="a01481_source.html#l00264">svutil.cpp:264</a></div></div>
+<div class="ttc" id="aa03998_html_a2de9fb634926d1ffc46b617e87d129f6"><div class="ttname"><a href="a03998.html#a2de9fb634926d1ffc46b617e87d129f6">SVNetwork::Send</a></div><div class="ttdeci">void Send(const char *msg)</div><div class="ttdoc">Put a message in the messagebuffer to the server and try to send it.</div><div class="ttdef"><b>Definition:</b> <a href="a01481_source.html#l00149">svutil.cpp:149</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7b2482c39089bf50e281ccfac06b23cd.html">wordrec</a></li><li class="navelem"><a class="el" href="a01481.html">lm_pain_points.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_0afc25342c548a63e1813d8fbde8101d.html">viewer</a></li><li class="navelem"><a class="el" href="a01481.html">svutil.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:21 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

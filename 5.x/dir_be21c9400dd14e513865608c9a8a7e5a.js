@@ -1,83 +1,83 @@
 var dir_be21c9400dd14e513865608c9a8a7e5a =
 [
-    [ "ambigs.cpp", "a00419.html", "a00419" ],
-    [ "ambigs.h", "a00422.html", "a00422" ],
-    [ "bits16.h", "a00425.html", [
-      [ "BITS16", "a02484.html", "a02484" ]
+    [ "ambigs.cpp", "a00470.html", "a00470" ],
+    [ "ambigs.h", "a00473.html", "a00473" ],
+    [ "bits16.h", "a00476.html", [
+      [ "BITS16", "a02942.html", "a02942" ]
     ] ],
-    [ "bitvector.cpp", "a00428.html", null ],
-    [ "bitvector.h", "a00431.html", [
-      [ "BitVector", "a02488.html", "a02488" ]
+    [ "bitvector.cpp", "a00479.html", null ],
+    [ "bitvector.h", "a00482.html", [
+      [ "BitVector", "a02946.html", "a02946" ]
     ] ],
-    [ "ccutil.cpp", "a00434.html", null ],
-    [ "ccutil.h", "a00437.html", [
-      [ "CCUtil", "a02492.html", "a02492" ]
+    [ "ccutil.cpp", "a00485.html", null ],
+    [ "ccutil.h", "a00488.html", [
+      [ "CCUtil", "a02950.html", "a02950" ]
     ] ],
-    [ "clst.cpp", "a00440.html", null ],
-    [ "clst.h", "a00443.html", "a00443" ],
-    [ "doubleptr.h", "a00446.html", [
-      [ "DoublePtr", "a02508.html", "a02508" ]
+    [ "clst.cpp", "a00491.html", null ],
+    [ "clst.h", "a00494.html", "a00494" ],
+    [ "doubleptr.h", "a00497.html", [
+      [ "DoublePtr", "a02966.html", "a02966" ]
     ] ],
-    [ "elst.cpp", "a00449.html", null ],
-    [ "elst.h", "a00452.html", "a00452" ],
-    [ "elst2.cpp", "a00455.html", null ],
-    [ "elst2.h", "a00458.html", "a00458" ],
-    [ "errcode.cpp", "a00461.html", "a00461" ],
-    [ "errcode.h", "a00464.html", "a00464" ],
-    [ "fileerr.h", "a00467.html", "a00467" ],
-    [ "genericheap.h", "a00470.html", [
-      [ "GenericHeap", "a02540.html", "a02540" ]
+    [ "elst.cpp", "a00500.html", null ],
+    [ "elst.h", "a00503.html", "a00503" ],
+    [ "elst2.cpp", "a00506.html", null ],
+    [ "elst2.h", "a00509.html", "a00509" ],
+    [ "errcode.cpp", "a00512.html", "a00512" ],
+    [ "errcode.h", "a00515.html", "a00515" ],
+    [ "fileerr.h", "a00518.html", "a00518" ],
+    [ "genericheap.h", "a00521.html", [
+      [ "GenericHeap", "a02998.html", "a02998" ]
     ] ],
-    [ "globaloc.cpp", "a00473.html", "a00473" ],
-    [ "globaloc.h", "a00476.html", "a00476" ],
-    [ "host.h", "a00479.html", "a00479" ],
-    [ "indexmapbidi.cpp", "a00482.html", null ],
-    [ "indexmapbidi.h", "a00485.html", [
-      [ "IndexMap", "a02544.html", "a02544" ],
-      [ "IndexMapBiDi", "a02548.html", "a02548" ]
+    [ "globaloc.cpp", "a00524.html", "a00524" ],
+    [ "globaloc.h", "a00527.html", "a00527" ],
+    [ "host.h", "a00530.html", "a00530" ],
+    [ "indexmapbidi.cpp", "a00533.html", null ],
+    [ "indexmapbidi.h", "a00536.html", [
+      [ "IndexMap", "a03002.html", "a03002" ],
+      [ "IndexMapBiDi", "a03006.html", "a03006" ]
     ] ],
-    [ "kdpair.h", "a00488.html", "a00488" ],
-    [ "lsterr.h", "a00491.html", "a00491" ],
-    [ "mainblk.cpp", "a00494.html", null ],
-    [ "object_cache.h", "a00497.html", [
-      [ "ObjectCache", "a02580.html", "a02580" ]
+    [ "kdpair.h", "a00539.html", "a00539" ],
+    [ "lsterr.h", "a00542.html", "a00542" ],
+    [ "mainblk.cpp", "a00545.html", null ],
+    [ "object_cache.h", "a00548.html", [
+      [ "ObjectCache", "a03038.html", "a03038" ]
     ] ],
-    [ "params.cpp", "a00500.html", "a00500" ],
-    [ "params.h", "a00503.html", "a00503" ],
-    [ "qrsequence.h", "a00506.html", [
-      [ "QRSequenceGenerator", "a02616.html", "a02616" ]
+    [ "params.cpp", "a00551.html", "a00551" ],
+    [ "params.h", "a00554.html", "a00554" ],
+    [ "qrsequence.h", "a00557.html", [
+      [ "QRSequenceGenerator", "a03074.html", "a03074" ]
     ] ],
-    [ "scanutils.cpp", "a00509.html", "a00509" ],
-    [ "scanutils.h", "a00512.html", "a00512" ],
-    [ "serialis.cpp", "a00515.html", "a00515" ],
-    [ "sorthelper.h", "a00518.html", [
-      [ "SortHelper", "a02620.html", "a02620" ],
-      [ "SortPair", "a02624.html", "a02624" ]
+    [ "scanutils.cpp", "a00560.html", "a00560" ],
+    [ "scanutils.h", "a00563.html", "a00563" ],
+    [ "serialis.cpp", "a00566.html", "a00566" ],
+    [ "sorthelper.h", "a00569.html", [
+      [ "SortHelper", "a03078.html", "a03078" ],
+      [ "SortPair", "a03082.html", "a03082" ]
     ] ],
-    [ "strngs.cpp", "a00521.html", "a00521" ],
-    [ "tessdatamanager.cpp", "a00524.html", null ],
-    [ "tessdatamanager.h", "a00527.html", "a00527" ],
-    [ "tprintf.cpp", "a00530.html", "a00530" ],
-    [ "tprintf.h", "a00533.html", "a00533" ],
-    [ "unichar.cpp", "a00536.html", "a00536" ],
-    [ "unicharcompress.cpp", "a00539.html", "a00539" ],
-    [ "unicharcompress.h", "a00542.html", [
-      [ "RecodedCharID", "a02632.html", "a02632" ],
-      [ "RecodedCharIDHash", "a02636.html", "a02636" ],
-      [ "UnicharCompress", "a02640.html", "a02640" ]
+    [ "strngs.cpp", "a00572.html", "a00572" ],
+    [ "tessdatamanager.cpp", "a00575.html", null ],
+    [ "tessdatamanager.h", "a00578.html", "a00578" ],
+    [ "tprintf.cpp", "a00581.html", "a00581" ],
+    [ "tprintf.h", "a00584.html", "a00584" ],
+    [ "unichar.cpp", "a00587.html", "a00587" ],
+    [ "unicharcompress.cpp", "a00590.html", "a00590" ],
+    [ "unicharcompress.h", "a00593.html", [
+      [ "RecodedCharID", "a03090.html", "a03090" ],
+      [ "RecodedCharIDHash", "a03094.html", "a03094" ],
+      [ "UnicharCompress", "a03098.html", "a03098" ]
     ] ],
-    [ "unicharmap.cpp", "a00545.html", null ],
-    [ "unicharmap.h", "a00548.html", [
-      [ "UNICHARMAP", "a02644.html", "a02644" ]
+    [ "unicharmap.cpp", "a00596.html", null ],
+    [ "unicharmap.h", "a00599.html", [
+      [ "UNICHARMAP", "a03102.html", "a03102" ]
     ] ],
-    [ "unicharset.cpp", "a00551.html", "a00551" ],
-    [ "unicharset.h", "a00554.html", "a00554" ],
-    [ "unicity_table.h", "a00557.html", [
-      [ "UnicityTable", "a02276.html", "a02276" ],
-      [ "UnicityTableEqEq", "a02672.html", "a02672" ]
+    [ "unicharset.cpp", "a00602.html", "a00602" ],
+    [ "unicharset.h", "a00605.html", "a00605" ],
+    [ "unicity_table.h", "a00608.html", [
+      [ "UnicityTable", "a02734.html", "a02734" ],
+      [ "UnicityTableEqEq", "a03130.html", "a03130" ]
     ] ],
-    [ "unicodes.cpp", "a00560.html", "a00560" ],
-    [ "unicodes.h", "a00563.html", null ],
-    [ "universalambigs.cpp", "a00566.html", "a00566" ],
-    [ "universalambigs.h", "a00569.html", null ]
+    [ "unicodes.cpp", "a00611.html", "a00611" ],
+    [ "unicodes.h", "a00614.html", null ],
+    [ "universalambigs.cpp", "a00617.html", "a00617" ],
+    [ "universalambigs.h", "a00620.html", null ]
 ];

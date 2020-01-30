@@ -1,4 +1,32 @@
 var a01187 =
 [
-    [ "main", "a01187.html#a3c04138a5bfe5d72780bb7e82a18e627", null ]
+    [ "compute_block_pitch", "a01187.html#ab52521ccb5506bc4cf5eafec79a472ce", null ],
+    [ "compute_fixed_pitch", "a01187.html#ab8827e291a6e910e2b52a60b714b2366", null ],
+    [ "compute_pitch_sd", "a01187.html#a3d465f5287d6eea58484423e2fc393d2", null ],
+    [ "compute_pitch_sd2", "a01187.html#a4da4fa0d2089a18b0ebcf50174f66406", null ],
+    [ "compute_rows_pitch", "a01187.html#a53eaa63ee27b657ae4788d6cbc35130b", null ],
+    [ "count_block_votes", "a01187.html#ab37643dc7ea67be989e2a96a70c253fb", null ],
+    [ "count_pitch_stats", "a01187.html#abd20a2c9d3f421ea2f611b9d410473c7", null ],
+    [ "find_repeated_chars", "a01187.html#a02ca43b07957e6f78a8461f9e0ff36b5", null ],
+    [ "find_row_pitch", "a01187.html#af22c7e6b1d5ea320112eb1c6f909a593", null ],
+    [ "fix_row_pitch", "a01187.html#a10ef71f284dcfeb7449404e3a4e01109", null ],
+    [ "fixed_pitch_row", "a01187.html#abc5fd6521e9ede5135e7a507d82ebfb4", null ],
+    [ "plot_fp_word", "a01187.html#a39a1be499c86f5a74b371323f3c1f873", null ],
+    [ "print_block_counts", "a01187.html#aa5338a403a2e0124608ba81678f83490", null ],
+    [ "print_pitch_sd", "a01187.html#ab67ac34396527cdc2e36c6e3ca75444d", null ],
+    [ "row_pitch_stats", "a01187.html#a701598b67936c0b535f5dcb7627f7f61", null ],
+    [ "try_block_fixed", "a01187.html#ab6b0ad34937d818d7a1f3fdec26f57dd", null ],
+    [ "try_doc_fixed", "a01187.html#ae876f57d1718113cd902b7b8fd89586a", null ],
+    [ "try_rows_fixed", "a01187.html#ae9a4717f6e896b8ea19ce94da5355eb7", null ],
+    [ "tune_row_pitch", "a01187.html#a4635e0f5be97f64153809218930864c1", null ],
+    [ "tune_row_pitch2", "a01187.html#aca47006847393da5aa30c5b3c1f0ff39", null ],
+    [ "textord_balance_factor", "a01187.html#a41cf65f836c8bdd4dd98ea282ef31815", null ],
+    [ "textord_blockndoc_fixed", "a01187.html#ac5c92bb35a083edcf1cc3be0875c9ff8", null ],
+    [ "textord_debug_pitch_metric", "a01187.html#a0e80cb6223261c2e59202b2d153c56b2", null ],
+    [ "textord_debug_pitch_test", "a01187.html#a1e4587adb2fa810c79228ddca88b6e65", null ],
+    [ "textord_fast_pitch_test", "a01187.html#a1987cbc3d188d489fd427197aca89f6d", null ],
+    [ "textord_pitch_cheat", "a01187.html#a5a8f27eb05c06eb18c634c066c99e2cb", null ],
+    [ "textord_projection_scale", "a01187.html#af6858bfbe71aa8522388bd9292511291", null ],
+    [ "textord_show_page_cuts", "a01187.html#a97a0e0341259922b9e54df257f5de0fc", null ],
+    [ "textord_show_row_cuts", "a01187.html#a16e42e88ec28fbfce9ee055356e194f5", null ]
 ];

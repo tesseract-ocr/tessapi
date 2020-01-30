@@ -1,6 +1,7 @@
 var a01070 =
 [
-    [ "FPCUTPT", "a03292.html", "a03292" ],
-    [ "check_pitch_sync2", "a01070.html#ae7f609989fe2f9abecbebbd6c4ded665", null ],
-    [ "check_pitch_sync3", "a01070.html#a393be41deafc890bf9dc5ef3131bb2d0", null ]
+    [ "MINEDGELENGTH", "a01070.html#ac4de85ebe649ec1bd29042d93ec87019", null ],
+    [ "check_path_legal", "a01070.html#adeed8a1cb243009aa6867ff637eb8677", null ],
+    [ "complete_edge", "a01070.html#affa66849c6f718f217c84b000407944b", null ],
+    [ "loop_bounding_box", "a01070.html#a95a3931e026bf45ab32e1e17ca45398c", null ]
 ];

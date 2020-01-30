@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/cutil/callcpp.cpp File Reference</title>
+<title>tesseract: /tesseract/src/classify/ocrfeatures.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,121 +89,53 @@ $(document).ready(function(){initNavTree('a00743.html','');});
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">callcpp.cpp File Reference</div>  </div>
+<div class="title">ocrfeatures.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="a00746_source.html">callcpp.h</a>&quot;</code><br />
-<code>#include &lt;cstdarg&gt;</code><br />
-<code>#include &lt;cstdio&gt;</code><br />
-<code>#include &lt;memory&gt;</code><br />
-<code>#include &quot;<a class="el" href="a01418_source.html">scrollview.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00533_source.html">tprintf.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a00746_source.html">ocrfeatures.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00803_source.html">emalloc.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00797_source.html">callcpp.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00563_source.html">scanutils.h</a>&quot;</code><br />
+<code>#include &lt;cassert&gt;</code><br />
+<code>#include &lt;cmath&gt;</code><br />
 </div>
 <p><a href="a00743_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a21679e7fec2d69db23107348fa13c153"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00743.html#a21679e7fec2d69db23107348fa13c153">cprintf</a> (const char *format,...)</td></tr>
-<tr class="separator:a21679e7fec2d69db23107348fa13c153"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f7d967080f5bab49d5056dce23305ec"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a03524.html">ScrollView</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00743.html#a2f7d967080f5bab49d5056dce23305ec">c_create_window</a> (const char *name, int16_t xpos, int16_t ypos, int16_t xsize, int16_t ysize, double xmin, double xmax, double ymin, double ymax)</td></tr>
-<tr class="separator:a2f7d967080f5bab49d5056dce23305ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48077e4a1f221a9febc643bdb5b4e8fe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00743.html#a48077e4a1f221a9febc643bdb5b4e8fe">c_line_color_index</a> (void *win, <a class="el" href="a00746.html#a17bc059e437838f094a5a25c2d5ab88f">C_COL</a> index)</td></tr>
-<tr class="separator:a48077e4a1f221a9febc643bdb5b4e8fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a411da919a36d0da4caf6a6775a66cea4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00743.html#a411da919a36d0da4caf6a6775a66cea4">c_move</a> (void *win, double x, double y)</td></tr>
-<tr class="separator:a411da919a36d0da4caf6a6775a66cea4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1985867f80140c430e3fa0d8d7430a44"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00743.html#a1985867f80140c430e3fa0d8d7430a44">c_draw</a> (void *win, double x, double y)</td></tr>
-<tr class="separator:a1985867f80140c430e3fa0d8d7430a44"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac91d916a53eb48572d9937d0d93b558c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00743.html#ac91d916a53eb48572d9937d0d93b558c">c_make_current</a> (void *win)</td></tr>
-<tr class="separator:ac91d916a53eb48572d9937d0d93b558c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afdb928ca6fcb1a387ca1fa91f88130dc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00743.html#afdb928ca6fcb1a387ca1fa91f88130dc">c_clear_window</a> (void *win)</td></tr>
-<tr class="separator:afdb928ca6fcb1a387ca1fa91f88130dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a51dc37eb580fe7f758275685e5ce0d59"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00743.html#a51dc37eb580fe7f758275685e5ce0d59">window_wait</a> (<a class="el" href="a03524.html">ScrollView</a> *win)</td></tr>
-<tr class="separator:a51dc37eb580fe7f758275685e5ce0d59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88ff5e23ace03b3fbfbb891604dd5bc6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00743.html#a88ff5e23ace03b3fbfbb891604dd5bc6">AddFeature</a> (<a class="el" href="a00746.html#a6ceed548fc087d83d8e21bf17b199f6a">FEATURE_SET</a> FeatureSet, <a class="el" href="a00746.html#a4834c45436ab672288f286fa1cea8bf5">FEATURE</a> Feature)</td></tr>
+<tr class="separator:a88ff5e23ace03b3fbfbb891604dd5bc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acaf54a6410150ec74f66ec6621f1352f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00743.html#acaf54a6410150ec74f66ec6621f1352f">FreeFeature</a> (<a class="el" href="a00746.html#a4834c45436ab672288f286fa1cea8bf5">FEATURE</a> Feature)</td></tr>
+<tr class="separator:acaf54a6410150ec74f66ec6621f1352f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72b29c3d875eb9a2241385b1f1388b2d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00743.html#a72b29c3d875eb9a2241385b1f1388b2d">FreeFeatureSet</a> (<a class="el" href="a00746.html#a6ceed548fc087d83d8e21bf17b199f6a">FEATURE_SET</a> FeatureSet)</td></tr>
+<tr class="separator:a72b29c3d875eb9a2241385b1f1388b2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32a08c42617c8dd6a156c1c8d7fb2cbb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00746.html#a4834c45436ab672288f286fa1cea8bf5">FEATURE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00743.html#a32a08c42617c8dd6a156c1c8d7fb2cbb">NewFeature</a> (const <a class="el" href="a03318.html">FEATURE_DESC_STRUCT</a> *FeatureDesc)</td></tr>
+<tr class="separator:a32a08c42617c8dd6a156c1c8d7fb2cbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdf1bcf73857cfc37fe8d667203bc875"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00746.html#a6ceed548fc087d83d8e21bf17b199f6a">FEATURE_SET</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00743.html#acdf1bcf73857cfc37fe8d667203bc875">NewFeatureSet</a> (int NumFeatures)</td></tr>
+<tr class="separator:acdf1bcf73857cfc37fe8d667203bc875"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbac3342338c1fb0f38aad20c3c324d8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00746.html#a6ceed548fc087d83d8e21bf17b199f6a">FEATURE_SET</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00743.html#adbac3342338c1fb0f38aad20c3c324d8">ReadFeatureSet</a> (FILE *File, const <a class="el" href="a03318.html">FEATURE_DESC_STRUCT</a> *FeatureDesc)</td></tr>
+<tr class="separator:adbac3342338c1fb0f38aad20c3c324d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44ea92b531291019aad76b8941cc75af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00743.html#a44ea92b531291019aad76b8941cc75af">WriteFeatureSet</a> (<a class="el" href="a00746.html#a6ceed548fc087d83d8e21bf17b199f6a">FEATURE_SET</a> FeatureSet, <a class="el" href="a02542.html">STRING</a> *str)</td></tr>
+<tr class="separator:a44ea92b531291019aad76b8941cc75af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="afdb928ca6fcb1a387ca1fa91f88130dc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afdb928ca6fcb1a387ca1fa91f88130dc">&#9670;&nbsp;</a></span>c_clear_window()</h2>
+<a id="a88ff5e23ace03b3fbfbb891604dd5bc6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88ff5e23ace03b3fbfbb891604dd5bc6">&#9670;&nbsp;</a></span>AddFeature()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void c_clear_window </td>
+          <td class="memname">bool AddFeature </td>
           <td>(</td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>win</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00743_source.html#l00096">96</a> of file <a class="el" href="a00743_source.html">callcpp.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                               {</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  <span class="keyword">auto</span>* window = static_cast&lt;ScrollView*&gt;(win);</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  window-&gt;Clear();</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a2f7d967080f5bab49d5056dce23305ec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2f7d967080f5bab49d5056dce23305ec">&#9670;&nbsp;</a></span>c_create_window()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a03524.html">ScrollView</a>* c_create_window </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
+          <td class="paramtype"><a class="el" href="a00746.html#a6ceed548fc087d83d8e21bf17b199f6a">FEATURE_SET</a>&#160;</td>
+          <td class="paramname"><em>FeatureSet</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int16_t&#160;</td>
-          <td class="paramname"><em>xpos</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int16_t&#160;</td>
-          <td class="paramname"><em>ypos</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int16_t&#160;</td>
-          <td class="paramname"><em>xsize</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int16_t&#160;</td>
-          <td class="paramname"><em>ysize</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>xmin</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>xmax</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>ymin</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>ymax</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="a00746.html#a4834c45436ab672288f286fa1cea8bf5">FEATURE</a>&#160;</td>
+          <td class="paramname"><em>Feature</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -212,37 +144,176 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Add a feature to a feature set. If the feature set is already full, false is returned to indicate that the feature could not be added to the set; otherwise, true is returned. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">FeatureSet</td><td>set of features to add Feature to </td></tr>
+    <tr><td class="paramname">Feature</td><td>feature to be added to FeatureSet </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if feature added to set, false if set is already full. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="a00743_source.html#l00047">47</a> of file <a class="el" href="a00743_source.html">callcpp.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                       {</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;   <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="a03524.html">ScrollView</a>(name, xpos, ypos, xsize, ysize, xmax - xmin, ymax - ymin, <span class="keyword">true</span>);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="a00743_source.html#l00039">39</a> of file <a class="el" href="a00743_source.html">ocrfeatures.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                                                         {</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <span class="keywordflow">if</span> (FeatureSet-&gt;<a class="code" href="a03326.html#af5f8cefc59003cce4cc41164e914bd4b">NumFeatures</a> &gt;= FeatureSet-&gt;<a class="code" href="a03326.html#af16613351e31fcf9a0426b1fc9e6279b">MaxNumFeatures</a>) {</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="a00743.html#acaf54a6410150ec74f66ec6621f1352f">FreeFeature</a>(Feature);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  }</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  FeatureSet-&gt;<a class="code" href="a03326.html#a4664d6a22a9d12f4011de4d877664c45">Features</a>[FeatureSet-&gt;<a class="code" href="a03326.html#af5f8cefc59003cce4cc41164e914bd4b">NumFeatures</a>++] = Feature;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a1985867f80140c430e3fa0d8d7430a44"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1985867f80140c430e3fa0d8d7430a44">&#9670;&nbsp;</a></span>c_draw()</h2>
+<a id="acaf54a6410150ec74f66ec6621f1352f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acaf54a6410150ec74f66ec6621f1352f">&#9670;&nbsp;</a></span>FreeFeature()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void c_draw </td>
+          <td class="memname">void FreeFeature </td>
           <td>(</td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>win</em>, </td>
+          <td class="paramtype"><a class="el" href="a00746.html#a4834c45436ab672288f286fa1cea8bf5">FEATURE</a>&#160;</td>
+          <td class="paramname"><em>Feature</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Release the memory consumed by the specified feature. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Feature</td><td>feature to be deallocated. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00743_source.html#l00053">53</a> of file <a class="el" href="a00743_source.html">ocrfeatures.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;{ free(Feature); } <span class="comment">/* FreeFeature */</span></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a72b29c3d875eb9a2241385b1f1388b2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72b29c3d875eb9a2241385b1f1388b2d">&#9670;&nbsp;</a></span>FreeFeatureSet()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FreeFeatureSet </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00746.html#a6ceed548fc087d83d8e21bf17b199f6a">FEATURE_SET</a>&#160;</td>
+          <td class="paramname"><em>FeatureSet</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Release the memory consumed by the specified feature set. This routine also frees the memory consumed by the features contained in the set. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">FeatureSet</td><td>set of features to be freed </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00743_source.html#l00061">61</a> of file <a class="el" href="a00743_source.html">ocrfeatures.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                                            {</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <span class="keywordtype">int</span> i;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="keywordflow">if</span> (FeatureSet) {</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordflow">for</span> (i = 0; i &lt; FeatureSet-&gt;<a class="code" href="a03326.html#af5f8cefc59003cce4cc41164e914bd4b">NumFeatures</a>; i++)</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;      <a class="code" href="a00743.html#acaf54a6410150ec74f66ec6621f1352f">FreeFeature</a>(FeatureSet-&gt;<a class="code" href="a03326.html#a4664d6a22a9d12f4011de4d877664c45">Features</a>[i]);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    free(FeatureSet);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a32a08c42617c8dd6a156c1c8d7fb2cbb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32a08c42617c8dd6a156c1c8d7fb2cbb">&#9670;&nbsp;</a></span>NewFeature()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00746.html#a4834c45436ab672288f286fa1cea8bf5">FEATURE</a> NewFeature </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="a03318.html">FEATURE_DESC_STRUCT</a> *&#160;</td>
+          <td class="paramname"><em>FeatureDesc</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Allocate and return a new feature of the specified type. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">FeatureDesc</td><td>description of feature to be created. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>New <a class="el" href="a00746.html#a4834c45436ab672288f286fa1cea8bf5">FEATURE</a>. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00743_source.html#l00077">77</a> of file <a class="el" href="a00743_source.html">ocrfeatures.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                                                           {</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <a class="code" href="a03322.html">FEATURE</a> Feature;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  Feature = static_cast&lt;FEATURE&gt;(malloc(<span class="keyword">sizeof</span>(<a class="code" href="a03322.html">FEATURE_STRUCT</a>) +</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                            (FeatureDesc-&gt;<a class="code" href="a03318.html#ae276ef0b2d76b9e37c74065737c64f83">NumParams</a> - 1) * <span class="keyword">sizeof</span>(<span class="keywordtype">float</span>)));</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  Feature-&gt;<a class="code" href="a03322.html#a1a034f275ff504afd63bd99643fae589">Type</a> = FeatureDesc;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  <span class="keywordflow">return</span> (Feature);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="acdf1bcf73857cfc37fe8d667203bc875"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acdf1bcf73857cfc37fe8d667203bc875">&#9670;&nbsp;</a></span>NewFeatureSet()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00746.html#a6ceed548fc087d83d8e21bf17b199f6a">FEATURE_SET</a> NewFeatureSet </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>NumFeatures</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Allocate and return a new feature set large enough to hold the specified number of features. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">NumFeatures</td><td>maximum # of features to be put in feature set </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>New <a class="el" href="a00746.html#a6ceed548fc087d83d8e21bf17b199f6a">FEATURE_SET</a>. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00743_source.html#l00093">93</a> of file <a class="el" href="a00743_source.html">ocrfeatures.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                                           {</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  <a class="code" href="a03326.html">FEATURE_SET</a> FeatureSet;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  FeatureSet = static_cast&lt;FEATURE_SET&gt;(<a class="code" href="a00800.html#a9bdc0885c33bbb5b062c77b1d90e2305">Emalloc</a> (<span class="keyword">sizeof</span> (<a class="code" href="a03326.html">FEATURE_SET_STRUCT</a>) +</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    (NumFeatures - 1) * <span class="keyword">sizeof</span> (<a class="code" href="a03322.html">FEATURE</a>)));</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  FeatureSet-&gt;<a class="code" href="a03326.html#af16613351e31fcf9a0426b1fc9e6279b">MaxNumFeatures</a> = NumFeatures;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  FeatureSet-&gt;<a class="code" href="a03326.html#af5f8cefc59003cce4cc41164e914bd4b">NumFeatures</a> = 0;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  <span class="keywordflow">return</span> (FeatureSet);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="adbac3342338c1fb0f38aad20c3c324d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbac3342338c1fb0f38aad20c3c324d8">&#9670;&nbsp;</a></span>ReadFeatureSet()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00746.html#a6ceed548fc087d83d8e21bf17b199f6a">FEATURE_SET</a> ReadFeatureSet </td>
+          <td>(</td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>File</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>y</em>&#160;</td>
+          <td class="paramtype">const <a class="el" href="a03318.html">FEATURE_DESC_STRUCT</a> *&#160;</td>
+          <td class="paramname"><em>FeatureDesc</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -251,32 +322,46 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Create a new feature set of the specified type and read in the features from File. The correct text representation for a feature set is an integer which specifies the number (N) of features in a set followed by a list of N feature descriptions. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">File</td><td>open text file to read new feature set from </td></tr>
+    <tr><td class="paramname">FeatureDesc</td><td>specifies type of feature to read from File </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>New feature set read from File. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="a00743_source.html#l00080">80</a> of file <a class="el" href="a00743_source.html">callcpp.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                      {</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  <span class="keyword">auto</span>* window = static_cast&lt;ScrollView*&gt;(win);</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  window-&gt;DrawTo(static_cast&lt;int&gt;(x), static_cast&lt;int&gt;(y));</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="a00743_source.html#l00139">139</a> of file <a class="el" href="a00743_source.html">ocrfeatures.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;                                                                               {</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;  <span class="keywordtype">int</span> NumFeatures;</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;  <a class="code" href="a00515.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a>(<a class="code" href="a00560.html#aa11dd049f17d50a5af65fbd245e705d0">tfscanf</a>(File, <span class="stringliteral">&quot;%d&quot;</span>, &amp;NumFeatures) == 1);</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;  <a class="code" href="a00515.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a>(NumFeatures &gt;= 0);</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160; </div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;  <a class="code" href="a03326.html">FEATURE_SET</a> FeatureSet = <a class="code" href="a00743.html#acdf1bcf73857cfc37fe8d667203bc875">NewFeatureSet</a>(NumFeatures);</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; NumFeatures; i++)</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    <a class="code" href="a00743.html#a88ff5e23ace03b3fbfbb891604dd5bc6">AddFeature</a>(FeatureSet, ReadFeature(File, FeatureDesc));</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;  <span class="keywordflow">return</span> FeatureSet;</div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a48077e4a1f221a9febc643bdb5b4e8fe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a48077e4a1f221a9febc643bdb5b4e8fe">&#9670;&nbsp;</a></span>c_line_color_index()</h2>
+<a id="a44ea92b531291019aad76b8941cc75af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44ea92b531291019aad76b8941cc75af">&#9670;&nbsp;</a></span>WriteFeatureSet()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void c_line_color_index </td>
+          <td class="memname">void WriteFeatureSet </td>
           <td>(</td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>win</em>, </td>
+          <td class="paramtype"><a class="el" href="a00746.html#a6ceed548fc087d83d8e21bf17b199f6a">FEATURE_SET</a>&#160;</td>
+          <td class="paramname"><em>FeatureSet</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="a00746.html#a17bc059e437838f094a5a25c2d5ab88f">C_COL</a>&#160;</td>
-          <td class="paramname"><em>index</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="a02542.html">STRING</a> *&#160;</td>
+          <td class="paramname"><em>str</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -285,166 +370,47 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Write a textual representation of FeatureSet to File. This representation is an integer specifying the number of features in the set, followed by a newline, followed by text representations for each feature in the set. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">FeatureSet</td><td>feature set to write to File </td></tr>
+    <tr><td class="paramname">str</td><td>string to write Feature to </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="a00743_source.html#l00062">62</a> of file <a class="el" href="a00743_source.html">callcpp.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                                     {</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; <span class="comment">// The colors are the same as the SV ones except that SV has COLOR:NONE --&gt; offset of 1</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; <span class="keyword">auto</span>* window = static_cast&lt;ScrollView*&gt;(win);</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; window-&gt;Pen(static_cast&lt;ScrollView::Color&gt;(index + 1));</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="ac91d916a53eb48572d9937d0d93b558c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac91d916a53eb48572d9937d0d93b558c">&#9670;&nbsp;</a></span>c_make_current()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void c_make_current </td>
-          <td>(</td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>win</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00743_source.html#l00089">89</a> of file <a class="el" href="a00743_source.html">callcpp.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                               {</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  <span class="keyword">auto</span>* window = static_cast&lt;ScrollView*&gt;(win);</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  window-&gt;Update();</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a411da919a36d0da4caf6a6775a66cea4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a411da919a36d0da4caf6a6775a66cea4">&#9670;&nbsp;</a></span>c_move()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void c_move </td>
-          <td>(</td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>win</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>y</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00743_source.html#l00071">71</a> of file <a class="el" href="a00743_source.html">callcpp.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                      {</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <span class="keyword">auto</span>* window = static_cast&lt;ScrollView*&gt;(win);</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  window-&gt;SetCursor(static_cast&lt;int&gt;(x), static_cast&lt;int&gt;(y));</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a21679e7fec2d69db23107348fa13c153"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a21679e7fec2d69db23107348fa13c153">&#9670;&nbsp;</a></span>cprintf()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void cprintf </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>format</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>...</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00743_source.html#l00032">32</a> of file <a class="el" href="a00743_source.html">callcpp.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  {</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  va_list args;                  <span class="comment">//variable args</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <span class="keywordtype">char</span> msg[1000];</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  va_start(args, format);  <span class="comment">//variable list</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  vsprintf(msg, format, args);  <span class="comment">//Format into msg</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  va_end(args);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;%s&quot;</span>, msg);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a51dc37eb580fe7f758275685e5ce0d59"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a51dc37eb580fe7f758275685e5ce0d59">&#9670;&nbsp;</a></span>window_wait()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">char window_wait </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a03524.html">ScrollView</a> *&#160;</td>
-          <td class="paramname"><em>win</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00743_source.html#l00103">103</a> of file <a class="el" href="a00743_source.html">callcpp.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                                  {</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  <span class="comment">// Wait till an input or click event (all others are thrown away)</span></div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  <span class="keywordtype">char</span> ret = <span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  <a class="code" href="a01418.html#a3688a0cf2f95d10a57e095222ccfe9a0">SVEventType</a> ev_type = <a class="code" href="a01418.html#a3688a0cf2f95d10a57e095222ccfe9a0a6eec81ed585bda7ff47ec38918cb2a0e">SVET_ANY</a>;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;  <span class="keywordflow">do</span> {</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    std::unique_ptr&lt;SVEvent&gt; ev(win-&gt;<a class="code" href="a03524.html#a0b820b3fe7a2ce083da0784e9339a1ad">AwaitEvent</a>(<a class="code" href="a01418.html#a3688a0cf2f95d10a57e095222ccfe9a0a6eec81ed585bda7ff47ec38918cb2a0e">SVET_ANY</a>));</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    ev_type = ev-&gt;type;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordflow">if</span> (ev_type == <a class="code" href="a01418.html#a3688a0cf2f95d10a57e095222ccfe9a0aee5f6202613f111d11fc310ccba2fa25">SVET_INPUT</a>)</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;      ret = ev-&gt;parameter[0];</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  } <span class="keywordflow">while</span> (ev_type != <a class="code" href="a01418.html#a3688a0cf2f95d10a57e095222ccfe9a0aee5f6202613f111d11fc310ccba2fa25">SVET_INPUT</a> &amp;&amp; ev_type != <a class="code" href="a01418.html#a3688a0cf2f95d10a57e095222ccfe9a0a2afe407abe8c055c45765b85d20e7946">SVET_CLICK</a>);</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  <span class="keywordflow">return</span> ret;</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="a00743_source.html#l00179">179</a> of file <a class="el" href="a00743_source.html">ocrfeatures.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;                                                          {</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;  <span class="keywordflow">if</span> (FeatureSet) {</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    str-&gt;<a class="code" href="a02542.html#a779cd637dd42d58d5500a3a657077e84">add_str_int</a>(<span class="stringliteral">&quot;&quot;</span>, FeatureSet-&gt;<a class="code" href="a03326.html#af5f8cefc59003cce4cc41164e914bd4b">NumFeatures</a>);</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    *str += <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; FeatureSet-&gt;<a class="code" href="a03326.html#af5f8cefc59003cce4cc41164e914bd4b">NumFeatures</a>; i++) {</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;      WriteFeature(FeatureSet-&gt;<a class="code" href="a03326.html#a4664d6a22a9d12f4011de4d877664c45">Features</a>[i], str);</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    }</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;  }</div>
 </div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa01418_html_a3688a0cf2f95d10a57e095222ccfe9a0a6eec81ed585bda7ff47ec38918cb2a0e"><div class="ttname"><a href="a01418.html#a3688a0cf2f95d10a57e095222ccfe9a0a6eec81ed585bda7ff47ec38918cb2a0e">SVET_ANY</a></div><div class="ttdef"><b>Definition:</b> <a href="a01418_source.html#l00055">scrollview.h:55</a></div></div>
-<div class="ttc" id="aa03524_html"><div class="ttname"><a href="a03524.html">ScrollView</a></div><div class="ttdef"><b>Definition:</b> <a href="a01418_source.html#l00097">scrollview.h:97</a></div></div>
-<div class="ttc" id="aa00530_html_a0c2bcd4462ec67ab0971b34a0f610f55"><div class="ttname"><a href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a></div><div class="ttdeci">DLLSYM void tprintf(const char *format,...)</div><div class="ttdef"><b>Definition:</b> <a href="a00530_source.html#l00034">tprintf.cpp:34</a></div></div>
-<div class="ttc" id="aa01418_html_a3688a0cf2f95d10a57e095222ccfe9a0aee5f6202613f111d11fc310ccba2fa25"><div class="ttname"><a href="a01418.html#a3688a0cf2f95d10a57e095222ccfe9a0aee5f6202613f111d11fc310ccba2fa25">SVET_INPUT</a></div><div class="ttdef"><b>Definition:</b> <a href="a01418_source.html#l00049">scrollview.h:49</a></div></div>
-<div class="ttc" id="aa03524_html_a0b820b3fe7a2ce083da0784e9339a1ad"><div class="ttname"><a href="a03524.html#a0b820b3fe7a2ce083da0784e9339a1ad">ScrollView::AwaitEvent</a></div><div class="ttdeci">SVEvent * AwaitEvent(SVEventType type)</div><div class="ttdef"><b>Definition:</b> <a href="a01415_source.html#l00443">scrollview.cpp:443</a></div></div>
-<div class="ttc" id="aa01418_html_a3688a0cf2f95d10a57e095222ccfe9a0a2afe407abe8c055c45765b85d20e7946"><div class="ttname"><a href="a01418.html#a3688a0cf2f95d10a57e095222ccfe9a0a2afe407abe8c055c45765b85d20e7946">SVET_CLICK</a></div><div class="ttdef"><b>Definition:</b> <a href="a01418_source.html#l00047">scrollview.h:47</a></div></div>
-<div class="ttc" id="aa01418_html_a3688a0cf2f95d10a57e095222ccfe9a0"><div class="ttname"><a href="a01418.html#a3688a0cf2f95d10a57e095222ccfe9a0">SVEventType</a></div><div class="ttdeci">SVEventType</div><div class="ttdef"><b>Definition:</b> <a href="a01418_source.html#l00044">scrollview.h:44</a></div></div>
+<div class="ttc" id="aa00743_html_a88ff5e23ace03b3fbfbb891604dd5bc6"><div class="ttname"><a href="a00743.html#a88ff5e23ace03b3fbfbb891604dd5bc6">AddFeature</a></div><div class="ttdeci">bool AddFeature(FEATURE_SET FeatureSet, FEATURE Feature)</div><div class="ttdef"><b>Definition:</b> <a href="a00743_source.html#l00039">ocrfeatures.cpp:39</a></div></div>
+<div class="ttc" id="aa02542_html_a779cd637dd42d58d5500a3a657077e84"><div class="ttname"><a href="a02542.html#a779cd637dd42d58d5500a3a657077e84">STRING::add_str_int</a></div><div class="ttdeci">void add_str_int(const char *str, int number)</div><div class="ttdef"><b>Definition:</b> <a href="a00572_source.html#l00370">strngs.cpp:370</a></div></div>
+<div class="ttc" id="aa00560_html_aa11dd049f17d50a5af65fbd245e705d0"><div class="ttname"><a href="a00560.html#aa11dd049f17d50a5af65fbd245e705d0">tfscanf</a></div><div class="ttdeci">int tfscanf(FILE *stream, const char *format,...)</div><div class="ttdef"><b>Definition:</b> <a href="a00560_source.html#l00181">scanutils.cpp:181</a></div></div>
+<div class="ttc" id="aa00800_html_a9bdc0885c33bbb5b062c77b1d90e2305"><div class="ttname"><a href="a00800.html#a9bdc0885c33bbb5b062c77b1d90e2305">Emalloc</a></div><div class="ttdeci">void * Emalloc(int Size)</div><div class="ttdef"><b>Definition:</b> <a href="a00800_source.html#l00031">emalloc.cpp:31</a></div></div>
+<div class="ttc" id="aa00515_html_a93a603f4063a6b9403d81caa245a583b"><div class="ttname"><a href="a00515.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a></div><div class="ttdeci">#define ASSERT_HOST(x)</div><div class="ttdef"><b>Definition:</b> <a href="a00515_source.html#l00087">errcode.h:87</a></div></div>
+<div class="ttc" id="aa03322_html"><div class="ttname"><a href="a03322.html">FEATURE_STRUCT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00746_source.html#l00058">ocrfeatures.h:58</a></div></div>
+<div class="ttc" id="aa00743_html_acaf54a6410150ec74f66ec6621f1352f"><div class="ttname"><a href="a00743.html#acaf54a6410150ec74f66ec6621f1352f">FreeFeature</a></div><div class="ttdeci">void FreeFeature(FEATURE Feature)</div><div class="ttdef"><b>Definition:</b> <a href="a00743_source.html#l00053">ocrfeatures.cpp:53</a></div></div>
+<div class="ttc" id="aa03326_html_af16613351e31fcf9a0426b1fc9e6279b"><div class="ttname"><a href="a03326.html#af16613351e31fcf9a0426b1fc9e6279b">FEATURE_SET_STRUCT::MaxNumFeatures</a></div><div class="ttdeci">uint16_t MaxNumFeatures</div><div class="ttdef"><b>Definition:</b> <a href="a00746_source.html#l00066">ocrfeatures.h:66</a></div></div>
+<div class="ttc" id="aa03318_html_ae276ef0b2d76b9e37c74065737c64f83"><div class="ttname"><a href="a03318.html#ae276ef0b2d76b9e37c74065737c64f83">FEATURE_DESC_STRUCT::NumParams</a></div><div class="ttdeci">uint16_t NumParams</div><div class="ttdef"><b>Definition:</b> <a href="a00746_source.html#l00052">ocrfeatures.h:52</a></div></div>
+<div class="ttc" id="aa03326_html_a4664d6a22a9d12f4011de4d877664c45"><div class="ttname"><a href="a03326.html#a4664d6a22a9d12f4011de4d877664c45">FEATURE_SET_STRUCT::Features</a></div><div class="ttdeci">FEATURE Features[1]</div><div class="ttdef"><b>Definition:</b> <a href="a00746_source.html#l00067">ocrfeatures.h:67</a></div></div>
+<div class="ttc" id="aa03322_html_a1a034f275ff504afd63bd99643fae589"><div class="ttname"><a href="a03322.html#a1a034f275ff504afd63bd99643fae589">FEATURE_STRUCT::Type</a></div><div class="ttdeci">const FEATURE_DESC_STRUCT * Type</div><div class="ttdef"><b>Definition:</b> <a href="a00746_source.html#l00059">ocrfeatures.h:59</a></div></div>
+<div class="ttc" id="aa03326_html"><div class="ttname"><a href="a03326.html">FEATURE_SET_STRUCT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00746_source.html#l00064">ocrfeatures.h:64</a></div></div>
+<div class="ttc" id="aa00743_html_acdf1bcf73857cfc37fe8d667203bc875"><div class="ttname"><a href="a00743.html#acdf1bcf73857cfc37fe8d667203bc875">NewFeatureSet</a></div><div class="ttdeci">FEATURE_SET NewFeatureSet(int NumFeatures)</div><div class="ttdef"><b>Definition:</b> <a href="a00743_source.html#l00093">ocrfeatures.cpp:93</a></div></div>
+<div class="ttc" id="aa03326_html_af5f8cefc59003cce4cc41164e914bd4b"><div class="ttname"><a href="a03326.html#af5f8cefc59003cce4cc41164e914bd4b">FEATURE_SET_STRUCT::NumFeatures</a></div><div class="ttdeci">uint16_t NumFeatures</div><div class="ttdef"><b>Definition:</b> <a href="a00746_source.html#l00065">ocrfeatures.h:65</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_26a98b1b7a71b8b8c9c7d7743e94ea74.html">cutil</a></li><li class="navelem"><a class="el" href="a00743.html">callcpp.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b8f5fb7b736ee5431a221bc7b817d6e0.html">classify</a></li><li class="navelem"><a class="el" href="a00743.html">ocrfeatures.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

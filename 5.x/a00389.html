@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/ccstruct/seam.cpp File Reference</title>
+<title>tesseract: /tesseract/src/ccstruct/points.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -86,84 +86,86 @@ $(document).ready(function(){initNavTree('a00389.html','');});
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#define-members">Macros</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">seam.cpp File Reference</div>  </div>
+<div class="title">points.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="a00392_source.html">seam.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00209_source.html">blobs.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00533_source.html">tprintf.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;algorithm&gt;</code><br />
+<code>#include &lt;cmath&gt;</code><br />
+<code>#include &lt;cstdlib&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00014_source.html">tesseract/helpers.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00041_source.html">tesseract/serialis.h</a>&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00392_source.html">points.h</a>&quot;</code><br />
 </div>
 <p><a href="a00389_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a525335710b53cb064ca56b936120431e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00389.html#a525335710b53cb064ca56b936120431e">_USE_MATH_DEFINES</a></td></tr>
+<tr class="separator:a525335710b53cb064ca56b936120431e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr><td colspan="2"><div class="groupHeader">start_seam_list</div></td></tr>
-<tr><td colspan="2"><div class="groupText"><p>Initialize a list of seams that match the original number of blobs present in the starting segmentation. Each of the seams created by this routine have location information only. </p>
-</div></td></tr>
-<tr class="memitem:a7a7eb511f9a83da65455fe0a2668bc6b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00389.html#a7a7eb511f9a83da65455fe0a2668bc6b">start_seam_list</a> (<a class="el" href="a02236.html">TWERD</a> *word, <a class="el" href="a02108.html">GenericVector</a>&lt; <a class="el" href="a02452.html">SEAM</a> * &gt; *seam_array)</td></tr>
-<tr class="separator:a7a7eb511f9a83da65455fe0a2668bc6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53f643f86d802fc4b65b8cbb73f21622"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00389.html#a53f643f86d802fc4b65b8cbb73f21622">ELISTIZE</a> (<a class="el" href="a02862.html">ICOORDELT</a>) bool <a class="el" href="a02866.html">FCOORD</a></td></tr>
+<tr class="separator:a53f643f86d802fc4b65b8cbb73f21622"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="a7a7eb511f9a83da65455fe0a2668bc6b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7a7eb511f9a83da65455fe0a2668bc6b">&#9670;&nbsp;</a></span>start_seam_list()</h2>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a525335710b53cb064ca56b936120431e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a525335710b53cb064ca56b936120431e">&#9670;&nbsp;</a></span>_USE_MATH_DEFINES</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void start_seam_list </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a02236.html">TWERD</a> *&#160;</td>
-          <td class="paramname"><em>word</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a02108.html">GenericVector</a>&lt; <a class="el" href="a02452.html">SEAM</a> * &gt; *&#160;</td>
-          <td class="paramname"><em>seam_array</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="memname">#define _USE_MATH_DEFINES</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00389_source.html#l00261">261</a> of file <a class="el" href="a00389_source.html">seam.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;                                                                    {</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;  seam_array-&gt;truncate(0);</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;  <a class="code" href="a02220.html">TPOINT</a> location;</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160; </div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> b = 1; b &lt; word-&gt;<a class="code" href="a02236.html#a0d5347723ece084faf8f3d0dba6dd219">NumBlobs</a>(); ++b) {</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    <a class="code" href="a02440.html">TBOX</a> bbox = word-&gt;<a class="code" href="a02236.html#a52fba22521039a79d8c1c8182f602dcc">blobs</a>[b - 1]-&gt;bounding_box();</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    <a class="code" href="a02440.html">TBOX</a> nbox = word-&gt;<a class="code" href="a02236.html#a52fba22521039a79d8c1c8182f602dcc">blobs</a>[b]-&gt;bounding_box();</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    location.<a class="code" href="a02220.html#a5ed4f3edb251c99c2de6cb33645af1fe">x</a> = (bbox.<a class="code" href="a02440.html#af74fa3bf628c9426cd6f1141a87dc2e0">right</a>() + nbox.<a class="code" href="a02440.html#a8e9dce0d30d2213598cd4befe0028c99">left</a>()) / 2;</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    location.<a class="code" href="a02220.html#a82f12e26621cfe8386bf08d11e9819c1">y</a> = (bbox.<a class="code" href="a02440.html#a9fee4521e71300975cb34ebb21e3fca5">bottom</a>() + bbox.<a class="code" href="a02440.html#a5dc64d0677b5d65385bc07a78cf49c4d">top</a>() + nbox.<a class="code" href="a02440.html#a9fee4521e71300975cb34ebb21e3fca5">bottom</a>() + nbox.<a class="code" href="a02440.html#a5dc64d0677b5d65385bc07a78cf49c4d">top</a>()) / 4;</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    seam_array-&gt;push_back(<span class="keyword">new</span> <a class="code" href="a02452.html">SEAM</a>(0.0f, location));</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;  }</div>
+<p class="definition">Definition at line <a class="el" href="a00389_source.html#l00018">18</a> of file <a class="el" href="a00389_source.html">points.cpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a53f643f86d802fc4b65b8cbb73f21622"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53f643f86d802fc4b65b8cbb73f21622">&#9670;&nbsp;</a></span>ELISTIZE()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ELISTIZE </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a02862.html">ICOORDELT</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00389_source.html#l00027">27</a> of file <a class="el" href="a00389_source.html">points.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                       {  <span class="comment">//Convert to unit vec</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <span class="keywordtype">float</span> len = length ();</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <span class="keywordflow">if</span> (len &lt; 0.0000000001) {</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  }</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  xcoord /= len;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  ycoord /= len;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 </div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa02440_html_af74fa3bf628c9426cd6f1141a87dc2e0"><div class="ttname"><a href="a02440.html#af74fa3bf628c9426cd6f1141a87dc2e0">TBOX::right</a></div><div class="ttdeci">int16_t right() const</div><div class="ttdef"><b>Definition:</b> <a href="a00380_source.html#l00078">rect.h:78</a></div></div>
-<div class="ttc" id="aa02452_html"><div class="ttname"><a href="a02452.html">SEAM</a></div><div class="ttdef"><b>Definition:</b> <a href="a00392_source.html#l00036">seam.h:36</a></div></div>
-<div class="ttc" id="aa02440_html_a5dc64d0677b5d65385bc07a78cf49c4d"><div class="ttname"><a href="a02440.html#a5dc64d0677b5d65385bc07a78cf49c4d">TBOX::top</a></div><div class="ttdeci">int16_t top() const</div><div class="ttdef"><b>Definition:</b> <a href="a00380_source.html#l00057">rect.h:57</a></div></div>
-<div class="ttc" id="aa02440_html_a9fee4521e71300975cb34ebb21e3fca5"><div class="ttname"><a href="a02440.html#a9fee4521e71300975cb34ebb21e3fca5">TBOX::bottom</a></div><div class="ttdeci">int16_t bottom() const</div><div class="ttdef"><b>Definition:</b> <a href="a00380_source.html#l00064">rect.h:64</a></div></div>
-<div class="ttc" id="aa02440_html_a8e9dce0d30d2213598cd4befe0028c99"><div class="ttname"><a href="a02440.html#a8e9dce0d30d2213598cd4befe0028c99">TBOX::left</a></div><div class="ttdeci">int16_t left() const</div><div class="ttdef"><b>Definition:</b> <a href="a00380_source.html#l00071">rect.h:71</a></div></div>
-<div class="ttc" id="aa02440_html"><div class="ttname"><a href="a02440.html">TBOX</a></div><div class="ttdef"><b>Definition:</b> <a href="a00380_source.html#l00033">rect.h:33</a></div></div>
-<div class="ttc" id="aa02220_html_a82f12e26621cfe8386bf08d11e9819c1"><div class="ttname"><a href="a02220.html#a82f12e26621cfe8386bf08d11e9819c1">TPOINT::y</a></div><div class="ttdeci">int16_t y</div><div class="ttdef"><b>Definition:</b> <a href="a00209_source.html#l00092">blobs.h:92</a></div></div>
-<div class="ttc" id="aa02220_html"><div class="ttname"><a href="a02220.html">TPOINT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00209_source.html#l00049">blobs.h:49</a></div></div>
-<div class="ttc" id="aa02236_html_a52fba22521039a79d8c1c8182f602dcc"><div class="ttname"><a href="a02236.html#a52fba22521039a79d8c1c8182f602dcc">TWERD::blobs</a></div><div class="ttdeci">GenericVector&lt; TBLOB * &gt; blobs</div><div class="ttdef"><b>Definition:</b> <a href="a00209_source.html#l00457">blobs.h:457</a></div></div>
-<div class="ttc" id="aa02236_html_a0d5347723ece084faf8f3d0dba6dd219"><div class="ttname"><a href="a02236.html#a0d5347723ece084faf8f3d0dba6dd219">TWERD::NumBlobs</a></div><div class="ttdeci">int NumBlobs() const</div><div class="ttdef"><b>Definition:</b> <a href="a00209_source.html#l00446">blobs.h:446</a></div></div>
-<div class="ttc" id="aa02220_html_a5ed4f3edb251c99c2de6cb33645af1fe"><div class="ttname"><a href="a02220.html#a5ed4f3edb251c99c2de6cb33645af1fe">TPOINT::x</a></div><div class="ttdeci">int16_t x</div><div class="ttdef"><b>Definition:</b> <a href="a00209_source.html#l00091">blobs.h:91</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_27285da2200a3bef8a8e2dba4d21412a.html">ccstruct</a></li><li class="navelem"><a class="el" href="a00389.html">seam.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_27285da2200a3bef8a8e2dba4d21412a.html">ccstruct</a></li><li class="navelem"><a class="el" href="a00389.html">points.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

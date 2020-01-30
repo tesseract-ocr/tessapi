@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/ccstruct/matrix.cpp Source File</title>
+<title>tesseract: /tesseract/src/ccstruct/boxword.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,207 +87,135 @@ $(document).ready(function(){initNavTree('a00278_source.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">matrix.cpp</div>  </div>
+<div class="title">boxword.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00278.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/******************************************************************************</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * File:         matrix.cpp  (Formerly matrix.c)</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * Description:  Ratings matrix code. (Used by associator)</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * Author:       Mark Seaman, OCR Technology</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> * (c) Copyright 1990, Hewlett-Packard Company.</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> ** Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> ** you may not use this file except in compliance with the License.</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> ** You may obtain a copy of the License at</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> ** http://www.apache.org/licenses/LICENSE-2.0</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> ** Unless required by applicable law or agreed to in writing, software</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> ** distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> ** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> ** See the License for the specific language governing permissions and</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> ** limitations under the License.</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"> *****************************************************************************/</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">/*----------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">              I n c l u d e s</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">----------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00281.html">matrix.h</a>&quot;</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00746.html">callcpp.h</a>&quot;</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00374.html">ratngs.h</a>&quot;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00533.html">tprintf.h</a>&quot;</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00554.html">unicharset.h</a>&quot;</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">// Destructor.</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">// It is defined here, so the compiler can create a single vtable</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">// instead of weak vtables in every compilation unit.</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<a class="code" href="a02328.html#aff68533c56026970287e309ccda78679">MATRIX::~MATRIX</a>() = <span class="keywordflow">default</span>;</div>
+<a href="a00278.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// File:        boxword.h</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// Description: Class to represent the bounding boxes of the output.</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// Author:      Ray Smith</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">// Created:     Tue May 25 14:18:14 PDT 2010</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">// (C) Copyright 2010, Google Inc.</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">// you may not use this file except in compliance with the License.</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// You may obtain a copy of the License at</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">// http://www.apache.org/licenses/LICENSE-2.0</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// Unless required by applicable law or agreed to in writing, software</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">// See the License for the specific language governing permissions and</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">// limitations under the License.</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#ifndef TESSERACT_CSTRUCT_BOXWORD_H_</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#define TESSERACT_CSTRUCT_BOXWORD_H_</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;functional&gt;</span>       <span class="comment">// for std::function</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00011.html">tesseract/genericvector.h</a>&gt;</span>  <span class="comment">// for GenericVector</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00431.html">rect.h</a>&quot;</span>           <span class="comment">// for TBOX</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">class </span><a class="code" href="a02802.html">BLOCK</a>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">class </span><a class="code" href="a02926.html">WERD</a>;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">struct </span><a class="code" href="a02694.html">TWERD</a>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">namespace </span><a class="code" href="a01818.html">tesseract</a> {</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="a02328.html#a66a3fcaec67c08f8d8db3368d1f0ddc1">   34</a></span>&#160;<span class="comment">// Returns true if there are any real classification results.</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a02328.html#a66a3fcaec67c08f8d8db3368d1f0ddc1">MATRIX::Classified</a>(<span class="keywordtype">int</span> col, <span class="keywordtype">int</span> row, <span class="keywordtype">int</span> wildcard_id)<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <span class="keywordflow">if</span> (<a class="code" href="a02104.html#a9cd45e53c06a989c4b462a3df0cedf48">get</a>(col, row) == <a class="code" href="a00281.html#a5c21a86b19e78482e6c7384c47c2457d">NOT_CLASSIFIED</a>) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  BLOB_CHOICE_IT b_it(<a class="code" href="a02104.html#a9cd45e53c06a989c4b462a3df0cedf48">get</a>(col, row));</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <span class="keywordflow">for</span> (b_it.mark_cycle_pt(); !b_it.cycled_list(); b_it.forward()) {</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="a02432.html">BLOB_CHOICE</a>* choice = b_it.data();</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordflow">if</span> (choice-&gt;<a class="code" href="a02432.html#adfec15287a640283b0a33a9b60ba12d3">IsClassified</a>())</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;      <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  }</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;}</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">// Class to hold an array of bounding boxes for an output word and</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">// the bounding box of the whole word.</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="a02698.html">   36</a></span>&#160;<span class="keyword">class </span><a class="code" href="a02698.html">BoxWord</a> {</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <a class="code" href="a02698.html#a7467dd28609edc0c8635c6e2a53184ae">BoxWord</a>();</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <span class="keyword">explicit</span> <a class="code" href="a02698.html#a7467dd28609edc0c8635c6e2a53184ae">BoxWord</a>(<span class="keyword">const</span> <a class="code" href="a02698.html">BoxWord</a>&amp; src);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <a class="code" href="a02698.html#aae53c4a338e7655ee843681cadae8d12">~BoxWord</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <a class="code" href="a02698.html">BoxWord</a>&amp; <a class="code" href="a02698.html#a611c93e8803464085f680bd2b85b9c5e">operator=</a>(<span class="keyword">const</span> <a class="code" href="a02698.html">BoxWord</a>&amp; src);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a02698.html#afabca4efb6b959b45ea2567aad48820d">CopyFrom</a>(<span class="keyword">const</span> <a class="code" href="a02698.html">BoxWord</a>&amp; src);</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">// Expands the existing matrix in-place to make the band wider, without</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="a02328.html#a8d472c8b388a9d1d0518259a7e002dba">   47</a></span>&#160;<span class="comment">// losing any existing data.</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02328.html#a8d472c8b388a9d1d0518259a7e002dba">MATRIX::IncreaseBandSize</a>(<span class="keywordtype">int</span> bandwidth) {</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <a class="code" href="a02104.html#a92bd85cbe805aacb0be51f5ad6f61939">ResizeWithCopy</a>(<a class="code" href="a02324.html#ad414e7f436cdf0a07cbe8434b6c712c3">dimension</a>(), <a class="code" href="a02324.html#a922677b7937cfb84ba19c568cda25fbf">bandwidth</a>);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;}</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">// Returns a bigger MATRIX with a new column and row in the matrix in order</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">// to split the blob at the given (ind,ind) diagonal location.</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">// Entries are relocated to the new MATRIX using the transformation defined</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">// by MATRIX_COORD::MapForSplit.</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="a02328.html#adbd8b24d516966e65a9a7621e132f3cf">   56</a></span>&#160;<span class="comment">// Transfers the pointer data to the new MATRIX and deletes *this.</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<a class="code" href="a02328.html">MATRIX</a>* <a class="code" href="a02328.html#adbd8b24d516966e65a9a7621e132f3cf">MATRIX::ConsumeAndMakeBigger</a>(<span class="keywordtype">int</span> ind) {</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="keywordtype">int</span> dim = <a class="code" href="a02324.html#ad414e7f436cdf0a07cbe8434b6c712c3">dimension</a>();</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="keywordtype">int</span> band_width = <a class="code" href="a02324.html#a922677b7937cfb84ba19c568cda25fbf">bandwidth</a>();</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <span class="comment">// Check to see if bandwidth needs expanding.</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> col = ind; col &gt;= 0 &amp;&amp; col &gt; ind - band_width; --col) {</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="a02104.html#ad4251b56690c68e51c6c0389a7c268bc">array_</a>[col * band_width + band_width - 1] != <a class="code" href="a02104.html#af9e4de813f248f5c6498ba91e473243a">empty_</a>) {</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;      ++band_width;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;      <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    }</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  }</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <span class="keyword">auto</span>* result = <span class="keyword">new</span> <a class="code" href="a02328.html#a7601db01acf62a95923bb0765bda67e4">MATRIX</a>(dim + 1, band_width);</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> col = 0; col &lt; dim; ++col) {</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> row = col; row &lt; dim &amp;&amp; row &lt; col + <a class="code" href="a02324.html#a922677b7937cfb84ba19c568cda25fbf">bandwidth</a>(); ++row) {</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;      <a class="code" href="a02332.html">MATRIX_COORD</a> coord(col, row);</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;      coord.<a class="code" href="a02332.html#a215ab937bc15f01ab3b141bdfbb8a0af">MapForSplit</a>(ind);</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;      BLOB_CHOICE_LIST* choices = <a class="code" href="a02104.html#a9cd45e53c06a989c4b462a3df0cedf48">get</a>(col, row);</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;      <span class="keywordflow">if</span> (choices != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="comment">// Correct matrix location on each choice.</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        BLOB_CHOICE_IT bc_it(choices);</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="keywordflow">for</span> (bc_it.mark_cycle_pt(); !bc_it.cycled_list(); bc_it.forward()) {</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;          <a class="code" href="a02432.html">BLOB_CHOICE</a>* choice = bc_it.data();</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;          choice-&gt;<a class="code" href="a02432.html#acd1a2f8fa2cac5894de41a0ad93d9005">set_matrix_cell</a>(coord.<a class="code" href="a02332.html#a22a122ba151628fafb64b2957c4690fd">col</a>, coord.<a class="code" href="a02332.html#abde52ca4976ce8acc4e70215df074ff5">row</a>);</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        }</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <a class="code" href="a00464.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a>(coord.<a class="code" href="a02332.html#aaf9577184ea7737011964f106c285c6a">Valid</a>(*result));</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        result-&gt;put(coord.<a class="code" href="a02332.html#a22a122ba151628fafb64b2957c4690fd">col</a>, coord.<a class="code" href="a02332.html#abde52ca4976ce8acc4e70215df074ff5">row</a>, choices);</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;      }</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    }</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="comment">// Factory to build a BoxWord from a TWERD using the DENORMs on each blob to</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="comment">// switch back to original image coordinates.</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <span class="keyword">static</span> <a class="code" href="a02698.html">BoxWord</a>* <a class="code" href="a02698.html#aab72d68adc48c35cbdcfa89f9aad5677">CopyFromNormalized</a>(<a class="code" href="a02694.html">TWERD</a>* tessword);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="comment">// Clean up the bounding boxes from the polygonal approximation by</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <span class="comment">// expanding slightly, then clipping to the blobs from the original_word</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="comment">// that overlap. If not null, the block provides the inverse rotation.</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a02698.html#af74a52ee479f2e2172b5fb15d680f9fa">ClipToOriginalWord</a>(<span class="keyword">const</span> <a class="code" href="a02802.html">BLOCK</a>* block, <a class="code" href="a02926.html">WERD</a>* original_word);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <span class="comment">// Merges the boxes from start to end, not including end, and deletes</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="comment">// the boxes between start and end.</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a02698.html#a3a7da282c5432576b36cd7a8ec9702d8">MergeBoxes</a>(<span class="keywordtype">int</span> start, <span class="keywordtype">int</span> end);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="comment">// Inserts a new box before the given index.</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <span class="comment">// Recomputes the bounding box.</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a02698.html#a23d6471fdda275e6448db555aecee1f3">InsertBox</a>(<span class="keywordtype">int</span> index, <span class="keyword">const</span> <a class="code" href="a02898.html">TBOX</a>&amp; box);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <span class="comment">// Changes the box at the given index to the new box.</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="comment">// Recomputes the bounding box.</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a02698.html#adc0a34ed6d9b8a5bf9246c4b58859c5a">ChangeBox</a>(<span class="keywordtype">int</span> index, <span class="keyword">const</span> <a class="code" href="a02898.html">TBOX</a>&amp; box);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <span class="comment">// Deletes the box with the given index, and shuffles up the rest.</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <span class="comment">// Recomputes the bounding box.</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a02698.html#a8a85de03e0800fe425990e498b00f87c">DeleteBox</a>(<span class="keywordtype">int</span> index);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <span class="comment">// Deletes all the boxes stored in BoxWord.</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a02698.html#aede79b94bea39b3223d32137bab439e2">DeleteAllBoxes</a>();</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <span class="comment">// This and other putatively are the same, so call the (permanent) callback</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <span class="comment">// for each blob index where the bounding boxes match.</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  <span class="comment">// The callback is deleted on completion.</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a02698.html#a5b48c2b16cbc14b47e8881aa35b1676e">ProcessMatchedBlobs</a>(<span class="keyword">const</span> <a class="code" href="a02694.html">TWERD</a>&amp; other, std::function&lt;<span class="keywordtype">void</span>(<span class="keywordtype">int</span>)&gt; cb) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="a02698.html#a6bad9bc5492723019a2ad03b00cb7738">   79</a></span>&#160;  <span class="keyword">const</span> <a class="code" href="a02898.html">TBOX</a>&amp; <a class="code" href="a02698.html#a6bad9bc5492723019a2ad03b00cb7738">bounding_box</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordflow">return</span> bbox_;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  }</div>
+<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="a02698.html#a2505cb916ecbd87e4ba1a44654b1e078">   82</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="a02698.html#a2505cb916ecbd87e4ba1a44654b1e078">length</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> length_; }</div>
+<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="a02698.html#a94891d405fd3837d235bb8916df1c89e">   83</a></span>&#160;  <span class="keyword">const</span> <a class="code" href="a02898.html">TBOX</a>&amp; <a class="code" href="a02698.html#a94891d405fd3837d235bb8916df1c89e">BlobBox</a>(<span class="keywordtype">int</span> index)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordflow">return</span> boxes_[index];</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  }</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  <span class="keyword">delete</span> <span class="keyword">this</span>;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;}</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  <span class="keywordtype">void</span> ComputeBoundingBox();</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">// Makes and returns a deep copy of *this, including all the BLOB_CHOICEs</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">// on the lists, but not any LanguageModelState that may be attached to the</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="a02328.html#aaa514407cfc9accd73b736bae56bb64c">   92</a></span>&#160;<span class="comment">// BLOB_CHOICEs.</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<a class="code" href="a02328.html">MATRIX</a>* <a class="code" href="a02328.html#aaa514407cfc9accd73b736bae56bb64c">MATRIX::DeepCopy</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  <span class="keywordtype">int</span> dim = <a class="code" href="a02324.html#ad414e7f436cdf0a07cbe8434b6c712c3">dimension</a>();</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  <span class="keywordtype">int</span> band_width = <a class="code" href="a02324.html#a922677b7937cfb84ba19c568cda25fbf">bandwidth</a>();</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  <span class="keyword">auto</span>* result = <span class="keyword">new</span> <a class="code" href="a02328.html#a7601db01acf62a95923bb0765bda67e4">MATRIX</a>(dim, band_width);</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> col = 0; col &lt; dim; ++col) {</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> row = col; row &lt; dim &amp;&amp; row &lt; col + band_width; ++row) {</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;      BLOB_CHOICE_LIST* choices = <a class="code" href="a02104.html#a9cd45e53c06a989c4b462a3df0cedf48">get</a>(col, row);</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;      <span class="keywordflow">if</span> (choices != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        <span class="keyword">auto</span>* copy_choices = <span class="keyword">new</span> BLOB_CHOICE_LIST;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        copy_choices-&gt;deep_copy(choices, &amp;<a class="code" href="a02432.html#af3f12ffe754a76bf2abbb82a001336f9">BLOB_CHOICE::deep_copy</a>);</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        result-&gt;put(col, row, copy_choices);</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;      }</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    }</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  }</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;  <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;}</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
-<div class="line"><a name="l00110"></a><span class="lineno"><a class="line" href="a02328.html#a614c673fe776cb6f98bcfaeb59e5e109">  110</a></span>&#160;<span class="comment">// Print the best guesses out of the match rating matrix.</span></div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02328.html#a614c673fe776cb6f98bcfaeb59e5e109">MATRIX::print</a>(<span class="keyword">const</span> <a class="code" href="a02660.html">UNICHARSET</a> &amp;unicharset)<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Ratings Matrix (top 3 choices)\n&quot;</span>);</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  <span class="keywordtype">int</span> dim = <a class="code" href="a02324.html#ad414e7f436cdf0a07cbe8434b6c712c3">dimension</a>();</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  <span class="keywordtype">int</span> band_width = <a class="code" href="a02324.html#a922677b7937cfb84ba19c568cda25fbf">bandwidth</a>();</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  <span class="keywordtype">int</span> row, col;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  <span class="keywordflow">for</span> (col = 0; col &lt; dim; ++col) {</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keywordflow">for</span> (row = col; row &lt; dim &amp;&amp; row &lt; col + band_width; ++row) {</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;      BLOB_CHOICE_LIST *rating = this-&gt;<a class="code" href="a02104.html#a9cd45e53c06a989c4b462a3df0cedf48">get</a>(col, row);</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;      <span class="keywordflow">if</span> (rating == <a class="code" href="a00281.html#a5c21a86b19e78482e6c7384c47c2457d">NOT_CLASSIFIED</a>) <span class="keywordflow">continue</span>;</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;      BLOB_CHOICE_IT b_it(rating);</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;      <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;col=%d row=%d &quot;</span>, col, row);</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;      <span class="keywordflow">for</span> (b_it.mark_cycle_pt(); !b_it.cycled_list(); b_it.forward()) {</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;%s rat=%g cert=%g &quot;</span> ,</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                unicharset.<a class="code" href="a02660.html#aa19fb595808fe4688c580334937dfa45">id_to_unichar</a>(b_it.data()-&gt;unichar_id()),</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                b_it.data()-&gt;rating(), b_it.data()-&gt;certainty());</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;      }</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;      <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;\n&quot;</span>);</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    }</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;\n&quot;</span>);</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;  }</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;  <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;\n&quot;</span>);</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;  <span class="keywordflow">for</span> (col = 0; col &lt; dim; ++col) <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;\t%d&quot;</span>, col);</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;  <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;\n&quot;</span>);</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;  <span class="keywordflow">for</span> (row = 0; row &lt; dim; ++row) {</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="keywordflow">for</span> (col = 0; col &lt;= row; ++col) {</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;      <span class="keywordflow">if</span> (col == 0) <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;%d\t&quot;</span>, row);</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;      <span class="keywordflow">if</span> (row &gt;= col + band_width) {</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot; \t&quot;</span>);</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        <span class="keywordflow">continue</span>;</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;      }</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;      BLOB_CHOICE_LIST *rating = this-&gt;<a class="code" href="a02104.html#a9cd45e53c06a989c4b462a3df0cedf48">get</a>(col, row);</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;      <span class="keywordflow">if</span> (rating != <a class="code" href="a00281.html#a5c21a86b19e78482e6c7384c47c2457d">NOT_CLASSIFIED</a>) {</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;        BLOB_CHOICE_IT b_it(rating);</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        <span class="keywordtype">int</span> counter = 0;</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        <span class="keywordflow">for</span> (b_it.mark_cycle_pt(); !b_it.cycled_list(); b_it.forward()) {</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;          <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;%s &quot;</span>,</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;                  unicharset.<a class="code" href="a02660.html#aa19fb595808fe4688c580334937dfa45">id_to_unichar</a>(b_it.data()-&gt;unichar_id()));</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;          ++counter;</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;          <span class="keywordflow">if</span> (counter == 3) <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        }</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;\t&quot;</span>);</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;      } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot; \t&quot;</span>);</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;      }</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    }</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;\n&quot;</span>);</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;  }</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;}</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  <a class="code" href="a02898.html">TBOX</a> bbox_;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  <span class="keywordtype">int</span> length_;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  <a class="code" href="a02434.html">GenericVector&lt;TBOX&gt;</a> boxes_;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;};</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;}  <span class="comment">// namespace tesseract.</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="preprocessor">#endif  // TESSERACT_CSTRUCT_BOXWORD_H_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa02432_html_adfec15287a640283b0a33a9b60ba12d3"><div class="ttname"><a href="a02432.html#adfec15287a640283b0a33a9b60ba12d3">BLOB_CHOICE::IsClassified</a></div><div class="ttdeci">bool IsClassified() const</div><div class="ttdef"><b>Definition:</b> <a href="a00374_source.html#l00133">ratngs.h:133</a></div></div>
-<div class="ttc" id="aa02324_html_a922677b7937cfb84ba19c568cda25fbf"><div class="ttname"><a href="a02324.html#a922677b7937cfb84ba19c568cda25fbf">BandTriMatrix&lt; BLOB_CHOICE_LIST * &gt;::bandwidth</a></div><div class="ttdeci">int bandwidth() const</div><div class="ttdef"><b>Definition:</b> <a href="a00281_source.html#l00534">matrix.h:534</a></div></div>
-<div class="ttc" id="aa00374_html"><div class="ttname"><a href="a00374.html">ratngs.h</a></div></div>
-<div class="ttc" id="aa02328_html_a614c673fe776cb6f98bcfaeb59e5e109"><div class="ttname"><a href="a02328.html#a614c673fe776cb6f98bcfaeb59e5e109">MATRIX::print</a></div><div class="ttdeci">void print(const UNICHARSET &amp;unicharset) const</div><div class="ttdef"><b>Definition:</b> <a href="a00278_source.html#l00110">matrix.cpp:110</a></div></div>
-<div class="ttc" id="aa02104_html_a9cd45e53c06a989c4b462a3df0cedf48"><div class="ttname"><a href="a02104.html#a9cd45e53c06a989c4b462a3df0cedf48">GENERIC_2D_ARRAY&lt; BLOB_CHOICE_LIST * &gt;::get</a></div><div class="ttdeci">BLOB_CHOICE_LIST * get(ICOORD pos) const</div><div class="ttdef"><b>Definition:</b> <a href="a00281_source.html#l00227">matrix.h:227</a></div></div>
-<div class="ttc" id="aa02328_html_aaa514407cfc9accd73b736bae56bb64c"><div class="ttname"><a href="a02328.html#aaa514407cfc9accd73b736bae56bb64c">MATRIX::DeepCopy</a></div><div class="ttdeci">MATRIX * DeepCopy() const</div><div class="ttdef"><b>Definition:</b> <a href="a00278_source.html#l00092">matrix.cpp:92</a></div></div>
-<div class="ttc" id="aa02328_html"><div class="ttname"><a href="a02328.html">MATRIX</a></div><div class="ttdef"><b>Definition:</b> <a href="a00281_source.html#l00574">matrix.h:574</a></div></div>
-<div class="ttc" id="aa00554_html"><div class="ttname"><a href="a00554.html">unicharset.h</a></div></div>
-<div class="ttc" id="aa02324_html_ad414e7f436cdf0a07cbe8434b6c712c3"><div class="ttname"><a href="a02324.html#ad414e7f436cdf0a07cbe8434b6c712c3">BandTriMatrix&lt; BLOB_CHOICE_LIST * &gt;::dimension</a></div><div class="ttdeci">int dimension() const</div><div class="ttdef"><b>Definition:</b> <a href="a00281_source.html#l00532">matrix.h:532</a></div></div>
-<div class="ttc" id="aa02328_html_a66a3fcaec67c08f8d8db3368d1f0ddc1"><div class="ttname"><a href="a02328.html#a66a3fcaec67c08f8d8db3368d1f0ddc1">MATRIX::Classified</a></div><div class="ttdeci">bool Classified(int col, int row, int wildcard_id) const</div><div class="ttdef"><b>Definition:</b> <a href="a00278_source.html#l00034">matrix.cpp:34</a></div></div>
-<div class="ttc" id="aa00533_html"><div class="ttname"><a href="a00533.html">tprintf.h</a></div></div>
-<div class="ttc" id="aa02660_html_aa19fb595808fe4688c580334937dfa45"><div class="ttname"><a href="a02660.html#aa19fb595808fe4688c580334937dfa45">UNICHARSET::id_to_unichar</a></div><div class="ttdeci">const char * id_to_unichar(UNICHAR_ID id) const</div><div class="ttdef"><b>Definition:</b> <a href="a00551_source.html#l00290">unicharset.cpp:290</a></div></div>
-<div class="ttc" id="aa02328_html_aff68533c56026970287e309ccda78679"><div class="ttname"><a href="a02328.html#aff68533c56026970287e309ccda78679">MATRIX::~MATRIX</a></div><div class="ttdeci">~MATRIX() override</div></div>
-<div class="ttc" id="aa02104_html_ad4251b56690c68e51c6c0389a7c268bc"><div class="ttname"><a href="a02104.html#ad4251b56690c68e51c6c0389a7c268bc">GENERIC_2D_ARRAY&lt; BLOB_CHOICE_LIST * &gt;::array_</a></div><div class="ttdeci">BLOB_CHOICE_LIST * * array_</div><div class="ttdef"><b>Definition:</b> <a href="a00281_source.html#l00504">matrix.h:504</a></div></div>
-<div class="ttc" id="aa02328_html_a7601db01acf62a95923bb0765bda67e4"><div class="ttname"><a href="a02328.html#a7601db01acf62a95923bb0765bda67e4">MATRIX::MATRIX</a></div><div class="ttdeci">MATRIX(int dimension, int bandwidth)</div><div class="ttdef"><b>Definition:</b> <a href="a00281_source.html#l00576">matrix.h:576</a></div></div>
-<div class="ttc" id="aa00281_html"><div class="ttname"><a href="a00281.html">matrix.h</a></div></div>
-<div class="ttc" id="aa02660_html"><div class="ttname"><a href="a02660.html">UNICHARSET</a></div><div class="ttdef"><b>Definition:</b> <a href="a00554_source.html#l00145">unicharset.h:145</a></div></div>
-<div class="ttc" id="aa00530_html_a0c2bcd4462ec67ab0971b34a0f610f55"><div class="ttname"><a href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a></div><div class="ttdeci">DLLSYM void tprintf(const char *format,...)</div><div class="ttdef"><b>Definition:</b> <a href="a00530_source.html#l00034">tprintf.cpp:34</a></div></div>
-<div class="ttc" id="aa00746_html"><div class="ttname"><a href="a00746.html">callcpp.h</a></div></div>
-<div class="ttc" id="aa02432_html_acd1a2f8fa2cac5894de41a0ad93d9005"><div class="ttname"><a href="a02432.html#acd1a2f8fa2cac5894de41a0ad93d9005">BLOB_CHOICE::set_matrix_cell</a></div><div class="ttdeci">void set_matrix_cell(int col, int row)</div><div class="ttdef"><b>Definition:</b> <a href="a00374_source.html#l00151">ratngs.h:151</a></div></div>
-<div class="ttc" id="aa02332_html_a215ab937bc15f01ab3b141bdfbb8a0af"><div class="ttname"><a href="a02332.html#a215ab937bc15f01ab3b141bdfbb8a0af">MATRIX_COORD::MapForSplit</a></div><div class="ttdeci">void MapForSplit(int ind)</div><div class="ttdef"><b>Definition:</b> <a href="a00281_source.html#l00625">matrix.h:625</a></div></div>
-<div class="ttc" id="aa02104_html_af9e4de813f248f5c6498ba91e473243a"><div class="ttname"><a href="a02104.html#af9e4de813f248f5c6498ba91e473243a">GENERIC_2D_ARRAY&lt; BLOB_CHOICE_LIST * &gt;::empty_</a></div><div class="ttdeci">BLOB_CHOICE_LIST * empty_</div><div class="ttdef"><b>Definition:</b> <a href="a00281_source.html#l00505">matrix.h:505</a></div></div>
-<div class="ttc" id="aa02332_html_aaf9577184ea7737011964f106c285c6a"><div class="ttname"><a href="a02332.html#aaf9577184ea7737011964f106c285c6a">MATRIX_COORD::Valid</a></div><div class="ttdeci">bool Valid(const MATRIX &amp;m) const</div><div class="ttdef"><b>Definition:</b> <a href="a00281_source.html#l00614">matrix.h:614</a></div></div>
-<div class="ttc" id="aa02432_html_af3f12ffe754a76bf2abbb82a001336f9"><div class="ttname"><a href="a02432.html#af3f12ffe754a76bf2abbb82a001336f9">BLOB_CHOICE::deep_copy</a></div><div class="ttdeci">static BLOB_CHOICE * deep_copy(const BLOB_CHOICE *src)</div><div class="ttdef"><b>Definition:</b> <a href="a00374_source.html#l00158">ratngs.h:158</a></div></div>
-<div class="ttc" id="aa02328_html_adbd8b24d516966e65a9a7621e132f3cf"><div class="ttname"><a href="a02328.html#adbd8b24d516966e65a9a7621e132f3cf">MATRIX::ConsumeAndMakeBigger</a></div><div class="ttdeci">MATRIX * ConsumeAndMakeBigger(int ind)</div><div class="ttdef"><b>Definition:</b> <a href="a00278_source.html#l00056">matrix.cpp:56</a></div></div>
-<div class="ttc" id="aa02328_html_a8d472c8b388a9d1d0518259a7e002dba"><div class="ttname"><a href="a02328.html#a8d472c8b388a9d1d0518259a7e002dba">MATRIX::IncreaseBandSize</a></div><div class="ttdeci">void IncreaseBandSize(int bandwidth)</div><div class="ttdef"><b>Definition:</b> <a href="a00278_source.html#l00047">matrix.cpp:47</a></div></div>
-<div class="ttc" id="aa02432_html"><div class="ttname"><a href="a02432.html">BLOB_CHOICE</a></div><div class="ttdef"><b>Definition:</b> <a href="a00374_source.html#l00049">ratngs.h:49</a></div></div>
-<div class="ttc" id="aa02104_html_a92bd85cbe805aacb0be51f5ad6f61939"><div class="ttname"><a href="a02104.html#a92bd85cbe805aacb0be51f5ad6f61939">GENERIC_2D_ARRAY&lt; BLOB_CHOICE_LIST * &gt;::ResizeWithCopy</a></div><div class="ttdeci">void ResizeWithCopy(int size1, int size2)</div><div class="ttdef"><b>Definition:</b> <a href="a00281_source.html#l00111">matrix.h:111</a></div></div>
-<div class="ttc" id="aa02332_html"><div class="ttname"><a href="a02332.html">MATRIX_COORD</a></div><div class="ttdef"><b>Definition:</b> <a href="a00281_source.html#l00604">matrix.h:604</a></div></div>
-<div class="ttc" id="aa00281_html_a5c21a86b19e78482e6c7384c47c2457d"><div class="ttname"><a href="a00281.html#a5c21a86b19e78482e6c7384c47c2457d">NOT_CLASSIFIED</a></div><div class="ttdeci">#define NOT_CLASSIFIED</div><div class="ttdef"><b>Definition:</b> <a href="a00281_source.html#l00040">matrix.h:40</a></div></div>
-<div class="ttc" id="aa00464_html_a93a603f4063a6b9403d81caa245a583b"><div class="ttname"><a href="a00464.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a></div><div class="ttdeci">#define ASSERT_HOST(x)</div><div class="ttdef"><b>Definition:</b> <a href="a00464_source.html#l00087">errcode.h:87</a></div></div>
-<div class="ttc" id="aa02332_html_abde52ca4976ce8acc4e70215df074ff5"><div class="ttname"><a href="a02332.html#abde52ca4976ce8acc4e70215df074ff5">MATRIX_COORD::row</a></div><div class="ttdeci">int row</div><div class="ttdef"><b>Definition:</b> <a href="a00281_source.html#l00633">matrix.h:633</a></div></div>
-<div class="ttc" id="aa02332_html_a22a122ba151628fafb64b2957c4690fd"><div class="ttname"><a href="a02332.html#a22a122ba151628fafb64b2957c4690fd">MATRIX_COORD::col</a></div><div class="ttdeci">int col</div><div class="ttdef"><b>Definition:</b> <a href="a00281_source.html#l00632">matrix.h:632</a></div></div>
+<div class="ttc" id="aa02698_html_a7467dd28609edc0c8635c6e2a53184ae"><div class="ttname"><a href="a02698.html#a7467dd28609edc0c8635c6e2a53184ae">tesseract::BoxWord::BoxWord</a></div><div class="ttdeci">BoxWord()</div><div class="ttdef"><b>Definition:</b> <a href="a00275_source.html#l00033">boxword.cpp:33</a></div></div>
+<div class="ttc" id="aa02698_html_a8a85de03e0800fe425990e498b00f87c"><div class="ttname"><a href="a02698.html#a8a85de03e0800fe425990e498b00f87c">tesseract::BoxWord::DeleteBox</a></div><div class="ttdeci">void DeleteBox(int index)</div><div class="ttdef"><b>Definition:</b> <a href="a00275_source.html#l00166">boxword.cpp:166</a></div></div>
+<div class="ttc" id="aa02698_html_aab72d68adc48c35cbdcfa89f9aad5677"><div class="ttname"><a href="a02698.html#aab72d68adc48c35cbdcfa89f9aad5677">tesseract::BoxWord::CopyFromNormalized</a></div><div class="ttdeci">static BoxWord * CopyFromNormalized(TWERD *tessword)</div><div class="ttdef"><b>Definition:</b> <a href="a00275_source.html#l00056">boxword.cpp:56</a></div></div>
+<div class="ttc" id="aa02694_html"><div class="ttname"><a href="a02694.html">TWERD</a></div><div class="ttdef"><b>Definition:</b> <a href="a00260_source.html#l00416">blobs.h:416</a></div></div>
+<div class="ttc" id="aa02698_html_af74a52ee479f2e2172b5fb15d680f9fa"><div class="ttname"><a href="a02698.html#af74a52ee479f2e2172b5fb15d680f9fa">tesseract::BoxWord::ClipToOriginalWord</a></div><div class="ttdeci">void ClipToOriginalWord(const BLOCK *block, WERD *original_word)</div><div class="ttdef"><b>Definition:</b> <a href="a00275_source.html#l00092">boxword.cpp:92</a></div></div>
+<div class="ttc" id="aa00431_html"><div class="ttname"><a href="a00431.html">rect.h</a></div></div>
+<div class="ttc" id="aa02698_html_afabca4efb6b959b45ea2567aad48820d"><div class="ttname"><a href="a02698.html#afabca4efb6b959b45ea2567aad48820d">tesseract::BoxWord::CopyFrom</a></div><div class="ttdeci">void CopyFrom(const BoxWord &amp;src)</div><div class="ttdef"><b>Definition:</b> <a href="a00275_source.html#l00045">boxword.cpp:45</a></div></div>
+<div class="ttc" id="aa00011_html"><div class="ttname"><a href="a00011.html">genericvector.h</a></div></div>
+<div class="ttc" id="aa02802_html"><div class="ttname"><a href="a02802.html">BLOCK</a></div><div class="ttdef"><b>Definition:</b> <a href="a00350_source.html#l00028">ocrblock.h:28</a></div></div>
+<div class="ttc" id="aa02698_html_a94891d405fd3837d235bb8916df1c89e"><div class="ttname"><a href="a02698.html#a94891d405fd3837d235bb8916df1c89e">tesseract::BoxWord::BlobBox</a></div><div class="ttdeci">const TBOX &amp; BlobBox(int index) const</div><div class="ttdef"><b>Definition:</b> <a href="a00278_source.html#l00083">boxword.h:83</a></div></div>
+<div class="ttc" id="aa02698_html_a5b48c2b16cbc14b47e8881aa35b1676e"><div class="ttname"><a href="a02698.html#a5b48c2b16cbc14b47e8881aa35b1676e">tesseract::BoxWord::ProcessMatchedBlobs</a></div><div class="ttdeci">void ProcessMatchedBlobs(const TWERD &amp;other, std::function&lt; void(int)&gt; cb) const</div><div class="ttdef"><b>Definition:</b> <a href="a00275_source.html#l00190">boxword.cpp:190</a></div></div>
+<div class="ttc" id="aa01818_html"><div class="ttname"><a href="a01818.html">tesseract</a></div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00065">baseapi.h:65</a></div></div>
+<div class="ttc" id="aa02698_html_aae53c4a338e7655ee843681cadae8d12"><div class="ttname"><a href="a02698.html#aae53c4a338e7655ee843681cadae8d12">tesseract::BoxWord::~BoxWord</a></div><div class="ttdeci">~BoxWord()=default</div></div>
+<div class="ttc" id="aa02434_html"><div class="ttname"><a href="a02434.html">GenericVector&lt; TBOX &gt;</a></div></div>
+<div class="ttc" id="aa02698_html_a23d6471fdda275e6448db555aecee1f3"><div class="ttname"><a href="a02698.html#a23d6471fdda275e6448db555aecee1f3">tesseract::BoxWord::InsertBox</a></div><div class="ttdeci">void InsertBox(int index, const TBOX &amp;box)</div><div class="ttdef"><b>Definition:</b> <a href="a00275_source.html#l00148">boxword.cpp:148</a></div></div>
+<div class="ttc" id="aa02698_html_a2505cb916ecbd87e4ba1a44654b1e078"><div class="ttname"><a href="a02698.html#a2505cb916ecbd87e4ba1a44654b1e078">tesseract::BoxWord::length</a></div><div class="ttdeci">int length() const</div><div class="ttdef"><b>Definition:</b> <a href="a00278_source.html#l00082">boxword.h:82</a></div></div>
+<div class="ttc" id="aa02698_html_adc0a34ed6d9b8a5bf9246c4b58859c5a"><div class="ttname"><a href="a02698.html#adc0a34ed6d9b8a5bf9246c4b58859c5a">tesseract::BoxWord::ChangeBox</a></div><div class="ttdeci">void ChangeBox(int index, const TBOX &amp;box)</div><div class="ttdef"><b>Definition:</b> <a href="a00275_source.html#l00159">boxword.cpp:159</a></div></div>
+<div class="ttc" id="aa02926_html"><div class="ttname"><a href="a02926.html">WERD</a></div><div class="ttdef"><b>Definition:</b> <a href="a00467_source.html#l00055">werd.h:55</a></div></div>
+<div class="ttc" id="aa02698_html_aede79b94bea39b3223d32137bab439e2"><div class="ttname"><a href="a02698.html#aede79b94bea39b3223d32137bab439e2">tesseract::BoxWord::DeleteAllBoxes</a></div><div class="ttdeci">void DeleteAllBoxes()</div><div class="ttdef"><b>Definition:</b> <a href="a00275_source.html#l00174">boxword.cpp:174</a></div></div>
+<div class="ttc" id="aa02698_html_a611c93e8803464085f680bd2b85b9c5e"><div class="ttname"><a href="a02698.html#a611c93e8803464085f680bd2b85b9c5e">tesseract::BoxWord::operator=</a></div><div class="ttdeci">BoxWord &amp; operator=(const BoxWord &amp;src)</div><div class="ttdef"><b>Definition:</b> <a href="a00275_source.html#l00040">boxword.cpp:40</a></div></div>
+<div class="ttc" id="aa02698_html_a3a7da282c5432576b36cd7a8ec9702d8"><div class="ttname"><a href="a02698.html#a3a7da282c5432576b36cd7a8ec9702d8">tesseract::BoxWord::MergeBoxes</a></div><div class="ttdeci">void MergeBoxes(int start, int end)</div><div class="ttdef"><b>Definition:</b> <a href="a00275_source.html#l00131">boxword.cpp:131</a></div></div>
+<div class="ttc" id="aa02698_html_a6bad9bc5492723019a2ad03b00cb7738"><div class="ttname"><a href="a02698.html#a6bad9bc5492723019a2ad03b00cb7738">tesseract::BoxWord::bounding_box</a></div><div class="ttdeci">const TBOX &amp; bounding_box() const</div><div class="ttdef"><b>Definition:</b> <a href="a00278_source.html#l00079">boxword.h:79</a></div></div>
+<div class="ttc" id="aa02898_html"><div class="ttname"><a href="a02898.html">TBOX</a></div><div class="ttdef"><b>Definition:</b> <a href="a00431_source.html#l00033">rect.h:33</a></div></div>
+<div class="ttc" id="aa02698_html"><div class="ttname"><a href="a02698.html">tesseract::BoxWord</a></div><div class="ttdef"><b>Definition:</b> <a href="a00278_source.html#l00036">boxword.h:36</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_27285da2200a3bef8a8e2dba4d21412a.html">ccstruct</a></li><li class="navelem"><a class="el" href="a00278.html">matrix.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:14 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_27285da2200a3bef8a8e2dba4d21412a.html">ccstruct</a></li><li class="navelem"><a class="el" href="a00278.html">boxword.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:20 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

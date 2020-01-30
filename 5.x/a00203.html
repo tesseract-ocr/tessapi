@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/ccstruct/blobbox.h File Reference</title>
+<title>tesseract: /tesseract/src/ccmain/reject.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,952 +87,326 @@ $(document).ready(function(){initNavTree('a00203.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#enum-members">Enumerations</a> &#124;
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">blobbox.h File Reference</div>  </div>
+<div class="title">reject.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;cinttypes&gt;</code><br />
-<code>#include &lt;cmath&gt;</code><br />
-<code>#include &lt;cstdint&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00452_source.html">elst.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00458_source.html">elst2.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00464_source.html">errcode.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00299_source.html">ocrblock.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00503_source.html">params.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00335_source.html">pdblock.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00341_source.html">points.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00368_source.html">quspline.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00380_source.html">rect.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a01418_source.html">scrollview.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00404_source.html">statistc.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00410_source.html">stepblob.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00533_source.html">tprintf.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00416_source.html">werd.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a00230_source.html">tessvars.h</a>&quot;</code><br />
+<code>#include &lt;cctype&gt;</code><br />
+<code>#include &lt;cerrno&gt;</code><br />
+<code>#include &lt;cstring&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00011_source.html">tesseract/genericvector.h</a>&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00206_source.html">reject.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00122_source.html">control.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00128_source.html">docqual.h</a>&quot;</code><br />
+<code>#include &lt;<a class="el" href="a00014_source.html">tesseract/helpers.h</a>&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00224_source.html">tesseractclass.h</a>&quot;</code><br />
 </div>
 <p><a href="a00203_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02208.html">BLOBNBOX</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02212.html">TO_ROW</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02216.html">TO_BLOCK</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a01539"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html">tesseract</a></td></tr>
+<tr class="memitem:a01818"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html">tesseract</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:a4c698e96e1ebeb67e13f584c524fd154"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00203.html#a4c698e96e1ebeb67e13f584c524fd154">PITCH_TYPE</a> { <br />
-&#160;&#160;<a class="el" href="a00203.html#a4c698e96e1ebeb67e13f584c524fd154a10ae5c0248c64ac97f5b982caff993bc">PITCH_DUNNO</a>, 
-<a class="el" href="a00203.html#a4c698e96e1ebeb67e13f584c524fd154a0cba173121a328d3cb40be58bb3fd372">PITCH_DEF_FIXED</a>, 
-<a class="el" href="a00203.html#a4c698e96e1ebeb67e13f584c524fd154a4f170138679e21b92bcdb28fa7ee7624">PITCH_MAYBE_FIXED</a>, 
-<a class="el" href="a00203.html#a4c698e96e1ebeb67e13f584c524fd154a9d6e380146149c1a17e58394bd40e438">PITCH_DEF_PROP</a>, 
-<br />
-&#160;&#160;<a class="el" href="a00203.html#a4c698e96e1ebeb67e13f584c524fd154aa52a7d1e5021f648986d68ab18d5fe6a">PITCH_MAYBE_PROP</a>, 
-<a class="el" href="a00203.html#a4c698e96e1ebeb67e13f584c524fd154a66d4c50c3dfbe049f0600dbff10ec362">PITCH_CORR_FIXED</a>, 
-<a class="el" href="a00203.html#a4c698e96e1ebeb67e13f584c524fd154aa44925f7147c8bb8948712ba9fbe55d3">PITCH_CORR_PROP</a>
-<br />
- }</td></tr>
-<tr class="separator:a4c698e96e1ebeb67e13f584c524fd154"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6d0b33e703e1291d0b60d4fe5a5e12cc"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00203.html#a6d0b33e703e1291d0b60d4fe5a5e12cc">TabType</a> { <br />
-&#160;&#160;<a class="el" href="a00203.html#a6d0b33e703e1291d0b60d4fe5a5e12ccaddba1c39549497adfc655e5e9a817dec">TT_NONE</a>, 
-<a class="el" href="a00203.html#a6d0b33e703e1291d0b60d4fe5a5e12cca78f911fabc911af76c04ea289a990ac7">TT_DELETED</a>, 
-<a class="el" href="a00203.html#a6d0b33e703e1291d0b60d4fe5a5e12cca0d571d70d55bfdb99070e2ee2d6e1c7f">TT_MAYBE_RAGGED</a>, 
-<a class="el" href="a00203.html#a6d0b33e703e1291d0b60d4fe5a5e12ccad0945333210420da84a7617b5788f246">TT_MAYBE_ALIGNED</a>, 
-<br />
-&#160;&#160;<a class="el" href="a00203.html#a6d0b33e703e1291d0b60d4fe5a5e12cca9f2414540c7d6e051206f486a70f5d2e">TT_CONFIRMED</a>, 
-<a class="el" href="a00203.html#a6d0b33e703e1291d0b60d4fe5a5e12cca17113fa407dccfcd4e19cca53e715af8">TT_VLINE</a>
-<br />
- }</td></tr>
-<tr class="separator:a6d0b33e703e1291d0b60d4fe5a5e12cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aebfaf711760a99b60c297d1d619df575"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00203.html#aebfaf711760a99b60c297d1d619df575">BlobRegionType</a> { <br />
-&#160;&#160;<a class="el" href="a00203.html#aebfaf711760a99b60c297d1d619df575ae09c6f7e99c3a3885c3469d52d0292d2">BRT_NOISE</a>, 
-<a class="el" href="a00203.html#aebfaf711760a99b60c297d1d619df575a56cc149e97b34634dd39babda79ea17d">BRT_HLINE</a>, 
-<a class="el" href="a00203.html#aebfaf711760a99b60c297d1d619df575a5d6cbdd0674e727feda3085026646f6a">BRT_VLINE</a>, 
-<a class="el" href="a00203.html#aebfaf711760a99b60c297d1d619df575a15e526e8dd226bd4d7678da6dcddb49b">BRT_RECTIMAGE</a>, 
-<br />
-&#160;&#160;<a class="el" href="a00203.html#aebfaf711760a99b60c297d1d619df575a3b72528ad70da88719f0479bc8c5a190">BRT_POLYIMAGE</a>, 
-<a class="el" href="a00203.html#aebfaf711760a99b60c297d1d619df575a8a98863f18016aa4ccfd2d07dbb092a4">BRT_UNKNOWN</a>, 
-<a class="el" href="a00203.html#aebfaf711760a99b60c297d1d619df575aea2da025a50db20db8213f96495dd4a6">BRT_VERT_TEXT</a>, 
-<a class="el" href="a00203.html#aebfaf711760a99b60c297d1d619df575a4f0b1431532d0e838187df32f2e822d7">BRT_TEXT</a>, 
-<br />
-&#160;&#160;<a class="el" href="a00203.html#aebfaf711760a99b60c297d1d619df575a3296f6ab68e0cf0c80dcd5478a1413a3">BRT_COUNT</a>
-<br />
- }</td></tr>
-<tr class="separator:aebfaf711760a99b60c297d1d619df575"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4974474b3b161b68355d9a16eeaa3883"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00203.html#a4974474b3b161b68355d9a16eeaa3883">BlobNeighbourDir</a> { <br />
-&#160;&#160;<a class="el" href="a00203.html#a4974474b3b161b68355d9a16eeaa3883a34eeb3a076f3bbcb32d47b74ee3cee86">BND_LEFT</a>, 
-<a class="el" href="a00203.html#a4974474b3b161b68355d9a16eeaa3883a898fc0442f50593b8ce360d3253d254d">BND_BELOW</a>, 
-<a class="el" href="a00203.html#a4974474b3b161b68355d9a16eeaa3883ac0391ea6a5bf43f7735142e9ae87a62f">BND_RIGHT</a>, 
-<a class="el" href="a00203.html#a4974474b3b161b68355d9a16eeaa3883a29aa5ffa693a9ac7e91c8c59e037509c">BND_ABOVE</a>, 
-<br />
-&#160;&#160;<a class="el" href="a00203.html#a4974474b3b161b68355d9a16eeaa3883a0f3b81ac0cbf413ac18c6de98cd69921">BND_COUNT</a>
-<br />
- }</td></tr>
-<tr class="separator:a4974474b3b161b68355d9a16eeaa3883"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a75b089d27e1df813fed544e0c131df8c"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00203.html#a75b089d27e1df813fed544e0c131df8c">BlobSpecialTextType</a> { <br />
-&#160;&#160;<a class="el" href="a00203.html#a75b089d27e1df813fed544e0c131df8ca1e2ca6a59ce1487c101d4605eab44b7a">BSTT_NONE</a>, 
-<a class="el" href="a00203.html#a75b089d27e1df813fed544e0c131df8ca9f7c059031ba5f95a4e0f43bac16a33a">BSTT_ITALIC</a>, 
-<a class="el" href="a00203.html#a75b089d27e1df813fed544e0c131df8caaf28e2df284d1c1c8caf262b5fcdb3f4">BSTT_DIGIT</a>, 
-<a class="el" href="a00203.html#a75b089d27e1df813fed544e0c131df8ca356056d522254adc40c8acdf14f19c4d">BSTT_MATH</a>, 
-<br />
-&#160;&#160;<a class="el" href="a00203.html#a75b089d27e1df813fed544e0c131df8ca604529fa299b8dcc81b0ac07ebb2c9b7">BSTT_UNCLEAR</a>, 
-<a class="el" href="a00203.html#a75b089d27e1df813fed544e0c131df8ca6fac1a2510eab4553549833d5d1afdc0">BSTT_SKIP</a>, 
-<a class="el" href="a00203.html#a75b089d27e1df813fed544e0c131df8caceba184627df3dabc8f3e3f2867c4eff">BSTT_COUNT</a>
-<br />
- }</td></tr>
-<tr class="separator:a75b089d27e1df813fed544e0c131df8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa72f1499398e9694bf46752e1cc895e1"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00203.html#aa72f1499398e9694bf46752e1cc895e1">BlobTextFlowType</a> { <br />
-&#160;&#160;<a class="el" href="a00203.html#aa72f1499398e9694bf46752e1cc895e1a745b15b1c990fa88c0712c50c5cd2202">BTFT_NONE</a>, 
-<a class="el" href="a00203.html#aa72f1499398e9694bf46752e1cc895e1af99f0c54b98b6c7a0dd5d5f0b5dc635d">BTFT_NONTEXT</a>, 
-<a class="el" href="a00203.html#aa72f1499398e9694bf46752e1cc895e1adac19762bd040a53914be696482c1e53">BTFT_NEIGHBOURS</a>, 
-<a class="el" href="a00203.html#aa72f1499398e9694bf46752e1cc895e1a8fa903eb3c633ef681659563769a8007">BTFT_CHAIN</a>, 
-<br />
-&#160;&#160;<a class="el" href="a00203.html#aa72f1499398e9694bf46752e1cc895e1ac6822a7999424340562c785a3fd95daa">BTFT_STRONG_CHAIN</a>, 
-<a class="el" href="a00203.html#aa72f1499398e9694bf46752e1cc895e1a1936f281ab87277e7ef0ba576920dc10">BTFT_TEXT_ON_IMAGE</a>, 
-<a class="el" href="a00203.html#aa72f1499398e9694bf46752e1cc895e1a64e3e70c4fac4d4e3facdb4638307d7f">BTFT_LEADER</a>, 
-<a class="el" href="a00203.html#aa72f1499398e9694bf46752e1cc895e1a35219ce81ca228b9f74013a1dff6ce7e">BTFT_COUNT</a>
-<br />
- }</td></tr>
-<tr class="separator:aa72f1499398e9694bf46752e1cc895e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a3358f8405c8bd675b0ee84f709373aed"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00203.html#a4974474b3b161b68355d9a16eeaa3883">BlobNeighbourDir</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00203.html#a3358f8405c8bd675b0ee84f709373aed">DirOtherWay</a> (<a class="el" href="a00203.html#a4974474b3b161b68355d9a16eeaa3883">BlobNeighbourDir</a> dir)</td></tr>
-<tr class="separator:a3358f8405c8bd675b0ee84f709373aed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8157ecf7fd234474a816126c75012952"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00203.html#a8157ecf7fd234474a816126c75012952">DominatesInMerge</a> (<a class="el" href="a00203.html#aa72f1499398e9694bf46752e1cc895e1">BlobTextFlowType</a> type1, <a class="el" href="a00203.html#aa72f1499398e9694bf46752e1cc895e1">BlobTextFlowType</a> type2)</td></tr>
-<tr class="separator:a8157ecf7fd234474a816126c75012952"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2ce6678ef43e0765b7af8c5611c4ebd9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00203.html#a2ce6678ef43e0765b7af8c5611c4ebd9">find_cblob_limits</a> (<a class="el" href="a02464.html">C_BLOB</a> *blob, float leftx, float rightx, <a class="el" href="a02408.html">FCOORD</a> rotation, float &amp;ymin, float &amp;ymax)</td></tr>
-<tr class="separator:a2ce6678ef43e0765b7af8c5611c4ebd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a57197f6f9deea830c41b3af8c9b8abb5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00203.html#a57197f6f9deea830c41b3af8c9b8abb5">find_cblob_vlimits</a> (<a class="el" href="a02464.html">C_BLOB</a> *blob, float leftx, float rightx, float &amp;ymin, float &amp;ymax)</td></tr>
-<tr class="separator:a57197f6f9deea830c41b3af8c9b8abb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a666ce7b60770a57b15560d167e79ddd3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00203.html#a666ce7b60770a57b15560d167e79ddd3">find_cblob_hlimits</a> (<a class="el" href="a02464.html">C_BLOB</a> *blob, float bottomy, float topy, float &amp;xmin, float &amp;xymax)</td></tr>
-<tr class="separator:a666ce7b60770a57b15560d167e79ddd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4145a126880b1bd685f07c9499903b71"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a02464.html">C_BLOB</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00203.html#a4145a126880b1bd685f07c9499903b71">crotate_cblob</a> (<a class="el" href="a02464.html">C_BLOB</a> *blob, <a class="el" href="a02408.html">FCOORD</a> rotation)</td></tr>
-<tr class="separator:a4145a126880b1bd685f07c9499903b71"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a343c30f9e935058965b844710a2e3180"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a02440.html">TBOX</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00203.html#a343c30f9e935058965b844710a2e3180">box_next</a> (BLOBNBOX_IT *it)</td></tr>
-<tr class="separator:a343c30f9e935058965b844710a2e3180"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3728c3433d1e8f6a2178bb796aa21fad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a02440.html">TBOX</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00203.html#a3728c3433d1e8f6a2178bb796aa21fad">box_next_pre_chopped</a> (BLOBNBOX_IT *it)</td></tr>
-<tr class="separator:a3728c3433d1e8f6a2178bb796aa21fad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a127cbd896383554910521dc8e03fd9ef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00203.html#a127cbd896383554910521dc8e03fd9ef">vertical_cblob_projection</a> (<a class="el" href="a02464.html">C_BLOB</a> *blob, <a class="el" href="a02460.html">STATS</a> *stats)</td></tr>
-<tr class="separator:a127cbd896383554910521dc8e03fd9ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48333b2ce7f8f0d732fc47a82e57911c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00203.html#a48333b2ce7f8f0d732fc47a82e57911c">vertical_coutline_projection</a> (<a class="el" href="a02252.html">C_OUTLINE</a> *outline, <a class="el" href="a02460.html">STATS</a> *stats)</td></tr>
-<tr class="separator:a48333b2ce7f8f0d732fc47a82e57911c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a331e6744e04cb0a2fb23c1465c82196c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00203.html#a331e6744e04cb0a2fb23c1465c82196c">plot_blob_list</a> (<a class="el" href="a03524.html">ScrollView</a> *win, BLOBNBOX_LIST *list, <a class="el" href="a03524.html#a100504544a5423a94222149ee9ed0fe8">ScrollView::Color</a> body_colour, <a class="el" href="a03524.html#a100504544a5423a94222149ee9ed0fe8">ScrollView::Color</a> child_colour)</td></tr>
-<tr class="separator:a331e6744e04cb0a2fb23c1465c82196c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:a90630abc7671a7a7a3934e63b696f124"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00203.html#a90630abc7671a7a7a3934e63b696f124">textord_error_weight</a> = 3</td></tr>
-<tr class="separator:a90630abc7671a7a7a3934e63b696f124"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f7e3099e20129096036e0edad5592e9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00203.html#a1f7e3099e20129096036e0edad5592e9">CLISTIZEH</a> (<a class="el" href="a02542.html">STRING</a>) <a class="el" href="a00371.html#afcdfaedb32b1f0fcfb0a3e5cd4ec788c">CLISTIZE</a>(<a class="el" href="a02542.html">STRING</a>) namespace tesseract</td></tr>
+<tr class="separator:a1f7e3099e20129096036e0edad5592e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38678800d902519bdb0b6dcff44e5ee8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00203.html#a38678800d902519bdb0b6dcff44e5ee8">reject_blanks</a> (<a class="el" href="a02830.html">WERD_RES</a> *word)</td></tr>
+<tr class="separator:a38678800d902519bdb0b6dcff44e5ee8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acda8fceb6df94a957f3a2380b944a09e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00203.html#acda8fceb6df94a957f3a2380b944a09e">reject_poor_matches</a> (<a class="el" href="a02830.html">WERD_RES</a> *word)</td></tr>
+<tr class="separator:acda8fceb6df94a957f3a2380b944a09e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7769557523c23cea384f550ae030e5ba"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00203.html#a7769557523c23cea384f550ae030e5ba">compute_reject_threshold</a> (<a class="el" href="a02894.html">WERD_CHOICE</a> *word)</td></tr>
+<tr class="separator:a7769557523c23cea384f550ae030e5ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Enumeration Type Documentation</h2>
-<a id="a4974474b3b161b68355d9a16eeaa3883"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4974474b3b161b68355d9a16eeaa3883">&#9670;&nbsp;</a></span>BlobNeighbourDir</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="a00203.html#a4974474b3b161b68355d9a16eeaa3883">BlobNeighbourDir</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a4974474b3b161b68355d9a16eeaa3883a34eeb3a076f3bbcb32d47b74ee3cee86"></a>BND_LEFT&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a4974474b3b161b68355d9a16eeaa3883a898fc0442f50593b8ce360d3253d254d"></a>BND_BELOW&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a4974474b3b161b68355d9a16eeaa3883ac0391ea6a5bf43f7735142e9ae87a62f"></a>BND_RIGHT&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a4974474b3b161b68355d9a16eeaa3883a29aa5ffa693a9ac7e91c8c59e037509c"></a>BND_ABOVE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a4974474b3b161b68355d9a16eeaa3883a0f3b81ac0cbf413ac18c6de98cd69921"></a>BND_COUNT&#160;</td><td class="fielddoc"></td></tr>
-</table>
-
-<p class="definition">Definition at line <a class="el" href="a00203_source.html#l00086">86</a> of file <a class="el" href="a00203_source.html">blobbox.h</a>.</p>
-<div class="fragment"><div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                      {</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  <a class="code" href="a00203.html#a4974474b3b161b68355d9a16eeaa3883a34eeb3a076f3bbcb32d47b74ee3cee86">BND_LEFT</a>,</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  <a class="code" href="a00203.html#a4974474b3b161b68355d9a16eeaa3883a898fc0442f50593b8ce360d3253d254d">BND_BELOW</a>,</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  <a class="code" href="a00203.html#a4974474b3b161b68355d9a16eeaa3883ac0391ea6a5bf43f7735142e9ae87a62f">BND_RIGHT</a>,</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  <a class="code" href="a00203.html#a4974474b3b161b68355d9a16eeaa3883a29aa5ffa693a9ac7e91c8c59e037509c">BND_ABOVE</a>,</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  <a class="code" href="a00203.html#a4974474b3b161b68355d9a16eeaa3883a0f3b81ac0cbf413ac18c6de98cd69921">BND_COUNT</a></div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="aebfaf711760a99b60c297d1d619df575"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aebfaf711760a99b60c297d1d619df575">&#9670;&nbsp;</a></span>BlobRegionType</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="a00203.html#aebfaf711760a99b60c297d1d619df575">BlobRegionType</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aebfaf711760a99b60c297d1d619df575ae09c6f7e99c3a3885c3469d52d0292d2"></a>BRT_NOISE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="aebfaf711760a99b60c297d1d619df575a56cc149e97b34634dd39babda79ea17d"></a>BRT_HLINE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="aebfaf711760a99b60c297d1d619df575a5d6cbdd0674e727feda3085026646f6a"></a>BRT_VLINE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="aebfaf711760a99b60c297d1d619df575a15e526e8dd226bd4d7678da6dcddb49b"></a>BRT_RECTIMAGE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="aebfaf711760a99b60c297d1d619df575a3b72528ad70da88719f0479bc8c5a190"></a>BRT_POLYIMAGE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="aebfaf711760a99b60c297d1d619df575a8a98863f18016aa4ccfd2d07dbb092a4"></a>BRT_UNKNOWN&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="aebfaf711760a99b60c297d1d619df575aea2da025a50db20db8213f96495dd4a6"></a>BRT_VERT_TEXT&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="aebfaf711760a99b60c297d1d619df575a4f0b1431532d0e838187df32f2e822d7"></a>BRT_TEXT&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="aebfaf711760a99b60c297d1d619df575a3296f6ab68e0cf0c80dcd5478a1413a3"></a>BRT_COUNT&#160;</td><td class="fielddoc"></td></tr>
-</table>
-
-<p class="definition">Definition at line <a class="el" href="a00203_source.html#l00071">71</a> of file <a class="el" href="a00203_source.html">blobbox.h</a>.</p>
-<div class="fragment"><div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                    {</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  <a class="code" href="a00203.html#aebfaf711760a99b60c297d1d619df575ae09c6f7e99c3a3885c3469d52d0292d2">BRT_NOISE</a>,      <span class="comment">// Neither text nor image.</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <a class="code" href="a00203.html#aebfaf711760a99b60c297d1d619df575a56cc149e97b34634dd39babda79ea17d">BRT_HLINE</a>,      <span class="comment">// Horizontal separator line.</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <a class="code" href="a00203.html#aebfaf711760a99b60c297d1d619df575a5d6cbdd0674e727feda3085026646f6a">BRT_VLINE</a>,      <span class="comment">// Vertical separator line.</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  <a class="code" href="a00203.html#aebfaf711760a99b60c297d1d619df575a15e526e8dd226bd4d7678da6dcddb49b">BRT_RECTIMAGE</a>,  <span class="comment">// Rectangular image.</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  <a class="code" href="a00203.html#aebfaf711760a99b60c297d1d619df575a3b72528ad70da88719f0479bc8c5a190">BRT_POLYIMAGE</a>,  <span class="comment">// Non-rectangular image.</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  <a class="code" href="a00203.html#aebfaf711760a99b60c297d1d619df575a8a98863f18016aa4ccfd2d07dbb092a4">BRT_UNKNOWN</a>,    <span class="comment">// Not determined yet.</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <a class="code" href="a00203.html#aebfaf711760a99b60c297d1d619df575aea2da025a50db20db8213f96495dd4a6">BRT_VERT_TEXT</a>,  <span class="comment">// Vertical alignment, not necessarily vertically oriented.</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  <a class="code" href="a00203.html#aebfaf711760a99b60c297d1d619df575a4f0b1431532d0e838187df32f2e822d7">BRT_TEXT</a>,       <span class="comment">// Convincing text.</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <a class="code" href="a00203.html#aebfaf711760a99b60c297d1d619df575a3296f6ab68e0cf0c80dcd5478a1413a3">BRT_COUNT</a>       <span class="comment">// Number of possibilities.</span></div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a75b089d27e1df813fed544e0c131df8c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a75b089d27e1df813fed544e0c131df8c">&#9670;&nbsp;</a></span>BlobSpecialTextType</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="a00203.html#a75b089d27e1df813fed544e0c131df8c">BlobSpecialTextType</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a75b089d27e1df813fed544e0c131df8ca1e2ca6a59ce1487c101d4605eab44b7a"></a>BSTT_NONE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a75b089d27e1df813fed544e0c131df8ca9f7c059031ba5f95a4e0f43bac16a33a"></a>BSTT_ITALIC&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a75b089d27e1df813fed544e0c131df8caaf28e2df284d1c1c8caf262b5fcdb3f4"></a>BSTT_DIGIT&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a75b089d27e1df813fed544e0c131df8ca356056d522254adc40c8acdf14f19c4d"></a>BSTT_MATH&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a75b089d27e1df813fed544e0c131df8ca604529fa299b8dcc81b0ac07ebb2c9b7"></a>BSTT_UNCLEAR&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a75b089d27e1df813fed544e0c131df8ca6fac1a2510eab4553549833d5d1afdc0"></a>BSTT_SKIP&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a75b089d27e1df813fed544e0c131df8caceba184627df3dabc8f3e3f2867c4eff"></a>BSTT_COUNT&#160;</td><td class="fielddoc"></td></tr>
-</table>
-
-<p class="definition">Definition at line <a class="el" href="a00203_source.html#l00095">95</a> of file <a class="el" href="a00203_source.html">blobbox.h</a>.</p>
-<div class="fragment"><div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                         {</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  <a class="code" href="a00203.html#a75b089d27e1df813fed544e0c131df8ca1e2ca6a59ce1487c101d4605eab44b7a">BSTT_NONE</a>,  <span class="comment">// No special.</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  <a class="code" href="a00203.html#a75b089d27e1df813fed544e0c131df8ca9f7c059031ba5f95a4e0f43bac16a33a">BSTT_ITALIC</a>,  <span class="comment">// Italic style.</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  <a class="code" href="a00203.html#a75b089d27e1df813fed544e0c131df8caaf28e2df284d1c1c8caf262b5fcdb3f4">BSTT_DIGIT</a>,  <span class="comment">// Digit symbols.</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  <a class="code" href="a00203.html#a75b089d27e1df813fed544e0c131df8ca356056d522254adc40c8acdf14f19c4d">BSTT_MATH</a>,  <span class="comment">// Mathmatical symobls (not including digit).</span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  <a class="code" href="a00203.html#a75b089d27e1df813fed544e0c131df8ca604529fa299b8dcc81b0ac07ebb2c9b7">BSTT_UNCLEAR</a>,  <span class="comment">// Characters with low recognition rate.</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  <a class="code" href="a00203.html#a75b089d27e1df813fed544e0c131df8ca6fac1a2510eab4553549833d5d1afdc0">BSTT_SKIP</a>,  <span class="comment">// Characters that we skip labeling (usually too small).</span></div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  <a class="code" href="a00203.html#a75b089d27e1df813fed544e0c131df8caceba184627df3dabc8f3e3f2867c4eff">BSTT_COUNT</a></div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="aa72f1499398e9694bf46752e1cc895e1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa72f1499398e9694bf46752e1cc895e1">&#9670;&nbsp;</a></span>BlobTextFlowType</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="a00203.html#aa72f1499398e9694bf46752e1cc895e1">BlobTextFlowType</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aa72f1499398e9694bf46752e1cc895e1a745b15b1c990fa88c0712c50c5cd2202"></a>BTFT_NONE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="aa72f1499398e9694bf46752e1cc895e1af99f0c54b98b6c7a0dd5d5f0b5dc635d"></a>BTFT_NONTEXT&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="aa72f1499398e9694bf46752e1cc895e1adac19762bd040a53914be696482c1e53"></a>BTFT_NEIGHBOURS&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="aa72f1499398e9694bf46752e1cc895e1a8fa903eb3c633ef681659563769a8007"></a>BTFT_CHAIN&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="aa72f1499398e9694bf46752e1cc895e1ac6822a7999424340562c785a3fd95daa"></a>BTFT_STRONG_CHAIN&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="aa72f1499398e9694bf46752e1cc895e1a1936f281ab87277e7ef0ba576920dc10"></a>BTFT_TEXT_ON_IMAGE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="aa72f1499398e9694bf46752e1cc895e1a64e3e70c4fac4d4e3facdb4638307d7f"></a>BTFT_LEADER&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="aa72f1499398e9694bf46752e1cc895e1a35219ce81ca228b9f74013a1dff6ce7e"></a>BTFT_COUNT&#160;</td><td class="fielddoc"></td></tr>
-</table>
-
-<p class="definition">Definition at line <a class="el" href="a00203_source.html#l00113">113</a> of file <a class="el" href="a00203_source.html">blobbox.h</a>.</p>
-<div class="fragment"><div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                      {</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  <a class="code" href="a00203.html#aa72f1499398e9694bf46752e1cc895e1a745b15b1c990fa88c0712c50c5cd2202">BTFT_NONE</a>,           <span class="comment">// No text flow set yet.</span></div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  <a class="code" href="a00203.html#aa72f1499398e9694bf46752e1cc895e1af99f0c54b98b6c7a0dd5d5f0b5dc635d">BTFT_NONTEXT</a>,        <span class="comment">// Flow too poor to be likely text.</span></div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  <a class="code" href="a00203.html#aa72f1499398e9694bf46752e1cc895e1adac19762bd040a53914be696482c1e53">BTFT_NEIGHBOURS</a>,     <span class="comment">// Neighbours support flow in this direction.</span></div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  <a class="code" href="a00203.html#aa72f1499398e9694bf46752e1cc895e1a8fa903eb3c633ef681659563769a8007">BTFT_CHAIN</a>,          <span class="comment">// There is a weak chain of text in this direction.</span></div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;  <a class="code" href="a00203.html#aa72f1499398e9694bf46752e1cc895e1ac6822a7999424340562c785a3fd95daa">BTFT_STRONG_CHAIN</a>,   <span class="comment">// There is a strong chain of text in this direction.</span></div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  <a class="code" href="a00203.html#aa72f1499398e9694bf46752e1cc895e1a1936f281ab87277e7ef0ba576920dc10">BTFT_TEXT_ON_IMAGE</a>,  <span class="comment">// There is a strong chain of text on an image.</span></div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;  <a class="code" href="a00203.html#aa72f1499398e9694bf46752e1cc895e1a64e3e70c4fac4d4e3facdb4638307d7f">BTFT_LEADER</a>,         <span class="comment">// Leader dots/dashes etc.</span></div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;  <a class="code" href="a00203.html#aa72f1499398e9694bf46752e1cc895e1a35219ce81ca228b9f74013a1dff6ce7e">BTFT_COUNT</a></div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a4c698e96e1ebeb67e13f584c524fd154"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4c698e96e1ebeb67e13f584c524fd154">&#9670;&nbsp;</a></span>PITCH_TYPE</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="a00203.html#a4c698e96e1ebeb67e13f584c524fd154">PITCH_TYPE</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a4c698e96e1ebeb67e13f584c524fd154a10ae5c0248c64ac97f5b982caff993bc"></a>PITCH_DUNNO&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a4c698e96e1ebeb67e13f584c524fd154a0cba173121a328d3cb40be58bb3fd372"></a>PITCH_DEF_FIXED&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a4c698e96e1ebeb67e13f584c524fd154a4f170138679e21b92bcdb28fa7ee7624"></a>PITCH_MAYBE_FIXED&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a4c698e96e1ebeb67e13f584c524fd154a9d6e380146149c1a17e58394bd40e438"></a>PITCH_DEF_PROP&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a4c698e96e1ebeb67e13f584c524fd154aa52a7d1e5021f648986d68ab18d5fe6a"></a>PITCH_MAYBE_PROP&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a4c698e96e1ebeb67e13f584c524fd154a66d4c50c3dfbe049f0600dbff10ec362"></a>PITCH_CORR_FIXED&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a4c698e96e1ebeb67e13f584c524fd154aa44925f7147c8bb8948712ba9fbe55d3"></a>PITCH_CORR_PROP&#160;</td><td class="fielddoc"></td></tr>
-</table>
-
-<p class="definition">Definition at line <a class="el" href="a00203_source.html#l00043">43</a> of file <a class="el" href="a00203_source.html">blobbox.h</a>.</p>
-<div class="fragment"><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;{</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <a class="code" href="a00203.html#a4c698e96e1ebeb67e13f584c524fd154a10ae5c0248c64ac97f5b982caff993bc">PITCH_DUNNO</a>,                   <span class="comment">// insufficient data</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <a class="code" href="a00203.html#a4c698e96e1ebeb67e13f584c524fd154a0cba173121a328d3cb40be58bb3fd372">PITCH_DEF_FIXED</a>,               <span class="comment">// definitely fixed</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <a class="code" href="a00203.html#a4c698e96e1ebeb67e13f584c524fd154a4f170138679e21b92bcdb28fa7ee7624">PITCH_MAYBE_FIXED</a>,             <span class="comment">// could be</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <a class="code" href="a00203.html#a4c698e96e1ebeb67e13f584c524fd154a9d6e380146149c1a17e58394bd40e438">PITCH_DEF_PROP</a>,</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <a class="code" href="a00203.html#a4c698e96e1ebeb67e13f584c524fd154aa52a7d1e5021f648986d68ab18d5fe6a">PITCH_MAYBE_PROP</a>,</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <a class="code" href="a00203.html#a4c698e96e1ebeb67e13f584c524fd154a66d4c50c3dfbe049f0600dbff10ec362">PITCH_CORR_FIXED</a>,</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <a class="code" href="a00203.html#a4c698e96e1ebeb67e13f584c524fd154aa44925f7147c8bb8948712ba9fbe55d3">PITCH_CORR_PROP</a></div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a6d0b33e703e1291d0b60d4fe5a5e12cc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6d0b33e703e1291d0b60d4fe5a5e12cc">&#9670;&nbsp;</a></span>TabType</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="a00203.html#a6d0b33e703e1291d0b60d4fe5a5e12cc">TabType</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a6d0b33e703e1291d0b60d4fe5a5e12ccaddba1c39549497adfc655e5e9a817dec"></a>TT_NONE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a6d0b33e703e1291d0b60d4fe5a5e12cca78f911fabc911af76c04ea289a990ac7"></a>TT_DELETED&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a6d0b33e703e1291d0b60d4fe5a5e12cca0d571d70d55bfdb99070e2ee2d6e1c7f"></a>TT_MAYBE_RAGGED&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a6d0b33e703e1291d0b60d4fe5a5e12ccad0945333210420da84a7617b5788f246"></a>TT_MAYBE_ALIGNED&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a6d0b33e703e1291d0b60d4fe5a5e12cca9f2414540c7d6e051206f486a70f5d2e"></a>TT_CONFIRMED&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a6d0b33e703e1291d0b60d4fe5a5e12cca17113fa407dccfcd4e19cca53e715af8"></a>TT_VLINE&#160;</td><td class="fielddoc"></td></tr>
-</table>
-
-<p class="definition">Definition at line <a class="el" href="a00203_source.html#l00058">58</a> of file <a class="el" href="a00203_source.html">blobbox.h</a>.</p>
-<div class="fragment"><div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;             {</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <a class="code" href="a00203.html#a6d0b33e703e1291d0b60d4fe5a5e12ccaddba1c39549497adfc655e5e9a817dec">TT_NONE</a>,           <span class="comment">// Not a tab.</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <a class="code" href="a00203.html#a6d0b33e703e1291d0b60d4fe5a5e12cca78f911fabc911af76c04ea289a990ac7">TT_DELETED</a>,        <span class="comment">// Not a tab after detailed analysis.</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <a class="code" href="a00203.html#a6d0b33e703e1291d0b60d4fe5a5e12cca0d571d70d55bfdb99070e2ee2d6e1c7f">TT_MAYBE_RAGGED</a>,   <span class="comment">// Initial designation of a tab-stop candidate.</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <a class="code" href="a00203.html#a6d0b33e703e1291d0b60d4fe5a5e12ccad0945333210420da84a7617b5788f246">TT_MAYBE_ALIGNED</a>,  <span class="comment">// Initial designation of a tab-stop candidate.</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <a class="code" href="a00203.html#a6d0b33e703e1291d0b60d4fe5a5e12cca9f2414540c7d6e051206f486a70f5d2e">TT_CONFIRMED</a>,      <span class="comment">// Aligned with neighbours.</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <a class="code" href="a00203.html#a6d0b33e703e1291d0b60d4fe5a5e12cca17113fa407dccfcd4e19cca53e715af8">TT_VLINE</a>           <span class="comment">// Detected as a vertical line.</span></div>
-</div><!-- fragment -->
-</div>
-</div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a343c30f9e935058965b844710a2e3180"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a343c30f9e935058965b844710a2e3180">&#9670;&nbsp;</a></span>box_next()</h2>
+<a id="a1f7e3099e20129096036e0edad5592e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f7e3099e20129096036e0edad5592e9">&#9670;&nbsp;</a></span>CLISTIZEH()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a02440.html">TBOX</a> box_next </td>
+          <td class="memname">CLISTIZEH </td>
           <td>(</td>
-          <td class="paramtype">BLOBNBOX_IT *&#160;</td>
-          <td class="paramname"><em>it</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="a02542.html">STRING</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00200_source.html#l00629">629</a> of file <a class="el" href="a00200_source.html">blobbox.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00638"></a><span class="lineno">  638</span>&#160;              {</div>
-<div class="line"><a name="l00639"></a><span class="lineno">  639</span>&#160;  <a class="code" href="a02208.html">BLOBNBOX</a> *blob;                <span class="comment">//current blob</span></div>
-<div class="line"><a name="l00640"></a><span class="lineno">  640</span>&#160;  <a class="code" href="a02440.html">TBOX</a> result;                    <span class="comment">//total box</span></div>
-<div class="line"><a name="l00641"></a><span class="lineno">  641</span>&#160; </div>
-<div class="line"><a name="l00642"></a><span class="lineno">  642</span>&#160;  blob = it-&gt;data ();</div>
-<div class="line"><a name="l00643"></a><span class="lineno">  643</span>&#160;  result = blob-&gt;<a class="code" href="a02208.html#acc27a54c9735f05e9152ba5f1c1a8261">bounding_box</a> ();</div>
-<div class="line"><a name="l00644"></a><span class="lineno">  644</span>&#160;  <span class="keywordflow">do</span> {</div>
-<div class="line"><a name="l00645"></a><span class="lineno">  645</span>&#160;    it-&gt;forward ();</div>
-<div class="line"><a name="l00646"></a><span class="lineno">  646</span>&#160;    blob = it-&gt;data ();</div>
-<div class="line"><a name="l00647"></a><span class="lineno">  647</span>&#160;    <span class="keywordflow">if</span> (blob-&gt;<a class="code" href="a02208.html#a5d497fdc454feff733889db8fe604868">cblob</a>() == <span class="keyword">nullptr</span>)</div>
+<p class="definition">Definition at line <a class="el" href="a00203_source.html#l00050">50</a> of file <a class="el" href="a00203_source.html">reject.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                    {</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keywordtype">void</span> Tesseract::set_done(<a class="code" href="a02830.html">WERD_RES</a> *word, int16_t pass) {</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  word-&gt;<a class="code" href="a02830.html#a2bd2ff4f993746fc87d3ee88357a4a88">done</a> = word-&gt;<a class="code" href="a02830.html#aa7f56655eb0e5164f2d2e85906475cb1">tess_accepted</a> &amp;&amp;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;      (strchr(word-&gt;<a class="code" href="a02830.html#a3d42ac7ec121263e757c9b7160dfd50d">best_choice</a>-&gt;<a class="code" href="a02894.html#adf200132afabc2ee6ec256e516011007">unichar_string</a>().<a class="code" href="a02542.html#a552838a146145cb7993f42aefb740ea4">c_str</a>(), <span class="charliteral">&#39; &#39;</span>) == <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <span class="keywordtype">bool</span> word_is_ambig = word-&gt;<a class="code" href="a02830.html#a3d42ac7ec121263e757c9b7160dfd50d">best_choice</a>-&gt;<a class="code" href="a02894.html#a71ab9d957b2206805e710dcf747b8810">dangerous_ambig_found</a>();</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="keywordtype">bool</span> word_from_dict = word-&gt;<a class="code" href="a02830.html#a3d42ac7ec121263e757c9b7160dfd50d">best_choice</a>-&gt;<a class="code" href="a02894.html#a7a606dd5236e78662fccade85d23edee">permuter</a>() == <a class="code" href="a00425.html#a18e2c75cefe9e5b78e8ce41aa5fa25bca616bdbcaed7dd414823b303af5c8b1f1">SYSTEM_DAWG_PERM</a> ||</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;      word-&gt;<a class="code" href="a02830.html#a3d42ac7ec121263e757c9b7160dfd50d">best_choice</a>-&gt;<a class="code" href="a02894.html#a7a606dd5236e78662fccade85d23edee">permuter</a>() == <a class="code" href="a00425.html#a18e2c75cefe9e5b78e8ce41aa5fa25bca4fd9d3b025ecc5ea8f2248fea29543e4">FREQ_DAWG_PERM</a> ||</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;      word-&gt;<a class="code" href="a02830.html#a3d42ac7ec121263e757c9b7160dfd50d">best_choice</a>-&gt;<a class="code" href="a02894.html#a7a606dd5236e78662fccade85d23edee">permuter</a>() == <a class="code" href="a00425.html#a18e2c75cefe9e5b78e8ce41aa5fa25bca5e293e54fa687876197992131e779d54">USER_DAWG_PERM</a>;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <span class="keywordflow">if</span> (word-&gt;<a class="code" href="a02830.html#a2bd2ff4f993746fc87d3ee88357a4a88">done</a> &amp;&amp; (pass == 1) &amp;&amp; (!word_from_dict || word_is_ambig) &amp;&amp;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;      one_ell_conflict(word, <span class="keyword">false</span>)) {</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordflow">if</span> (tessedit_rejection_debug) <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;one_ell_conflict detected\n&quot;</span>);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    word-&gt;<a class="code" href="a02830.html#a2bd2ff4f993746fc87d3ee88357a4a88">done</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  }</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <span class="keywordflow">if</span> (word-&gt;<a class="code" href="a02830.html#a2bd2ff4f993746fc87d3ee88357a4a88">done</a> &amp;&amp; ((!word_from_dict &amp;&amp;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;      word-&gt;<a class="code" href="a02830.html#a3d42ac7ec121263e757c9b7160dfd50d">best_choice</a>-&gt;<a class="code" href="a02894.html#a7a606dd5236e78662fccade85d23edee">permuter</a>() != <a class="code" href="a00425.html#a18e2c75cefe9e5b78e8ce41aa5fa25bca809574e2067a5304fbd2279d869e9b24">NUMBER_PERM</a>) || word_is_ambig)) {</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordflow">if</span> (tessedit_rejection_debug) <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;non-dict or ambig word detected\n&quot;</span>);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;      word-&gt;<a class="code" href="a02830.html#a2bd2ff4f993746fc87d3ee88357a4a88">done</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  }</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  <span class="keywordflow">if</span> (tessedit_rejection_debug) {</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;set_done(): done=%d\n&quot;</span>, word-&gt;<a class="code" href="a02830.html#a2bd2ff4f993746fc87d3ee88357a4a88">done</a>);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    word-&gt;<a class="code" href="a02830.html#a3d42ac7ec121263e757c9b7160dfd50d">best_choice</a>-&gt;<a class="code" href="a02894.html#af1ae6bf0c69cf408c3efa6fb78bcabc7">print</a>(<span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  }</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;}</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">/*************************************************************************</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment"> * make_reject_map()</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment"> * Sets the done flag to indicate whether the resylt is acceptable.</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment"> * Sets a reject map for the word.</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment"> *************************************************************************/</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="keywordtype">void</span> Tesseract::make_reject_map(<a class="code" href="a02830.html">WERD_RES</a> *word, <a class="code" href="a02814.html">ROW</a> *row, int16_t pass) {</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  <span class="keywordtype">int</span> i;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <span class="keywordtype">int</span> offset;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  <a class="code" href="a00206.html#a619bb19b0a304dcfa4e73be192ace9c5">flip_0O</a>(word);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  check_debug_pt(word, -1);     <span class="comment">// For trap only</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  set_done(word, pass);  <span class="comment">// Set acceptance</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  word-&gt;<a class="code" href="a02830.html#ae24eb58be06cf275aee411d947fd31ef">reject_map</a>.<a class="code" href="a02906.html#a798c11e002b9421b26a748f5186bdae9">initialise</a>(word-&gt;<a class="code" href="a02830.html#a3d42ac7ec121263e757c9b7160dfd50d">best_choice</a>-&gt;<a class="code" href="a02894.html#adaecd80cfe44e00e9c4647859b1c87e0">unichar_lengths</a>().<a class="code" href="a02542.html#a7a1f2a841e8d01d5a8c05bc3ab8064eb">length</a>());</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  <a class="code" href="a00203.html#a38678800d902519bdb0b6dcff44e5ee8">reject_blanks</a>(word);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  <span class="comment">/*</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">  0: Rays original heuristic - the baseline</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment">  */</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  <span class="keywordflow">if</span> (tessedit_reject_mode == 0) {</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keywordflow">if</span> (!word-&gt;<a class="code" href="a02830.html#a2bd2ff4f993746fc87d3ee88357a4a88">done</a>)</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;      <a class="code" href="a00203.html#acda8fceb6df94a957f3a2380b944a09e">reject_poor_matches</a>(word);</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (tessedit_reject_mode == 5) {</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="comment">/*</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">    5: Reject I/1/l from words where there is no strong contextual confirmation;</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">      the whole of any unacceptable words (incl PERM rej of dubious 1/I/ls);</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment">      and the whole of any words which are very small</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment">    */</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="a00344.html#af974e6755e636c8bc7cbe57e3bcbdd73">kBlnXHeight</a> / word-&gt;<a class="code" href="a02830.html#a202d9d5d2a462d84012011c689e16605">denorm</a>.<a class="code" href="a02798.html#aaa8b03dcd0096f380be5b94ff58dcdf8">y_scale</a>() &lt;= min_sane_x_ht_pixels) {</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;      word-&gt;<a class="code" href="a02830.html#ae24eb58be06cf275aee411d947fd31ef">reject_map</a>.<a class="code" href="a02906.html#a7f6528c1228002276d930ed9407c556b">rej_word_small_xht</a>();</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;      one_ell_conflict(word, <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;      <span class="comment">/*</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment">        Originally the code here just used the done flag. Now I have duplicated</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment">        and unpacked the conditions for setting the done flag so that each</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment">        mechanism can be turned on or off independently. This works WITHOUT</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">        affecting the done flag setting.</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment">      */</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;      <span class="keywordflow">if</span> (rej_use_tess_accepted &amp;&amp; !word-&gt;<a class="code" href="a02830.html#aa7f56655eb0e5164f2d2e85906475cb1">tess_accepted</a>)</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        word-&gt;<a class="code" href="a02830.html#ae24eb58be06cf275aee411d947fd31ef">reject_map</a>.<a class="code" href="a02906.html#a776b94463f9c008020c8cdf69c89b8c4">rej_word_not_tess_accepted</a> ();</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;      <span class="keywordflow">if</span> (rej_use_tess_blanks &amp;&amp;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        (strchr (word-&gt;<a class="code" href="a02830.html#a3d42ac7ec121263e757c9b7160dfd50d">best_choice</a>-&gt;<a class="code" href="a02894.html#adf200132afabc2ee6ec256e516011007">unichar_string</a>().<a class="code" href="a02542.html#a552838a146145cb7993f42aefb740ea4">c_str</a>(), <span class="charliteral">&#39; &#39;</span>) != <span class="keyword">nullptr</span>))</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        word-&gt;<a class="code" href="a02830.html#ae24eb58be06cf275aee411d947fd31ef">reject_map</a>.<a class="code" href="a02906.html#acb01c2a1d8d28ecffdb51c6a7c3d22da">rej_word_contains_blanks</a> ();</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;      <a class="code" href="a02894.html">WERD_CHOICE</a>* best_choice = word-&gt;<a class="code" href="a02830.html#a3d42ac7ec121263e757c9b7160dfd50d">best_choice</a>;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;      <span class="keywordflow">if</span> (rej_use_good_perm) {</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        <span class="keywordflow">if</span> ((best_choice-&gt;<a class="code" href="a02894.html#a7a606dd5236e78662fccade85d23edee">permuter</a>() == <a class="code" href="a00425.html#a18e2c75cefe9e5b78e8ce41aa5fa25bca616bdbcaed7dd414823b303af5c8b1f1">SYSTEM_DAWG_PERM</a> ||</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;             best_choice-&gt;<a class="code" href="a02894.html#a7a606dd5236e78662fccade85d23edee">permuter</a>() == <a class="code" href="a00425.html#a18e2c75cefe9e5b78e8ce41aa5fa25bca4fd9d3b025ecc5ea8f2248fea29543e4">FREQ_DAWG_PERM</a> ||</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;             best_choice-&gt;<a class="code" href="a02894.html#a7a606dd5236e78662fccade85d23edee">permuter</a>() == <a class="code" href="a00425.html#a18e2c75cefe9e5b78e8ce41aa5fa25bca5e293e54fa687876197992131e779d54">USER_DAWG_PERM</a>) &amp;&amp;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;            (!rej_use_sensible_wd ||</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;             acceptable_word_string(*word-&gt;<a class="code" href="a02830.html#a053a2aeeddc26a93a41a04fa08dd688a">uch_set</a>,</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;                                    best_choice-&gt;<a class="code" href="a02894.html#adf200132afabc2ee6ec256e516011007">unichar_string</a>().<a class="code" href="a02542.html#a552838a146145cb7993f42aefb740ea4">c_str</a>(),</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;                                    best_choice-&gt;<a class="code" href="a02894.html#adaecd80cfe44e00e9c4647859b1c87e0">unichar_lengths</a>().<a class="code" href="a02542.html#a552838a146145cb7993f42aefb740ea4">c_str</a>()) !=</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;                                        <a class="code" href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eeeaab0741a5a5ff9757ca343af255353ba0">AC_UNACCEPTABLE</a>)) {</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;          <span class="comment">// PASSED TEST</span></div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (best_choice-&gt;<a class="code" href="a02894.html#a7a606dd5236e78662fccade85d23edee">permuter</a>() == <a class="code" href="a00425.html#a18e2c75cefe9e5b78e8ce41aa5fa25bca809574e2067a5304fbd2279d869e9b24">NUMBER_PERM</a>) {</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;          <span class="keywordflow">if</span> (rej_alphas_in_number_perm) {</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;            <span class="keywordflow">for</span> (i = 0, offset = 0;</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;                 best_choice-&gt;<a class="code" href="a02894.html#adf200132afabc2ee6ec256e516011007">unichar_string</a>()[offset] != <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;                 offset += best_choice-&gt;<a class="code" href="a02894.html#adaecd80cfe44e00e9c4647859b1c87e0">unichar_lengths</a>()[i++]) {</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;              <span class="keywordflow">if</span> (word-&gt;<a class="code" href="a02830.html#ae24eb58be06cf275aee411d947fd31ef">reject_map</a>[i].accepted() &amp;&amp;</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;                  word-&gt;<a class="code" href="a02830.html#a053a2aeeddc26a93a41a04fa08dd688a">uch_set</a>-&gt;<a class="code" href="a03118.html#a620c3ec802c8ddf9401a6940f542618e">get_isalpha</a>(</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;                      best_choice-&gt;<a class="code" href="a02894.html#adf200132afabc2ee6ec256e516011007">unichar_string</a>().<a class="code" href="a02542.html#a552838a146145cb7993f42aefb740ea4">c_str</a>() + offset,</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;                      best_choice-&gt;<a class="code" href="a02894.html#adaecd80cfe44e00e9c4647859b1c87e0">unichar_lengths</a>()[i]))</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;                word-&gt;<a class="code" href="a02830.html#ae24eb58be06cf275aee411d947fd31ef">reject_map</a>[i].setrej_bad_permuter();</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;              <span class="comment">// rej alpha</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;            }</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;          }</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;          word-&gt;<a class="code" href="a02830.html#ae24eb58be06cf275aee411d947fd31ef">reject_map</a>.<a class="code" href="a02906.html#a36d38c0c25d9792a85b5cb4b01e251fa">rej_word_bad_permuter</a>();</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        }</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;      }</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;      <span class="comment">/* Ambig word rejection was here once !!*/</span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    }</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;  } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;BAD tessedit_reject_mode\n&quot;</span>);</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    <a class="code" href="a00515.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a>(<span class="stringliteral">&quot;Fatal error encountered!&quot;</span> == <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;  }</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160; </div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;  <span class="keywordflow">if</span> (tessedit_image_border &gt; -1)</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    reject_edge_blobs(word);</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;  check_debug_pt (word, 10);</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;  <span class="keywordflow">if</span> (tessedit_rejection_debug) {</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Permuter Type = %d\n&quot;</span>, word-&gt;<a class="code" href="a02830.html#a3d42ac7ec121263e757c9b7160dfd50d">best_choice</a>-&gt;<a class="code" href="a02894.html#a7a606dd5236e78662fccade85d23edee">permuter</a> ());</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Certainty: %f     Rating: %f\n&quot;</span>,</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;      word-&gt;<a class="code" href="a02830.html#a3d42ac7ec121263e757c9b7160dfd50d">best_choice</a>-&gt;<a class="code" href="a02894.html#acea3ee4af3377da8f4c10627e4ba42cf">certainty</a> (), word-&gt;<a class="code" href="a02830.html#a3d42ac7ec121263e757c9b7160dfd50d">best_choice</a>-&gt;<a class="code" href="a02894.html#afa672748d2585eea64ab79592dd02eb3">rating</a> ());</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Dict word: %d\n&quot;</span>, dict_word(*(word-&gt;<a class="code" href="a02830.html#a3d42ac7ec121263e757c9b7160dfd50d">best_choice</a>)));</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;  }</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160; </div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;  <a class="code" href="a00206.html#a24694172b77bc1092fb404873485b1c3">flip_hyphens</a>(word);</div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a3728c3433d1e8f6a2178bb796aa21fad"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3728c3433d1e8f6a2178bb796aa21fad">&#9670;&nbsp;</a></span>box_next_pre_chopped()</h2>
+<a id="a7769557523c23cea384f550ae030e5ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7769557523c23cea384f550ae030e5ba">&#9670;&nbsp;</a></span>compute_reject_threshold()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a02440.html">TBOX</a> box_next_pre_chopped </td>
+          <td class="memname">float compute_reject_threshold </td>
           <td>(</td>
-          <td class="paramtype">BLOBNBOX_IT *&#160;</td>
-          <td class="paramname"><em>it</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="a02894.html">WERD_CHOICE</a> *&#160;</td>
+          <td class="paramname"><em>word</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00200_source.html#l00657">657</a> of file <a class="el" href="a00200_source.html">blobbox.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00667"></a><span class="lineno">  667</span>&#160;                          {</div>
-<div class="line"><a name="l00668"></a><span class="lineno">  668</span>&#160;  <a class="code" href="a02208.html">BLOBNBOX</a> *blob;                <span class="comment">//current blob</span></div>
-<div class="line"><a name="l00669"></a><span class="lineno">  669</span>&#160;  <a class="code" href="a02440.html">TBOX</a> result;                    <span class="comment">//total box</span></div>
-<div class="line"><a name="l00670"></a><span class="lineno">  670</span>&#160; </div>
-<div class="line"><a name="l00671"></a><span class="lineno">  671</span>&#160;  blob = it-&gt;data ();</div>
-<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;  result = blob-&gt;<a class="code" href="a02208.html#acc27a54c9735f05e9152ba5f1c1a8261">bounding_box</a> ();</div>
+<p class="definition">Definition at line <a class="el" href="a00203_source.html#l00225">225</a> of file <a class="el" href="a00203_source.html">reject.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;                                                  {</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;  <span class="keywordtype">float</span> threshold;               <span class="comment">// rejection threshold</span></div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;  <span class="keywordtype">float</span> bestgap = 0.0f;          <span class="comment">// biggest gap</span></div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;  <span class="keywordtype">float</span> gapstart;                <span class="comment">// bottom of gap</span></div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160; </div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;  <span class="keywordtype">int</span> blob_count = word-&gt;<a class="code" href="a02894.html#ad00f0a3cf74d3b2d82dcefb811bd1685">length</a>();</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;  <a class="code" href="a02434.html">GenericVector&lt;float&gt;</a> ratings;</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;  ratings.<a class="code" href="a02434.html#a09005e8f2b51d033d60eb5690aa5d112">resize_no_init</a>(blob_count);</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; blob_count; ++i) {</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    ratings[i] = word-&gt;<a class="code" href="a02894.html#acea3ee4af3377da8f4c10627e4ba42cf">certainty</a>(i);</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;  }</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;  ratings.<a class="code" href="a02434.html#a999bbd8ff336c81fe1198ea714c7936d">sort</a>();</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;  gapstart = ratings[0] - 1;     <span class="comment">// all reject if none better</span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;  <span class="keywordflow">if</span> (blob_count &gt;= 3) {</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> index = 0; index &lt; blob_count - 1; index++) {</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;      <span class="keywordflow">if</span> (ratings[index + 1] - ratings[index] &gt; bestgap) {</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;        bestgap = ratings[index + 1] - ratings[index];</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;        <span class="comment">// find biggest</span></div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;        gapstart = ratings[index];</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;      }</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    }</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;  }</div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a4145a126880b1bd685f07c9499903b71"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4145a126880b1bd685f07c9499903b71">&#9670;&nbsp;</a></span>crotate_cblob()</h2>
+<a id="a38678800d902519bdb0b6dcff44e5ee8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38678800d902519bdb0b6dcff44e5ee8">&#9670;&nbsp;</a></span>reject_blanks()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a02464.html">C_BLOB</a>* crotate_cblob </td>
+          <td class="memname">void reject_blanks </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="a02464.html">C_BLOB</a> *&#160;</td>
-          <td class="paramname"><em>blob</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype"><a class="el" href="a02830.html">WERD_RES</a> *&#160;</td>
+          <td class="paramname"><em>word</em></td><td>)</td>
           <td></td>
-          <td class="paramtype"><a class="el" href="a02408.html">FCOORD</a>&#160;</td>
-          <td class="paramname"><em>rotation</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00200_source.html#l00605">605</a> of file <a class="el" href="a00200_source.html">blobbox.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00614"></a><span class="lineno">  614</span>&#160;                       {</div>
-<div class="line"><a name="l00615"></a><span class="lineno">  615</span>&#160;  C_OUTLINE_LIST out_list;       <span class="comment">//output outlines</span></div>
-<div class="line"><a name="l00616"></a><span class="lineno">  616</span>&#160;                                 <span class="comment">//input outlines</span></div>
-<div class="line"><a name="l00617"></a><span class="lineno">  617</span>&#160;  C_OUTLINE_IT in_it = blob-&gt;<a class="code" href="a02464.html#ae510f3d0e7398fbb46608082429eac89">out_list</a> ();</div>
-<div class="line"><a name="l00618"></a><span class="lineno">  618</span>&#160;                                 <span class="comment">//output outlines</span></div>
-<div class="line"><a name="l00619"></a><span class="lineno">  619</span>&#160;  C_OUTLINE_IT out_it = &amp;out_list;</div>
+<p class="definition">Definition at line <a class="el" href="a00203_source.html#l00178">178</a> of file <a class="el" href="a00203_source.html">reject.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;                                   {</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;  int16_t i;</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;  int16_t offset;</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160; </div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;  <span class="keywordflow">for</span> (i = 0, offset = 0; word-&gt;<a class="code" href="a02830.html#a3d42ac7ec121263e757c9b7160dfd50d">best_choice</a>-&gt;<a class="code" href="a02894.html#adf200132afabc2ee6ec256e516011007">unichar_string</a>()[offset] != <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;       offset += word-&gt;<a class="code" href="a02830.html#a3d42ac7ec121263e757c9b7160dfd50d">best_choice</a>-&gt;<a class="code" href="a02894.html#adaecd80cfe44e00e9c4647859b1c87e0">unichar_lengths</a>()[i], i += 1) {</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    <span class="keywordflow">if</span> (word-&gt;<a class="code" href="a02830.html#a3d42ac7ec121263e757c9b7160dfd50d">best_choice</a>-&gt;<a class="code" href="a02894.html#adf200132afabc2ee6ec256e516011007">unichar_string</a>()[offset] == <span class="charliteral">&#39; &#39;</span>)</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;                                 <span class="comment">//rej unrecognised blobs</span></div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a3358f8405c8bd675b0ee84f709373aed"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3358f8405c8bd675b0ee84f709373aed">&#9670;&nbsp;</a></span>DirOtherWay()</h2>
+<a id="acda8fceb6df94a957f3a2380b944a09e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acda8fceb6df94a957f3a2380b944a09e">&#9670;&nbsp;</a></span>reject_poor_matches()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00203.html#a4974474b3b161b68355d9a16eeaa3883">BlobNeighbourDir</a> DirOtherWay </td>
+          <td class="memname">void reject_poor_matches </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="a00203.html#a4974474b3b161b68355d9a16eeaa3883">BlobNeighbourDir</a>&#160;</td>
-          <td class="paramname"><em>dir</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="a02830.html">WERD_RES</a> *&#160;</td>
+          <td class="paramname"><em>word</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00203_source.html#l00105">105</a> of file <a class="el" href="a00203_source.html">blobbox.h</a>.</p>
-<div class="fragment"><div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                                                          {</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;  <span class="keywordflow">return</span> static_cast&lt;BlobNeighbourDir&gt;(dir ^ 2);</div>
+<p class="definition">Definition at line <a class="el" href="a00203_source.html#l00207">207</a> of file <a class="el" href="a00203_source.html">reject.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;                                         {</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;  <span class="keywordtype">float</span> threshold = <a class="code" href="a00203.html#a7769557523c23cea384f550ae030e5ba">compute_reject_threshold</a>(word-&gt;<a class="code" href="a02830.html#a3d42ac7ec121263e757c9b7160dfd50d">best_choice</a>);</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; word-&gt;<a class="code" href="a02830.html#a3d42ac7ec121263e757c9b7160dfd50d">best_choice</a>-&gt;<a class="code" href="a02894.html#ad00f0a3cf74d3b2d82dcefb811bd1685">length</a>(); ++i) {</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    <span class="keywordflow">if</span> (word-&gt;<a class="code" href="a02830.html#a3d42ac7ec121263e757c9b7160dfd50d">best_choice</a>-&gt;<a class="code" href="a02894.html#a76b18095a88a05db299aa84451a5f52c">unichar_id</a>(i) == <a class="code" href="a00605.html#a08fdf52fb8650b2a0752cfd7bd236871af05dfe36988b7a26764e26e820873a71">UNICHAR_SPACE</a>)</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;      word-&gt;<a class="code" href="a02830.html#ae24eb58be06cf275aee411d947fd31ef">reject_map</a>[i].setrej_tess_failure();</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (word-&gt;<a class="code" href="a02830.html#a3d42ac7ec121263e757c9b7160dfd50d">best_choice</a>-&gt;<a class="code" href="a02894.html#acea3ee4af3377da8f4c10627e4ba42cf">certainty</a>(i) &lt; threshold)</div>
 </div><!-- fragment -->
-</div>
-</div>
-<a id="a8157ecf7fd234474a816126c75012952"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8157ecf7fd234474a816126c75012952">&#9670;&nbsp;</a></span>DominatesInMerge()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool DominatesInMerge </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00203.html#aa72f1499398e9694bf46752e1cc895e1">BlobTextFlowType</a>&#160;</td>
-          <td class="paramname"><em>type1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a00203.html#aa72f1499398e9694bf46752e1cc895e1">BlobTextFlowType</a>&#160;</td>
-          <td class="paramname"><em>type2</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00203_source.html#l00128">128</a> of file <a class="el" href="a00203_source.html">blobbox.h</a>.</p>
-<div class="fragment"><div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                                                                             {</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;  <span class="comment">// LEADER always loses.</span></div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;  <span class="keywordflow">if</span> (type1 == <a class="code" href="a00203.html#aa72f1499398e9694bf46752e1cc895e1a64e3e70c4fac4d4e3facdb4638307d7f">BTFT_LEADER</a>) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;  <span class="keywordflow">if</span> (type2 == <a class="code" href="a00203.html#aa72f1499398e9694bf46752e1cc895e1a64e3e70c4fac4d4e3facdb4638307d7f">BTFT_LEADER</a>) <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;  <span class="comment">// With those out of the way, the ordering of the enum determines the result.</span></div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;  <span class="keywordflow">return</span> type1 &gt;= type2;</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a666ce7b60770a57b15560d167e79ddd3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a666ce7b60770a57b15560d167e79ddd3">&#9670;&nbsp;</a></span>find_cblob_hlimits()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void find_cblob_hlimits </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a02464.html">C_BLOB</a> *&#160;</td>
-          <td class="paramname"><em>blob</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>bottomy</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>topy</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float &amp;&#160;</td>
-          <td class="paramname"><em>xmin</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float &amp;&#160;</td>
-          <td class="paramname"><em>xymax</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00200_source.html#l00571">571</a> of file <a class="el" href="a00200_source.html">blobbox.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00581"></a><span class="lineno">  581</span>&#160;                                     {</div>
-<div class="line"><a name="l00582"></a><span class="lineno">  582</span>&#160;  int16_t stepindex;               <span class="comment">//current point</span></div>
-<div class="line"><a name="l00583"></a><span class="lineno">  583</span>&#160;  <a class="code" href="a02400.html">ICOORD</a> pos;                    <span class="comment">//current coords</span></div>
-<div class="line"><a name="l00584"></a><span class="lineno">  584</span>&#160;  <a class="code" href="a02400.html">ICOORD</a> vec;                    <span class="comment">//rotated step</span></div>
-<div class="line"><a name="l00585"></a><span class="lineno">  585</span>&#160;  <a class="code" href="a02252.html">C_OUTLINE</a> *outline;            <span class="comment">//current outline</span></div>
-<div class="line"><a name="l00586"></a><span class="lineno">  586</span>&#160;                                 <span class="comment">//outlines</span></div>
-<div class="line"><a name="l00587"></a><span class="lineno">  587</span>&#160;  C_OUTLINE_IT out_it = blob-&gt;<a class="code" href="a02464.html#ae510f3d0e7398fbb46608082429eac89">out_list</a> ();</div>
-<div class="line"><a name="l00588"></a><span class="lineno">  588</span>&#160; </div>
-<div class="line"><a name="l00589"></a><span class="lineno">  589</span>&#160;  xmin = static_cast&lt;float&gt;(INT32_MAX);</div>
-<div class="line"><a name="l00590"></a><span class="lineno">  590</span>&#160;  xmax = static_cast&lt;float&gt;(-INT32_MAX);</div>
-<div class="line"><a name="l00591"></a><span class="lineno">  591</span>&#160;  <span class="keywordflow">for</span> (out_it.mark_cycle_pt (); !out_it.cycled_list (); out_it.forward ()) {</div>
-<div class="line"><a name="l00592"></a><span class="lineno">  592</span>&#160;    outline = out_it.data ();</div>
-<div class="line"><a name="l00593"></a><span class="lineno">  593</span>&#160;    pos = outline-&gt;<a class="code" href="a02252.html#ae6cde032abde27e92591f4a2cb720df8">start_pos</a> (); <span class="comment">//get coords</span></div>
-<div class="line"><a name="l00594"></a><span class="lineno">  594</span>&#160;    <span class="keywordflow">for</span> (stepindex = 0; stepindex &lt; outline-&gt;<a class="code" href="a02252.html#ae80a9800eb44c83b018277edccc3e015">pathlength</a> (); stepindex++) {</div>
-<div class="line"><a name="l00595"></a><span class="lineno">  595</span>&#160;                                 <span class="comment">//inside</span></div>
-<div class="line"><a name="l00596"></a><span class="lineno">  596</span>&#160;      <span class="keywordflow">if</span> (pos.<a class="code" href="a02400.html#a27df9d66085dcf65ead7f620d68a91ac">y</a> () &gt;= bottomy &amp;&amp; pos.<a class="code" href="a02400.html#a27df9d66085dcf65ead7f620d68a91ac">y</a> () &lt;= topy) {</div>
-<div class="line"><a name="l00597"></a><span class="lineno">  597</span>&#160;        UpdateRange(pos.<a class="code" href="a02400.html#aabf3d2cbd535df26ebcac17def628216">x</a>(), &amp;xmin, &amp;xmax);</div>
-<div class="line"><a name="l00598"></a><span class="lineno">  598</span>&#160;      }</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a2ce6678ef43e0765b7af8c5611c4ebd9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2ce6678ef43e0765b7af8c5611c4ebd9">&#9670;&nbsp;</a></span>find_cblob_limits()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void find_cblob_limits </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a02464.html">C_BLOB</a> *&#160;</td>
-          <td class="paramname"><em>blob</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>leftx</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>rightx</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a02408.html">FCOORD</a>&#160;</td>
-          <td class="paramname"><em>rotation</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float &amp;&#160;</td>
-          <td class="paramname"><em>ymin</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float &amp;&#160;</td>
-          <td class="paramname"><em>ymax</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00200_source.html#l00496">496</a> of file <a class="el" href="a00200_source.html">blobbox.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160;                                    {</div>
-<div class="line"><a name="l00506"></a><span class="lineno">  506</span>&#160;  int16_t stepindex;               <span class="comment">//current point</span></div>
-<div class="line"><a name="l00507"></a><span class="lineno">  507</span>&#160;  <a class="code" href="a02400.html">ICOORD</a> pos;                    <span class="comment">//current coords</span></div>
-<div class="line"><a name="l00508"></a><span class="lineno">  508</span>&#160;  <a class="code" href="a02400.html">ICOORD</a> vec;                    <span class="comment">//rotated step</span></div>
-<div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160;  <a class="code" href="a02252.html">C_OUTLINE</a> *outline;            <span class="comment">//current outline</span></div>
-<div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160;                                 <span class="comment">//outlines</span></div>
-<div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160;  C_OUTLINE_IT out_it = blob-&gt;<a class="code" href="a02464.html#ae510f3d0e7398fbb46608082429eac89">out_list</a> ();</div>
-<div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160; </div>
-<div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160;  ymin = static_cast&lt;float&gt;(INT32_MAX);</div>
-<div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160;  ymax = static_cast&lt;float&gt;(-INT32_MAX);</div>
-<div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160;  <span class="keywordflow">for</span> (out_it.mark_cycle_pt (); !out_it.cycled_list (); out_it.forward ()) {</div>
-<div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160;    outline = out_it.data ();</div>
-<div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160;    pos = outline-&gt;<a class="code" href="a02252.html#ae6cde032abde27e92591f4a2cb720df8">start_pos</a> (); <span class="comment">//get coords</span></div>
-<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;    pos.<a class="code" href="a02400.html#aaedd825587ccb78583bbd6717793faea">rotate</a> (rotation);</div>
-<div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160;    <span class="keywordflow">for</span> (stepindex = 0; stepindex &lt; outline-&gt;<a class="code" href="a02252.html#ae80a9800eb44c83b018277edccc3e015">pathlength</a> (); stepindex++) {</div>
-<div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160;                                 <span class="comment">//inside</span></div>
-<div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160;      <span class="keywordflow">if</span> (pos.<a class="code" href="a02400.html#aabf3d2cbd535df26ebcac17def628216">x</a> () &gt;= leftx &amp;&amp; pos.<a class="code" href="a02400.html#aabf3d2cbd535df26ebcac17def628216">x</a> () &lt;= rightx) {</div>
-<div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;        UpdateRange(pos.<a class="code" href="a02400.html#a27df9d66085dcf65ead7f620d68a91ac">y</a>(), &amp;ymin, &amp;ymax);</div>
-<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160;      }</div>
-<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160;      vec = outline-&gt;<a class="code" href="a02252.html#a19e4020f57c65fec6593990630284428">step</a> (stepindex);</div>
-<div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160;      vec.<a class="code" href="a02400.html#aaedd825587ccb78583bbd6717793faea">rotate</a> (rotation);</div>
-<div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160;      pos += vec;                <span class="comment">//move to next</span></div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a57197f6f9deea830c41b3af8c9b8abb5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a57197f6f9deea830c41b3af8c9b8abb5">&#9670;&nbsp;</a></span>find_cblob_vlimits()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void find_cblob_vlimits </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a02464.html">C_BLOB</a> *&#160;</td>
-          <td class="paramname"><em>blob</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>leftx</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>rightx</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float &amp;&#160;</td>
-          <td class="paramname"><em>ymin</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float &amp;&#160;</td>
-          <td class="paramname"><em>ymax</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00200_source.html#l00535">535</a> of file <a class="el" href="a00200_source.html">blobbox.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;                                     {</div>
-<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;  int16_t stepindex;               <span class="comment">//current point</span></div>
-<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;  <a class="code" href="a02400.html">ICOORD</a> pos;                    <span class="comment">//current coords</span></div>
-<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;  <a class="code" href="a02400.html">ICOORD</a> vec;                    <span class="comment">//rotated step</span></div>
-<div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160;  <a class="code" href="a02252.html">C_OUTLINE</a> *outline;            <span class="comment">//current outline</span></div>
-<div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160;                                 <span class="comment">//outlines</span></div>
-<div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160;  C_OUTLINE_IT out_it = blob-&gt;<a class="code" href="a02464.html#ae510f3d0e7398fbb46608082429eac89">out_list</a> ();</div>
-<div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160; </div>
-<div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160;  ymin = static_cast&lt;float&gt;(INT32_MAX);</div>
-<div class="line"><a name="l00553"></a><span class="lineno">  553</span>&#160;  ymax = static_cast&lt;float&gt;(-INT32_MAX);</div>
-<div class="line"><a name="l00554"></a><span class="lineno">  554</span>&#160;  <span class="keywordflow">for</span> (out_it.mark_cycle_pt (); !out_it.cycled_list (); out_it.forward ()) {</div>
-<div class="line"><a name="l00555"></a><span class="lineno">  555</span>&#160;    outline = out_it.data ();</div>
-<div class="line"><a name="l00556"></a><span class="lineno">  556</span>&#160;    pos = outline-&gt;<a class="code" href="a02252.html#ae6cde032abde27e92591f4a2cb720df8">start_pos</a> (); <span class="comment">//get coords</span></div>
-<div class="line"><a name="l00557"></a><span class="lineno">  557</span>&#160;    <span class="keywordflow">for</span> (stepindex = 0; stepindex &lt; outline-&gt;<a class="code" href="a02252.html#ae80a9800eb44c83b018277edccc3e015">pathlength</a> (); stepindex++) {</div>
-<div class="line"><a name="l00558"></a><span class="lineno">  558</span>&#160;                                 <span class="comment">//inside</span></div>
-<div class="line"><a name="l00559"></a><span class="lineno">  559</span>&#160;      <span class="keywordflow">if</span> (pos.<a class="code" href="a02400.html#aabf3d2cbd535df26ebcac17def628216">x</a> () &gt;= leftx &amp;&amp; pos.<a class="code" href="a02400.html#aabf3d2cbd535df26ebcac17def628216">x</a> () &lt;= rightx) {</div>
-<div class="line"><a name="l00560"></a><span class="lineno">  560</span>&#160;        UpdateRange(pos.<a class="code" href="a02400.html#a27df9d66085dcf65ead7f620d68a91ac">y</a>(), &amp;ymin, &amp;ymax);</div>
-<div class="line"><a name="l00561"></a><span class="lineno">  561</span>&#160;      }</div>
-<div class="line"><a name="l00562"></a><span class="lineno">  562</span>&#160;      vec = outline-&gt;<a class="code" href="a02252.html#a19e4020f57c65fec6593990630284428">step</a> (stepindex);</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a331e6744e04cb0a2fb23c1465c82196c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a331e6744e04cb0a2fb23c1465c82196c">&#9670;&nbsp;</a></span>plot_blob_list()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void plot_blob_list </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a03524.html">ScrollView</a> *&#160;</td>
-          <td class="paramname"><em>win</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">BLOBNBOX_LIST *&#160;</td>
-          <td class="paramname"><em>list</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a03524.html#a100504544a5423a94222149ee9ed0fe8">ScrollView::Color</a>&#160;</td>
-          <td class="paramname"><em>body_colour</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a03524.html#a100504544a5423a94222149ee9ed0fe8">ScrollView::Color</a>&#160;</td>
-          <td class="paramname"><em>child_colour</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00200_source.html#l01068">1068</a> of file <a class="el" href="a00200_source.html">blobbox.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l01071"></a><span class="lineno"> 1071</span>&#160;                                                {</div>
-<div class="line"><a name="l01072"></a><span class="lineno"> 1072</span>&#160;  <a class="code" href="a02208.html#a4390090c077b282cb4bc814633cb8e27">BLOBNBOX::PlotBlobs</a>(&amp;noise_blobs, <a class="code" href="a03524.html#a100504544a5423a94222149ee9ed0fe8a9a954d0f0149ee883cbcc5e0a379b460">ScrollView::CORAL</a>, <a class="code" href="a03524.html#a100504544a5423a94222149ee9ed0fe8a66e5117e4930fdd9a43bdb674d57a719">ScrollView::BLUE</a>, win);</div>
-<div class="line"><a name="l01073"></a><span class="lineno"> 1073</span>&#160;  <a class="code" href="a02208.html#a4390090c077b282cb4bc814633cb8e27">BLOBNBOX::PlotBlobs</a>(&amp;small_blobs, <a class="code" href="a03524.html#a100504544a5423a94222149ee9ed0fe8a8c6bd80ef295f1fcdb8e79549a0b9385">ScrollView::GOLDENROD</a>, <a class="code" href="a03524.html#a100504544a5423a94222149ee9ed0fe8a61dec9bc0aaf1d527a731b2a6ce055c8">ScrollView::YELLOW</a>,</div>
-<div class="line"><a name="l01074"></a><span class="lineno"> 1074</span>&#160;                      win);</div>
-<div class="line"><a name="l01075"></a><span class="lineno"> 1075</span>&#160;  <a class="code" href="a02208.html#a4390090c077b282cb4bc814633cb8e27">BLOBNBOX::PlotBlobs</a>(&amp;large_blobs, <a class="code" href="a03524.html#a100504544a5423a94222149ee9ed0fe8acf8b3fe79bd99f51b05b218a8b0c5ee5">ScrollView::DARK_GREEN</a>, <a class="code" href="a03524.html#a100504544a5423a94222149ee9ed0fe8a61dec9bc0aaf1d527a731b2a6ce055c8">ScrollView::YELLOW</a>,</div>
-<div class="line"><a name="l01076"></a><span class="lineno"> 1076</span>&#160;                      win);</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a127cbd896383554910521dc8e03fd9ef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a127cbd896383554910521dc8e03fd9ef">&#9670;&nbsp;</a></span>vertical_cblob_projection()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void vertical_cblob_projection </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a02464.html">C_BLOB</a> *&#160;</td>
-          <td class="paramname"><em>blob</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a02460.html">STATS</a> *&#160;</td>
-          <td class="paramname"><em>stats</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00200_source.html#l00854">854</a> of file <a class="el" href="a00200_source.html">blobbox.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00871"></a><span class="lineno">  871</span>&#160;                                {</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a48333b2ce7f8f0d732fc47a82e57911c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a48333b2ce7f8f0d732fc47a82e57911c">&#9670;&nbsp;</a></span>vertical_coutline_projection()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void vertical_coutline_projection </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a02252.html">C_OUTLINE</a> *&#160;</td>
-          <td class="paramname"><em>outline</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a02460.html">STATS</a> *&#160;</td>
-          <td class="paramname"><em>stats</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00200_source.html#l00873">873</a> of file <a class="el" href="a00200_source.html">blobbox.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00875"></a><span class="lineno">  875</span>&#160;                                                                           {</div>
-<div class="line"><a name="l00876"></a><span class="lineno">  876</span>&#160;    <a class="code" href="a00200.html#a48333b2ce7f8f0d732fc47a82e57911c">vertical_coutline_projection</a> (out_it.data (), stats);</div>
-<div class="line"><a name="l00877"></a><span class="lineno">  877</span>&#160;  }</div>
-<div class="line"><a name="l00878"></a><span class="lineno">  878</span>&#160;}</div>
-<div class="line"><a name="l00879"></a><span class="lineno">  879</span>&#160; </div>
-<div class="line"><a name="l00880"></a><span class="lineno">  880</span>&#160; </div>
-<div class="line"><a name="l00881"></a><span class="lineno">  881</span>&#160;<span class="comment">/**********************************************************************</span></div>
-<div class="line"><a name="l00882"></a><span class="lineno">  882</span>&#160;<span class="comment"> * vertical_coutline_projection</span></div>
-<div class="line"><a name="l00883"></a><span class="lineno">  883</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00884"></a><span class="lineno">  884</span>&#160;<span class="comment"> * Compute the vertical projection of a outline from its outlines</span></div>
-<div class="line"><a name="l00885"></a><span class="lineno">  885</span>&#160;<span class="comment"> * and add to the given STATS.</span></div>
-<div class="line"><a name="l00886"></a><span class="lineno">  886</span>&#160;<span class="comment"> **********************************************************************/</span></div>
-<div class="line"><a name="l00887"></a><span class="lineno">  887</span>&#160; </div>
-<div class="line"><a name="l00888"></a><span class="lineno">  888</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00200.html#a48333b2ce7f8f0d732fc47a82e57911c">vertical_coutline_projection</a>(                     <span class="comment">//project outlines</span></div>
-<div class="line"><a name="l00889"></a><span class="lineno">  889</span>&#160;                                  <a class="code" href="a02252.html">C_OUTLINE</a> *outline,  <span class="comment">//outline to project</span></div>
-<div class="line"><a name="l00890"></a><span class="lineno">  890</span>&#160;                                  <a class="code" href="a02460.html">STATS</a> *stats         <span class="comment">//output</span></div>
-<div class="line"><a name="l00891"></a><span class="lineno">  891</span>&#160;                                 ) {</div>
-<div class="line"><a name="l00892"></a><span class="lineno">  892</span>&#160;  <a class="code" href="a02400.html">ICOORD</a> pos;                    <span class="comment">//current point</span></div>
-<div class="line"><a name="l00893"></a><span class="lineno">  893</span>&#160;  <a class="code" href="a02400.html">ICOORD</a> step;                   <span class="comment">//edge step</span></div>
-<div class="line"><a name="l00894"></a><span class="lineno">  894</span>&#160;  int32_t length;                  <span class="comment">//of outline</span></div>
-<div class="line"><a name="l00895"></a><span class="lineno">  895</span>&#160;  int16_t stepindex;               <span class="comment">//current step</span></div>
-<div class="line"><a name="l00896"></a><span class="lineno">  896</span>&#160;  C_OUTLINE_IT out_it = outline-&gt;<a class="code" href="a02252.html#a87880b33bc69fa17ab37a93706ae8d84">child</a> ();</div>
-<div class="line"><a name="l00897"></a><span class="lineno">  897</span>&#160; </div>
-<div class="line"><a name="l00898"></a><span class="lineno">  898</span>&#160;  pos = outline-&gt;<a class="code" href="a02252.html#ae6cde032abde27e92591f4a2cb720df8">start_pos</a> ();</div>
-</div><!-- fragment -->
-</div>
-</div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="a90630abc7671a7a7a3934e63b696f124"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a90630abc7671a7a7a3934e63b696f124">&#9670;&nbsp;</a></span>textord_error_weight</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double textord_error_weight = 3</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>"Weighting for error in believability" <br  />
- </p>
-
 </div>
 </div>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa00203_html_a4c698e96e1ebeb67e13f584c524fd154aa44925f7147c8bb8948712ba9fbe55d3"><div class="ttname"><a href="a00203.html#a4c698e96e1ebeb67e13f584c524fd154aa44925f7147c8bb8948712ba9fbe55d3">PITCH_CORR_PROP</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00051">blobbox.h:51</a></div></div>
-<div class="ttc" id="aa00203_html_a75b089d27e1df813fed544e0c131df8ca1e2ca6a59ce1487c101d4605eab44b7a"><div class="ttname"><a href="a00203.html#a75b089d27e1df813fed544e0c131df8ca1e2ca6a59ce1487c101d4605eab44b7a">BSTT_NONE</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00096">blobbox.h:96</a></div></div>
-<div class="ttc" id="aa02208_html_a4390090c077b282cb4bc814633cb8e27"><div class="ttname"><a href="a02208.html#a4390090c077b282cb4bc814633cb8e27">BLOBNBOX::PlotBlobs</a></div><div class="ttdeci">static void PlotBlobs(BLOBNBOX_LIST *list, ScrollView::Color body_colour, ScrollView::Color child_colour, ScrollView *win)</div><div class="ttdef"><b>Definition:</b> <a href="a00200_source.html#l00417">blobbox.cpp:417</a></div></div>
-<div class="ttc" id="aa03524_html_a100504544a5423a94222149ee9ed0fe8a66e5117e4930fdd9a43bdb674d57a719"><div class="ttname"><a href="a03524.html#a100504544a5423a94222149ee9ed0fe8a66e5117e4930fdd9a43bdb674d57a719">ScrollView::BLUE</a></div><div class="ttdef"><b>Definition:</b> <a href="a01418_source.html#l00108">scrollview.h:108</a></div></div>
-<div class="ttc" id="aa00203_html_a4c698e96e1ebeb67e13f584c524fd154a4f170138679e21b92bcdb28fa7ee7624"><div class="ttname"><a href="a00203.html#a4c698e96e1ebeb67e13f584c524fd154a4f170138679e21b92bcdb28fa7ee7624">PITCH_MAYBE_FIXED</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00047">blobbox.h:47</a></div></div>
-<div class="ttc" id="aa00203_html_a75b089d27e1df813fed544e0c131df8ca604529fa299b8dcc81b0ac07ebb2c9b7"><div class="ttname"><a href="a00203.html#a75b089d27e1df813fed544e0c131df8ca604529fa299b8dcc81b0ac07ebb2c9b7">BSTT_UNCLEAR</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00100">blobbox.h:100</a></div></div>
-<div class="ttc" id="aa00203_html_aebfaf711760a99b60c297d1d619df575a56cc149e97b34634dd39babda79ea17d"><div class="ttname"><a href="a00203.html#aebfaf711760a99b60c297d1d619df575a56cc149e97b34634dd39babda79ea17d">BRT_HLINE</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00073">blobbox.h:73</a></div></div>
-<div class="ttc" id="aa00203_html_a4974474b3b161b68355d9a16eeaa3883ac0391ea6a5bf43f7735142e9ae87a62f"><div class="ttname"><a href="a00203.html#a4974474b3b161b68355d9a16eeaa3883ac0391ea6a5bf43f7735142e9ae87a62f">BND_RIGHT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00089">blobbox.h:89</a></div></div>
-<div class="ttc" id="aa00203_html_a4974474b3b161b68355d9a16eeaa3883a29aa5ffa693a9ac7e91c8c59e037509c"><div class="ttname"><a href="a00203.html#a4974474b3b161b68355d9a16eeaa3883a29aa5ffa693a9ac7e91c8c59e037509c">BND_ABOVE</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00090">blobbox.h:90</a></div></div>
-<div class="ttc" id="aa00203_html_a75b089d27e1df813fed544e0c131df8ca356056d522254adc40c8acdf14f19c4d"><div class="ttname"><a href="a00203.html#a75b089d27e1df813fed544e0c131df8ca356056d522254adc40c8acdf14f19c4d">BSTT_MATH</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00099">blobbox.h:99</a></div></div>
-<div class="ttc" id="aa00203_html_aa72f1499398e9694bf46752e1cc895e1a745b15b1c990fa88c0712c50c5cd2202"><div class="ttname"><a href="a00203.html#aa72f1499398e9694bf46752e1cc895e1a745b15b1c990fa88c0712c50c5cd2202">BTFT_NONE</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00114">blobbox.h:114</a></div></div>
-<div class="ttc" id="aa02208_html"><div class="ttname"><a href="a02208.html">BLOBNBOX</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00142">blobbox.h:142</a></div></div>
-<div class="ttc" id="aa00203_html_a6d0b33e703e1291d0b60d4fe5a5e12cca17113fa407dccfcd4e19cca53e715af8"><div class="ttname"><a href="a00203.html#a6d0b33e703e1291d0b60d4fe5a5e12cca17113fa407dccfcd4e19cca53e715af8">TT_VLINE</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00064">blobbox.h:64</a></div></div>
-<div class="ttc" id="aa00203_html_a6d0b33e703e1291d0b60d4fe5a5e12cca9f2414540c7d6e051206f486a70f5d2e"><div class="ttname"><a href="a00203.html#a6d0b33e703e1291d0b60d4fe5a5e12cca9f2414540c7d6e051206f486a70f5d2e">TT_CONFIRMED</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00063">blobbox.h:63</a></div></div>
-<div class="ttc" id="aa00203_html_a4c698e96e1ebeb67e13f584c524fd154a9d6e380146149c1a17e58394bd40e438"><div class="ttname"><a href="a00203.html#a4c698e96e1ebeb67e13f584c524fd154a9d6e380146149c1a17e58394bd40e438">PITCH_DEF_PROP</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00048">blobbox.h:48</a></div></div>
-<div class="ttc" id="aa00203_html_a4974474b3b161b68355d9a16eeaa3883a0f3b81ac0cbf413ac18c6de98cd69921"><div class="ttname"><a href="a00203.html#a4974474b3b161b68355d9a16eeaa3883a0f3b81ac0cbf413ac18c6de98cd69921">BND_COUNT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00091">blobbox.h:91</a></div></div>
-<div class="ttc" id="aa00203_html_a6d0b33e703e1291d0b60d4fe5a5e12cca0d571d70d55bfdb99070e2ee2d6e1c7f"><div class="ttname"><a href="a00203.html#a6d0b33e703e1291d0b60d4fe5a5e12cca0d571d70d55bfdb99070e2ee2d6e1c7f">TT_MAYBE_RAGGED</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00061">blobbox.h:61</a></div></div>
-<div class="ttc" id="aa00203_html_a6d0b33e703e1291d0b60d4fe5a5e12ccaddba1c39549497adfc655e5e9a817dec"><div class="ttname"><a href="a00203.html#a6d0b33e703e1291d0b60d4fe5a5e12ccaddba1c39549497adfc655e5e9a817dec">TT_NONE</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00059">blobbox.h:59</a></div></div>
-<div class="ttc" id="aa00203_html_aebfaf711760a99b60c297d1d619df575a5d6cbdd0674e727feda3085026646f6a"><div class="ttname"><a href="a00203.html#aebfaf711760a99b60c297d1d619df575a5d6cbdd0674e727feda3085026646f6a">BRT_VLINE</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00074">blobbox.h:74</a></div></div>
-<div class="ttc" id="aa00203_html_aebfaf711760a99b60c297d1d619df575ae09c6f7e99c3a3885c3469d52d0292d2"><div class="ttname"><a href="a00203.html#aebfaf711760a99b60c297d1d619df575ae09c6f7e99c3a3885c3469d52d0292d2">BRT_NOISE</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00072">blobbox.h:72</a></div></div>
-<div class="ttc" id="aa02252_html"><div class="ttname"><a href="a02252.html">C_OUTLINE</a></div><div class="ttdef"><b>Definition:</b> <a href="a00239_source.html#l00071">coutln.h:71</a></div></div>
-<div class="ttc" id="aa00203_html_aebfaf711760a99b60c297d1d619df575a15e526e8dd226bd4d7678da6dcddb49b"><div class="ttname"><a href="a00203.html#aebfaf711760a99b60c297d1d619df575a15e526e8dd226bd4d7678da6dcddb49b">BRT_RECTIMAGE</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00075">blobbox.h:75</a></div></div>
-<div class="ttc" id="aa00203_html_a4c698e96e1ebeb67e13f584c524fd154aa52a7d1e5021f648986d68ab18d5fe6a"><div class="ttname"><a href="a00203.html#a4c698e96e1ebeb67e13f584c524fd154aa52a7d1e5021f648986d68ab18d5fe6a">PITCH_MAYBE_PROP</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00049">blobbox.h:49</a></div></div>
-<div class="ttc" id="aa02252_html_ae6cde032abde27e92591f4a2cb720df8"><div class="ttname"><a href="a02252.html#ae6cde032abde27e92591f4a2cb720df8">C_OUTLINE::start_pos</a></div><div class="ttdeci">const ICOORD &amp; start_pos() const</div><div class="ttdef"><b>Definition:</b> <a href="a00239_source.html#l00147">coutln.h:147</a></div></div>
-<div class="ttc" id="aa00203_html_a4c698e96e1ebeb67e13f584c524fd154a10ae5c0248c64ac97f5b982caff993bc"><div class="ttname"><a href="a00203.html#a4c698e96e1ebeb67e13f584c524fd154a10ae5c0248c64ac97f5b982caff993bc">PITCH_DUNNO</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00045">blobbox.h:45</a></div></div>
-<div class="ttc" id="aa00203_html_aa72f1499398e9694bf46752e1cc895e1af99f0c54b98b6c7a0dd5d5f0b5dc635d"><div class="ttname"><a href="a00203.html#aa72f1499398e9694bf46752e1cc895e1af99f0c54b98b6c7a0dd5d5f0b5dc635d">BTFT_NONTEXT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00115">blobbox.h:115</a></div></div>
-<div class="ttc" id="aa00203_html_aebfaf711760a99b60c297d1d619df575a4f0b1431532d0e838187df32f2e822d7"><div class="ttname"><a href="a00203.html#aebfaf711760a99b60c297d1d619df575a4f0b1431532d0e838187df32f2e822d7">BRT_TEXT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00079">blobbox.h:79</a></div></div>
-<div class="ttc" id="aa03524_html_a100504544a5423a94222149ee9ed0fe8a61dec9bc0aaf1d527a731b2a6ce055c8"><div class="ttname"><a href="a03524.html#a100504544a5423a94222149ee9ed0fe8a61dec9bc0aaf1d527a731b2a6ce055c8">ScrollView::YELLOW</a></div><div class="ttdef"><b>Definition:</b> <a href="a01418_source.html#l00105">scrollview.h:105</a></div></div>
-<div class="ttc" id="aa00203_html_aebfaf711760a99b60c297d1d619df575a8a98863f18016aa4ccfd2d07dbb092a4"><div class="ttname"><a href="a00203.html#aebfaf711760a99b60c297d1d619df575a8a98863f18016aa4ccfd2d07dbb092a4">BRT_UNKNOWN</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00077">blobbox.h:77</a></div></div>
-<div class="ttc" id="aa02252_html_a19e4020f57c65fec6593990630284428"><div class="ttname"><a href="a02252.html#a19e4020f57c65fec6593990630284428">C_OUTLINE::step</a></div><div class="ttdeci">ICOORD step(int index) const</div><div class="ttdef"><b>Definition:</b> <a href="a00239_source.html#l00143">coutln.h:143</a></div></div>
-<div class="ttc" id="aa03524_html_a100504544a5423a94222149ee9ed0fe8a8c6bd80ef295f1fcdb8e79549a0b9385"><div class="ttname"><a href="a03524.html#a100504544a5423a94222149ee9ed0fe8a8c6bd80ef295f1fcdb8e79549a0b9385">ScrollView::GOLDENROD</a></div><div class="ttdef"><b>Definition:</b> <a href="a01418_source.html#l00123">scrollview.h:123</a></div></div>
-<div class="ttc" id="aa02400_html_a27df9d66085dcf65ead7f620d68a91ac"><div class="ttname"><a href="a02400.html#a27df9d66085dcf65ead7f620d68a91ac">ICOORD::y</a></div><div class="ttdeci">int16_t y() const</div><div class="ttdoc">access_function</div><div class="ttdef"><b>Definition:</b> <a href="a00341_source.html#l00055">points.h:55</a></div></div>
-<div class="ttc" id="aa02460_html"><div class="ttname"><a href="a02460.html">STATS</a></div><div class="ttdef"><b>Definition:</b> <a href="a00404_source.html#l00030">statistc.h:30</a></div></div>
-<div class="ttc" id="aa00203_html_a75b089d27e1df813fed544e0c131df8caaf28e2df284d1c1c8caf262b5fcdb3f4"><div class="ttname"><a href="a00203.html#a75b089d27e1df813fed544e0c131df8caaf28e2df284d1c1c8caf262b5fcdb3f4">BSTT_DIGIT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00098">blobbox.h:98</a></div></div>
-<div class="ttc" id="aa00203_html_a75b089d27e1df813fed544e0c131df8ca6fac1a2510eab4553549833d5d1afdc0"><div class="ttname"><a href="a00203.html#a75b089d27e1df813fed544e0c131df8ca6fac1a2510eab4553549833d5d1afdc0">BSTT_SKIP</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00101">blobbox.h:101</a></div></div>
-<div class="ttc" id="aa00203_html_a6d0b33e703e1291d0b60d4fe5a5e12ccad0945333210420da84a7617b5788f246"><div class="ttname"><a href="a00203.html#a6d0b33e703e1291d0b60d4fe5a5e12ccad0945333210420da84a7617b5788f246">TT_MAYBE_ALIGNED</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00062">blobbox.h:62</a></div></div>
-<div class="ttc" id="aa02208_html_a5d497fdc454feff733889db8fe604868"><div class="ttname"><a href="a02208.html#a5d497fdc454feff733889db8fe604868">BLOBNBOX::cblob</a></div><div class="ttdeci">C_BLOB * cblob() const</div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00267">blobbox.h:267</a></div></div>
-<div class="ttc" id="aa03524_html_a100504544a5423a94222149ee9ed0fe8acf8b3fe79bd99f51b05b218a8b0c5ee5"><div class="ttname"><a href="a03524.html#a100504544a5423a94222149ee9ed0fe8acf8b3fe79bd99f51b05b218a8b0c5ee5">ScrollView::DARK_GREEN</a></div><div class="ttdef"><b>Definition:</b> <a href="a01418_source.html#l00124">scrollview.h:124</a></div></div>
-<div class="ttc" id="aa00203_html_a4c698e96e1ebeb67e13f584c524fd154a0cba173121a328d3cb40be58bb3fd372"><div class="ttname"><a href="a00203.html#a4c698e96e1ebeb67e13f584c524fd154a0cba173121a328d3cb40be58bb3fd372">PITCH_DEF_FIXED</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00046">blobbox.h:46</a></div></div>
-<div class="ttc" id="aa00203_html_a75b089d27e1df813fed544e0c131df8caceba184627df3dabc8f3e3f2867c4eff"><div class="ttname"><a href="a00203.html#a75b089d27e1df813fed544e0c131df8caceba184627df3dabc8f3e3f2867c4eff">BSTT_COUNT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00102">blobbox.h:102</a></div></div>
-<div class="ttc" id="aa00203_html_aebfaf711760a99b60c297d1d619df575aea2da025a50db20db8213f96495dd4a6"><div class="ttname"><a href="a00203.html#aebfaf711760a99b60c297d1d619df575aea2da025a50db20db8213f96495dd4a6">BRT_VERT_TEXT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00078">blobbox.h:78</a></div></div>
-<div class="ttc" id="aa00203_html_aa72f1499398e9694bf46752e1cc895e1adac19762bd040a53914be696482c1e53"><div class="ttname"><a href="a00203.html#aa72f1499398e9694bf46752e1cc895e1adac19762bd040a53914be696482c1e53">BTFT_NEIGHBOURS</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00116">blobbox.h:116</a></div></div>
-<div class="ttc" id="aa02400_html_aaedd825587ccb78583bbd6717793faea"><div class="ttname"><a href="a02400.html#aaedd825587ccb78583bbd6717793faea">ICOORD::rotate</a></div><div class="ttdeci">void rotate(const FCOORD &amp;vec)</div><div class="ttdef"><b>Definition:</b> <a href="a00341_source.html#l00522">points.h:522</a></div></div>
-<div class="ttc" id="aa02252_html_a87880b33bc69fa17ab37a93706ae8d84"><div class="ttname"><a href="a02252.html#a87880b33bc69fa17ab37a93706ae8d84">C_OUTLINE::child</a></div><div class="ttdeci">C_OUTLINE_LIST * child()</div><div class="ttdef"><b>Definition:</b> <a href="a00239_source.html#l00107">coutln.h:107</a></div></div>
-<div class="ttc" id="aa00203_html_a4974474b3b161b68355d9a16eeaa3883a34eeb3a076f3bbcb32d47b74ee3cee86"><div class="ttname"><a href="a00203.html#a4974474b3b161b68355d9a16eeaa3883a34eeb3a076f3bbcb32d47b74ee3cee86">BND_LEFT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00087">blobbox.h:87</a></div></div>
-<div class="ttc" id="aa02400_html_aabf3d2cbd535df26ebcac17def628216"><div class="ttname"><a href="a02400.html#aabf3d2cbd535df26ebcac17def628216">ICOORD::x</a></div><div class="ttdeci">int16_t x() const</div><div class="ttdoc">access function</div><div class="ttdef"><b>Definition:</b> <a href="a00341_source.html#l00051">points.h:51</a></div></div>
-<div class="ttc" id="aa03524_html_a100504544a5423a94222149ee9ed0fe8a9a954d0f0149ee883cbcc5e0a379b460"><div class="ttname"><a href="a03524.html#a100504544a5423a94222149ee9ed0fe8a9a954d0f0149ee883cbcc5e0a379b460">ScrollView::CORAL</a></div><div class="ttdef"><b>Definition:</b> <a href="a01418_source.html#l00119">scrollview.h:119</a></div></div>
-<div class="ttc" id="aa00203_html_aebfaf711760a99b60c297d1d619df575a3296f6ab68e0cf0c80dcd5478a1413a3"><div class="ttname"><a href="a00203.html#aebfaf711760a99b60c297d1d619df575a3296f6ab68e0cf0c80dcd5478a1413a3">BRT_COUNT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00081">blobbox.h:81</a></div></div>
-<div class="ttc" id="aa02464_html_ae510f3d0e7398fbb46608082429eac89"><div class="ttname"><a href="a02464.html#ae510f3d0e7398fbb46608082429eac89">C_BLOB::out_list</a></div><div class="ttdeci">C_OUTLINE_LIST * out_list()</div><div class="ttdef"><b>Definition:</b> <a href="a00410_source.html#l00069">stepblob.h:69</a></div></div>
-<div class="ttc" id="aa02440_html"><div class="ttname"><a href="a02440.html">TBOX</a></div><div class="ttdef"><b>Definition:</b> <a href="a00380_source.html#l00033">rect.h:33</a></div></div>
-<div class="ttc" id="aa02208_html_acc27a54c9735f05e9152ba5f1c1a8261"><div class="ttname"><a href="a02208.html#acc27a54c9735f05e9152ba5f1c1a8261">BLOBNBOX::bounding_box</a></div><div class="ttdeci">const TBOX &amp; bounding_box() const</div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00229">blobbox.h:229</a></div></div>
-<div class="ttc" id="aa00203_html_aa72f1499398e9694bf46752e1cc895e1a64e3e70c4fac4d4e3facdb4638307d7f"><div class="ttname"><a href="a00203.html#aa72f1499398e9694bf46752e1cc895e1a64e3e70c4fac4d4e3facdb4638307d7f">BTFT_LEADER</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00120">blobbox.h:120</a></div></div>
-<div class="ttc" id="aa00203_html_aa72f1499398e9694bf46752e1cc895e1ac6822a7999424340562c785a3fd95daa"><div class="ttname"><a href="a00203.html#aa72f1499398e9694bf46752e1cc895e1ac6822a7999424340562c785a3fd95daa">BTFT_STRONG_CHAIN</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00118">blobbox.h:118</a></div></div>
-<div class="ttc" id="aa00203_html_aa72f1499398e9694bf46752e1cc895e1a8fa903eb3c633ef681659563769a8007"><div class="ttname"><a href="a00203.html#aa72f1499398e9694bf46752e1cc895e1a8fa903eb3c633ef681659563769a8007">BTFT_CHAIN</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00117">blobbox.h:117</a></div></div>
-<div class="ttc" id="aa00203_html_aa72f1499398e9694bf46752e1cc895e1a1936f281ab87277e7ef0ba576920dc10"><div class="ttname"><a href="a00203.html#aa72f1499398e9694bf46752e1cc895e1a1936f281ab87277e7ef0ba576920dc10">BTFT_TEXT_ON_IMAGE</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00119">blobbox.h:119</a></div></div>
-<div class="ttc" id="aa02252_html_ae80a9800eb44c83b018277edccc3e015"><div class="ttname"><a href="a02252.html#ae80a9800eb44c83b018277edccc3e015">C_OUTLINE::pathlength</a></div><div class="ttdeci">int32_t pathlength() const</div><div class="ttdef"><b>Definition:</b> <a href="a00239_source.html#l00134">coutln.h:134</a></div></div>
-<div class="ttc" id="aa00203_html_a4974474b3b161b68355d9a16eeaa3883a898fc0442f50593b8ce360d3253d254d"><div class="ttname"><a href="a00203.html#a4974474b3b161b68355d9a16eeaa3883a898fc0442f50593b8ce360d3253d254d">BND_BELOW</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00088">blobbox.h:88</a></div></div>
-<div class="ttc" id="aa00203_html_aa72f1499398e9694bf46752e1cc895e1a35219ce81ca228b9f74013a1dff6ce7e"><div class="ttname"><a href="a00203.html#aa72f1499398e9694bf46752e1cc895e1a35219ce81ca228b9f74013a1dff6ce7e">BTFT_COUNT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00121">blobbox.h:121</a></div></div>
-<div class="ttc" id="aa00203_html_a4c698e96e1ebeb67e13f584c524fd154a66d4c50c3dfbe049f0600dbff10ec362"><div class="ttname"><a href="a00203.html#a4c698e96e1ebeb67e13f584c524fd154a66d4c50c3dfbe049f0600dbff10ec362">PITCH_CORR_FIXED</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00050">blobbox.h:50</a></div></div>
-<div class="ttc" id="aa00203_html_a75b089d27e1df813fed544e0c131df8ca9f7c059031ba5f95a4e0f43bac16a33a"><div class="ttname"><a href="a00203.html#a75b089d27e1df813fed544e0c131df8ca9f7c059031ba5f95a4e0f43bac16a33a">BSTT_ITALIC</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00097">blobbox.h:97</a></div></div>
-<div class="ttc" id="aa00200_html_a48333b2ce7f8f0d732fc47a82e57911c"><div class="ttname"><a href="a00200.html#a48333b2ce7f8f0d732fc47a82e57911c">vertical_coutline_projection</a></div><div class="ttdeci">void vertical_coutline_projection(C_OUTLINE *outline, STATS *stats)</div><div class="ttdef"><b>Definition:</b> <a href="a00200_source.html#l00873">blobbox.cpp:873</a></div></div>
-<div class="ttc" id="aa02400_html"><div class="ttname"><a href="a02400.html">ICOORD</a></div><div class="ttdoc">integer coordinate</div><div class="ttdef"><b>Definition:</b> <a href="a00341_source.html#l00030">points.h:30</a></div></div>
-<div class="ttc" id="aa00203_html_a6d0b33e703e1291d0b60d4fe5a5e12cca78f911fabc911af76c04ea289a990ac7"><div class="ttname"><a href="a00203.html#a6d0b33e703e1291d0b60d4fe5a5e12cca78f911fabc911af76c04ea289a990ac7">TT_DELETED</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00060">blobbox.h:60</a></div></div>
-<div class="ttc" id="aa00203_html_aebfaf711760a99b60c297d1d619df575a3b72528ad70da88719f0479bc8c5a190"><div class="ttname"><a href="a00203.html#aebfaf711760a99b60c297d1d619df575a3b72528ad70da88719f0479bc8c5a190">BRT_POLYIMAGE</a></div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00076">blobbox.h:76</a></div></div>
+<div class="ttc" id="aa02830_html_a2bd2ff4f993746fc87d3ee88357a4a88"><div class="ttname"><a href="a02830.html#a2bd2ff4f993746fc87d3ee88357a4a88">WERD_RES::done</a></div><div class="ttdeci">bool done</div><div class="ttdef"><b>Definition:</b> <a href="a00374_source.html#l00299">pageres.h:299</a></div></div>
+<div class="ttc" id="aa02894_html_adf200132afabc2ee6ec256e516011007"><div class="ttname"><a href="a02894.html#adf200132afabc2ee6ec256e516011007">WERD_CHOICE::unichar_string</a></div><div class="ttdeci">const STRING &amp; unichar_string() const</div><div class="ttdef"><b>Definition:</b> <a href="a00425_source.html#l00529">ratngs.h:529</a></div></div>
+<div class="ttc" id="aa00203_html_a38678800d902519bdb0b6dcff44e5ee8"><div class="ttname"><a href="a00203.html#a38678800d902519bdb0b6dcff44e5ee8">reject_blanks</a></div><div class="ttdeci">void reject_blanks(WERD_RES *word)</div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00178">reject.cpp:178</a></div></div>
+<div class="ttc" id="aa00206_html_a24694172b77bc1092fb404873485b1c3"><div class="ttname"><a href="a00206.html#a24694172b77bc1092fb404873485b1c3">flip_hyphens</a></div><div class="ttdeci">void flip_hyphens(WERD_RES *word)</div></div>
+<div class="ttc" id="aa00344_html_af974e6755e636c8bc7cbe57e3bcbdd73"><div class="ttname"><a href="a00344.html#af974e6755e636c8bc7cbe57e3bcbdd73">kBlnXHeight</a></div><div class="ttdeci">const int kBlnXHeight</div><div class="ttdef"><b>Definition:</b> <a href="a00344_source.html#l00023">normalis.h:23</a></div></div>
+<div class="ttc" id="aa02894_html_a76b18095a88a05db299aa84451a5f52c"><div class="ttname"><a href="a02894.html#a76b18095a88a05db299aa84451a5f52c">WERD_CHOICE::unichar_id</a></div><div class="ttdeci">UNICHAR_ID unichar_id(int index) const</div><div class="ttdef"><b>Definition:</b> <a href="a00425_source.html#l00303">ratngs.h:303</a></div></div>
+<div class="ttc" id="aa00206_html_a619bb19b0a304dcfa4e73be192ace9c5"><div class="ttname"><a href="a00206.html#a619bb19b0a304dcfa4e73be192ace9c5">flip_0O</a></div><div class="ttdeci">void flip_0O(WERD_RES *word)</div></div>
+<div class="ttc" id="aa02894_html"><div class="ttname"><a href="a02894.html">WERD_CHOICE</a></div><div class="ttdef"><b>Definition:</b> <a href="a00425_source.html#l00261">ratngs.h:261</a></div></div>
+<div class="ttc" id="aa02894_html_a71ab9d957b2206805e710dcf747b8810"><div class="ttname"><a href="a02894.html#a71ab9d957b2206805e710dcf747b8810">WERD_CHOICE::dangerous_ambig_found</a></div><div class="ttdeci">bool dangerous_ambig_found() const</div><div class="ttdef"><b>Definition:</b> <a href="a00425_source.html#l00351">ratngs.h:351</a></div></div>
+<div class="ttc" id="aa02906_html_a798c11e002b9421b26a748f5186bdae9"><div class="ttname"><a href="a02906.html#a798c11e002b9421b26a748f5186bdae9">REJMAP::initialise</a></div><div class="ttdeci">void initialise(int16_t length)</div><div class="ttdef"><b>Definition:</b> <a href="a00434_source.html#l00272">rejctmap.cpp:272</a></div></div>
+<div class="ttc" id="aa03118_html_a620c3ec802c8ddf9401a6940f542618e"><div class="ttname"><a href="a03118.html#a620c3ec802c8ddf9401a6940f542618e">UNICHARSET::get_isalpha</a></div><div class="ttdeci">bool get_isalpha(UNICHAR_ID unichar_id) const</div><div class="ttdef"><b>Definition:</b> <a href="a00605_source.html#l00481">unicharset.h:481</a></div></div>
+<div class="ttc" id="aa00515_html_a93a603f4063a6b9403d81caa245a583b"><div class="ttname"><a href="a00515.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a></div><div class="ttdeci">#define ASSERT_HOST(x)</div><div class="ttdef"><b>Definition:</b> <a href="a00515_source.html#l00087">errcode.h:87</a></div></div>
+<div class="ttc" id="aa00425_html_a18e2c75cefe9e5b78e8ce41aa5fa25bca616bdbcaed7dd414823b303af5c8b1f1"><div class="ttname"><a href="a00425.html#a18e2c75cefe9e5b78e8ce41aa5fa25bca616bdbcaed7dd414823b303af5c8b1f1">SYSTEM_DAWG_PERM</a></div><div class="ttdef"><b>Definition:</b> <a href="a00425_source.html#l00239">ratngs.h:239</a></div></div>
+<div class="ttc" id="aa02830_html_a202d9d5d2a462d84012011c689e16605"><div class="ttname"><a href="a02830.html#a202d9d5d2a462d84012011c689e16605">WERD_RES::denorm</a></div><div class="ttdeci">DENORM denorm</div><div class="ttdef"><b>Definition:</b> <a href="a00374_source.html#l00195">pageres.h:195</a></div></div>
+<div class="ttc" id="aa02894_html_acea3ee4af3377da8f4c10627e4ba42cf"><div class="ttname"><a href="a02894.html#acea3ee4af3377da8f4c10627e4ba42cf">WERD_CHOICE::certainty</a></div><div class="ttdeci">float certainty() const</div><div class="ttdef"><b>Definition:</b> <a href="a00425_source.html#l00318">ratngs.h:318</a></div></div>
+<div class="ttc" id="aa02894_html_a7a606dd5236e78662fccade85d23edee"><div class="ttname"><a href="a02894.html#a7a606dd5236e78662fccade85d23edee">WERD_CHOICE::permuter</a></div><div class="ttdeci">uint8_t permuter() const</div><div class="ttdef"><b>Definition:</b> <a href="a00425_source.html#l00334">ratngs.h:334</a></div></div>
+<div class="ttc" id="aa02830_html"><div class="ttname"><a href="a02830.html">WERD_RES</a></div><div class="ttdef"><b>Definition:</b> <a href="a00374_source.html#l00160">pageres.h:160</a></div></div>
+<div class="ttc" id="aa00203_html_acda8fceb6df94a957f3a2380b944a09e"><div class="ttname"><a href="a00203.html#acda8fceb6df94a957f3a2380b944a09e">reject_poor_matches</a></div><div class="ttdeci">void reject_poor_matches(WERD_RES *word)</div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00207">reject.cpp:207</a></div></div>
+<div class="ttc" id="aa02830_html_a053a2aeeddc26a93a41a04fa08dd688a"><div class="ttname"><a href="a02830.html#a053a2aeeddc26a93a41a04fa08dd688a">WERD_RES::uch_set</a></div><div class="ttdeci">const UNICHARSET * uch_set</div><div class="ttdef"><b>Definition:</b> <a href="a00374_source.html#l00197">pageres.h:197</a></div></div>
+<div class="ttc" id="aa02830_html_a3d42ac7ec121263e757c9b7160dfd50d"><div class="ttname"><a href="a02830.html#a3d42ac7ec121263e757c9b7160dfd50d">WERD_RES::best_choice</a></div><div class="ttdeci">WERD_CHOICE * best_choice</div><div class="ttdef"><b>Definition:</b> <a href="a00374_source.html#l00235">pageres.h:235</a></div></div>
+<div class="ttc" id="aa02542_html_a552838a146145cb7993f42aefb740ea4"><div class="ttname"><a href="a02542.html#a552838a146145cb7993f42aefb740ea4">STRING::c_str</a></div><div class="ttdeci">const char * c_str() const</div><div class="ttdef"><b>Definition:</b> <a href="a00572_source.html#l00192">strngs.cpp:192</a></div></div>
+<div class="ttc" id="aa02906_html_acb01c2a1d8d28ecffdb51c6a7c3d22da"><div class="ttname"><a href="a02906.html#acb01c2a1d8d28ecffdb51c6a7c3d22da">REJMAP::rej_word_contains_blanks</a></div><div class="ttdeci">void rej_word_contains_blanks()</div><div class="ttdef"><b>Definition:</b> <a href="a00434_source.html#l00369">rejctmap.cpp:369</a></div></div>
+<div class="ttc" id="aa00203_html_a7769557523c23cea384f550ae030e5ba"><div class="ttname"><a href="a00203.html#a7769557523c23cea384f550ae030e5ba">compute_reject_threshold</a></div><div class="ttdeci">float compute_reject_threshold(WERD_CHOICE *word)</div><div class="ttdef"><b>Definition:</b> <a href="a00203_source.html#l00225">reject.cpp:225</a></div></div>
+<div class="ttc" id="aa00605_html_a08fdf52fb8650b2a0752cfd7bd236871af05dfe36988b7a26764e26e820873a71"><div class="ttname"><a href="a00605.html#a08fdf52fb8650b2a0752cfd7bd236871af05dfe36988b7a26764e26e820873a71">UNICHAR_SPACE</a></div><div class="ttdef"><b>Definition:</b> <a href="a00605_source.html#l00034">unicharset.h:34</a></div></div>
+<div class="ttc" id="aa02798_html_aaa8b03dcd0096f380be5b94ff58dcdf8"><div class="ttname"><a href="a02798.html#aaa8b03dcd0096f380be5b94ff58dcdf8">DENORM::y_scale</a></div><div class="ttdeci">float y_scale() const</div><div class="ttdef"><b>Definition:</b> <a href="a00344_source.html#l00269">normalis.h:269</a></div></div>
+<div class="ttc" id="aa02434_html_a09005e8f2b51d033d60eb5690aa5d112"><div class="ttname"><a href="a02434.html#a09005e8f2b51d033d60eb5690aa5d112">GenericVector::resize_no_init</a></div><div class="ttdeci">void resize_no_init(int size)</div><div class="ttdef"><b>Definition:</b> <a href="a00011_source.html#l00065">genericvector.h:65</a></div></div>
+<div class="ttc" id="aa02830_html_aa7f56655eb0e5164f2d2e85906475cb1"><div class="ttname"><a href="a02830.html#aa7f56655eb0e5164f2d2e85906475cb1">WERD_RES::tess_accepted</a></div><div class="ttdeci">bool tess_accepted</div><div class="ttdef"><b>Definition:</b> <a href="a00374_source.html#l00297">pageres.h:297</a></div></div>
+<div class="ttc" id="aa02906_html_a776b94463f9c008020c8cdf69c89b8c4"><div class="ttname"><a href="a02906.html#a776b94463f9c008020c8cdf69c89b8c4">REJMAP::rej_word_not_tess_accepted</a></div><div class="ttdeci">void rej_word_not_tess_accepted()</div><div class="ttdef"><b>Definition:</b> <a href="a00434_source.html#l00360">rejctmap.cpp:360</a></div></div>
+<div class="ttc" id="aa02830_html_ae24eb58be06cf275aee411d947fd31ef"><div class="ttname"><a href="a02830.html#ae24eb58be06cf275aee411d947fd31ef">WERD_RES::reject_map</a></div><div class="ttdeci">REJMAP reject_map</div><div class="ttdef"><b>Definition:</b> <a href="a00374_source.html#l00288">pageres.h:288</a></div></div>
+<div class="ttc" id="aa02434_html"><div class="ttname"><a href="a02434.html">GenericVector&lt; float &gt;</a></div></div>
+<div class="ttc" id="aa00122_html_af9ff5a7d7a1b9eeea7ce4106bffa7eeeaab0741a5a5ff9757ca343af255353ba0"><div class="ttname"><a href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eeeaab0741a5a5ff9757ca343af255353ba0">AC_UNACCEPTABLE</a></div><div class="ttdoc">Unacceptable word.</div><div class="ttdef"><b>Definition:</b> <a href="a00122_source.html#l00029">control.h:29</a></div></div>
+<div class="ttc" id="aa02542_html_a7a1f2a841e8d01d5a8c05bc3ab8064eb"><div class="ttname"><a href="a02542.html#a7a1f2a841e8d01d5a8c05bc3ab8064eb">STRING::length</a></div><div class="ttdeci">int32_t length() const</div><div class="ttdef"><b>Definition:</b> <a href="a00572_source.html#l00187">strngs.cpp:187</a></div></div>
+<div class="ttc" id="aa02906_html_a36d38c0c25d9792a85b5cb4b01e251fa"><div class="ttname"><a href="a02906.html#a36d38c0c25d9792a85b5cb4b01e251fa">REJMAP::rej_word_bad_permuter</a></div><div class="ttdeci">void rej_word_bad_permuter()</div><div class="ttdef"><b>Definition:</b> <a href="a00434_source.html#l00378">rejctmap.cpp:378</a></div></div>
+<div class="ttc" id="aa02894_html_af1ae6bf0c69cf408c3efa6fb78bcabc7"><div class="ttname"><a href="a02894.html#af1ae6bf0c69cf408c3efa6fb78bcabc7">WERD_CHOICE::print</a></div><div class="ttdeci">void print() const</div><div class="ttdef"><b>Definition:</b> <a href="a00425_source.html#l00568">ratngs.h:568</a></div></div>
+<div class="ttc" id="aa02894_html_ad00f0a3cf74d3b2d82dcefb811bd1685"><div class="ttname"><a href="a02894.html#ad00f0a3cf74d3b2d82dcefb811bd1685">WERD_CHOICE::length</a></div><div class="ttdeci">int length() const</div><div class="ttdef"><b>Definition:</b> <a href="a00425_source.html#l00291">ratngs.h:291</a></div></div>
+<div class="ttc" id="aa02906_html_a7f6528c1228002276d930ed9407c556b"><div class="ttname"><a href="a02906.html#a7f6528c1228002276d930ed9407c556b">REJMAP::rej_word_small_xht</a></div><div class="ttdeci">void rej_word_small_xht()</div><div class="ttdef"><b>Definition:</b> <a href="a00434_source.html#l00342">rejctmap.cpp:342</a></div></div>
+<div class="ttc" id="aa02814_html"><div class="ttname"><a href="a02814.html">ROW</a></div><div class="ttdef"><b>Definition:</b> <a href="a00362_source.html#l00035">ocrrow.h:35</a></div></div>
+<div class="ttc" id="aa00581_html_a0c2bcd4462ec67ab0971b34a0f610f55"><div class="ttname"><a href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a></div><div class="ttdeci">DLLSYM void tprintf(const char *format,...)</div><div class="ttdef"><b>Definition:</b> <a href="a00581_source.html#l00034">tprintf.cpp:34</a></div></div>
+<div class="ttc" id="aa02894_html_afa672748d2585eea64ab79592dd02eb3"><div class="ttname"><a href="a02894.html#afa672748d2585eea64ab79592dd02eb3">WERD_CHOICE::rating</a></div><div class="ttdeci">float rating() const</div><div class="ttdef"><b>Definition:</b> <a href="a00425_source.html#l00315">ratngs.h:315</a></div></div>
+<div class="ttc" id="aa02434_html_a999bbd8ff336c81fe1198ea714c7936d"><div class="ttname"><a href="a02434.html#a999bbd8ff336c81fe1198ea714c7936d">GenericVector::sort</a></div><div class="ttdeci">void sort()</div><div class="ttdef"><b>Definition:</b> <a href="a00011_source.html#l01102">genericvector.h:1102</a></div></div>
+<div class="ttc" id="aa02894_html_adaecd80cfe44e00e9c4647859b1c87e0"><div class="ttname"><a href="a02894.html#adaecd80cfe44e00e9c4647859b1c87e0">WERD_CHOICE::unichar_lengths</a></div><div class="ttdeci">const STRING &amp; unichar_lengths() const</div><div class="ttdef"><b>Definition:</b> <a href="a00425_source.html#l00536">ratngs.h:536</a></div></div>
+<div class="ttc" id="aa00425_html_a18e2c75cefe9e5b78e8ce41aa5fa25bca4fd9d3b025ecc5ea8f2248fea29543e4"><div class="ttname"><a href="a00425.html#a18e2c75cefe9e5b78e8ce41aa5fa25bca4fd9d3b025ecc5ea8f2248fea29543e4">FREQ_DAWG_PERM</a></div><div class="ttdef"><b>Definition:</b> <a href="a00425_source.html#l00242">ratngs.h:242</a></div></div>
+<div class="ttc" id="aa00425_html_a18e2c75cefe9e5b78e8ce41aa5fa25bca809574e2067a5304fbd2279d869e9b24"><div class="ttname"><a href="a00425.html#a18e2c75cefe9e5b78e8ce41aa5fa25bca809574e2067a5304fbd2279d869e9b24">NUMBER_PERM</a></div><div class="ttdef"><b>Definition:</b> <a href="a00425_source.html#l00237">ratngs.h:237</a></div></div>
+<div class="ttc" id="aa00425_html_a18e2c75cefe9e5b78e8ce41aa5fa25bca5e293e54fa687876197992131e779d54"><div class="ttname"><a href="a00425.html#a18e2c75cefe9e5b78e8ce41aa5fa25bca5e293e54fa687876197992131e779d54">USER_DAWG_PERM</a></div><div class="ttdef"><b>Definition:</b> <a href="a00425_source.html#l00241">ratngs.h:241</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_27285da2200a3bef8a8e2dba4d21412a.html">ccstruct</a></li><li class="navelem"><a class="el" href="a00203.html">blobbox.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_43edf6714a3bf7b9dbcd0e0e50a1a1a7.html">ccmain</a></li><li class="navelem"><a class="el" href="a00203.html">reject.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

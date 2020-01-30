@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/ccmain/tessvars.h File Reference</title>
+<title>tesseract: /tesseract/src/ccmain/paragraphs.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,44 +87,112 @@ $(document).ready(function(){initNavTree('a00179.html','');});
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
-<div class="title">tessvars.h File Reference</div>  </div>
+<div class="title">paragraphs.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;cstdio&gt;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a00182_source.html">paragraphs.h</a>&quot;</code><br />
+<code>#include &lt;cctype&gt;</code><br />
+<code>#include &lt;cmath&gt;</code><br />
+<code>#include &lt;cstdio&gt;</code><br />
+<code>#include &lt;cstdlib&gt;</code><br />
+<code>#include &lt;cstring&gt;</code><br />
+<code>#include &lt;algorithm&gt;</code><br />
+<code>#include &lt;memory&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00011_source.html">tesseract/genericvector.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00014_source.html">tesseract/helpers.h</a>&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00530_source.html">host.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00155_source.html">mutableiterator.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00350_source.html">ocrblock.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00356_source.html">ocrpara.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00362_source.html">ocrrow.h</a>&quot;</code><br />
+<code>#include &lt;<a class="el" href="a00026_source.html">tesseract/pageiterator.h</a>&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00374_source.html">pageres.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00185_source.html">paragraphs_internal.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00386_source.html">pdblock.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00404_source.html">polyblk.h</a>&quot;</code><br />
+<code>#include &lt;<a class="el" href="a00032_source.html">tesseract/publictypes.h</a>&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00425_source.html">ratngs.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00431_source.html">rect.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00455_source.html">statistc.h</a>&quot;</code><br />
+<code>#include &lt;<a class="el" href="a00044_source.html">tesseract/strngs.h</a>&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00584_source.html">tprintf.h</a>&quot;</code><br />
+<code>#include &lt;<a class="el" href="a00050_source.html">tesseract/unichar.h</a>&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00605_source.html">unicharset.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00614_source.html">unicodes.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00467_source.html">werd.h</a>&quot;</code><br />
 </div>
 <p><a href="a00179_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02590.html">tesseract::UnicodeSpanSkipper</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02594.html">tesseract::Cluster</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02598.html">tesseract::SimpleClusterer</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02602.html">tesseract::GeometricClassifierState</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02606.html">tesseract::Interval</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:a01818"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html">tesseract</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a4b153a6c7f9116c12cffe35964cf6ba3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a4b153a6c7f9116c12cffe35964cf6ba3">tesseract::AsciiLikelyListItem</a> (const <a class="el" href="a02542.html">STRING</a> &amp;word)</td></tr>
+<tr class="separator:a4b153a6c7f9116c12cffe35964cf6ba3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe22d992db19f44c79906b66dc846eaa"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#abe22d992db19f44c79906b66dc846eaa">tesseract::UnicodeFor</a> (const <a class="el" href="a03118.html">UNICHARSET</a> *u, const <a class="el" href="a02894.html">WERD_CHOICE</a> *werd, int pos)</td></tr>
+<tr class="separator:abe22d992db19f44c79906b66dc846eaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04498cd763cc4a381f1b7c2d0e17f020"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a04498cd763cc4a381f1b7c2d0e17f020">tesseract::LeftWordAttributes</a> (const <a class="el" href="a03118.html">UNICHARSET</a> *unicharset, const <a class="el" href="a02894.html">WERD_CHOICE</a> *werd, const <a class="el" href="a02542.html">STRING</a> &amp;utf8, bool *is_list, bool *starts_idea, bool *ends_idea)</td></tr>
+<tr class="separator:a04498cd763cc4a381f1b7c2d0e17f020"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0bc43fa3c52639420ed7eeb1093aa24"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#aa0bc43fa3c52639420ed7eeb1093aa24">tesseract::RightWordAttributes</a> (const <a class="el" href="a03118.html">UNICHARSET</a> *unicharset, const <a class="el" href="a02894.html">WERD_CHOICE</a> *werd, const <a class="el" href="a02542.html">STRING</a> &amp;utf8, bool *is_list, bool *starts_idea, bool *ends_idea)</td></tr>
+<tr class="separator:aa0bc43fa3c52639420ed7eeb1093aa24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f44dde2641dd1047debf38c4429dc2b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a8f44dde2641dd1047debf38c4429dc2b">tesseract::ValidFirstLine</a> (const <a class="el" href="a02434.html">GenericVector</a>&lt; RowScratchRegisters &gt; *rows, int row, const <a class="el" href="a02810.html">ParagraphModel</a> *model)</td></tr>
+<tr class="separator:a8f44dde2641dd1047debf38c4429dc2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7933d5b144ff81c13320bfb6f32e0264"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a7933d5b144ff81c13320bfb6f32e0264">tesseract::ValidBodyLine</a> (const <a class="el" href="a02434.html">GenericVector</a>&lt; RowScratchRegisters &gt; *rows, int row, const <a class="el" href="a02810.html">ParagraphModel</a> *model)</td></tr>
+<tr class="separator:a7933d5b144ff81c13320bfb6f32e0264"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2327e0fae9f7527a805d6cb2ac9bfc16"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a2327e0fae9f7527a805d6cb2ac9bfc16">tesseract::CrownCompatible</a> (const <a class="el" href="a02434.html">GenericVector</a>&lt; RowScratchRegisters &gt; *rows, int a, int b, const <a class="el" href="a02810.html">ParagraphModel</a> *model)</td></tr>
+<tr class="separator:a2327e0fae9f7527a805d6cb2ac9bfc16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f083a56b3a7be7431cea88c86f49216"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a8f083a56b3a7be7431cea88c86f49216">tesseract::RecomputeMarginsAndClearHypotheses</a> (<a class="el" href="a02434.html">GenericVector</a>&lt; RowScratchRegisters &gt; *rows, int start, int end, int percentile)</td></tr>
+<tr class="separator:a8f083a56b3a7be7431cea88c86f49216"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf0128a0f8d13a8183820ce034d56122"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#adf0128a0f8d13a8183820ce034d56122">tesseract::InterwordSpace</a> (const <a class="el" href="a02434.html">GenericVector</a>&lt; RowScratchRegisters &gt; &amp;rows, int row_start, int row_end)</td></tr>
+<tr class="separator:adf0128a0f8d13a8183820ce034d56122"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d73136a6cc816e7f51fcfbfe99d52c1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a5d73136a6cc816e7f51fcfbfe99d52c1">tesseract::FirstWordWouldHaveFit</a> (const RowScratchRegisters &amp;before, const RowScratchRegisters &amp;after, <a class="el" href="a01818.html#a550970d1662b3ac5830c6a28dba676b1">tesseract::ParagraphJustification</a> justification)</td></tr>
+<tr class="separator:a5d73136a6cc816e7f51fcfbfe99d52c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95092769d51f59c291291e7397895a23"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a95092769d51f59c291291e7397895a23">tesseract::FirstWordWouldHaveFit</a> (const RowScratchRegisters &amp;before, const RowScratchRegisters &amp;after)</td></tr>
+<tr class="separator:a95092769d51f59c291291e7397895a23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1812316831faad241ffadb840e9a21e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#ac1812316831faad241ffadb840e9a21e">tesseract::RowsFitModel</a> (const <a class="el" href="a02434.html">GenericVector</a>&lt; RowScratchRegisters &gt; *rows, int start, int end, const <a class="el" href="a02810.html">ParagraphModel</a> *model)</td></tr>
+<tr class="separator:ac1812316831faad241ffadb840e9a21e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cafdf34c1f6a37446d3e656da69afdc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a9cafdf34c1f6a37446d3e656da69afdc">tesseract::CanonicalizeDetectionResults</a> (<a class="el" href="a02434.html">GenericVector</a>&lt; <a class="el" href="a02806.html">PARA</a> * &gt; *row_owners, PARA_LIST *paragraphs)</td></tr>
+<tr class="separator:a9cafdf34c1f6a37446d3e656da69afdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3edfcbb6042dffc461c6e5737c72643"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#ac3edfcbb6042dffc461c6e5737c72643">tesseract::DetectParagraphs</a> (int debug_level, <a class="el" href="a02434.html">GenericVector</a>&lt; RowInfo &gt; *row_infos, <a class="el" href="a02434.html">GenericVector</a>&lt; <a class="el" href="a02806.html">PARA</a> * &gt; *row_owners, PARA_LIST *paragraphs, <a class="el" href="a02434.html">GenericVector</a>&lt; <a class="el" href="a02810.html">ParagraphModel</a> * &gt; *models)</td></tr>
+<tr class="separator:ac3edfcbb6042dffc461c6e5737c72643"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fb9da5e21dab182f4ac89730a421443"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a7fb9da5e21dab182f4ac89730a421443">tesseract::DetectParagraphs</a> (int debug_level, bool after_text_recognition, const MutableIterator *block_start, <a class="el" href="a02434.html">GenericVector</a>&lt; <a class="el" href="a02810.html">ParagraphModel</a> * &gt; *models)</td></tr>
+<tr class="separator:a7fb9da5e21dab182f4ac89730a421443"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:adff672a9cdb59d57a0d142954a6a3899"><td class="memItemLeft" align="right" valign="top">FILE *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00179.html#adff672a9cdb59d57a0d142954a6a3899">debug_fp</a></td></tr>
-<tr class="separator:adff672a9cdb59d57a0d142954a6a3899"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98233252a018dc9eb158c8223e2db208"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="a02810.html">ParagraphModel</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a98233252a018dc9eb158c8223e2db208">tesseract::kCrownLeft</a> = reinterpret_cast&lt;<a class="el" href="a02810.html">ParagraphModel</a> *&gt;(static_cast&lt;uintptr_t&gt;(0xDEAD111F))</td></tr>
+<tr class="separator:a98233252a018dc9eb158c8223e2db208"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fec475017947c91c5cdb29b160f4453"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="a02810.html">ParagraphModel</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a9fec475017947c91c5cdb29b160f4453">tesseract::kCrownRight</a> = reinterpret_cast&lt;<a class="el" href="a02810.html">ParagraphModel</a> *&gt;(static_cast&lt;uintptr_t&gt;(0xDEAD888F))</td></tr>
+<tr class="separator:a9fec475017947c91c5cdb29b160f4453"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="adff672a9cdb59d57a0d142954a6a3899"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adff672a9cdb59d57a0d142954a6a3899">&#9670;&nbsp;</a></span>debug_fp</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">FILE* debug_fp</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00176_source.html#l00023">23</a> of file <a class="el" href="a00176_source.html">tessvars.cpp</a>.</p>
-
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_43edf6714a3bf7b9dbcd0e0e50a1a1a7.html">ccmain</a></li><li class="navelem"><a class="el" href="a00179.html">tessvars.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_43edf6714a3bf7b9dbcd0e0e50a1a1a7.html">ccmain</a></li><li class="navelem"><a class="el" href="a00179.html">paragraphs.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

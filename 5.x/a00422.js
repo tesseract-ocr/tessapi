@@ -1,17 +1,13 @@
 var a00422 =
 [
-    [ "UnicharIdArrayUtils", "a02472.html", null ],
-    [ "AmbigSpec", "a02476.html", "a02476" ],
-    [ "UnicharAmbigs", "a02480.html", "a02480" ],
-    [ "MAX_AMBIG_SIZE", "a00422.html#a66b35d22667233a1566433c6dd864463", null ],
-    [ "UnicharAmbigsVector", "a00422.html#a75c8b4558543aa0d0bebea769678bb65", null ],
-    [ "UnicharIdVector", "a00422.html#a6f543188c7748dd63a8d99c581607d01", null ],
-    [ "AmbigType", "a00422.html#aa13017f5f891a1f9f95074bf26a5b222", [
-      [ "NOT_AMBIG", "a00422.html#aa13017f5f891a1f9f95074bf26a5b222af40a6c3f3fbd83ba09a6607f534349dc", null ],
-      [ "REPLACE_AMBIG", "a00422.html#aa13017f5f891a1f9f95074bf26a5b222a4de7fc7ae32fd87a4c53e4b6bf3322de", null ],
-      [ "DEFINITE_AMBIG", "a00422.html#aa13017f5f891a1f9f95074bf26a5b222a36712914249ab1d96c4f395c06bc7009", null ],
-      [ "SIMILAR_AMBIG", "a00422.html#aa13017f5f891a1f9f95074bf26a5b222aba0a03f0cccfdd9e45817623613dd740", null ],
-      [ "CASE_AMBIG", "a00422.html#aa13017f5f891a1f9f95074bf26a5b222a29c650e9672a75e50491fc10c0f07ec5", null ],
-      [ "AMBIG_TYPE_COUNT", "a00422.html#aa13017f5f891a1f9f95074bf26a5b222a79854db5a6d73c698dd9b003f426918f", null ]
-    ] ]
+    [ "EqualIgnoringCaseAndTerminalPunct", "a00422.html#a98992670ff5a4da6695f318643d48ca4", null ],
+    [ "FindMatchingChoice", "a00422.html#ae7d10d7f2ebc33a80d4c2ec84996e121", null ],
+    [ "print_ratings_list", "a00422.html#a2de5b7d5a020bb9823091dbece4ea36e", null ],
+    [ "ScriptPosToString", "a00422.html#a9a75fa73a4d69a48bdf5918c1949c976", null ],
+    [ "kMaxBaselineDrift", "a00422.html#a3655904b6e0f4d2c677ebebeae93a092", null ],
+    [ "kMaxDropCapBottom", "a00422.html#abea898c2813372b2ddd7f70ecdce4b08", null ],
+    [ "kMaxOverlapDenominator", "a00422.html#a4a83ca234ca4d4ee248cbfdc9b36bb30", null ],
+    [ "kMinSubscriptOffset", "a00422.html#a1375174ce0d252af5207f03bfdb0b898", null ],
+    [ "kMinSuperscriptOffset", "a00422.html#a322c161fa1101b0e31ce4094c6c2935b", null ],
+    [ "kMinXHeightMatch", "a00422.html#a534f356c4262f863f5fe371d5f034749", null ]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/wordrec/chop.h Source File</title>
+<title>tesseract: /tesseract/src/training/validate_khmer.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,58 +87,54 @@ $(document).ready(function(){initNavTree('a01448_source.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">chop.h</div>  </div>
+<div class="title">validate_khmer.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a01448.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/******************************************************************************</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * File:        chop.h</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * Author:      Mark Seaman, SW Productivity</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> * (c) Copyright 1987, Hewlett-Packard Company.</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> ** Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> ** you may not use this file except in compliance with the License.</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> ** You may obtain a copy of the License at</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> ** http://www.apache.org/licenses/LICENSE-2.0</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> ** Unless required by applicable law or agreed to in writing, software</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> ** distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> ** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> ** See the License for the specific language governing permissions and</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> ** limitations under the License.</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> *****************************************************************************/</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#ifndef CHOP_H</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#define CHOP_H</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">/*----------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">              I n c l u d e s</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">----------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00470.html">genericheap.h</a>&quot;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00488.html">kdpair.h</a>&quot;</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00392.html">seam.h</a>&quot;</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">/*----------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">              T y p e s</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="a01448.html#acddb2ccb7be3d768d16abfd230d468eb">   31</a></span>&#160;<span class="comment">---------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#define MAX_NUM_POINTS 50</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="a01448.html#ab644b1a83b3ef5c62442fac3f0f67b12">   33</a></span>&#160;<span class="comment">// The PointPair elements do NOT own the EDGEPTs.</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="a01448.html#a6ea49e5c54f90d06755a9ad39bda3b1d">   34</a></span>&#160;<span class="keyword">using</span> <a class="code" href="a02556.html">PointPair</a> = <a class="code" href="a02556.html">tesseract::KDPairInc&lt;float, EDGEPT*&gt;</a>;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">using</span> <a class="code" href="a02540.html">PointHeap</a> = <a class="code" href="a02540.html">tesseract::GenericHeap&lt;PointPair&gt;</a>;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#endif</span></div>
+<a href="a01448.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef TESSERACT_TRAINING_VALIDATE_KHMER_H_</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define TESSERACT_TRAINING_VALIDATE_KHMER_H_</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a01460.html">validator.h</a>&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span><a class="code" href="a01818.html">tesseract</a> {</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// Subclass of Validator that validates and segments Khmer.</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="a03954.html">    9</a></span>&#160;<span class="keyword">class </span><a class="code" href="a03954.html">ValidateKhmer</a> : <span class="keyword">public</span> <a class="code" href="a03962.html">Validator</a> {</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="a03954.html#aeb22b8981ccde5876f59b12024038bd6">   11</a></span>&#160;  <a class="code" href="a03954.html#aeb22b8981ccde5876f59b12024038bd6">ValidateKhmer</a>(<a class="code" href="a01818.html#ac6cc6bc2b0c67458c52c7f5f419fddd4">ViramaScript</a> script, <span class="keywordtype">bool</span> report_errors)</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;      : <a class="code" href="a03962.html">Validator</a>(script, report_errors) {}</div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="a03954.html#a97b2f67a3b00829d444cf8ed2eb318c8">   13</a></span>&#160;  <a class="code" href="a03954.html#a97b2f67a3b00829d444cf8ed2eb318c8">~ValidateKhmer</a>() {}</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  <span class="comment">// Returns whether codes matches the pattern for an Khmer Grapheme.</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  <span class="comment">// Consumes the next Grapheme in codes_[codes_used_++...] and copies it to</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="comment">// parts_ and output_. Returns true if a valid Grapheme was consumed,</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <span class="comment">// otherwise does not increment codes_used_.</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="a03954.html#a2aeefdc063507628e6a6d932ed5a1d0d">ConsumeGraphemeIfValid</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  <span class="comment">// Returns the CharClass corresponding to the given Unicode ch.</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  <a class="code" href="a03962.html#a91b43d3a4def0cb3af167f53dd5d520f">CharClass</a> <a class="code" href="a03954.html#abf15190e757480319ad6a35972a2f7b5">UnicodeToCharClass</a>(<a class="code" href="a01818.html#a445c8390d18d4299d6a46de3a0d2fb63">char32</a> ch) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;};</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;}  <span class="comment">// namespace tesseract</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#endif  // TESSERACT_TRAINING_VALIDATE_KHMER_H_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa00488_html"><div class="ttname"><a href="a00488.html">kdpair.h</a></div></div>
-<div class="ttc" id="aa00470_html"><div class="ttname"><a href="a00470.html">genericheap.h</a></div></div>
-<div class="ttc" id="aa02556_html"><div class="ttname"><a href="a02556.html">tesseract::KDPairInc</a></div><div class="ttdef"><b>Definition:</b> <a href="a00488_source.html#l00051">kdpair.h:51</a></div></div>
-<div class="ttc" id="aa02540_html"><div class="ttname"><a href="a02540.html">tesseract::GenericHeap</a></div><div class="ttdef"><b>Definition:</b> <a href="a00470_source.html#l00058">genericheap.h:58</a></div></div>
-<div class="ttc" id="aa00392_html"><div class="ttname"><a href="a00392.html">seam.h</a></div></div>
+<div class="ttc" id="aa01818_html_ac6cc6bc2b0c67458c52c7f5f419fddd4"><div class="ttname"><a href="a01818.html#ac6cc6bc2b0c67458c52c7f5f419fddd4">tesseract::ViramaScript</a></div><div class="ttdeci">ViramaScript</div><div class="ttdef"><b>Definition:</b> <a href="a01460_source.html#l00067">validator.h:67</a></div></div>
+<div class="ttc" id="aa03954_html"><div class="ttname"><a href="a03954.html">tesseract::ValidateKhmer</a></div><div class="ttdef"><b>Definition:</b> <a href="a01448_source.html#l00009">validate_khmer.h:9</a></div></div>
+<div class="ttc" id="aa03954_html_abf15190e757480319ad6a35972a2f7b5"><div class="ttname"><a href="a03954.html#abf15190e757480319ad6a35972a2f7b5">tesseract::ValidateKhmer::UnicodeToCharClass</a></div><div class="ttdeci">CharClass UnicodeToCharClass(char32 ch) const override</div><div class="ttdef"><b>Definition:</b> <a href="a01445_source.html#l00088">validate_khmer.cpp:88</a></div></div>
+<div class="ttc" id="aa03954_html_a97b2f67a3b00829d444cf8ed2eb318c8"><div class="ttname"><a href="a03954.html#a97b2f67a3b00829d444cf8ed2eb318c8">tesseract::ValidateKhmer::~ValidateKhmer</a></div><div class="ttdeci">~ValidateKhmer()</div><div class="ttdef"><b>Definition:</b> <a href="a01448_source.html#l00013">validate_khmer.h:13</a></div></div>
+<div class="ttc" id="aa03962_html_a91b43d3a4def0cb3af167f53dd5d520f"><div class="ttname"><a href="a03962.html#a91b43d3a4def0cb3af167f53dd5d520f">tesseract::Validator::CharClass</a></div><div class="ttdeci">CharClass</div><div class="ttdef"><b>Definition:</b> <a href="a01460_source.html#l00126">validator.h:126</a></div></div>
+<div class="ttc" id="aa01460_html"><div class="ttname"><a href="a01460.html">validator.h</a></div></div>
+<div class="ttc" id="aa03954_html_aeb22b8981ccde5876f59b12024038bd6"><div class="ttname"><a href="a03954.html#aeb22b8981ccde5876f59b12024038bd6">tesseract::ValidateKhmer::ValidateKhmer</a></div><div class="ttdeci">ValidateKhmer(ViramaScript script, bool report_errors)</div><div class="ttdef"><b>Definition:</b> <a href="a01448_source.html#l00011">validate_khmer.h:11</a></div></div>
+<div class="ttc" id="aa01818_html_a445c8390d18d4299d6a46de3a0d2fb63"><div class="ttname"><a href="a01818.html#a445c8390d18d4299d6a46de3a0d2fb63">tesseract::char32</a></div><div class="ttdeci">signed int char32</div><div class="ttdef"><b>Definition:</b> <a href="a00050_source.html#l00053">unichar.h:53</a></div></div>
+<div class="ttc" id="aa03954_html_a2aeefdc063507628e6a6d932ed5a1d0d"><div class="ttname"><a href="a03954.html#a2aeefdc063507628e6a6d932ed5a1d0d">tesseract::ValidateKhmer::ConsumeGraphemeIfValid</a></div><div class="ttdeci">bool ConsumeGraphemeIfValid() override</div><div class="ttdef"><b>Definition:</b> <a href="a01445_source.html#l00020">validate_khmer.cpp:20</a></div></div>
+<div class="ttc" id="aa01818_html"><div class="ttname"><a href="a01818.html">tesseract</a></div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00065">baseapi.h:65</a></div></div>
+<div class="ttc" id="aa03962_html"><div class="ttname"><a href="a03962.html">tesseract::Validator</a></div><div class="ttdef"><b>Definition:</b> <a href="a01460_source.html#l00086">validator.h:86</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7b2482c39089bf50e281ccfac06b23cd.html">wordrec</a></li><li class="navelem"><a class="el" href="a01448.html">chop.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7c7ae07dd2a999045cb78bf7ff8dcbc7.html">training</a></li><li class="navelem"><a class="el" href="a01448.html">validate_khmer.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:21 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

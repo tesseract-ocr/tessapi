@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/ccutil/serialis.cpp Source File</title>
+<title>tesseract: /tesseract/src/ccutil/errcode.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,13 +87,13 @@ $(document).ready(function(){initNavTree('a00515_source.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">serialis.cpp</div>  </div>
+<div class="title">errcode.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="a00515.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**********************************************************************</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * File:        serialis.cpp  (Formerly serialmac.h)</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * Description: Inline routines and macros for serialisation functions</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * Author:      Phil Cheatle</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * File:        errcode.h  (Formerly error.h)</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * Description: Header file for generic error handler class</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * Author:      Ray Smith</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> * (C) Copyright 1990, Hewlett-Packard Ltd.</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> ** Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
@@ -108,336 +108,116 @@ $(document).ready(function(){initNavTree('a00515_source.html','');});
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> **********************************************************************/</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;tesseract/serialis.h&gt;</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;cstdio&gt;</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00464.html">errcode.h</a>&quot;</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;tesseract/genericvector.h&gt;</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;tesseract/strngs.h&gt;</span>             <span class="comment">// for STRING</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">namespace </span><a class="code" href="a01539.html">tesseract</a> {</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a01539.html#a853a2b028e177ca4711aff8e122e9436">DeSerialize</a>(FILE* fp, <span class="keywordtype">char</span>* data, <span class="keywordtype">size_t</span> n) {</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <span class="keywordflow">return</span> fread(data, <span class="keyword">sizeof</span>(*data), n, fp) == n;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;}</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a01539.html#a853a2b028e177ca4711aff8e122e9436">DeSerialize</a>(FILE* fp, <span class="keywordtype">float</span>* data, <span class="keywordtype">size_t</span> n) {</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <span class="keywordflow">return</span> fread(data, <span class="keyword">sizeof</span>(*data), n, fp) == n;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;}</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a01539.html#a853a2b028e177ca4711aff8e122e9436">DeSerialize</a>(FILE* fp, int8_t* data, <span class="keywordtype">size_t</span> n) {</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <span class="keywordflow">return</span> fread(data, <span class="keyword">sizeof</span>(*data), n, fp) == n;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;}</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a01539.html#a853a2b028e177ca4711aff8e122e9436">DeSerialize</a>(FILE* fp, int16_t* data, <span class="keywordtype">size_t</span> n) {</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <span class="keywordflow">return</span> fread(data, <span class="keyword">sizeof</span>(*data), n, fp) == n;</div>
-<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="a01539.html#a853a2b028e177ca4711aff8e122e9436">   41</a></span>&#160;}</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a01539.html#a853a2b028e177ca4711aff8e122e9436">DeSerialize</a>(FILE* fp, int32_t* data, <span class="keywordtype">size_t</span> n) {</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <span class="keywordflow">return</span> fread(data, <span class="keyword">sizeof</span>(*data), n, fp) == n;</div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="a01539.html#aa34b1755cf628bc71e476c00f34c0bb3">   45</a></span>&#160;}</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a01539.html#a853a2b028e177ca4711aff8e122e9436">DeSerialize</a>(FILE* fp, uint8_t* data, <span class="keywordtype">size_t</span> n) {</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <span class="keywordflow">return</span> fread(data, <span class="keyword">sizeof</span>(*data), n, fp) == n;</div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="a01539.html#ab9ba22a314b60ad7a20f60dea94ef929">   49</a></span>&#160;}</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a01539.html#a853a2b028e177ca4711aff8e122e9436">DeSerialize</a>(FILE* fp, uint16_t* data, <span class="keywordtype">size_t</span> n) {</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="keywordflow">return</span> fread(data, <span class="keyword">sizeof</span>(*data), n, fp) == n;</div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="a01539.html#ab68469a4d20e3b91ad2c822b6ba2bd34">   53</a></span>&#160;}</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a01539.html#a853a2b028e177ca4711aff8e122e9436">DeSerialize</a>(FILE* fp, uint32_t* data, <span class="keywordtype">size_t</span> n) {</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="keywordflow">return</span> fread(data, <span class="keyword">sizeof</span>(*data), n, fp) == n;</div>
-<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="a01539.html#a33ac84970633d148724e5e6f2c7e2927">   57</a></span>&#160;}</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a01539.html#aac98ce8ed0ca122cbdd178773b3bb4a7">Serialize</a>(FILE* fp, <span class="keyword">const</span> <span class="keywordtype">char</span>* data, <span class="keywordtype">size_t</span> n) {</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <span class="keywordflow">return</span> fwrite(data, <span class="keyword">sizeof</span>(*data), n, fp) == n;</div>
-<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="a01539.html#a091da81dd7c0aba750ab703ce1ce6575">   61</a></span>&#160;}</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a01539.html#aac98ce8ed0ca122cbdd178773b3bb4a7">Serialize</a>(FILE* fp, <span class="keyword">const</span> <span class="keywordtype">float</span>* data, <span class="keywordtype">size_t</span> n) {</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="keywordflow">return</span> fwrite(data, <span class="keyword">sizeof</span>(*data), n, fp) == n;</div>
-<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="a01539.html#ab3ff13debfb4ae4c35dfb6b16c6abc3d">   65</a></span>&#160;}</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a01539.html#aac98ce8ed0ca122cbdd178773b3bb4a7">Serialize</a>(FILE* fp, <span class="keyword">const</span> int8_t* data, <span class="keywordtype">size_t</span> n) {</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <span class="keywordflow">return</span> fwrite(data, <span class="keyword">sizeof</span>(*data), n, fp) == n;</div>
-<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="a01539.html#a86c8cf3076cdb92f38b80d94494c76d5">   69</a></span>&#160;}</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a01539.html#aac98ce8ed0ca122cbdd178773b3bb4a7">Serialize</a>(FILE* fp, <span class="keyword">const</span> int16_t* data, <span class="keywordtype">size_t</span> n) {</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <span class="keywordflow">return</span> fwrite(data, <span class="keyword">sizeof</span>(*data), n, fp) == n;</div>
-<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="a01539.html#aac98ce8ed0ca122cbdd178773b3bb4a7">   73</a></span>&#160;}</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a01539.html#aac98ce8ed0ca122cbdd178773b3bb4a7">Serialize</a>(FILE* fp, <span class="keyword">const</span> int32_t* data, <span class="keywordtype">size_t</span> n) {</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  <span class="keywordflow">return</span> fwrite(data, <span class="keyword">sizeof</span>(*data), n, fp) == n;</div>
-<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="a01539.html#a0e915c71049cc15223fcf96bab364742">   77</a></span>&#160;}</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a01539.html#aac98ce8ed0ca122cbdd178773b3bb4a7">Serialize</a>(FILE* fp, <span class="keyword">const</span> uint8_t* data, <span class="keywordtype">size_t</span> n) {</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  <span class="keywordflow">return</span> fwrite(data, <span class="keyword">sizeof</span>(*data), n, fp) == n;</div>
-<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="a01539.html#aa842cb40ec5f440ace37d32ac25ecfc8">   81</a></span>&#160;}</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a01539.html#aac98ce8ed0ca122cbdd178773b3bb4a7">Serialize</a>(FILE* fp, <span class="keyword">const</span> uint16_t* data, <span class="keywordtype">size_t</span> n) {</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  <span class="keywordflow">return</span> fwrite(data, <span class="keyword">sizeof</span>(*data), n, fp) == n;</div>
-<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="a01539.html#ab6d475dc2076d955072e9a72d2d87f63">   85</a></span>&#160;}</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a01539.html#aac98ce8ed0ca122cbdd178773b3bb4a7">Serialize</a>(FILE* fp, <span class="keyword">const</span> uint32_t* data, <span class="keywordtype">size_t</span> n) {</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  <span class="keywordflow">return</span> fwrite(data, <span class="keyword">sizeof</span>(*data), n, fp) == n;</div>
-<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="a01539.html#ac613fd1a19a8ae217db45e37058590bf">   89</a></span>&#160;}</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;TFile::TFile()</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    : offset_(0),</div>
-<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="a01539.html#a0c832f709d5ea246dcfbd1d14a2aa488">   93</a></span>&#160;      data_(nullptr),</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;      data_is_owned_(false),</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;      is_writing_(false),</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;      swap_(false) {}</div>
-<div class="line"><a name="l00097"></a><span class="lineno"><a class="line" href="a01539.html#a8e65245284243f501887ebae04a3c827">   97</a></span>&#160; </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;TFile::~TFile() {</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  <span class="keywordflow">if</span> (data_is_owned_)</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keyword">delete</span> data_;</div>
-<div class="line"><a name="l00101"></a><span class="lineno"><a class="line" href="a01539.html#a630fceac7a95780ba5246280c5d3f2a0">  101</a></span>&#160;}</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a01539.html#a86c8cf3076cdb92f38b80d94494c76d5">TFile::DeSerialize</a>(<span class="keywordtype">char</span>* buffer, <span class="keywordtype">size_t</span> <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) {</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  <span class="keywordflow">return</span> FRead(buffer, <span class="keyword">sizeof</span>(*buffer), <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) == <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;}</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a01539.html#a86c8cf3076cdb92f38b80d94494c76d5">TFile::DeSerialize</a>(<span class="keywordtype">double</span>* buffer, <span class="keywordtype">size_t</span> <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) {</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  <span class="keywordflow">return</span> FReadEndian(buffer, <span class="keyword">sizeof</span>(*buffer), <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) == <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;}</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a01539.html#a86c8cf3076cdb92f38b80d94494c76d5">TFile::DeSerialize</a>(<span class="keywordtype">float</span>* buffer, <span class="keywordtype">size_t</span> <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) {</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  <span class="keywordflow">return</span> FReadEndian(buffer, <span class="keyword">sizeof</span>(*buffer), <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) == <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;}</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a01539.html#a86c8cf3076cdb92f38b80d94494c76d5">TFile::DeSerialize</a>(int8_t* buffer, <span class="keywordtype">size_t</span> <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) {</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  <span class="keywordflow">return</span> FRead(buffer, <span class="keyword">sizeof</span>(*buffer), <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) == <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;}</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a01539.html#a86c8cf3076cdb92f38b80d94494c76d5">TFile::DeSerialize</a>(int16_t* buffer, <span class="keywordtype">size_t</span> <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) {</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  <span class="keywordflow">return</span> FReadEndian(buffer, <span class="keyword">sizeof</span>(*buffer), <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) == <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>;</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;}</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a01539.html#a86c8cf3076cdb92f38b80d94494c76d5">TFile::DeSerialize</a>(int32_t* buffer, <span class="keywordtype">size_t</span> <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) {</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;  <span class="keywordflow">return</span> FReadEndian(buffer, <span class="keyword">sizeof</span>(*buffer), <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) == <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>;</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;}</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a01539.html#a86c8cf3076cdb92f38b80d94494c76d5">TFile::DeSerialize</a>(int64_t* buffer, <span class="keywordtype">size_t</span> <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) {</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;  <span class="keywordflow">return</span> FReadEndian(buffer, <span class="keyword">sizeof</span>(*buffer), <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) == <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>;</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;}</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a01539.html#a86c8cf3076cdb92f38b80d94494c76d5">TFile::DeSerialize</a>(uint8_t* buffer, <span class="keywordtype">size_t</span> <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) {</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;  <span class="keywordflow">return</span> FRead(buffer, <span class="keyword">sizeof</span>(*buffer), <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) == <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>;</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;}</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a01539.html#a86c8cf3076cdb92f38b80d94494c76d5">TFile::DeSerialize</a>(uint16_t* buffer, <span class="keywordtype">size_t</span> <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) {</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;  <span class="keywordflow">return</span> FReadEndian(buffer, <span class="keyword">sizeof</span>(*buffer), <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) == <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>;</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;}</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160; </div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a01539.html#a86c8cf3076cdb92f38b80d94494c76d5">TFile::DeSerialize</a>(uint32_t* buffer, <span class="keywordtype">size_t</span> <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) {</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;  <span class="keywordflow">return</span> FReadEndian(buffer, <span class="keyword">sizeof</span>(*buffer), <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) == <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>;</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;}</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160; </div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a01539.html#a86c8cf3076cdb92f38b80d94494c76d5">TFile::DeSerialize</a>(uint64_t* buffer, <span class="keywordtype">size_t</span> <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) {</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;  <span class="keywordflow">return</span> FReadEndian(buffer, <span class="keyword">sizeof</span>(*buffer), <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) == <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>;</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;}</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a01539.html#a630fceac7a95780ba5246280c5d3f2a0">TFile::Serialize</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* buffer, <span class="keywordtype">size_t</span> <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) {</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;  <span class="keywordflow">return</span> FWrite(buffer, <span class="keyword">sizeof</span>(*buffer), <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) == <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>;</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;}</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a01539.html#a630fceac7a95780ba5246280c5d3f2a0">TFile::Serialize</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>* buffer, <span class="keywordtype">size_t</span> <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) {</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;  <span class="keywordflow">return</span> FWrite(buffer, <span class="keyword">sizeof</span>(*buffer), <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) == <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>;</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;}</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160; </div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a01539.html#a630fceac7a95780ba5246280c5d3f2a0">TFile::Serialize</a>(<span class="keyword">const</span> <span class="keywordtype">float</span>* buffer, <span class="keywordtype">size_t</span> <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) {</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;  <span class="keywordflow">return</span> FWrite(buffer, <span class="keyword">sizeof</span>(*buffer), <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) == <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>;</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;}</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a01539.html#a630fceac7a95780ba5246280c5d3f2a0">TFile::Serialize</a>(<span class="keyword">const</span> int8_t* buffer, <span class="keywordtype">size_t</span> <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) {</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;  <span class="keywordflow">return</span> FWrite(buffer, <span class="keyword">sizeof</span>(*buffer), <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) == <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>;</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;}</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160; </div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a01539.html#a630fceac7a95780ba5246280c5d3f2a0">TFile::Serialize</a>(<span class="keyword">const</span> int16_t* buffer, <span class="keywordtype">size_t</span> <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) {</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;  <span class="keywordflow">return</span> FWrite(buffer, <span class="keyword">sizeof</span>(*buffer), <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) == <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>;</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;}</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a01539.html#a630fceac7a95780ba5246280c5d3f2a0">TFile::Serialize</a>(<span class="keyword">const</span> int32_t* buffer, <span class="keywordtype">size_t</span> <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) {</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;  <span class="keywordflow">return</span> FWrite(buffer, <span class="keyword">sizeof</span>(*buffer), <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) == <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>;</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;}</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a01539.html#a630fceac7a95780ba5246280c5d3f2a0">TFile::Serialize</a>(<span class="keyword">const</span> int64_t* buffer, <span class="keywordtype">size_t</span> <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) {</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;  <span class="keywordflow">return</span> FWrite(buffer, <span class="keyword">sizeof</span>(*buffer), <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) == <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>;</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;}</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160; </div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a01539.html#a630fceac7a95780ba5246280c5d3f2a0">TFile::Serialize</a>(<span class="keyword">const</span> uint8_t* buffer, <span class="keywordtype">size_t</span> <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) {</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;  <span class="keywordflow">return</span> FWrite(buffer, <span class="keyword">sizeof</span>(*buffer), <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) == <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>;</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;}</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a01539.html#a630fceac7a95780ba5246280c5d3f2a0">TFile::Serialize</a>(<span class="keyword">const</span> uint16_t* buffer, <span class="keywordtype">size_t</span> <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) {</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;  <span class="keywordflow">return</span> FWrite(buffer, <span class="keyword">sizeof</span>(*buffer), <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) == <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>;</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;}</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160; </div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a01539.html#a630fceac7a95780ba5246280c5d3f2a0">TFile::Serialize</a>(<span class="keyword">const</span> uint32_t* buffer, <span class="keywordtype">size_t</span> <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) {</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;  <span class="keywordflow">return</span> FWrite(buffer, <span class="keyword">sizeof</span>(*buffer), <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) == <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>;</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;}</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160; </div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a01539.html#a630fceac7a95780ba5246280c5d3f2a0">TFile::Serialize</a>(<span class="keyword">const</span> uint64_t* buffer, <span class="keywordtype">size_t</span> <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) {</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;  <span class="keywordflow">return</span> FWrite(buffer, <span class="keyword">sizeof</span>(*buffer), <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) == <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>;</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;}</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160; </div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="keywordtype">bool</span> TFile::Skip(<span class="keywordtype">size_t</span> <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) {</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;  offset_ += <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>;</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;}</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160; </div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="keywordtype">bool</span> TFile::Open(<span class="keyword">const</span> STRING&amp; filename, FileReader reader) {</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;  <span class="keywordflow">if</span> (!data_is_owned_) {</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    data_ = <span class="keyword">new</span> <a class="code" href="a02108.html">GenericVector&lt;char&gt;</a>;</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    data_is_owned_ = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;  }</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;  offset_ = 0;</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;  is_writing_ = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;  swap_ = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;  <span class="keywordflow">if</span> (reader == <span class="keyword">nullptr</span>)</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    <span class="keywordflow">return</span> LoadDataFromFile(filename.c_str(), data_);</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;  <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    <span class="keywordflow">return</span> (*reader)(filename.c_str(), data_);</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;}</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160; </div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="keywordtype">bool</span> TFile::Open(<span class="keyword">const</span> <span class="keywordtype">char</span>* data, <span class="keywordtype">int</span> size) {</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;  offset_ = 0;</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;  <span class="keywordflow">if</span> (!data_is_owned_) {</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    data_ = <span class="keyword">new</span> <a class="code" href="a02108.html">GenericVector&lt;char&gt;</a>;</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;    data_is_owned_ = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;  }</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;  is_writing_ = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;  swap_ = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;  data_-&gt;resize_no_init(size);</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;  memcpy(&amp;(*data_)[0], data, size);</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;}</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160; </div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="keywordtype">bool</span> TFile::Open(FILE* fp, int64_t end_offset) {</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;  offset_ = 0;</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;  <span class="keyword">auto</span> current_pos = std::ftell(fp);</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;  <span class="keywordflow">if</span> (current_pos &lt; 0) {</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    <span class="comment">// ftell failed.</span></div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;  }</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;  <span class="keywordflow">if</span> (end_offset &lt; 0) {</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    <span class="keywordflow">if</span> (fseek(fp, 0, SEEK_END))</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    end_offset = ftell(fp);</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    <span class="keywordflow">if</span> (fseek(fp, current_pos, SEEK_SET))</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;  }</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;  <span class="keywordtype">int</span> size = end_offset - current_pos;</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;  is_writing_ = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;  swap_ = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;  <span class="keywordflow">if</span> (!data_is_owned_) {</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    data_ = <span class="keyword">new</span> <a class="code" href="a02108.html">GenericVector&lt;char&gt;</a>;</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    data_is_owned_ = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;  }</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;  data_-&gt;resize_no_init(size);</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;  <span class="keywordflow">return</span> static_cast&lt;int&gt;(fread(&amp;(*data_)[0], 1, size, fp)) == size;</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;}</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160; </div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="keywordtype">char</span>* TFile::FGets(<span class="keywordtype">char</span>* buffer, <span class="keywordtype">int</span> buffer_size) {</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;  <a class="code" href="a00464.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a>(!is_writing_);</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;  <span class="keywordtype">int</span> size = 0;</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;  <span class="keywordflow">while</span> (size + 1 &lt; buffer_size &amp;&amp; offset_ &lt; data_-&gt;size()) {</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    buffer[size++] = (*data_)[offset_++];</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    <span class="keywordflow">if</span> ((*data_)[offset_ - 1] == <span class="charliteral">&#39;\n&#39;</span>) <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;  }</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;  <span class="keywordflow">if</span> (size &lt; buffer_size) buffer[size] = <span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;  <span class="keywordflow">return</span> size &gt; 0 ? buffer : <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;}</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160; </div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;<span class="keywordtype">int</span> TFile::FReadEndian(<span class="keywordtype">void</span>* buffer, <span class="keywordtype">size_t</span> size, <span class="keywordtype">int</span> <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) {</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;  <span class="keywordtype">int</span> num_read = FRead(buffer, size, <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>);</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;  <span class="keywordflow">if</span> (swap_) {</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    <span class="keywordtype">char</span>* char_buffer = static_cast&lt;char*&gt;(buffer);</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; num_read; ++i, char_buffer += size) {</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;      ReverseN(char_buffer, size);</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    }</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;  }</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;  <span class="keywordflow">return</span> num_read;</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;}</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160; </div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;<span class="keywordtype">int</span> TFile::FRead(<span class="keywordtype">void</span>* buffer, <span class="keywordtype">size_t</span> size, <span class="keywordtype">int</span> <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) {</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;  <a class="code" href="a00464.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a>(!is_writing_);</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;  <a class="code" href="a00464.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a>(size &gt; 0);</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;  <a class="code" href="a00464.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a>(<a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a> &gt;= 0);</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;  <span class="keywordtype">size_t</span> required_size;</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;  <span class="keywordflow">if</span> (SIZE_MAX / size &lt;= <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) {</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    <span class="comment">// Avoid integer overflow.</span></div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    required_size = data_-&gt;size() - offset_;</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;  } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    required_size = size * <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>;</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    <span class="keywordflow">if</span> (data_-&gt;size() - offset_ &lt; required_size) {</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;      required_size = data_-&gt;size() - offset_;</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    }</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;  }</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;  <span class="keywordflow">if</span> (required_size &gt; 0 &amp;&amp; buffer != <span class="keyword">nullptr</span>)</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;    memcpy(buffer, &amp;(*data_)[offset_], required_size);</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;  offset_ += required_size;</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;  <span class="keywordflow">return</span> required_size / size;</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;}</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160; </div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;<span class="keywordtype">void</span> TFile::Rewind() {</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;  <a class="code" href="a00464.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a>(!is_writing_);</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;  offset_ = 0;</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;}</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160; </div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="keywordtype">void</span> TFile::OpenWrite(<a class="code" href="a02108.html">GenericVector&lt;char&gt;</a>* data) {</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;  offset_ = 0;</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;  <span class="keywordflow">if</span> (data != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    <span class="keywordflow">if</span> (data_is_owned_) <span class="keyword">delete</span> data_;</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    data_ = data;</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    data_is_owned_ = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (!data_is_owned_) {</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    data_ = <span class="keyword">new</span> <a class="code" href="a02108.html">GenericVector&lt;char&gt;</a>;</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;    data_is_owned_ = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;  }</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;  is_writing_ = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;  swap_ = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;  data_-&gt;truncate(0);</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;}</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160; </div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;<span class="keywordtype">bool</span> TFile::CloseWrite(<span class="keyword">const</span> STRING&amp; filename, FileWriter writer) {</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;  <a class="code" href="a00464.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a>(is_writing_);</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;  <span class="keywordflow">if</span> (writer == <span class="keyword">nullptr</span>)</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    <span class="keywordflow">return</span> SaveDataToFile(*data_, filename.c_str());</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;  <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    <span class="keywordflow">return</span> (*writer)(*data_, filename.c_str());</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;}</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160; </div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;<span class="keywordtype">int</span> TFile::FWrite(<span class="keyword">const</span> <span class="keywordtype">void</span>* buffer, <span class="keywordtype">size_t</span> size, <span class="keywordtype">int</span> <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>) {</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;  <a class="code" href="a00464.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a>(is_writing_);</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;  <a class="code" href="a00464.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a>(size &gt; 0);</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;  <a class="code" href="a00464.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a>(<a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a> &gt;= 0);</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;  <a class="code" href="a00464.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a>(SIZE_MAX / size &gt; <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>);</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;  <span class="keywordtype">size_t</span> total = size * <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>;</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span>* buf = static_cast&lt;const char*&gt;(buffer);</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;  <span class="comment">// This isn&#39;t very efficient, but memory is so fast compared to disk</span></div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;  <span class="comment">// that it is relatively unimportant, and very simple.</span></div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; total; ++i)</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;    data_-&gt;push_back(buf[i]);</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>;</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;}</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160; </div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;}  <span class="comment">// namespace tesseract.</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#ifndef ERRCODE_H</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#define ERRCODE_H</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00029.html">tesseract/platform.h</a>&gt;</span>   <span class="comment">// for TESS_API</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="a00515.html#a8a3a2e51383909b357fcdf8eda803637">   24</a></span>&#160;<span class="comment">/*Control parameters for error()*/</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">enum</span> <a class="code" href="a00515.html#a8a3a2e51383909b357fcdf8eda803637">TessErrorLogCode</a> {</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <a class="code" href="a00515.html#a8a3a2e51383909b357fcdf8eda803637a488607ea6c5f90b63a063b953af1e078">DBG</a> =     -1,           <span class="comment">/*log without alert */</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <a class="code" href="a00515.html#a8a3a2e51383909b357fcdf8eda803637a13d4c6d048f76d5b02c6f1b70323e770">TESSLOG</a> =  0,            <span class="comment">/*alert user */</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <a class="code" href="a00515.html#a8a3a2e51383909b357fcdf8eda803637a5e74e236a50519c41cbbcecea29add63">TESSEXIT</a> = 1,            <span class="comment">/*exit after error */</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <a class="code" href="a00515.html#a8a3a2e51383909b357fcdf8eda803637a781ad2788df9e25c59a70894c7832096">ABORT</a> =    2            <span class="comment">/*abort after error */</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;};</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="a00515.html#a3676a4fc46e338b904a93510be6f562b">   32</a></span>&#160;<span class="comment">/* Explicit Error Abort codes */</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="a00515.html#a9115a70e6be8541b95c0a7261efd6f72">   33</a></span>&#160;<span class="preprocessor">#define NO_ABORT_CODE      0</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="a00515.html#aac21ab893bcc2d6bd68bd9e3bfdbd366">   34</a></span>&#160;<span class="preprocessor">#define LIST_ABORT      1</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="a00515.html#add42da420d8595d84a59a1a913d2a4ea">   35</a></span>&#160;<span class="preprocessor">#define MEMORY_ABORT    2</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#define FILE_ABORT      3</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="a00515.html#a6b5079228b0b5c79c163c89334c9c8f3">   38</a></span>&#160;<span class="comment">/* Location of code at error codes Reserve 0..2 (status codes 0..23 for UNLV)*/</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="a00515.html#af821f94fc1a208befcfba6704e80cdfa">   39</a></span>&#160;<span class="preprocessor">#define LOC_UNUSED0        0</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="a00515.html#a604f61763b5827f1ddd08fd83e0207de">   40</a></span>&#160;<span class="preprocessor">#define LOC_UNUSED1        1</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="a00515.html#a8a3a2e51383909b357fcdf8eda803637a13d4c6d048f76d5b02c6f1b70323e770">   41</a></span>&#160;<span class="preprocessor">#define LOC_UNUSED2        2</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="a00515.html#a8a3a2e51383909b357fcdf8eda803637a5e74e236a50519c41cbbcecea29add63">   42</a></span>&#160;<span class="preprocessor">#define LOC_INIT      3</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="a00515.html#a305ddc4b344c74288d9503715849fcb7">   43</a></span>&#160;<span class="preprocessor">#define LOC_EDGE_PROG   4</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="a00515.html#a6c302c9a3ba67897009ea264f458cb63">   44</a></span>&#160;<span class="preprocessor">#define LOC_TEXT_ORD_ROWS 5</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="a00515.html#aa9f98e30983b3c080e7fa3a439592a00">   45</a></span>&#160;<span class="preprocessor">#define LOC_TEXT_ORD_WORDS  6</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="a00515.html#a01d964b84a183d7d9c1b7d205358ca74">   46</a></span>&#160;<span class="preprocessor">#define LOC_PASS1     7</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#define LOC_PASS2     8</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="a00515.html#a8f145da3d27aa025f220becb27879db7">   48</a></span>&#160;<span class="comment">/* Reserve up to 8..13 for adding subloc 0/3 plus subsubloc 0/1/2 */</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#define LOC_FUZZY_SPACE   14</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="a00515.html#a6b2566a0d57e097555b339d08379ac0d">   50</a></span>&#160;<span class="comment">/* Reserve up to 14..20 for adding subloc 0/3 plus subsubloc 0/1/2 */</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="a00515.html#a035b82243d07c39f12fcd8bf45a47493">   51</a></span>&#160;<span class="preprocessor">#define LOC_MM_ADAPT    21</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="a00515.html#aab54db69aaf3fd317086ea2ee52ffa5d">   52</a></span>&#160;<span class="preprocessor">#define LOC_DOC_BLK_REJ   22</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="a00515.html#ae65561e7d9e920830efc5621836e0034">   53</a></span>&#160;<span class="preprocessor">#define LOC_WRITE_RESULTS 23</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#define LOC_ADAPTIVE    24</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">/* DON&#39;T DEFINE ANY LOCATION &gt; 31 !!! */</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="a00515.html#a2547c1ff4f32e0726fd745c388e50aa0">   57</a></span>&#160;<span class="comment">/* Sub locatation determines whether pass2 was in normal mode or fix xht mode*/</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="a00515.html#abad647a33244550ffb318471d9936d0a">   58</a></span>&#160;<span class="preprocessor">#define SUBLOC_NORM     0</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#define SUBLOC_FIX_XHT    3</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">/* Sub Sub locatation determines whether match_word_pass2 was in Tess</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">  matcher, NN matcher or somewhere else */</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="a00515.html#af08dfdd36f5d31547eba1a9ea43d52b9">   63</a></span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="a00515.html#a4a13ef51ac14385e8bee7ff749d397df">   64</a></span>&#160;<span class="preprocessor">#define SUBSUBLOC_OTHER   0</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="a00515.html#afe706f26e15d2cca06f97f38f994e478">   65</a></span>&#160;<span class="preprocessor">#define SUBSUBLOC_TESS    1</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor">#define SUBSUBLOC_NN    2</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="a02994.html">   67</a></span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keyword">class </span><a class="code" href="a00029.html#a86e51270628c53ce7e2c23b1c2b4490e">TESS_API</a> <a class="code" href="a02994.html">ERRCODE</a> {           <span class="comment">// error handler class</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *message;           <span class="comment">// error message</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <span class="keywordtype">void</span> error(                  <span class="comment">// error print function</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *caller,        <span class="comment">// function location</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <a class="code" href="a00515.html#a8a3a2e51383909b357fcdf8eda803637">TessErrorLogCode</a> <a class="code" href="a01827.html#ae88f73f69c3427ef726b7470ed95cccc">action</a>,   <span class="comment">// action to take</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *format, ...    <span class="comment">// fprintf format</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="a02994.html#abe574b89f5807ae09e7353b70ce544b1">   75</a></span>&#160;  ) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  constexpr <a class="code" href="a02994.html">ERRCODE</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *<span class="keywordtype">string</span>) : message(<a class="code" href="a01622.html#aca454f84dd198a937af6499dd758aa3d">string</a>) {</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  }                            <span class="comment">// initialize with string</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;};</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;constexpr <a class="code" href="a02994.html">ERRCODE</a> <a class="code" href="a00515.html#abaff373c32bb38acded0e9b9c61598f8">ASSERT_FAILED</a>(<span class="stringliteral">&quot;Assert failed&quot;</span>);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">#if defined __cplusplus</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor"># define DO_NOTHING static_cast&lt;void&gt;(0)</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="a00515.html#aaa67df6726d3707c387dec5d0355b1ee">   84</a></span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="preprocessor"># define DO_NOTHING (void)(0)</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="a00515.html#a93a603f4063a6b9403d81caa245a583b">   87</a></span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="preprocessor">#define ASSERT_HOST(x) (x) \</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor">  ? DO_NOTHING \</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="preprocessor">  : ASSERT_FAILED.error(#x, ABORT, &quot;in file %s, line %d&quot;, __FILE__, __LINE__)</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="a00515.html#ac95065b84879fd4fd0aec2293a2a6127">   91</a></span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="preprocessor">#define ASSERT_HOST_MSG(x, ...)                                                \</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="preprocessor">  if (!(x)) {                                                                  \</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="preprocessor">    tprintf(__VA_ARGS__);                                                      \</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="preprocessor">    ASSERT_FAILED.error(#x, ABORT, &quot;in file %s, line %d&quot;, __FILE__, __LINE__); \</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="preprocessor">  }</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00515.html#a5bc45d1c7b7602898f2c7edc72cbcd37">signal_exit</a>(<span class="keywordtype">int</span> signal_code);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00515.html#ae281080023125653d85cd946e95f626c">set_global_loc_code</a>(<span class="keywordtype">int</span> loc_code);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00515.html#a87d586caeb936d763514af2bbba8cab6">set_global_subloc_code</a>(<span class="keywordtype">int</span> loc_code);</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00515.html#a683cb64eb69da4200257e0468b4347a0">set_global_subsubloc_code</a>(<span class="keywordtype">int</span> loc_code);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa02108_html"><div class="ttname"><a href="a02108.html">GenericVector&lt; char &gt;</a></div></div>
-<div class="ttc" id="aa00755_html_acd4ea858d7133e40518e0832ff9d94b2"><div class="ttname"><a href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a></div><div class="ttdeci">int count(LIST var_list)</div><div class="ttdef"><b>Definition:</b> <a href="a00755_source.html#l00079">oldlist.cpp:79</a></div></div>
-<div class="ttc" id="aa01539_html_a853a2b028e177ca4711aff8e122e9436"><div class="ttname"><a href="a01539.html#a853a2b028e177ca4711aff8e122e9436">tesseract::DeSerialize</a></div><div class="ttdeci">bool DeSerialize(FILE *fp, char *data, size_t n)</div><div class="ttdef"><b>Definition:</b> <a href="a00515_source.html#l00041">serialis.cpp:41</a></div></div>
-<div class="ttc" id="aa01539_html"><div class="ttname"><a href="a01539.html">tesseract</a></div><div class="ttdef"><b>Definition:</b> <a href="a00002_source.html#l00025">altorenderer.cpp:25</a></div></div>
-<div class="ttc" id="aa00464_html"><div class="ttname"><a href="a00464.html">errcode.h</a></div></div>
-<div class="ttc" id="aa00464_html_a93a603f4063a6b9403d81caa245a583b"><div class="ttname"><a href="a00464.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a></div><div class="ttdeci">#define ASSERT_HOST(x)</div><div class="ttdef"><b>Definition:</b> <a href="a00464_source.html#l00087">errcode.h:87</a></div></div>
-<div class="ttc" id="aa01539_html_a630fceac7a95780ba5246280c5d3f2a0"><div class="ttname"><a href="a01539.html#a630fceac7a95780ba5246280c5d3f2a0">tesseract::Serialize</a></div><div class="ttdeci">bool Serialize(FILE *fp, const uint32_t *data, size_t n)</div><div class="ttdef"><b>Definition:</b> <a href="a00515_source.html#l00101">serialis.cpp:101</a></div></div>
-<div class="ttc" id="aa01539_html_a86c8cf3076cdb92f38b80d94494c76d5"><div class="ttname"><a href="a01539.html#a86c8cf3076cdb92f38b80d94494c76d5">tesseract::DeSerialize</a></div><div class="ttdeci">bool DeSerialize(FILE *fp, uint32_t *data, size_t n)</div><div class="ttdef"><b>Definition:</b> <a href="a00515_source.html#l00069">serialis.cpp:69</a></div></div>
-<div class="ttc" id="aa01539_html_aac98ce8ed0ca122cbdd178773b3bb4a7"><div class="ttname"><a href="a01539.html#aac98ce8ed0ca122cbdd178773b3bb4a7">tesseract::Serialize</a></div><div class="ttdeci">bool Serialize(FILE *fp, const char *data, size_t n)</div><div class="ttdef"><b>Definition:</b> <a href="a00515_source.html#l00073">serialis.cpp:73</a></div></div>
+<div class="ttc" id="aa01622_html_aca454f84dd198a937af6499dd758aa3d"><div class="ttname"><a href="a01622.html#aca454f84dd198a937af6499dd758aa3d">string</a></div><div class="ttdeci">std::string string</div><div class="ttdef"><b>Definition:</b> <a href="a01622_source.html#l00021">equationdetect_test.cc:21</a></div></div>
+<div class="ttc" id="aa00515_html_a8a3a2e51383909b357fcdf8eda803637a5e74e236a50519c41cbbcecea29add63"><div class="ttname"><a href="a00515.html#a8a3a2e51383909b357fcdf8eda803637a5e74e236a50519c41cbbcecea29add63">TESSEXIT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00515_source.html#l00042">errcode.h:42</a></div></div>
+<div class="ttc" id="aa00515_html_a8a3a2e51383909b357fcdf8eda803637"><div class="ttname"><a href="a00515.html#a8a3a2e51383909b357fcdf8eda803637">TessErrorLogCode</a></div><div class="ttdeci">TessErrorLogCode</div><div class="ttdef"><b>Definition:</b> <a href="a00515_source.html#l00024">errcode.h:24</a></div></div>
+<div class="ttc" id="aa02994_html"><div class="ttname"><a href="a02994.html">ERRCODE</a></div><div class="ttdef"><b>Definition:</b> <a href="a00515_source.html#l00067">errcode.h:67</a></div></div>
+<div class="ttc" id="aa00029_html"><div class="ttname"><a href="a00029.html">platform.h</a></div></div>
+<div class="ttc" id="aa00515_html_abaff373c32bb38acded0e9b9c61598f8"><div class="ttname"><a href="a00515.html#abaff373c32bb38acded0e9b9c61598f8">ASSERT_FAILED</a></div><div class="ttdeci">constexpr ERRCODE ASSERT_FAILED(&quot;Assert failed&quot;)</div></div>
+<div class="ttc" id="aa00515_html_a87d586caeb936d763514af2bbba8cab6"><div class="ttname"><a href="a00515.html#a87d586caeb936d763514af2bbba8cab6">set_global_subloc_code</a></div><div class="ttdeci">void set_global_subloc_code(int loc_code)</div><div class="ttdef"><b>Definition:</b> <a href="a00524_source.html#l00030">globaloc.cpp:30</a></div></div>
+<div class="ttc" id="aa00515_html_a5bc45d1c7b7602898f2c7edc72cbcd37"><div class="ttname"><a href="a00515.html#a5bc45d1c7b7602898f2c7edc72cbcd37">signal_exit</a></div><div class="ttdeci">void signal_exit(int signal_code)</div></div>
+<div class="ttc" id="aa00515_html_a8a3a2e51383909b357fcdf8eda803637a13d4c6d048f76d5b02c6f1b70323e770"><div class="ttname"><a href="a00515.html#a8a3a2e51383909b357fcdf8eda803637a13d4c6d048f76d5b02c6f1b70323e770">TESSLOG</a></div><div class="ttdef"><b>Definition:</b> <a href="a00515_source.html#l00041">errcode.h:41</a></div></div>
+<div class="ttc" id="aa00515_html_ae281080023125653d85cd946e95f626c"><div class="ttname"><a href="a00515.html#ae281080023125653d85cd946e95f626c">set_global_loc_code</a></div><div class="ttdeci">void set_global_loc_code(int loc_code)</div><div class="ttdef"><b>Definition:</b> <a href="a00524_source.html#l00025">globaloc.cpp:25</a></div></div>
+<div class="ttc" id="aa00515_html_a683cb64eb69da4200257e0468b4347a0"><div class="ttname"><a href="a00515.html#a683cb64eb69da4200257e0468b4347a0">set_global_subsubloc_code</a></div><div class="ttdeci">void set_global_subsubloc_code(int loc_code)</div><div class="ttdef"><b>Definition:</b> <a href="a00524_source.html#l00035">globaloc.cpp:35</a></div></div>
+<div class="ttc" id="aa00029_html_a86e51270628c53ce7e2c23b1c2b4490e"><div class="ttname"><a href="a00029.html#a86e51270628c53ce7e2c23b1c2b4490e">TESS_API</a></div><div class="ttdeci">#define TESS_API</div><div class="ttdef"><b>Definition:</b> <a href="a00029_source.html#l00054">platform.h:54</a></div></div>
+<div class="ttc" id="aa00515_html_a8a3a2e51383909b357fcdf8eda803637a781ad2788df9e25c59a70894c7832096"><div class="ttname"><a href="a00515.html#a8a3a2e51383909b357fcdf8eda803637a781ad2788df9e25c59a70894c7832096">ABORT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00515_source.html#l00043">errcode.h:43</a></div></div>
+<div class="ttc" id="aa00515_html_a8a3a2e51383909b357fcdf8eda803637a488607ea6c5f90b63a063b953af1e078"><div class="ttname"><a href="a00515.html#a8a3a2e51383909b357fcdf8eda803637a488607ea6c5f90b63a063b953af1e078">DBG</a></div><div class="ttdef"><b>Definition:</b> <a href="a00515_source.html#l00040">errcode.h:40</a></div></div>
+<div class="ttc" id="aa01827_html_ae88f73f69c3427ef726b7470ed95cccc"><div class="ttname"><a href="a01827.html#ae88f73f69c3427ef726b7470ed95cccc">tesstrain_utils.action</a></div><div class="ttdeci">action</div><div class="ttdef"><b>Definition:</b> <a href="a01397_source.html#l00159">tesstrain_utils.py:159</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_be21c9400dd14e513865608c9a8a7e5a.html">ccutil</a></li><li class="navelem"><a class="el" href="a00515.html">serialis.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:14 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_be21c9400dd14e513865608c9a8a7e5a.html">ccutil</a></li><li class="navelem"><a class="el" href="a00515.html">errcode.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:20 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

@@ -1,4 +1,5 @@
 var a00119 =
 [
-    [ "kMaxCircleErosions", "a00119.html#ac7c9e75ad6da750ae79b8dff6c8f30cd", null ]
+    [ "kBackUpConfigFile", "a00119.html#a4976a2b3ea53d82ffdb2767bba98aa80", null ],
+    [ "kMinRefitXHeightFraction", "a00119.html#a91ae9908e7c8f49bf292bbdd6678230e", null ]
 ];

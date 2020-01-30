@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/ccstruct/mod128.cpp Source File</title>
+<title>tesseract: /tesseract/src/ccstruct/ccstruct.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,110 +87,65 @@ $(document).ready(function(){initNavTree('a00284_source.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">mod128.cpp</div>  </div>
+<div class="title">ccstruct.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00284.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**********************************************************************</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * File:        mod128.cpp  (Formerly dir128.c)</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * Description: Code to convert a DIR128 to an ICOORD.</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * Author:          Ray Smith</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> * (C) Copyright 1991, Hewlett-Packard Ltd.</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> ** Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> ** you may not use this file except in compliance with the License.</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> ** You may obtain a copy of the License at</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> ** http://www.apache.org/licenses/LICENSE-2.0</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> ** Unless required by applicable law or agreed to in writing, software</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> ** distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> ** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> ** See the License for the specific language governing permissions and</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> ** limitations under the License.</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> **********************************************************************/</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00287.html">mod128.h</a>&quot;</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> int16_t idirtab[] = {</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  1000, 0, 998, 49, 995, 98, 989, 146,</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  980, 195, 970, 242, 956, 290, 941, 336,</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  923, 382, 903, 427, 881, 471, 857, 514,</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  831, 555, 803, 595, 773, 634, 740, 671,</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  707, 707, 671, 740, 634, 773, 595, 803,</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  555, 831, 514, 857, 471, 881, 427, 903,</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  382, 923, 336, 941, 290, 956, 242, 970,</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  195, 980, 146, 989, 98, 995, 49, 998,</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  0, 1000, -49, 998, -98, 995, -146, 989,</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  -195, 980, -242, 970, -290, 956, -336, 941,</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  -382, 923, -427, 903, -471, 881, -514, 857,</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  -555, 831, -595, 803, -634, 773, -671, 740,</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  -707, 707, -740, 671, -773, 634, -803, 595,</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  -831, 555, -857, 514, -881, 471, -903, 427,</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  -923, 382, -941, 336, -956, 290, -970, 242,</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  -980, 195, -989, 146, -995, 98, -998, 49,</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  -1000, 0, -998, -49, -995, -98, -989, -146,</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  -980, -195, -970, -242, -956, -290, -941, -336,</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  -923, -382, -903, -427, -881, -471, -857, -514,</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  -831, -555, -803, -595, -773, -634, -740, -671,</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  -707, -707, -671, -740, -634, -773, -595, -803,</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  -555, -831, -514, -857, -471, -881, -427, -903,</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  -382, -923, -336, -941, -290, -956, -242, -970,</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  -195, -980, -146, -989, -98, -995, -49, -998,</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  0, -1000, 49, -998, 98, -995, 146, -989,</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  195, -980, 242, -970, 290, -956, 336, -941,</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  382, -923, 427, -903, 471, -881, 514, -857,</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  555, -831, 595, -803, 634, -773, 671, -740,</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  707, -707, 740, -671, 773, -634, 803, -595,</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  831, -555, 857, -514, 881, -471, 903, -427,</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  923, -382, 941, -336, 956, -290, 970, -242,</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  980, -195, 989, -146, 995, -98, 998, -49</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;};</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="a02400.html">ICOORD</a>* dirtab = reinterpret_cast&lt;const ICOORD*&gt;(idirtab);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">/**********************************************************************</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment"> * DIR128::DIR128</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment"> * Quantize the direction of an FCOORD to make a DIR128.</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="a02336.html#a3205d8518dd0ffd6df641a910d979774">   62</a></span>&#160;<span class="comment"> **********************************************************************/</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<a class="code" href="a02336.html#a17872a498b45153b56e789b80ef6e18b">DIR128::DIR128</a>(                 <span class="comment">//from fcoord</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;               <span class="keyword">const</span> <a class="code" href="a02408.html">FCOORD</a> fc  <span class="comment">//vector to quantize</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;              ) {</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <span class="keywordtype">int</span> high, low, current;        <span class="comment">//binary search</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  low = 0;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="keywordflow">if</span> (fc.<a class="code" href="a02408.html#abb9516f874133b689b0e62ac70874385">y</a> () == 0) {</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordflow">if</span> (fc.<a class="code" href="a02408.html#aecd85311c159bcd52b485a97a8dcc901">x</a> () &gt;= 0)</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;      dir = 0;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;      dir = <a class="code" href="a00287.html#a9bc1fe94bf8c1b9aaef3dade106b6304">MODULUS</a> / 2;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  }</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  high = <a class="code" href="a00287.html#a9bc1fe94bf8c1b9aaef3dade106b6304">MODULUS</a>;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  <span class="keywordflow">do</span> {</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    current = (high + low) / 2;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordflow">if</span> (dirtab[current] * fc &gt;= 0)</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;      low = current;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;      high = current;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  }</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  <span class="keywordflow">while</span> (high - low &gt; 1);</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  dir = low;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;}</div>
+<a href="a00284.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// File:        ccstruct.h</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// Description: ccstruct class.</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// Author:      Samuel Charron</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">// (C) Copyright 2006, Google Inc.</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// you may not use this file except in compliance with the License.</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">// You may obtain a copy of the License at</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// http://www.apache.org/licenses/LICENSE-2.0</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">// Unless required by applicable law or agreed to in writing, software</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">// See the License for the specific language governing permissions and</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">// limitations under the License.</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#ifndef TESSERACT_CCSTRUCT_CCSTRUCT_H_</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#define TESSERACT_CCSTRUCT_CCSTRUCT_H_</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00488.html">ccutil.h</a>&quot;</span> <span class="comment">// for CCUtil</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">namespace </span><a class="code" href="a01818.html">tesseract</a> {</div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="a02702.html">   25</a></span>&#160;<span class="keyword">class </span><a class="code" href="a02702.html">CCStruct</a> : <span class="keyword">public</span> <a class="code" href="a02950.html">CCUtil</a> {</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <a class="code" href="a02702.html#a7b10d6dbbbb0b364bcfef56d46e3b568">CCStruct</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <a class="code" href="a02702.html#ae92604b4f32ff2245f8b95b9f740ca5d">~CCStruct</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <span class="comment">// Globally accessible constants.</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <span class="comment">// APPROXIMATIONS of the fractions of the character cell taken by</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <span class="comment">// the descenders, ascenders, and x-height.</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="a02702.html#a7e8a361df0831d295edf1c150c3ca3a3">   33</a></span>&#160;  <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">double</span> <a class="code" href="a02702.html#a7e8a361df0831d295edf1c150c3ca3a3">kDescenderFraction</a>;  <span class="comment">// = 0.25;</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="a02702.html#a737fdb37b9401ad3d04371c1bd4a0b17">   34</a></span>&#160;  <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">double</span> <a class="code" href="a02702.html#a737fdb37b9401ad3d04371c1bd4a0b17">kXHeightFraction</a>;    <span class="comment">// = 0.5;</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="a02702.html#a9d71fddad74d9418e106713cd643b919">   35</a></span>&#160;  <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">double</span> <a class="code" href="a02702.html#a9d71fddad74d9418e106713cd643b919">kAscenderFraction</a>;   <span class="comment">// = 0.25;</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <span class="comment">// Derived value giving the x-height as a fraction of cap-height.</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="a02702.html#a594719f667105487f0c3f78de6f85f77">   37</a></span>&#160;  <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">double</span> <a class="code" href="a02702.html#a594719f667105487f0c3f78de6f85f77">kXHeightCapRatio</a>;    <span class="comment">// = XHeight/(XHeight + Ascender).</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;};</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;}  <span class="comment">// namespace tesseract</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#endif  // TESSERACT_CCSTRUCT_CCSTRUCT_H_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa02408_html_aecd85311c159bcd52b485a97a8dcc901"><div class="ttname"><a href="a02408.html#aecd85311c159bcd52b485a97a8dcc901">FCOORD::x</a></div><div class="ttdeci">float x() const</div><div class="ttdef"><b>Definition:</b> <a href="a00341_source.html#l00206">points.h:206</a></div></div>
-<div class="ttc" id="aa02408_html"><div class="ttname"><a href="a02408.html">FCOORD</a></div><div class="ttdef"><b>Definition:</b> <a href="a00341_source.html#l00187">points.h:187</a></div></div>
-<div class="ttc" id="aa00287_html"><div class="ttname"><a href="a00287.html">mod128.h</a></div></div>
-<div class="ttc" id="aa02408_html_abb9516f874133b689b0e62ac70874385"><div class="ttname"><a href="a02408.html#abb9516f874133b689b0e62ac70874385">FCOORD::y</a></div><div class="ttdeci">float y() const</div><div class="ttdef"><b>Definition:</b> <a href="a00341_source.html#l00209">points.h:209</a></div></div>
-<div class="ttc" id="aa02336_html_a17872a498b45153b56e789b80ef6e18b"><div class="ttname"><a href="a02336.html#a17872a498b45153b56e789b80ef6e18b">DIR128::DIR128</a></div><div class="ttdeci">DIR128()=default</div></div>
-<div class="ttc" id="aa00287_html_a9bc1fe94bf8c1b9aaef3dade106b6304"><div class="ttname"><a href="a00287.html#a9bc1fe94bf8c1b9aaef3dade106b6304">MODULUS</a></div><div class="ttdeci">#define MODULUS</div><div class="ttdef"><b>Definition:</b> <a href="a00287_source.html#l00024">mod128.h:24</a></div></div>
-<div class="ttc" id="aa02400_html"><div class="ttname"><a href="a02400.html">ICOORD</a></div><div class="ttdoc">integer coordinate</div><div class="ttdef"><b>Definition:</b> <a href="a00341_source.html#l00030">points.h:30</a></div></div>
+<div class="ttc" id="aa02702_html_a737fdb37b9401ad3d04371c1bd4a0b17"><div class="ttname"><a href="a02702.html#a737fdb37b9401ad3d04371c1bd4a0b17">tesseract::CCStruct::kXHeightFraction</a></div><div class="ttdeci">static const double kXHeightFraction</div><div class="ttdef"><b>Definition:</b> <a href="a00284_source.html#l00034">ccstruct.h:34</a></div></div>
+<div class="ttc" id="aa02702_html_a594719f667105487f0c3f78de6f85f77"><div class="ttname"><a href="a02702.html#a594719f667105487f0c3f78de6f85f77">tesseract::CCStruct::kXHeightCapRatio</a></div><div class="ttdeci">static const double kXHeightCapRatio</div><div class="ttdef"><b>Definition:</b> <a href="a00284_source.html#l00037">ccstruct.h:37</a></div></div>
+<div class="ttc" id="aa02702_html_ae92604b4f32ff2245f8b95b9f740ca5d"><div class="ttname"><a href="a02702.html#ae92604b4f32ff2245f8b95b9f740ca5d">tesseract::CCStruct::~CCStruct</a></div><div class="ttdeci">~CCStruct() override</div></div>
+<div class="ttc" id="aa02702_html"><div class="ttname"><a href="a02702.html">tesseract::CCStruct</a></div><div class="ttdef"><b>Definition:</b> <a href="a00284_source.html#l00025">ccstruct.h:25</a></div></div>
+<div class="ttc" id="aa00488_html"><div class="ttname"><a href="a00488.html">ccutil.h</a></div></div>
+<div class="ttc" id="aa02702_html_a9d71fddad74d9418e106713cd643b919"><div class="ttname"><a href="a02702.html#a9d71fddad74d9418e106713cd643b919">tesseract::CCStruct::kAscenderFraction</a></div><div class="ttdeci">static const double kAscenderFraction</div><div class="ttdef"><b>Definition:</b> <a href="a00284_source.html#l00035">ccstruct.h:35</a></div></div>
+<div class="ttc" id="aa02702_html_a7e8a361df0831d295edf1c150c3ca3a3"><div class="ttname"><a href="a02702.html#a7e8a361df0831d295edf1c150c3ca3a3">tesseract::CCStruct::kDescenderFraction</a></div><div class="ttdeci">static const double kDescenderFraction</div><div class="ttdef"><b>Definition:</b> <a href="a00284_source.html#l00033">ccstruct.h:33</a></div></div>
+<div class="ttc" id="aa01818_html"><div class="ttname"><a href="a01818.html">tesseract</a></div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00065">baseapi.h:65</a></div></div>
+<div class="ttc" id="aa02702_html_a7b10d6dbbbb0b364bcfef56d46e3b568"><div class="ttname"><a href="a02702.html#a7b10d6dbbbb0b364bcfef56d46e3b568">tesseract::CCStruct::CCStruct</a></div><div class="ttdeci">CCStruct()=default</div></div>
+<div class="ttc" id="aa02950_html"><div class="ttname"><a href="a02950.html">tesseract::CCUtil</a></div><div class="ttdef"><b>Definition:</b> <a href="a00488_source.html#l00040">ccutil.h:40</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_27285da2200a3bef8a8e2dba4d21412a.html">ccstruct</a></li><li class="navelem"><a class="el" href="a00284.html">mod128.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:14 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_27285da2200a3bef8a8e2dba4d21412a.html">ccstruct</a></li><li class="navelem"><a class="el" href="a00284.html">ccstruct.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:20 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

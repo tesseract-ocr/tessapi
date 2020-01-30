@@ -1,15 +1,16 @@
 var a01160 =
 [
-    [ "BLOCK_STATS_CLUSTERS", "a01160.html#aa7d31b20094e2e66f0049b58e67012c0", null ],
-    [ "make_real_word", "a01160.html#a2f01b8d475f1f2fc0bf0109a9578dc9f", null ],
-    [ "make_real_words", "a01160.html#a0725cc4e2bbf76c5d4af92746f921835", null ],
-    [ "make_rep_words", "a01160.html#a1fa4cd3ec1f0048e56999e8a27d90fd8", null ],
-    [ "make_single_word", "a01160.html#a962516b377eedea75f32f8ba004bfb49", null ],
-    [ "make_words", "a01160.html#a2a74f87b59b8f2a4e33ddac0933ab2e5", null ],
-    [ "row_words", "a01160.html#a9e94c19a6796c13f1425c48de4ee56ea", null ],
-    [ "row_words2", "a01160.html#a29f1b9a90fd6470238dea9b85b0842fd", null ],
-    [ "set_row_spaces", "a01160.html#a34969fd53dd1581681d5009bbfb4bc71", null ],
-    [ "textord_chopper_test", "a01160.html#a594fed24b150427611f8089f7872e0b6", null ],
-    [ "textord_force_make_prop_words", "a01160.html#a8254c5a8dbe4e95c9dcb1b0afab8575e", null ],
-    [ "textord_fp_chopping", "a01160.html#a4c5406de0eeebed6b467633d6d3feb63", null ]
+    [ "kCellSplitColumnThreshold", "a01160.html#a4b621a2aed2de5bbc9f60f5a2e1050a5", null ],
+    [ "kCellSplitRowThreshold", "a01160.html#a39a015a67ade7e0efecbb76e7b675720", null ],
+    [ "kGoodRowNumberOfColumnsLarge", "a01160.html#a043f4bae458f1871a3a49b10917b60ad", null ],
+    [ "kGoodRowNumberOfColumnsSmall", "a01160.html#a68558ee989aac7883a39814a36f1f592", null ],
+    [ "kGoodRowNumberOfColumnsSmallSize", "a01160.html#a7e35b09657599e52f423ee1e9de41b33", null ],
+    [ "kHorizontalSpacing", "a01160.html#a459c450e19dcfec134e92887f41bb9ac", null ],
+    [ "kLinedTableMinHorizontalLines", "a01160.html#a230bf7e7a8fb6b2c2b5501baf6291743", null ],
+    [ "kLinedTableMinVerticalLines", "a01160.html#acc82e2db65c1e3234222f38f46ab42d3", null ],
+    [ "kMarginFactor", "a01160.html#ab11424363f4f0ea43a9395a314790f90", null ],
+    [ "kMaxRowSize", "a01160.html#a81a11e8f02c3fb3a0bbbec62de19e1ad", null ],
+    [ "kMinFilledArea", "a01160.html#a787309c5a8b6594e5aed4adda5e15671", null ],
+    [ "kRequiredColumns", "a01160.html#a59250c62639c9045e10bd2e0ca53148b", null ],
+    [ "kVerticalSpacing", "a01160.html#a0420369bcc5ffea9087e2779a2dacdb6", null ]
 ];

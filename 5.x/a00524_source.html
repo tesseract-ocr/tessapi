@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/ccutil/tessdatamanager.cpp Source File</title>
+<title>tesseract: /tesseract/src/ccutil/globaloc.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,370 +87,59 @@ $(document).ready(function(){initNavTree('a00524_source.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">tessdatamanager.cpp</div>  </div>
+<div class="title">globaloc.cpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00524.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// File:        tessdatamanager.cpp</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// Description: Functions to handle loading/combining tesseract data files.</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// Author:      Daria Antonova</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">// (C) Copyright 2009, Google Inc.</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// you may not use this file except in compliance with the License.</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">// You may obtain a copy of the License at</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// http://www.apache.org/licenses/LICENSE-2.0</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">// Unless required by applicable law or agreed to in writing, software</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">// See the License for the specific language governing permissions and</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">// limitations under the License.</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#ifdef HAVE_CONFIG_H</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &quot;config_auto.h&quot;</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00527.html">tessdatamanager.h</a>&quot;</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &lt;cstdio&gt;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#if defined(HAVE_LIBARCHIVE)</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include &lt;archive.h&gt;</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &lt;archive_entry.h&gt;</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00464.html">errcode.h</a>&quot;</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &lt;tesseract/helpers.h&gt;</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &lt;tesseract/serialis.h&gt;</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#include &lt;tesseract/strngs.h&gt;</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00533.html">tprintf.h</a>&quot;</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00503.html">params.h</a>&quot;</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">namespace </span><a class="code" href="a01539.html">tesseract</a> {</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="a02628.html#af776d5d04c22626406d818c2cd836b0e">   42</a></span>&#160;<a class="code" href="a02628.html#af776d5d04c22626406d818c2cd836b0e">TessdataManager::TessdataManager</a>() : reader_(nullptr), is_loaded_(false), swap_(false) {</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <a class="code" href="a02628.html#a2c560afdb4c1d801467aeffa6f3dccff">SetVersionString</a>(PACKAGE_VERSION);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;}</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="a02628.html#ab0c4df450d27c29b7d01fc187e08e9bd">   46</a></span>&#160;<a class="code" href="a02628.html#af776d5d04c22626406d818c2cd836b0e">TessdataManager::TessdataManager</a>(FileReader reader)</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  : reader_(reader),</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    is_loaded_(false),</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    swap_(false) {</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <a class="code" href="a02628.html#a2c560afdb4c1d801467aeffa6f3dccff">SetVersionString</a>(PACKAGE_VERSION);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;}</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">// Lazily loads from the the given filename. Won&#39;t actually read the file</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">// until it needs it.</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="a02628.html#a9b2be2fbddff81ec96e1d0842dc7e692">   55</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02628.html#a9b2be2fbddff81ec96e1d0842dc7e692">TessdataManager::LoadFileLater</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *data_file_name) {</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <a class="code" href="a02628.html#a2ee433aeb0fa9bdf6ea93079c663ab85">Clear</a>();</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  data_file_name_ = data_file_name;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;}</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#if defined(HAVE_LIBARCHIVE)</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keywordtype">bool</span> TessdataManager::LoadArchiveFile(<span class="keyword">const</span> <span class="keywordtype">char</span> *filename) {</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <span class="keywordtype">bool</span> result = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  archive *a = archive_read_new();</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="keywordflow">if</span> (a != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    archive_read_support_filter_all(a);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    archive_read_support_format_all(a);</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordflow">if</span> (archive_read_open_filename(a, filename, 8192) == ARCHIVE_OK) {</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;      archive_entry *ae;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;      <span class="keywordflow">while</span> (archive_read_next_header(a, &amp;ae) == ARCHIVE_OK) {</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">char</span> *component = archive_entry_pathname(ae);</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keywordflow">if</span> (component != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;          <a class="code" href="a01539.html#a5f278974ef80900b460194614d4f1899">TessdataType</a> <a class="code" href="a01548.html#a2aec20b482a80e7f8b08bd60ef53bd44">type</a>;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;          <span class="keywordflow">if</span> (TessdataTypeFromFileName(component, &amp;<a class="code" href="a01548.html#a2aec20b482a80e7f8b08bd60ef53bd44">type</a>)) {</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            int64_t size = archive_entry_size(ae);</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            <span class="keywordflow">if</span> (size &gt; 0) {</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;              entries_[<a class="code" href="a01548.html#a2aec20b482a80e7f8b08bd60ef53bd44">type</a>].resize_no_init(size);</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;              <span class="keywordflow">if</span> (archive_read_data(a, &amp;entries_[<a class="code" href="a01548.html#a2aec20b482a80e7f8b08bd60ef53bd44">type</a>][0], size) == size) {</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                is_loaded_ = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;              }</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            }</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;          }</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        }</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;      }</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;      result = is_loaded_;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="preprocessor">#if defined(DEBUG)</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;      <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;archive_read_open_filename(...,%s,...) failed, %s\n&quot;</span>,</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;              filename, strerror(archive_errno(a)));</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    }</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    archive_read_free(a);</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  }</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;}</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno"><a class="line" href="a02628.html#ae070706240e9b479dcbb3a561b962d34">   97</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a02628.html#ae070706240e9b479dcbb3a561b962d34">TessdataManager::Init</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *data_file_name) {</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  <a class="code" href="a02108.html">GenericVector&lt;char&gt;</a> data;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  <span class="keywordflow">if</span> (reader_ == <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="preprocessor">#if defined(HAVE_LIBARCHIVE)</span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordflow">if</span> (LoadArchiveFile(data_file_name)) <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keywordflow">if</span> (!LoadDataFromFile(data_file_name, &amp;data)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keywordflow">if</span> (!(*reader_)(data_file_name, &amp;data)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  }</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="a02628.html#adde3e0fbebf692babd33bfe4c7eabeef">LoadMemBuffer</a>(data_file_name, &amp;data[0], data.size());</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;}</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment">// Loads from the given memory buffer as if a file.</span></div>
-<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="a02628.html#adde3e0fbebf692babd33bfe4c7eabeef">  111</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a02628.html#adde3e0fbebf692babd33bfe4c7eabeef">TessdataManager::LoadMemBuffer</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> <span class="keywordtype">char</span> *data,</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                                    <span class="keywordtype">int</span> size) {</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  <span class="comment">// TODO: This method supports only the proprietary file format.</span></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  <a class="code" href="a02628.html#a2ee433aeb0fa9bdf6ea93079c663ab85">Clear</a>();</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  data_file_name_ = name;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  TFile fp;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  fp.Open(data, size);</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  uint32_t num_entries;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;  <span class="keywordflow">if</span> (!fp.DeSerialize(&amp;num_entries)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  swap_ = num_entries &gt; kMaxNumTessdataEntries;</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;  fp.set_swap(swap_);</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;  <span class="keywordflow">if</span> (swap_) ReverseN(&amp;num_entries, <span class="keyword">sizeof</span>(num_entries));</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  <span class="keywordflow">if</span> (num_entries &gt; kMaxNumTessdataEntries) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;  <a class="code" href="a02108.html">GenericVector&lt;int64_t&gt;</a> offset_table;</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;  offset_table.resize_no_init(num_entries);</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;  <span class="keywordflow">if</span> (!fp.DeSerialize(&amp;offset_table[0], num_entries)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i = 0; i &lt; num_entries &amp;&amp; i &lt; <a class="code" href="a01539.html#a5f278974ef80900b460194614d4f1899ae23733dd332d50ddb3b0be7990b1538c">TESSDATA_NUM_ENTRIES</a>; ++i) {</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    <span class="keywordflow">if</span> (offset_table[i] &gt;= 0) {</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;      int64_t entry_size = size - offset_table[i];</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;      <span class="keywordtype">unsigned</span> j = i + 1;</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;      <span class="keywordflow">while</span> (j &lt; num_entries &amp;&amp; offset_table[j] == -1) ++j;</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;      <span class="keywordflow">if</span> (j &lt; num_entries) entry_size = offset_table[j] - offset_table[i];</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;      entries_[i].resize_no_init(entry_size);</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;      <span class="keywordflow">if</span> (!fp.DeSerialize(&amp;entries_[i][0], entry_size)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    }</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;  }</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;  <span class="keywordflow">if</span> (entries_[<a class="code" href="a01539.html#a5f278974ef80900b460194614d4f1899a2d48e3db49e33025c931467f34554782">TESSDATA_VERSION</a>].empty()) {</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <a class="code" href="a02628.html#a2c560afdb4c1d801467aeffa6f3dccff">SetVersionString</a>(<span class="stringliteral">&quot;Pre-4.0.0&quot;</span>);</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;  }</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;  is_loaded_ = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;}</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="comment">// Overwrites a single entry of the given type.</span></div>
-<div class="line"><a name="l00145"></a><span class="lineno"><a class="line" href="a02628.html#a0213a816f84d5f6bb500903aa3861d7b">  145</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02628.html#a0213a816f84d5f6bb500903aa3861d7b">TessdataManager::OverwriteEntry</a>(<a class="code" href="a01539.html#a5f278974ef80900b460194614d4f1899">TessdataType</a> <a class="code" href="a01548.html#a2aec20b482a80e7f8b08bd60ef53bd44">type</a>, <span class="keyword">const</span> <span class="keywordtype">char</span> *data,</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;                                     <span class="keywordtype">int</span> size) {</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;  is_loaded_ = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;  entries_[<a class="code" href="a01548.html#a2aec20b482a80e7f8b08bd60ef53bd44">type</a>].resize_no_init(size);</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;  memcpy(&amp;entries_[<a class="code" href="a01548.html#a2aec20b482a80e7f8b08bd60ef53bd44">type</a>][0], data, size);</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;}</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160; </div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="comment">// Saves to the given filename.</span></div>
-<div class="line"><a name="l00153"></a><span class="lineno"><a class="line" href="a02628.html#ab5d5b2185c41bf9d5f49ad1013367a18">  153</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a02628.html#ab5d5b2185c41bf9d5f49ad1013367a18">TessdataManager::SaveFile</a>(<span class="keyword">const</span> STRING &amp;filename,</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                               FileWriter writer)<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;  <span class="comment">// TODO: This method supports only the proprietary file format.</span></div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;  <a class="code" href="a00464.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a>(is_loaded_);</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;  <a class="code" href="a02108.html">GenericVector&lt;char&gt;</a> data;</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;  <a class="code" href="a02628.html#a69355f9262a2437ac0bedc4fcd1dcae1">Serialize</a>(&amp;data);</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;  <span class="keywordflow">if</span> (writer == <span class="keyword">nullptr</span>)</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    <span class="keywordflow">return</span> SaveDataToFile(data, filename.c_str());</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;  <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    <span class="keywordflow">return</span> (*writer)(data, filename.c_str());</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;}</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; </div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="comment">// Serializes to the given vector.</span></div>
-<div class="line"><a name="l00166"></a><span class="lineno"><a class="line" href="a02628.html#a69355f9262a2437ac0bedc4fcd1dcae1">  166</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02628.html#a69355f9262a2437ac0bedc4fcd1dcae1">TessdataManager::Serialize</a>(<a class="code" href="a02108.html">GenericVector&lt;char&gt;</a> *data)<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;  <span class="comment">// TODO: This method supports only the proprietary file format.</span></div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;  <a class="code" href="a00464.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a>(is_loaded_);</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;  <span class="comment">// Compute the offset_table and total size.</span></div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;  int64_t offset_table[<a class="code" href="a01539.html#a5f278974ef80900b460194614d4f1899ae23733dd332d50ddb3b0be7990b1538c">TESSDATA_NUM_ENTRIES</a>];</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;  int64_t offset = <span class="keyword">sizeof</span>(int32_t) + <span class="keyword">sizeof</span>(offset_table);</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i = 0; i &lt; <a class="code" href="a01539.html#a5f278974ef80900b460194614d4f1899ae23733dd332d50ddb3b0be7990b1538c">TESSDATA_NUM_ENTRIES</a>; ++i) {</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    <span class="keywordflow">if</span> (entries_[i].empty()) {</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;      offset_table[i] = -1;</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;      offset_table[i] = offset;</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;      offset += entries_[i].size();</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    }</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;  }</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;  data-&gt;init_to_size(offset, 0);</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;  int32_t num_entries = <a class="code" href="a01539.html#a5f278974ef80900b460194614d4f1899ae23733dd332d50ddb3b0be7990b1538c">TESSDATA_NUM_ENTRIES</a>;</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;  TFile fp;</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;  fp.OpenWrite(data);</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;  fp.Serialize(&amp;num_entries);</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;  fp.Serialize(&amp;offset_table[0], countof(offset_table));</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;  <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; entry : entries_) {</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    <span class="keywordflow">if</span> (!entry.empty()) {</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;      fp.Serialize(&amp;entry[0], entry.size());</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    }</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;  }</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;}</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160; </div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="comment">// Resets to the initial state, keeping the reader.</span></div>
-<div class="line"><a name="l00194"></a><span class="lineno"><a class="line" href="a02628.html#a2ee433aeb0fa9bdf6ea93079c663ab85">  194</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02628.html#a2ee433aeb0fa9bdf6ea93079c663ab85">TessdataManager::Clear</a>() {</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;  <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; entry : entries_) {</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    entry.clear();</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;  }</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;  is_loaded_ = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;}</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160; </div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="comment">// Prints a directory of contents.</span></div>
-<div class="line"><a name="l00202"></a><span class="lineno"><a class="line" href="a02628.html#a204adbeaf6c9892c7c207df319773480">  202</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02628.html#a204adbeaf6c9892c7c207df319773480">TessdataManager::Directory</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;  <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Version string:%s\n&quot;</span>, <a class="code" href="a02628.html#a0eb1c5c435f701a73197c4d732cdd5c4">VersionString</a>().c_str());</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;  <span class="keywordtype">int</span> offset = <a class="code" href="a01539.html#a5f278974ef80900b460194614d4f1899ae23733dd332d50ddb3b0be7990b1538c">TESSDATA_NUM_ENTRIES</a> * <span class="keyword">sizeof</span>(int64_t);</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i = 0; i &lt; <a class="code" href="a01539.html#a5f278974ef80900b460194614d4f1899ae23733dd332d50ddb3b0be7990b1538c">TESSDATA_NUM_ENTRIES</a>; ++i) {</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    <span class="keywordflow">if</span> (!entries_[i].empty()) {</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;      <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;%d:%s:size=%d, offset=%d\n&quot;</span>, i, kTessdataFileSuffixes[i],</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;              entries_[i].size(), offset);</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;      offset += entries_[i].size();</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    }</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;  }</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;}</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160; </div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="comment">// Opens the given TFile pointer to the given component type.</span></div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="comment">// Returns false in case of failure.</span></div>
-<div class="line"><a name="l00216"></a><span class="lineno"><a class="line" href="a02628.html#a39f041b29c9ecf85063ebe181a963a6f">  216</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a02628.html#a39f041b29c9ecf85063ebe181a963a6f">TessdataManager::GetComponent</a>(<a class="code" href="a01539.html#a5f278974ef80900b460194614d4f1899">TessdataType</a> <a class="code" href="a01548.html#a2aec20b482a80e7f8b08bd60ef53bd44">type</a>, TFile *fp) {</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;  <span class="keywordflow">if</span> (!is_loaded_ &amp;&amp; !<a class="code" href="a02628.html#ae070706240e9b479dcbb3a561b962d34">Init</a>(data_file_name_.c_str())) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;  <span class="keyword">const</span> <a class="code" href="a02628.html">TessdataManager</a> *const_this = <span class="keyword">this</span>;</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;  <span class="keywordflow">return</span> const_this-&gt;<a class="code" href="a02628.html#a39f041b29c9ecf85063ebe181a963a6f">GetComponent</a>(<a class="code" href="a01548.html#a2aec20b482a80e7f8b08bd60ef53bd44">type</a>, fp);</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;}</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160; </div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="comment">// As non-const version except it can&#39;t load the component if not already</span></div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="comment">// loaded.</span></div>
-<div class="line"><a name="l00224"></a><span class="lineno"><a class="line" href="a02628.html#a35bff067c5cf6f9e562d387ea70c9e77">  224</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a02628.html#a39f041b29c9ecf85063ebe181a963a6f">TessdataManager::GetComponent</a>(<a class="code" href="a01539.html#a5f278974ef80900b460194614d4f1899">TessdataType</a> <a class="code" href="a01548.html#a2aec20b482a80e7f8b08bd60ef53bd44">type</a>, TFile *fp)<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;  <a class="code" href="a00464.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a>(is_loaded_);</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;  <span class="keywordflow">if</span> (entries_[<a class="code" href="a01548.html#a2aec20b482a80e7f8b08bd60ef53bd44">type</a>].empty()) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;  fp-&gt;Open(&amp;entries_[<a class="code" href="a01548.html#a2aec20b482a80e7f8b08bd60ef53bd44">type</a>][0], entries_[<a class="code" href="a01548.html#a2aec20b482a80e7f8b08bd60ef53bd44">type</a>].size());</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;  fp-&gt;set_swap(swap_);</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;}</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160; </div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="comment">// Returns the current version string.</span></div>
-<div class="line"><a name="l00233"></a><span class="lineno"><a class="line" href="a02628.html#a0eb1c5c435f701a73197c4d732cdd5c4">  233</a></span>&#160;std::string <a class="code" href="a02628.html#a0eb1c5c435f701a73197c4d732cdd5c4">TessdataManager::VersionString</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;  <span class="keywordflow">return</span> std::string(&amp;entries_[<a class="code" href="a01539.html#a5f278974ef80900b460194614d4f1899a2d48e3db49e33025c931467f34554782">TESSDATA_VERSION</a>][0],</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;                     entries_[<a class="code" href="a01539.html#a5f278974ef80900b460194614d4f1899a2d48e3db49e33025c931467f34554782">TESSDATA_VERSION</a>].size());</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;}</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160; </div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="comment">// Sets the version string to the given v_str.</span></div>
-<div class="line"><a name="l00239"></a><span class="lineno"><a class="line" href="a02628.html#a2c560afdb4c1d801467aeffa6f3dccff">  239</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02628.html#a2c560afdb4c1d801467aeffa6f3dccff">TessdataManager::SetVersionString</a>(<span class="keyword">const</span> std::string &amp;v_str) {</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;  entries_[<a class="code" href="a01539.html#a5f278974ef80900b460194614d4f1899a2d48e3db49e33025c931467f34554782">TESSDATA_VERSION</a>].resize_no_init(v_str.size());</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;  memcpy(&amp;entries_[<a class="code" href="a01539.html#a5f278974ef80900b460194614d4f1899a2d48e3db49e33025c931467f34554782">TESSDATA_VERSION</a>][0], v_str.data(), v_str.size());</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;}</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160; </div>
-<div class="line"><a name="l00244"></a><span class="lineno"><a class="line" href="a02628.html#a1e9906f8e8ecb6dc5ce8fd201d63116b">  244</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a02628.html#a1e9906f8e8ecb6dc5ce8fd201d63116b">TessdataManager::CombineDataFiles</a>(</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *language_data_path_prefix,</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *output_filename) {</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;  <span class="comment">// Load individual tessdata components from files.</span></div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;  <span class="keywordflow">for</span> (<span class="keyword">auto</span> filesuffix : kTessdataFileSuffixes) {</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    <a class="code" href="a01539.html#a5f278974ef80900b460194614d4f1899">TessdataType</a> <a class="code" href="a01548.html#a2aec20b482a80e7f8b08bd60ef53bd44">type</a>;</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    <a class="code" href="a00464.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a>(TessdataTypeFromFileSuffix(filesuffix, &amp;<a class="code" href="a01548.html#a2aec20b482a80e7f8b08bd60ef53bd44">type</a>));</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;    STRING filename = language_data_path_prefix;</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    filename += filesuffix;</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    FILE *fp = fopen(filename.c_str(), <span class="stringliteral">&quot;rb&quot;</span>);</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    <span class="keywordflow">if</span> (fp != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;      fclose(fp);</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;      <span class="keywordflow">if</span> (!LoadDataFromFile(filename.c_str(), &amp;entries_[<a class="code" href="a01548.html#a2aec20b482a80e7f8b08bd60ef53bd44">type</a>])) {</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;        <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Load of file %s failed!\n&quot;</span>, filename.c_str());</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;      }</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    }</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;  }</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;  is_loaded_ = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160; </div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;  <span class="comment">// Make sure that the required components are present.</span></div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;  <span class="keywordflow">if</span> (!<a class="code" href="a02628.html#aa786c7d69b77b69721c45e37d2c681db">IsBaseAvailable</a>() &amp;&amp; !<a class="code" href="a02628.html#a12e6ade823f7473181af2193cadb41de">IsLSTMAvailable</a>()) {</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;        <span class="stringliteral">&quot;Error: traineddata file must contain at least (a unicharset file&quot;</span></div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;        <span class="stringliteral">&quot;and inttemp) OR an lstm file.\n&quot;</span>);</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;  }</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;  <span class="comment">// Write updated data to the output traineddata file.</span></div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="a02628.html#ab5d5b2185c41bf9d5f49ad1013367a18">SaveFile</a>(output_filename, <span class="keyword">nullptr</span>);</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;}</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160; </div>
-<div class="line"><a name="l00275"></a><span class="lineno"><a class="line" href="a02628.html#a636c6e1a2844027ff940868d8460bfd9">  275</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a02628.html#a636c6e1a2844027ff940868d8460bfd9">TessdataManager::OverwriteComponents</a>(</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *new_traineddata_filename,</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    <span class="keywordtype">char</span> **component_filenames,</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    <span class="keywordtype">int</span> num_new_components) {</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;  <span class="comment">// Open the files with the new components.</span></div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;  <span class="comment">// TODO: This method supports only the proprietary file format.</span></div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; num_new_components; ++i) {</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    <a class="code" href="a01539.html#a5f278974ef80900b460194614d4f1899">TessdataType</a> <a class="code" href="a01548.html#a2aec20b482a80e7f8b08bd60ef53bd44">type</a>;</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;    <span class="keywordflow">if</span> (TessdataTypeFromFileName(component_filenames[i], &amp;<a class="code" href="a01548.html#a2aec20b482a80e7f8b08bd60ef53bd44">type</a>)) {</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;      <span class="keywordflow">if</span> (!LoadDataFromFile(component_filenames[i], &amp;entries_[<a class="code" href="a01548.html#a2aec20b482a80e7f8b08bd60ef53bd44">type</a>])) {</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;        <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Failed to read component file:%s\n&quot;</span>, component_filenames[i]);</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;      }</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    }</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;  }</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160; </div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;  <span class="comment">// Write updated data to the output traineddata file.</span></div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="a02628.html#ab5d5b2185c41bf9d5f49ad1013367a18">SaveFile</a>(new_traineddata_filename, <span class="keyword">nullptr</span>);</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;}</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160; </div>
-<div class="line"><a name="l00295"></a><span class="lineno"><a class="line" href="a02628.html#a735169c99fb52b985aeed260bf52681c">  295</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a02628.html#a735169c99fb52b985aeed260bf52681c">TessdataManager::ExtractToFile</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *filename) {</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;  <a class="code" href="a01539.html#a5f278974ef80900b460194614d4f1899">TessdataType</a> <a class="code" href="a01548.html#a2aec20b482a80e7f8b08bd60ef53bd44">type</a> = <a class="code" href="a01539.html#a5f278974ef80900b460194614d4f1899ae23733dd332d50ddb3b0be7990b1538c">TESSDATA_NUM_ENTRIES</a>;</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;  <a class="code" href="a00464.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a>(</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;      tesseract::TessdataManager::TessdataTypeFromFileName(filename, &amp;<a class="code" href="a01548.html#a2aec20b482a80e7f8b08bd60ef53bd44">type</a>));</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;  <span class="keywordflow">if</span> (entries_[<a class="code" href="a01548.html#a2aec20b482a80e7f8b08bd60ef53bd44">type</a>].empty()) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;  <span class="keywordflow">return</span> SaveDataToFile(entries_[<a class="code" href="a01548.html#a2aec20b482a80e7f8b08bd60ef53bd44">type</a>], filename);</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;}</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160; </div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;<span class="keywordtype">bool</span> TessdataManager::TessdataTypeFromFileSuffix(<span class="keyword">const</span> <span class="keywordtype">char</span> *suffix,</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;                                                 <a class="code" href="a01539.html#a5f278974ef80900b460194614d4f1899">TessdataType</a> *<a class="code" href="a01548.html#a2aec20b482a80e7f8b08bd60ef53bd44">type</a>) {</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> i = 0; i &lt; <a class="code" href="a01539.html#a5f278974ef80900b460194614d4f1899ae23733dd332d50ddb3b0be7990b1538c">TESSDATA_NUM_ENTRIES</a>; ++i) {</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;    <span class="keywordflow">if</span> (strcmp(kTessdataFileSuffixes[i], suffix) == 0) {</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;      *<a class="code" href="a01548.html#a2aec20b482a80e7f8b08bd60ef53bd44">type</a> = static_cast&lt;TessdataType&gt;(i);</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;      <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;    }</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;  }</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;<span class="preprocessor">#if defined(DEBUG)</span></div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;  <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;TessdataManager can&#39;t determine which tessdata&quot;</span></div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;         <span class="stringliteral">&quot; component is represented by %s\n&quot;</span>, suffix);</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;  <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;}</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160; </div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;<span class="keywordtype">bool</span> TessdataManager::TessdataTypeFromFileName(<span class="keyword">const</span> <span class="keywordtype">char</span> *filename,</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;                                               <a class="code" href="a01539.html#a5f278974ef80900b460194614d4f1899">TessdataType</a> *<a class="code" href="a01548.html#a2aec20b482a80e7f8b08bd60ef53bd44">type</a>) {</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;  <span class="comment">// Get the file suffix (extension)</span></div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *suffix = strrchr(filename, <span class="charliteral">&#39;.&#39;</span>);</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;  <span class="keywordflow">if</span> (suffix == <span class="keyword">nullptr</span> || *(++suffix) == <span class="charliteral">&#39;\0&#39;</span>) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;  <span class="keywordflow">return</span> TessdataTypeFromFileSuffix(suffix, <a class="code" href="a01548.html#a2aec20b482a80e7f8b08bd60ef53bd44">type</a>);</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;}</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160; </div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;}  <span class="comment">// namespace tesseract</span></div>
+<a href="a00524.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**********************************************************************</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * File:        errcode.cpp  (Formerly error.c)</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * Description: Generic error handler function</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * Author:      Ray Smith</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> * (C) Copyright 1989, Hewlett-Packard Ltd.</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> ** Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> ** you may not use this file except in compliance with the License.</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> ** You may obtain a copy of the License at</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> ** http://www.apache.org/licenses/LICENSE-2.0</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> ** Unless required by applicable law or agreed to in writing, software</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> ** distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> ** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> ** See the License for the specific language governing permissions and</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> ** limitations under the License.</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> **********************************************************************/</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00527.html">globaloc.h</a>&quot;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &quot;allheaders.h&quot;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00515.html">errcode.h</a>&quot;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00584.html">tprintf.h</a>&quot;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">// TODO: remove empty function?</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="a00527.html#ae281080023125653d85cd946e95f626c">   25</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00524.html#ae281080023125653d85cd946e95f626c">set_global_loc_code</a>(<span class="keywordtype">int</span> loc_code) {</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <span class="comment">// global_loc_code = loc_code;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;}</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">// TODO: remove empty function?</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="a00527.html#a87d586caeb936d763514af2bbba8cab6">   30</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00524.html#a87d586caeb936d763514af2bbba8cab6">set_global_subloc_code</a>(<span class="keywordtype">int</span> loc_code) {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <span class="comment">// global_subloc_code = loc_code;</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;}</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">// TODO: remove empty function?</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="a00527.html#a683cb64eb69da4200257e0468b4347a0">   35</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00524.html#a683cb64eb69da4200257e0468b4347a0">set_global_subsubloc_code</a>(<span class="keywordtype">int</span> loc_code) {</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <span class="comment">// global_subsubloc_code = loc_code;</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa00503_html"><div class="ttname"><a href="a00503.html">params.h</a></div></div>
-<div class="ttc" id="aa02628_html_a39f041b29c9ecf85063ebe181a963a6f"><div class="ttname"><a href="a02628.html#a39f041b29c9ecf85063ebe181a963a6f">tesseract::TessdataManager::GetComponent</a></div><div class="ttdeci">bool GetComponent(TessdataType type, TFile *fp)</div><div class="ttdef"><b>Definition:</b> <a href="a00524_source.html#l00216">tessdatamanager.cpp:216</a></div></div>
-<div class="ttc" id="aa01539_html_a5f278974ef80900b460194614d4f1899a2d48e3db49e33025c931467f34554782"><div class="ttname"><a href="a01539.html#a5f278974ef80900b460194614d4f1899a2d48e3db49e33025c931467f34554782">tesseract::TESSDATA_VERSION</a></div><div class="ttdef"><b>Definition:</b> <a href="a00527_source.html#l00080">tessdatamanager.h:80</a></div></div>
-<div class="ttc" id="aa02628_html_a0213a816f84d5f6bb500903aa3861d7b"><div class="ttname"><a href="a02628.html#a0213a816f84d5f6bb500903aa3861d7b">tesseract::TessdataManager::OverwriteEntry</a></div><div class="ttdeci">void OverwriteEntry(TessdataType type, const char *data, int size)</div><div class="ttdef"><b>Definition:</b> <a href="a00524_source.html#l00145">tessdatamanager.cpp:145</a></div></div>
-<div class="ttc" id="aa02628_html"><div class="ttname"><a href="a02628.html">tesseract::TessdataManager</a></div><div class="ttdef"><b>Definition:</b> <a href="a00527_source.html#l00126">tessdatamanager.h:126</a></div></div>
-<div class="ttc" id="aa02628_html_a204adbeaf6c9892c7c207df319773480"><div class="ttname"><a href="a02628.html#a204adbeaf6c9892c7c207df319773480">tesseract::TessdataManager::Directory</a></div><div class="ttdeci">void Directory() const</div><div class="ttdef"><b>Definition:</b> <a href="a00524_source.html#l00202">tessdatamanager.cpp:202</a></div></div>
-<div class="ttc" id="aa01539_html_a5f278974ef80900b460194614d4f1899ae23733dd332d50ddb3b0be7990b1538c"><div class="ttname"><a href="a01539.html#a5f278974ef80900b460194614d4f1899ae23733dd332d50ddb3b0be7990b1538c">tesseract::TESSDATA_NUM_ENTRIES</a></div><div class="ttdef"><b>Definition:</b> <a href="a00527_source.html#l00082">tessdatamanager.h:82</a></div></div>
-<div class="ttc" id="aa02628_html_a1e9906f8e8ecb6dc5ce8fd201d63116b"><div class="ttname"><a href="a02628.html#a1e9906f8e8ecb6dc5ce8fd201d63116b">tesseract::TessdataManager::CombineDataFiles</a></div><div class="ttdeci">bool CombineDataFiles(const char *language_data_path_prefix, const char *output_filename)</div><div class="ttdef"><b>Definition:</b> <a href="a00524_source.html#l00244">tessdatamanager.cpp:244</a></div></div>
-<div class="ttc" id="aa02108_html"><div class="ttname"><a href="a02108.html">GenericVector&lt; char &gt;</a></div></div>
-<div class="ttc" id="aa00533_html"><div class="ttname"><a href="a00533.html">tprintf.h</a></div></div>
-<div class="ttc" id="aa02628_html_a2ee433aeb0fa9bdf6ea93079c663ab85"><div class="ttname"><a href="a02628.html#a2ee433aeb0fa9bdf6ea93079c663ab85">tesseract::TessdataManager::Clear</a></div><div class="ttdeci">void Clear()</div><div class="ttdef"><b>Definition:</b> <a href="a00524_source.html#l00194">tessdatamanager.cpp:194</a></div></div>
-<div class="ttc" id="aa02628_html_a9b2be2fbddff81ec96e1d0842dc7e692"><div class="ttname"><a href="a02628.html#a9b2be2fbddff81ec96e1d0842dc7e692">tesseract::TessdataManager::LoadFileLater</a></div><div class="ttdeci">void LoadFileLater(const char *data_file_name)</div><div class="ttdef"><b>Definition:</b> <a href="a00524_source.html#l00055">tessdatamanager.cpp:55</a></div></div>
-<div class="ttc" id="aa02628_html_a636c6e1a2844027ff940868d8460bfd9"><div class="ttname"><a href="a02628.html#a636c6e1a2844027ff940868d8460bfd9">tesseract::TessdataManager::OverwriteComponents</a></div><div class="ttdeci">bool OverwriteComponents(const char *new_traineddata_filename, char **component_filenames, int num_new_components)</div><div class="ttdef"><b>Definition:</b> <a href="a00524_source.html#l00275">tessdatamanager.cpp:275</a></div></div>
-<div class="ttc" id="aa02628_html_a2c560afdb4c1d801467aeffa6f3dccff"><div class="ttname"><a href="a02628.html#a2c560afdb4c1d801467aeffa6f3dccff">tesseract::TessdataManager::SetVersionString</a></div><div class="ttdeci">void SetVersionString(const std::string &amp;v_str)</div><div class="ttdef"><b>Definition:</b> <a href="a00524_source.html#l00239">tessdatamanager.cpp:239</a></div></div>
-<div class="ttc" id="aa00530_html_a0c2bcd4462ec67ab0971b34a0f610f55"><div class="ttname"><a href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a></div><div class="ttdeci">DLLSYM void tprintf(const char *format,...)</div><div class="ttdef"><b>Definition:</b> <a href="a00530_source.html#l00034">tprintf.cpp:34</a></div></div>
-<div class="ttc" id="aa01548_html_a2aec20b482a80e7f8b08bd60ef53bd44"><div class="ttname"><a href="a01548.html#a2aec20b482a80e7f8b08bd60ef53bd44">tesstrain_utils.type</a></div><div class="ttdeci">type</div><div class="ttdef"><b>Definition:</b> <a href="a01346_source.html#l00141">tesstrain_utils.py:141</a></div></div>
-<div class="ttc" id="aa02628_html_a12e6ade823f7473181af2193cadb41de"><div class="ttname"><a href="a02628.html#a12e6ade823f7473181af2193cadb41de">tesseract::TessdataManager::IsLSTMAvailable</a></div><div class="ttdeci">bool IsLSTMAvailable() const</div><div class="ttdef"><b>Definition:</b> <a href="a00527_source.html#l00183">tessdatamanager.h:183</a></div></div>
-<div class="ttc" id="aa02628_html_ae070706240e9b479dcbb3a561b962d34"><div class="ttname"><a href="a02628.html#ae070706240e9b479dcbb3a561b962d34">tesseract::TessdataManager::Init</a></div><div class="ttdeci">bool Init(const char *data_file_name)</div><div class="ttdef"><b>Definition:</b> <a href="a00524_source.html#l00097">tessdatamanager.cpp:97</a></div></div>
-<div class="ttc" id="aa02628_html_aa786c7d69b77b69721c45e37d2c681db"><div class="ttname"><a href="a02628.html#aa786c7d69b77b69721c45e37d2c681db">tesseract::TessdataManager::IsBaseAvailable</a></div><div class="ttdeci">bool IsBaseAvailable() const</div><div class="ttdef"><b>Definition:</b> <a href="a00527_source.html#l00177">tessdatamanager.h:177</a></div></div>
-<div class="ttc" id="aa02628_html_a0eb1c5c435f701a73197c4d732cdd5c4"><div class="ttname"><a href="a02628.html#a0eb1c5c435f701a73197c4d732cdd5c4">tesseract::TessdataManager::VersionString</a></div><div class="ttdeci">std::string VersionString() const</div><div class="ttdef"><b>Definition:</b> <a href="a00524_source.html#l00233">tessdatamanager.cpp:233</a></div></div>
-<div class="ttc" id="aa01539_html"><div class="ttname"><a href="a01539.html">tesseract</a></div><div class="ttdef"><b>Definition:</b> <a href="a00002_source.html#l00025">altorenderer.cpp:25</a></div></div>
-<div class="ttc" id="aa00464_html"><div class="ttname"><a href="a00464.html">errcode.h</a></div></div>
-<div class="ttc" id="aa00464_html_a93a603f4063a6b9403d81caa245a583b"><div class="ttname"><a href="a00464.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a></div><div class="ttdeci">#define ASSERT_HOST(x)</div><div class="ttdef"><b>Definition:</b> <a href="a00464_source.html#l00087">errcode.h:87</a></div></div>
-<div class="ttc" id="aa02628_html_af776d5d04c22626406d818c2cd836b0e"><div class="ttname"><a href="a02628.html#af776d5d04c22626406d818c2cd836b0e">tesseract::TessdataManager::TessdataManager</a></div><div class="ttdeci">TessdataManager()</div><div class="ttdef"><b>Definition:</b> <a href="a00524_source.html#l00042">tessdatamanager.cpp:42</a></div></div>
-<div class="ttc" id="aa00527_html"><div class="ttname"><a href="a00527.html">tessdatamanager.h</a></div></div>
-<div class="ttc" id="aa02628_html_a735169c99fb52b985aeed260bf52681c"><div class="ttname"><a href="a02628.html#a735169c99fb52b985aeed260bf52681c">tesseract::TessdataManager::ExtractToFile</a></div><div class="ttdeci">bool ExtractToFile(const char *filename)</div><div class="ttdef"><b>Definition:</b> <a href="a00524_source.html#l00295">tessdatamanager.cpp:295</a></div></div>
-<div class="ttc" id="aa02628_html_ab5d5b2185c41bf9d5f49ad1013367a18"><div class="ttname"><a href="a02628.html#ab5d5b2185c41bf9d5f49ad1013367a18">tesseract::TessdataManager::SaveFile</a></div><div class="ttdeci">bool SaveFile(const STRING &amp;filename, FileWriter writer) const</div><div class="ttdef"><b>Definition:</b> <a href="a00524_source.html#l00153">tessdatamanager.cpp:153</a></div></div>
-<div class="ttc" id="aa02628_html_a69355f9262a2437ac0bedc4fcd1dcae1"><div class="ttname"><a href="a02628.html#a69355f9262a2437ac0bedc4fcd1dcae1">tesseract::TessdataManager::Serialize</a></div><div class="ttdeci">void Serialize(GenericVector&lt; char &gt; *data) const</div><div class="ttdef"><b>Definition:</b> <a href="a00524_source.html#l00166">tessdatamanager.cpp:166</a></div></div>
-<div class="ttc" id="aa02628_html_adde3e0fbebf692babd33bfe4c7eabeef"><div class="ttname"><a href="a02628.html#adde3e0fbebf692babd33bfe4c7eabeef">tesseract::TessdataManager::LoadMemBuffer</a></div><div class="ttdeci">bool LoadMemBuffer(const char *name, const char *data, int size)</div><div class="ttdef"><b>Definition:</b> <a href="a00524_source.html#l00111">tessdatamanager.cpp:111</a></div></div>
-<div class="ttc" id="aa01539_html_a5f278974ef80900b460194614d4f1899"><div class="ttname"><a href="a01539.html#a5f278974ef80900b460194614d4f1899">tesseract::TessdataType</a></div><div class="ttdeci">TessdataType</div><div class="ttdef"><b>Definition:</b> <a href="a00527_source.html#l00056">tessdatamanager.h:56</a></div></div>
+<div class="ttc" id="aa00524_html_a87d586caeb936d763514af2bbba8cab6"><div class="ttname"><a href="a00524.html#a87d586caeb936d763514af2bbba8cab6">set_global_subloc_code</a></div><div class="ttdeci">void set_global_subloc_code(int loc_code)</div><div class="ttdef"><b>Definition:</b> <a href="a00524_source.html#l00030">globaloc.cpp:30</a></div></div>
+<div class="ttc" id="aa00584_html"><div class="ttname"><a href="a00584.html">tprintf.h</a></div></div>
+<div class="ttc" id="aa00524_html_ae281080023125653d85cd946e95f626c"><div class="ttname"><a href="a00524.html#ae281080023125653d85cd946e95f626c">set_global_loc_code</a></div><div class="ttdeci">void set_global_loc_code(int loc_code)</div><div class="ttdef"><b>Definition:</b> <a href="a00524_source.html#l00025">globaloc.cpp:25</a></div></div>
+<div class="ttc" id="aa00524_html_a683cb64eb69da4200257e0468b4347a0"><div class="ttname"><a href="a00524.html#a683cb64eb69da4200257e0468b4347a0">set_global_subsubloc_code</a></div><div class="ttdeci">void set_global_subsubloc_code(int loc_code)</div><div class="ttdef"><b>Definition:</b> <a href="a00524_source.html#l00035">globaloc.cpp:35</a></div></div>
+<div class="ttc" id="aa00527_html"><div class="ttname"><a href="a00527.html">globaloc.h</a></div></div>
+<div class="ttc" id="aa00515_html"><div class="ttname"><a href="a00515.html">errcode.h</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_be21c9400dd14e513865608c9a8a7e5a.html">ccutil</a></li><li class="navelem"><a class="el" href="a00524.html">tessdatamanager.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:14 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_be21c9400dd14e513865608c9a8a7e5a.html">ccutil</a></li><li class="navelem"><a class="el" href="a00524.html">globaloc.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:20 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

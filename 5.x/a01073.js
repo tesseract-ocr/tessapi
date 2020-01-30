@@ -1,9 +1,7 @@
 var a01073 =
 [
-    [ "check_pitch_sync", "a01073.html#a321a8bfc3b9248bd4ec353aa9d5f1831", null ],
-    [ "ELISTIZE", "a01073.html#a4d39b973449f23a381e22fe1c1792af7", null ],
-    [ "make_illegal_segment", "a01073.html#aeb1a310c897473e865cbd6529041f7b6", null ],
-    [ "pitsync_fake_depth", "a01073.html#a017f9254f6b703215cfe5940a67d52f2", null ],
-    [ "pitsync_joined_edge", "a01073.html#a06bb83057da5b8bc252bac729baa0a65", null ],
-    [ "pitsync_offset_freecut_fraction", "a01073.html#a676189661b13473a99c0242726cdc08a", null ]
+    [ "BUCKETSIZE", "a01073.html#a1697ba8bc67aab0eb972da5596ee5cc9", null ],
+    [ "check_path_legal", "a01073.html#adeed8a1cb243009aa6867ff637eb8677", null ],
+    [ "complete_edge", "a01073.html#affa66849c6f718f217c84b000407944b", null ],
+    [ "loop_bounding_box", "a01073.html#a95a3931e026bf45ab32e1e17ca45398c", null ]
 ];

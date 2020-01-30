@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['hfunc_7817',['HFunc',['../a03028.html',1,'tesseract']]],
-  ['hprime_7818',['HPrime',['../a03032.html',1,'tesseract']]]
+  ['heaptest_8588',['HeapTest',['../a04130.html',1,'tesseract']]],
+  ['hfunc_8589',['HFunc',['../a03482.html',1,'tesseract']]],
+  ['hprime_8590',['HPrime',['../a03486.html',1,'tesseract']]]
 ];

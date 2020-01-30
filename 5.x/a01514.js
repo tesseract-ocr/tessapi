@@ -1,9 +1,7 @@
 var a01514 =
 [
-    [ "edge_window_wait", "a01514.html#a09f227f1c8c806d8cc6c758f167b965d", null ],
-    [ "update_edge_window", "a01514.html#a3a90c5459659abe9227ab93d20042630", null ],
-    [ "display_edgepts", "a01514.html#a4ce0ea2dbe7f9c1e27849c005309ad9f", null ],
-    [ "draw_blob_edges", "a01514.html#ae2440305a17a8a14c0e1c74e035934a3", null ],
-    [ "mark_outline", "a01514.html#a58186147d8297e9600d4176629dc4765", null ],
-    [ "edge_window", "a01514.html#a37713d15c49a322a3a468db0f0c26d98", null ]
+    [ "SeamDecPair", "a01514.html#ac79ab0d2ef73225372ad8bc160f05bb8", null ],
+    [ "SeamPair", "a01514.html#ae7f82456c8e7ab23b2a7e9525a096248", null ],
+    [ "SeamPile", "a01514.html#a83c96ebc37f8c5d331411d9965c38088", null ],
+    [ "SeamQueue", "a01514.html#a59c55ffd84e0961a6cbc4869f36c8ce5", null ]
 ];

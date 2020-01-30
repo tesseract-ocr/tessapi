@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/lstm/tfnetwork.pb.h File Reference</title>
+<title>tesseract: /tesseract/src/lstm/parallel.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -88,85 +88,32 @@ $(document).ready(function(){initNavTree('a00917.html','');});
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#define-members">Macros</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle">
-<div class="title">tfnetwork.pb.h File Reference</div>  </div>
+<div class="title">parallel.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;string&gt;</code><br />
-<code>#include &lt;google/protobuf/stubs/common.h&gt;</code><br />
-<code>#include &lt;google/protobuf/io/coded_stream.h&gt;</code><br />
-<code>#include &lt;google/protobuf/arena.h&gt;</code><br />
-<code>#include &lt;google/protobuf/arenastring.h&gt;</code><br />
-<code>#include &lt;google/protobuf/generated_message_table_driven.h&gt;</code><br />
-<code>#include &lt;google/protobuf/generated_message_util.h&gt;</code><br />
-<code>#include &lt;google/protobuf/inlined_string_field.h&gt;</code><br />
-<code>#include &lt;google/protobuf/metadata.h&gt;</code><br />
-<code>#include &lt;google/protobuf/message.h&gt;</code><br />
-<code>#include &lt;google/protobuf/repeated_field.h&gt;</code><br />
-<code>#include &lt;google/protobuf/extension_set.h&gt;</code><br />
-<code>#include &lt;google/protobuf/unknown_field_set.h&gt;</code><br />
-<code>#include &quot;tensorflow/core/framework/graph.pb.h&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a00923_source.html">plumbing.h</a>&quot;</code><br />
 </div>
 <p><a href="a00917_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03144.html">protobuf_tfnetwork_2eproto::TableStruct</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03148.html">tesseract::TFNetworkModel</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03542.html">tesseract::Parallel</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a01542"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01542.html">protobuf_tfnetwork_2eproto</a></td></tr>
+<tr class="memitem:a01818"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html">tesseract</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01539"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html">tesseract</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01543"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01543.html">google</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01544"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01544.html">google::protobuf</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:acedcfc3f32d0c61b138381ce7ace7802"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00917.html#acedcfc3f32d0c61b138381ce7ace7802">PROTOBUF_INTERNAL_EXPORT_protobuf_tfnetwork_2eproto</a></td></tr>
-<tr class="separator:acedcfc3f32d0c61b138381ce7ace7802"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a3ec7cfb9e88f09e708a5a4f047229546"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01542.html#a3ec7cfb9e88f09e708a5a4f047229546">protobuf_tfnetwork_2eproto::AddDescriptors</a> ()</td></tr>
-<tr class="separator:a3ec7cfb9e88f09e708a5a4f047229546"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91215d643cf3c05f076e30bf88136ca8"><td class="memTemplParams" colspan="2">template&lt;&gt; </td></tr>
-<tr class="memitem:a91215d643cf3c05f076e30bf88136ca8"><td class="memTemplItemLeft" align="right" valign="top">::<a class="el" href="a03148.html">tesseract::TFNetworkModel</a> *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a01544.html#a91215d643cf3c05f076e30bf88136ca8">google::protobuf::Arena::CreateMaybeMessage&lt;::tesseract::TFNetworkModel &gt;</a> (Arena *)</td></tr>
-<tr class="separator:a91215d643cf3c05f076e30bf88136ca8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="acedcfc3f32d0c61b138381ce7ace7802"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acedcfc3f32d0c61b138381ce7ace7802">&#9670;&nbsp;</a></span>PROTOBUF_INTERNAL_EXPORT_protobuf_tfnetwork_2eproto</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PROTOBUF_INTERNAL_EXPORT_protobuf_tfnetwork_2eproto</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00917_source.html#l00035">35</a> of file <a class="el" href="a00917_source.html">tfnetwork.pb.h</a>.</p>
-
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_57c32823bf7301c39893cc8d5b3eca8e.html">lstm</a></li><li class="navelem"><a class="el" href="a00917.html">tfnetwork.pb.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_57c32823bf7301c39893cc8d5b3eca8e.html">lstm</a></li><li class="navelem"><a class="el" href="a00917.html">parallel.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

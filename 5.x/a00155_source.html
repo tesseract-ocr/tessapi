@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/ccmain/reject.h Source File</title>
+<title>tesseract: /tesseract/src/ccmain/mutableiterator.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,62 +87,90 @@ $(document).ready(function(){initNavTree('a00155_source.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">reject.h</div>  </div>
+<div class="title">mutableiterator.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00155.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**********************************************************************</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * File:        reject.h</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * Description: Rejection functions used in tessedit</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * Author:      Phil Cheatle</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * Created:     Wed Sep 23 16:50:21 BST 1992</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> * (C) Copyright 1992, Hewlett-Packard Ltd.</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> ** Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> ** you may not use this file except in compliance with the License.</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> ** You may obtain a copy of the License at</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> ** http://www.apache.org/licenses/LICENSE-2.0</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> ** Unless required by applicable law or agreed to in writing, software</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> ** distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> ** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> ** See the License for the specific language governing permissions and</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> ** limitations under the License.</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"> **********************************************************************/</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#ifndef REJECT_H</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#define REJECT_H</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">class </span><a class="code" href="a02436.html">WERD_CHOICE</a>;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">class </span><a class="code" href="a02372.html">WERD_RES</a>;</div>
+<a href="a00155.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// File:        mutableiterator.h</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// Description: Iterator for tesseract results providing access to</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//              both high-level API and Tesseract internal data structures.</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">// Author:      David Eger</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">// Created:     Thu Feb 24 19:01:06 PST 2011</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// (C) Copyright 2011, Google Inc.</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// you may not use this file except in compliance with the License.</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">// You may obtain a copy of the License at</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// http://www.apache.org/licenses/LICENSE-2.0</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// Unless required by applicable law or agreed to in writing, software</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">// distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">// See the License for the specific language governing permissions and</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">// limitations under the License.</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#ifndef TESSERACT_CCMAIN_MUTABLEITERATOR_H_</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#define TESSERACT_CCMAIN_MUTABLEITERATOR_H_</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00038.html">tesseract/resultiterator.h</a>&gt;</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00155.html#a38678800d902519bdb0b6dcff44e5ee8">reject_blanks</a>(<a class="code" href="a02372.html">WERD_RES</a> *<a class="code" href="a02372.html#afc15fa7c1b5ad55d6772dea0d6865df1">word</a>);</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00155.html#acda8fceb6df94a957f3a2380b944a09e">reject_poor_matches</a>(<a class="code" href="a02372.html">WERD_RES</a> *<a class="code" href="a02372.html#afc15fa7c1b5ad55d6772dea0d6865df1">word</a>);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keywordtype">float</span> <a class="code" href="a00155.html#a7769557523c23cea384f550ae030e5ba">compute_reject_threshold</a>(<a class="code" href="a02436.html">WERD_CHOICE</a>* <a class="code" href="a02372.html#afc15fa7c1b5ad55d6772dea0d6865df1">word</a>);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a00155.html#a35ed905845d187cb2e5ec9a6250caeac">word_contains_non_1_digit</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code" href="a02372.html#afc15fa7c1b5ad55d6772dea0d6865df1">word</a>, <span class="keyword">const</span> <span class="keywordtype">char</span>* word_lengths);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00155.html#ad83dc1005097e689a58b493e14b943a6">dont_allow_1Il</a>(<a class="code" href="a02372.html">WERD_RES</a> *<a class="code" href="a02372.html#afc15fa7c1b5ad55d6772dea0d6865df1">word</a>);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00155.html#a24694172b77bc1092fb404873485b1c3">flip_hyphens</a>(<a class="code" href="a02372.html">WERD_RES</a> *<a class="code" href="a02372.html#afc15fa7c1b5ad55d6772dea0d6865df1">word</a>);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00155.html#a619bb19b0a304dcfa4e73be192ace9c5">flip_0O</a>(<a class="code" href="a02372.html">WERD_RES</a> *<a class="code" href="a02372.html#afc15fa7c1b5ad55d6772dea0d6865df1">word</a>);</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a00155.html#af2246535e2d275646d40bb6223b69ab4">non_0_digit</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* str, <span class="keywordtype">int</span> length);</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">class </span>BLOB_CHOICE_IT;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">namespace </span><a class="code" href="a01818.html">tesseract</a> {</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">class </span>Tesseract;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">// Class to iterate over tesseract results, providing access to all levels</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">// of the page hierarchy, without including any tesseract headers or having</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">// to handle any tesseract structures.</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">// WARNING! This class points to data held within the TessBaseAPI class, and</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">// therefore can only be used while the TessBaseAPI class still exists and</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">// has not been subjected to a call of Init, SetImage, Recognize, Clear, End</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">// DetectOS, or anything else that changes the internal PAGE_RES.</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">// See tesseract/apitypes.h for the definition of PageIteratorLevel.</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">// See also base class PageIterator, which contains the bulk of the interface.</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">// ResultIterator adds text-specific methods for access to OCR output.</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">// MutableIterator adds access to internal data structures.</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="a02582.html">   44</a></span>&#160;<span class="keyword">class </span><a class="code" href="a02582.html">MutableIterator</a> : <span class="keyword">public</span> <a class="code" href="a02534.html">ResultIterator</a> {</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="comment">// See argument descriptions in ResultIterator()</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="a02582.html#abfb0922afb796635750b349d98177bf4">   47</a></span>&#160;  <a class="code" href="a02582.html#abfb0922afb796635750b349d98177bf4">MutableIterator</a>(<a class="code" href="a02818.html">PAGE_RES</a>* page_res, <a class="code" href="a02658.html">Tesseract</a>* <a class="code" href="a01818.html">tesseract</a>,</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                  <span class="keywordtype">int</span> scale, <span class="keywordtype">int</span> scaled_yres,</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                  <span class="keywordtype">int</span> rect_left, <span class="keywordtype">int</span> rect_top,</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                  <span class="keywordtype">int</span> rect_width, <span class="keywordtype">int</span> rect_height)</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;      : <a class="code" href="a02534.html">ResultIterator</a>(</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;          <a class="code" href="a02454.html">LTRResultIterator</a>(page_res, <a class="code" href="a01818.html">tesseract</a>, scale, scaled_yres, rect_left,</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                            rect_top, rect_width, rect_height)) {}</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <a class="code" href="a02582.html#ad32d5656ea2aa654b700600b41c07f90">~MutableIterator</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="comment">// See PageIterator and ResultIterator for most calls.</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="comment">// Return access to Tesseract internals.</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="a02582.html#ab8f0407490b81601af672c339aaa5d7a">   59</a></span>&#160;  <span class="keyword">const</span> <a class="code" href="a02834.html">PAGE_RES_IT</a> *<a class="code" href="a02582.html#ab8f0407490b81601af672c339aaa5d7a">PageResIt</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="a02486.html#a42df7b8e352be1e5a140787109419f93">it_</a>; }</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;};</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;}  <span class="comment">// namespace tesseract.</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">#endif  // TESSERACT_CCMAIN_MUTABLEITERATOR_H_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa00155_html_acda8fceb6df94a957f3a2380b944a09e"><div class="ttname"><a href="a00155.html#acda8fceb6df94a957f3a2380b944a09e">reject_poor_matches</a></div><div class="ttdeci">void reject_poor_matches(WERD_RES *word)</div><div class="ttdef"><b>Definition:</b> <a href="a00152_source.html#l00207">reject.cpp:207</a></div></div>
-<div class="ttc" id="aa02436_html"><div class="ttname"><a href="a02436.html">WERD_CHOICE</a></div><div class="ttdef"><b>Definition:</b> <a href="a00374_source.html#l00261">ratngs.h:261</a></div></div>
-<div class="ttc" id="aa02372_html"><div class="ttname"><a href="a02372.html">WERD_RES</a></div><div class="ttdef"><b>Definition:</b> <a href="a00323_source.html#l00160">pageres.h:160</a></div></div>
-<div class="ttc" id="aa00155_html_af2246535e2d275646d40bb6223b69ab4"><div class="ttname"><a href="a00155.html#af2246535e2d275646d40bb6223b69ab4">non_0_digit</a></div><div class="ttdeci">bool non_0_digit(const char *str, int length)</div></div>
-<div class="ttc" id="aa00155_html_a35ed905845d187cb2e5ec9a6250caeac"><div class="ttname"><a href="a00155.html#a35ed905845d187cb2e5ec9a6250caeac">word_contains_non_1_digit</a></div><div class="ttdeci">bool word_contains_non_1_digit(const char *word, const char *word_lengths)</div></div>
-<div class="ttc" id="aa02372_html_afc15fa7c1b5ad55d6772dea0d6865df1"><div class="ttname"><a href="a02372.html#afc15fa7c1b5ad55d6772dea0d6865df1">WERD_RES::word</a></div><div class="ttdeci">WERD * word</div><div class="ttdef"><b>Definition:</b> <a href="a00323_source.html#l00180">pageres.h:180</a></div></div>
-<div class="ttc" id="aa00155_html_a619bb19b0a304dcfa4e73be192ace9c5"><div class="ttname"><a href="a00155.html#a619bb19b0a304dcfa4e73be192ace9c5">flip_0O</a></div><div class="ttdeci">void flip_0O(WERD_RES *word)</div></div>
-<div class="ttc" id="aa00155_html_a38678800d902519bdb0b6dcff44e5ee8"><div class="ttname"><a href="a00155.html#a38678800d902519bdb0b6dcff44e5ee8">reject_blanks</a></div><div class="ttdeci">void reject_blanks(WERD_RES *word)</div><div class="ttdef"><b>Definition:</b> <a href="a00152_source.html#l00178">reject.cpp:178</a></div></div>
-<div class="ttc" id="aa00155_html_a24694172b77bc1092fb404873485b1c3"><div class="ttname"><a href="a00155.html#a24694172b77bc1092fb404873485b1c3">flip_hyphens</a></div><div class="ttdeci">void flip_hyphens(WERD_RES *word)</div></div>
-<div class="ttc" id="aa00155_html_ad83dc1005097e689a58b493e14b943a6"><div class="ttname"><a href="a00155.html#ad83dc1005097e689a58b493e14b943a6">dont_allow_1Il</a></div><div class="ttdeci">void dont_allow_1Il(WERD_RES *word)</div></div>
-<div class="ttc" id="aa00155_html_a7769557523c23cea384f550ae030e5ba"><div class="ttname"><a href="a00155.html#a7769557523c23cea384f550ae030e5ba">compute_reject_threshold</a></div><div class="ttdeci">float compute_reject_threshold(WERD_CHOICE *word)</div><div class="ttdef"><b>Definition:</b> <a href="a00152_source.html#l00225">reject.cpp:225</a></div></div>
+<div class="ttc" id="aa02486_html_a42df7b8e352be1e5a140787109419f93"><div class="ttname"><a href="a02486.html#a42df7b8e352be1e5a140787109419f93">tesseract::PageIterator::it_</a></div><div class="ttdeci">PAGE_RES_IT * it_</div><div class="ttdef"><b>Definition:</b> <a href="a00026_source.html#l00332">pageiterator.h:332</a></div></div>
+<div class="ttc" id="aa02658_html"><div class="ttname"><a href="a02658.html">tesseract::Tesseract</a></div><div class="ttdef"><b>Definition:</b> <a href="a00224_source.html#l00172">tesseractclass.h:172</a></div></div>
+<div class="ttc" id="aa02582_html_ab8f0407490b81601af672c339aaa5d7a"><div class="ttname"><a href="a02582.html#ab8f0407490b81601af672c339aaa5d7a">tesseract::MutableIterator::PageResIt</a></div><div class="ttdeci">const PAGE_RES_IT * PageResIt() const</div><div class="ttdef"><b>Definition:</b> <a href="a00155_source.html#l00059">mutableiterator.h:59</a></div></div>
+<div class="ttc" id="aa02454_html"><div class="ttname"><a href="a02454.html">tesseract::LTRResultIterator</a></div><div class="ttdef"><b>Definition:</b> <a href="a00017_source.html#l00047">ltrresultiterator.h:47</a></div></div>
+<div class="ttc" id="aa00038_html"><div class="ttname"><a href="a00038.html">resultiterator.h</a></div></div>
+<div class="ttc" id="aa02582_html_abfb0922afb796635750b349d98177bf4"><div class="ttname"><a href="a02582.html#abfb0922afb796635750b349d98177bf4">tesseract::MutableIterator::MutableIterator</a></div><div class="ttdeci">MutableIterator(PAGE_RES *page_res, Tesseract *tesseract, int scale, int scaled_yres, int rect_left, int rect_top, int rect_width, int rect_height)</div><div class="ttdef"><b>Definition:</b> <a href="a00155_source.html#l00047">mutableiterator.h:47</a></div></div>
+<div class="ttc" id="aa01818_html"><div class="ttname"><a href="a01818.html">tesseract</a></div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00065">baseapi.h:65</a></div></div>
+<div class="ttc" id="aa02818_html"><div class="ttname"><a href="a02818.html">PAGE_RES</a></div><div class="ttdef"><b>Definition:</b> <a href="a00374_source.html#l00073">pageres.h:73</a></div></div>
+<div class="ttc" id="aa02834_html"><div class="ttname"><a href="a02834.html">PAGE_RES_IT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00374_source.html#l00668">pageres.h:668</a></div></div>
+<div class="ttc" id="aa02534_html"><div class="ttname"><a href="a02534.html">tesseract::ResultIterator</a></div><div class="ttdef"><b>Definition:</b> <a href="a00038_source.html#l00044">resultiterator.h:44</a></div></div>
+<div class="ttc" id="aa02582_html_ad32d5656ea2aa654b700600b41c07f90"><div class="ttname"><a href="a02582.html#ad32d5656ea2aa654b700600b41c07f90">tesseract::MutableIterator::~MutableIterator</a></div><div class="ttdeci">~MutableIterator() override</div></div>
+<div class="ttc" id="aa02582_html"><div class="ttname"><a href="a02582.html">tesseract::MutableIterator</a></div><div class="ttdef"><b>Definition:</b> <a href="a00155_source.html#l00044">mutableiterator.h:44</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_43edf6714a3bf7b9dbcd0e0e50a1a1a7.html">ccmain</a></li><li class="navelem"><a class="el" href="a00155.html">reject.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:14 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_43edf6714a3bf7b9dbcd0e0e50a1a1a7.html">ccmain</a></li><li class="navelem"><a class="el" href="a00155.html">mutableiterator.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:19 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

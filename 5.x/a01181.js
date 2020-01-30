@@ -1,9 +1,7 @@
 var a01181 =
 [
-    [ "ClassifierName", "a01181.html#a87c21c76ec4382d7198af1742eef44f6", [
-      [ "CN_PRUNER", "a01181.html#a87c21c76ec4382d7198af1742eef44f6a31b46596c5b8ddd5c28b43d3164b6430", null ],
-      [ "CN_FULL", "a01181.html#a87c21c76ec4382d7198af1742eef44f6a1e554cbfcb457dd689fed35534aabb5b", null ],
-      [ "CN_COUNT", "a01181.html#a87c21c76ec4382d7198af1742eef44f6a7ff10b528f0218e5f5a6e09119423563", null ]
-    ] ],
-    [ "main", "a01181.html#a3c04138a5bfe5d72780bb7e82a18e627", null ]
+    [ "WordWithBox", "a03802.html", "a03802" ],
+    [ "Textord", "a03806.html", "a03806" ],
+    [ "WordGrid", "a01181.html#a31fbe34a4156601f59e4a38c9ffb17bd", null ],
+    [ "WordSearch", "a01181.html#afb579fb147022de61399306507e3412d", null ]
 ];

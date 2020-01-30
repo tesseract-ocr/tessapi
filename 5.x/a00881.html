@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/lstm/reconfig.cpp File Reference</title>
+<title>tesseract: /tesseract/src/lstm/lstm.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,27 +87,104 @@ $(document).ready(function(){initNavTree('a00881.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#define-members">Macros</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
-<div class="title">reconfig.cpp File Reference</div>  </div>
+<div class="title">lstm.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="a00884_source.html">reconfig.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a00884_source.html">lstm.h</a>&quot;</code><br />
+<code>#include &lt;cstdio&gt;</code><br />
+<code>#include &lt;cstdlib&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00863_source.html">fullyconnected.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00869_source.html">functions.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00911_source.html">networkscratch.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00584_source.html">tprintf.h</a>&quot;</code><br />
 </div>
 <p><a href="a00881_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a01539"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html">tesseract</a></td></tr>
+<tr class="memitem:a01818"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html">tesseract</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a640e05199d977160f5b1adbeb0b7526a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00881.html#a640e05199d977160f5b1adbeb0b7526a">PARALLEL_IF_OPENMP</a>(__num_threads)</td></tr>
+<tr class="separator:a640e05199d977160f5b1adbeb0b7526a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a928a2b0f3f970a1c396c0789bdd19c74"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00881.html#a928a2b0f3f970a1c396c0789bdd19c74">SECTION_IF_OPENMP</a></td></tr>
+<tr class="separator:a928a2b0f3f970a1c396c0789bdd19c74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a485889d32a3c44b62120ea4db9ca5dd8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00881.html#a485889d32a3c44b62120ea4db9ca5dd8">END_PARALLEL_IF_OPENMP</a></td></tr>
+<tr class="separator:a485889d32a3c44b62120ea4db9ca5dd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a26d5ed25b47e7e5674b03d9c62115686"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a26d5ed25b47e7e5674b03d9c62115686">tesseract::kStateClip</a> = 100.0</td></tr>
+<tr class="separator:a26d5ed25b47e7e5674b03d9c62115686"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20a569eeb48232f976204ba74145f99f"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a20a569eeb48232f976204ba74145f99f">tesseract::kErrClip</a> = 1.0f</td></tr>
+<tr class="separator:a20a569eeb48232f976204ba74145f99f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a485889d32a3c44b62120ea4db9ca5dd8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a485889d32a3c44b62120ea4db9ca5dd8">&#9670;&nbsp;</a></span>END_PARALLEL_IF_OPENMP</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define END_PARALLEL_IF_OPENMP</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00881_source.html#l00061">61</a> of file <a class="el" href="a00881_source.html">lstm.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a640e05199d977160f5b1adbeb0b7526a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a640e05199d977160f5b1adbeb0b7526a">&#9670;&nbsp;</a></span>PARALLEL_IF_OPENMP</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PARALLEL_IF_OPENMP</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">__num_threads</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00881_source.html#l00059">59</a> of file <a class="el" href="a00881_source.html">lstm.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a928a2b0f3f970a1c396c0789bdd19c74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a928a2b0f3f970a1c396c0789bdd19c74">&#9670;&nbsp;</a></span>SECTION_IF_OPENMP</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SECTION_IF_OPENMP</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00881_source.html#l00060">60</a> of file <a class="el" href="a00881_source.html">lstm.cpp</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_57c32823bf7301c39893cc8d5b3eca8e.html">lstm</a></li><li class="navelem"><a class="el" href="a00881.html">reconfig.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_57c32823bf7301c39893cc8d5b3eca8e.html">lstm</a></li><li class="navelem"><a class="el" href="a00881.html">lstm.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

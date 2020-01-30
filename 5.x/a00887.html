@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/lstm/reversed.cpp File Reference</title>
+<title>tesseract: /tesseract/src/lstm/lstmrecognizer.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,29 +87,52 @@ $(document).ready(function(){initNavTree('a00887.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
-<div class="title">reversed.cpp File Reference</div>  </div>
+<div class="title">lstmrecognizer.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="a00890_source.html">reversed.h</a>&quot;</code><br />
-<code>#include &lt;cstdio&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00860_source.html">networkscratch.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a00890_source.html">lstmrecognizer.h</a>&quot;</code><br />
+<code>#include &quot;allheaders.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00797_source.html">callcpp.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00830_source.html">dict.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00521_source.html">genericheap.h</a>&quot;</code><br />
+<code>#include &lt;<a class="el" href="a00014_source.html">tesseract/helpers.h</a>&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00320_source.html">imagedata.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00878_source.html">input.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00884_source.html">lstm.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00344_source.html">normalis.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00374_source.html">pageres.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00425_source.html">ratngs.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00929_source.html">recodebeam.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a01469_source.html">scrollview.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00455_source.html">statistc.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00584_source.html">tprintf.h</a>&quot;</code><br />
+<code>#include &lt;unordered_set&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
 </div>
 <p><a href="a00887_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a01539"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html">tesseract</a></td></tr>
+<tr class="memitem:a01818"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html">tesseract</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:ab5c5633364a26b6abb8bb6a9fce2e48c"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#ab5c5633364a26b6abb8bb6a9fce2e48c">tesseract::kDictRatio</a> = 2.25</td></tr>
+<tr class="separator:ab5c5633364a26b6abb8bb6a9fce2e48c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6eb7c7e53c7bea83e22c35d8f406b73e"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a6eb7c7e53c7bea83e22c35d8f406b73e">tesseract::kCertOffset</a> = -0.085</td></tr>
+<tr class="separator:a6eb7c7e53c7bea83e22c35d8f406b73e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_57c32823bf7301c39893cc8d5b3eca8e.html">lstm</a></li><li class="navelem"><a class="el" href="a00887.html">reversed.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_57c32823bf7301c39893cc8d5b3eca8e.html">lstm</a></li><li class="navelem"><a class="el" href="a00887.html">lstmrecognizer.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

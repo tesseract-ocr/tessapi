@@ -1,18 +1,12 @@
 var a00005 =
 [
-    [ "TESS_CHAR", "a02100.html", "a02100" ],
-    [ "_USE_MATH_DEFINES", "a00005.html#a525335710b53cb064ca56b936120431e", null ],
-    [ "HOcrEscape", "a00005.html#a91558c5771a593a5c2e3e62e9ad8e822", null ],
-    [ "kBytesPer64BitNumber", "a00005.html#a6007ea2fe11067865156fb804c36079e", null ],
-    [ "kBytesPerBoxFileLine", "a00005.html#a294e870871cf3fb0928cbd5686346b3d", null ],
-    [ "kBytesPerNumber", "a00005.html#a929cce152875849d022496470235b437", null ],
-    [ "kLatinChs", "a00005.html#a7e0c7c50e2e05e503a51b8c33d35ade6", null ],
-    [ "kMaxBytesPerLine", "a00005.html#a688dc51b653c642009af87c6d9b9dea2", null ],
-    [ "kMaxIntSize", "a00005.html#a3e35711780f8c0254a2dd64071ef2b6b", null ],
-    [ "kMinRectSize", "a00005.html#a11307fd919d7a9313500b04cfc1a8e3d", null ],
-    [ "kNumbersPerBlob", "a00005.html#aa46d9454c58be9a34a7a91737d553900", null ],
-    [ "kTesseractReject", "a00005.html#a1083ed81b6adbb6930e87d0c58671e26", null ],
-    [ "kUniChs", "a00005.html#afa62cc25480d6eee8b1bb2ef4a1f8fc3", null ],
-    [ "kUNLVReject", "a00005.html#a99bec48b41ccb504c28851dbe5b1f106", null ],
-    [ "kUNLVSuspect", "a00005.html#af7e73b761f145b66ffcc7585ed69d940", null ]
+    [ "GenericVector", "a02434.html", "a02434" ],
+    [ "TessBaseAPI", "a02438.html", "a02438" ],
+    [ "DictFunc", "a00005.html#a5e5b2279431c77651014a0ab2ce72772", null ],
+    [ "FillLatticeFunc", "a00005.html#aed8f1c10ec2bbc3ffb4888880fb6beb1", null ],
+    [ "INT_FEATURE", "a00005.html#aaaa6b29a5996502c926c90bf5f114290", null ],
+    [ "ParamsModelClassifyFunc", "a00005.html#ad0fc06e4e712dc5bbfdb207d44e4f09b", null ],
+    [ "ProbabilityInContextFunc", "a00005.html#ad4bde5491dc1e930bcf0196ea34c0655", null ],
+    [ "TruthCallback", "a00005.html#a3ea4f62427e54d64a770bf616c41685b", null ],
+    [ "HOcrEscape", "a00005.html#a91558c5771a593a5c2e3e62e9ad8e822", null ]
 ];

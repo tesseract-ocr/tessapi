@@ -1,11 +1,16 @@
 var a01082 =
 [
-    [ "CrackPos", "a03300.html", "a03300" ],
-    [ "block_edges", "a01082.html#abb7a43f68bf63d405e6cdc4502c328fa", null ],
-    [ "free_crackedges", "a01082.html#a19b3430c0ac6e770e54b8b52a9a991c5", null ],
-    [ "h_edge", "a01082.html#a06f8ee398cd3556fc0d40c5decd25745", null ],
-    [ "join_edges", "a01082.html#a6e23861c825d8a8e48c8b26d75e0b715", null ],
-    [ "line_edges", "a01082.html#ab294257ab80bcdc214889ca190336a62", null ],
-    [ "make_margins", "a01082.html#a26cbd420c42609f65c542dd2a8cf8252", null ],
-    [ "v_edge", "a01082.html#a9f6f7cf3af410407129ae07523fde0db", null ]
+    [ "add_frag_to_list", "a01082.html#a1434d38fe4f3bae685a9a7e57ae920e8", null ],
+    [ "add_repeated_word", "a01082.html#a1182f87de03f2305872227ced1749884", null ],
+    [ "close_chopped_cfragments", "a01082.html#ac4275b5c0c8c10cc8775f51ec5c4aab6", null ],
+    [ "fixed_chop_cblob", "a01082.html#a14a2fd39f601a68966348a6445ea2139", null ],
+    [ "fixed_chop_coutline", "a01082.html#ac5a9e39d6898b062ec682a1080d4130e", null ],
+    [ "fixed_pitch_words", "a01082.html#a847ce086f4000dcaea3f209f5ca70429", null ],
+    [ "fixed_split_coutline", "a01082.html#a1522bb8b2b418f6b1704d571dd036dc8", null ],
+    [ "join_chopped_fragments", "a01082.html#a375591af79f8740853e7c5016d65c7ac", null ],
+    [ "join_segments", "a01082.html#ad2273ca7e91ca8154840f53753a2ee94", null ],
+    [ "save_chop_cfragment", "a01082.html#ab020bb94219216e46a14583f7af4e6a4", null ],
+    [ "split_to_blob", "a01082.html#aabae40f8453c5aa4cf0d7d4e2d08a658", null ],
+    [ "textord_fp_chop_error", "a01082.html#a2a0d157354238600ccd3b59e304b4414", null ],
+    [ "textord_fp_chop_snap", "a01082.html#a001d94f8a785916584f8bdceb4164802", null ]
 ];

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['make_5ffirst_5fbaseline_15215',['make_first_baseline',['../a02428.html#a278b4eb02ff4e584c479bf528b2430ae',1,'QSPLINE']]],
-  ['make_5fholed_5fbaseline_15216',['make_holed_baseline',['../a02428.html#abbfbb7d09880e7770be0fa99282a70c6',1,'QSPLINE']]]
+  ['gridsearch_3c_20bbc_2c_20bbc_5fclist_2c_20bbc_5fc_5fit_20_3e_16767',['GridSearch&lt; BBC, BBC_CLIST, BBC_C_IT &gt;',['../a03646.html#a63d895957e5663cd516fde667084fca6',1,'tesseract::BBGrid']]]
 ];

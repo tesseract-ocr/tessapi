@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/classify/mfdefs.h File Reference</title>
+<title>tesseract: /tesseract/src/classify/float2int.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,306 +87,55 @@ $(document).ready(function(){initNavTree('a00665.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#define-members">Macros</a> &#124;
-<a href="#typedef-members">Typedefs</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#define-members">Macros</a>  </div>
   <div class="headertitle">
-<div class="title">mfdefs.h File Reference</div>  </div>
+<div class="title">float2int.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="a00785_source.html">matchdefs.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00758_source.html">oldlist.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a00668_source.html">float2int.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00740_source.html">normmatch.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00722_source.html">mfoutline.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00641_source.html">classify.h</a>&quot;</code><br />
+<code>#include &lt;<a class="el" href="a00014_source.html">tesseract/helpers.h</a>&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00758_source.html">picofeat.h</a>&quot;</code><br />
 </div>
 <p><a href="a00665_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:a01818"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html">tesseract</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a91b4d8b8bc76e243410f648f487b9a1a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00665.html#a91b4d8b8bc76e243410f648f487b9a1a">MFSIZE</a>&#160;&#160;&#160;6</td></tr>
-<tr class="separator:a91b4d8b8bc76e243410f648f487b9a1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa14d8a5c035963734f527261a209c402"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00665.html#aa14d8a5c035963734f527261a209c402">XPOSITION</a>&#160;&#160;&#160;0</td></tr>
-<tr class="separator:aa14d8a5c035963734f527261a209c402"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab4a43f7e9f215f0fb311fdb0f54fe1bf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00665.html#ab4a43f7e9f215f0fb311fdb0f54fe1bf">YPOSITION</a>&#160;&#160;&#160;1</td></tr>
-<tr class="separator:ab4a43f7e9f215f0fb311fdb0f54fe1bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab9af949da5ae4ae116df014c0d22d1e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00665.html#aab9af949da5ae4ae116df014c0d22d1e">MFLENGTH</a>&#160;&#160;&#160;2</td></tr>
-<tr class="separator:aab9af949da5ae4ae116df014c0d22d1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac815b03ec48abf99301f44140ff0b0a9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00665.html#ac815b03ec48abf99301f44140ff0b0a9">ORIENTATION</a>&#160;&#160;&#160;3</td></tr>
-<tr class="separator:ac815b03ec48abf99301f44140ff0b0a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1464eb110ea01416a6590990ef70292"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00665.html#ad1464eb110ea01416a6590990ef70292">FIRSTBULGE</a>&#160;&#160;&#160;4</td></tr>
-<tr class="separator:ad1464eb110ea01416a6590990ef70292"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af4886ef7009ef75f6e3a13ff562feb27"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00665.html#af4886ef7009ef75f6e3a13ff562feb27">SECONDBULGE</a>&#160;&#160;&#160;5</td></tr>
-<tr class="separator:af4886ef7009ef75f6e3a13ff562feb27"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73241e8fe18f28077a7158303e7a126f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00665.html#a73241e8fe18f28077a7158303e7a126f">NextFeatureOf</a>(L)&#160;&#160;&#160;((<a class="el" href="a00665.html#a48288195254495e88ac033d20d13aa31">MICROFEATURE</a>)<a class="el" href="a00758.html#a69547be764424f18b0be535400747978">first_node</a>(L))</td></tr>
-<tr class="separator:a73241e8fe18f28077a7158303e7a126f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:aac5a17ed8297359e2ecee0b481cfd50b"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00665.html#aac5a17ed8297359e2ecee0b481cfd50b">MICROFEATURES</a> = <a class="el" href="a00758.html#a5a5301af82c2874d80478a89424eb475">LIST</a></td></tr>
-<tr class="separator:aac5a17ed8297359e2ecee0b481cfd50b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a982f5f0554d0580d6e919b346a5c0099"><td class="memItemLeft" align="right" valign="top">typedef float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00665.html#a982f5f0554d0580d6e919b346a5c0099">MFBLOCK</a>[<a class="el" href="a00665.html#a91b4d8b8bc76e243410f648f487b9a1a">MFSIZE</a>]</td></tr>
-<tr class="separator:a982f5f0554d0580d6e919b346a5c0099"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48288195254495e88ac033d20d13aa31"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00665.html#a48288195254495e88ac033d20d13aa31">MICROFEATURE</a> = float *</td></tr>
-<tr class="separator:a48288195254495e88ac033d20d13aa31"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a10606897d42fff8ca71fb36795bd581e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00665.html#a48288195254495e88ac033d20d13aa31">MICROFEATURE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00665.html#a10606897d42fff8ca71fb36795bd581e">NewMicroFeature</a> ()</td></tr>
-<tr class="separator:a10606897d42fff8ca71fb36795bd581e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd75dd0b29a6b9bf0c5a31b3484bd0d9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00665.html#afd75dd0b29a6b9bf0c5a31b3484bd0d9">FreeMicroFeatures</a> (<a class="el" href="a00665.html#aac5a17ed8297359e2ecee0b481cfd50b">MICROFEATURES</a> MicroFeatures)</td></tr>
-<tr class="separator:afd75dd0b29a6b9bf0c5a31b3484bd0d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a507d2964a00ad9a1d82e6c5ae21720be"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00665.html#a507d2964a00ad9a1d82e6c5ae21720be">MAX_INT_CHAR_NORM</a>&#160;&#160;&#160;(<a class="el" href="a00698.html#a5a763027f420d44c110f0887f297259c">INT_CHAR_NORM_RANGE</a> - 1)</td></tr>
+<tr class="separator:a507d2964a00ad9a1d82e6c5ae21720be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="ad1464eb110ea01416a6590990ef70292"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad1464eb110ea01416a6590990ef70292">&#9670;&nbsp;</a></span>FIRSTBULGE</h2>
+<a id="a507d2964a00ad9a1d82e6c5ae21720be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a507d2964a00ad9a1d82e6c5ae21720be">&#9670;&nbsp;</a></span>MAX_INT_CHAR_NORM</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define FIRSTBULGE&#160;&#160;&#160;4</td>
+          <td class="memname">#define MAX_INT_CHAR_NORM&#160;&#160;&#160;(<a class="el" href="a00698.html#a5a763027f420d44c110f0887f297259c">INT_CHAR_NORM_RANGE</a> - 1)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00665_source.html#l00039">39</a> of file <a class="el" href="a00665_source.html">mfdefs.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00665_source.html#l00027">27</a> of file <a class="el" href="a00665_source.html">float2int.cpp</a>.</p>
 
-</div>
-</div>
-<a id="aab9af949da5ae4ae116df014c0d22d1e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aab9af949da5ae4ae116df014c0d22d1e">&#9670;&nbsp;</a></span>MFLENGTH</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define MFLENGTH&#160;&#160;&#160;2</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00665_source.html#l00037">37</a> of file <a class="el" href="a00665_source.html">mfdefs.h</a>.</p>
-
-</div>
-</div>
-<a id="a91b4d8b8bc76e243410f648f487b9a1a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a91b4d8b8bc76e243410f648f487b9a1a">&#9670;&nbsp;</a></span>MFSIZE</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define MFSIZE&#160;&#160;&#160;6</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00665_source.html#l00030">30</a> of file <a class="el" href="a00665_source.html">mfdefs.h</a>.</p>
-
-</div>
-</div>
-<a id="a73241e8fe18f28077a7158303e7a126f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a73241e8fe18f28077a7158303e7a126f">&#9670;&nbsp;</a></span>NextFeatureOf</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define NextFeatureOf</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">L</td><td>)</td>
-          <td>&#160;&#160;&#160;((<a class="el" href="a00665.html#a48288195254495e88ac033d20d13aa31">MICROFEATURE</a>)<a class="el" href="a00758.html#a69547be764424f18b0be535400747978">first_node</a>(L))</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<hr  />
- <h2><a class="anchor" id="autotoc_md20"></a>
-Macros</h2>
-
-<p class="definition">Definition at line <a class="el" href="a00665_source.html#l00047">47</a> of file <a class="el" href="a00665_source.html">mfdefs.h</a>.</p>
-
-</div>
-</div>
-<a id="ac815b03ec48abf99301f44140ff0b0a9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac815b03ec48abf99301f44140ff0b0a9">&#9670;&nbsp;</a></span>ORIENTATION</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define ORIENTATION&#160;&#160;&#160;3</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00665_source.html#l00038">38</a> of file <a class="el" href="a00665_source.html">mfdefs.h</a>.</p>
-
-</div>
-</div>
-<a id="af4886ef7009ef75f6e3a13ff562feb27"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af4886ef7009ef75f6e3a13ff562feb27">&#9670;&nbsp;</a></span>SECONDBULGE</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define SECONDBULGE&#160;&#160;&#160;5</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00665_source.html#l00040">40</a> of file <a class="el" href="a00665_source.html">mfdefs.h</a>.</p>
-
-</div>
-</div>
-<a id="aa14d8a5c035963734f527261a209c402"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa14d8a5c035963734f527261a209c402">&#9670;&nbsp;</a></span>XPOSITION</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define XPOSITION&#160;&#160;&#160;0</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00665_source.html#l00035">35</a> of file <a class="el" href="a00665_source.html">mfdefs.h</a>.</p>
-
-</div>
-</div>
-<a id="ab4a43f7e9f215f0fb311fdb0f54fe1bf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab4a43f7e9f215f0fb311fdb0f54fe1bf">&#9670;&nbsp;</a></span>YPOSITION</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define YPOSITION&#160;&#160;&#160;1</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00665_source.html#l00036">36</a> of file <a class="el" href="a00665_source.html">mfdefs.h</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Typedef Documentation</h2>
-<a id="a982f5f0554d0580d6e919b346a5c0099"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a982f5f0554d0580d6e919b346a5c0099">&#9670;&nbsp;</a></span>MFBLOCK</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef float MFBLOCK[<a class="el" href="a00665.html#a91b4d8b8bc76e243410f648f487b9a1a">MFSIZE</a>]</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00665_source.html#l00031">31</a> of file <a class="el" href="a00665_source.html">mfdefs.h</a>.</p>
-
-</div>
-</div>
-<a id="a48288195254495e88ac033d20d13aa31"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a48288195254495e88ac033d20d13aa31">&#9670;&nbsp;</a></span>MICROFEATURE</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="a00665.html#a48288195254495e88ac033d20d13aa31">MICROFEATURE</a> =  float*</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00665_source.html#l00032">32</a> of file <a class="el" href="a00665_source.html">mfdefs.h</a>.</p>
-
-</div>
-</div>
-<a id="aac5a17ed8297359e2ecee0b481cfd50b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aac5a17ed8297359e2ecee0b481cfd50b">&#9670;&nbsp;</a></span>MICROFEATURES</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="a00665.html#aac5a17ed8297359e2ecee0b481cfd50b">MICROFEATURES</a> =  <a class="el" href="a00758.html#a5a5301af82c2874d80478a89424eb475">LIST</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<hr  />
- <h2><a class="anchor" id="autotoc_md19"></a>
-Include Files and Type Defines</h2>
-
-<p class="definition">Definition at line <a class="el" href="a00665_source.html#l00027">27</a> of file <a class="el" href="a00665_source.html">mfdefs.h</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="afd75dd0b29a6b9bf0c5a31b3484bd0d9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afd75dd0b29a6b9bf0c5a31b3484bd0d9">&#9670;&nbsp;</a></span>FreeMicroFeatures()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void FreeMicroFeatures </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00665.html#aac5a17ed8297359e2ecee0b481cfd50b">MICROFEATURES</a>&#160;</td>
-          <td class="paramname"><em>MicroFeatures</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>This routine deallocates all of the memory consumed by a list of micro-features. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">MicroFeatures</td><td>list of micro-features to be freed </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="a00662_source.html#l00041">41</a> of file <a class="el" href="a00662_source.html">mfdefs.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                                                    {</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <a class="code" href="a00755.html#a1a1efc1a269e5bb5bf16c1a174363ba4">destroy_nodes</a>(MicroFeatures, <a class="code" href="a00749.html#af846576ae65dc13e49ddc616e17baa27">Efree</a>);</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a10606897d42fff8ca71fb36795bd581e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a10606897d42fff8ca71fb36795bd581e">&#9670;&nbsp;</a></span>NewMicroFeature()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00665.html#a48288195254495e88ac033d20d13aa31">MICROFEATURE</a> NewMicroFeature </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<hr  />
- <h2><a class="anchor" id="autotoc_md21"></a>
-Public Function Prototypes</h2>
-<p>This routine allocates and returns a new micro-feature data structure. </p><dl class="section return"><dt>Returns</dt><dd>New MICROFEATURE </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="a00662_source.html#l00032">32</a> of file <a class="el" href="a00662_source.html">mfdefs.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;                               {</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <span class="keywordflow">return</span> (static_cast&lt;MICROFEATURE&gt;(<a class="code" href="a00749.html#a9bdc0885c33bbb5b062c77b1d90e2305">Emalloc</a> (<span class="keyword">sizeof</span> (<a class="code" href="a00665.html#a982f5f0554d0580d6e919b346a5c0099">MFBLOCK</a>))));</div>
-</div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa00665_html_a982f5f0554d0580d6e919b346a5c0099"><div class="ttname"><a href="a00665.html#a982f5f0554d0580d6e919b346a5c0099">MFBLOCK</a></div><div class="ttdeci">float MFBLOCK[MFSIZE]</div><div class="ttdef"><b>Definition:</b> <a href="a00665_source.html#l00031">mfdefs.h:31</a></div></div>
-<div class="ttc" id="aa00749_html_a9bdc0885c33bbb5b062c77b1d90e2305"><div class="ttname"><a href="a00749.html#a9bdc0885c33bbb5b062c77b1d90e2305">Emalloc</a></div><div class="ttdeci">void * Emalloc(int Size)</div><div class="ttdef"><b>Definition:</b> <a href="a00749_source.html#l00031">emalloc.cpp:31</a></div></div>
-<div class="ttc" id="aa00749_html_af846576ae65dc13e49ddc616e17baa27"><div class="ttname"><a href="a00749.html#af846576ae65dc13e49ddc616e17baa27">Efree</a></div><div class="ttdeci">void Efree(void *ptr)</div><div class="ttdef"><b>Definition:</b> <a href="a00749_source.html#l00045">emalloc.cpp:45</a></div></div>
-<div class="ttc" id="aa00755_html_a1a1efc1a269e5bb5bf16c1a174363ba4"><div class="ttname"><a href="a00755.html#a1a1efc1a269e5bb5bf16c1a174363ba4">destroy_nodes</a></div><div class="ttdeci">void destroy_nodes(LIST list, void_dest destructor)</div><div class="ttdef"><b>Definition:</b> <a href="a00755_source.html#l00138">oldlist.cpp:138</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b8f5fb7b736ee5431a221bc7b817d6e0.html">classify</a></li><li class="navelem"><a class="el" href="a00665.html">mfdefs.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b8f5fb7b736ee5431a221bc7b817d6e0.html">classify</a></li><li class="navelem"><a class="el" href="a00665.html">float2int.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

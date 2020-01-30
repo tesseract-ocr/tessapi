@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/classify/shapeclassifier.h File Reference</title>
+<title>tesseract: /tesseract/src/classify/mfoutline.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,37 +87,785 @@ $(document).ready(function(){initNavTree('a00719.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">shapeclassifier.h File Reference</div>  </div>
+<div class="title">mfoutline.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;tesseract/unichar.h&gt;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a00653_source.html">clusttool.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00722_source.html">mfoutline.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00260_source.html">blobs.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00728_source.html">mfx.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00554_source.html">params.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00641_source.html">classify.h</a>&quot;</code><br />
+<code>#include &lt;cmath&gt;</code><br />
+<code>#include &lt;cstdio&gt;</code><br />
 </div>
 <p><a href="a00719_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02108.html">GenericVector&lt; T &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02880.html">tesseract::PointerVector&lt; T &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02884.html">tesseract::ShapeClassifier</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a01539"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html">tesseract</a></td></tr>
+<tr class="memitem:a01818"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html">tesseract</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a4acb6328d74e385e88c02c45e1306b97"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00809.html#a5a5301af82c2874d80478a89424eb475">LIST</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00719.html#a4acb6328d74e385e88c02c45e1306b97">ConvertBlob</a> (<a class="el" href="a02690.html">TBLOB</a> *blob)</td></tr>
+<tr class="separator:a4acb6328d74e385e88c02c45e1306b97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ddc957cfa64a7dc50f9a3836319e766"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00722.html#a88f6c3506e81059ed00e2ab9e99334a3">MFOUTLINE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00719.html#a8ddc957cfa64a7dc50f9a3836319e766">ConvertOutline</a> (<a class="el" href="a02686.html">TESSLINE</a> *outline)</td></tr>
+<tr class="separator:a8ddc957cfa64a7dc50f9a3836319e766"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d507cbf8bfa947b364ed74f5cb160cd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00809.html#a5a5301af82c2874d80478a89424eb475">LIST</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00719.html#a4d507cbf8bfa947b364ed74f5cb160cd">ConvertOutlines</a> (<a class="el" href="a02686.html">TESSLINE</a> *outline, <a class="el" href="a00809.html#a5a5301af82c2874d80478a89424eb475">LIST</a> mf_outlines, <a class="el" href="a00722.html#abace9421f1a42147c8af40a950bc7203">OUTLINETYPE</a> outline_type)</td></tr>
+<tr class="separator:a4d507cbf8bfa947b364ed74f5cb160cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8686a08c5566ba3373b3553c3486ade8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00719.html#a8686a08c5566ba3373b3553c3486ade8">FindDirectionChanges</a> (<a class="el" href="a00722.html#a88f6c3506e81059ed00e2ab9e99334a3">MFOUTLINE</a> Outline, float MinSlope, float MaxSlope)</td></tr>
+<tr class="separator:a8686a08c5566ba3373b3553c3486ade8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4633687049466a4f28d70775b0481431"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00719.html#a4633687049466a4f28d70775b0481431">FreeMFOutline</a> (void *arg)</td></tr>
+<tr class="separator:a4633687049466a4f28d70775b0481431"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a553352ad44661adad2a80a24ac78aeaf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00719.html#a553352ad44661adad2a80a24ac78aeaf">FreeOutlines</a> (<a class="el" href="a00809.html#a5a5301af82c2874d80478a89424eb475">LIST</a> Outlines)</td></tr>
+<tr class="separator:a553352ad44661adad2a80a24ac78aeaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa2531f8656ba496465bc23ff1a2f99c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00719.html#afa2531f8656ba496465bc23ff1a2f99c">MarkDirectionChanges</a> (<a class="el" href="a00722.html#a88f6c3506e81059ed00e2ab9e99334a3">MFOUTLINE</a> Outline)</td></tr>
+<tr class="separator:afa2531f8656ba496465bc23ff1a2f99c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a917b406f8854b822d8cf2eb2480e6684"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a03306.html">MFEDGEPT</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00719.html#a917b406f8854b822d8cf2eb2480e6684">NewEdgePoint</a> ()</td></tr>
+<tr class="separator:a917b406f8854b822d8cf2eb2480e6684"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af520bd5bba313216d0b6fb9e58041266"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00722.html#a88f6c3506e81059ed00e2ab9e99334a3">MFOUTLINE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00719.html#af520bd5bba313216d0b6fb9e58041266">NextExtremity</a> (<a class="el" href="a00722.html#a88f6c3506e81059ed00e2ab9e99334a3">MFOUTLINE</a> EdgePoint)</td></tr>
+<tr class="separator:af520bd5bba313216d0b6fb9e58041266"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c8d13baa5320139d699337868cde2a8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00719.html#a5c8d13baa5320139d699337868cde2a8">NormalizeOutline</a> (<a class="el" href="a00722.html#a88f6c3506e81059ed00e2ab9e99334a3">MFOUTLINE</a> Outline, float XOrigin)</td></tr>
+<tr class="separator:a5c8d13baa5320139d699337868cde2a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd95d6d2be6406aea26fbf0f0bf157ae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00719.html#abd95d6d2be6406aea26fbf0f0bf157ae">ChangeDirection</a> (<a class="el" href="a00722.html#a88f6c3506e81059ed00e2ab9e99334a3">MFOUTLINE</a> Start, <a class="el" href="a00722.html#a88f6c3506e81059ed00e2ab9e99334a3">MFOUTLINE</a> End, <a class="el" href="a00722.html#a66289eb077ac8e91c2f0b9c0d7e3e653">DIRECTION</a> Direction)</td></tr>
+<tr class="separator:abd95d6d2be6406aea26fbf0f0bf157ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5936ef194bb508756e2b1b891c31ece"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00719.html#af5936ef194bb508756e2b1b891c31ece">CharNormalizeOutline</a> (<a class="el" href="a00722.html#a88f6c3506e81059ed00e2ab9e99334a3">MFOUTLINE</a> Outline, const <a class="el" href="a02798.html">DENORM</a> &amp;cn_denorm)</td></tr>
+<tr class="separator:af5936ef194bb508756e2b1b891c31ece"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a659801969668b8d7e376b43fef4c90e8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00719.html#a659801969668b8d7e376b43fef4c90e8">ComputeDirection</a> (<a class="el" href="a03306.html">MFEDGEPT</a> *Start, <a class="el" href="a03306.html">MFEDGEPT</a> *Finish, float MinSlope, float MaxSlope)</td></tr>
+<tr class="separator:a659801969668b8d7e376b43fef4c90e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a224d838335416038dcb0348f665f5a05"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00722.html#a88f6c3506e81059ed00e2ab9e99334a3">MFOUTLINE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00719.html#a224d838335416038dcb0348f665f5a05">NextDirectionChange</a> (<a class="el" href="a00722.html#a88f6c3506e81059ed00e2ab9e99334a3">MFOUTLINE</a> EdgePoint)</td></tr>
+<tr class="separator:a224d838335416038dcb0348f665f5a05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="abd95d6d2be6406aea26fbf0f0bf157ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd95d6d2be6406aea26fbf0f0bf157ae">&#9670;&nbsp;</a></span>ChangeDirection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ChangeDirection </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00722.html#a88f6c3506e81059ed00e2ab9e99334a3">MFOUTLINE</a>&#160;</td>
+          <td class="paramname"><em>Start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00722.html#a88f6c3506e81059ed00e2ab9e99334a3">MFOUTLINE</a>&#160;</td>
+          <td class="paramname"><em>End</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00722.html#a66289eb077ac8e91c2f0b9c0d7e3e653">DIRECTION</a>&#160;</td>
+          <td class="paramname"><em>Direction</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Change the direction of every vector in the specified outline segment to Direction. The segment to be changed starts at Start and ends at End. Note that the previous direction of End must also be changed to reflect the change in direction of the point before it. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Start</td><td>defines start of segment of outline to be modified </td></tr>
+    <tr><td class="paramname">End</td><td>defines end of segment of outline to be modified </td></tr>
+    <tr><td class="paramname">Direction</td><td>new direction to assign to segment </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00719_source.html#l00309">309</a> of file <a class="el" href="a00719_source.html">mfoutline.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;                                                                          {</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;  <a class="code" href="a03374.html">MFOUTLINE</a> Current;</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160; </div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;  <span class="keywordflow">for</span> (Current = Start; Current != End; Current = NextPointAfter (Current))</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;    PointAt (Current)-&gt;Direction = Direction;</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160; </div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;  PointAt (End)-&gt;PreviousDirection = Direction;</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160; </div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="af5936ef194bb508756e2b1b891c31ece"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5936ef194bb508756e2b1b891c31ece">&#9670;&nbsp;</a></span>CharNormalizeOutline()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CharNormalizeOutline </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00722.html#a88f6c3506e81059ed00e2ab9e99334a3">MFOUTLINE</a>&#160;</td>
+          <td class="paramname"><em>Outline</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="a02798.html">DENORM</a> &amp;&#160;</td>
+          <td class="paramname"><em>cn_denorm</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This routine normalizes each point in Outline by translating it to the specified center and scaling it anisotropically according to the given scale factors. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Outline</td><td>outline to be character normalized </td></tr>
+    <tr><td class="paramname">cn_denorm</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00719_source.html#l00326">326</a> of file <a class="el" href="a00719_source.html">mfoutline.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;                                                                      {</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;  <a class="code" href="a03374.html">MFOUTLINE</a> First, Current;</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;  <a class="code" href="a03306.html">MFEDGEPT</a> *CurrentPoint;</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160; </div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;  <span class="keywordflow">if</span> (Outline == <a class="code" href="a00809.html#ae212530ca629c67513698e988c705a5a">NIL_LIST</a>)</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160; </div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;  First = Outline;</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;  Current = First;</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;  <span class="keywordflow">do</span> {</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    CurrentPoint = PointAt(Current);</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;    <a class="code" href="a02866.html">FCOORD</a> pos(CurrentPoint-&gt;<a class="code" href="a03306.html#a2b633b56b9a1a71a23551e387b7c8af4">Point</a>.<a class="code" href="a03222.html#add242df27ddbc90edf732823e38eb844">x</a>, CurrentPoint-&gt;<a class="code" href="a03306.html#a2b633b56b9a1a71a23551e387b7c8af4">Point</a>.<a class="code" href="a03222.html#ac396edee922ba896114b00d8715dd207">y</a>);</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;    cn_denorm.<a class="code" href="a02798.html#ab92a713c132564104cbe9bb9709ad55b">LocalNormTransform</a>(pos, &amp;pos);</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;    CurrentPoint-&gt;<a class="code" href="a03306.html#a2b633b56b9a1a71a23551e387b7c8af4">Point</a>.<a class="code" href="a03222.html#add242df27ddbc90edf732823e38eb844">x</a> = (pos.x() - UINT8_MAX / 2) * <a class="code" href="a00722.html#a2fe8b8a3fa428a5955d5fbfeafc4dba3">MF_SCALE_FACTOR</a>;</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;    CurrentPoint-&gt;<a class="code" href="a03306.html#a2b633b56b9a1a71a23551e387b7c8af4">Point</a>.<a class="code" href="a03222.html#ac396edee922ba896114b00d8715dd207">y</a> = (pos.y() - UINT8_MAX / 2) * <a class="code" href="a00722.html#a2fe8b8a3fa428a5955d5fbfeafc4dba3">MF_SCALE_FACTOR</a>;</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160; </div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;    Current = NextPointAfter(Current);</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;  }</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;  <span class="keywordflow">while</span> (Current != First);</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160; </div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a659801969668b8d7e376b43fef4c90e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a659801969668b8d7e376b43fef4c90e8">&#9670;&nbsp;</a></span>ComputeDirection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ComputeDirection </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a03306.html">MFEDGEPT</a> *&#160;</td>
+          <td class="paramname"><em>Start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a03306.html">MFEDGEPT</a> *&#160;</td>
+          <td class="paramname"><em>Finish</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>MinSlope</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>MaxSlope</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This routine computes the slope from Start to Finish and and then computes the approximate direction of the line segment from Start to Finish. The direction is quantized into 8 buckets: N, S, E, W, NE, NW, SE, SW Both the slope and the direction are then stored into the appropriate fields of the Start edge point. The direction is also stored into the PreviousDirection field of the Finish edge point. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Start</td><td>starting point to compute direction from </td></tr>
+    <tr><td class="paramname">Finish</td><td>finishing point to compute direction to </td></tr>
+    <tr><td class="paramname">MinSlope</td><td>slope below which lines are horizontal </td></tr>
+    <tr><td class="paramname">MaxSlope</td><td>slope above which lines are vertical </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00719_source.html#l00363">363</a> of file <a class="el" href="a00719_source.html">mfoutline.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;                                      {</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;  <a class="code" href="a03222.html">FVECTOR</a> Delta;</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160; </div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;  Delta.<a class="code" href="a03222.html#add242df27ddbc90edf732823e38eb844">x</a> = Finish-&gt;<a class="code" href="a03306.html#a2b633b56b9a1a71a23551e387b7c8af4">Point</a>.<a class="code" href="a03222.html#add242df27ddbc90edf732823e38eb844">x</a> - Start-&gt;<a class="code" href="a03306.html#a2b633b56b9a1a71a23551e387b7c8af4">Point</a>.<a class="code" href="a03222.html#add242df27ddbc90edf732823e38eb844">x</a>;</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;  Delta.<a class="code" href="a03222.html#ac396edee922ba896114b00d8715dd207">y</a> = Finish-&gt;<a class="code" href="a03306.html#a2b633b56b9a1a71a23551e387b7c8af4">Point</a>.<a class="code" href="a03222.html#ac396edee922ba896114b00d8715dd207">y</a> - Start-&gt;<a class="code" href="a03306.html#a2b633b56b9a1a71a23551e387b7c8af4">Point</a>.<a class="code" href="a03222.html#ac396edee922ba896114b00d8715dd207">y</a>;</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;  <span class="keywordflow">if</span> (Delta.<a class="code" href="a03222.html#add242df27ddbc90edf732823e38eb844">x</a> == 0) {</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;    <span class="keywordflow">if</span> (Delta.<a class="code" href="a03222.html#ac396edee922ba896114b00d8715dd207">y</a> &lt; 0) {</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;      Start-&gt;<a class="code" href="a03306.html#a58b6e7389f57060c18eb447cac8e8795">Slope</a> = -FLT_MAX;</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;      Start-&gt;<a class="code" href="a03306.html#a2b987163e368c4d0a3c4d027b5619665">Direction</a> = <a class="code" href="a00722.html#a66289eb077ac8e91c2f0b9c0d7e3e653a035a454a75284b5dc261bd500ab311ed">south</a>;</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;      Start-&gt;<a class="code" href="a03306.html#a58b6e7389f57060c18eb447cac8e8795">Slope</a> = FLT_MAX;</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;      Start-&gt;<a class="code" href="a03306.html#a2b987163e368c4d0a3c4d027b5619665">Direction</a> = <a class="code" href="a00722.html#a66289eb077ac8e91c2f0b9c0d7e3e653a257e6b7fcd6ccb860083f20eb9bd660d">north</a>;</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;    }</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;  } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;    Start-&gt;<a class="code" href="a03306.html#a58b6e7389f57060c18eb447cac8e8795">Slope</a> = Delta.<a class="code" href="a03222.html#ac396edee922ba896114b00d8715dd207">y</a> / Delta.<a class="code" href="a03222.html#add242df27ddbc90edf732823e38eb844">x</a>;</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;    <span class="keywordflow">if</span> (Delta.<a class="code" href="a03222.html#add242df27ddbc90edf732823e38eb844">x</a> &gt; 0) {</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;      <span class="keywordflow">if</span> (Delta.<a class="code" href="a03222.html#ac396edee922ba896114b00d8715dd207">y</a> &gt; 0) {</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;        <span class="keywordflow">if</span> (Start-&gt;<a class="code" href="a03306.html#a58b6e7389f57060c18eb447cac8e8795">Slope</a> &gt; MinSlope) {</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;          <span class="keywordflow">if</span> (Start-&gt;<a class="code" href="a03306.html#a58b6e7389f57060c18eb447cac8e8795">Slope</a> &lt; MaxSlope) {</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;            Start-&gt;<a class="code" href="a03306.html#a2b987163e368c4d0a3c4d027b5619665">Direction</a> = <a class="code" href="a00722.html#a66289eb077ac8e91c2f0b9c0d7e3e653ae3b4c14104592166f37bd10677137b23">northeast</a>;</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;          } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;            Start-&gt;<a class="code" href="a03306.html#a2b987163e368c4d0a3c4d027b5619665">Direction</a> = <a class="code" href="a00722.html#a66289eb077ac8e91c2f0b9c0d7e3e653a257e6b7fcd6ccb860083f20eb9bd660d">north</a>;</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;          }</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;          Start-&gt;<a class="code" href="a03306.html#a2b987163e368c4d0a3c4d027b5619665">Direction</a> = <a class="code" href="a00722.html#a66289eb077ac8e91c2f0b9c0d7e3e653a1be79cd4775c5384e197f1031580b10a">east</a>;</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;        }</div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;      }</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;      <span class="keywordflow">else</span> <span class="keywordflow">if</span> (Start-&gt;<a class="code" href="a03306.html#a58b6e7389f57060c18eb447cac8e8795">Slope</a> &lt; -MinSlope) {</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;        <span class="keywordflow">if</span> (Start-&gt;<a class="code" href="a03306.html#a58b6e7389f57060c18eb447cac8e8795">Slope</a> &gt; -MaxSlope) {</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;          Start-&gt;<a class="code" href="a03306.html#a2b987163e368c4d0a3c4d027b5619665">Direction</a> = <a class="code" href="a00722.html#a66289eb077ac8e91c2f0b9c0d7e3e653ae1fe6949267a85f8ffd113c0eb67116a">southeast</a>;</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;          Start-&gt;<a class="code" href="a03306.html#a2b987163e368c4d0a3c4d027b5619665">Direction</a> = <a class="code" href="a00722.html#a66289eb077ac8e91c2f0b9c0d7e3e653a035a454a75284b5dc261bd500ab311ed">south</a>;</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;        }</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;      } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;        Start-&gt;<a class="code" href="a03306.html#a2b987163e368c4d0a3c4d027b5619665">Direction</a> = <a class="code" href="a00722.html#a66289eb077ac8e91c2f0b9c0d7e3e653a1be79cd4775c5384e197f1031580b10a">east</a>;</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;      }</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (Delta.<a class="code" href="a03222.html#ac396edee922ba896114b00d8715dd207">y</a> &gt; 0) {</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;      <span class="keywordflow">if</span> (Start-&gt;<a class="code" href="a03306.html#a58b6e7389f57060c18eb447cac8e8795">Slope</a> &lt; -MinSlope) {</div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;        <span class="keywordflow">if</span> (Start-&gt;<a class="code" href="a03306.html#a58b6e7389f57060c18eb447cac8e8795">Slope</a> &gt; -MaxSlope) {</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;          Start-&gt;<a class="code" href="a03306.html#a2b987163e368c4d0a3c4d027b5619665">Direction</a> = <a class="code" href="a00722.html#a66289eb077ac8e91c2f0b9c0d7e3e653a612166623e6f200d052d3d8dc4c075c0">northwest</a>;</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;          Start-&gt;<a class="code" href="a03306.html#a2b987163e368c4d0a3c4d027b5619665">Direction</a> = <a class="code" href="a00722.html#a66289eb077ac8e91c2f0b9c0d7e3e653a257e6b7fcd6ccb860083f20eb9bd660d">north</a>;</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;        }</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;      } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;        Start-&gt;<a class="code" href="a03306.html#a2b987163e368c4d0a3c4d027b5619665">Direction</a> = <a class="code" href="a00722.html#a66289eb077ac8e91c2f0b9c0d7e3e653a9f771a3f89930d6b7e164e32a951dcb6">west</a>;</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;      }</div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (Start-&gt;<a class="code" href="a03306.html#a58b6e7389f57060c18eb447cac8e8795">Slope</a> &gt; MinSlope) {</div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;      <span class="keywordflow">if</span> (Start-&gt;<a class="code" href="a03306.html#a58b6e7389f57060c18eb447cac8e8795">Slope</a> &lt; MaxSlope) {</div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;        Start-&gt;<a class="code" href="a03306.html#a2b987163e368c4d0a3c4d027b5619665">Direction</a> = <a class="code" href="a00722.html#a66289eb077ac8e91c2f0b9c0d7e3e653a0a8b39b36c98d2346b9a5453838f3aea">southwest</a>;</div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;      } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;        Start-&gt;<a class="code" href="a03306.html#a2b987163e368c4d0a3c4d027b5619665">Direction</a> = <a class="code" href="a00722.html#a66289eb077ac8e91c2f0b9c0d7e3e653a035a454a75284b5dc261bd500ab311ed">south</a>;</div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;      }</div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;      Start-&gt;<a class="code" href="a03306.html#a2b987163e368c4d0a3c4d027b5619665">Direction</a> = <a class="code" href="a00722.html#a66289eb077ac8e91c2f0b9c0d7e3e653a9f771a3f89930d6b7e164e32a951dcb6">west</a>;</div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;    }</div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;  }</div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;  Finish-&gt;<a class="code" href="a03306.html#a47d3c4465ab5bb663d77c507cfebc18a">PreviousDirection</a> = Start-&gt;<a class="code" href="a03306.html#a2b987163e368c4d0a3c4d027b5619665">Direction</a>;</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a4acb6328d74e385e88c02c45e1306b97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4acb6328d74e385e88c02c45e1306b97">&#9670;&nbsp;</a></span>ConvertBlob()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00809.html#a5a5301af82c2874d80478a89424eb475">LIST</a> ConvertBlob </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a02690.html">TBLOB</a> *&#160;</td>
+          <td class="paramname"><em>blob</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Convert a blob into a list of MFOUTLINEs (float-based microfeature format). </p>
+
+<p class="definition">Definition at line <a class="el" href="a00719_source.html#l00036">36</a> of file <a class="el" href="a00719_source.html">mfoutline.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                              {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <a class="code" href="a03374.html">LIST</a> outlines = <a class="code" href="a00809.html#ae212530ca629c67513698e988c705a5a">NIL_LIST</a>;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <span class="keywordflow">return</span> (blob == <span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;      ? <a class="code" href="a00809.html#ae212530ca629c67513698e988c705a5a">NIL_LIST</a></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;      : <a class="code" href="a00719.html#a4d507cbf8bfa947b364ed74f5cb160cd">ConvertOutlines</a>(blob-&gt;<a class="code" href="a02690.html#a3c9282cad4102157d214bcc6311cda07">outlines</a>, outlines, <a class="code" href="a00722.html#abace9421f1a42147c8af40a950bc7203a281b97b7e8b9c87a09e7fc5b5fe95da8">outer</a>);</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a8ddc957cfa64a7dc50f9a3836319e766"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ddc957cfa64a7dc50f9a3836319e766">&#9670;&nbsp;</a></span>ConvertOutline()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00722.html#a88f6c3506e81059ed00e2ab9e99334a3">MFOUTLINE</a> ConvertOutline </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a02686.html">TESSLINE</a> *&#160;</td>
+          <td class="paramname"><em>outline</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Convert a <a class="el" href="a02686.html">TESSLINE</a> into the float-based MFOUTLINE micro-feature format. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00719_source.html#l00046">46</a> of file <a class="el" href="a00719_source.html">mfoutline.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                                            {</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <a class="code" href="a03306.html">MFEDGEPT</a> *NewPoint;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <a class="code" href="a03374.html">MFOUTLINE</a> MFOutline = <a class="code" href="a00809.html#ae212530ca629c67513698e988c705a5a">NIL_LIST</a>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <a class="code" href="a02682.html">EDGEPT</a> *EdgePoint;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <a class="code" href="a02682.html">EDGEPT</a> *StartPoint;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <a class="code" href="a02682.html">EDGEPT</a> *NextPoint;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="keywordflow">if</span> (outline == <span class="keyword">nullptr</span> || outline-&gt;<a class="code" href="a02686.html#a0ab1e26b1dae548f0bd3c096c6183b18">loop</a> == <span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordflow">return</span> MFOutline;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  StartPoint = outline-&gt;<a class="code" href="a02686.html#a0ab1e26b1dae548f0bd3c096c6183b18">loop</a>;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  EdgePoint = StartPoint;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="keywordflow">do</span> {</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    NextPoint = EdgePoint-&gt;<a class="code" href="a02682.html#a196f7786194752f89e364a586d24884d">next</a>;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="comment">/* filter out duplicate points */</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordflow">if</span> (EdgePoint-&gt;<a class="code" href="a02682.html#adee462d390e637a8393ba373c8d2a1bb">pos</a>.<a class="code" href="a02678.html#a5ed4f3edb251c99c2de6cb33645af1fe">x</a> != NextPoint-&gt;<a class="code" href="a02682.html#adee462d390e637a8393ba373c8d2a1bb">pos</a>.<a class="code" href="a02678.html#a5ed4f3edb251c99c2de6cb33645af1fe">x</a> ||</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        EdgePoint-&gt;<a class="code" href="a02682.html#adee462d390e637a8393ba373c8d2a1bb">pos</a>.<a class="code" href="a02678.html#a82f12e26621cfe8386bf08d11e9819c1">y</a> != NextPoint-&gt;<a class="code" href="a02682.html#adee462d390e637a8393ba373c8d2a1bb">pos</a>.<a class="code" href="a02678.html#a82f12e26621cfe8386bf08d11e9819c1">y</a>) {</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;      NewPoint = <a class="code" href="a00719.html#a917b406f8854b822d8cf2eb2480e6684">NewEdgePoint</a>();</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;      NewPoint-&gt;<a class="code" href="a03306.html#a746afb4523d47e8de262c72b14a58d6a">ClearMark</a>();</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;      NewPoint-&gt;<a class="code" href="a03306.html#afb620bd3400c744e9a74e3ddd1d44d75">Hidden</a> = EdgePoint-&gt;<a class="code" href="a02682.html#a6cd6d001509459c85ab5db66d6865721">IsHidden</a>();</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;      NewPoint-&gt;<a class="code" href="a03306.html#a2b633b56b9a1a71a23551e387b7c8af4">Point</a>.<a class="code" href="a03222.html#add242df27ddbc90edf732823e38eb844">x</a> = EdgePoint-&gt;<a class="code" href="a02682.html#adee462d390e637a8393ba373c8d2a1bb">pos</a>.<a class="code" href="a02678.html#a5ed4f3edb251c99c2de6cb33645af1fe">x</a>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;      NewPoint-&gt;<a class="code" href="a03306.html#a2b633b56b9a1a71a23551e387b7c8af4">Point</a>.<a class="code" href="a03222.html#ac396edee922ba896114b00d8715dd207">y</a> = EdgePoint-&gt;<a class="code" href="a02682.html#adee462d390e637a8393ba373c8d2a1bb">pos</a>.<a class="code" href="a02678.html#a82f12e26621cfe8386bf08d11e9819c1">y</a>;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;      MFOutline = <a class="code" href="a00806.html#a9c4294375af81ab4c133b6b5a3679a16">push</a>(MFOutline, NewPoint);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    }</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    EdgePoint = NextPoint;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  } <span class="keywordflow">while</span> (EdgePoint != StartPoint);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <span class="keywordflow">if</span> (MFOutline != <span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    MakeOutlineCircular(MFOutline);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  <span class="keywordflow">return</span> MFOutline;</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a4d507cbf8bfa947b364ed74f5cb160cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d507cbf8bfa947b364ed74f5cb160cd">&#9670;&nbsp;</a></span>ConvertOutlines()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00809.html#a5a5301af82c2874d80478a89424eb475">LIST</a> ConvertOutlines </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a02686.html">TESSLINE</a> *&#160;</td>
+          <td class="paramname"><em>outline</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00809.html#a5a5301af82c2874d80478a89424eb475">LIST</a>&#160;</td>
+          <td class="paramname"><em>mf_outlines</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00722.html#abace9421f1a42147c8af40a950bc7203">OUTLINETYPE</a>&#160;</td>
+          <td class="paramname"><em>outline_type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Convert a tree of outlines to a list of MFOUTLINEs (lists of MFEDGEPTs).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outline</td><td>first outline to be converted </td></tr>
+    <tr><td class="paramname">mf_outlines</td><td>list to add converted outlines to </td></tr>
+    <tr><td class="paramname">outline_type</td><td>are the outlines outer or holes? </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00719_source.html#l00088">88</a> of file <a class="el" href="a00719_source.html">mfoutline.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                                               {</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  <a class="code" href="a03374.html">MFOUTLINE</a> mf_outline;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  <span class="keywordflow">while</span> (outline != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    mf_outline = <a class="code" href="a00719.html#a8ddc957cfa64a7dc50f9a3836319e766">ConvertOutline</a>(outline);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordflow">if</span> (mf_outline != <span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;      mf_outlines = <a class="code" href="a00806.html#a9c4294375af81ab4c133b6b5a3679a16">push</a>(mf_outlines, mf_outline);</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    outline = outline-&gt;<a class="code" href="a02686.html#a0fb224d43ea53a791f0957fa92793bef">next</a>;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  }</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  <span class="keywordflow">return</span> mf_outlines;</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a8686a08c5566ba3373b3553c3486ade8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8686a08c5566ba3373b3553c3486ade8">&#9670;&nbsp;</a></span>FindDirectionChanges()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FindDirectionChanges </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00722.html#a88f6c3506e81059ed00e2ab9e99334a3">MFOUTLINE</a>&#160;</td>
+          <td class="paramname"><em>Outline</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>MinSlope</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>MaxSlope</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This routine searches through the specified outline, computes a slope for each vector in the outline, and marks each vector as having one of the following directions: N, S, E, W, NE, NW, SE, SW This information is then stored in the outline and the outline is returned. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Outline</td><td>micro-feature outline to analyze </td></tr>
+    <tr><td class="paramname">MinSlope</td><td>controls "snapping" of segments to horizontal </td></tr>
+    <tr><td class="paramname">MaxSlope</td><td>controls "snapping" of segments to vertical </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00719_source.html#l00114">114</a> of file <a class="el" href="a00719_source.html">mfoutline.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                                          {</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  <a class="code" href="a03306.html">MFEDGEPT</a> *Current;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;  <a class="code" href="a03306.html">MFEDGEPT</a> *Last;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  <a class="code" href="a03374.html">MFOUTLINE</a> EdgePoint;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;  <span class="keywordflow">if</span> (DegenerateOutline (Outline))</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;  Last = PointAt (Outline);</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;  Outline = NextPointAfter (Outline);</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;  EdgePoint = Outline;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;  <span class="keywordflow">do</span> {</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    Current = PointAt (EdgePoint);</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <a class="code" href="a00719.html#a659801969668b8d7e376b43fef4c90e8">ComputeDirection</a>(Last, Current, MinSlope, MaxSlope);</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    Last = Current;</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    EdgePoint = NextPointAfter (EdgePoint);</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;  }</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;  <span class="keywordflow">while</span> (EdgePoint != Outline);</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a4633687049466a4f28d70775b0481431"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4633687049466a4f28d70775b0481431">&#9670;&nbsp;</a></span>FreeMFOutline()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FreeMFOutline </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>arg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This routine deallocates all of the memory consumed by a micro-feature outline. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">arg</td><td>micro-feature outline to be freed </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00719_source.html#l00145">145</a> of file <a class="el" href="a00719_source.html">mfoutline.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;                              {  <span class="comment">//MFOUTLINE                             Outline)</span></div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;  <a class="code" href="a03374.html">MFOUTLINE</a> Start;</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;  <span class="keyword">auto</span> Outline = static_cast&lt;MFOUTLINE&gt;(arg);</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;  <span class="comment">/* break the circular outline so we can use std. techniques to deallocate */</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;  Start = <a class="code" href="a00809.html#adb120d4c08ce52b5dfe524f0419a9154">list_rest</a> (Outline);</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;  <a class="code" href="a00809.html#a42cc2d9c5eabb2193e2e64df41adedf4">set_rest</a>(Outline, <a class="code" href="a00809.html#ae212530ca629c67513698e988c705a5a">NIL_LIST</a>);</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;  <span class="keywordflow">while</span> (Start != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    free(<a class="code" href="a00809.html#a69547be764424f18b0be535400747978">first_node</a>(Start));</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    Start = <a class="code" href="a00806.html#a4a16ea0d766f4b3bc697142d5303a62c">pop</a> (Start);</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;  }</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a553352ad44661adad2a80a24ac78aeaf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a553352ad44661adad2a80a24ac78aeaf">&#9670;&nbsp;</a></span>FreeOutlines()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FreeOutlines </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00809.html#a5a5301af82c2874d80478a89424eb475">LIST</a>&#160;</td>
+          <td class="paramname"><em>Outlines</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Release all memory consumed by the specified list of outlines. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Outlines</td><td>list of mf-outlines to be freed </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00719_source.html#l00166">166</a> of file <a class="el" href="a00719_source.html">mfoutline.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                                 {</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;  <a class="code" href="a00806.html#a1a1efc1a269e5bb5bf16c1a174363ba4">destroy_nodes</a>(Outlines, <a class="code" href="a00719.html#a4633687049466a4f28d70775b0481431">FreeMFOutline</a>);</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="afa2531f8656ba496465bc23ff1a2f99c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa2531f8656ba496465bc23ff1a2f99c">&#9670;&nbsp;</a></span>MarkDirectionChanges()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MarkDirectionChanges </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00722.html#a88f6c3506e81059ed00e2ab9e99334a3">MFOUTLINE</a>&#160;</td>
+          <td class="paramname"><em>Outline</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This routine searches through the specified outline and finds the points at which the outline changes direction. These points are then marked as "extremities". This routine is used as an alternative to FindExtremities(). It forces the endpoints of the microfeatures to be at the direction changes rather than at the midpoint between direction changes. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Outline</td><td>micro-feature outline to analyze </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00719_source.html#l00182">182</a> of file <a class="el" href="a00719_source.html">mfoutline.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;                                             {</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;  <a class="code" href="a03374.html">MFOUTLINE</a> Current;</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;  <a class="code" href="a03374.html">MFOUTLINE</a> Last;</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;  <a class="code" href="a03374.html">MFOUTLINE</a> First;</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160; </div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;  <span class="keywordflow">if</span> (DegenerateOutline (Outline))</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160; </div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;  First = <a class="code" href="a00719.html#a224d838335416038dcb0348f665f5a05">NextDirectionChange</a> (Outline);</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;  Last = First;</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;  <span class="keywordflow">do</span> {</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    Current = <a class="code" href="a00719.html#a224d838335416038dcb0348f665f5a05">NextDirectionChange</a> (Last);</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    PointAt(Current)-&gt;MarkPoint();</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    Last = Current;</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;  }</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;  <span class="keywordflow">while</span> (Last != First);</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; </div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a917b406f8854b822d8cf2eb2480e6684"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a917b406f8854b822d8cf2eb2480e6684">&#9670;&nbsp;</a></span>NewEdgePoint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a03306.html">MFEDGEPT</a>* NewEdgePoint </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Return a new edge point for a micro-feature outline. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00719_source.html#l00204">204</a> of file <a class="el" href="a00719_source.html">mfoutline.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;                         {</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;  <span class="keywordflow">return</span> reinterpret_cast&lt;MFEDGEPT *&gt;(malloc(<span class="keyword">sizeof</span>(<a class="code" href="a03306.html">MFEDGEPT</a>)));</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a224d838335416038dcb0348f665f5a05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a224d838335416038dcb0348f665f5a05">&#9670;&nbsp;</a></span>NextDirectionChange()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00722.html#a88f6c3506e81059ed00e2ab9e99334a3">MFOUTLINE</a> NextDirectionChange </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00722.html#a88f6c3506e81059ed00e2ab9e99334a3">MFOUTLINE</a>&#160;</td>
+          <td class="paramname"><em>EdgePoint</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This routine returns the next point in the micro-feature outline that has a direction different than EdgePoint. The routine assumes that the outline being searched is not a degenerate outline (i.e. it must have 2 or more edge points). </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">EdgePoint</td><td>start search from this point </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Point of next direction change in micro-feature outline. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Globals: none </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00719_source.html#l00434">434</a> of file <a class="el" href="a00719_source.html">mfoutline.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;                                                   {</div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;  <a class="code" href="a00722.html#a66289eb077ac8e91c2f0b9c0d7e3e653">DIRECTION</a> InitialDirection;</div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160; </div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;  InitialDirection = PointAt (EdgePoint)-&gt;Direction;</div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160; </div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;  <a class="code" href="a03374.html">MFOUTLINE</a> next_pt = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;  <span class="keywordflow">do</span> {</div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;    EdgePoint = NextPointAfter(EdgePoint);</div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;    next_pt = NextPointAfter(EdgePoint);</div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;  } <span class="keywordflow">while</span> (PointAt(EdgePoint)-&gt;Direction == InitialDirection &amp;&amp;</div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;           !PointAt(EdgePoint)-&gt;Hidden &amp;&amp;</div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;           next_pt != <span class="keyword">nullptr</span> &amp;&amp; !PointAt(next_pt)-&gt;Hidden);</div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160; </div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;  <span class="keywordflow">return</span> (EdgePoint);</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="af520bd5bba313216d0b6fb9e58041266"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af520bd5bba313216d0b6fb9e58041266">&#9670;&nbsp;</a></span>NextExtremity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00722.html#a88f6c3506e81059ed00e2ab9e99334a3">MFOUTLINE</a> NextExtremity </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00722.html#a88f6c3506e81059ed00e2ab9e99334a3">MFOUTLINE</a>&#160;</td>
+          <td class="paramname"><em>EdgePoint</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This routine returns the next point in the micro-feature outline that is an extremity. The search starts after EdgePoint. The routine assumes that the outline being searched is not a degenerate outline (i.e. it must have 2 or more edge points). </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">EdgePoint</td><td>start search from this point </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Next extremity in the outline after EdgePoint. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Globals: none </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00719_source.html#l00219">219</a> of file <a class="el" href="a00719_source.html">mfoutline.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;                                             {</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;  EdgePoint = NextPointAfter(EdgePoint);</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;  <span class="keywordflow">while</span> (!PointAt(EdgePoint)-&gt;ExtremityMark)</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    EdgePoint = NextPointAfter(EdgePoint);</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160; </div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;  <span class="keywordflow">return</span> (EdgePoint);</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160; </div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a5c8d13baa5320139d699337868cde2a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c8d13baa5320139d699337868cde2a8">&#9670;&nbsp;</a></span>NormalizeOutline()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void NormalizeOutline </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00722.html#a88f6c3506e81059ed00e2ab9e99334a3">MFOUTLINE</a>&#160;</td>
+          <td class="paramname"><em>Outline</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>XOrigin</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This routine normalizes the coordinates of the specified outline so that the outline is deskewed down to the baseline, translated so that x=0 is at XOrigin, and scaled so that the height of a character cell from descender to ascender is 1. Of this height, 0.25 is for the descender, 0.25 for the ascender, and 0.5 for the x-height. The y coordinate of the baseline is 0. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Outline</td><td>outline to be normalized </td></tr>
+    <tr><td class="paramname">XOrigin</td><td>x-origin of text </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00719_source.html#l00241">241</a> of file <a class="el" href="a00719_source.html">mfoutline.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;                                     {</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;  <span class="keywordflow">if</span> (Outline == <a class="code" href="a00809.html#ae212530ca629c67513698e988c705a5a">NIL_LIST</a>)</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160; </div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;  <a class="code" href="a03374.html">MFOUTLINE</a> EdgePoint = Outline;</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;  <span class="keywordflow">do</span> {</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    <a class="code" href="a03306.html">MFEDGEPT</a> *Current = PointAt(EdgePoint);</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    Current-&gt;<a class="code" href="a03306.html#a2b633b56b9a1a71a23551e387b7c8af4">Point</a>.<a class="code" href="a03222.html#ac396edee922ba896114b00d8715dd207">y</a> = <a class="code" href="a00722.html#a2fe8b8a3fa428a5955d5fbfeafc4dba3">MF_SCALE_FACTOR</a> *</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;        (Current-&gt;<a class="code" href="a03306.html#a2b633b56b9a1a71a23551e387b7c8af4">Point</a>.<a class="code" href="a03222.html#ac396edee922ba896114b00d8715dd207">y</a> - <a class="code" href="a00344.html#abe10ce41bf7240ae8a053dea471d6ed5">kBlnBaselineOffset</a>);</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    Current-&gt;<a class="code" href="a03306.html#a2b633b56b9a1a71a23551e387b7c8af4">Point</a>.<a class="code" href="a03222.html#add242df27ddbc90edf732823e38eb844">x</a> = <a class="code" href="a00722.html#a2fe8b8a3fa428a5955d5fbfeafc4dba3">MF_SCALE_FACTOR</a> * (Current-&gt;<a class="code" href="a03306.html#a2b633b56b9a1a71a23551e387b7c8af4">Point</a>.<a class="code" href="a03222.html#add242df27ddbc90edf732823e38eb844">x</a> - XOrigin);</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    EdgePoint = NextPointAfter(EdgePoint);</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;  } <span class="keywordflow">while</span> (EdgePoint != Outline);</div>
+</div><!-- fragment -->
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="aa03306_html_a2b987163e368c4d0a3c4d027b5619665"><div class="ttname"><a href="a03306.html#a2b987163e368c4d0a3c4d027b5619665">MFEDGEPT::Direction</a></div><div class="ttdeci">DIRECTION Direction</div><div class="ttdef"><b>Definition:</b> <a href="a00722_source.html#l00056">mfoutline.h:56</a></div></div>
+<div class="ttc" id="aa00722_html_a66289eb077ac8e91c2f0b9c0d7e3e653"><div class="ttname"><a href="a00722.html#a66289eb077ac8e91c2f0b9c0d7e3e653">DIRECTION</a></div><div class="ttdeci">DIRECTION</div><div class="ttdef"><b>Definition:</b> <a href="a00722_source.html#l00030">mfoutline.h:30</a></div></div>
+<div class="ttc" id="aa00722_html_a66289eb077ac8e91c2f0b9c0d7e3e653a035a454a75284b5dc261bd500ab311ed"><div class="ttname"><a href="a00722.html#a66289eb077ac8e91c2f0b9c0d7e3e653a035a454a75284b5dc261bd500ab311ed">south</a></div><div class="ttdef"><b>Definition:</b> <a href="a00722_source.html#l00032">mfoutline.h:32</a></div></div>
+<div class="ttc" id="aa03306_html_afb620bd3400c744e9a74e3ddd1d44d75"><div class="ttname"><a href="a03306.html#afb620bd3400c744e9a74e3ddd1d44d75">MFEDGEPT::Hidden</a></div><div class="ttdeci">bool Hidden</div><div class="ttdef"><b>Definition:</b> <a href="a00722_source.html#l00054">mfoutline.h:54</a></div></div>
+<div class="ttc" id="aa03306_html_a2b633b56b9a1a71a23551e387b7c8af4"><div class="ttname"><a href="a03306.html#a2b633b56b9a1a71a23551e387b7c8af4">MFEDGEPT::Point</a></div><div class="ttdeci">FPOINT Point</div><div class="ttdef"><b>Definition:</b> <a href="a00722_source.html#l00052">mfoutline.h:52</a></div></div>
+<div class="ttc" id="aa02686_html_a0ab1e26b1dae548f0bd3c096c6183b18"><div class="ttname"><a href="a02686.html#a0ab1e26b1dae548f0bd3c096c6183b18">TESSLINE::loop</a></div><div class="ttdeci">EDGEPT * loop</div><div class="ttdef"><b>Definition:</b> <a href="a00260_source.html#l00278">blobs.h:278</a></div></div>
+<div class="ttc" id="aa00809_html_a69547be764424f18b0be535400747978"><div class="ttname"><a href="a00809.html#a69547be764424f18b0be535400747978">first_node</a></div><div class="ttdeci">#define first_node(l)</div><div class="ttdef"><b>Definition:</b> <a href="a00809_source.html#l00084">oldlist.h:84</a></div></div>
+<div class="ttc" id="aa03222_html_ac396edee922ba896114b00d8715dd207"><div class="ttname"><a href="a03222.html#ac396edee922ba896114b00d8715dd207">FPOINT::y</a></div><div class="ttdeci">float y</div><div class="ttdef"><b>Definition:</b> <a href="a00674_source.html#l00044">fpoint.h:44</a></div></div>
+<div class="ttc" id="aa00806_html_a1a1efc1a269e5bb5bf16c1a174363ba4"><div class="ttname"><a href="a00806.html#a1a1efc1a269e5bb5bf16c1a174363ba4">destroy_nodes</a></div><div class="ttdeci">void destroy_nodes(LIST list, void_dest destructor)</div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00138">oldlist.cpp:138</a></div></div>
+<div class="ttc" id="aa03374_html"><div class="ttname"><a href="a03374.html">list_rec</a></div><div class="ttdef"><b>Definition:</b> <a href="a00809_source.html#l00073">oldlist.h:73</a></div></div>
+<div class="ttc" id="aa00809_html_adb120d4c08ce52b5dfe524f0419a9154"><div class="ttname"><a href="a00809.html#adb120d4c08ce52b5dfe524f0419a9154">list_rest</a></div><div class="ttdeci">#define list_rest(l)</div><div class="ttdef"><b>Definition:</b> <a href="a00809_source.html#l00083">oldlist.h:83</a></div></div>
+<div class="ttc" id="aa02690_html_a3c9282cad4102157d214bcc6311cda07"><div class="ttname"><a href="a02690.html#a3c9282cad4102157d214bcc6311cda07">TBLOB::outlines</a></div><div class="ttdeci">TESSLINE * outlines</div><div class="ttdef"><b>Definition:</b> <a href="a00260_source.html#l00398">blobs.h:398</a></div></div>
+<div class="ttc" id="aa02682_html_a6cd6d001509459c85ab5db66d6865721"><div class="ttname"><a href="a02682.html#a6cd6d001509459c85ab5db66d6865721">EDGEPT::IsHidden</a></div><div class="ttdeci">bool IsHidden() const</div><div class="ttdef"><b>Definition:</b> <a href="a00260_source.html#l00174">blobs.h:174</a></div></div>
+<div class="ttc" id="aa00719_html_a224d838335416038dcb0348f665f5a05"><div class="ttname"><a href="a00719.html#a224d838335416038dcb0348f665f5a05">NextDirectionChange</a></div><div class="ttdeci">MFOUTLINE NextDirectionChange(MFOUTLINE EdgePoint)</div><div class="ttdef"><b>Definition:</b> <a href="a00719_source.html#l00434">mfoutline.cpp:434</a></div></div>
+<div class="ttc" id="aa03222_html"><div class="ttname"><a href="a03222.html">FPOINT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00674_source.html#l00028">fpoint.h:28</a></div></div>
+<div class="ttc" id="aa00722_html_a66289eb077ac8e91c2f0b9c0d7e3e653a612166623e6f200d052d3d8dc4c075c0"><div class="ttname"><a href="a00722.html#a66289eb077ac8e91c2f0b9c0d7e3e653a612166623e6f200d052d3d8dc4c075c0">northwest</a></div><div class="ttdef"><b>Definition:</b> <a href="a00722_source.html#l00036">mfoutline.h:36</a></div></div>
+<div class="ttc" id="aa03306_html_a47d3c4465ab5bb663d77c507cfebc18a"><div class="ttname"><a href="a03306.html#a47d3c4465ab5bb663d77c507cfebc18a">MFEDGEPT::PreviousDirection</a></div><div class="ttdeci">DIRECTION PreviousDirection</div><div class="ttdef"><b>Definition:</b> <a href="a00722_source.html#l00057">mfoutline.h:57</a></div></div>
+<div class="ttc" id="aa03222_html_add242df27ddbc90edf732823e38eb844"><div class="ttname"><a href="a03222.html#add242df27ddbc90edf732823e38eb844">FPOINT::x</a></div><div class="ttdeci">float x</div><div class="ttdef"><b>Definition:</b> <a href="a00674_source.html#l00044">fpoint.h:44</a></div></div>
+<div class="ttc" id="aa00722_html_a2fe8b8a3fa428a5955d5fbfeafc4dba3"><div class="ttname"><a href="a00722.html#a2fe8b8a3fa428a5955d5fbfeafc4dba3">MF_SCALE_FACTOR</a></div><div class="ttdeci">const float MF_SCALE_FACTOR</div><div class="ttdef"><b>Definition:</b> <a href="a00722_source.html#l00070">mfoutline.h:70</a></div></div>
+<div class="ttc" id="aa02686_html_a0fb224d43ea53a791f0957fa92793bef"><div class="ttname"><a href="a02686.html#a0fb224d43ea53a791f0957fa92793bef">TESSLINE::next</a></div><div class="ttdeci">TESSLINE * next</div><div class="ttdef"><b>Definition:</b> <a href="a00260_source.html#l00279">blobs.h:279</a></div></div>
+<div class="ttc" id="aa00809_html_ae212530ca629c67513698e988c705a5a"><div class="ttname"><a href="a00809.html#ae212530ca629c67513698e988c705a5a">NIL_LIST</a></div><div class="ttdeci">#define NIL_LIST</div><div class="ttdef"><b>Definition:</b> <a href="a00809_source.html#l00068">oldlist.h:68</a></div></div>
+<div class="ttc" id="aa02866_html"><div class="ttname"><a href="a02866.html">FCOORD</a></div><div class="ttdef"><b>Definition:</b> <a href="a00392_source.html#l00187">points.h:187</a></div></div>
+<div class="ttc" id="aa00722_html_a66289eb077ac8e91c2f0b9c0d7e3e653a0a8b39b36c98d2346b9a5453838f3aea"><div class="ttname"><a href="a00722.html#a66289eb077ac8e91c2f0b9c0d7e3e653a0a8b39b36c98d2346b9a5453838f3aea">southwest</a></div><div class="ttdef"><b>Definition:</b> <a href="a00722_source.html#l00038">mfoutline.h:38</a></div></div>
+<div class="ttc" id="aa00719_html_a659801969668b8d7e376b43fef4c90e8"><div class="ttname"><a href="a00719.html#a659801969668b8d7e376b43fef4c90e8">ComputeDirection</a></div><div class="ttdeci">void ComputeDirection(MFEDGEPT *Start, MFEDGEPT *Finish, float MinSlope, float MaxSlope)</div><div class="ttdef"><b>Definition:</b> <a href="a00719_source.html#l00363">mfoutline.cpp:363</a></div></div>
+<div class="ttc" id="aa02678_html_a5ed4f3edb251c99c2de6cb33645af1fe"><div class="ttname"><a href="a02678.html#a5ed4f3edb251c99c2de6cb33645af1fe">TPOINT::x</a></div><div class="ttdeci">int16_t x</div><div class="ttdef"><b>Definition:</b> <a href="a00260_source.html#l00091">blobs.h:91</a></div></div>
+<div class="ttc" id="aa02678_html_a82f12e26621cfe8386bf08d11e9819c1"><div class="ttname"><a href="a02678.html#a82f12e26621cfe8386bf08d11e9819c1">TPOINT::y</a></div><div class="ttdeci">int16_t y</div><div class="ttdef"><b>Definition:</b> <a href="a00260_source.html#l00092">blobs.h:92</a></div></div>
+<div class="ttc" id="aa00719_html_a8ddc957cfa64a7dc50f9a3836319e766"><div class="ttname"><a href="a00719.html#a8ddc957cfa64a7dc50f9a3836319e766">ConvertOutline</a></div><div class="ttdeci">MFOUTLINE ConvertOutline(TESSLINE *outline)</div><div class="ttdef"><b>Definition:</b> <a href="a00719_source.html#l00046">mfoutline.cpp:46</a></div></div>
+<div class="ttc" id="aa00719_html_a4633687049466a4f28d70775b0481431"><div class="ttname"><a href="a00719.html#a4633687049466a4f28d70775b0481431">FreeMFOutline</a></div><div class="ttdeci">void FreeMFOutline(void *arg)</div><div class="ttdef"><b>Definition:</b> <a href="a00719_source.html#l00145">mfoutline.cpp:145</a></div></div>
+<div class="ttc" id="aa00806_html_a9c4294375af81ab4c133b6b5a3679a16"><div class="ttname"><a href="a00806.html#a9c4294375af81ab4c133b6b5a3679a16">push</a></div><div class="ttdeci">LIST push(LIST list, void *element)</div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00172">oldlist.cpp:172</a></div></div>
+<div class="ttc" id="aa00719_html_a917b406f8854b822d8cf2eb2480e6684"><div class="ttname"><a href="a00719.html#a917b406f8854b822d8cf2eb2480e6684">NewEdgePoint</a></div><div class="ttdeci">MFEDGEPT * NewEdgePoint()</div><div class="ttdef"><b>Definition:</b> <a href="a00719_source.html#l00204">mfoutline.cpp:204</a></div></div>
+<div class="ttc" id="aa00722_html_a66289eb077ac8e91c2f0b9c0d7e3e653ae1fe6949267a85f8ffd113c0eb67116a"><div class="ttname"><a href="a00722.html#a66289eb077ac8e91c2f0b9c0d7e3e653ae1fe6949267a85f8ffd113c0eb67116a">southeast</a></div><div class="ttdef"><b>Definition:</b> <a href="a00722_source.html#l00037">mfoutline.h:37</a></div></div>
+<div class="ttc" id="aa03306_html_a58b6e7389f57060c18eb447cac8e8795"><div class="ttname"><a href="a03306.html#a58b6e7389f57060c18eb447cac8e8795">MFEDGEPT::Slope</a></div><div class="ttdeci">float Slope</div><div class="ttdef"><b>Definition:</b> <a href="a00722_source.html#l00053">mfoutline.h:53</a></div></div>
+<div class="ttc" id="aa03306_html_a746afb4523d47e8de262c72b14a58d6a"><div class="ttname"><a href="a03306.html#a746afb4523d47e8de262c72b14a58d6a">MFEDGEPT::ClearMark</a></div><div class="ttdeci">void ClearMark()</div><div class="ttdef"><b>Definition:</b> <a href="a00722_source.html#l00044">mfoutline.h:44</a></div></div>
+<div class="ttc" id="aa03306_html"><div class="ttname"><a href="a03306.html">MFEDGEPT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00722_source.html#l00041">mfoutline.h:41</a></div></div>
+<div class="ttc" id="aa00722_html_a66289eb077ac8e91c2f0b9c0d7e3e653a1be79cd4775c5384e197f1031580b10a"><div class="ttname"><a href="a00722.html#a66289eb077ac8e91c2f0b9c0d7e3e653a1be79cd4775c5384e197f1031580b10a">east</a></div><div class="ttdef"><b>Definition:</b> <a href="a00722_source.html#l00033">mfoutline.h:33</a></div></div>
+<div class="ttc" id="aa00722_html_a66289eb077ac8e91c2f0b9c0d7e3e653a9f771a3f89930d6b7e164e32a951dcb6"><div class="ttname"><a href="a00722.html#a66289eb077ac8e91c2f0b9c0d7e3e653a9f771a3f89930d6b7e164e32a951dcb6">west</a></div><div class="ttdef"><b>Definition:</b> <a href="a00722_source.html#l00034">mfoutline.h:34</a></div></div>
+<div class="ttc" id="aa00806_html_a4a16ea0d766f4b3bc697142d5303a62c"><div class="ttname"><a href="a00806.html#a4a16ea0d766f4b3bc697142d5303a62c">pop</a></div><div class="ttdeci">LIST pop(LIST list)</div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00161">oldlist.cpp:161</a></div></div>
+<div class="ttc" id="aa02682_html"><div class="ttname"><a href="a02682.html">EDGEPT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00260_source.html#l00097">blobs.h:97</a></div></div>
+<div class="ttc" id="aa02798_html_ab92a713c132564104cbe9bb9709ad55b"><div class="ttname"><a href="a02798.html#ab92a713c132564104cbe9bb9709ad55b">DENORM::LocalNormTransform</a></div><div class="ttdeci">void LocalNormTransform(const TPOINT &amp;pt, TPOINT *transformed) const</div><div class="ttdef"><b>Definition:</b> <a href="a00341_source.html#l00305">normalis.cpp:305</a></div></div>
+<div class="ttc" id="aa00722_html_a66289eb077ac8e91c2f0b9c0d7e3e653a257e6b7fcd6ccb860083f20eb9bd660d"><div class="ttname"><a href="a00722.html#a66289eb077ac8e91c2f0b9c0d7e3e653a257e6b7fcd6ccb860083f20eb9bd660d">north</a></div><div class="ttdef"><b>Definition:</b> <a href="a00722_source.html#l00031">mfoutline.h:31</a></div></div>
+<div class="ttc" id="aa00722_html_a66289eb077ac8e91c2f0b9c0d7e3e653ae3b4c14104592166f37bd10677137b23"><div class="ttname"><a href="a00722.html#a66289eb077ac8e91c2f0b9c0d7e3e653ae3b4c14104592166f37bd10677137b23">northeast</a></div><div class="ttdef"><b>Definition:</b> <a href="a00722_source.html#l00035">mfoutline.h:35</a></div></div>
+<div class="ttc" id="aa00722_html_abace9421f1a42147c8af40a950bc7203a281b97b7e8b9c87a09e7fc5b5fe95da8"><div class="ttname"><a href="a00722.html#abace9421f1a42147c8af40a950bc7203a281b97b7e8b9c87a09e7fc5b5fe95da8">outer</a></div><div class="ttdef"><b>Definition:</b> <a href="a00722_source.html#l00060">mfoutline.h:60</a></div></div>
+<div class="ttc" id="aa00344_html_abe10ce41bf7240ae8a053dea471d6ed5"><div class="ttname"><a href="a00344.html#abe10ce41bf7240ae8a053dea471d6ed5">kBlnBaselineOffset</a></div><div class="ttdeci">const int kBlnBaselineOffset</div><div class="ttdef"><b>Definition:</b> <a href="a00344_source.html#l00024">normalis.h:24</a></div></div>
+<div class="ttc" id="aa02682_html_adee462d390e637a8393ba373c8d2a1bb"><div class="ttname"><a href="a02682.html#adee462d390e637a8393ba373c8d2a1bb">EDGEPT::pos</a></div><div class="ttdeci">TPOINT pos</div><div class="ttdef"><b>Definition:</b> <a href="a00260_source.html#l00184">blobs.h:184</a></div></div>
+<div class="ttc" id="aa02682_html_a196f7786194752f89e364a586d24884d"><div class="ttname"><a href="a02682.html#a196f7786194752f89e364a586d24884d">EDGEPT::next</a></div><div class="ttdeci">EDGEPT * next</div><div class="ttdef"><b>Definition:</b> <a href="a00260_source.html#l00190">blobs.h:190</a></div></div>
+<div class="ttc" id="aa00809_html_a42cc2d9c5eabb2193e2e64df41adedf4"><div class="ttname"><a href="a00809.html#a42cc2d9c5eabb2193e2e64df41adedf4">set_rest</a></div><div class="ttdeci">#define set_rest(l, cell)</div><div class="ttdef"><b>Definition:</b> <a href="a00809_source.html#l00101">oldlist.h:101</a></div></div>
+<div class="ttc" id="aa00719_html_a4d507cbf8bfa947b364ed74f5cb160cd"><div class="ttname"><a href="a00719.html#a4d507cbf8bfa947b364ed74f5cb160cd">ConvertOutlines</a></div><div class="ttdeci">LIST ConvertOutlines(TESSLINE *outline, LIST mf_outlines, OUTLINETYPE outline_type)</div><div class="ttdef"><b>Definition:</b> <a href="a00719_source.html#l00088">mfoutline.cpp:88</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b8f5fb7b736ee5431a221bc7b817d6e0.html">classify</a></li><li class="navelem"><a class="el" href="a00719.html">shapeclassifier.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b8f5fb7b736ee5431a221bc7b817d6e0.html">classify</a></li><li class="navelem"><a class="el" href="a00719.html">mfoutline.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

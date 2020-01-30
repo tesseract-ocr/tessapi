@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/ccmain/tessedit.cpp File Reference</title>
+<title>tesseract: /tesseract/src/ccmain/pageiterator.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,48 +87,32 @@ $(document).ready(function(){initNavTree('a00167.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#enum-members">Enumerations</a>  </div>
+<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle">
-<div class="title">tessedit.cpp File Reference</div>  </div>
+<div class="title">pageiterator.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="a00071_source.html">control.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00785_source.html">matchdefs.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00323_source.html">pageres.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00503_source.html">params.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00794_source.html">stopper.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00173_source.html">tesseractclass.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00179_source.html">tessvars.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00533_source.html">tprintf.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a01448_source.html">chop.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00641_source.html">intmatcher.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00155_source.html">reject.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00839_source.html">lstmrecognizer.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="a00026_source.html">tesseract/pageiterator.h</a>&gt;</code><br />
+<code>#include &quot;allheaders.h&quot;</code><br />
+<code>#include &lt;<a class="el" href="a00014_source.html">tesseract/helpers.h</a>&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00374_source.html">pageres.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00224_source.html">tesseractclass.h</a>&quot;</code><br />
+<code>#include &lt;algorithm&gt;</code><br />
 </div>
 <p><a href="a00167_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a01539"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html">tesseract</a></td></tr>
+<tr class="memitem:a01818"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html">tesseract</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:a158666bdc32b1dce84c368c24cbc4108"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#a158666bdc32b1dce84c368c24cbc4108">tesseract::CMD_EVENTS</a> { <a class="el" href="a01539.html#a158666bdc32b1dce84c368c24cbc4108ad5393026a89cc45e229dc1cceca208cd">tesseract::ACTION_1_CMD_EVENT</a>, 
-<a class="el" href="a01539.html#a158666bdc32b1dce84c368c24cbc4108a73be97af434dae7d485282b3a24e766f">tesseract::RECOG_WERDS</a>, 
-<a class="el" href="a01539.html#a158666bdc32b1dce84c368c24cbc4108a5ff116d52a6fb93880f2501ee7f7cd64">tesseract::RECOG_PSEUDO</a>, 
-<a class="el" href="a01539.html#a158666bdc32b1dce84c368c24cbc4108a5e902f0d506a3c3d51b2e5ebcc0ad603">tesseract::ACTION_2_CMD_EVENT</a>
- }</td></tr>
-<tr class="separator:a158666bdc32b1dce84c368c24cbc4108"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_43edf6714a3bf7b9dbcd0e0e50a1a1a7.html">ccmain</a></li><li class="navelem"><a class="el" href="a00167.html">tessedit.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_43edf6714a3bf7b9dbcd0e0e50a1a1a7.html">ccmain</a></li><li class="navelem"><a class="el" href="a00167.html">pageiterator.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

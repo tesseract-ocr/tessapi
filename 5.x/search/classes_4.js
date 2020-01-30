@@ -1,16 +1,19 @@
 var searchData=
 [
-  ['edgeoffset_7702',['EdgeOffset',['../a02248.html',1,'']]],
-  ['edgept_7703',['EDGEPT',['../a02224.html',1,'']]],
-  ['element_7704',['Element',['../a02832.html',1,'MinK']]],
-  ['elist_7705',['ELIST',['../a02516.html',1,'']]],
-  ['elist2_7706',['ELIST2',['../a02528.html',1,'']]],
-  ['elist2_5fiterator_7707',['ELIST2_ITERATOR',['../a02532.html',1,'']]],
-  ['elist2_5flink_7708',['ELIST2_LINK',['../a02524.html',1,'']]],
-  ['elist_5fiterator_7709',['ELIST_ITERATOR',['../a02520.html',1,'']]],
-  ['elist_5flink_7710',['ELIST_LINK',['../a02512.html',1,'']]],
-  ['equationdetect_7711',['EquationDetect',['../a02120.html',1,'tesseract']]],
-  ['equationdetectbase_7712',['EquationDetectBase',['../a03272.html',1,'tesseract']]],
-  ['errcode_7713',['ERRCODE',['../a02536.html',1,'']]],
-  ['errorcounter_7714',['ErrorCounter',['../a03388.html',1,'tesseract']]]
+  ['eanycode_5fchar_8463',['EANYCODE_CHAR',['../a02462.html',1,'']]],
+  ['edgeoffset_8464',['EdgeOffset',['../a02706.html',1,'']]],
+  ['edgept_8465',['EDGEPT',['../a02682.html',1,'']]],
+  ['element_8466',['Element',['../a03290.html',1,'MinK']]],
+  ['elist_8467',['ELIST',['../a02974.html',1,'']]],
+  ['elist2_8468',['ELIST2',['../a02986.html',1,'']]],
+  ['elist2_5fiterator_8469',['ELIST2_ITERATOR',['../a02990.html',1,'']]],
+  ['elist2_5flink_8470',['ELIST2_LINK',['../a02982.html',1,'']]],
+  ['elist_5fiterator_8471',['ELIST_ITERATOR',['../a02978.html',1,'']]],
+  ['elist_5flink_8472',['ELIST_LINK',['../a02970.html',1,'']]],
+  ['equationdetect_8473',['EquationDetect',['../a02578.html',1,'tesseract']]],
+  ['equationdetectbase_8474',['EquationDetectBase',['../a03726.html',1,'tesseract']]],
+  ['equationfindertest_8475',['EquationFinderTest',['../a04122.html',1,'tesseract']]],
+  ['errcode_8476',['ERRCODE',['../a02994.html',1,'']]],
+  ['errorcounter_8477',['ErrorCounter',['../a03842.html',1,'tesseract']]],
+  ['etext_5fdesc_8478',['ETEXT_DESC',['../a02466.html',1,'']]]
 ];

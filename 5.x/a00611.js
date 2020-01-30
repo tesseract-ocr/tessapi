@@ -1,25 +1,7 @@
 var a00611 =
 [
-    [ "CHAR_DESC_STRUCT", "a02756.html", "a02756" ],
-    [ "FEATURE_DEFS_STRUCT", "a02760.html", "a02760" ],
-    [ "NUM_FEATURE_TYPES", "a00611.html#aff5d3186888ac3dbd87adcc54b7f2ecf", null ],
-    [ "CHAR_DESC", "a00611.html#a328d8357302c5e1ee7f11f6ee34577f3", null ],
-    [ "FEATURE_DEFS", "a00611.html#a3d87491bc8c74401376efa5e1793e2a2", null ],
-    [ "FreeCharDescription", "a00611.html#ae2a92eefc3755300284119692527e3b9", null ],
-    [ "InitFeatureDefs", "a00611.html#a6e4c84ab01e39577e4a74d9ab1eff68b", null ],
-    [ "NewCharDescription", "a00611.html#a860f7517bac9477e79551e501df549ed", null ],
-    [ "ReadCharDescription", "a00611.html#ae1558f5d4119a9e651a85e10887be9f3", null ],
-    [ "ShortNameToFeatureType", "a00611.html#a96bfe8f02db0cc4dea42e9a9e9a98630", null ],
-    [ "ValidCharDescription", "a00611.html#af8fa799b7b0c0c8e18648a521ef2775f", null ],
-    [ "WriteCharDescription", "a00611.html#a7ec256eeb477e0fd9bb2124e54c13f34", null ],
-    [ "CharNormDesc", "a00611.html#aeaae0c3ba332fe6addd19ed202a3ecb7", null ],
-    [ "GeoFeatDesc", "a00611.html#ad083578933c187809f33f7e7cb6aac48", null ],
-    [ "IntFeatDesc", "a00611.html#abcae860ec494b3a15b6db31638a1d2f2", null ],
-    [ "kCNFeatureType", "a00611.html#a1721f38e30ba7e6f0473bf08cddea58f", null ],
-    [ "kGeoFeatureType", "a00611.html#afabf946423972bb31424564a9e0ead68", null ],
-    [ "kIntFeatureType", "a00611.html#a932f3dd36ff509924434534b4292074b", null ],
-    [ "kMicroFeatureType", "a00611.html#a6781dc960db654977a5c696ca44407d6", null ],
-    [ "MicroFeatureDesc", "a00611.html#aa889ab53df925b2ccc5a2871eca3eff7", null ],
-    [ "OutlineFeatDesc", "a00611.html#a72a26e08f0fd9771c2b6af211bb1a6c3", null ],
-    [ "PicoFeatDesc", "a00611.html#a6874f1e9456afb7479b229bcb58d95a8", null ]
+    [ "kLRM", "a00611.html#a3187702bdaeea23471bcd19386c60325", null ],
+    [ "kPDF", "a00611.html#a449a1a336e8ce20dd079c8359dd33999", null ],
+    [ "kRLE", "a00611.html#ac7b2d022c7d14c5b97b06266d380ffd9", null ],
+    [ "kRLM", "a00611.html#a934f6d23c9a174e3efce87c78334885b", null ]
 ];

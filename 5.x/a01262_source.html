@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/training/ligature_table.h Source File</title>
+<title>tesseract: /tesseract/src/training/dawg2wordlist.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,115 +87,133 @@ $(document).ready(function(){initNavTree('a01262_source.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">ligature_table.h</div>  </div>
+<div class="title">dawg2wordlist.cpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a01262.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**********************************************************************</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * File:        ligature_table.h</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * Description: Class for adding and removing optional latin ligatures,</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *              conditional on codepoint support by a specified font</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> *              (if specified).</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> * Author:      Ranjith Unnikrishnan</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> * Created:     Mon Nov 18 2013</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> * (C) Copyright 2013, Google Inc.</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> * you may not use this file except in compliance with the License.</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> * You may obtain a copy of the License at</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> * http://www.apache.org/licenses/LICENSE-2.0</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> * Unless required by applicable law or agreed to in writing, software</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> * See the License for the specific language governing permissions and</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"> * limitations under the License.</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment"> **********************************************************************/</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#ifndef TRAININGDATA_LIGATURE_TABLE_H_</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#define TRAININGDATA_LIGATURE_TABLE_H_</span></div>
+<a href="a01262.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// File:        dawg2wordlist.cpp</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// Description: Program to create a word list from a DAWG and unicharset.</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// Author:      David Eger</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">// (C) Copyright 2011, Google Inc.</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// you may not use this file except in compliance with the License.</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">// You may obtain a copy of the License at</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// http://www.apache.org/licenses/LICENSE-2.0</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">// Unless required by applicable law or agreed to in writing, software</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">// See the License for the specific language governing permissions and</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">// limitations under the License.</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a01253.html">commontraining.h</a>&quot;</span>     <span class="comment">// CheckSharedLibraryVersion</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00818.html">dawg.h</a>&quot;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00041.html">tesseract/serialis.h</a>&gt;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00851.html">trie.h</a>&quot;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00605.html">unicharset.h</a>&quot;</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a01373.html">util.h</a>&quot;</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">namespace </span><a class="code" href="a01539.html">tesseract</a> {</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">class </span>PangoFontInfo;  <span class="comment">// defined in pango_font_info.h</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">// Map to substitute strings for ligatures.</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">using</span> <a class="code" href="a01539.html#a2b75596dcf8d1df32f7c20b581a731c5">LigHash</a> = std::unordered_map&lt;std::string, std::string, StringHash&gt;;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">class </span>LigatureTable {</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <span class="comment">// Get a static instance of this class.</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <span class="keyword">static</span> <a class="code" href="a03420.html#af898d1f98a23a8d9dc67f69d214546f3">LigatureTable</a>* <a class="code" href="a03420.html#aba486383e49efbda9ea0b9b83836f6b1">Get</a>();</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="comment">// Convert the utf8 string so that ligaturizable sequences, such as &quot;fi&quot; get</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <span class="comment">// replaced by the (utf8 code for) appropriate ligature characters. Only do so</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <span class="comment">// if the corresponding ligature character is renderable in the current font.</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  std::string <a class="code" href="a03420.html#a1b72cf139a78664e80061e55331c872a">AddLigatures</a>(<span class="keyword">const</span> std::string&amp; str, <span class="keyword">const</span> PangoFontInfo* font) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="comment">// Remove all ligatures.</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  std::string <a class="code" href="a03420.html#aa95c830fc0e74d71cb0aa697178d338d">RemoveLigatures</a>(<span class="keyword">const</span> std::string&amp; str) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="comment">// Remove only custom ligatures (eg. &quot;ct&quot;) encoded in the private-use-area.</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  std::string <a class="code" href="a03420.html#abd7e3a9f5cad25d11746836beefafd66">RemoveCustomLigatures</a>(<span class="keyword">const</span> std::string&amp; str) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="keyword">const</span> <a class="code" href="a01539.html#a2b75596dcf8d1df32f7c20b581a731c5">LigHash</a>&amp; <a class="code" href="a03420.html#a002f474596648d474f517a96937b5359">norm_to_lig_table</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="a01539.html#a2b75596dcf8d1df32f7c20b581a731c5">   53</a></span>&#160;    <span class="keywordflow">return</span> <a class="code" href="a03420.html#a89607ae8cabe9cff8bddb99ff57f8ff9">norm_to_lig_table_</a>;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  }</div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="a03420.html">   55</a></span>&#160;  <span class="keyword">const</span> <a class="code" href="a01539.html#a2b75596dcf8d1df32f7c20b581a731c5">LigHash</a>&amp; <a class="code" href="a03420.html#a0b20a9837ca0b1dc3b5a3594110893c8">lig_to_norm_table</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="a03420.html#ac2bbda92d0e7c5e07e11dc028423220f">lig_to_norm_table_</a>;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  }</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <a class="code" href="a03420.html#af898d1f98a23a8d9dc67f69d214546f3">LigatureTable</a>();</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <span class="comment">// Initialize the hash tables mapping between ligature strings and the</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <span class="comment">// corresponding ligature characters.</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a03420.html#a4b8c8b0c869b143ecfa0eea892ffdf8f">Init</a>();</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="keyword">static</span> std::unique_ptr&lt;LigatureTable&gt; <a class="code" href="a03420.html#a89217e4e6e96a4826f68dc2681c90771">instance_</a>;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <a class="code" href="a01539.html#a2b75596dcf8d1df32f7c20b581a731c5">LigHash</a> <a class="code" href="a03420.html#a89607ae8cabe9cff8bddb99ff57f8ff9">norm_to_lig_table_</a>;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <a class="code" href="a01539.html#a2b75596dcf8d1df32f7c20b581a731c5">LigHash</a> <a class="code" href="a03420.html#ac2bbda92d0e7c5e07e11dc028423220f">lig_to_norm_table_</a>;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <span class="keywordtype">int</span> <a class="code" href="a03420.html#af5e58c8e852e6cf6421179792e133ac6">min_lig_length_</a>;</div>
-<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="a03420.html#a002f474596648d474f517a96937b5359">   69</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="a03420.html#a7ebf0d92cf6632ed160a8967530ee27e">max_lig_length_</a>;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="keywordtype">int</span> <a class="code" href="a03420.html#a89afe461e33f3a06cf61ab64de13778e">min_norm_length_</a>;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <span class="keywordtype">int</span> <a class="code" href="a03420.html#aa8585a5f8ba698854023d2cf7b32b0fb">max_norm_length_</a>;</div>
-<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="a03420.html#a0b20a9837ca0b1dc3b5a3594110893c8">   72</a></span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <a class="code" href="a03420.html#af898d1f98a23a8d9dc67f69d214546f3">LigatureTable</a>(<span class="keyword">const</span> <a class="code" href="a03420.html">LigatureTable</a>&amp;);</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <span class="keywordtype">void</span> operator=(<span class="keyword">const</span> <a class="code" href="a03420.html">LigatureTable</a>&amp;);</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;};</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;}  <span class="comment">// namespace tesseract</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor">#endif  // OCR_TRAININGDATA_TYPESETTING_LIGATURE_TABLE_H_</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">static</span> <a class="code" href="a03382.html">tesseract::Dawg</a> *LoadSquishedDawg(<span class="keyword">const</span> <a class="code" href="a03118.html">UNICHARSET</a> &amp;unicharset,</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;                                         <span class="keyword">const</span> <span class="keywordtype">char</span> *filename) {</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">int</span> kDictDebugLevel = 1;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <a class="code" href="a02538.html">tesseract::TFile</a> dawg_file;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <span class="keywordflow">if</span> (!dawg_file.<a class="code" href="a02538.html#aa8cddbeec3274ac9e8417de368fe5ecc">Open</a>(filename, <span class="keyword">nullptr</span>)) {</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Could not open %s for reading.\n&quot;</span>, filename);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  }</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Loading word list from %s\n&quot;</span>, filename);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <a class="code" href="a03394.html">tesseract::SquishedDawg</a> *retval = <span class="keyword">new</span> <a class="code" href="a03394.html">tesseract::SquishedDawg</a>(</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;      <a class="code" href="a01818.html#a07c41f251f1782c60df4e626c35d2151a9c67e397ff6d57a705cd4cd4524a2b34">tesseract::DAWG_TYPE_WORD</a>, <span class="stringliteral">&quot;eng&quot;</span>, <a class="code" href="a00425.html#a18e2c75cefe9e5b78e8ce41aa5fa25bca616bdbcaed7dd414823b303af5c8b1f1">SYSTEM_DAWG_PERM</a>, kDictDebugLevel);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <span class="keywordflow">if</span> (!retval-&gt;<a class="code" href="a03394.html#acb7a1ad5bd1be5086c7e631f6e88ae24">Load</a>(&amp;dawg_file)) {</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Could not read %s\n&quot;</span>, filename);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">delete</span> retval;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  }</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Word list loaded.\n&quot;</span>);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <span class="keywordflow">return</span> retval;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;}</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="a03838.html">   45</a></span>&#160;<span class="keyword">class </span><a class="code" href="a03838.html">WordOutputter</a> {</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="a03838.html#af81a3eb961f99c5f6470c037d078c999">   47</a></span>&#160;  <a class="code" href="a03838.html#af81a3eb961f99c5f6470c037d078c999">WordOutputter</a>(FILE *<a class="code" href="a04138.html">file</a>) : file_(<a class="code" href="a04138.html">file</a>) {}</div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="a03838.html#ad573101b61c94a4f017ed574d4308762">   48</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a03838.html#ad573101b61c94a4f017ed574d4308762">output_word</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *word) { fprintf(file_, <span class="stringliteral">&quot;%s\n&quot;</span>, word); }</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  FILE *file_;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;};</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">// returns 0 if successful.</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keyword">static</span> <span class="keywordtype">int</span> WriteDawgAsWordlist(<span class="keyword">const</span> <a class="code" href="a03118.html">UNICHARSET</a> &amp;unicharset,</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                               <span class="keyword">const</span> <a class="code" href="a03382.html">tesseract::Dawg</a> *dawg,</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                               <span class="keyword">const</span> <span class="keywordtype">char</span> *outfile_name) {</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  FILE *out = fopen(outfile_name, <span class="stringliteral">&quot;wb&quot;</span>);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="keywordflow">if</span> (out == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Could not open %s for writing.\n&quot;</span>, outfile_name);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  }</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <a class="code" href="a03838.html">WordOutputter</a> outputter(out);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <span class="keyword">using namespace </span>std::placeholders;  <span class="comment">// for _1</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  dawg-&gt;<a class="code" href="a03382.html#a6da9243ecffa1a54cbfb2897b8a4a285">iterate_words</a>(unicharset,</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                      std::bind(&amp;<a class="code" href="a03838.html#ad573101b61c94a4f017ed574d4308762">WordOutputter::output_word</a>, &amp;outputter, _1));</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <span class="keywordflow">return</span> fclose(out);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;}</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="a01262.html#a0ddf1224851353fc92bfbff6f499fa97">   69</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="a01262.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> *argv[]) {</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  tesseract::CheckSharedLibraryVersion();</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <span class="keywordflow">if</span> (argc &gt; 1 &amp;&amp; (!strcmp(argv[1], <span class="stringliteral">&quot;-v&quot;</span>) || !strcmp(argv[1], <span class="stringliteral">&quot;--version&quot;</span>))) {</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    printf(<span class="stringliteral">&quot;%s\n&quot;</span>, <a class="code" href="a02438.html#a3785779c909fcdd77e24b340f5913e4b">tesseract::TessBaseAPI::Version</a>());</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (argc != 4) {</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Print all the words in a given dawg.\n&quot;</span>);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Usage: %s -v | --version | %s &lt;unicharset&gt; &lt;dawgfile&gt; &lt;wordlistfile&gt;\n&quot;</span>,</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            argv[0], argv[0]);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  }</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *unicharset_file = argv[1];</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *dawg_file = argv[2];</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *wordlist_file = argv[3];</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  <a class="code" href="a03118.html">UNICHARSET</a> unicharset;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  <span class="keywordflow">if</span> (!unicharset.<a class="code" href="a03118.html#af066ba55fdc20f996eaaed05618b377e">load_from_file</a>(unicharset_file)) {</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Error loading unicharset from %s.\n&quot;</span>, unicharset_file);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  }</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  <a class="code" href="a03382.html">tesseract::Dawg</a> *dict = LoadSquishedDawg(unicharset, dawg_file);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  <span class="keywordflow">if</span> (dict == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Error loading dictionary from %s.\n&quot;</span>, dawg_file);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  }</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  <span class="keywordtype">int</span> retval = WriteDawgAsWordlist(unicharset, dict, wordlist_file);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  <span class="keyword">delete</span> dict;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  <span class="keywordflow">return</span> retval;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa03420_html_a89217e4e6e96a4826f68dc2681c90771"><div class="ttname"><a href="a03420.html#a89217e4e6e96a4826f68dc2681c90771">tesseract::LigatureTable::instance_</a></div><div class="ttdeci">static std::unique_ptr&lt; LigatureTable &gt; instance_</div><div class="ttdef"><b>Definition:</b> <a href="a01262_source.html#l00082">ligature_table.h:82</a></div></div>
-<div class="ttc" id="aa03420_html_a4b8c8b0c869b143ecfa0eea892ffdf8f"><div class="ttname"><a href="a03420.html#a4b8c8b0c869b143ecfa0eea892ffdf8f">tesseract::LigatureTable::Init</a></div><div class="ttdeci">void Init()</div><div class="ttdef"><b>Definition:</b> <a href="a01259_source.html#l00081">ligature_table.cpp:81</a></div></div>
-<div class="ttc" id="aa03420_html_aa95c830fc0e74d71cb0aa697178d338d"><div class="ttname"><a href="a03420.html#aa95c830fc0e74d71cb0aa697178d338d">tesseract::LigatureTable::RemoveLigatures</a></div><div class="ttdeci">std::string RemoveLigatures(const std::string &amp;str) const</div><div class="ttdef"><b>Definition:</b> <a href="a01259_source.html#l00129">ligature_table.cpp:129</a></div></div>
-<div class="ttc" id="aa03420_html_a89afe461e33f3a06cf61ab64de13778e"><div class="ttname"><a href="a03420.html#a89afe461e33f3a06cf61ab64de13778e">tesseract::LigatureTable::min_norm_length_</a></div><div class="ttdeci">int min_norm_length_</div><div class="ttdef"><b>Definition:</b> <a href="a01262_source.html#l00087">ligature_table.h:87</a></div></div>
-<div class="ttc" id="aa03420_html_ac2bbda92d0e7c5e07e11dc028423220f"><div class="ttname"><a href="a03420.html#ac2bbda92d0e7c5e07e11dc028423220f">tesseract::LigatureTable::lig_to_norm_table_</a></div><div class="ttdeci">LigHash lig_to_norm_table_</div><div class="ttdef"><b>Definition:</b> <a href="a01262_source.html#l00084">ligature_table.h:84</a></div></div>
-<div class="ttc" id="aa01539_html_a2b75596dcf8d1df32f7c20b581a731c5"><div class="ttname"><a href="a01539.html#a2b75596dcf8d1df32f7c20b581a731c5">tesseract::LigHash</a></div><div class="ttdeci">std::unordered_map&lt; std::string, std::string, StringHash &gt; LigHash</div><div class="ttdef"><b>Definition:</b> <a href="a01262_source.html#l00053">ligature_table.h:53</a></div></div>
-<div class="ttc" id="aa03420_html_af898d1f98a23a8d9dc67f69d214546f3"><div class="ttname"><a href="a03420.html#af898d1f98a23a8d9dc67f69d214546f3">tesseract::LigatureTable::LigatureTable</a></div><div class="ttdeci">LigatureTable()</div><div class="ttdef"><b>Definition:</b> <a href="a01259_source.html#l00078">ligature_table.cpp:78</a></div></div>
-<div class="ttc" id="aa03420_html_a002f474596648d474f517a96937b5359"><div class="ttname"><a href="a03420.html#a002f474596648d474f517a96937b5359">tesseract::LigatureTable::norm_to_lig_table</a></div><div class="ttdeci">const LigHash &amp; norm_to_lig_table() const</div><div class="ttdef"><b>Definition:</b> <a href="a01262_source.html#l00069">ligature_table.h:69</a></div></div>
-<div class="ttc" id="aa03420_html_abd7e3a9f5cad25d11746836beefafd66"><div class="ttname"><a href="a03420.html#abd7e3a9f5cad25d11746836beefafd66">tesseract::LigatureTable::RemoveCustomLigatures</a></div><div class="ttdeci">std::string RemoveCustomLigatures(const std::string &amp;str) const</div><div class="ttdef"><b>Definition:</b> <a href="a01259_source.html#l00148">ligature_table.cpp:148</a></div></div>
-<div class="ttc" id="aa03420_html_af5e58c8e852e6cf6421179792e133ac6"><div class="ttname"><a href="a03420.html#af5e58c8e852e6cf6421179792e133ac6">tesseract::LigatureTable::min_lig_length_</a></div><div class="ttdeci">int min_lig_length_</div><div class="ttdef"><b>Definition:</b> <a href="a01262_source.html#l00085">ligature_table.h:85</a></div></div>
-<div class="ttc" id="aa03420_html_a1b72cf139a78664e80061e55331c872a"><div class="ttname"><a href="a03420.html#a1b72cf139a78664e80061e55331c872a">tesseract::LigatureTable::AddLigatures</a></div><div class="ttdeci">std::string AddLigatures(const std::string &amp;str, const PangoFontInfo *font) const</div><div class="ttdef"><b>Definition:</b> <a href="a01259_source.html#l00174">ligature_table.cpp:174</a></div></div>
-<div class="ttc" id="aa03420_html_a7ebf0d92cf6632ed160a8967530ee27e"><div class="ttname"><a href="a03420.html#a7ebf0d92cf6632ed160a8967530ee27e">tesseract::LigatureTable::max_lig_length_</a></div><div class="ttdeci">int max_lig_length_</div><div class="ttdef"><b>Definition:</b> <a href="a01262_source.html#l00086">ligature_table.h:86</a></div></div>
-<div class="ttc" id="aa03420_html_a0b20a9837ca0b1dc3b5a3594110893c8"><div class="ttname"><a href="a03420.html#a0b20a9837ca0b1dc3b5a3594110893c8">tesseract::LigatureTable::lig_to_norm_table</a></div><div class="ttdeci">const LigHash &amp; lig_to_norm_table() const</div><div class="ttdef"><b>Definition:</b> <a href="a01262_source.html#l00072">ligature_table.h:72</a></div></div>
-<div class="ttc" id="aa01539_html"><div class="ttname"><a href="a01539.html">tesseract</a></div><div class="ttdef"><b>Definition:</b> <a href="a00002_source.html#l00025">altorenderer.cpp:25</a></div></div>
-<div class="ttc" id="aa03420_html"><div class="ttname"><a href="a03420.html">tesseract::LigatureTable</a></div><div class="ttdef"><b>Definition:</b> <a href="a01262_source.html#l00055">ligature_table.h:55</a></div></div>
-<div class="ttc" id="aa03420_html_aa8585a5f8ba698854023d2cf7b32b0fb"><div class="ttname"><a href="a03420.html#aa8585a5f8ba698854023d2cf7b32b0fb">tesseract::LigatureTable::max_norm_length_</a></div><div class="ttdeci">int max_norm_length_</div><div class="ttdef"><b>Definition:</b> <a href="a01262_source.html#l00088">ligature_table.h:88</a></div></div>
-<div class="ttc" id="aa03420_html_aba486383e49efbda9ea0b9b83836f6b1"><div class="ttname"><a href="a03420.html#aba486383e49efbda9ea0b9b83836f6b1">tesseract::LigatureTable::Get</a></div><div class="ttdeci">static LigatureTable * Get()</div><div class="ttdef"><b>Definition:</b> <a href="a01259_source.html#l00070">ligature_table.cpp:70</a></div></div>
-<div class="ttc" id="aa01373_html"><div class="ttname"><a href="a01373.html">util.h</a></div></div>
-<div class="ttc" id="aa03420_html_a89607ae8cabe9cff8bddb99ff57f8ff9"><div class="ttname"><a href="a03420.html#a89607ae8cabe9cff8bddb99ff57f8ff9">tesseract::LigatureTable::norm_to_lig_table_</a></div><div class="ttdeci">LigHash norm_to_lig_table_</div><div class="ttdef"><b>Definition:</b> <a href="a01262_source.html#l00083">ligature_table.h:83</a></div></div>
+<div class="ttc" id="aa03118_html_af066ba55fdc20f996eaaed05618b377e"><div class="ttname"><a href="a03118.html#af066ba55fdc20f996eaaed05618b377e">UNICHARSET::load_from_file</a></div><div class="ttdeci">bool load_from_file(const char *const filename, bool skip_fragments)</div><div class="ttdef"><b>Definition:</b> <a href="a00605_source.html#l00378">unicharset.h:378</a></div></div>
+<div class="ttc" id="aa03394_html_acb7a1ad5bd1be5086c7e631f6e88ae24"><div class="ttname"><a href="a03394.html#acb7a1ad5bd1be5086c7e631f6e88ae24">tesseract::SquishedDawg::Load</a></div><div class="ttdeci">bool Load(TFile *fp)</div><div class="ttdef"><b>Definition:</b> <a href="a00818_source.html#l00431">dawg.h:431</a></div></div>
+<div class="ttc" id="aa03394_html"><div class="ttname"><a href="a03394.html">tesseract::SquishedDawg</a></div><div class="ttdef"><b>Definition:</b> <a href="a00818_source.html#l00405">dawg.h:405</a></div></div>
+<div class="ttc" id="aa01253_html"><div class="ttname"><a href="a01253.html">commontraining.h</a></div></div>
+<div class="ttc" id="aa00425_html_a18e2c75cefe9e5b78e8ce41aa5fa25bca616bdbcaed7dd414823b303af5c8b1f1"><div class="ttname"><a href="a00425.html#a18e2c75cefe9e5b78e8ce41aa5fa25bca616bdbcaed7dd414823b303af5c8b1f1">SYSTEM_DAWG_PERM</a></div><div class="ttdef"><b>Definition:</b> <a href="a00425_source.html#l00239">ratngs.h:239</a></div></div>
+<div class="ttc" id="aa01818_html_a07c41f251f1782c60df4e626c35d2151a9c67e397ff6d57a705cd4cd4524a2b34"><div class="ttname"><a href="a01818.html#a07c41f251f1782c60df4e626c35d2151a9c67e397ff6d57a705cd4cd4524a2b34">tesseract::DAWG_TYPE_WORD</a></div><div class="ttdef"><b>Definition:</b> <a href="a00818_source.html#l00068">dawg.h:68</a></div></div>
+<div class="ttc" id="aa02538_html_aa8cddbeec3274ac9e8417de368fe5ecc"><div class="ttname"><a href="a02538.html#aa8cddbeec3274ac9e8417de368fe5ecc">tesseract::TFile::Open</a></div><div class="ttdeci">bool Open(const STRING &amp;filename, FileReader reader)</div><div class="ttdef"><b>Definition:</b> <a href="a00566_source.html#l00210">serialis.cpp:210</a></div></div>
+<div class="ttc" id="aa03838_html"><div class="ttname"><a href="a03838.html">WordOutputter</a></div><div class="ttdef"><b>Definition:</b> <a href="a01262_source.html#l00045">dawg2wordlist.cpp:45</a></div></div>
+<div class="ttc" id="aa00605_html"><div class="ttname"><a href="a00605.html">unicharset.h</a></div></div>
+<div class="ttc" id="aa00818_html"><div class="ttname"><a href="a00818.html">dawg.h</a></div></div>
+<div class="ttc" id="aa04138_html"><div class="ttname"><a href="a04138.html">file</a></div><div class="ttdef"><b>Definition:</b> <a href="a01637_source.html#l00022">include_gunit.h:22</a></div></div>
+<div class="ttc" id="aa01262_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="a01262.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdef"><b>Definition:</b> <a href="a01262_source.html#l00069">dawg2wordlist.cpp:69</a></div></div>
+<div class="ttc" id="aa02538_html"><div class="ttname"><a href="a02538.html">tesseract::TFile</a></div><div class="ttdef"><b>Definition:</b> <a href="a00041_source.html#l00075">serialis.h:75</a></div></div>
+<div class="ttc" id="aa03118_html"><div class="ttname"><a href="a03118.html">UNICHARSET</a></div><div class="ttdef"><b>Definition:</b> <a href="a00605_source.html#l00145">unicharset.h:145</a></div></div>
+<div class="ttc" id="aa02438_html_a3785779c909fcdd77e24b340f5913e4b"><div class="ttname"><a href="a02438.html#a3785779c909fcdd77e24b340f5913e4b">tesseract::TessBaseAPI::Version</a></div><div class="ttdeci">static const char * Version()</div><div class="ttdef"><b>Definition:</b> <a href="a00056_source.html#l00233">baseapi.cpp:233</a></div></div>
+<div class="ttc" id="aa03382_html_a6da9243ecffa1a54cbfb2897b8a4a285"><div class="ttname"><a href="a03382.html#a6da9243ecffa1a54cbfb2897b8a4a285">tesseract::Dawg::iterate_words</a></div><div class="ttdeci">void iterate_words(const UNICHARSET &amp;unicharset, std::function&lt; void(const WERD_CHOICE *)&gt; cb) const</div><div class="ttdef"><b>Definition:</b> <a href="a00815_source.html#l00118">dawg.cpp:118</a></div></div>
+<div class="ttc" id="aa03382_html"><div class="ttname"><a href="a03382.html">tesseract::Dawg</a></div><div class="ttdef"><b>Definition:</b> <a href="a00818_source.html#l00113">dawg.h:113</a></div></div>
+<div class="ttc" id="aa03838_html_af81a3eb961f99c5f6470c037d078c999"><div class="ttname"><a href="a03838.html#af81a3eb961f99c5f6470c037d078c999">WordOutputter::WordOutputter</a></div><div class="ttdeci">WordOutputter(FILE *file)</div><div class="ttdef"><b>Definition:</b> <a href="a01262_source.html#l00047">dawg2wordlist.cpp:47</a></div></div>
+<div class="ttc" id="aa03838_html_ad573101b61c94a4f017ed574d4308762"><div class="ttname"><a href="a03838.html#ad573101b61c94a4f017ed574d4308762">WordOutputter::output_word</a></div><div class="ttdeci">void output_word(const char *word)</div><div class="ttdef"><b>Definition:</b> <a href="a01262_source.html#l00048">dawg2wordlist.cpp:48</a></div></div>
+<div class="ttc" id="aa00581_html_a0c2bcd4462ec67ab0971b34a0f610f55"><div class="ttname"><a href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a></div><div class="ttdeci">DLLSYM void tprintf(const char *format,...)</div><div class="ttdef"><b>Definition:</b> <a href="a00581_source.html#l00034">tprintf.cpp:34</a></div></div>
+<div class="ttc" id="aa00041_html"><div class="ttname"><a href="a00041.html">serialis.h</a></div></div>
+<div class="ttc" id="aa00851_html"><div class="ttname"><a href="a00851.html">trie.h</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7c7ae07dd2a999045cb78bf7ff8dcbc7.html">training</a></li><li class="navelem"><a class="el" href="a01262.html">ligature_table.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:15 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7c7ae07dd2a999045cb78bf7ff8dcbc7.html">training</a></li><li class="navelem"><a class="el" href="a01262.html">dawg2wordlist.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:21 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

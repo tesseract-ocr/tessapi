@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/wordrec/plotedges.h Source File</title>
+<title>tesseract: /tesseract/src/wordrec/findseam.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,93 +87,60 @@ $(document).ready(function(){initNavTree('a01514_source.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">plotedges.h</div>  </div>
+<div class="title">findseam.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="a01514.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/******************************************************************************</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * File:         plotedges.h</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * Description:  Convert the various data type into line lists</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * Author:       Mark Seaman, OCR Technology</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> * (c) Copyright 1989, Hewlett-Packard Company.</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> ** Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> ** you may not use this file except in compliance with the License.</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> ** You may obtain a copy of the License at</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> ** http://www.apache.org/licenses/LICENSE-2.0</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> ** Unless required by applicable law or agreed to in writing, software</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> ** distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> ** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> ** See the License for the specific language governing permissions and</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> ** limitations under the License.</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"> *****************************************************************************/</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#ifndef PLOTEDGES_H</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#define PLOTEDGES_H</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00758.html">oldlist.h</a>&quot;</span>  <span class="comment">// for LIST</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">class </span><a class="code" href="a03524.html">ScrollView</a>;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">struct </span><a class="code" href="a02224.html">EDGEPT</a>;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">struct </span><a class="code" href="a02232.html">TBLOB</a>;</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * File:        findseam.h</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * Author:      Mark Seaman, SW Productivity</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> * (c) Copyright 1987, Hewlett-Packard Company.</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> ** Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> ** you may not use this file except in compliance with the License.</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> ** You may obtain a copy of the License at</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> ** http://www.apache.org/licenses/LICENSE-2.0</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> ** Unless required by applicable law or agreed to in writing, software</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> ** distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> ** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> ** See the License for the specific language governing permissions and</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> ** limitations under the License.</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> *****************************************************************************/</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#ifndef FINDSEAM_H</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#define FINDSEAM_H</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">/*----------------------------------------------------------------------</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">              I n c l u d e s</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">----------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00443.html">seam.h</a>&quot;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00521.html">genericheap.h</a>&quot;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00539.html">kdpair.h</a>&quot;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a01499.html">chop.h</a>&quot;</span></div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">/*----------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">              V a r i a b l e s</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">----------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">extern</span> <a class="code" href="a03524.html">ScrollView</a> *<a class="code" href="a01514.html#a37713d15c49a322a3a468db0f0c26d98">edge_window</a>;        <span class="comment">/* Window for edges */</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">/*----------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">            Macros</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">----------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">/**********************************************************************</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment"> * update_edge_window</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="a01514.html#a3a90c5459659abe9227ab93d20042630">   41</a></span>&#160;<span class="comment"> * Refresh the display of the edge window.</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment"> **********************************************************************/</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#define update_edge_window()    \</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">if (wordrec_display_splits) {   \</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">  c_make_current (edge_window); \</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">}</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">/**********************************************************************</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"> * edge_window_wait</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="a01514.html#a09f227f1c8c806d8cc6c758f167b965d">   52</a></span>&#160;<span class="comment"> * Wait for someone to click in the edges window.</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment"> **********************************************************************/</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#define edge_window_wait()  \</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">if (wordrec_display_splits) window_wait (edge_window)</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">/*----------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">              F u n c t i o n s</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">---------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a01514.html#a4ce0ea2dbe7f9c1e27849c005309ad9f">display_edgepts</a>(<a class="code" href="a02920.html">LIST</a> <a class="code" href="a02232.html#a3c9282cad4102157d214bcc6311cda07">outlines</a>);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a01514.html#ae2440305a17a8a14c0e1c74e035934a3">draw_blob_edges</a>(<a class="code" href="a02232.html">TBLOB</a> *blob);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a01514.html#a58186147d8297e9600d4176629dc4765">mark_outline</a>(<a class="code" href="a02224.html">EDGEPT</a> *edgept);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="a01514.html#ae7f82456c8e7ab23b2a7e9525a096248">   30</a></span>&#160;<span class="comment">// The SeamPair elements own their SEAMs and delete them upon destruction.</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="a01514.html#a59c55ffd84e0961a6cbc4869f36c8ce5">   31</a></span>&#160;<span class="keyword">using</span> <a class="code" href="a03026.html">SeamPair</a> = <a class="code" href="a03026.html">tesseract::KDPtrPairInc&lt;float, SEAM&gt;</a>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">using</span> <a class="code" href="a02998.html">SeamQueue</a> = <a class="code" href="a02998.html">tesseract::GenericHeap&lt;SeamPair&gt;</a>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="a01514.html#ac79ab0d2ef73225372ad8bc160f05bb8">   33</a></span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="a01514.html#a83c96ebc37f8c5d331411d9965c38088">   34</a></span>&#160;<span class="keyword">using</span> <a class="code" href="a03030.html">SeamDecPair</a> = <a class="code" href="a03030.html">tesseract::KDPtrPairDec&lt;float, SEAM&gt;</a>;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">using</span> <a class="code" href="a02998.html">SeamPile</a> = <a class="code" href="a02998.html">tesseract::GenericHeap&lt;SeamDecPair&gt;</a>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa00758_html"><div class="ttname"><a href="a00758.html">oldlist.h</a></div></div>
-<div class="ttc" id="aa01514_html_a4ce0ea2dbe7f9c1e27849c005309ad9f"><div class="ttname"><a href="a01514.html#a4ce0ea2dbe7f9c1e27849c005309ad9f">display_edgepts</a></div><div class="ttdeci">void display_edgepts(LIST outlines)</div><div class="ttdef"><b>Definition:</b> <a href="a01511_source.html#l00042">plotedges.cpp:42</a></div></div>
-<div class="ttc" id="aa03524_html"><div class="ttname"><a href="a03524.html">ScrollView</a></div><div class="ttdef"><b>Definition:</b> <a href="a01418_source.html#l00097">scrollview.h:97</a></div></div>
-<div class="ttc" id="aa02224_html"><div class="ttname"><a href="a02224.html">EDGEPT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00209_source.html#l00097">blobs.h:97</a></div></div>
-<div class="ttc" id="aa01514_html_a58186147d8297e9600d4176629dc4765"><div class="ttname"><a href="a01514.html#a58186147d8297e9600d4176629dc4765">mark_outline</a></div><div class="ttdeci">void mark_outline(EDGEPT *edgept)</div><div class="ttdef"><b>Definition:</b> <a href="a01511_source.html#l00081">plotedges.cpp:81</a></div></div>
-<div class="ttc" id="aa02232_html"><div class="ttname"><a href="a02232.html">TBLOB</a></div><div class="ttdef"><b>Definition:</b> <a href="a00209_source.html#l00282">blobs.h:282</a></div></div>
-<div class="ttc" id="aa01514_html_a37713d15c49a322a3a468db0f0c26d98"><div class="ttname"><a href="a01514.html#a37713d15c49a322a3a468db0f0c26d98">edge_window</a></div><div class="ttdeci">ScrollView * edge_window</div><div class="ttdef"><b>Definition:</b> <a href="a01511_source.html#l00033">plotedges.cpp:33</a></div></div>
-<div class="ttc" id="aa02920_html"><div class="ttname"><a href="a02920.html">list_rec</a></div><div class="ttdef"><b>Definition:</b> <a href="a00758_source.html#l00073">oldlist.h:73</a></div></div>
-<div class="ttc" id="aa01514_html_ae2440305a17a8a14c0e1c74e035934a3"><div class="ttname"><a href="a01514.html#ae2440305a17a8a14c0e1c74e035934a3">draw_blob_edges</a></div><div class="ttdeci">void draw_blob_edges(TBLOB *blob)</div><div class="ttdef"><b>Definition:</b> <a href="a01511_source.html#l00065">plotedges.cpp:65</a></div></div>
-<div class="ttc" id="aa02232_html_a3c9282cad4102157d214bcc6311cda07"><div class="ttname"><a href="a02232.html#a3c9282cad4102157d214bcc6311cda07">TBLOB::outlines</a></div><div class="ttdeci">TESSLINE * outlines</div><div class="ttdef"><b>Definition:</b> <a href="a00209_source.html#l00398">blobs.h:398</a></div></div>
+<div class="ttc" id="aa02998_html"><div class="ttname"><a href="a02998.html">tesseract::GenericHeap</a></div><div class="ttdef"><b>Definition:</b> <a href="a00521_source.html#l00058">genericheap.h:58</a></div></div>
+<div class="ttc" id="aa03030_html"><div class="ttname"><a href="a03030.html">tesseract::KDPtrPairDec</a></div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00162">kdpair.h:162</a></div></div>
+<div class="ttc" id="aa01499_html"><div class="ttname"><a href="a01499.html">chop.h</a></div></div>
+<div class="ttc" id="aa00539_html"><div class="ttname"><a href="a00539.html">kdpair.h</a></div></div>
+<div class="ttc" id="aa03026_html"><div class="ttname"><a href="a03026.html">tesseract::KDPtrPairInc</a></div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00145">kdpair.h:145</a></div></div>
+<div class="ttc" id="aa00443_html"><div class="ttname"><a href="a00443.html">seam.h</a></div></div>
+<div class="ttc" id="aa00521_html"><div class="ttname"><a href="a00521.html">genericheap.h</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7b2482c39089bf50e281ccfac06b23cd.html">wordrec</a></li><li class="navelem"><a class="el" href="a01514.html">plotedges.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7b2482c39089bf50e281ccfac06b23cd.html">wordrec</a></li><li class="navelem"><a class="el" href="a01514.html">findseam.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:21 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

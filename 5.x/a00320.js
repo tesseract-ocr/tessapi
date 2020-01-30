@@ -1,8 +1,14 @@
 var a00320 =
 [
-    [ "CLISTIZE", "a00320.html#afcdfaedb32b1f0fcfb0a3e5cd4ec788c", null ],
-    [ "kMaxLineSizeRatio", "a00320.html#a00ac9ba6627438b66b6ef302e0b361d2", null ],
-    [ "kMaxWordGapRatio", "a00320.html#accb3cb4f22100d91c31064ff7f610226", null ],
-    [ "kMaxWordSizeRatio", "a00320.html#aa9ef752edbd2ab5db631fa9514135cc0", null ],
-    [ "kWordrecMaxNumJoinChunks", "a00320.html#acce49cce3d17bc2e3e1508d1c4d3959d", null ]
+    [ "WordFeature", "a02758.html", "a02758" ],
+    [ "FloatWordFeature", "a02762.html", "a02762" ],
+    [ "ImageData", "a02766.html", "a02766" ],
+    [ "DocumentData", "a02770.html", "a02770" ],
+    [ "DocumentCache", "a02774.html", "a02774" ],
+    [ "CachingStrategy", "a00320.html#ac6e0095dbd1848688e60d550a32959e2", [
+      [ "CS_SEQUENTIAL", "a00320.html#ac6e0095dbd1848688e60d550a32959e2a3960de33d0be559c7b125f7fe8686b91", null ],
+      [ "CS_ROUND_ROBIN", "a00320.html#ac6e0095dbd1848688e60d550a32959e2ab8b05505e8cbcebe010260accdd1d977", null ]
+    ] ],
+    [ "kFeaturePadding", "a00320.html#a7cef4214dd641427422896b04970818a", null ],
+    [ "kImagePadding", "a00320.html#a46aa5a5d605dc04f98aedca6ac9edd8f", null ]
 ];

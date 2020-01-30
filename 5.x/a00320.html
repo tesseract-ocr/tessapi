@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/ccstruct/pageres.cpp File Reference</title>
+<title>tesseract: /tesseract/src/ccstruct/imagedata.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,138 +87,60 @@ $(document).ready(function(){initNavTree('a00320.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a> &#124;
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
-<div class="title">pageres.cpp File Reference</div>  </div>
+<div class="title">imagedata.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="a00323_source.html">pageres.h</a>&quot;</code><br />
-<code>#include &lt;cassert&gt;</code><br />
-<code>#include &lt;cstdint&gt;</code><br />
-<code>#include &lt;cstring&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00197_source.html">blamer.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00209_source.html">blobs.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00227_source.html">boxword.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00464_source.html">errcode.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00299_source.html">ocrblock.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00311_source.html">ocrrow.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00335_source.html">pdblock.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00353_source.html">polyblk.h</a>&quot;</code><br />
-<code>#include &lt;tesseract/publictypes.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00392_source.html">seam.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00410_source.html">stepblob.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00533_source.html">tprintf.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;mutex&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00011_source.html">tesseract/genericvector.h</a>&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00392_source.html">points.h</a>&quot;</code><br />
+<code>#include &lt;<a class="el" href="a00044_source.html">tesseract/strngs.h</a>&gt;</code><br />
 </div>
 <p><a href="a00320_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:afcdfaedb32b1f0fcfb0a3e5cd4ec788c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00320.html#afcdfaedb32b1f0fcfb0a3e5cd4ec788c">CLISTIZE</a> (<a class="el" href="a02364.html">BLOCK_RES</a>) <a class="el" href="a01073.html#a4d39b973449f23a381e22fe1c1792af7">ELISTIZE</a>(<a class="el" href="a02368.html">ROW_RES</a>) <a class="el" href="a01073.html#a4d39b973449f23a381e22fe1c1792af7">ELISTIZE</a>(<a class="el" href="a02372.html">WERD_RES</a>) static const double kStopperAmbiguityThresholdGain</td></tr>
-<tr class="separator:afcdfaedb32b1f0fcfb0a3e5cd4ec788c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02758.html">tesseract::WordFeature</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02762.html">tesseract::FloatWordFeature</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02766.html">tesseract::ImageData</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02770.html">tesseract::DocumentData</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02774.html">tesseract::DocumentCache</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:a01818"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html">tesseract</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:ac6e0095dbd1848688e60d550a32959e2"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#ac6e0095dbd1848688e60d550a32959e2">tesseract::CachingStrategy</a> { <a class="el" href="a01818.html#ac6e0095dbd1848688e60d550a32959e2a3960de33d0be559c7b125f7fe8686b91">tesseract::CS_SEQUENTIAL</a>, 
+<a class="el" href="a01818.html#ac6e0095dbd1848688e60d550a32959e2ab8b05505e8cbcebe010260accdd1d977">tesseract::CS_ROUND_ROBIN</a>
+ }</td></tr>
+<tr class="separator:ac6e0095dbd1848688e60d550a32959e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:acce49cce3d17bc2e3e1508d1c4d3959d"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00320.html#acce49cce3d17bc2e3e1508d1c4d3959d">kWordrecMaxNumJoinChunks</a> = 4</td></tr>
-<tr class="separator:acce49cce3d17bc2e3e1508d1c4d3959d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa9ef752edbd2ab5db631fa9514135cc0"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00320.html#aa9ef752edbd2ab5db631fa9514135cc0">kMaxWordSizeRatio</a> = 1.25</td></tr>
-<tr class="separator:aa9ef752edbd2ab5db631fa9514135cc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00ac9ba6627438b66b6ef302e0b361d2"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00320.html#a00ac9ba6627438b66b6ef302e0b361d2">kMaxLineSizeRatio</a> = 1.25</td></tr>
-<tr class="separator:a00ac9ba6627438b66b6ef302e0b361d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:accb3cb4f22100d91c31064ff7f610226"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00320.html#accb3cb4f22100d91c31064ff7f610226">kMaxWordGapRatio</a> = 2.0</td></tr>
-<tr class="separator:accb3cb4f22100d91c31064ff7f610226"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cef4214dd641427422896b04970818a"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a7cef4214dd641427422896b04970818a">tesseract::kFeaturePadding</a> = 2</td></tr>
+<tr class="separator:a7cef4214dd641427422896b04970818a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46aa5a5d605dc04f98aedca6ac9edd8f"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a46aa5a5d605dc04f98aedca6ac9edd8f">tesseract::kImagePadding</a> = 4</td></tr>
+<tr class="separator:a46aa5a5d605dc04f98aedca6ac9edd8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="afcdfaedb32b1f0fcfb0a3e5cd4ec788c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afcdfaedb32b1f0fcfb0a3e5cd4ec788c">&#9670;&nbsp;</a></span>CLISTIZE()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">CLISTIZE </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a02364.html">BLOCK_RES</a>&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="a00ac9ba6627438b66b6ef302e0b361d2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a00ac9ba6627438b66b6ef302e0b361d2">&#9670;&nbsp;</a></span>kMaxLineSizeRatio</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const double kMaxLineSizeRatio = 1.25</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00320_source.html#l00057">57</a> of file <a class="el" href="a00320_source.html">pageres.cpp</a>.</p>
-
-</div>
-</div>
-<a id="accb3cb4f22100d91c31064ff7f610226"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#accb3cb4f22100d91c31064ff7f610226">&#9670;&nbsp;</a></span>kMaxWordGapRatio</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const double kMaxWordGapRatio = 2.0</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00320_source.html#l00059">59</a> of file <a class="el" href="a00320_source.html">pageres.cpp</a>.</p>
-
-</div>
-</div>
-<a id="aa9ef752edbd2ab5db631fa9514135cc0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa9ef752edbd2ab5db631fa9514135cc0">&#9670;&nbsp;</a></span>kMaxWordSizeRatio</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const double kMaxWordSizeRatio = 1.25</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00320_source.html#l00055">55</a> of file <a class="el" href="a00320_source.html">pageres.cpp</a>.</p>
-
-</div>
-</div>
-<a id="acce49cce3d17bc2e3e1508d1c4d3959d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acce49cce3d17bc2e3e1508d1c4d3959d">&#9670;&nbsp;</a></span>kWordrecMaxNumJoinChunks</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const int kWordrecMaxNumJoinChunks = 4</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00320_source.html#l00052">52</a> of file <a class="el" href="a00320_source.html">pageres.cpp</a>.</p>
-
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_27285da2200a3bef8a8e2dba4d21412a.html">ccstruct</a></li><li class="navelem"><a class="el" href="a00320.html">pageres.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_27285da2200a3bef8a8e2dba4d21412a.html">ccstruct</a></li><li class="navelem"><a class="el" href="a00320.html">imagedata.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

@@ -1,7 +1,24 @@
 var searchData=
 [
-  ['temp_5fconfig_14469',['TEMP_CONFIG',['../a00575.html#a28c8c4986a613e9ecfbbbd82ef48ba4c',1,'adaptive.h']]],
-  ['temp_5fproto_14470',['TEMP_PROTO',['../a00575.html#a082a2b2f795e9ef8e3c5d08bd2b726a5',1,'adaptive.h']]],
-  ['testcallback_14471',['TestCallback',['../a01539.html#a2ae47d02c5c0ee31e211dbe0ae0d1a5b',1,'tesseract']]],
-  ['trie_5fnodes_14472',['TRIE_NODES',['../a00800.html#a32793106e32b517fba30aee8bb12022a',1,'trie.h']]]
+  ['temp_5fconfig_15881',['TEMP_CONFIG',['../a00626.html#a28c8c4986a613e9ecfbbbd82ef48ba4c',1,'adaptive.h']]],
+  ['temp_5fproto_15882',['TEMP_PROTO',['../a00626.html#a082a2b2f795e9ef8e3c5d08bd2b726a5',1,'adaptive.h']]],
+  ['tessbaseapi_15883',['TessBaseAPI',['../a00008.html#a47436d31525552f08492b8dcdfc12755',1,'capi.h']]],
+  ['tesscancelfunc_15884',['TessCancelFunc',['../a00008.html#aa2ee919d88770b0dc12682e057edebb5',1,'capi.h']]],
+  ['tesschoiceiterator_15885',['TessChoiceIterator',['../a00008.html#a7c4ee80ec46ad6a93ce21ed96a066c34',1,'capi.h']]],
+  ['tessmutableiterator_15886',['TessMutableIterator',['../a00008.html#a1b0c4949f7e355a94f2d2e8aeae6b104',1,'capi.h']]],
+  ['tessocrenginemode_15887',['TessOcrEngineMode',['../a00008.html#a31b19efc57adef1e2a8284250529c3ac',1,'capi.h']]],
+  ['tessorientation_15888',['TessOrientation',['../a00008.html#a3f08251e466637e9cbb99c47bb98f35c',1,'capi.h']]],
+  ['tesspageiterator_15889',['TessPageIterator',['../a00008.html#a975e1aea4d19c979138dac040af1510a',1,'capi.h']]],
+  ['tesspageiteratorlevel_15890',['TessPageIteratorLevel',['../a00008.html#ac272ec656593da48bd73be092f57ded5',1,'capi.h']]],
+  ['tesspagesegmode_15891',['TessPageSegMode',['../a00008.html#a8043f56805d7f0fb69b2fcce0939df1b',1,'capi.h']]],
+  ['tessparagraphjustification_15892',['TessParagraphJustification',['../a00008.html#aa3323e26835128ff78a146ef5d7c7067',1,'capi.h']]],
+  ['tesspolyblocktype_15893',['TessPolyBlockType',['../a00008.html#af04e44f054f32d18d68dfb80f39b69ab',1,'capi.h']]],
+  ['tessprogressfunc_15894',['TessProgressFunc',['../a00008.html#a321970606761526f4a0d6a642761b5f1',1,'capi.h']]],
+  ['tessresultiterator_15895',['TessResultIterator',['../a00008.html#aa313de0a41e165b98c3a1d4f1c83b04b',1,'capi.h']]],
+  ['tessresultrenderer_15896',['TessResultRenderer',['../a00008.html#a79b401fe19433464a13b416108deb755',1,'capi.h']]],
+  ['tesstextlineorder_15897',['TessTextlineOrder',['../a00008.html#ab44d13303a4d450fcba1413be2995981',1,'capi.h']]],
+  ['tesswritingdirection_15898',['TessWritingDirection',['../a00008.html#a3d526105b36bbcd9fc2e650ec8248a9f',1,'capi.h']]],
+  ['testcallback_15899',['TestCallback',['../a01818.html#a2ae47d02c5c0ee31e211dbe0ae0d1a5b',1,'tesseract']]],
+  ['trie_5fnodes_15900',['TRIE_NODES',['../a00851.html#a32793106e32b517fba30aee8bb12022a',1,'trie.h']]],
+  ['truthcallback_15901',['TruthCallback',['../a01818.html#a3ea4f62427e54d64a770bf616c41685b',1,'tesseract']]]
 ];

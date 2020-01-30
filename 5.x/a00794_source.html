@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/dict/stopper.h Source File</title>
+<title>tesseract: /tesseract/src/cutil/callcpp.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,78 +87,150 @@ $(document).ready(function(){initNavTree('a00794_source.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">stopper.h</div>  </div>
+<div class="title">callcpp.cpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00794.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/******************************************************************************</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> ** Filename:    stopper.h</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> ** Purpose:     Stopping criteria for word classifier.</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> ** Author:      Dan Johnson</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> ** History:     Wed May  1 09:42:57 1991, DSJ, Created.</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> **</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> ** (c) Copyright Hewlett-Packard Company, 1988.</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> ** Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> ** you may not use this file except in compliance with the License.</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> ** You may obtain a copy of the License at</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> ** http://www.apache.org/licenses/LICENSE-2.0</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> ** Unless required by applicable law or agreed to in writing, software</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> ** distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> ** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> ** See the License for the specific language governing permissions and</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> ** limitations under the License.</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> ******************************************************************************/</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#ifndef   STOPPER_H</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#define   STOPPER_H</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">/*----------------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">          Include Files and Type Defines</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">----------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &lt;tesseract/genericvector.h&gt;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00503.html">params.h</a>&quot;</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00374.html">ratngs.h</a>&quot;</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &lt;tesseract/unichar.h&gt;</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">class </span><a class="code" href="a02436.html">WERD_CHOICE</a>;</div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="a00794.html#af5f37aa612be5b5d3563816d12defe94">   31</a></span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">using</span> <a class="code" href="a00794.html#af5f37aa612be5b5d3563816d12defe94">BLOB_WIDTH</a> = uint8_t;</div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="a02968.html">   33</a></span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="a02968.html#a84f9091bf2031485313a01c27acadba6">   34</a></span>&#160;<span class="keyword">struct </span><a class="code" href="a02968.html">DANGERR_INFO</a> {</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <a class="code" href="a02968.html#a84f9091bf2031485313a01c27acadba6">DANGERR_INFO</a>() :</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="a02968.html#a7fb0c9a1b1a22a2b3c308011a207e2c0">begin</a>(-1), <a class="code" href="a02968.html#adfaf65ffc0f21a2fa0cbc56817b2549a">end</a>(-1), <a class="code" href="a02968.html#af8bd75c848bf8c8c43b4d6ae8350c96b">dangerous</a>(<span class="keyword">false</span>), <a class="code" href="a02968.html#a6aa009d85760b7acc7bf50158d64a143">correct_is_ngram</a>(<span class="keyword">false</span>),</div>
-<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="a02968.html#aaef16575b8b0d298f1dcb4f56299f815">   37</a></span>&#160;    <a class="code" href="a02968.html#abe509f094f3675bb73f82ce17fc703bc">leftmost</a>(INVALID_UNICHAR_ID) {}</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <a class="code" href="a02968.html#a84f9091bf2031485313a01c27acadba6">DANGERR_INFO</a>(<span class="keywordtype">int</span> b, <span class="keywordtype">int</span> e, <span class="keywordtype">bool</span> d, <span class="keywordtype">bool</span> n, UNICHAR_ID l) :</div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="a02968.html#a7fb0c9a1b1a22a2b3c308011a207e2c0">   39</a></span>&#160;    <a class="code" href="a02968.html#a7fb0c9a1b1a22a2b3c308011a207e2c0">begin</a>(b), <a class="code" href="a02968.html#adfaf65ffc0f21a2fa0cbc56817b2549a">end</a>(e), <a class="code" href="a02968.html#af8bd75c848bf8c8c43b4d6ae8350c96b">dangerous</a>(d), <a class="code" href="a02968.html#a6aa009d85760b7acc7bf50158d64a143">correct_is_ngram</a>(n), <a class="code" href="a02968.html#abe509f094f3675bb73f82ce17fc703bc">leftmost</a>(l) {}</div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="a02968.html#adfaf65ffc0f21a2fa0cbc56817b2549a">   40</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="a02968.html#a7fb0c9a1b1a22a2b3c308011a207e2c0">begin</a>;</div>
-<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="a02968.html#af8bd75c848bf8c8c43b4d6ae8350c96b">   41</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="a02968.html#adfaf65ffc0f21a2fa0cbc56817b2549a">end</a>;</div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="a02968.html#a6aa009d85760b7acc7bf50158d64a143">   42</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="a02968.html#af8bd75c848bf8c8c43b4d6ae8350c96b">dangerous</a>;</div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="a02968.html#abe509f094f3675bb73f82ce17fc703bc">   43</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="a02968.html#a6aa009d85760b7acc7bf50158d64a143">correct_is_ngram</a>;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  UNICHAR_ID <a class="code" href="a02968.html#abe509f094f3675bb73f82ce17fc703bc">leftmost</a>;   <span class="comment">// in the replacement, what&#39;s the leftmost character?</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;};</div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="a00794.html#a83aebc66a5c063bfae114275effe34b2">   46</a></span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">using</span> <a class="code" href="a02108.html">DANGERR</a> = <a class="code" href="a02108.html">GenericVector&lt;DANGERR_INFO&gt;</a>;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#endif</span></div>
+<a href="a00794.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**********************************************************************</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * File:        callcpp.cpp</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * Description: extern C interface calling C++ from C.</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * Author:      Ray Smith</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> * (C) Copyright 1996, Hewlett-Packard Co.</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> ** Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> ** you may not use this file except in compliance with the License.</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> ** You may obtain a copy of the License at</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> ** http://www.apache.org/licenses/LICENSE-2.0</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> ** Unless required by applicable law or agreed to in writing, software</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> ** distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> ** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> ** See the License for the specific language governing permissions and</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> ** limitations under the License.</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> **********************************************************************/</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">// Include automatically generated configuration file if running autoconf.</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#ifdef HAVE_CONFIG_H</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;config_auto.h&quot;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00797.html">callcpp.h</a>&quot;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &lt;cstdarg&gt;</span>      <span class="comment">// for va_end, va_list, va_start</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &lt;cstdio&gt;</span>       <span class="comment">// for vsprintf</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span>       <span class="comment">// for unique_ptr</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a01469.html">scrollview.h</a>&quot;</span> <span class="comment">// for ScrollView, SVEvent, SVET_ANY, SVET_INPUT</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00584.html">tprintf.h</a>&quot;</span>    <span class="comment">// for tprintf</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="a00797.html#a21679e7fec2d69db23107348fa13c153">   32</a></span>&#160;<a class="code" href="a00794.html#a21679e7fec2d69db23107348fa13c153">cprintf</a> (                        <span class="comment">//Trace printf</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">const</span> <span class="keywordtype">char</span> *format, ...          <span class="comment">//special message</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;) {</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  va_list args;                  <span class="comment">//variable args</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <span class="keywordtype">char</span> msg[1000];</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  va_start(args, format);  <span class="comment">//variable list</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  vsprintf(msg, format, args);  <span class="comment">//Format into msg</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  va_end(args);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;%s&quot;</span>, msg);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;}</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#ifndef GRAPHICS_DISABLED</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="a00797.html#a2f7d967080f5bab49d5056dce23305ec">   47</a></span>&#160;<a class="code" href="a03978.html">ScrollView</a> *<a class="code" href="a00794.html#a2f7d967080f5bab49d5056dce23305ec">c_create_window</a>(                   <span class="comment">/*create a window */</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                      <span class="keyword">const</span> <span class="keywordtype">char</span> *name,  <span class="comment">/*name/title of window */</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                      int16_t xpos,        <span class="comment">/*coords of window */</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                      int16_t ypos,        <span class="comment">/*coords of window */</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                      int16_t xsize,       <span class="comment">/*size of window */</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                      int16_t ysize,       <span class="comment">/*size of window */</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                      <span class="keywordtype">double</span> xmin,       <span class="comment">/*scrolling limits */</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                      <span class="keywordtype">double</span> xmax,       <span class="comment">/*to stop users */</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                      <span class="keywordtype">double</span> ymin,       <span class="comment">/*getting lost in */</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                      <span class="keywordtype">double</span> ymax        <span class="comment">/*empty space */</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                     ) {</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;   <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="a03978.html">ScrollView</a>(name, xpos, ypos, xsize, ysize, xmax - xmin, ymax - ymin, <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;}</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="a00797.html#a48077e4a1f221a9febc643bdb5b4e8fe">   62</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00794.html#a48077e4a1f221a9febc643bdb5b4e8fe">c_line_color_index</a>(  <span class="comment">/*set color */</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                        <span class="keywordtype">void</span> *win,</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                        <a class="code" href="a00797.html#a17bc059e437838f094a5a25c2d5ab88f">C_COL</a> index) {</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; <span class="comment">// The colors are the same as the SV ones except that SV has COLOR:NONE --&gt; offset of 1</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; <span class="keyword">auto</span>* window = static_cast&lt;ScrollView*&gt;(win);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; window-&gt;Pen(static_cast&lt;ScrollView::Color&gt;(index + 1));</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;}</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="a00797.html#a411da919a36d0da4caf6a6775a66cea4">   71</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00794.html#a411da919a36d0da4caf6a6775a66cea4">c_move</a>(  <span class="comment">/*move pen */</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            <span class="keywordtype">void</span> *win,</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            <span class="keywordtype">double</span> x,</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            <span class="keywordtype">double</span> y) {</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <span class="keyword">auto</span>* window = static_cast&lt;ScrollView*&gt;(win);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  window-&gt;SetCursor(static_cast&lt;int&gt;(x), static_cast&lt;int&gt;(y));</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;}</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="a00797.html#a1985867f80140c430e3fa0d8d7430a44">   80</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00794.html#a1985867f80140c430e3fa0d8d7430a44">c_draw</a>(  <span class="comment">/*move pen */</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            <span class="keywordtype">void</span> *win,</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            <span class="keywordtype">double</span> x,</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            <span class="keywordtype">double</span> y) {</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  <span class="keyword">auto</span>* window = static_cast&lt;ScrollView*&gt;(win);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  window-&gt;DrawTo(static_cast&lt;int&gt;(x), static_cast&lt;int&gt;(y));</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;}</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="a00797.html#ac91d916a53eb48572d9937d0d93b558c">   89</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00794.html#ac91d916a53eb48572d9937d0d93b558c">c_make_current</a>(  <span class="comment">/*move pen */</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                    <span class="keywordtype">void</span> *win) {</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  <span class="keyword">auto</span>* window = static_cast&lt;ScrollView*&gt;(win);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  window-&gt;Update();</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;}</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="a00797.html#afdb928ca6fcb1a387ca1fa91f88130dc">   96</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00794.html#afdb928ca6fcb1a387ca1fa91f88130dc">c_clear_window</a>(  <span class="comment">/*move pen */</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                    <span class="keywordtype">void</span> *win) {</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  <span class="keyword">auto</span>* window = static_cast&lt;ScrollView*&gt;(win);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  window-&gt;Clear();</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;}</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<div class="line"><a name="l00103"></a><span class="lineno"><a class="line" href="a00797.html#a51dc37eb580fe7f758275685e5ce0d59">  103</a></span>&#160;<span class="keywordtype">char</span> <a class="code" href="a00794.html#a51dc37eb580fe7f758275685e5ce0d59">window_wait</a>(<a class="code" href="a03978.html">ScrollView</a>* win) {</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  <span class="comment">// Wait till an input or click event (all others are thrown away)</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  <span class="keywordtype">char</span> ret = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  <a class="code" href="a01469.html#a3688a0cf2f95d10a57e095222ccfe9a0">SVEventType</a> ev_type = <a class="code" href="a01469.html#a3688a0cf2f95d10a57e095222ccfe9a0a6eec81ed585bda7ff47ec38918cb2a0e">SVET_ANY</a>;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;  <span class="keywordflow">do</span> {</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    std::unique_ptr&lt;SVEvent&gt; ev(win-&gt;<a class="code" href="a03978.html#a0b820b3fe7a2ce083da0784e9339a1ad">AwaitEvent</a>(<a class="code" href="a01469.html#a3688a0cf2f95d10a57e095222ccfe9a0a6eec81ed585bda7ff47ec38918cb2a0e">SVET_ANY</a>));</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    ev_type = ev-&gt;type;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordflow">if</span> (ev_type == <a class="code" href="a01469.html#a3688a0cf2f95d10a57e095222ccfe9a0aee5f6202613f111d11fc310ccba2fa25">SVET_INPUT</a>)</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;      ret = ev-&gt;parameter[0];</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  } <span class="keywordflow">while</span> (ev_type != <a class="code" href="a01469.html#a3688a0cf2f95d10a57e095222ccfe9a0aee5f6202613f111d11fc310ccba2fa25">SVET_INPUT</a> &amp;&amp; ev_type != <a class="code" href="a01469.html#a3688a0cf2f95d10a57e095222ccfe9a0a2afe407abe8c055c45765b85d20e7946">SVET_CLICK</a>);</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  <span class="keywordflow">return</span> ret;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;}</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa00503_html"><div class="ttname"><a href="a00503.html">params.h</a></div></div>
-<div class="ttc" id="aa00374_html"><div class="ttname"><a href="a00374.html">ratngs.h</a></div></div>
-<div class="ttc" id="aa02436_html"><div class="ttname"><a href="a02436.html">WERD_CHOICE</a></div><div class="ttdef"><b>Definition:</b> <a href="a00374_source.html#l00261">ratngs.h:261</a></div></div>
-<div class="ttc" id="aa02968_html_a84f9091bf2031485313a01c27acadba6"><div class="ttname"><a href="a02968.html#a84f9091bf2031485313a01c27acadba6">DANGERR_INFO::DANGERR_INFO</a></div><div class="ttdeci">DANGERR_INFO()</div><div class="ttdef"><b>Definition:</b> <a href="a00794_source.html#l00034">stopper.h:34</a></div></div>
-<div class="ttc" id="aa02968_html_abe509f094f3675bb73f82ce17fc703bc"><div class="ttname"><a href="a02968.html#abe509f094f3675bb73f82ce17fc703bc">DANGERR_INFO::leftmost</a></div><div class="ttdeci">UNICHAR_ID leftmost</div><div class="ttdef"><b>Definition:</b> <a href="a00794_source.html#l00043">stopper.h:43</a></div></div>
-<div class="ttc" id="aa02108_html"><div class="ttname"><a href="a02108.html">GenericVector&lt; DANGERR_INFO &gt;</a></div></div>
-<div class="ttc" id="aa00794_html_af5f37aa612be5b5d3563816d12defe94"><div class="ttname"><a href="a00794.html#af5f37aa612be5b5d3563816d12defe94">BLOB_WIDTH</a></div><div class="ttdeci">uint8_t BLOB_WIDTH</div><div class="ttdef"><b>Definition:</b> <a href="a00794_source.html#l00031">stopper.h:31</a></div></div>
-<div class="ttc" id="aa02968_html_af8bd75c848bf8c8c43b4d6ae8350c96b"><div class="ttname"><a href="a02968.html#af8bd75c848bf8c8c43b4d6ae8350c96b">DANGERR_INFO::dangerous</a></div><div class="ttdeci">bool dangerous</div><div class="ttdef"><b>Definition:</b> <a href="a00794_source.html#l00041">stopper.h:41</a></div></div>
-<div class="ttc" id="aa02968_html"><div class="ttname"><a href="a02968.html">DANGERR_INFO</a></div><div class="ttdef"><b>Definition:</b> <a href="a00794_source.html#l00033">stopper.h:33</a></div></div>
-<div class="ttc" id="aa02968_html_a6aa009d85760b7acc7bf50158d64a143"><div class="ttname"><a href="a02968.html#a6aa009d85760b7acc7bf50158d64a143">DANGERR_INFO::correct_is_ngram</a></div><div class="ttdeci">bool correct_is_ngram</div><div class="ttdef"><b>Definition:</b> <a href="a00794_source.html#l00042">stopper.h:42</a></div></div>
-<div class="ttc" id="aa02968_html_adfaf65ffc0f21a2fa0cbc56817b2549a"><div class="ttname"><a href="a02968.html#adfaf65ffc0f21a2fa0cbc56817b2549a">DANGERR_INFO::end</a></div><div class="ttdeci">int end</div><div class="ttdef"><b>Definition:</b> <a href="a00794_source.html#l00040">stopper.h:40</a></div></div>
-<div class="ttc" id="aa02968_html_a7fb0c9a1b1a22a2b3c308011a207e2c0"><div class="ttname"><a href="a02968.html#a7fb0c9a1b1a22a2b3c308011a207e2c0">DANGERR_INFO::begin</a></div><div class="ttdeci">int begin</div><div class="ttdef"><b>Definition:</b> <a href="a00794_source.html#l00039">stopper.h:39</a></div></div>
+<div class="ttc" id="aa03978_html"><div class="ttname"><a href="a03978.html">ScrollView</a></div><div class="ttdef"><b>Definition:</b> <a href="a01469_source.html#l00097">scrollview.h:97</a></div></div>
+<div class="ttc" id="aa01469_html_a3688a0cf2f95d10a57e095222ccfe9a0"><div class="ttname"><a href="a01469.html#a3688a0cf2f95d10a57e095222ccfe9a0">SVEventType</a></div><div class="ttdeci">SVEventType</div><div class="ttdef"><b>Definition:</b> <a href="a01469_source.html#l00044">scrollview.h:44</a></div></div>
+<div class="ttc" id="aa01469_html_a3688a0cf2f95d10a57e095222ccfe9a0a2afe407abe8c055c45765b85d20e7946"><div class="ttname"><a href="a01469.html#a3688a0cf2f95d10a57e095222ccfe9a0a2afe407abe8c055c45765b85d20e7946">SVET_CLICK</a></div><div class="ttdef"><b>Definition:</b> <a href="a01469_source.html#l00047">scrollview.h:47</a></div></div>
+<div class="ttc" id="aa01469_html_a3688a0cf2f95d10a57e095222ccfe9a0aee5f6202613f111d11fc310ccba2fa25"><div class="ttname"><a href="a01469.html#a3688a0cf2f95d10a57e095222ccfe9a0aee5f6202613f111d11fc310ccba2fa25">SVET_INPUT</a></div><div class="ttdef"><b>Definition:</b> <a href="a01469_source.html#l00049">scrollview.h:49</a></div></div>
+<div class="ttc" id="aa00794_html_a21679e7fec2d69db23107348fa13c153"><div class="ttname"><a href="a00794.html#a21679e7fec2d69db23107348fa13c153">cprintf</a></div><div class="ttdeci">void cprintf(const char *format,...)</div><div class="ttdef"><b>Definition:</b> <a href="a00794_source.html#l00032">callcpp.cpp:32</a></div></div>
+<div class="ttc" id="aa00794_html_a411da919a36d0da4caf6a6775a66cea4"><div class="ttname"><a href="a00794.html#a411da919a36d0da4caf6a6775a66cea4">c_move</a></div><div class="ttdeci">void c_move(void *win, double x, double y)</div><div class="ttdef"><b>Definition:</b> <a href="a00794_source.html#l00071">callcpp.cpp:71</a></div></div>
+<div class="ttc" id="aa00797_html_a17bc059e437838f094a5a25c2d5ab88f"><div class="ttname"><a href="a00797.html#a17bc059e437838f094a5a25c2d5ab88f">C_COL</a></div><div class="ttdeci">C_COL</div><div class="ttdef"><b>Definition:</b> <a href="a00797_source.html#l00026">callcpp.h:26</a></div></div>
+<div class="ttc" id="aa00794_html_afdb928ca6fcb1a387ca1fa91f88130dc"><div class="ttname"><a href="a00794.html#afdb928ca6fcb1a387ca1fa91f88130dc">c_clear_window</a></div><div class="ttdeci">void c_clear_window(void *win)</div><div class="ttdef"><b>Definition:</b> <a href="a00794_source.html#l00096">callcpp.cpp:96</a></div></div>
+<div class="ttc" id="aa00584_html"><div class="ttname"><a href="a00584.html">tprintf.h</a></div></div>
+<div class="ttc" id="aa00797_html"><div class="ttname"><a href="a00797.html">callcpp.h</a></div></div>
+<div class="ttc" id="aa01469_html_a3688a0cf2f95d10a57e095222ccfe9a0a6eec81ed585bda7ff47ec38918cb2a0e"><div class="ttname"><a href="a01469.html#a3688a0cf2f95d10a57e095222ccfe9a0a6eec81ed585bda7ff47ec38918cb2a0e">SVET_ANY</a></div><div class="ttdef"><b>Definition:</b> <a href="a01469_source.html#l00055">scrollview.h:55</a></div></div>
+<div class="ttc" id="aa03978_html_a0b820b3fe7a2ce083da0784e9339a1ad"><div class="ttname"><a href="a03978.html#a0b820b3fe7a2ce083da0784e9339a1ad">ScrollView::AwaitEvent</a></div><div class="ttdeci">SVEvent * AwaitEvent(SVEventType type)</div><div class="ttdef"><b>Definition:</b> <a href="a01466_source.html#l00443">scrollview.cpp:443</a></div></div>
+<div class="ttc" id="aa00794_html_a2f7d967080f5bab49d5056dce23305ec"><div class="ttname"><a href="a00794.html#a2f7d967080f5bab49d5056dce23305ec">c_create_window</a></div><div class="ttdeci">ScrollView * c_create_window(const char *name, int16_t xpos, int16_t ypos, int16_t xsize, int16_t ysize, double xmin, double xmax, double ymin, double ymax)</div><div class="ttdef"><b>Definition:</b> <a href="a00794_source.html#l00047">callcpp.cpp:47</a></div></div>
+<div class="ttc" id="aa00794_html_a48077e4a1f221a9febc643bdb5b4e8fe"><div class="ttname"><a href="a00794.html#a48077e4a1f221a9febc643bdb5b4e8fe">c_line_color_index</a></div><div class="ttdeci">void c_line_color_index(void *win, C_COL index)</div><div class="ttdef"><b>Definition:</b> <a href="a00794_source.html#l00062">callcpp.cpp:62</a></div></div>
+<div class="ttc" id="aa00581_html_a0c2bcd4462ec67ab0971b34a0f610f55"><div class="ttname"><a href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a></div><div class="ttdeci">DLLSYM void tprintf(const char *format,...)</div><div class="ttdef"><b>Definition:</b> <a href="a00581_source.html#l00034">tprintf.cpp:34</a></div></div>
+<div class="ttc" id="aa00794_html_a1985867f80140c430e3fa0d8d7430a44"><div class="ttname"><a href="a00794.html#a1985867f80140c430e3fa0d8d7430a44">c_draw</a></div><div class="ttdeci">void c_draw(void *win, double x, double y)</div><div class="ttdef"><b>Definition:</b> <a href="a00794_source.html#l00080">callcpp.cpp:80</a></div></div>
+<div class="ttc" id="aa00794_html_a51dc37eb580fe7f758275685e5ce0d59"><div class="ttname"><a href="a00794.html#a51dc37eb580fe7f758275685e5ce0d59">window_wait</a></div><div class="ttdeci">char window_wait(ScrollView *win)</div><div class="ttdef"><b>Definition:</b> <a href="a00794_source.html#l00103">callcpp.cpp:103</a></div></div>
+<div class="ttc" id="aa01469_html"><div class="ttname"><a href="a01469.html">scrollview.h</a></div></div>
+<div class="ttc" id="aa00794_html_ac91d916a53eb48572d9937d0d93b558c"><div class="ttname"><a href="a00794.html#ac91d916a53eb48572d9937d0d93b558c">c_make_current</a></div><div class="ttdeci">void c_make_current(void *win)</div><div class="ttdef"><b>Definition:</b> <a href="a00794_source.html#l00089">callcpp.cpp:89</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_2d55640c0a15c59e1d7c66cdbf3fd5ea.html">dict</a></li><li class="navelem"><a class="el" href="a00794.html">stopper.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:14 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_26a98b1b7a71b8b8c9c7d7743e94ea74.html">cutil</a></li><li class="navelem"><a class="el" href="a00794.html">callcpp.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:20 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

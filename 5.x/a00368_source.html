@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/ccstruct/quspline.h Source File</title>
+<title>tesseract: /tesseract/src/ccstruct/otsuthr.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,137 +87,75 @@ $(document).ready(function(){initNavTree('a00368_source.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">quspline.h</div>  </div>
+<div class="title">otsuthr.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00368.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**********************************************************************</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * File:        quspline.h  (Formerly qspline.h)</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * Description: Code for the QSPLINE class.</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * Author:      Ray Smith</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * Created:     Tue Oct 08 17:16:12 BST 1991</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> * (C) Copyright 1991, Hewlett-Packard Ltd.</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> ** Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> ** you may not use this file except in compliance with the License.</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> ** You may obtain a copy of the License at</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> ** http://www.apache.org/licenses/LICENSE-2.0</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> ** Unless required by applicable law or agreed to in writing, software</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> ** distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> ** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> ** See the License for the specific language governing permissions and</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> ** limitations under the License.</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"> **********************************************************************/</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#ifndef QUSPLINE_H</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#define QUSPLINE_H</span></div>
+<a href="a00368.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// File:        otsuthr.h</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// Description: Simple Otsu thresholding for binarizing images.</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// Author:      Ray Smith</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">// Created:     Fri Mar 07 12:14:01 PST 2008</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">// (C) Copyright 2008, Google Inc.</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">// you may not use this file except in compliance with the License.</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// You may obtain a copy of the License at</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">// http://www.apache.org/licenses/LICENSE-2.0</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// Unless required by applicable law or agreed to in writing, software</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">// See the License for the specific language governing permissions and</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">// limitations under the License.</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#ifndef TESSERACT_CCMAIN_OTSUTHR_H_</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#define TESSERACT_CCMAIN_OTSUTHR_H_</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;cstdint&gt;</span>             <span class="comment">// for int32_t</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a01418.html">scrollview.h</a>&quot;</span>        <span class="comment">// for ScrollView, ScrollView::Color</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">class </span><a class="code" href="a02400.html">ICOORD</a>;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">class </span><a class="code" href="a02424.html">QUAD_COEFFS</a>;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">class </span><a class="code" href="a02356.html">ROW</a>;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">class </span><a class="code" href="a02440.html">TBOX</a>;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">struct </span>Pix;</div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="a02428.html">   31</a></span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">class </span><a class="code" href="a02428.html">QSPLINE</a></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;{</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <span class="keyword">friend</span> <span class="keywordtype">void</span> <a class="code" href="a02428.html#a278b4eb02ff4e584c479bf528b2430ae">make_first_baseline</a>(<a class="code" href="a02440.html">TBOX</a> *,</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                                  <span class="keywordtype">int</span>,</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                                  <span class="keywordtype">int</span> *,</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                                  <span class="keywordtype">int</span> *,</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                                  <a class="code" href="a02428.html">QSPLINE</a> *,</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                                  <a class="code" href="a02428.html">QSPLINE</a> *,</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                                  <span class="keywordtype">float</span>);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <span class="keyword">friend</span> <span class="keywordtype">void</span> <a class="code" href="a02428.html#abbfbb7d09880e7770be0fa99282a70c6">make_holed_baseline</a>(<a class="code" href="a02440.html">TBOX</a> *, <span class="keywordtype">int</span>, <a class="code" href="a02428.html">QSPLINE</a> *, <a class="code" href="a02428.html">QSPLINE</a> *, <span class="keywordtype">float</span>);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <span class="keyword">friend</span> <span class="keywordtype">void</span> <a class="code" href="a02428.html#afc6deb99d649bb50497f4666630ecb7f">tweak_row_baseline</a>(<a class="code" href="a02356.html">ROW</a> *, <span class="keywordtype">double</span>, <span class="keywordtype">double</span>);</div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="a02428.html#a550dbc1b50898c27be5237d72812d1c7">   43</a></span>&#160;  <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="a02428.html#a550dbc1b50898c27be5237d72812d1c7">QSPLINE</a>() {  <span class="comment">//empty constructor</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;      segments = 0;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;      xcoords = <span class="keyword">nullptr</span>;            <span class="comment">//everything empty</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;      quadratics = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    }</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <a class="code" href="a02428.html#a550dbc1b50898c27be5237d72812d1c7">QSPLINE</a>(  <span class="comment">//copy constructor</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <span class="keyword">const</span> <a class="code" href="a02428.html">QSPLINE</a> &amp;src);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="code" href="a02428.html#a550dbc1b50898c27be5237d72812d1c7">QSPLINE</a>(                  <span class="comment">//constructor</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            int32_t <a class="code" href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>,      <span class="comment">//number of segments</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            int32_t *xstarts,   <span class="comment">//segment starts</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <span class="keywordtype">double</span> *coeffs);  <span class="comment">//coefficients</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <a class="code" href="a02428.html#a7619e90d02d5127754c93073378a738a">~QSPLINE</a> ();                 <span class="comment">//destructor</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <a class="code" href="a02428.html#a550dbc1b50898c27be5237d72812d1c7">QSPLINE</a> (                    <span class="comment">//least squares fit</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;      <span class="keywordtype">int</span> xstarts[],             <span class="comment">//spline boundaries</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;      <span class="keywordtype">int</span> segcount,              <span class="comment">//no of segments</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;      <span class="keywordtype">int</span> xcoords[],             <span class="comment">//points to fit</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;      <span class="keywordtype">int</span> ycoords[], <span class="keywordtype">int</span> blobcount,<span class="comment">//no of coords</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;      <span class="keywordtype">int</span> degree);               <span class="comment">//function</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">double</span> <a class="code" href="a02428.html#aaebd602e34d8b7f4e7b73884f1701a75">step</a>(            <span class="comment">//step change</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                <span class="keywordtype">double</span> x1,  <span class="comment">//between coords</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                <span class="keywordtype">double</span> x2);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordtype">double</span> <a class="code" href="a02428.html#a6d9a420087cfe7fa3349cabb048de02f">y</a>(                  <span class="comment">//evaluate</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;             <span class="keywordtype">double</span> x) <span class="keyword">const</span>;  <span class="comment">//at x</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="a02428.html#a3d1808becf8a69d00747b444d9c76cf6">move</a>(              <span class="comment">// reposition spline</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;              <a class="code" href="a02400.html">ICOORD</a> vec);  <span class="comment">// by vector</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="a02428.html#a613a51c7c212f6e62433ec841410cbe1">overlap</a>(                   <span class="comment">//test overlap</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            <a class="code" href="a02428.html">QSPLINE</a>* spline2,  <span class="comment">//2 cannot be smaller</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            <span class="keywordtype">double</span> fraction);  <span class="comment">//by more than this</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="a02428.html#a2459d3e247a16f9f01d6b77597193812">extrapolate</a>(                  <span class="comment">//linear extrapolation</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                     <span class="keywordtype">double</span> gradient,  <span class="comment">//gradient to use</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                     <span class="keywordtype">int</span> left,         <span class="comment">//new left edge</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                     <span class="keywordtype">int</span> right);       <span class="comment">//new right edge</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">#ifndef GRAPHICS_DISABLED</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="a02428.html#a76779877e010949e0055ed273801619d">plot</a>(                       <span class="comment">//draw it</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;              <a class="code" href="a03524.html">ScrollView</a>* window,         <span class="comment">//in window</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;              <a class="code" href="a03524.html#a100504544a5423a94222149ee9ed0fe8">ScrollView::Color</a> colour) <span class="keyword">const</span>;  <span class="comment">//in colour</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="comment">// Paint the baseline over pix. If pix has depth of 32, then the line will</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="comment">// be painted in red. Otherwise it will be painted in black.</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="a02428.html#a76779877e010949e0055ed273801619d">plot</a>(Pix* pix) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <a class="code" href="a02428.html">QSPLINE</a> &amp; <a class="code" href="a02428.html#a947d537ad3fd5ef782bc81055b291dcf">operator= </a>(</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;      <span class="keyword">const</span> <a class="code" href="a02428.html">QSPLINE</a> &amp; source);   <span class="comment">//from this</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    int32_t spline_index(                  <span class="comment">//binary search</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                       <span class="keywordtype">double</span> x) <span class="keyword">const</span>;  <span class="comment">//for x</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    int32_t segments;              <span class="comment">//no of segments</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    int32_t *xcoords;              <span class="comment">//no of coords</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <a class="code" href="a02424.html">QUAD_COEFFS</a> *quadratics;     <span class="comment">//spline pieces</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;};</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">struct </span>Pix;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">namespace </span><a class="code" href="a01818.html">tesseract</a> {</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="a01818.html#a30cac105cb2746dccb9a2e6334a0209b">   27</a></span>&#160;<span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="a01818.html#a30cac105cb2746dccb9a2e6334a0209b">kHistogramSize</a> = 256;  <span class="comment">// The size of a histogram of pixel values.</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">// Computes the Otsu threshold(s) for the given image rectangle, making one</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">// for each channel. Each channel is always one byte per pixel.</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">// Returns an array of threshold values and an array of hi_values, such</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">// that a pixel value &gt;threshold[channel] is considered foreground if</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">// hi_values[channel] is 0 or background if 1. A hi_value of -1 indicates</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">// that there is no apparent foreground. At least one hi_value will not be -1.</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">// Delete thresholds and hi_values with delete [] after use.</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">// The return value is the number of channels in the input image, being</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">// the size of the output thresholds and hi_values arrays.</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keywordtype">int</span> <a class="code" href="a01818.html#a865a6eb28d729e208b513acbe716f22d">OtsuThreshold</a>(Pix* src_pix, <span class="keywordtype">int</span> left, <span class="keywordtype">int</span> top, <span class="keywordtype">int</span> width, <span class="keywordtype">int</span> height,</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                  <span class="keywordtype">int</span>** thresholds, <span class="keywordtype">int</span>** hi_values);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">// Computes the histogram for the given image rectangle, and the given</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">// single channel. Each channel is always one byte per pixel.</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">// Histogram is always a kHistogramSize(256) element array to count</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">// occurrences of each pixel value.</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a01818.html#a6601a260946a730407fc6ef4f69d8725">HistogramRect</a>(Pix* src_pix, <span class="keywordtype">int</span> channel,</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                   <span class="keywordtype">int</span> left, <span class="keywordtype">int</span> top, <span class="keywordtype">int</span> width, <span class="keywordtype">int</span> height,</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                   <span class="keywordtype">int</span>* histogram);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">// Computes the Otsu threshold(s) for the given histogram.</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">// Also returns H = total count in histogram, and</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">// omega0 = count of histogram below threshold.</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keywordtype">int</span> <a class="code" href="a01818.html#aa38847c682089329f7cec83a5bcb714b">OtsuStats</a>(<span class="keyword">const</span> <span class="keywordtype">int</span>* histogram, <span class="keywordtype">int</span>* H_out, <span class="keywordtype">int</span>* omega0_out);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;}  <span class="comment">// namespace tesseract.</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#endif  // TESSERACT_CCMAIN_OTSUTHR_H_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa02428_html_a7619e90d02d5127754c93073378a738a"><div class="ttname"><a href="a02428.html#a7619e90d02d5127754c93073378a738a">QSPLINE::~QSPLINE</a></div><div class="ttdeci">~QSPLINE()</div><div class="ttdef"><b>Definition:</b> <a href="a00365_source.html#l00148">quspline.cpp:148</a></div></div>
-<div class="ttc" id="aa02428_html_afc6deb99d649bb50497f4666630ecb7f"><div class="ttname"><a href="a02428.html#afc6deb99d649bb50497f4666630ecb7f">QSPLINE::tweak_row_baseline</a></div><div class="ttdeci">friend void tweak_row_baseline(ROW *, double, double)</div><div class="ttdef"><b>Definition:</b> <a href="a01139_source.html#l00893">tordmain.cpp:893</a></div></div>
-<div class="ttc" id="aa02428_html_a2459d3e247a16f9f01d6b77597193812"><div class="ttname"><a href="a02428.html#a2459d3e247a16f9f01d6b77597193812">QSPLINE::extrapolate</a></div><div class="ttdeci">void extrapolate(double gradient, int left, int right)</div><div class="ttdef"><b>Definition:</b> <a href="a00365_source.html#l00280">quspline.cpp:280</a></div></div>
-<div class="ttc" id="aa02428_html_abbfbb7d09880e7770be0fa99282a70c6"><div class="ttname"><a href="a02428.html#abbfbb7d09880e7770be0fa99282a70c6">QSPLINE::make_holed_baseline</a></div><div class="ttdeci">friend void make_holed_baseline(TBOX *, int, QSPLINE *, QSPLINE *, float)</div></div>
-<div class="ttc" id="aa02428_html"><div class="ttname"><a href="a02428.html">QSPLINE</a></div><div class="ttdef"><b>Definition:</b> <a href="a00368_source.html#l00031">quspline.h:31</a></div></div>
-<div class="ttc" id="aa03524_html"><div class="ttname"><a href="a03524.html">ScrollView</a></div><div class="ttdef"><b>Definition:</b> <a href="a01418_source.html#l00097">scrollview.h:97</a></div></div>
-<div class="ttc" id="aa02424_html"><div class="ttname"><a href="a02424.html">QUAD_COEFFS</a></div><div class="ttdef"><b>Definition:</b> <a href="a00362_source.html#l00024">quadratc.h:24</a></div></div>
-<div class="ttc" id="aa02428_html_a947d537ad3fd5ef782bc81055b291dcf"><div class="ttname"><a href="a02428.html#a947d537ad3fd5ef782bc81055b291dcf">QSPLINE::operator=</a></div><div class="ttdeci">QSPLINE &amp; operator=(const QSPLINE &amp;source)</div><div class="ttdef"><b>Definition:</b> <a href="a00365_source.html#l00159">quspline.cpp:159</a></div></div>
-<div class="ttc" id="aa02428_html_a613a51c7c212f6e62433ec841410cbe1"><div class="ttname"><a href="a02428.html#a613a51c7c212f6e62433ec841410cbe1">QSPLINE::overlap</a></div><div class="ttdeci">bool overlap(QSPLINE *spline2, double fraction)</div><div class="ttdef"><b>Definition:</b> <a href="a00365_source.html#l00262">quspline.cpp:262</a></div></div>
-<div class="ttc" id="aa00755_html_acd4ea858d7133e40518e0832ff9d94b2"><div class="ttname"><a href="a00755.html#acd4ea858d7133e40518e0832ff9d94b2">count</a></div><div class="ttdeci">int count(LIST var_list)</div><div class="ttdef"><b>Definition:</b> <a href="a00755_source.html#l00079">oldlist.cpp:79</a></div></div>
-<div class="ttc" id="aa02428_html_aaebd602e34d8b7f4e7b73884f1701a75"><div class="ttname"><a href="a02428.html#aaebd602e34d8b7f4e7b73884f1701a75">QSPLINE::step</a></div><div class="ttdeci">double step(double x1, double x2)</div><div class="ttdef"><b>Definition:</b> <a href="a00365_source.html#l00178">quspline.cpp:178</a></div></div>
-<div class="ttc" id="aa03524_html_a100504544a5423a94222149ee9ed0fe8"><div class="ttname"><a href="a03524.html#a100504544a5423a94222149ee9ed0fe8">ScrollView::Color</a></div><div class="ttdeci">Color</div><div class="ttdef"><b>Definition:</b> <a href="a01418_source.html#l00100">scrollview.h:100</a></div></div>
-<div class="ttc" id="aa02428_html_a550dbc1b50898c27be5237d72812d1c7"><div class="ttname"><a href="a02428.html#a550dbc1b50898c27be5237d72812d1c7">QSPLINE::QSPLINE</a></div><div class="ttdeci">QSPLINE()</div><div class="ttdef"><b>Definition:</b> <a href="a00368_source.html#l00043">quspline.h:43</a></div></div>
-<div class="ttc" id="aa01418_html"><div class="ttname"><a href="a01418.html">scrollview.h</a></div></div>
-<div class="ttc" id="aa02428_html_a278b4eb02ff4e584c479bf528b2430ae"><div class="ttname"><a href="a02428.html#a278b4eb02ff4e584c479bf528b2430ae">QSPLINE::make_first_baseline</a></div><div class="ttdeci">friend void make_first_baseline(TBOX *, int, int *, int *, QSPLINE *, QSPLINE *, float)</div></div>
-<div class="ttc" id="aa02356_html"><div class="ttname"><a href="a02356.html">ROW</a></div><div class="ttdef"><b>Definition:</b> <a href="a00311_source.html#l00035">ocrrow.h:35</a></div></div>
-<div class="ttc" id="aa02440_html"><div class="ttname"><a href="a02440.html">TBOX</a></div><div class="ttdef"><b>Definition:</b> <a href="a00380_source.html#l00033">rect.h:33</a></div></div>
-<div class="ttc" id="aa02428_html_a6d9a420087cfe7fa3349cabb048de02f"><div class="ttname"><a href="a02428.html#a6d9a420087cfe7fa3349cabb048de02f">QSPLINE::y</a></div><div class="ttdeci">double y(double x) const</div><div class="ttdef"><b>Definition:</b> <a href="a00365_source.html#l00202">quspline.cpp:202</a></div></div>
-<div class="ttc" id="aa02428_html_a3d1808becf8a69d00747b444d9c76cf6"><div class="ttname"><a href="a02428.html#a3d1808becf8a69d00747b444d9c76cf6">QSPLINE::move</a></div><div class="ttdeci">void move(ICOORD vec)</div><div class="ttdef"><b>Definition:</b> <a href="a00365_source.html#l00242">quspline.cpp:242</a></div></div>
-<div class="ttc" id="aa02428_html_a76779877e010949e0055ed273801619d"><div class="ttname"><a href="a02428.html#a76779877e010949e0055ed273801619d">QSPLINE::plot</a></div><div class="ttdeci">void plot(ScrollView *window, ScrollView::Color colour) const</div><div class="ttdef"><b>Definition:</b> <a href="a00365_source.html#l00335">quspline.cpp:335</a></div></div>
-<div class="ttc" id="aa02400_html"><div class="ttname"><a href="a02400.html">ICOORD</a></div><div class="ttdoc">integer coordinate</div><div class="ttdef"><b>Definition:</b> <a href="a00341_source.html#l00030">points.h:30</a></div></div>
+<div class="ttc" id="aa01818_html_aa38847c682089329f7cec83a5bcb714b"><div class="ttname"><a href="a01818.html#aa38847c682089329f7cec83a5bcb714b">tesseract::OtsuStats</a></div><div class="ttdeci">int OtsuStats(const int *histogram, int *H_out, int *omega0_out)</div><div class="ttdef"><b>Definition:</b> <a href="a00365_source.html#l00187">otsuthr.cpp:187</a></div></div>
+<div class="ttc" id="aa01818_html_a30cac105cb2746dccb9a2e6334a0209b"><div class="ttname"><a href="a01818.html#a30cac105cb2746dccb9a2e6334a0209b">tesseract::kHistogramSize</a></div><div class="ttdeci">const int kHistogramSize</div><div class="ttdef"><b>Definition:</b> <a href="a00368_source.html#l00027">otsuthr.h:27</a></div></div>
+<div class="ttc" id="aa01818_html"><div class="ttname"><a href="a01818.html">tesseract</a></div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00065">baseapi.h:65</a></div></div>
+<div class="ttc" id="aa01818_html_a6601a260946a730407fc6ef4f69d8725"><div class="ttname"><a href="a01818.html#a6601a260946a730407fc6ef4f69d8725">tesseract::HistogramRect</a></div><div class="ttdeci">void HistogramRect(Pix *src_pix, int channel, int left, int top, int width, int height, int *histogram)</div><div class="ttdef"><b>Definition:</b> <a href="a00365_source.html#l00166">otsuthr.cpp:166</a></div></div>
+<div class="ttc" id="aa01818_html_a865a6eb28d729e208b513acbe716f22d"><div class="ttname"><a href="a01818.html#a865a6eb28d729e208b513acbe716f22d">tesseract::OtsuThreshold</a></div><div class="ttdeci">int OtsuThreshold(Pix *src_pix, int left, int top, int width, int height, int **thresholds, int **hi_values)</div><div class="ttdef"><b>Definition:</b> <a href="a00365_source.html#l00056">otsuthr.cpp:56</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_27285da2200a3bef8a8e2dba4d21412a.html">ccstruct</a></li><li class="navelem"><a class="el" href="a00368.html">quspline.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:14 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_27285da2200a3bef8a8e2dba4d21412a.html">ccstruct</a></li><li class="navelem"><a class="el" href="a00368.html">otsuthr.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:20 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

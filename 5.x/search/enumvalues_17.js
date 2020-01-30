@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['yellow_15199',['YELLOW',['../a03524.html#a100504544a5423a94222149ee9ed0fe8a61dec9bc0aaf1d527a731b2a6ce055c8',1,'ScrollView::YELLOW()'],['../a00746.html#a17bc059e437838f094a5a25c2d5ab88fabf28513245738599d13e3ce36bd16c82',1,'Yellow():&#160;callcpp.h']]],
-  ['yellow_5fgreen_15200',['YELLOW_GREEN',['../a03524.html#a100504544a5423a94222149ee9ed0fe8a889ceefbe45dca9afa6f5bd4281d3f1e',1,'ScrollView::YELLOW_GREEN()'],['../a00746.html#a17bc059e437838f094a5a25c2d5ab88fafd28bd110d78a17b17dd8391f8cffc24',1,'Yellow_GREEN():&#160;callcpp.h']]]
+  ['xh_5fgood_16746',['XH_GOOD',['../a01818.html#a2e53285161b2010d0d23d1bf99261e64a634a80d9494da9f98e421d365a92de2b',1,'tesseract']]],
+  ['xh_5finconsistent_16747',['XH_INCONSISTENT',['../a01818.html#a2e53285161b2010d0d23d1bf99261e64afe8b1f418f59f88d4a1c88308b064815',1,'tesseract']]],
+  ['xh_5fsubnormal_16748',['XH_SUBNORMAL',['../a01818.html#a2e53285161b2010d0d23d1bf99261e64a996fdb88dd53344a2b77382b608f559b',1,'tesseract']]]
 ];

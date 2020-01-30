@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/ccstruct/imagedata.cpp File Reference</title>
+<title>tesseract: /tesseract/src/ccstruct/blread.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,60 +87,143 @@ $(document).ready(function(){initNavTree('a00266.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">imagedata.cpp File Reference</div>  </div>
+<div class="title">blread.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="a00269_source.html">imagedata.h</a>&quot;</code><br />
-<code>#include &lt;cinttypes&gt;</code><br />
-<code>#include &lt;thread&gt;</code><br />
-<code>#include &quot;allheaders.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00221_source.html">boxread.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00746_source.html">callcpp.h</a>&quot;</code><br />
-<code>#include &lt;tesseract/helpers.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00380_source.html">rect.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a01418_source.html">scrollview.h</a>&quot;</code><br />
-<code>#include &lt;tesseract/serialis.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00533_source.html">tprintf.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;cstdint&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00044_source.html">tesseract/strngs.h</a>&gt;</code><br />
 </div>
 <p><a href="a00266_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:a01539"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html">tesseract</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:a242da311d6eca25202d6cdb98ff46600"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00266.html#a242da311d6eca25202d6cdb98ff46600">kMaxReadAhead</a> = 8</td></tr>
-<tr class="separator:a242da311d6eca25202d6cdb98ff46600"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a74a37aa6889ec51bda0d091767c6ae46"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00266.html#a74a37aa6889ec51bda0d091767c6ae46">read_unlv_file</a> (<a class="el" href="a02542.html">STRING</a> name, int32_t xsize, int32_t ysize, BLOCK_LIST *blocks)</td></tr>
+<tr class="separator:a74a37aa6889ec51bda0d091767c6ae46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d4d883ff45201c5b6166b5941cb96a2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00266.html#a6d4d883ff45201c5b6166b5941cb96a2">FullPageBlock</a> (int width, int height, BLOCK_LIST *blocks)</td></tr>
+<tr class="separator:a6d4d883ff45201c5b6166b5941cb96a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="a242da311d6eca25202d6cdb98ff46600"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a242da311d6eca25202d6cdb98ff46600">&#9670;&nbsp;</a></span>kMaxReadAhead</h2>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a6d4d883ff45201c5b6166b5941cb96a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d4d883ff45201c5b6166b5941cb96a2">&#9670;&nbsp;</a></span>FullPageBlock()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const int kMaxReadAhead = 8</td>
+          <td class="memname">void FullPageBlock </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>height</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">BLOCK_LIST *&#160;</td>
+          <td class="paramname"><em>blocks</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00266_source.html#l00040">40</a> of file <a class="el" href="a00266_source.html">imagedata.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00263_source.html#l00063">63</a> of file <a class="el" href="a00263_source.html">blread.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                                                              {</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  BLOCK_IT block_it(blocks);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <span class="keyword">auto</span>* block = <span class="keyword">new</span> <a class="code" href="a02802.html">BLOCK</a>(<span class="stringliteral">&quot;&quot;</span>, <span class="keyword">true</span>, 0, 0, 0, 0, width, height);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  block_it.add_to_end(block);</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a74a37aa6889ec51bda0d091767c6ae46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74a37aa6889ec51bda0d091767c6ae46">&#9670;&nbsp;</a></span>read_unlv_file()</h2>
 
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool read_unlv_file </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a02542.html">STRING</a>&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int32_t&#160;</td>
+          <td class="paramname"><em>xsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int32_t&#160;</td>
+          <td class="paramname"><em>ysize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">BLOCK_LIST *&#160;</td>
+          <td class="paramname"><em>blocks</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00263_source.html#l00031">31</a> of file <a class="el" href="a00263_source.html">blread.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                      {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  FILE *pdfp;                    <span class="comment">//file pointer</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <a class="code" href="a02802.html">BLOCK</a> *block;                  <span class="comment">//current block</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <span class="keywordtype">int</span> x;                         <span class="comment">//current top-down coords</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <span class="keywordtype">int</span> y;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <span class="keywordtype">int</span> width;                     <span class="comment">//of current block</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="keywordtype">int</span> height;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  BLOCK_IT block_it = blocks;    <span class="comment">//block iterator</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  name += <a class="code" href="a00263.html#aa14fc11aa7528cfededa3d19c18901f1">UNLV_EXT</a>;              <span class="comment">//add extension</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="keywordflow">if</span> ((pdfp = fopen (name.<a class="code" href="a02542.html#a552838a146145cb7993f42aefb740ea4">c_str</a> (), <span class="stringliteral">&quot;rb&quot;</span>)) == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;                <span class="comment">//didn&#39;t read one</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">while</span> (<a class="code" href="a00560.html#aa11dd049f17d50a5af65fbd245e705d0">tfscanf</a>(pdfp, <span class="stringliteral">&quot;%d %d %d %d %*s&quot;</span>, &amp;x, &amp;y, &amp;width, &amp;height) &gt;= 4) {</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                                 <span class="comment">//make rect block</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;      block = <span class="keyword">new</span> <a class="code" href="a02802.html">BLOCK</a> (name.<a class="code" href="a02542.html#a552838a146145cb7993f42aefb740ea4">c_str</a> (), <span class="keyword">true</span>, 0, 0,</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                         static_cast&lt;int16_t&gt;(x), static_cast&lt;int16_t&gt;(ysize - y - height),</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                         static_cast&lt;int16_t&gt;(x + width), static_cast&lt;int16_t&gt;(ysize - y));</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                                 <span class="comment">//on end of list</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;      block_it.add_to_end (block);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    }</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    fclose(pdfp);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  }</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;UZN file %s loaded.\n&quot;</span>, name.<a class="code" href="a02542.html#a552838a146145cb7993f42aefb740ea4">c_str</a>());</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+</div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="aa00560_html_aa11dd049f17d50a5af65fbd245e705d0"><div class="ttname"><a href="a00560.html#aa11dd049f17d50a5af65fbd245e705d0">tfscanf</a></div><div class="ttdeci">int tfscanf(FILE *stream, const char *format,...)</div><div class="ttdef"><b>Definition:</b> <a href="a00560_source.html#l00181">scanutils.cpp:181</a></div></div>
+<div class="ttc" id="aa02802_html"><div class="ttname"><a href="a02802.html">BLOCK</a></div><div class="ttdef"><b>Definition:</b> <a href="a00350_source.html#l00028">ocrblock.h:28</a></div></div>
+<div class="ttc" id="aa02542_html_a552838a146145cb7993f42aefb740ea4"><div class="ttname"><a href="a02542.html#a552838a146145cb7993f42aefb740ea4">STRING::c_str</a></div><div class="ttdeci">const char * c_str() const</div><div class="ttdef"><b>Definition:</b> <a href="a00572_source.html#l00192">strngs.cpp:192</a></div></div>
+<div class="ttc" id="aa00263_html_aa14fc11aa7528cfededa3d19c18901f1"><div class="ttname"><a href="a00263.html#aa14fc11aa7528cfededa3d19c18901f1">UNLV_EXT</a></div><div class="ttdeci">#define UNLV_EXT</div><div class="ttdef"><b>Definition:</b> <a href="a00263_source.html#l00024">blread.cpp:24</a></div></div>
+<div class="ttc" id="aa00581_html_a0c2bcd4462ec67ab0971b34a0f610f55"><div class="ttname"><a href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a></div><div class="ttdeci">DLLSYM void tprintf(const char *format,...)</div><div class="ttdef"><b>Definition:</b> <a href="a00581_source.html#l00034">tprintf.cpp:34</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_27285da2200a3bef8a8e2dba4d21412a.html">ccstruct</a></li><li class="navelem"><a class="el" href="a00266.html">imagedata.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_27285da2200a3bef8a8e2dba4d21412a.html">ccstruct</a></li><li class="navelem"><a class="el" href="a00266.html">blread.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

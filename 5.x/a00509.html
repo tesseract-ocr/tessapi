@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/ccutil/scanutils.cpp File Reference</title>
+<title>tesseract: /tesseract/src/ccutil/elst2.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,339 +87,208 @@ $(document).ready(function(){initNavTree('a00509.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#enum-members">Enumerations</a> &#124;
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#define-members">Macros</a>  </div>
   <div class="headertitle">
-<div class="title">scanutils.cpp File Reference</div>  </div>
+<div class="title">elst2.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;cctype&gt;</code><br />
-<code>#include &lt;climits&gt;</code><br />
-<code>#include &lt;cmath&gt;</code><br />
-<code>#include &lt;cstdarg&gt;</code><br />
-<code>#include &lt;cstddef&gt;</code><br />
-<code>#include &lt;cstdint&gt;</code><br />
-<code>#include &lt;cstdio&gt;</code><br />
-<code>#include &lt;cstring&gt;</code><br />
-<code>#include &lt;limits&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00512_source.html">scanutils.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;cstdio&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00041_source.html">tesseract/serialis.h</a>&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00542_source.html">lsterr.h</a>&quot;</code><br />
 </div>
 <p><a href="a00509_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:aa705cf7e79a21c2352b00ffe20cd295f"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00509.html#aa705cf7e79a21c2352b00ffe20cd295f">Flags</a> { <a class="el" href="a00509.html#aa705cf7e79a21c2352b00ffe20cd295fa16e2deec2ffcd10b35b25e98d31f31f3">FL_SPLAT</a> = 0x01, 
-<a class="el" href="a00509.html#aa705cf7e79a21c2352b00ffe20cd295fa25877a5731b46ebc3b2b7f4accc833b4">FL_INV</a> = 0x02, 
-<a class="el" href="a00509.html#aa705cf7e79a21c2352b00ffe20cd295fa2df3ca889266ab843730f4be43f97986">FL_WIDTH</a> = 0x04, 
-<a class="el" href="a00509.html#aa705cf7e79a21c2352b00ffe20cd295fa202578abbb960bdab4babbe68bf9390e">FL_MINUS</a> = 0x08
- }</td></tr>
-<tr class="separator:aa705cf7e79a21c2352b00ffe20cd295f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0033f76204b45cfccb3fbeabbaa6211d"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00509.html#a0033f76204b45cfccb3fbeabbaa6211d">Ranks</a> { <br />
-&#160;&#160;<a class="el" href="a00509.html#a0033f76204b45cfccb3fbeabbaa6211da9633e1851b7b2c20ed420c923eb1d4c8">RANK_CHAR</a> = -2, 
-<a class="el" href="a00509.html#a0033f76204b45cfccb3fbeabbaa6211da6037aa6e3c663441b93eebbdff8485aa">RANK_SHORT</a> = -1, 
-<a class="el" href="a00509.html#a0033f76204b45cfccb3fbeabbaa6211dac79c6538c2a3099d763299ea26d6f20b">RANK_INT</a> = 0, 
-<a class="el" href="a00509.html#a0033f76204b45cfccb3fbeabbaa6211daa2af7c6e2cc94c7375a2f4eb9a60111b">RANK_LONG</a> = 1, 
-<br />
-&#160;&#160;<a class="el" href="a00509.html#a0033f76204b45cfccb3fbeabbaa6211da51e64b627717b9a513e7ba4dadd0aeaf">RANK_LONGLONG</a> = 2, 
-<a class="el" href="a00509.html#a0033f76204b45cfccb3fbeabbaa6211dae37d10eaf799dffedbdf8153ef328c76">RANK_PTR</a> = std::numeric_limits&lt;int&gt;::max()
-<br />
- }</td></tr>
-<tr class="separator:a0033f76204b45cfccb3fbeabbaa6211d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9bfb067b851f965ede4494192cdf2ca5"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00509.html#a9bfb067b851f965ede4494192cdf2ca5">Bail</a> { <a class="el" href="a00509.html#a9bfb067b851f965ede4494192cdf2ca5aaae16b9445315ff94565daac7ade1257">BAIL_NONE</a> = 0, 
-<a class="el" href="a00509.html#a9bfb067b851f965ede4494192cdf2ca5aff08dac6a5ac1b1769fe875641bd978f">BAIL_EOF</a>, 
-<a class="el" href="a00509.html#a9bfb067b851f965ede4494192cdf2ca5ae37148d3636a530accd287c945bfc931">BAIL_ERR</a>
- }</td></tr>
-<tr class="separator:a9bfb067b851f965ede4494192cdf2ca5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02982.html">ELIST2_LINK</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02986.html">ELIST2</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02990.html">ELIST2_ITERATOR</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:aee2a0965dece7158d9c1eec370bd3876"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00509.html#aee2a0965dece7158d9c1eec370bd3876">LongBit</a> ()</td></tr>
-<tr class="separator:aee2a0965dece7158d9c1eec370bd3876"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa11dd049f17d50a5af65fbd245e705d0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00509.html#aa11dd049f17d50a5af65fbd245e705d0">tfscanf</a> (FILE *stream, const char *format,...)</td></tr>
-<tr class="separator:aa11dd049f17d50a5af65fbd245e705d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:a4ab151b94ade31b51e40dcca4bed9290"><td class="memItemLeft" align="right" valign="top">enum <a class="el" href="a00509.html#a0033f76204b45cfccb3fbeabbaa6211d">Ranks</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00509.html#a4ab151b94ade31b51e40dcca4bed9290">kMinRank</a> = <a class="el" href="a00509.html#a0033f76204b45cfccb3fbeabbaa6211da9633e1851b7b2c20ed420c923eb1d4c8">RANK_CHAR</a></td></tr>
-<tr class="separator:a4ab151b94ade31b51e40dcca4bed9290"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aecc63800b2939a2f18c4bbac035a6b1e"><td class="memItemLeft" align="right" valign="top">enum <a class="el" href="a00509.html#a0033f76204b45cfccb3fbeabbaa6211d">Ranks</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00509.html#aecc63800b2939a2f18c4bbac035a6b1e">kMaxRank</a> = <a class="el" href="a00509.html#a0033f76204b45cfccb3fbeabbaa6211da51e64b627717b9a513e7ba4dadd0aeaf">RANK_LONGLONG</a></td></tr>
-<tr class="separator:aecc63800b2939a2f18c4bbac035a6b1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00bbd60cd73376421df7a9a28f7ed53f"><td class="memItemLeft" align="right" valign="top">enum <a class="el" href="a00509.html#a0033f76204b45cfccb3fbeabbaa6211d">Ranks</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00509.html#a00bbd60cd73376421df7a9a28f7ed53f">kIntMaxRank</a> = <a class="el" href="a00509.html#a0033f76204b45cfccb3fbeabbaa6211da51e64b627717b9a513e7ba4dadd0aeaf">RANK_LONGLONG</a></td></tr>
-<tr class="separator:a00bbd60cd73376421df7a9a28f7ed53f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a10bf2de794b057958ab2c085ac7e70c0"><td class="memItemLeft" align="right" valign="top">enum <a class="el" href="a00509.html#a0033f76204b45cfccb3fbeabbaa6211d">Ranks</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00509.html#a10bf2de794b057958ab2c085ac7e70c0">kSizeTRank</a> = <a class="el" href="a00509.html#a0033f76204b45cfccb3fbeabbaa6211daa2af7c6e2cc94c7375a2f4eb9a60111b">RANK_LONG</a></td></tr>
-<tr class="separator:a10bf2de794b057958ab2c085ac7e70c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a78e27521afe59f87ae2214fefd11eb08"><td class="memItemLeft" align="right" valign="top">enum <a class="el" href="a00509.html#a0033f76204b45cfccb3fbeabbaa6211d">Ranks</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00509.html#a78e27521afe59f87ae2214fefd11eb08">kPtrDiffRank</a> = <a class="el" href="a00509.html#a0033f76204b45cfccb3fbeabbaa6211daa2af7c6e2cc94c7375a2f4eb9a60111b">RANK_LONG</a></td></tr>
-<tr class="separator:a78e27521afe59f87ae2214fefd11eb08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:adc858fd865cb4f529784fbc52d4d2b87"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00509.html#adc858fd865cb4f529784fbc52d4d2b87">QUOTE_IT</a>(parm)&#160;&#160;&#160;#parm</td></tr>
+<tr class="separator:adc858fd865cb4f529784fbc52d4d2b87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe9bc96f0255f620d7eb93aa9ad921e1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00509.html#afe9bc96f0255f620d7eb93aa9ad921e1">ELIST2IZEH_A</a>(CLASSNAME)</td></tr>
+<tr class="separator:afe9bc96f0255f620d7eb93aa9ad921e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61d7ced1948543bdac72c2ae9d92cc7a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00509.html#a61d7ced1948543bdac72c2ae9d92cc7a">ELIST2IZEH_B</a>(CLASSNAME)</td></tr>
+<tr class="separator:a61d7ced1948543bdac72c2ae9d92cc7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a580e2302bf687d2a94a171a32e609997"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00509.html#a580e2302bf687d2a94a171a32e609997">ELIST2IZEH_C</a>(CLASSNAME)</td></tr>
+<tr class="separator:a580e2302bf687d2a94a171a32e609997"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a790562c8bc97eb7c596d2388a3b2918c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00509.html#a790562c8bc97eb7c596d2388a3b2918c">ELIST2IZEH</a>(CLASSNAME)</td></tr>
+<tr class="separator:a790562c8bc97eb7c596d2388a3b2918c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a574b9d080e6a413d915407cea6ac0243"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00509.html#a574b9d080e6a413d915407cea6ac0243">ELIST2IZE</a>(CLASSNAME)</td></tr>
+<tr class="separator:a574b9d080e6a413d915407cea6ac0243"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Enumeration Type Documentation</h2>
-<a id="a9bfb067b851f965ede4494192cdf2ca5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9bfb067b851f965ede4494192cdf2ca5">&#9670;&nbsp;</a></span>Bail</h2>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a574b9d080e6a413d915407cea6ac0243"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a574b9d080e6a413d915407cea6ac0243">&#9670;&nbsp;</a></span>ELIST2IZE</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="a00509.html#a9bfb067b851f965ede4494192cdf2ca5">Bail</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a9bfb067b851f965ede4494192cdf2ca5aaae16b9445315ff94565daac7ade1257"></a>BAIL_NONE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a9bfb067b851f965ede4494192cdf2ca5aff08dac6a5ac1b1769fe875641bd978f"></a>BAIL_EOF&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a9bfb067b851f965ede4494192cdf2ca5ae37148d3636a530accd287c945bfc931"></a>BAIL_ERR&#160;</td><td class="fielddoc"></td></tr>
-</table>
-
-<p class="definition">Definition at line <a class="el" href="a00509_source.html#l00054">54</a> of file <a class="el" href="a00509_source.html">scanutils.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;          {</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <a class="code" href="a00509.html#a9bfb067b851f965ede4494192cdf2ca5aaae16b9445315ff94565daac7ade1257">BAIL_NONE</a> = 0,    <span class="comment">// No error condition</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <a class="code" href="a00509.html#a9bfb067b851f965ede4494192cdf2ca5aff08dac6a5ac1b1769fe875641bd978f">BAIL_EOF</a>,         <span class="comment">// Hit EOF</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <a class="code" href="a00509.html#a9bfb067b851f965ede4494192cdf2ca5ae37148d3636a530accd287c945bfc931">BAIL_ERR</a>          <span class="comment">// Conversion mismatch</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;};</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="aa705cf7e79a21c2352b00ffe20cd295f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa705cf7e79a21c2352b00ffe20cd295f">&#9670;&nbsp;</a></span>Flags</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="a00509.html#aa705cf7e79a21c2352b00ffe20cd295f">Flags</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aa705cf7e79a21c2352b00ffe20cd295fa16e2deec2ffcd10b35b25e98d31f31f3"></a>FL_SPLAT&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="aa705cf7e79a21c2352b00ffe20cd295fa25877a5731b46ebc3b2b7f4accc833b4"></a>FL_INV&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="aa705cf7e79a21c2352b00ffe20cd295fa2df3ca889266ab843730f4be43f97986"></a>FL_WIDTH&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="aa705cf7e79a21c2352b00ffe20cd295fa202578abbb960bdab4babbe68bf9390e"></a>FL_MINUS&#160;</td><td class="fielddoc"></td></tr>
-</table>
-
-<p class="definition">Definition at line <a class="el" href="a00509_source.html#l00031">31</a> of file <a class="el" href="a00509_source.html">scanutils.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;           {</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <a class="code" href="a00509.html#aa705cf7e79a21c2352b00ffe20cd295fa16e2deec2ffcd10b35b25e98d31f31f3">FL_SPLAT</a>  = 0x01,   <span class="comment">// Drop the value, do not assign</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <a class="code" href="a00509.html#aa705cf7e79a21c2352b00ffe20cd295fa25877a5731b46ebc3b2b7f4accc833b4">FL_INV</a>    = 0x02,   <span class="comment">// Character-set with inverse</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <a class="code" href="a00509.html#aa705cf7e79a21c2352b00ffe20cd295fa2df3ca889266ab843730f4be43f97986">FL_WIDTH</a>  = 0x04,   <span class="comment">// Field width specified</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <a class="code" href="a00509.html#aa705cf7e79a21c2352b00ffe20cd295fa202578abbb960bdab4babbe68bf9390e">FL_MINUS</a>  = 0x08,   <span class="comment">// Negative number</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;};</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a0033f76204b45cfccb3fbeabbaa6211d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0033f76204b45cfccb3fbeabbaa6211d">&#9670;&nbsp;</a></span>Ranks</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="a00509.html#a0033f76204b45cfccb3fbeabbaa6211d">Ranks</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a0033f76204b45cfccb3fbeabbaa6211da9633e1851b7b2c20ed420c923eb1d4c8"></a>RANK_CHAR&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a0033f76204b45cfccb3fbeabbaa6211da6037aa6e3c663441b93eebbdff8485aa"></a>RANK_SHORT&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a0033f76204b45cfccb3fbeabbaa6211dac79c6538c2a3099d763299ea26d6f20b"></a>RANK_INT&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a0033f76204b45cfccb3fbeabbaa6211daa2af7c6e2cc94c7375a2f4eb9a60111b"></a>RANK_LONG&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a0033f76204b45cfccb3fbeabbaa6211da51e64b627717b9a513e7ba4dadd0aeaf"></a>RANK_LONGLONG&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a0033f76204b45cfccb3fbeabbaa6211dae37d10eaf799dffedbdf8153ef328c76"></a>RANK_PTR&#160;</td><td class="fielddoc"></td></tr>
-</table>
-
-<p class="definition">Definition at line <a class="el" href="a00509_source.html#l00038">38</a> of file <a class="el" href="a00509_source.html">scanutils.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;           {</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <a class="code" href="a00509.html#a0033f76204b45cfccb3fbeabbaa6211da9633e1851b7b2c20ed420c923eb1d4c8">RANK_CHAR</a> = -2,</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <a class="code" href="a00509.html#a0033f76204b45cfccb3fbeabbaa6211da6037aa6e3c663441b93eebbdff8485aa">RANK_SHORT</a>  = -1,</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <a class="code" href="a00509.html#a0033f76204b45cfccb3fbeabbaa6211dac79c6538c2a3099d763299ea26d6f20b">RANK_INT</a>  = 0,</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <a class="code" href="a00509.html#a0033f76204b45cfccb3fbeabbaa6211daa2af7c6e2cc94c7375a2f4eb9a60111b">RANK_LONG</a> = 1,</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <a class="code" href="a00509.html#a0033f76204b45cfccb3fbeabbaa6211da51e64b627717b9a513e7ba4dadd0aeaf">RANK_LONGLONG</a> = 2,</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <a class="code" href="a00509.html#a0033f76204b45cfccb3fbeabbaa6211dae37d10eaf799dffedbdf8153ef328c76">RANK_PTR</a>      = std::numeric_limits&lt;int&gt;::max() <span class="comment">// Special value used for pointers</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;};</div>
-</div><!-- fragment -->
-</div>
-</div>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="aee2a0965dece7158d9c1eec370bd3876"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aee2a0965dece7158d9c1eec370bd3876">&#9670;&nbsp;</a></span>LongBit()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">size_t LongBit </td>
+          <td class="memname">#define ELIST2IZE</td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00509_source.html#l00061">61</a> of file <a class="el" href="a00509_source.html">scanutils.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                        {</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <span class="keywordflow">return</span> CHAR_BIT * <span class="keyword">sizeof</span>(long);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="aa11dd049f17d50a5af65fbd245e705d0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa11dd049f17d50a5af65fbd245e705d0">&#9670;&nbsp;</a></span>tfscanf()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int tfscanf </td>
-          <td>(</td>
-          <td class="paramtype">FILE *&#160;</td>
-          <td class="paramname"><em>stream</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>format</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>...</em>&#160;</td>
-        </tr>
-        <tr>
+          <td class="paramname">CLASSNAME</td><td>)</td>
           <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>fscanf variant to ensure correct reading regardless of locale.</p>
-<p>tfscanf parse a file stream according to the given format. See the fscanf manpage for more information, as this function attempts to mimic its behavior.</p>
-<dl class="section note"><dt>Note</dt><dd>Note that scientific floating-point notation is not supported. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="a00509_source.html#l00181">181</a> of file <a class="el" href="a00509_source.html">scanutils.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;                                                   {</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;  va_list ap;</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;  <span class="keywordtype">int</span> rv;</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160; </div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;  va_start(ap, format);</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;  rv = tvfscanf(stream, format, ap);</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;  va_end(ap);</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; </div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;  <span class="keywordflow">return</span> rv;</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;}</div>
+<b>Value:</b><div class="fragment"><div class="line">\</div>
+<div class="line"><span class="comment">  /***********************************************************************    \</span></div>
+<div class="line"><span class="comment">  *             CLASSNAME##_zapper                                            \</span></div>
+<div class="line"><span class="comment">  *                                                                           \</span></div>
+<div class="line"><span class="comment">  *  A function which can delete a CLASSNAME element.  This is passed to the  \</span></div>
+<div class="line"><span class="comment">  *  generic clear list member function so that when a list is cleared the    \</span></div>
+<div class="line"><span class="comment">  *  elements on the list are properly destroyed from the base class, even    \</span></div>
+<div class="line"><span class="comment">  *  though we don&#39;t use a virtual destructor function.                       \</span></div>
+<div class="line"><span class="comment">  **********************************************************************/</span>     \</div>
+<div class="line">                                                                              \</div>
+<div class="line">  DLLSYM <span class="keywordtype">void</span> CLASSNAME##_zapper(                   <span class="comment">/*delete a link*/</span>         \</div>
+<div class="line">                                 <a class="code" href="a02982.html">ELIST2_LINK</a> *link) <span class="comment">/*link to delete*/</span>        \</div>
+<div class="line">  {                                                                           \</div>
+<div class="line">    delete (CLASSNAME *)link;                                                 \</div>
+<div class="line">  }                                                                           \</div>
+<div class="line">                                                                              \</div>
+<div class="line">  <span class="comment">/* Become a deep copy of src_list*/</span>                                         \</div>
+<div class="line">  void CLASSNAME##_LIST::deep_copy(<span class="keyword">const</span> CLASSNAME##_LIST *src_list,          \</div>
+<div class="line">                                   CLASSNAME *(*copier)(<span class="keyword">const</span> CLASSNAME *)) { \</div>
+<div class="line">    CLASSNAME##_IT from_it(const_cast&lt;CLASSNAME##_LIST *&gt;(src_list));         \</div>
+<div class="line">    CLASSNAME##_IT to_it(<span class="keyword">this</span>);                                               \</div>
+<div class="line">                                                                              \</div>
+<div class="line">    for (from_it.mark_cycle_pt(); !from_it.cycled_list(); from_it.forward())  \</div>
+<div class="line">      to_it.add_after_then_move((*copier)(from_it.data()));                   \</div>
+<div class="line">  }</div>
 </div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="a00509_source.html#l00928">928</a> of file <a class="el" href="a00509_source.html">elst2.h</a>.</p>
+
 </div>
 </div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="a00bbd60cd73376421df7a9a28f7ed53f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a00bbd60cd73376421df7a9a28f7ed53f">&#9670;&nbsp;</a></span>kIntMaxRank</h2>
+<a id="a790562c8bc97eb7c596d2388a3b2918c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a790562c8bc97eb7c596d2388a3b2918c">&#9670;&nbsp;</a></span>ELIST2IZEH</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="a00509.html#a0033f76204b45cfccb3fbeabbaa6211d">Ranks</a> kIntMaxRank = <a class="el" href="a00509.html#a0033f76204b45cfccb3fbeabbaa6211da51e64b627717b9a513e7ba4dadd0aeaf">RANK_LONGLONG</a></td>
+          <td class="memname">#define ELIST2IZEH</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">CLASSNAME</td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00509_source.html#l00050">50</a> of file <a class="el" href="a00509_source.html">scanutils.cpp</a>.</p>
+<b>Value:</b><div class="fragment"><div class="line">\</div>
+<div class="line">  ELIST2IZEH_A(CLASSNAME)     <a class="code" href="a00509.html#a61d7ced1948543bdac72c2ae9d92cc7a">\</a></div>
+<div class="line"><a class="code" href="a00509.html#a61d7ced1948543bdac72c2ae9d92cc7a">                              \</a></div>
+<div class="line"><a class="code" href="a00509.html#a61d7ced1948543bdac72c2ae9d92cc7a">  ELIST2IZEH_B</a>(CLASSNAME)     <a class="code" href="a00509.html#a580e2302bf687d2a94a171a32e609997">\</a></div>
+<div class="line"><a class="code" href="a00509.html#a580e2302bf687d2a94a171a32e609997">                              \</a></div>
+<div class="line"><a class="code" href="a00509.html#a580e2302bf687d2a94a171a32e609997">  ELIST2IZEH_C</a>(CLASSNAME)</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="a00509_source.html#l00917">917</a> of file <a class="el" href="a00509_source.html">elst2.h</a>.</p>
 
 </div>
 </div>
-<a id="aecc63800b2939a2f18c4bbac035a6b1e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aecc63800b2939a2f18c4bbac035a6b1e">&#9670;&nbsp;</a></span>kMaxRank</h2>
+<a id="afe9bc96f0255f620d7eb93aa9ad921e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe9bc96f0255f620d7eb93aa9ad921e1">&#9670;&nbsp;</a></span>ELIST2IZEH_A</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="a00509.html#a0033f76204b45cfccb3fbeabbaa6211d">Ranks</a> kMaxRank = <a class="el" href="a00509.html#a0033f76204b45cfccb3fbeabbaa6211da51e64b627717b9a513e7ba4dadd0aeaf">RANK_LONGLONG</a></td>
+          <td class="memname">#define ELIST2IZEH_A</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">CLASSNAME</td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00509_source.html#l00048">48</a> of file <a class="el" href="a00509_source.html">scanutils.cpp</a>.</p>
+<b>Value:</b><div class="fragment"><div class="line">\</div>
+<div class="line">  extern <a class="code" href="a00029.html#ab90d161af4ce92c48d61bb06c325308f">DLLSYM</a> <span class="keywordtype">void</span> CLASSNAME##_zapper(                    <span class="comment">/*delete a link*/</span> \</div>
+<div class="line">                                        <a class="code" href="a02982.html">ELIST2_LINK</a> *link); <span class="comment">/*link to delete*/</span></div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="a00509_source.html#l00828">828</a> of file <a class="el" href="a00509_source.html">elst2.h</a>.</p>
 
 </div>
 </div>
-<a id="a4ab151b94ade31b51e40dcca4bed9290"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4ab151b94ade31b51e40dcca4bed9290">&#9670;&nbsp;</a></span>kMinRank</h2>
+<a id="a61d7ced1948543bdac72c2ae9d92cc7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61d7ced1948543bdac72c2ae9d92cc7a">&#9670;&nbsp;</a></span>ELIST2IZEH_B</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="a00509.html#a0033f76204b45cfccb3fbeabbaa6211d">Ranks</a> kMinRank = <a class="el" href="a00509.html#a0033f76204b45cfccb3fbeabbaa6211da9633e1851b7b2c20ed420c923eb1d4c8">RANK_CHAR</a></td>
+          <td class="memname">#define ELIST2IZEH_B</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">CLASSNAME</td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00509_source.html#l00047">47</a> of file <a class="el" href="a00509_source.html">scanutils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00509_source.html#l00833">833</a> of file <a class="el" href="a00509_source.html">elst2.h</a>.</p>
 
 </div>
 </div>
-<a id="a78e27521afe59f87ae2214fefd11eb08"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a78e27521afe59f87ae2214fefd11eb08">&#9670;&nbsp;</a></span>kPtrDiffRank</h2>
+<a id="a580e2302bf687d2a94a171a32e609997"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a580e2302bf687d2a94a171a32e609997">&#9670;&nbsp;</a></span>ELIST2IZEH_C</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="a00509.html#a0033f76204b45cfccb3fbeabbaa6211d">Ranks</a> kPtrDiffRank = <a class="el" href="a00509.html#a0033f76204b45cfccb3fbeabbaa6211daa2af7c6e2cc94c7375a2f4eb9a60111b">RANK_LONG</a></td>
+          <td class="memname">#define ELIST2IZEH_C</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">CLASSNAME</td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00509_source.html#l00052">52</a> of file <a class="el" href="a00509_source.html">scanutils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00509_source.html#l00875">875</a> of file <a class="el" href="a00509_source.html">elst2.h</a>.</p>
 
 </div>
 </div>
-<a id="a10bf2de794b057958ab2c085ac7e70c0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a10bf2de794b057958ab2c085ac7e70c0">&#9670;&nbsp;</a></span>kSizeTRank</h2>
+<a id="adc858fd865cb4f529784fbc52d4d2b87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc858fd865cb4f529784fbc52d4d2b87">&#9670;&nbsp;</a></span>QUOTE_IT</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="a00509.html#a0033f76204b45cfccb3fbeabbaa6211d">Ranks</a> kSizeTRank = <a class="el" href="a00509.html#a0033f76204b45cfccb3fbeabbaa6211daa2af7c6e2cc94c7375a2f4eb9a60111b">RANK_LONG</a></td>
+          <td class="memname">#define QUOTE_IT</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">parm</td><td>)</td>
+          <td>&#160;&#160;&#160;#parm</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00509_source.html#l00051">51</a> of file <a class="el" href="a00509_source.html">scanutils.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00509_source.html#l00797">797</a> of file <a class="el" href="a00509_source.html">elst2.h</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa00509_html_a0033f76204b45cfccb3fbeabbaa6211da6037aa6e3c663441b93eebbdff8485aa"><div class="ttname"><a href="a00509.html#a0033f76204b45cfccb3fbeabbaa6211da6037aa6e3c663441b93eebbdff8485aa">RANK_SHORT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00509_source.html#l00040">scanutils.cpp:40</a></div></div>
-<div class="ttc" id="aa00509_html_a0033f76204b45cfccb3fbeabbaa6211da51e64b627717b9a513e7ba4dadd0aeaf"><div class="ttname"><a href="a00509.html#a0033f76204b45cfccb3fbeabbaa6211da51e64b627717b9a513e7ba4dadd0aeaf">RANK_LONGLONG</a></div><div class="ttdef"><b>Definition:</b> <a href="a00509_source.html#l00043">scanutils.cpp:43</a></div></div>
-<div class="ttc" id="aa00509_html_a9bfb067b851f965ede4494192cdf2ca5aff08dac6a5ac1b1769fe875641bd978f"><div class="ttname"><a href="a00509.html#a9bfb067b851f965ede4494192cdf2ca5aff08dac6a5ac1b1769fe875641bd978f">BAIL_EOF</a></div><div class="ttdef"><b>Definition:</b> <a href="a00509_source.html#l00056">scanutils.cpp:56</a></div></div>
-<div class="ttc" id="aa00509_html_aa705cf7e79a21c2352b00ffe20cd295fa202578abbb960bdab4babbe68bf9390e"><div class="ttname"><a href="a00509.html#aa705cf7e79a21c2352b00ffe20cd295fa202578abbb960bdab4babbe68bf9390e">FL_MINUS</a></div><div class="ttdef"><b>Definition:</b> <a href="a00509_source.html#l00035">scanutils.cpp:35</a></div></div>
-<div class="ttc" id="aa00509_html_aa705cf7e79a21c2352b00ffe20cd295fa2df3ca889266ab843730f4be43f97986"><div class="ttname"><a href="a00509.html#aa705cf7e79a21c2352b00ffe20cd295fa2df3ca889266ab843730f4be43f97986">FL_WIDTH</a></div><div class="ttdef"><b>Definition:</b> <a href="a00509_source.html#l00034">scanutils.cpp:34</a></div></div>
-<div class="ttc" id="aa00509_html_a0033f76204b45cfccb3fbeabbaa6211dae37d10eaf799dffedbdf8153ef328c76"><div class="ttname"><a href="a00509.html#a0033f76204b45cfccb3fbeabbaa6211dae37d10eaf799dffedbdf8153ef328c76">RANK_PTR</a></div><div class="ttdef"><b>Definition:</b> <a href="a00509_source.html#l00044">scanutils.cpp:44</a></div></div>
-<div class="ttc" id="aa00509_html_a0033f76204b45cfccb3fbeabbaa6211dac79c6538c2a3099d763299ea26d6f20b"><div class="ttname"><a href="a00509.html#a0033f76204b45cfccb3fbeabbaa6211dac79c6538c2a3099d763299ea26d6f20b">RANK_INT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00509_source.html#l00041">scanutils.cpp:41</a></div></div>
-<div class="ttc" id="aa00509_html_a9bfb067b851f965ede4494192cdf2ca5ae37148d3636a530accd287c945bfc931"><div class="ttname"><a href="a00509.html#a9bfb067b851f965ede4494192cdf2ca5ae37148d3636a530accd287c945bfc931">BAIL_ERR</a></div><div class="ttdef"><b>Definition:</b> <a href="a00509_source.html#l00057">scanutils.cpp:57</a></div></div>
-<div class="ttc" id="aa00509_html_aa705cf7e79a21c2352b00ffe20cd295fa16e2deec2ffcd10b35b25e98d31f31f3"><div class="ttname"><a href="a00509.html#aa705cf7e79a21c2352b00ffe20cd295fa16e2deec2ffcd10b35b25e98d31f31f3">FL_SPLAT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00509_source.html#l00032">scanutils.cpp:32</a></div></div>
-<div class="ttc" id="aa00509_html_a9bfb067b851f965ede4494192cdf2ca5aaae16b9445315ff94565daac7ade1257"><div class="ttname"><a href="a00509.html#a9bfb067b851f965ede4494192cdf2ca5aaae16b9445315ff94565daac7ade1257">BAIL_NONE</a></div><div class="ttdef"><b>Definition:</b> <a href="a00509_source.html#l00055">scanutils.cpp:55</a></div></div>
-<div class="ttc" id="aa00509_html_aa705cf7e79a21c2352b00ffe20cd295fa25877a5731b46ebc3b2b7f4accc833b4"><div class="ttname"><a href="a00509.html#aa705cf7e79a21c2352b00ffe20cd295fa25877a5731b46ebc3b2b7f4accc833b4">FL_INV</a></div><div class="ttdef"><b>Definition:</b> <a href="a00509_source.html#l00033">scanutils.cpp:33</a></div></div>
-<div class="ttc" id="aa00509_html_a0033f76204b45cfccb3fbeabbaa6211da9633e1851b7b2c20ed420c923eb1d4c8"><div class="ttname"><a href="a00509.html#a0033f76204b45cfccb3fbeabbaa6211da9633e1851b7b2c20ed420c923eb1d4c8">RANK_CHAR</a></div><div class="ttdef"><b>Definition:</b> <a href="a00509_source.html#l00039">scanutils.cpp:39</a></div></div>
-<div class="ttc" id="aa00509_html_a0033f76204b45cfccb3fbeabbaa6211daa2af7c6e2cc94c7375a2f4eb9a60111b"><div class="ttname"><a href="a00509.html#a0033f76204b45cfccb3fbeabbaa6211daa2af7c6e2cc94c7375a2f4eb9a60111b">RANK_LONG</a></div><div class="ttdef"><b>Definition:</b> <a href="a00509_source.html#l00042">scanutils.cpp:42</a></div></div>
+<div class="ttc" id="aa00509_html_a580e2302bf687d2a94a171a32e609997"><div class="ttname"><a href="a00509.html#a580e2302bf687d2a94a171a32e609997">ELIST2IZEH_C</a></div><div class="ttdeci">#define ELIST2IZEH_C(CLASSNAME)</div><div class="ttdef"><b>Definition:</b> <a href="a00509_source.html#l00875">elst2.h:875</a></div></div>
+<div class="ttc" id="aa00029_html_ab90d161af4ce92c48d61bb06c325308f"><div class="ttname"><a href="a00029.html#ab90d161af4ce92c48d61bb06c325308f">DLLSYM</a></div><div class="ttdeci">#define DLLSYM</div><div class="ttdef"><b>Definition:</b> <a href="a00029_source.html#l00021">platform.h:21</a></div></div>
+<div class="ttc" id="aa02982_html"><div class="ttname"><a href="a02982.html">ELIST2_LINK</a></div><div class="ttdef"><b>Definition:</b> <a href="a00509_source.html#l00053">elst2.h:53</a></div></div>
+<div class="ttc" id="aa00509_html_a61d7ced1948543bdac72c2ae9d92cc7a"><div class="ttname"><a href="a00509.html#a61d7ced1948543bdac72c2ae9d92cc7a">ELIST2IZEH_B</a></div><div class="ttdeci">#define ELIST2IZEH_B(CLASSNAME)</div><div class="ttdef"><b>Definition:</b> <a href="a00509_source.html#l00833">elst2.h:833</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_be21c9400dd14e513865608c9a8a7e5a.html">ccutil</a></li><li class="navelem"><a class="el" href="a00509.html">scanutils.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_be21c9400dd14e513865608c9a8a7e5a.html">ccutil</a></li><li class="navelem"><a class="el" href="a00509.html">elst2.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

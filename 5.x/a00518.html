@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/ccutil/sorthelper.h File Reference</title>
+<title>tesseract: /tesseract/src/ccutil/fileerr.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,30 +87,250 @@ $(document).ready(function(){initNavTree('a00518.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">sorthelper.h File Reference</div>  </div>
+<div class="title">fileerr.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;cstdlib&gt;</code><br />
-<code>#include &lt;tesseract/genericvector.h&gt;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a00515_source.html">errcode.h</a>&quot;</code><br />
 </div>
 <p><a href="a00518_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02620.html">SortHelper&lt; T &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02624.html">SortHelper&lt; T &gt;::SortPair&lt; PairT &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a87bcfbb01b486030002f9a0bea203a4d"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a02994.html">ERRCODE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00518.html#a87bcfbb01b486030002f9a0bea203a4d">CANTOPENFILE</a> (&quot;Can't open <a class="el" href="a04138.html">file</a>&quot;)</td></tr>
+<tr class="separator:a87bcfbb01b486030002f9a0bea203a4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6695a86145ef9baffdf1986dd069b69"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a02994.html">ERRCODE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00518.html#af6695a86145ef9baffdf1986dd069b69">CANTCREATEFILE</a> (&quot;Can't create <a class="el" href="a04138.html">file</a>&quot;)</td></tr>
+<tr class="separator:af6695a86145ef9baffdf1986dd069b69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c8550e2a42b3ce50f502e5b48a0ad5e"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a02994.html">ERRCODE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00518.html#a5c8550e2a42b3ce50f502e5b48a0ad5e">CANTMAKEPIPE</a> (&quot;Can't create pipe&quot;)</td></tr>
+<tr class="separator:a5c8550e2a42b3ce50f502e5b48a0ad5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15292bd76f6e4e1d2f5f9bb61e054aab"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a02994.html">ERRCODE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00518.html#a15292bd76f6e4e1d2f5f9bb61e054aab">CANTCONNECTPIPE</a> (&quot;Can't reconnect pipes to stdin/stdout&quot;)</td></tr>
+<tr class="separator:a15292bd76f6e4e1d2f5f9bb61e054aab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfc6d6a42d6b8c23f9f50f35cb95684a"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a02994.html">ERRCODE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00518.html#acfc6d6a42d6b8c23f9f50f35cb95684a">READFAILED</a> (&quot;Read <a class="el" href="a00659.html#a66c7f757ef35e33a52ac2efe3f4e8247">of</a> <a class="el" href="a04138.html">file</a> failed&quot;)</td></tr>
+<tr class="separator:acfc6d6a42d6b8c23f9f50f35cb95684a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84959b71792eb12ff0c0b42c582086da"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a02994.html">ERRCODE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00518.html#a84959b71792eb12ff0c0b42c582086da">WRITEFAILED</a> (&quot;Write <a class="el" href="a00659.html#a66c7f757ef35e33a52ac2efe3f4e8247">of</a> <a class="el" href="a04138.html">file</a> failed&quot;)</td></tr>
+<tr class="separator:a84959b71792eb12ff0c0b42c582086da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a290d8614e10676f95ca2fa692a3c5dcd"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a02994.html">ERRCODE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00518.html#a290d8614e10676f95ca2fa692a3c5dcd">SELECTFAILED</a> (&quot;Select failed&quot;)</td></tr>
+<tr class="separator:a290d8614e10676f95ca2fa692a3c5dcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a336d4286840d74ef5453abab9f598c75"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a02994.html">ERRCODE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00518.html#a336d4286840d74ef5453abab9f598c75">EXECFAILED</a> (&quot;Could not exec new process&quot;)</td></tr>
+<tr class="separator:a336d4286840d74ef5453abab9f598c75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a15292bd76f6e4e1d2f5f9bb61e054aab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15292bd76f6e4e1d2f5f9bb61e054aab">&#9670;&nbsp;</a></span>CANTCONNECTPIPE()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="a02994.html">ERRCODE</a> CANTCONNECTPIPE </td>
+          <td>(</td>
+          <td class="paramtype">&quot;Can't reconnect pipes to stdin/stdout&quot;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af6695a86145ef9baffdf1986dd069b69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6695a86145ef9baffdf1986dd069b69">&#9670;&nbsp;</a></span>CANTCREATEFILE()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="a02994.html">ERRCODE</a> CANTCREATEFILE </td>
+          <td>(</td>
+          <td class="paramtype">&quot;Can't create <a class="el" href="a04138.html">file</a>&quot;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5c8550e2a42b3ce50f502e5b48a0ad5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c8550e2a42b3ce50f502e5b48a0ad5e">&#9670;&nbsp;</a></span>CANTMAKEPIPE()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="a02994.html">ERRCODE</a> CANTMAKEPIPE </td>
+          <td>(</td>
+          <td class="paramtype">&quot;Can't create pipe&quot;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a87bcfbb01b486030002f9a0bea203a4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87bcfbb01b486030002f9a0bea203a4d">&#9670;&nbsp;</a></span>CANTOPENFILE()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="a02994.html">ERRCODE</a> CANTOPENFILE </td>
+          <td>(</td>
+          <td class="paramtype">&quot;Can't open <a class="el" href="a04138.html">file</a>&quot;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a336d4286840d74ef5453abab9f598c75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a336d4286840d74ef5453abab9f598c75">&#9670;&nbsp;</a></span>EXECFAILED()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="a02994.html">ERRCODE</a> EXECFAILED </td>
+          <td>(</td>
+          <td class="paramtype">&quot;Could not exec new process&quot;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acfc6d6a42d6b8c23f9f50f35cb95684a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acfc6d6a42d6b8c23f9f50f35cb95684a">&#9670;&nbsp;</a></span>READFAILED()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="a02994.html">ERRCODE</a> READFAILED </td>
+          <td>(</td>
+          <td class="paramtype">&quot;Read <a class="el" href="a00659.html#a66c7f757ef35e33a52ac2efe3f4e8247">of</a> <a class="el" href="a04138.html">file</a> failed&quot;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a290d8614e10676f95ca2fa692a3c5dcd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a290d8614e10676f95ca2fa692a3c5dcd">&#9670;&nbsp;</a></span>SELECTFAILED()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="a02994.html">ERRCODE</a> SELECTFAILED </td>
+          <td>(</td>
+          <td class="paramtype">&quot;Select failed&quot;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a84959b71792eb12ff0c0b42c582086da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84959b71792eb12ff0c0b42c582086da">&#9670;&nbsp;</a></span>WRITEFAILED()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="a02994.html">ERRCODE</a> WRITEFAILED </td>
+          <td>(</td>
+          <td class="paramtype">&quot;Write <a class="el" href="a00659.html#a66c7f757ef35e33a52ac2efe3f4e8247">of</a> <a class="el" href="a04138.html">file</a> failed&quot;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_be21c9400dd14e513865608c9a8a7e5a.html">ccutil</a></li><li class="navelem"><a class="el" href="a00518.html">sorthelper.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_be21c9400dd14e513865608c9a8a7e5a.html">ccutil</a></li><li class="navelem"><a class="el" href="a00518.html">fileerr.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

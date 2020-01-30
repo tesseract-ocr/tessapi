@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/classify/picofeat.cpp File Reference</title>
+<title>tesseract: /tesseract/src/classify/kdtree.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,69 +87,134 @@ $(document).ready(function(){initNavTree('a00704.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#define-members">Macros</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">picofeat.cpp File Reference</div>  </div>
+<div class="title">kdtree.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="a00707_source.html">picofeat.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00590_source.html">classify.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00611_source.html">featdefs.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00623_source.html">fpoint.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00671_source.html">mfoutline.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00695_source.html">ocrfeatures.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00503_source.html">params.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00737_source.html">trainingsample.h</a>&quot;</code><br />
-<code>#include &lt;cmath&gt;</code><br />
-<code>#include &lt;cstdio&gt;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a00746_source.html">ocrfeatures.h</a>&quot;</code><br />
 </div>
 <p><a href="a00704_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:a01539"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html">tesseract</a></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03298.html">KDNODE</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03302.html">KDTREE</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:aa17af5e06853a731f52d4b4a84c3df90"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00704.html#aa17af5e06853a731f52d4b4a84c3df90">RootOf</a>(T)&#160;&#160;&#160;((T)-&gt;Root.Left-&gt;Data)</td></tr>
+<tr class="separator:aa17af5e06853a731f52d4b4a84c3df90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a1d60f69e882d1a8a95a1106c4c593bfb"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00704.html#a1d60f69e882d1a8a95a1106c4c593bfb">void_proc</a> = void(*)(...)</td></tr>
+<tr class="separator:a1d60f69e882d1a8a95a1106c4c593bfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a7846f8631b95d1162876b4a0b9c9d34c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00704.html#a7846f8631b95d1162876b4a0b9c9d34c">ConvertSegmentToPicoFeat</a> (<a class="el" href="a02764.html">FPOINT</a> *Start, <a class="el" href="a02764.html">FPOINT</a> *End, <a class="el" href="a00695.html#a6ceed548fc087d83d8e21bf17b199f6a">FEATURE_SET</a> FeatureSet)</td></tr>
-<tr class="separator:a7846f8631b95d1162876b4a0b9c9d34c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0ef34dbe10ce0b1c08b63a640c1f1009"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00704.html#a0ef34dbe10ce0b1c08b63a640c1f1009">ConvertToPicoFeatures2</a> (<a class="el" href="a00671.html#a88f6c3506e81059ed00e2ab9e99334a3">MFOUTLINE</a> Outline, <a class="el" href="a00695.html#a6ceed548fc087d83d8e21bf17b199f6a">FEATURE_SET</a> FeatureSet)</td></tr>
-<tr class="separator:a0ef34dbe10ce0b1c08b63a640c1f1009"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d34691eace89769641af5a13f448310"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00704.html#a0d34691eace89769641af5a13f448310">NormalizePicoX</a> (<a class="el" href="a00695.html#a6ceed548fc087d83d8e21bf17b199f6a">FEATURE_SET</a> FeatureSet)</td></tr>
-<tr class="separator:a0d34691eace89769641af5a13f448310"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:ade0cbc6650cd99b83ecc2c1a828a4bee"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00704.html#ade0cbc6650cd99b83ecc2c1a828a4bee">classify_pico_feature_length</a> = 0.05</td></tr>
-<tr class="separator:ade0cbc6650cd99b83ecc2c1a828a4bee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73ea2156bc8f7cfc9adcc0b3a5b8b15c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a03302.html">KDTREE</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00704.html#a73ea2156bc8f7cfc9adcc0b3a5b8b15c">MakeKDTree</a> (int16_t KeySize, const <a class="el" href="a03314.html">PARAM_DESC</a> KeyDesc[])</td></tr>
+<tr class="separator:a73ea2156bc8f7cfc9adcc0b3a5b8b15c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25b5f5ed44816d6ec2d546cd8b36e33f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00704.html#a25b5f5ed44816d6ec2d546cd8b36e33f">KDStore</a> (<a class="el" href="a03302.html">KDTREE</a> *Tree, float *Key, void *Data)</td></tr>
+<tr class="separator:a25b5f5ed44816d6ec2d546cd8b36e33f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc8167fe19a9b173fcc4c9694e89498e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00704.html#abc8167fe19a9b173fcc4c9694e89498e">KDDelete</a> (<a class="el" href="a03302.html">KDTREE</a> *Tree, float Key[], void *Data)</td></tr>
+<tr class="separator:abc8167fe19a9b173fcc4c9694e89498e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ae5c4107c450db0fe65fdff5be08af4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00704.html#a4ae5c4107c450db0fe65fdff5be08af4">KDNearestNeighborSearch</a> (<a class="el" href="a03302.html">KDTREE</a> *Tree, float Query[], int QuerySize, float MaxDistance, int *NumberOfResults, void **NBuffer, float DBuffer[])</td></tr>
+<tr class="separator:a4ae5c4107c450db0fe65fdff5be08af4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84d80224322dcba34d276906a638fc6d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00704.html#a84d80224322dcba34d276906a638fc6d">KDWalk</a> (<a class="el" href="a03302.html">KDTREE</a> *Tree, <a class="el" href="a00704.html#a1d60f69e882d1a8a95a1106c4c593bfb">void_proc</a> Action, void *context)</td></tr>
+<tr class="separator:a84d80224322dcba34d276906a638fc6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37e4019555a2b5284b17237373913346"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00704.html#a37e4019555a2b5284b17237373913346">FreeKDTree</a> (<a class="el" href="a03302.html">KDTREE</a> *Tree)</td></tr>
+<tr class="separator:a37e4019555a2b5284b17237373913346"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a518580bc5292633120eca883bedd9561"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a03298.html">KDNODE</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00704.html#a518580bc5292633120eca883bedd9561">MakeKDNode</a> (<a class="el" href="a03302.html">KDTREE</a> *tree, float Key[], void *Data, int Index)</td></tr>
+<tr class="separator:a518580bc5292633120eca883bedd9561"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21cd787524746ef057017f6c2a543345"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00704.html#a21cd787524746ef057017f6c2a543345">FreeKDNode</a> (<a class="el" href="a03298.html">KDNODE</a> *Node)</td></tr>
+<tr class="separator:a21cd787524746ef057017f6c2a543345"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac19360bcf5a256e10f0bcc726261a33d"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00704.html#ac19360bcf5a256e10f0bcc726261a33d">DistanceSquared</a> (int k, <a class="el" href="a03314.html">PARAM_DESC</a> *dim, float p1[], float p2[])</td></tr>
+<tr class="separator:ac19360bcf5a256e10f0bcc726261a33d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c851b9c1d2b32d2242195d6a9c19487"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00704.html#a2c851b9c1d2b32d2242195d6a9c19487">ComputeDistance</a> (int k, <a class="el" href="a03314.html">PARAM_DESC</a> *dim, float p1[], float p2[])</td></tr>
+<tr class="separator:a2c851b9c1d2b32d2242195d6a9c19487"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c049d80c7249e815d8aa80c91a9eb47"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00704.html#a8c049d80c7249e815d8aa80c91a9eb47">QueryInSearch</a> (<a class="el" href="a03302.html">KDTREE</a> *tree)</td></tr>
+<tr class="separator:a8c049d80c7249e815d8aa80c91a9eb47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ff36c896ff0c75e390fa815105b76ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00704.html#a0ff36c896ff0c75e390fa815105b76ee">Walk</a> (<a class="el" href="a03302.html">KDTREE</a> *tree, <a class="el" href="a00704.html#a1d60f69e882d1a8a95a1106c4c593bfb">void_proc</a> action, void *context, <a class="el" href="a03298.html">KDNODE</a> *SubTree, int32_t Level)</td></tr>
+<tr class="separator:a0ff36c896ff0c75e390fa815105b76ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3be65344ced84a11159bc0bea5de60f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00704.html#af3be65344ced84a11159bc0bea5de60f">InsertNodes</a> (<a class="el" href="a03302.html">KDTREE</a> *tree, <a class="el" href="a03298.html">KDNODE</a> *nodes)</td></tr>
+<tr class="separator:af3be65344ced84a11159bc0bea5de60f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1e7c0f4e7719b87f25e6fa67c62a4e9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00704.html#aa1e7c0f4e7719b87f25e6fa67c62a4e9">FreeSubTree</a> (<a class="el" href="a03298.html">KDNODE</a> *SubTree)</td></tr>
+<tr class="separator:aa1e7c0f4e7719b87f25e6fa67c62a4e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="aa17af5e06853a731f52d4b4a84c3df90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa17af5e06853a731f52d4b4a84c3df90">&#9670;&nbsp;</a></span>RootOf</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define RootOf</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">T</td><td>)</td>
+          <td>&#160;&#160;&#160;((T)-&gt;Root.Left-&gt;Data)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00704_source.html#l00056">56</a> of file <a class="el" href="a00704_source.html">kdtree.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="a1d60f69e882d1a8a95a1106c4c593bfb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d60f69e882d1a8a95a1106c4c593bfb">&#9670;&nbsp;</a></span>void_proc</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="a00704.html#a1d60f69e882d1a8a95a1106c4c593bfb">void_proc</a> =  void (*)(...)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00704_source.html#l00025">25</a> of file <a class="el" href="a00704_source.html">kdtree.h</a>.</p>
+
+</div>
+</div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a7846f8631b95d1162876b4a0b9c9d34c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7846f8631b95d1162876b4a0b9c9d34c">&#9670;&nbsp;</a></span>ConvertSegmentToPicoFeat()</h2>
+<a id="a2c851b9c1d2b32d2242195d6a9c19487"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c851b9c1d2b32d2242195d6a9c19487">&#9670;&nbsp;</a></span>ComputeDistance()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void ConvertSegmentToPicoFeat </td>
+          <td class="memname">float ComputeDistance </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="a02764.html">FPOINT</a> *&#160;</td>
-          <td class="paramname"><em>Start</em>, </td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>k</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="a02764.html">FPOINT</a> *&#160;</td>
-          <td class="paramname"><em>End</em>, </td>
+          <td class="paramtype"><a class="el" href="a03314.html">PARAM_DESC</a> *&#160;</td>
+          <td class="paramname"><em>dim</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="a00695.html#a6ceed548fc087d83d8e21bf17b199f6a">FEATURE_SET</a>&#160;</td>
-          <td class="paramname"><em>FeatureSet</em>&#160;</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>p1</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>p2</em>[]&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -158,73 +223,42 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This routine converts an entire segment of an outline into a set of pico features which are added to FeatureSet. The length of the segment is rounded to the nearest whole number of pico-features. The pico-features are spaced evenly over the entire segment. Results are placed in FeatureSet. Globals:</p><ul>
-<li>classify_pico_feature_length length of a single pico-feature <dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">Start</td><td>starting point of pico-feature </td></tr>
-    <tr><td class="paramname">End</td><td>ending point of pico-feature </td></tr>
-    <tr><td class="paramname">FeatureSet</td><td>set to add pico-feature to </td></tr>
-  </table>
-  </dd>
-</dl>
-</li>
-</ul>
 
-<p class="definition">Definition at line <a class="el" href="a00704_source.html#l00102">102</a> of file <a class="el" href="a00704_source.html">picofeat.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                                                      {</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  <a class="code" href="a02864.html">FEATURE</a> Feature;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;  <span class="keywordtype">float</span> Angle;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  <span class="keywordtype">float</span> Length;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;  <span class="keywordtype">int</span> NumFeatures;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  <a class="code" href="a02764.html">FPOINT</a> Center;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  <a class="code" href="a02764.html">FPOINT</a> Delta;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  <span class="keywordtype">int</span> i;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  Angle = <a class="code" href="a00620.html#af6cb732ba6e4cf3abb6be826c7b74b49">NormalizedAngleFrom</a> (Start, End, 1.0);</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  Length = <a class="code" href="a00620.html#ab85e87f52e61d4a180dda1d1789df9f9">DistanceBetween</a> (*Start, *End);</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  NumFeatures = static_cast&lt;int&gt;(floor (Length / <a class="code" href="a00704.html#ade0cbc6650cd99b83ecc2c1a828a4bee">classify_pico_feature_length</a> + 0.5));</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  <span class="keywordflow">if</span> (NumFeatures &lt; 1)</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    NumFeatures = 1;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  <span class="comment">/* compute vector for one pico feature */</span></div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;  Delta.<a class="code" href="a02764.html#add242df27ddbc90edf732823e38eb844">x</a> = <a class="code" href="a00623.html#a3882f9c0c6c99c9bf796113a1524cba1">XDelta</a> (*Start, *End) / NumFeatures;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;  Delta.<a class="code" href="a02764.html#ac396edee922ba896114b00d8715dd207">y</a> = <a class="code" href="a00623.html#abeec3d0313052da8c1e239e64acaf5cd">YDelta</a> (*Start, *End) / NumFeatures;</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;  <span class="comment">/* compute position of first pico feature */</span></div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;  Center.<a class="code" href="a02764.html#add242df27ddbc90edf732823e38eb844">x</a> = Start-&gt;<a class="code" href="a02764.html#add242df27ddbc90edf732823e38eb844">x</a> + Delta.<a class="code" href="a02764.html#add242df27ddbc90edf732823e38eb844">x</a> / 2.0;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;  Center.<a class="code" href="a02764.html#ac396edee922ba896114b00d8715dd207">y</a> = Start-&gt;<a class="code" href="a02764.html#ac396edee922ba896114b00d8715dd207">y</a> + Delta.<a class="code" href="a02764.html#ac396edee922ba896114b00d8715dd207">y</a> / 2.0;</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;  <span class="comment">/* compute each pico feature in segment and add to feature set */</span></div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;  <span class="keywordflow">for</span> (i = 0; i &lt; NumFeatures; i++) {</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    Feature = <a class="code" href="a00692.html#a32a08c42617c8dd6a156c1c8d7fb2cbb">NewFeature</a> (&amp;<a class="code" href="a00611.html#a6874f1e9456afb7479b229bcb58d95a8">PicoFeatDesc</a>);</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    Feature-&gt;<a class="code" href="a02864.html#acdddc3235f689b0d45574003fc3e3b1b">Params</a>[<a class="code" href="a00707.html#ac00e1c5d2ac3096e0928e2186aee1aaca9895f2baa648985ab8ee5586c1563511">PicoFeatDir</a>] = Angle;</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    Feature-&gt;<a class="code" href="a02864.html#acdddc3235f689b0d45574003fc3e3b1b">Params</a>[<a class="code" href="a00707.html#ac00e1c5d2ac3096e0928e2186aee1aacaf28d56154a908256d7b3beb62977e2fc">PicoFeatX</a>] = Center.<a class="code" href="a02764.html#add242df27ddbc90edf732823e38eb844">x</a>;</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    Feature-&gt;<a class="code" href="a02864.html#acdddc3235f689b0d45574003fc3e3b1b">Params</a>[<a class="code" href="a00707.html#ac00e1c5d2ac3096e0928e2186aee1aaca43884de5e2e87be26f9642b50135f98a">PicoFeatY</a>] = Center.<a class="code" href="a02764.html#ac396edee922ba896114b00d8715dd207">y</a>;</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <a class="code" href="a00692.html#a88ff5e23ace03b3fbfbb891604dd5bc6">AddFeature</a>(FeatureSet, Feature);</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    Center.<a class="code" href="a02764.html#add242df27ddbc90edf732823e38eb844">x</a> += Delta.<a class="code" href="a02764.html#add242df27ddbc90edf732823e38eb844">x</a>;</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    Center.<a class="code" href="a02764.html#ac396edee922ba896114b00d8715dd207">y</a> += Delta.<a class="code" href="a02764.html#ac396edee922ba896114b00d8715dd207">y</a>;</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;  }</div>
+<p class="definition">Definition at line <a class="el" href="a00701_source.html#l00447">447</a> of file <a class="el" href="a00701_source.html">kdtree.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;                                                                      {</div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;  <span class="keywordflow">return</span> sqrt(<a class="code" href="a00701.html#ac19360bcf5a256e10f0bcc726261a33d">DistanceSquared</a>(k, dim, p1, p2));</div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a0ef34dbe10ce0b1c08b63a640c1f1009"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0ef34dbe10ce0b1c08b63a640c1f1009">&#9670;&nbsp;</a></span>ConvertToPicoFeatures2()</h2>
+<a id="ac19360bcf5a256e10f0bcc726261a33d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac19360bcf5a256e10f0bcc726261a33d">&#9670;&nbsp;</a></span>DistanceSquared()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void ConvertToPicoFeatures2 </td>
+          <td class="memname">float DistanceSquared </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="a00671.html#a88f6c3506e81059ed00e2ab9e99334a3">MFOUTLINE</a>&#160;</td>
-          <td class="paramname"><em>Outline</em>, </td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>k</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="a00695.html#a6ceed548fc087d83d8e21bf17b199f6a">FEATURE_SET</a>&#160;</td>
-          <td class="paramname"><em>FeatureSet</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="a03314.html">PARAM_DESC</a> *&#160;</td>
+          <td class="paramname"><em>dim</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>p1</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>p2</em>[]&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -233,135 +267,661 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This routine steps through the specified outline and cuts it up into pieces of equal length. These pieces become the desired pico-features. Each segment in the outline is converted into an integral number of pico-features. Results are returned in FeatureSet.</p>
-<p>Globals:</p><ul>
-<li>classify_pico_feature_length length of features to be extracted <dl class="params"><dt>Parameters</dt><dd>
+<p>Returns the Euclidean distance squared between p1 and p2 for all essential dimensions. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">Outline</td><td>outline to extract micro-features from </td></tr>
-    <tr><td class="paramname">FeatureSet</td><td>set of features to add pico-features to </td></tr>
+    <tr><td class="paramname">k</td><td>keys are in k-space </td></tr>
+    <tr><td class="paramname">dim</td><td>dimension descriptions (essential, circular, etc) </td></tr>
+    <tr><td class="paramname">p1,p2</td><td>two different points in K-D space </td></tr>
   </table>
   </dd>
 </dl>
-</li>
-</ul>
 
-<p class="definition">Definition at line <a class="el" href="a00704_source.html#l00154">154</a> of file <a class="el" href="a00704_source.html">picofeat.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;                                                                       {</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;  <a class="code" href="a02920.html">MFOUTLINE</a> Next;</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;  <a class="code" href="a02920.html">MFOUTLINE</a> First;</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;  <a class="code" href="a02920.html">MFOUTLINE</a> Current;</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;  <span class="keywordflow">if</span> (DegenerateOutline(Outline))</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160; </div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;  First = Outline;</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;  Current = First;</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;  Next = NextPointAfter(Current);</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;  <span class="keywordflow">do</span> {</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    <span class="comment">/* note that an edge is hidden if the ending point of the edge is</span></div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="comment">       marked as hidden.  This situation happens because the order of</span></div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="comment">       the outlines is reversed when they are converted from the old</span></div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="comment">       format.  In the old format, a hidden edge is marked by the</span></div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="comment">       starting point for that edge. */</span></div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    <span class="keywordflow">if</span> (!(PointAt(Next)-&gt;Hidden))</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;      <a class="code" href="a00704.html#a7846f8631b95d1162876b4a0b9c9d34c">ConvertSegmentToPicoFeat</a> (&amp;(PointAt(Current)-&gt;Point),</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        &amp;(PointAt(Next)-&gt;Point), FeatureSet);</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160; </div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    Current = Next;</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    Next = NextPointAfter(Current);</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;  }</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;  <span class="keywordflow">while</span> (Current != First);</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; </div>
+<p class="definition">Definition at line <a class="el" href="a00701_source.html#l00426">426</a> of file <a class="el" href="a00701_source.html">kdtree.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;                                                                      {</div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;  <span class="keywordtype">float</span> total_distance = 0;</div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160; </div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;  <span class="keywordflow">for</span> (; k &gt; 0; k--, p1++, p2++, dim++) {</div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;    <span class="keywordflow">if</span> (dim-&gt;<a class="code" href="a03314.html#a7092c8d39e65848962df620ed6adb69c">NonEssential</a>)</div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;      <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160; </div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;    <span class="keywordtype">float</span> dimension_distance = *p1 - *p2;</div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160; </div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;    <span class="comment">/* if this dimension is circular - check wraparound distance */</span></div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;    <span class="keywordflow">if</span> (dim-&gt;<a class="code" href="a03314.html#a4599855199042155a25e52c0395237ce">Circular</a>) {</div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;      dimension_distance = <a class="code" href="a00701.html#adbeb54abd64e764a1b38688776d36f77">Magnitude</a>(dimension_distance);</div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;      <span class="keywordtype">float</span> wrap_distance = dim-&gt;<a class="code" href="a03314.html#a67c612d52e28b862b39d3f66b16e67c3">Max</a> - dim-&gt;<a class="code" href="a03314.html#af6aa718816c7dd55596014492979b043">Min</a> - dimension_distance;</div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;      dimension_distance = std::min(dimension_distance, wrap_distance);</div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;    }</div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160; </div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;    total_distance += dimension_distance * dimension_distance;</div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;  }</div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;  <span class="keywordflow">return</span> total_distance;</div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a0d34691eace89769641af5a13f448310"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0d34691eace89769641af5a13f448310">&#9670;&nbsp;</a></span>NormalizePicoX()</h2>
+<a id="a21cd787524746ef057017f6c2a543345"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21cd787524746ef057017f6c2a543345">&#9670;&nbsp;</a></span>FreeKDNode()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void NormalizePicoX </td>
+          <td class="memname">void FreeKDNode </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="a00695.html#a6ceed548fc087d83d8e21bf17b199f6a">FEATURE_SET</a>&#160;</td>
-          <td class="paramname"><em>FeatureSet</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="a03298.html">KDNODE</a> *&#160;</td>
+          <td class="paramname"><em>Node</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This routine computes the average x position over all of the pico-features in FeatureSet and then renormalizes the pico-features to force this average to be the x origin (i.e. x=0). FeatureSet is changed. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">FeatureSet</td><td>pico-features to be normalized </td></tr>
-  </table>
-  </dd>
-</dl>
 
-<p class="definition">Definition at line <a class="el" href="a00704_source.html#l00192">192</a> of file <a class="el" href="a00704_source.html">picofeat.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;                                            {</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;  <span class="keywordtype">int</span> i;</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;  <a class="code" href="a02864.html">FEATURE</a> Feature;</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;  <span class="keywordtype">float</span> Origin = 0.0;</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160; </div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;  <span class="keywordflow">for</span> (i = 0; i &lt; FeatureSet-&gt;<a class="code" href="a02868.html#af5f8cefc59003cce4cc41164e914bd4b">NumFeatures</a>; i++) {</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    Feature = FeatureSet-&gt;<a class="code" href="a02868.html#a4664d6a22a9d12f4011de4d877664c45">Features</a>[i];</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    Origin += Feature-&gt;<a class="code" href="a02864.html#acdddc3235f689b0d45574003fc3e3b1b">Params</a>[<a class="code" href="a00707.html#ac00e1c5d2ac3096e0928e2186aee1aacaf28d56154a908256d7b3beb62977e2fc">PicoFeatX</a>];</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;  }</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;  Origin /= FeatureSet-&gt;<a class="code" href="a02868.html#af5f8cefc59003cce4cc41164e914bd4b">NumFeatures</a>;</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160; </div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;  <span class="keywordflow">for</span> (i = 0; i &lt; FeatureSet-&gt;<a class="code" href="a02868.html#af5f8cefc59003cce4cc41164e914bd4b">NumFeatures</a>; i++) {</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    Feature = FeatureSet-&gt;<a class="code" href="a02868.html#a4664d6a22a9d12f4011de4d877664c45">Features</a>[i];</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    Feature-&gt;<a class="code" href="a02864.html#acdddc3235f689b0d45574003fc3e3b1b">Params</a>[<a class="code" href="a00707.html#ac00e1c5d2ac3096e0928e2186aee1aacaf28d56154a908256d7b3beb62977e2fc">PicoFeatX</a>] -= Origin;</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;  }</div>
+<p class="definition">Definition at line <a class="el" href="a00701_source.html#l00369">369</a> of file <a class="el" href="a00701_source.html">kdtree.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;{ free(Node); }</div>
 </div><!-- fragment -->
 </div>
 </div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="ade0cbc6650cd99b83ecc2c1a828a4bee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ade0cbc6650cd99b83ecc2c1a828a4bee">&#9670;&nbsp;</a></span>classify_pico_feature_length</h2>
+<a id="a37e4019555a2b5284b17237373913346"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37e4019555a2b5284b17237373913346">&#9670;&nbsp;</a></span>FreeKDTree()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double classify_pico_feature_length = 0.05</td>
+          <td class="memname">void FreeKDTree </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a03302.html">KDTREE</a> *&#160;</td>
+          <td class="paramname"><em>Tree</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>"Pico Feature Length" <br  />
- </p>
+<p>This routine frees all memory which is allocated to the specified KD-tree. This includes the data structure for the kd-tree itself plus the data structures for each node in the tree. It does not include the Key and Data items which are pointed to by the nodes. This memory is left untouched. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Tree</td><td>tree data structure to be released </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="a00704_source.html#l00036">36</a> of file <a class="el" href="a00704_source.html">picofeat.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00701_source.html#l00330">330</a> of file <a class="el" href="a00701_source.html">kdtree.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;                              {</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;  <a class="code" href="a00701.html#a59f352b6bc9971b0d7502d31060f7c44">FreeSubTree</a>(Tree-&gt;<a class="code" href="a03302.html#ab52e8a6004fc595de526dfa831c2e725">Root</a>.<a class="code" href="a03298.html#a66ffa1cc4e73e45599978f8f6416e350">Left</a>);</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;  free(Tree);</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aa1e7c0f4e7719b87f25e6fa67c62a4e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1e7c0f4e7719b87f25e6fa67c62a4e9">&#9670;&nbsp;</a></span>FreeSubTree()</h2>
 
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FreeSubTree </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a03298.html">KDNODE</a> *&#160;</td>
+          <td class="paramname"><em>sub_tree</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Free all of the nodes of a sub tree. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00701_source.html#l00531">531</a> of file <a class="el" href="a00701_source.html">kdtree.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160;                                   {</div>
+<div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160;  <span class="keywordflow">if</span> (sub_tree != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160;    <a class="code" href="a00701.html#a59f352b6bc9971b0d7502d31060f7c44">FreeSubTree</a>(sub_tree-&gt;<a class="code" href="a03298.html#a66ffa1cc4e73e45599978f8f6416e350">Left</a>);</div>
+<div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;    <a class="code" href="a00701.html#a59f352b6bc9971b0d7502d31060f7c44">FreeSubTree</a>(sub_tree-&gt;<a class="code" href="a03298.html#a699e9e67472e12f86bbb5c1effdb4fa3">Right</a>);</div>
+<div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160;    free(sub_tree);</div>
+<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="af3be65344ced84a11159bc0bea5de60f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3be65344ced84a11159bc0bea5de60f">&#9670;&nbsp;</a></span>InsertNodes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void InsertNodes </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a03302.html">KDTREE</a> *&#160;</td>
+          <td class="paramname"><em>tree</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a03298.html">KDNODE</a> *&#160;</td>
+          <td class="paramname"><em>nodes</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Given a subtree nodes, insert all of its elements into tree. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00701_source.html#l00521">521</a> of file <a class="el" href="a00701_source.html">kdtree.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;                                              {</div>
+<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160;  <span class="keywordflow">if</span> (nodes == <span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160;    <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160; </div>
+<div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160;  <a class="code" href="a00701.html#a25b5f5ed44816d6ec2d546cd8b36e33f">KDStore</a>(tree, nodes-&gt;<a class="code" href="a03298.html#a4cf6a9ce5397fc92b6b60eec881e0efc">Key</a>, nodes-&gt;<a class="code" href="a03298.html#afd5eeb76bcf3d1ba9b387e0cd4e9ce16">Data</a>);</div>
+<div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160;  <a class="code" href="a00701.html#af3be65344ced84a11159bc0bea5de60f">InsertNodes</a>(tree, nodes-&gt;<a class="code" href="a03298.html#a66ffa1cc4e73e45599978f8f6416e350">Left</a>);</div>
+<div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160;  <a class="code" href="a00701.html#af3be65344ced84a11159bc0bea5de60f">InsertNodes</a>(tree, nodes-&gt;<a class="code" href="a03298.html#a699e9e67472e12f86bbb5c1effdb4fa3">Right</a>);</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="abc8167fe19a9b173fcc4c9694e89498e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc8167fe19a9b173fcc4c9694e89498e">&#9670;&nbsp;</a></span>KDDelete()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void KDDelete </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a03302.html">KDTREE</a> *&#160;</td>
+          <td class="paramname"><em>Tree</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>Key</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>Data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This routine deletes a node from Tree. The node to be deleted is specified by the Key for the node and the Data contents of the node. These two pointers must be identical to the pointers that were used for the node when it was originally stored in the tree. A node will be deleted from the tree only if its key and data pointers are identical to Key and Data respectively. The tree is re-formed by removing the affected subtree and inserting all elements but the root.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Tree</td><td>K-D tree to delete node from </td></tr>
+    <tr><td class="paramname">Key</td><td>key of node to be deleted </td></tr>
+    <tr><td class="paramname">Data</td><td>data contents of node to be deleted </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00701_source.html#l00252">252</a> of file <a class="el" href="a00701_source.html">kdtree.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;                                                  {</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;  <span class="keywordtype">int</span> Level;</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;  <a class="code" href="a03298.html">KDNODE</a> *Current;</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;  <a class="code" href="a03298.html">KDNODE</a> *Father;</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160; </div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;  <span class="comment">/* initialize search at root of tree */</span></div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;  Father = &amp;(Tree-&gt;<a class="code" href="a03302.html#ab52e8a6004fc595de526dfa831c2e725">Root</a>);</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;  Current = Father-&gt;<a class="code" href="a03298.html#a66ffa1cc4e73e45599978f8f6416e350">Left</a>;</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;  Level = NextLevel(Tree, -1);</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160; </div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;  <span class="comment">/* search tree for node to be deleted */</span></div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;  <span class="keywordflow">while</span> ((Current != <span class="keyword">nullptr</span>) &amp;&amp; (!<a class="code" href="a00701.html#a5a33bfaa4d9dcac7939f99f721bf61b9">NodeFound</a> (Current, Key, Data))) {</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    Father = Current;</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    <span class="keywordflow">if</span> (Key[Level] &lt; Current-&gt;<a class="code" href="a03298.html#a615628671cc352ae7071104e0fcf0701">BranchPoint</a>)</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;      Current = Current-&gt;<a class="code" href="a03298.html#a66ffa1cc4e73e45599978f8f6416e350">Left</a>;</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;      Current = Current-&gt;<a class="code" href="a03298.html#a699e9e67472e12f86bbb5c1effdb4fa3">Right</a>;</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160; </div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    Level = NextLevel(Tree, Level);</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;  }</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160; </div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;  <span class="keywordflow">if</span> (Current != <span class="keyword">nullptr</span>) {         <span class="comment">/* if node to be deleted was found */</span></div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    <span class="keywordflow">if</span> (Current == Father-&gt;<a class="code" href="a03298.html#a66ffa1cc4e73e45599978f8f6416e350">Left</a>) {</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;      Father-&gt;<a class="code" href="a03298.html#a66ffa1cc4e73e45599978f8f6416e350">Left</a> = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;      Father-&gt;<a class="code" href="a03298.html#a4e6aa5abd6c7207585010298b3fbad34">LeftBranch</a> = Tree-&gt;<a class="code" href="a03302.html#a486dfb881bc360bbfbd36248bba80552">KeyDesc</a>[Level].<a class="code" href="a03314.html#af6aa718816c7dd55596014492979b043">Min</a>;</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;      Father-&gt;<a class="code" href="a03298.html#a699e9e67472e12f86bbb5c1effdb4fa3">Right</a> = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;      Father-&gt;<a class="code" href="a03298.html#a06977c7752b157540446329009ef6595">RightBranch</a> = Tree-&gt;<a class="code" href="a03302.html#a486dfb881bc360bbfbd36248bba80552">KeyDesc</a>[Level].<a class="code" href="a03314.html#a67c612d52e28b862b39d3f66b16e67c3">Max</a>;</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    }</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160; </div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;    <a class="code" href="a00701.html#af3be65344ced84a11159bc0bea5de60f">InsertNodes</a>(Tree, Current-&gt;<a class="code" href="a03298.html#a66ffa1cc4e73e45599978f8f6416e350">Left</a>);</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    <a class="code" href="a00701.html#af3be65344ced84a11159bc0bea5de60f">InsertNodes</a>(Tree, Current-&gt;<a class="code" href="a03298.html#a699e9e67472e12f86bbb5c1effdb4fa3">Right</a>);</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;    <a class="code" href="a00701.html#a59f352b6bc9971b0d7502d31060f7c44">FreeSubTree</a>(Current);</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;  }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a4ae5c4107c450db0fe65fdff5be08af4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ae5c4107c450db0fe65fdff5be08af4">&#9670;&nbsp;</a></span>KDNearestNeighborSearch()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void KDNearestNeighborSearch </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a03302.html">KDTREE</a> *&#160;</td>
+          <td class="paramname"><em>Tree</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>Query</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>QuerySize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>MaxDistance</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>NumberOfResults</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void **&#160;</td>
+          <td class="paramname"><em>NBuffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>DBuffer</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This routine searches the K-D tree specified by Tree and finds the QuerySize nearest neighbors of Query. All neighbors must be within MaxDistance of Query. The data contents of the nearest neighbors are placed in NBuffer and their distances from Query are placed in DBuffer. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Tree</td><td>ptr to K-D tree to be searched </td></tr>
+    <tr><td class="paramname">Query</td><td>ptr to query key (point in D-space) </td></tr>
+    <tr><td class="paramname">QuerySize</td><td>number of nearest neighbors to be found </td></tr>
+    <tr><td class="paramname">MaxDistance</td><td>all neighbors must be within this distance </td></tr>
+    <tr><td class="paramname">NBuffer</td><td>ptr to QuerySize buffer to hold nearest neighbors </td></tr>
+    <tr><td class="paramname">DBuffer</td><td>ptr to QuerySize buffer to hold distances from nearest neighbor to query point </td></tr>
+    <tr><td class="paramname">NumberOfResults</td><td>[out] Number of nearest neighbors actually found </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00701_source.html#l00304">304</a> of file <a class="el" href="a00701_source.html">kdtree.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;                                                           {</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;  <a class="code" href="a03294.html">KDTreeSearch</a> <a class="code" href="a00806.html#a1d8af9328f064a9df6d6f88336dd054e">search</a>(Tree, Query, QuerySize);</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;  <a class="code" href="a00806.html#a1d8af9328f064a9df6d6f88336dd054e">search</a>.Search(NumberOfResults, DBuffer, NBuffer);</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a25b5f5ed44816d6ec2d546cd8b36e33f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25b5f5ed44816d6ec2d546cd8b36e33f">&#9670;&nbsp;</a></span>KDStore()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void KDStore </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a03302.html">KDTREE</a> *&#160;</td>
+          <td class="paramname"><em>Tree</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>Key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>Data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This routine stores Data in the K-D tree specified by Tree using Key as an access key.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Tree</td><td>K-D tree in which data is to be stored </td></tr>
+    <tr><td class="paramname">Key</td><td>ptr to key by which data can be retrieved </td></tr>
+    <tr><td class="paramname">Data</td><td>ptr to data to be stored in the tree </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00701_source.html#l00211">211</a> of file <a class="el" href="a00701_source.html">kdtree.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;                                                   {</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;  <span class="keywordtype">int</span> Level;</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;  <a class="code" href="a03298.html">KDNODE</a> *Node;</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;  <a class="code" href="a03298.html">KDNODE</a> **PtrToNode;</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160; </div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;  PtrToNode = &amp;(Tree-&gt;<a class="code" href="a03302.html#ab52e8a6004fc595de526dfa831c2e725">Root</a>.<a class="code" href="a03298.html#a66ffa1cc4e73e45599978f8f6416e350">Left</a>);</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;  Node = *PtrToNode;</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;  Level = NextLevel(Tree, -1);</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;  <span class="keywordflow">while</span> (Node != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    <span class="keywordflow">if</span> (Key[Level] &lt; Node-&gt;<a class="code" href="a03298.html#a615628671cc352ae7071104e0fcf0701">BranchPoint</a>) {</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;      PtrToNode = &amp;(Node-&gt;<a class="code" href="a03298.html#a66ffa1cc4e73e45599978f8f6416e350">Left</a>);</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;      <span class="keywordflow">if</span> (Key[Level] &gt; Node-&gt;<a class="code" href="a03298.html#a4e6aa5abd6c7207585010298b3fbad34">LeftBranch</a>)</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;        Node-&gt;<a class="code" href="a03298.html#a4e6aa5abd6c7207585010298b3fbad34">LeftBranch</a> = Key[Level];</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    }</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;      PtrToNode = &amp;(Node-&gt;<a class="code" href="a03298.html#a699e9e67472e12f86bbb5c1effdb4fa3">Right</a>);</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;      <span class="keywordflow">if</span> (Key[Level] &lt; Node-&gt;<a class="code" href="a03298.html#a06977c7752b157540446329009ef6595">RightBranch</a>)</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;        Node-&gt;<a class="code" href="a03298.html#a06977c7752b157540446329009ef6595">RightBranch</a> = Key[Level];</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    }</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    Level = NextLevel(Tree, Level);</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    Node = *PtrToNode;</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;  }</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160; </div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;  *PtrToNode = <a class="code" href="a00701.html#a518580bc5292633120eca883bedd9561">MakeKDNode</a>(Tree, Key, Data, Level);</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a84d80224322dcba34d276906a638fc6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84d80224322dcba34d276906a638fc6d">&#9670;&nbsp;</a></span>KDWalk()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void KDWalk </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a03302.html">KDTREE</a> *&#160;</td>
+          <td class="paramname"><em>Tree</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00704.html#a1d60f69e882d1a8a95a1106c4c593bfb">void_proc</a>&#160;</td>
+          <td class="paramname"><em>action</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>context</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Walk a given Tree with action. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00701_source.html#l00314">314</a> of file <a class="el" href="a00701_source.html">kdtree.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;                                                           {</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;  <span class="keywordflow">if</span> (Tree-&gt;<a class="code" href="a03302.html#ab52e8a6004fc595de526dfa831c2e725">Root</a>.<a class="code" href="a03298.html#a66ffa1cc4e73e45599978f8f6416e350">Left</a> != <span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    <a class="code" href="a00701.html#a8279da9e706be04cf32f1c4172cf3c11">Walk</a>(Tree, <a class="code" href="a01827.html#ae88f73f69c3427ef726b7470ed95cccc">action</a>, context, Tree-&gt;<a class="code" href="a03302.html#ab52e8a6004fc595de526dfa831c2e725">Root</a>.<a class="code" href="a03298.html#a66ffa1cc4e73e45599978f8f6416e350">Left</a>, NextLevel(Tree, -1));</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a518580bc5292633120eca883bedd9561"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a518580bc5292633120eca883bedd9561">&#9670;&nbsp;</a></span>MakeKDNode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a03298.html">KDNODE</a>* MakeKDNode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a03302.html">KDTREE</a> *&#160;</td>
+          <td class="paramname"><em>tree</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>Key</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>Data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>Index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This routine allocates memory for a new K-D tree node and places the specified Key and Data into it. The left and right subtree pointers for the node are initialized to empty subtrees. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tree</td><td>The tree to create the node for </td></tr>
+    <tr><td class="paramname">Key</td><td>Access key for new node in KD tree </td></tr>
+    <tr><td class="paramname">Data</td><td>ptr to data to be stored in new node </td></tr>
+    <tr><td class="paramname">Index</td><td>index of Key to branch on </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>pointer to new K-D tree node </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="a00701_source.html#l00351">351</a> of file <a class="el" href="a00701_source.html">kdtree.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;                                                                     {</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;  <a class="code" href="a03298.html">KDNODE</a> *NewNode;</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160; </div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;  NewNode = static_cast&lt;KDNODE *&gt;(<a class="code" href="a00800.html#a9bdc0885c33bbb5b062c77b1d90e2305">Emalloc</a> (<span class="keyword">sizeof</span> (<a class="code" href="a03298.html">KDNODE</a>)));</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160; </div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;  NewNode-&gt;<a class="code" href="a03298.html#a4cf6a9ce5397fc92b6b60eec881e0efc">Key</a> = Key;</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;  NewNode-&gt;<a class="code" href="a03298.html#afd5eeb76bcf3d1ba9b387e0cd4e9ce16">Data</a> = Data;</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;  NewNode-&gt;<a class="code" href="a03298.html#a615628671cc352ae7071104e0fcf0701">BranchPoint</a> = Key[Index];</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;  NewNode-&gt;<a class="code" href="a03298.html#a4e6aa5abd6c7207585010298b3fbad34">LeftBranch</a> = tree-&gt;<a class="code" href="a03302.html#a486dfb881bc360bbfbd36248bba80552">KeyDesc</a>[Index].<a class="code" href="a03314.html#af6aa718816c7dd55596014492979b043">Min</a>;</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;  NewNode-&gt;<a class="code" href="a03298.html#a06977c7752b157540446329009ef6595">RightBranch</a> = tree-&gt;<a class="code" href="a03302.html#a486dfb881bc360bbfbd36248bba80552">KeyDesc</a>[Index].<a class="code" href="a03314.html#a67c612d52e28b862b39d3f66b16e67c3">Max</a>;</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;  NewNode-&gt;<a class="code" href="a03298.html#a66ffa1cc4e73e45599978f8f6416e350">Left</a> = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;  NewNode-&gt;<a class="code" href="a03298.html#a699e9e67472e12f86bbb5c1effdb4fa3">Right</a> = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160; </div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;  <span class="keywordflow">return</span> NewNode;</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a73ea2156bc8f7cfc9adcc0b3a5b8b15c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73ea2156bc8f7cfc9adcc0b3a5b8b15c">&#9670;&nbsp;</a></span>MakeKDTree()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a03302.html">KDTREE</a>* MakeKDTree </td>
+          <td>(</td>
+          <td class="paramtype">int16_t&#160;</td>
+          <td class="paramname"><em>KeySize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="a03314.html">PARAM_DESC</a>&#160;</td>
+          <td class="paramname"><em>KeyDesc</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>a new <a class="el" href="a03302.html">KDTREE</a> based on the specified parameters. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">KeySize</td><td># of dimensions in the K-D tree </td></tr>
+    <tr><td class="paramname">KeyDesc</td><td>array of params to describe key dimensions </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00701_source.html#l00179">179</a> of file <a class="el" href="a00701_source.html">kdtree.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;                                                                {</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;  <span class="keyword">auto</span> *KDTree = static_cast&lt;KDTREE *&gt;(<a class="code" href="a00800.html#a9bdc0885c33bbb5b062c77b1d90e2305">Emalloc</a>(</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;      <span class="keyword">sizeof</span>(<a class="code" href="a03302.html">KDTREE</a>) + (KeySize - 1) * <span class="keyword">sizeof</span>(<a class="code" href="a03314.html">PARAM_DESC</a>)));</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; KeySize; i++) {</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    KDTree-&gt;KeyDesc[i].NonEssential = KeyDesc[i].<a class="code" href="a03314.html#a7092c8d39e65848962df620ed6adb69c">NonEssential</a>;</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    KDTree-&gt;KeyDesc[i].Circular = KeyDesc[i].<a class="code" href="a03314.html#a4599855199042155a25e52c0395237ce">Circular</a>;</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    <span class="keywordflow">if</span> (KeyDesc[i].Circular) {</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;      KDTree-&gt;KeyDesc[i].Min = KeyDesc[i].<a class="code" href="a03314.html#af6aa718816c7dd55596014492979b043">Min</a>;</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;      KDTree-&gt;KeyDesc[i].Max = KeyDesc[i].<a class="code" href="a03314.html#a67c612d52e28b862b39d3f66b16e67c3">Max</a>;</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;      KDTree-&gt;KeyDesc[i].Range = KeyDesc[i].<a class="code" href="a03314.html#a67c612d52e28b862b39d3f66b16e67c3">Max</a> - KeyDesc[i].<a class="code" href="a03314.html#af6aa718816c7dd55596014492979b043">Min</a>;</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;      KDTree-&gt;KeyDesc[i].HalfRange = KDTree-&gt;KeyDesc[i].Range / 2;</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;      KDTree-&gt;KeyDesc[i].MidRange = (KeyDesc[i].<a class="code" href="a03314.html#a67c612d52e28b862b39d3f66b16e67c3">Max</a> + KeyDesc[i].<a class="code" href="a03314.html#af6aa718816c7dd55596014492979b043">Min</a>) / 2;</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;      KDTree-&gt;KeyDesc[i].Min = <a class="code" href="a00701.html#a8904460bfbb91685971ab30c3025e0c5">MINSEARCH</a>;</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;      KDTree-&gt;KeyDesc[i].Max = <a class="code" href="a00701.html#a322efe6a34504778ebc6b3e2264789d5">MAXSEARCH</a>;</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    }</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;  }</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;  KDTree-&gt;KeySize = KeySize;</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;  KDTree-&gt;Root.Left = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;  KDTree-&gt;Root.Right = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;  <span class="keywordflow">return</span> KDTree;</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a8c049d80c7249e815d8aa80c91a9eb47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c049d80c7249e815d8aa80c91a9eb47">&#9670;&nbsp;</a></span>QueryInSearch()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int QueryInSearch </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a03302.html">KDTREE</a> *&#160;</td>
+          <td class="paramname"><em>tree</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0ff36c896ff0c75e390fa815105b76ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ff36c896ff0c75e390fa815105b76ee">&#9670;&nbsp;</a></span>Walk()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Walk </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a03302.html">KDTREE</a> *&#160;</td>
+          <td class="paramname"><em>tree</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00704.html#a1d60f69e882d1a8a95a1106c4c593bfb">void_proc</a>&#160;</td>
+          <td class="paramname"><em>action</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>context</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a03298.html">KDNODE</a> *&#160;</td>
+          <td class="paramname"><em>sub_tree</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int32_t&#160;</td>
+          <td class="paramname"><em>level</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Walk a tree, calling action once on each node.</p>
+<p>Operation: This routine walks through the specified sub_tree and invokes action action at each node as follows: action(context, data, level) data the data contents of the node being visited, level is the level of the node in the tree with the root being level 0. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tree</td><td>root of the tree being walked. </td></tr>
+    <tr><td class="paramname">action</td><td>action to be performed at every node </td></tr>
+    <tr><td class="paramname">context</td><td>action's context </td></tr>
+    <tr><td class="paramname">sub_tree</td><td>ptr to root of subtree to be walked </td></tr>
+    <tr><td class="paramname">level</td><td>current level in the tree for this node </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00701_source.html#l00511">511</a> of file <a class="el" href="a00701_source.html">kdtree.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160;                                           {</div>
+<div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160;  (*action)(context, sub_tree-&gt;<a class="code" href="a03298.html#afd5eeb76bcf3d1ba9b387e0cd4e9ce16">Data</a>, level);</div>
+<div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160;  <span class="keywordflow">if</span> (sub_tree-&gt;<a class="code" href="a03298.html#a66ffa1cc4e73e45599978f8f6416e350">Left</a> != <span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160;    <a class="code" href="a00701.html#a8279da9e706be04cf32f1c4172cf3c11">Walk</a>(tree, <a class="code" href="a01827.html#ae88f73f69c3427ef726b7470ed95cccc">action</a>, context, sub_tree-&gt;<a class="code" href="a03298.html#a66ffa1cc4e73e45599978f8f6416e350">Left</a>, NextLevel(tree, level));</div>
+<div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160;  <span class="keywordflow">if</span> (sub_tree-&gt;<a class="code" href="a03298.html#a699e9e67472e12f86bbb5c1effdb4fa3">Right</a> != <span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;    <a class="code" href="a00701.html#a8279da9e706be04cf32f1c4172cf3c11">Walk</a>(tree, <a class="code" href="a01827.html#ae88f73f69c3427ef726b7470ed95cccc">action</a>, context, sub_tree-&gt;<a class="code" href="a03298.html#a699e9e67472e12f86bbb5c1effdb4fa3">Right</a>, NextLevel(tree, level));</div>
+</div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa00704_html_ade0cbc6650cd99b83ecc2c1a828a4bee"><div class="ttname"><a href="a00704.html#ade0cbc6650cd99b83ecc2c1a828a4bee">classify_pico_feature_length</a></div><div class="ttdeci">double classify_pico_feature_length</div><div class="ttdef"><b>Definition:</b> <a href="a00704_source.html#l00036">picofeat.cpp:36</a></div></div>
-<div class="ttc" id="aa00692_html_a88ff5e23ace03b3fbfbb891604dd5bc6"><div class="ttname"><a href="a00692.html#a88ff5e23ace03b3fbfbb891604dd5bc6">AddFeature</a></div><div class="ttdeci">bool AddFeature(FEATURE_SET FeatureSet, FEATURE Feature)</div><div class="ttdef"><b>Definition:</b> <a href="a00692_source.html#l00039">ocrfeatures.cpp:39</a></div></div>
-<div class="ttc" id="aa00704_html_a7846f8631b95d1162876b4a0b9c9d34c"><div class="ttname"><a href="a00704.html#a7846f8631b95d1162876b4a0b9c9d34c">ConvertSegmentToPicoFeat</a></div><div class="ttdeci">void ConvertSegmentToPicoFeat(FPOINT *Start, FPOINT *End, FEATURE_SET FeatureSet)</div><div class="ttdef"><b>Definition:</b> <a href="a00704_source.html#l00102">picofeat.cpp:102</a></div></div>
-<div class="ttc" id="aa00611_html_a6874f1e9456afb7479b229bcb58d95a8"><div class="ttname"><a href="a00611.html#a6874f1e9456afb7479b229bcb58d95a8">PicoFeatDesc</a></div><div class="ttdeci">const TESS_API FEATURE_DESC_STRUCT PicoFeatDesc</div></div>
-<div class="ttc" id="aa02868_html_a4664d6a22a9d12f4011de4d877664c45"><div class="ttname"><a href="a02868.html#a4664d6a22a9d12f4011de4d877664c45">FEATURE_SET_STRUCT::Features</a></div><div class="ttdeci">FEATURE Features[1]</div><div class="ttdef"><b>Definition:</b> <a href="a00695_source.html#l00067">ocrfeatures.h:67</a></div></div>
-<div class="ttc" id="aa02864_html_acdddc3235f689b0d45574003fc3e3b1b"><div class="ttname"><a href="a02864.html#acdddc3235f689b0d45574003fc3e3b1b">FEATURE_STRUCT::Params</a></div><div class="ttdeci">float Params[1]</div><div class="ttdef"><b>Definition:</b> <a href="a00695_source.html#l00060">ocrfeatures.h:60</a></div></div>
-<div class="ttc" id="aa00692_html_a32a08c42617c8dd6a156c1c8d7fb2cbb"><div class="ttname"><a href="a00692.html#a32a08c42617c8dd6a156c1c8d7fb2cbb">NewFeature</a></div><div class="ttdeci">FEATURE NewFeature(const FEATURE_DESC_STRUCT *FeatureDesc)</div><div class="ttdef"><b>Definition:</b> <a href="a00692_source.html#l00077">ocrfeatures.cpp:77</a></div></div>
-<div class="ttc" id="aa02868_html_af5f8cefc59003cce4cc41164e914bd4b"><div class="ttname"><a href="a02868.html#af5f8cefc59003cce4cc41164e914bd4b">FEATURE_SET_STRUCT::NumFeatures</a></div><div class="ttdeci">uint16_t NumFeatures</div><div class="ttdef"><b>Definition:</b> <a href="a00695_source.html#l00065">ocrfeatures.h:65</a></div></div>
-<div class="ttc" id="aa00707_html_ac00e1c5d2ac3096e0928e2186aee1aaca43884de5e2e87be26f9642b50135f98a"><div class="ttname"><a href="a00707.html#ac00e1c5d2ac3096e0928e2186aee1aaca43884de5e2e87be26f9642b50135f98a">PicoFeatY</a></div><div class="ttdef"><b>Definition:</b> <a href="a00707_source.html#l00043">picofeat.h:43</a></div></div>
-<div class="ttc" id="aa02764_html_ac396edee922ba896114b00d8715dd207"><div class="ttname"><a href="a02764.html#ac396edee922ba896114b00d8715dd207">FPOINT::y</a></div><div class="ttdeci">float y</div><div class="ttdef"><b>Definition:</b> <a href="a00623_source.html#l00044">fpoint.h:44</a></div></div>
-<div class="ttc" id="aa00620_html_ab85e87f52e61d4a180dda1d1789df9f9"><div class="ttname"><a href="a00620.html#ab85e87f52e61d4a180dda1d1789df9f9">DistanceBetween</a></div><div class="ttdeci">float DistanceBetween(FPOINT A, FPOINT B)</div><div class="ttdef"><b>Definition:</b> <a href="a00620_source.html#l00028">fpoint.cpp:28</a></div></div>
-<div class="ttc" id="aa00623_html_abeec3d0313052da8c1e239e64acaf5cd"><div class="ttname"><a href="a00623.html#abeec3d0313052da8c1e239e64acaf5cd">YDelta</a></div><div class="ttdeci">#define YDelta(A, B)</div><div class="ttdef"><b>Definition:</b> <a href="a00623_source.html#l00038">fpoint.h:38</a></div></div>
-<div class="ttc" id="aa02764_html_add242df27ddbc90edf732823e38eb844"><div class="ttname"><a href="a02764.html#add242df27ddbc90edf732823e38eb844">FPOINT::x</a></div><div class="ttdeci">float x</div><div class="ttdef"><b>Definition:</b> <a href="a00623_source.html#l00044">fpoint.h:44</a></div></div>
-<div class="ttc" id="aa00620_html_af6cb732ba6e4cf3abb6be826c7b74b49"><div class="ttname"><a href="a00620.html#af6cb732ba6e4cf3abb6be826c7b74b49">NormalizedAngleFrom</a></div><div class="ttdeci">float NormalizedAngleFrom(FPOINT *Point1, FPOINT *Point2, float FullScale)</div><div class="ttdef"><b>Definition:</b> <a href="a00620_source.html#l00043">fpoint.cpp:43</a></div></div>
-<div class="ttc" id="aa00623_html_a3882f9c0c6c99c9bf796113a1524cba1"><div class="ttname"><a href="a00623.html#a3882f9c0c6c99c9bf796113a1524cba1">XDelta</a></div><div class="ttdeci">#define XDelta(A, B)</div><div class="ttdef"><b>Definition:</b> <a href="a00623_source.html#l00037">fpoint.h:37</a></div></div>
-<div class="ttc" id="aa00707_html_ac00e1c5d2ac3096e0928e2186aee1aaca9895f2baa648985ab8ee5586c1563511"><div class="ttname"><a href="a00707.html#ac00e1c5d2ac3096e0928e2186aee1aaca9895f2baa648985ab8ee5586c1563511">PicoFeatDir</a></div><div class="ttdef"><b>Definition:</b> <a href="a00707_source.html#l00043">picofeat.h:43</a></div></div>
-<div class="ttc" id="aa02864_html"><div class="ttname"><a href="a02864.html">FEATURE_STRUCT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00695_source.html#l00058">ocrfeatures.h:58</a></div></div>
-<div class="ttc" id="aa02764_html"><div class="ttname"><a href="a02764.html">FPOINT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00623_source.html#l00028">fpoint.h:28</a></div></div>
-<div class="ttc" id="aa02920_html"><div class="ttname"><a href="a02920.html">list_rec</a></div><div class="ttdef"><b>Definition:</b> <a href="a00758_source.html#l00073">oldlist.h:73</a></div></div>
-<div class="ttc" id="aa00707_html_ac00e1c5d2ac3096e0928e2186aee1aacaf28d56154a908256d7b3beb62977e2fc"><div class="ttname"><a href="a00707.html#ac00e1c5d2ac3096e0928e2186aee1aacaf28d56154a908256d7b3beb62977e2fc">PicoFeatX</a></div><div class="ttdef"><b>Definition:</b> <a href="a00707_source.html#l00043">picofeat.h:43</a></div></div>
+<div class="ttc" id="aa03298_html_a4cf6a9ce5397fc92b6b60eec881e0efc"><div class="ttname"><a href="a03298.html#a4cf6a9ce5397fc92b6b60eec881e0efc">KDNODE::Key</a></div><div class="ttdeci">float * Key</div><div class="ttdef"><b>Definition:</b> <a href="a00704_source.html#l00038">kdtree.h:38</a></div></div>
+<div class="ttc" id="aa03294_html"><div class="ttname"><a href="a03294.html">KDTreeSearch</a></div><div class="ttdef"><b>Definition:</b> <a href="a00701_source.html#l00119">kdtree.cpp:119</a></div></div>
+<div class="ttc" id="aa03314_html_a4599855199042155a25e52c0395237ce"><div class="ttname"><a href="a03314.html#a4599855199042155a25e52c0395237ce">PARAM_DESC::Circular</a></div><div class="ttdeci">bool Circular</div><div class="ttdef"><b>Definition:</b> <a href="a00746_source.html#l00042">ocrfeatures.h:42</a></div></div>
+<div class="ttc" id="aa00800_html_a9bdc0885c33bbb5b062c77b1d90e2305"><div class="ttname"><a href="a00800.html#a9bdc0885c33bbb5b062c77b1d90e2305">Emalloc</a></div><div class="ttdeci">void * Emalloc(int Size)</div><div class="ttdef"><b>Definition:</b> <a href="a00800_source.html#l00031">emalloc.cpp:31</a></div></div>
+<div class="ttc" id="aa00701_html_ac19360bcf5a256e10f0bcc726261a33d"><div class="ttname"><a href="a00701.html#ac19360bcf5a256e10f0bcc726261a33d">DistanceSquared</a></div><div class="ttdeci">float DistanceSquared(int k, PARAM_DESC *dim, float p1[], float p2[])</div><div class="ttdef"><b>Definition:</b> <a href="a00701_source.html#l00426">kdtree.cpp:426</a></div></div>
+<div class="ttc" id="aa00701_html_a518580bc5292633120eca883bedd9561"><div class="ttname"><a href="a00701.html#a518580bc5292633120eca883bedd9561">MakeKDNode</a></div><div class="ttdeci">KDNODE * MakeKDNode(KDTREE *tree, float Key[], void *Data, int Index)</div><div class="ttdef"><b>Definition:</b> <a href="a00701_source.html#l00351">kdtree.cpp:351</a></div></div>
+<div class="ttc" id="aa03302_html_a486dfb881bc360bbfbd36248bba80552"><div class="ttname"><a href="a03302.html#a486dfb881bc360bbfbd36248bba80552">KDTREE::KeyDesc</a></div><div class="ttdeci">PARAM_DESC KeyDesc[1]</div><div class="ttdef"><b>Definition:</b> <a href="a00704_source.html#l00050">kdtree.h:50</a></div></div>
+<div class="ttc" id="aa03314_html_af6aa718816c7dd55596014492979b043"><div class="ttname"><a href="a03314.html#af6aa718816c7dd55596014492979b043">PARAM_DESC::Min</a></div><div class="ttdeci">float Min</div><div class="ttdef"><b>Definition:</b> <a href="a00746_source.html#l00044">ocrfeatures.h:44</a></div></div>
+<div class="ttc" id="aa03302_html"><div class="ttname"><a href="a03302.html">KDTREE</a></div><div class="ttdef"><b>Definition:</b> <a href="a00704_source.html#l00047">kdtree.h:47</a></div></div>
+<div class="ttc" id="aa03298_html_afd5eeb76bcf3d1ba9b387e0cd4e9ce16"><div class="ttname"><a href="a03298.html#afd5eeb76bcf3d1ba9b387e0cd4e9ce16">KDNODE::Data</a></div><div class="ttdeci">void * Data</div><div class="ttdef"><b>Definition:</b> <a href="a00704_source.html#l00039">kdtree.h:39</a></div></div>
+<div class="ttc" id="aa03302_html_ab52e8a6004fc595de526dfa831c2e725"><div class="ttname"><a href="a03302.html#ab52e8a6004fc595de526dfa831c2e725">KDTREE::Root</a></div><div class="ttdeci">KDNODE Root</div><div class="ttdef"><b>Definition:</b> <a href="a00704_source.html#l00049">kdtree.h:49</a></div></div>
+<div class="ttc" id="aa00701_html_a25b5f5ed44816d6ec2d546cd8b36e33f"><div class="ttname"><a href="a00701.html#a25b5f5ed44816d6ec2d546cd8b36e33f">KDStore</a></div><div class="ttdeci">void KDStore(KDTREE *Tree, float *Key, void *Data)</div><div class="ttdef"><b>Definition:</b> <a href="a00701_source.html#l00211">kdtree.cpp:211</a></div></div>
+<div class="ttc" id="aa03298_html_a66ffa1cc4e73e45599978f8f6416e350"><div class="ttname"><a href="a03298.html#a66ffa1cc4e73e45599978f8f6416e350">KDNODE::Left</a></div><div class="ttdeci">struct KDNODE * Left</div><div class="ttdef"><b>Definition:</b> <a href="a00704_source.html#l00043">kdtree.h:43</a></div></div>
+<div class="ttc" id="aa00701_html_af3be65344ced84a11159bc0bea5de60f"><div class="ttname"><a href="a00701.html#af3be65344ced84a11159bc0bea5de60f">InsertNodes</a></div><div class="ttdeci">void InsertNodes(KDTREE *tree, KDNODE *nodes)</div><div class="ttdef"><b>Definition:</b> <a href="a00701_source.html#l00521">kdtree.cpp:521</a></div></div>
+<div class="ttc" id="aa03314_html_a67c612d52e28b862b39d3f66b16e67c3"><div class="ttname"><a href="a03314.html#a67c612d52e28b862b39d3f66b16e67c3">PARAM_DESC::Max</a></div><div class="ttdeci">float Max</div><div class="ttdef"><b>Definition:</b> <a href="a00746_source.html#l00045">ocrfeatures.h:45</a></div></div>
+<div class="ttc" id="aa00701_html_a322efe6a34504778ebc6b3e2264789d5"><div class="ttname"><a href="a00701.html#a322efe6a34504778ebc6b3e2264789d5">MAXSEARCH</a></div><div class="ttdeci">#define MAXSEARCH</div><div class="ttdef"><b>Definition:</b> <a href="a00701_source.html#l00035">kdtree.cpp:35</a></div></div>
+<div class="ttc" id="aa03314_html"><div class="ttname"><a href="a03314.html">PARAM_DESC</a></div><div class="ttdef"><b>Definition:</b> <a href="a00746_source.html#l00041">ocrfeatures.h:41</a></div></div>
+<div class="ttc" id="aa03314_html_a7092c8d39e65848962df620ed6adb69c"><div class="ttname"><a href="a03314.html#a7092c8d39e65848962df620ed6adb69c">PARAM_DESC::NonEssential</a></div><div class="ttdeci">bool NonEssential</div><div class="ttdef"><b>Definition:</b> <a href="a00746_source.html#l00043">ocrfeatures.h:43</a></div></div>
+<div class="ttc" id="aa00701_html_a59f352b6bc9971b0d7502d31060f7c44"><div class="ttname"><a href="a00701.html#a59f352b6bc9971b0d7502d31060f7c44">FreeSubTree</a></div><div class="ttdeci">void FreeSubTree(KDNODE *sub_tree)</div><div class="ttdef"><b>Definition:</b> <a href="a00701_source.html#l00531">kdtree.cpp:531</a></div></div>
+<div class="ttc" id="aa00701_html_a5a33bfaa4d9dcac7939f99f721bf61b9"><div class="ttname"><a href="a00701.html#a5a33bfaa4d9dcac7939f99f721bf61b9">NodeFound</a></div><div class="ttdeci">#define NodeFound(N, K, D)</div><div class="ttdef"><b>Definition:</b> <a href="a00701_source.html#l00029">kdtree.cpp:29</a></div></div>
+<div class="ttc" id="aa00701_html_a8279da9e706be04cf32f1c4172cf3c11"><div class="ttname"><a href="a00701.html#a8279da9e706be04cf32f1c4172cf3c11">Walk</a></div><div class="ttdeci">void Walk(KDTREE *tree, void_proc action, void *context, KDNODE *sub_tree, int32_t level)</div><div class="ttdef"><b>Definition:</b> <a href="a00701_source.html#l00511">kdtree.cpp:511</a></div></div>
+<div class="ttc" id="aa03298_html_a699e9e67472e12f86bbb5c1effdb4fa3"><div class="ttname"><a href="a03298.html#a699e9e67472e12f86bbb5c1effdb4fa3">KDNODE::Right</a></div><div class="ttdeci">struct KDNODE * Right</div><div class="ttdef"><b>Definition:</b> <a href="a00704_source.html#l00044">kdtree.h:44</a></div></div>
+<div class="ttc" id="aa03298_html_a06977c7752b157540446329009ef6595"><div class="ttname"><a href="a03298.html#a06977c7752b157540446329009ef6595">KDNODE::RightBranch</a></div><div class="ttdeci">float RightBranch</div><div class="ttdef"><b>Definition:</b> <a href="a00704_source.html#l00042">kdtree.h:42</a></div></div>
+<div class="ttc" id="aa03298_html_a4e6aa5abd6c7207585010298b3fbad34"><div class="ttname"><a href="a03298.html#a4e6aa5abd6c7207585010298b3fbad34">KDNODE::LeftBranch</a></div><div class="ttdeci">float LeftBranch</div><div class="ttdef"><b>Definition:</b> <a href="a00704_source.html#l00041">kdtree.h:41</a></div></div>
+<div class="ttc" id="aa03298_html_a615628671cc352ae7071104e0fcf0701"><div class="ttname"><a href="a03298.html#a615628671cc352ae7071104e0fcf0701">KDNODE::BranchPoint</a></div><div class="ttdeci">float BranchPoint</div><div class="ttdef"><b>Definition:</b> <a href="a00704_source.html#l00040">kdtree.h:40</a></div></div>
+<div class="ttc" id="aa00701_html_adbeb54abd64e764a1b38688776d36f77"><div class="ttname"><a href="a00701.html#adbeb54abd64e764a1b38688776d36f77">Magnitude</a></div><div class="ttdeci">#define Magnitude(X)</div><div class="ttdef"><b>Definition:</b> <a href="a00701_source.html#l00028">kdtree.cpp:28</a></div></div>
+<div class="ttc" id="aa03298_html"><div class="ttname"><a href="a03298.html">KDNODE</a></div><div class="ttdef"><b>Definition:</b> <a href="a00704_source.html#l00037">kdtree.h:37</a></div></div>
+<div class="ttc" id="aa01827_html_ae88f73f69c3427ef726b7470ed95cccc"><div class="ttname"><a href="a01827.html#ae88f73f69c3427ef726b7470ed95cccc">tesstrain_utils.action</a></div><div class="ttdeci">action</div><div class="ttdef"><b>Definition:</b> <a href="a01397_source.html#l00159">tesstrain_utils.py:159</a></div></div>
+<div class="ttc" id="aa00806_html_a1d8af9328f064a9df6d6f88336dd054e"><div class="ttname"><a href="a00806.html#a1d8af9328f064a9df6d6f88336dd054e">search</a></div><div class="ttdeci">LIST search(LIST list, void *key, int_compare is_equal)</div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00202">oldlist.cpp:202</a></div></div>
+<div class="ttc" id="aa00701_html_a8904460bfbb91685971ab30c3025e0c5"><div class="ttname"><a href="a00701.html#a8904460bfbb91685971ab30c3025e0c5">MINSEARCH</a></div><div class="ttdeci">#define MINSEARCH</div><div class="ttdef"><b>Definition:</b> <a href="a00701_source.html#l00034">kdtree.cpp:34</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b8f5fb7b736ee5431a221bc7b817d6e0.html">classify</a></li><li class="navelem"><a class="el" href="a00704.html">picofeat.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b8f5fb7b736ee5431a221bc7b817d6e0.html">classify</a></li><li class="navelem"><a class="el" href="a00704.html">kdtree.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

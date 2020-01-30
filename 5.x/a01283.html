@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/training/mastertrainer.cpp File Reference</title>
+<title>tesseract: /tesseract/src/training/icuerrorcode.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,51 +87,27 @@ $(document).ready(function(){initNavTree('a01283.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle">
-<div class="title">mastertrainer.cpp File Reference</div>  </div>
+<div class="title">icuerrorcode.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="a01286_source.html">mastertrainer.h</a>&quot;</code><br />
-<code>#include &lt;cmath&gt;</code><br />
-<code>#include &lt;ctime&gt;</code><br />
-<code>#include &quot;allheaders.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00221_source.html">boxread.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00590_source.html">classify.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a01223_source.html">errorcounter.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00611_source.html">featdefs.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a01322_source.html">sampleiterator.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00719_source.html">shapeclassifier.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00725_source.html">shapetable.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a01424_source.html">svmnode.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00512_source.html">scanutils.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a01286_source.html">icuerrorcode.h</a>&quot;</code><br />
 </div>
 <p><a href="a01283_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a01539"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html">tesseract</a></td></tr>
+<tr class="memitem:a01818"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html">tesseract</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:a6dc1c791f04726f9cc345b54b85222b9"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#a6dc1c791f04726f9cc345b54b85222b9">tesseract::kMinClusteredShapes</a> = 1</td></tr>
-<tr class="separator:a6dc1c791f04726f9cc345b54b85222b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93d3ba882abd48b578f7db93e8a4e6e9"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#a93d3ba882abd48b578f7db93e8a4e6e9">tesseract::kMaxUnicharsPerCluster</a> = 2000</td></tr>
-<tr class="separator:a93d3ba882abd48b578f7db93e8a4e6e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a80aa3c385749b5df58ac015ba00e9f"><td class="memItemLeft" align="right" valign="top">const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#a5a80aa3c385749b5df58ac015ba00e9f">tesseract::kFontMergeDistance</a> = 0.025</td></tr>
-<tr class="separator:a5a80aa3c385749b5df58ac015ba00e9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a765cba391d1d3fc666802038fce31c85"><td class="memItemLeft" align="right" valign="top">const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#a765cba391d1d3fc666802038fce31c85">tesseract::kInfiniteDist</a> = 999.0f</td></tr>
-<tr class="separator:a765cba391d1d3fc666802038fce31c85"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7c7ae07dd2a999045cb78bf7ff8dcbc7.html">training</a></li><li class="navelem"><a class="el" href="a01283.html">mastertrainer.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7c7ae07dd2a999045cb78bf7ff8dcbc7.html">training</a></li><li class="navelem"><a class="el" href="a01283.html">icuerrorcode.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

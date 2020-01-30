@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/classify/intmatcher.h File Reference</title>
+<title>tesseract: /tesseract/src/classify/classify.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,121 +89,52 @@ $(document).ready(function(){initNavTree('a00641.html','');});
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#define-members">Macros</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#enum-members">Enumerations</a>  </div>
   <div class="headertitle">
-<div class="title">intmatcher.h File Reference</div>  </div>
+<div class="title">classify.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="a00503_source.html">params.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00647_source.html">intproto.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a00626_source.html">adaptive.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00284_source.html">ccstruct.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00830_source.html">dict.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00662_source.html">featdefs.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00314_source.html">fontinfo.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00320_source.html">imagedata.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00686_source.html">intfx.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00692_source.html">intmatcher.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00344_source.html">normalis.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00425_source.html">ratngs.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00746_source.html">ocrfeatures.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00608_source.html">unicity_table.h</a>&quot;</code><br />
 </div>
 <p><a href="a00641_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02780.html">CP_RESULT_STRUCT</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02784.html">ScratchEvidence</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02788.html">IntegerMatcher</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03166.html">tesseract::Classify</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a01539"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html">tesseract</a></td></tr>
+<tr class="memitem:a01818"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html">tesseract</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:a3698359e38298fe5dce86d20443acd3f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00641.html#a3698359e38298fe5dce86d20443acd3f">SE_TABLE_BITS</a>&#160;&#160;&#160;9</td></tr>
-<tr class="separator:a3698359e38298fe5dce86d20443acd3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a81f6021dc96b06bb0683c605b77a1b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00641.html#a1a81f6021dc96b06bb0683c605b77a1b">SE_TABLE_SIZE</a>&#160;&#160;&#160;512</td></tr>
-<tr class="separator:a1a81f6021dc96b06bb0683c605b77a1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:a5e4352c88795fcbc3f1ae44e9d94490c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00641.html#a5e4352c88795fcbc3f1ae44e9d94490c">disable_character_fragments</a> = false</td></tr>
-<tr class="separator:a5e4352c88795fcbc3f1ae44e9d94490c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe4b8f9ecb4595e800850f646935045b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00641.html#afe4b8f9ecb4595e800850f646935045b">classify_integer_matcher_multiplier</a> = 10</td></tr>
-<tr class="separator:afe4b8f9ecb4595e800850f646935045b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:afe12112c1ca56d41c919d0f18dfdf240"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#afe12112c1ca56d41c919d0f18dfdf240">tesseract::CharSegmentationType</a> { <a class="el" href="a01818.html#afe12112c1ca56d41c919d0f18dfdf240af7f038dab34772b9ddb631d46aa4126a">tesseract::CST_FRAGMENT</a>, 
+<a class="el" href="a01818.html#afe12112c1ca56d41c919d0f18dfdf240ab74e41d8efe1a9beae832eb1652096f5">tesseract::CST_WHOLE</a>, 
+<a class="el" href="a01818.html#afe12112c1ca56d41c919d0f18dfdf240a9395c1832262d72b28dd6461c334f207">tesseract::CST_IMPROPER</a>, 
+<a class="el" href="a01818.html#afe12112c1ca56d41c919d0f18dfdf240a9757169f767169fe9fea1f62ab9ba17b">tesseract::CST_NGRAM</a>
+ }</td></tr>
+<tr class="separator:afe12112c1ca56d41c919d0f18dfdf240"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a3698359e38298fe5dce86d20443acd3f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3698359e38298fe5dce86d20443acd3f">&#9670;&nbsp;</a></span>SE_TABLE_BITS</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define SE_TABLE_BITS&#160;&#160;&#160;9</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<hr  />
- <h2><a class="anchor" id="autotoc_md14"></a>
-Public Function Prototypes</h2>
-
-<p class="definition">Definition at line <a class="el" href="a00641_source.html#l00054">54</a> of file <a class="el" href="a00641_source.html">intmatcher.h</a>.</p>
-
-</div>
-</div>
-<a id="a1a81f6021dc96b06bb0683c605b77a1b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1a81f6021dc96b06bb0683c605b77a1b">&#9670;&nbsp;</a></span>SE_TABLE_SIZE</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define SE_TABLE_SIZE&#160;&#160;&#160;512</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00641_source.html#l00055">55</a> of file <a class="el" href="a00641_source.html">intmatcher.h</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="afe4b8f9ecb4595e800850f646935045b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afe4b8f9ecb4595e800850f646935045b">&#9670;&nbsp;</a></span>classify_integer_matcher_multiplier</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int classify_integer_matcher_multiplier = 10</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>"Integer Matcher Multiplier  0-255:   " <br  />
- </p>
-
-</div>
-</div>
-<a id="a5e4352c88795fcbc3f1ae44e9d94490c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5e4352c88795fcbc3f1ae44e9d94490c">&#9670;&nbsp;</a></span>disable_character_fragments</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool disable_character_fragments = false</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>"Do not include character fragments in the" " results of the classifier" <br  />
- </p>
-
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b8f5fb7b736ee5431a221bc7b817d6e0.html">classify</a></li><li class="navelem"><a class="el" href="a00641.html">intmatcher.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b8f5fb7b736ee5431a221bc7b817d6e0.html">classify</a></li><li class="navelem"><a class="el" href="a00641.html">classify.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

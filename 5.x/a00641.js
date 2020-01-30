@@ -1,10 +1,10 @@
 var a00641 =
 [
-    [ "CP_RESULT_STRUCT", "a02780.html", "a02780" ],
-    [ "ScratchEvidence", "a02784.html", "a02784" ],
-    [ "IntegerMatcher", "a02788.html", "a02788" ],
-    [ "SE_TABLE_BITS", "a00641.html#a3698359e38298fe5dce86d20443acd3f", null ],
-    [ "SE_TABLE_SIZE", "a00641.html#a1a81f6021dc96b06bb0683c605b77a1b", null ],
-    [ "classify_integer_matcher_multiplier", "a00641.html#afe4b8f9ecb4595e800850f646935045b", null ],
-    [ "disable_character_fragments", "a00641.html#a5e4352c88795fcbc3f1ae44e9d94490c", null ]
+    [ "Classify", "a03166.html", "a03166" ],
+    [ "CharSegmentationType", "a00641.html#afe12112c1ca56d41c919d0f18dfdf240", [
+      [ "CST_FRAGMENT", "a00641.html#afe12112c1ca56d41c919d0f18dfdf240af7f038dab34772b9ddb631d46aa4126a", null ],
+      [ "CST_WHOLE", "a00641.html#afe12112c1ca56d41c919d0f18dfdf240ab74e41d8efe1a9beae832eb1652096f5", null ],
+      [ "CST_IMPROPER", "a00641.html#afe12112c1ca56d41c919d0f18dfdf240a9395c1832262d72b28dd6461c334f207", null ],
+      [ "CST_NGRAM", "a00641.html#afe12112c1ca56d41c919d0f18dfdf240a9757169f767169fe9fea1f62ab9ba17b", null ]
+    ] ]
 ];

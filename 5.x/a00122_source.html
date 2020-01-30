@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/ccmain/pagewalk.cpp Source File</title>
+<title>tesseract: /tesseract/src/ccmain/control.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,16 +87,16 @@ $(document).ready(function(){initNavTree('a00122_source.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">pagewalk.cpp</div>  </div>
+<div class="title">control.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="a00122.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**********************************************************************</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * File:        pagewalk.cpp  (Formerly walkers.c)</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * Description: Block list processors</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * Author:      Phil Cheatle</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * Created:     Thu Oct 10 16:25:24 BST 1991</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * File:        control.h  (Formerly control.h)</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * Description: Module-independent matcher controller.</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * Author:      Ray Smith</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * Created:     Thu Apr 23 11:09:58 BST 1992</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> * (C) Copyright 1991, Hewlett-Packard Ltd.</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> * (C) Copyright 1992, Hewlett-Packard Ltd.</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> ** Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> ** you may not use this file except in compliance with the License.</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> ** You may obtain a copy of the License at</span></div>
@@ -109,43 +109,34 @@ $(document).ready(function(){initNavTree('a00122_source.html','');});
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"> **********************************************************************/</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00323.html">pageres.h</a>&quot;</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00173.html">tesseractclass.h</a>&quot;</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">namespace </span><a class="code" href="a01539.html">tesseract</a> {</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02200.html#a8b2de7d7c968f60246626f9271f89793">Tesseract::process_selected_words</a>(</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <a class="code" href="a02360.html">PAGE_RES</a>* page_res, <span class="comment">// blocks to check</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <a class="code" href="a02440.html">TBOX</a>&amp; selection_box,</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keywordtype">bool</span> (<a class="code" href="a02200.html">tesseract::Tesseract</a>::* word_processor)(<a class="code" href="a02376.html">PAGE_RES_IT</a>* pr_it)) {</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <span class="keywordflow">for</span> (<a class="code" href="a02376.html">PAGE_RES_IT</a> page_res_it(page_res); page_res_it.<a class="code" href="a02376.html#a6cdcdaa4b0b1250ab7e14760d4b5f113">word</a>() != <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;       page_res_it.forward()) {</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="a02468.html">WERD</a>* word = page_res_it.word()-&gt;word;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordflow">if</span> (word-&gt;<a class="code" href="a02468.html#ad35a2fd78555195a3dedcdd01094d0d4">bounding_box</a>().<a class="code" href="a02440.html#a7c8a66b8b086ecbce4a605e446bf8c1f">overlap</a>(selection_box)) {</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;      <span class="keywordflow">if</span> (!(this-&gt;*word_processor)(&amp;page_res_it))</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    }</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  }</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;}</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;}  <span class="comment">// namespace tesseract</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#ifndef CONTROL_H</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#define CONTROL_H</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eee">   27</a></span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">enum</span> <a class="code" href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eee">ACCEPTABLE_WERD_TYPE</a></div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eeeaab0741a5a5ff9757ca343af255353ba0">   29</a></span>&#160;{</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eeeaf8e947b78fa9ddbd1172c0157a3516ff">   30</a></span>&#160;  <a class="code" href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eeeaab0741a5a5ff9757ca343af255353ba0">AC_UNACCEPTABLE</a>,               </div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eeead58aa8857ae2a3ec6a90b29a849700d7">   31</a></span>&#160;  <a class="code" href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eeeaf8e947b78fa9ddbd1172c0157a3516ff">AC_LOWER_CASE</a>,                 </div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eeea71786bea8ae4bacc2670610dde24e707">   32</a></span>&#160;  <a class="code" href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eeead58aa8857ae2a3ec6a90b29a849700d7">AC_UPPER_CASE</a>,                 </div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eeea7bae128b501c1b34213e7ce6b17f7988">   33</a></span>&#160;  <a class="code" href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eeea71786bea8ae4bacc2670610dde24e707">AC_INITIAL_CAP</a>,                </div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eeea6d37e3775faa628c72b7953f89caeb22">   34</a></span>&#160;  <a class="code" href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eeea7bae128b501c1b34213e7ce6b17f7988">AC_LC_ABBREV</a>,                  </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <a class="code" href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eeea6d37e3775faa628c72b7953f89caeb22">AC_UC_ABBREV</a>                   </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;};</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa02360_html"><div class="ttname"><a href="a02360.html">PAGE_RES</a></div><div class="ttdef"><b>Definition:</b> <a href="a00323_source.html#l00073">pageres.h:73</a></div></div>
-<div class="ttc" id="aa02468_html_ad35a2fd78555195a3dedcdd01094d0d4"><div class="ttname"><a href="a02468.html#ad35a2fd78555195a3dedcdd01094d0d4">WERD::bounding_box</a></div><div class="ttdeci">TBOX bounding_box() const</div><div class="ttdef"><b>Definition:</b> <a href="a00413_source.html#l00147">werd.cpp:147</a></div></div>
-<div class="ttc" id="aa02200_html_a8b2de7d7c968f60246626f9271f89793"><div class="ttname"><a href="a02200.html#a8b2de7d7c968f60246626f9271f89793">tesseract::Tesseract::process_selected_words</a></div><div class="ttdeci">void process_selected_words(PAGE_RES *page_res, TBOX &amp;selection_box, bool(tesseract::Tesseract::*word_processor)(PAGE_RES_IT *pr_it))</div><div class="ttdef"><b>Definition:</b> <a href="a00122_source.html#l00045">pagewalk.cpp:45</a></div></div>
-<div class="ttc" id="aa02376_html"><div class="ttname"><a href="a02376.html">PAGE_RES_IT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00323_source.html#l00668">pageres.h:668</a></div></div>
-<div class="ttc" id="aa01539_html"><div class="ttname"><a href="a01539.html">tesseract</a></div><div class="ttdef"><b>Definition:</b> <a href="a00002_source.html#l00025">altorenderer.cpp:25</a></div></div>
-<div class="ttc" id="aa02468_html"><div class="ttname"><a href="a02468.html">WERD</a></div><div class="ttdef"><b>Definition:</b> <a href="a00416_source.html#l00055">werd.h:55</a></div></div>
-<div class="ttc" id="aa02440_html"><div class="ttname"><a href="a02440.html">TBOX</a></div><div class="ttdef"><b>Definition:</b> <a href="a00380_source.html#l00033">rect.h:33</a></div></div>
-<div class="ttc" id="aa02376_html_a6cdcdaa4b0b1250ab7e14760d4b5f113"><div class="ttname"><a href="a02376.html#a6cdcdaa4b0b1250ab7e14760d4b5f113">PAGE_RES_IT::word</a></div><div class="ttdeci">WERD_RES * word() const</div><div class="ttdef"><b>Definition:</b> <a href="a00323_source.html#l00748">pageres.h:748</a></div></div>
-<div class="ttc" id="aa00173_html"><div class="ttname"><a href="a00173.html">tesseractclass.h</a></div></div>
-<div class="ttc" id="aa00323_html"><div class="ttname"><a href="a00323.html">pageres.h</a></div></div>
-<div class="ttc" id="aa02200_html"><div class="ttname"><a href="a02200.html">tesseract::Tesseract</a></div><div class="ttdef"><b>Definition:</b> <a href="a00173_source.html#l00172">tesseractclass.h:172</a></div></div>
-<div class="ttc" id="aa02440_html_a7c8a66b8b086ecbce4a605e446bf8c1f"><div class="ttname"><a href="a02440.html#a7c8a66b8b086ecbce4a605e446bf8c1f">TBOX::overlap</a></div><div class="ttdeci">bool overlap(const TBOX &amp;box) const</div><div class="ttdef"><b>Definition:</b> <a href="a00380_source.html#l00350">rect.h:350</a></div></div>
+<div class="ttc" id="aa00122_html_af9ff5a7d7a1b9eeea7ce4106bffa7eeea7bae128b501c1b34213e7ce6b17f7988"><div class="ttname"><a href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eeea7bae128b501c1b34213e7ce6b17f7988">AC_LC_ABBREV</a></div><div class="ttdoc">a.b.c.</div><div class="ttdef"><b>Definition:</b> <a href="a00122_source.html#l00033">control.h:33</a></div></div>
+<div class="ttc" id="aa00122_html_af9ff5a7d7a1b9eeea7ce4106bffa7eee"><div class="ttname"><a href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eee">ACCEPTABLE_WERD_TYPE</a></div><div class="ttdeci">ACCEPTABLE_WERD_TYPE</div><div class="ttdef"><b>Definition:</b> <a href="a00122_source.html#l00027">control.h:27</a></div></div>
+<div class="ttc" id="aa00122_html_af9ff5a7d7a1b9eeea7ce4106bffa7eeea6d37e3775faa628c72b7953f89caeb22"><div class="ttname"><a href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eeea6d37e3775faa628c72b7953f89caeb22">AC_UC_ABBREV</a></div><div class="ttdoc">A.B.C.</div><div class="ttdef"><b>Definition:</b> <a href="a00122_source.html#l00034">control.h:34</a></div></div>
+<div class="ttc" id="aa00122_html_af9ff5a7d7a1b9eeea7ce4106bffa7eeead58aa8857ae2a3ec6a90b29a849700d7"><div class="ttname"><a href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eeead58aa8857ae2a3ec6a90b29a849700d7">AC_UPPER_CASE</a></div><div class="ttdoc">ALL upper case.</div><div class="ttdef"><b>Definition:</b> <a href="a00122_source.html#l00031">control.h:31</a></div></div>
+<div class="ttc" id="aa00122_html_af9ff5a7d7a1b9eeea7ce4106bffa7eeeaf8e947b78fa9ddbd1172c0157a3516ff"><div class="ttname"><a href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eeeaf8e947b78fa9ddbd1172c0157a3516ff">AC_LOWER_CASE</a></div><div class="ttdoc">ALL lower case.</div><div class="ttdef"><b>Definition:</b> <a href="a00122_source.html#l00030">control.h:30</a></div></div>
+<div class="ttc" id="aa00122_html_af9ff5a7d7a1b9eeea7ce4106bffa7eeeaab0741a5a5ff9757ca343af255353ba0"><div class="ttname"><a href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eeeaab0741a5a5ff9757ca343af255353ba0">AC_UNACCEPTABLE</a></div><div class="ttdoc">Unacceptable word.</div><div class="ttdef"><b>Definition:</b> <a href="a00122_source.html#l00029">control.h:29</a></div></div>
+<div class="ttc" id="aa00122_html_af9ff5a7d7a1b9eeea7ce4106bffa7eeea71786bea8ae4bacc2670610dde24e707"><div class="ttname"><a href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eeea71786bea8ae4bacc2670610dde24e707">AC_INITIAL_CAP</a></div><div class="ttdoc">ALL but initial lc.</div><div class="ttdef"><b>Definition:</b> <a href="a00122_source.html#l00032">control.h:32</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_43edf6714a3bf7b9dbcd0e0e50a1a1a7.html">ccmain</a></li><li class="navelem"><a class="el" href="a00122.html">pagewalk.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:14 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_43edf6714a3bf7b9dbcd0e0e50a1a1a7.html">ccmain</a></li><li class="navelem"><a class="el" href="a00122.html">control.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:19 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/classify/float2int.cpp Source File</title>
+<title>tesseract: /tesseract/src/ccutil/unicodes.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,15 +87,15 @@ $(document).ready(function(){initNavTree('a00614_source.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">float2int.cpp</div>  </div>
+<div class="title">unicodes.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00614.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/******************************************************************************</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> ** Filename:    float2int.cpp</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> ** Purpose:     Routines for converting float features to int features</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> ** Author:      Dan Johnson</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> **</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> ** (c) Copyright Hewlett-Packard Company, 1988.</span></div>
+<a href="a00614.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**********************************************************************</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * File:        unicodes.h</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * Description: Unicode related machinery</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * Author:      David Eger</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> * (C) Copyright 2011, Google, Inc.</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> ** Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> ** you may not use this file except in compliance with the License.</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> ** You may obtain a copy of the License at</span></div>
@@ -105,109 +105,34 @@ $(document).ready(function(){initNavTree('a00614_source.html','');});
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> ** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> ** See the License for the specific language governing permissions and</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> ** limitations under the License.</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> ******************************************************************************/</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">/*-----------------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">          Include Files and Type Defines</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">-----------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00617.html">float2int.h</a>&quot;</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00689.html">normmatch.h</a>&quot;</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00671.html">mfoutline.h</a>&quot;</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00590.html">classify.h</a>&quot;</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &lt;tesseract/helpers.h&gt;</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00707.html">picofeat.h</a>&quot;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="a00614.html#a507d2964a00ad9a1d82e6c5ae21720be">   27</a></span>&#160;<span class="preprocessor">#define MAX_INT_CHAR_NORM (INT_CHAR_NORM_RANGE - 1)</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> **********************************************************************/</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#ifndef TESSERACT_CCUTIL_UNICODES_H_</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#define TESSERACT_CCUTIL_UNICODES_H_</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">namespace </span><a class="code" href="a01818.html">tesseract</a> {</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">extern</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* <span class="keyword">const</span> <a class="code" href="a01818.html#a3187702bdaeea23471bcd19386c60325">kLRM</a>;  </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">extern</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* <span class="keyword">const</span> <a class="code" href="a01818.html#a934f6d23c9a174e3efce87c78334885b">kRLM</a>;  </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">extern</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* <span class="keyword">const</span> <a class="code" href="a01818.html#ac7b2d022c7d14c5b97b06266d380ffd9">kRLE</a>;  </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">extern</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* <span class="keyword">const</span> <a class="code" href="a01818.html#a449a1a336e8ce20dd079c8359dd33999">kPDF</a>;  </div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">/*-----------------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">              Public Code</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">-----------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">namespace </span><a class="code" href="a01539.html">tesseract</a> {</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="a02708.html#a6067009a4a1b6f59d8c247b940de79bb">   44</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02708.html#a6067009a4a1b6f59d8c247b940de79bb">Classify::ClearCharNormArray</a>(uint8_t* char_norm_array) {</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  memset(char_norm_array, 0, <span class="keyword">sizeof</span>(*char_norm_array) * <a class="code" href="a02492.html#a69c5179ac5f10a24f3f97e16ca09460f">unicharset</a>.<a class="code" href="a02660.html#adb332692009836a2d89e5fdf63f9765f">size</a>());</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;}                                <span class="comment">/* ClearCharNormArray */</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="a02708.html#ac3c61907f0a19e9d9362bf95c4f5aaa4">   62</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02708.html#ac3c61907f0a19e9d9362bf95c4f5aaa4">Classify::ComputeIntCharNormArray</a>(<span class="keyword">const</span> <a class="code" href="a02864.html">FEATURE_STRUCT</a>&amp; norm_feature,</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                                       uint8_t* char_norm_array) {</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="a02492.html#a69c5179ac5f10a24f3f97e16ca09460f">unicharset</a>.<a class="code" href="a02660.html#adb332692009836a2d89e5fdf63f9765f">size</a>(); i++) {</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">if</span> (i &lt; PreTrainedTemplates-&gt;NumClasses) {</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;      <span class="keywordtype">int</span> norm_adjust = static_cast&lt;int&gt;(<a class="code" href="a00647.html#a5a763027f420d44c110f0887f297259c">INT_CHAR_NORM_RANGE</a> *</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <a class="code" href="a02708.html#a6ada4fb19fc39913901a09cf7e954b0f">ComputeNormMatch</a>(i, norm_feature, <span class="keyword">false</span>));</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;      char_norm_array[i] = ClipToRange(norm_adjust, 0, <a class="code" href="a00614.html#a507d2964a00ad9a1d82e6c5ae21720be">MAX_INT_CHAR_NORM</a>);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;      <span class="comment">// Classes with no templates (eg. ambigs &amp; ligatures) default</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;      <span class="comment">// to worst match.</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;      char_norm_array[i] = <a class="code" href="a00614.html#a507d2964a00ad9a1d82e6c5ae21720be">MAX_INT_CHAR_NORM</a>;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    }</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  }</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;}                                <span class="comment">/* ComputeIntCharNormArray */</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="a02708.html#ae1f3fc88bf28a4a169273bcf2515610e">   90</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02708.html#ae1f3fc88bf28a4a169273bcf2515610e">Classify::ComputeIntFeatures</a>(<a class="code" href="a02868.html">FEATURE_SET</a> Features,</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                                  <a class="code" href="a00647.html#a544a6c7d78d215e9a4da202daecfeb52">INT_FEATURE_ARRAY</a> IntFeatures) {</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  <span class="keywordtype">float</span> YShift;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  <span class="keywordflow">if</span> (<a class="code" href="a02708.html#aa92ef2f6a1f0e726d576a59644c3cc63">classify_norm_method</a> == <a class="code" href="a00671.html#a2a4b69f9a2827dc98bc4cbc233118865a83297de004f4e58b9be2108c6cd08a23">baseline</a>)</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    YShift = <a class="code" href="a00617.html#a0cd5a36a70bcf28d6727fe56e419b5a2">BASELINE_Y_SHIFT</a>;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    YShift = <a class="code" href="a00647.html#abd4c49783ccd23c297ef5650ccce9c9c">Y_SHIFT</a>;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> Fid = 0; Fid &lt; Features-&gt;<a class="code" href="a02868.html#af5f8cefc59003cce4cc41164e914bd4b">NumFeatures</a>; Fid++) {</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <a class="code" href="a02864.html">FEATURE</a> Feature = Features-&gt;<a class="code" href="a02868.html#a4664d6a22a9d12f4011de4d877664c45">Features</a>[Fid];</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    IntFeatures[Fid].X =</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <a class="code" href="a00644.html#a3d2c25bcd44ab38e471cbb4fdb657579">Bucket8For</a>(Feature-&gt;<a class="code" href="a02864.html#acdddc3235f689b0d45574003fc3e3b1b">Params</a>[<a class="code" href="a00707.html#ac00e1c5d2ac3096e0928e2186aee1aacaf28d56154a908256d7b3beb62977e2fc">PicoFeatX</a>], <a class="code" href="a00647.html#a7c72e90cfafe9834907d05ddf55bff09">X_SHIFT</a>, <a class="code" href="a00617.html#ae30a299d1150890d3f3606094fbf1169">INT_FEAT_RANGE</a>);</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    IntFeatures[Fid].Y =</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        <a class="code" href="a00644.html#a3d2c25bcd44ab38e471cbb4fdb657579">Bucket8For</a>(Feature-&gt;<a class="code" href="a02864.html#acdddc3235f689b0d45574003fc3e3b1b">Params</a>[<a class="code" href="a00707.html#ac00e1c5d2ac3096e0928e2186aee1aaca43884de5e2e87be26f9642b50135f98a">PicoFeatY</a>], YShift, <a class="code" href="a00617.html#ae30a299d1150890d3f3606094fbf1169">INT_FEAT_RANGE</a>);</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    IntFeatures[Fid].Theta = <a class="code" href="a00644.html#a8cebc325d67fc72eb4c30dafd9900243">CircBucketFor</a>(Feature-&gt;<a class="code" href="a02864.html#acdddc3235f689b0d45574003fc3e3b1b">Params</a>[<a class="code" href="a00707.html#ac00e1c5d2ac3096e0928e2186aee1aaca9895f2baa648985ab8ee5586c1563511">PicoFeatDir</a>],</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                                           <a class="code" href="a00647.html#a0be004c4069c9a09479eef2955f1097e">ANGLE_SHIFT</a>, <a class="code" href="a00617.html#ae30a299d1150890d3f3606094fbf1169">INT_FEAT_RANGE</a>);</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    IntFeatures[Fid].CP_misses = 0;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;  }</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;}                                <span class="comment">/* ComputeIntFeatures */</span></div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;}  <span class="comment">// namespace tesseract</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;}  <span class="comment">// namespace</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#endif  // TESSERACT_CCUTIL_UNICODES_H_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa00647_html_a5a763027f420d44c110f0887f297259c"><div class="ttname"><a href="a00647.html#a5a763027f420d44c110f0887f297259c">INT_CHAR_NORM_RANGE</a></div><div class="ttdeci">#define INT_CHAR_NORM_RANGE</div><div class="ttdef"><b>Definition:</b> <a href="a00647_source.html#l00129">intproto.h:129</a></div></div>
-<div class="ttc" id="aa00644_html_a3d2c25bcd44ab38e471cbb4fdb657579"><div class="ttname"><a href="a00644.html#a3d2c25bcd44ab38e471cbb4fdb657579">Bucket8For</a></div><div class="ttdeci">uint8_t Bucket8For(float param, float offset, int num_buckets)</div><div class="ttdef"><b>Definition:</b> <a href="a00644_source.html#l00417">intproto.cpp:417</a></div></div>
-<div class="ttc" id="aa02492_html_a69c5179ac5f10a24f3f97e16ca09460f"><div class="ttname"><a href="a02492.html#a69c5179ac5f10a24f3f97e16ca09460f">tesseract::CCUtil::unicharset</a></div><div class="ttdeci">UNICHARSET unicharset</div><div class="ttdef"><b>Definition:</b> <a href="a00437_source.html#l00057">ccutil.h:57</a></div></div>
-<div class="ttc" id="aa02660_html_adb332692009836a2d89e5fdf63f9765f"><div class="ttname"><a href="a02660.html#adb332692009836a2d89e5fdf63f9765f">UNICHARSET::size</a></div><div class="ttdeci">int size() const</div><div class="ttdef"><b>Definition:</b> <a href="a00554_source.html#l00341">unicharset.h:341</a></div></div>
-<div class="ttc" id="aa00617_html_ae30a299d1150890d3f3606094fbf1169"><div class="ttname"><a href="a00617.html#ae30a299d1150890d3f3606094fbf1169">INT_FEAT_RANGE</a></div><div class="ttdeci">#define INT_FEAT_RANGE</div><div class="ttdef"><b>Definition:</b> <a href="a00617_source.html#l00026">float2int.h:26</a></div></div>
-<div class="ttc" id="aa00617_html"><div class="ttname"><a href="a00617.html">float2int.h</a></div></div>
-<div class="ttc" id="aa02708_html_a6067009a4a1b6f59d8c247b940de79bb"><div class="ttname"><a href="a02708.html#a6067009a4a1b6f59d8c247b940de79bb">tesseract::Classify::ClearCharNormArray</a></div><div class="ttdeci">void ClearCharNormArray(uint8_t *char_norm_array)</div><div class="ttdef"><b>Definition:</b> <a href="a00614_source.html#l00044">float2int.cpp:44</a></div></div>
-<div class="ttc" id="aa00647_html_a7c72e90cfafe9834907d05ddf55bff09"><div class="ttname"><a href="a00647.html#a7c72e90cfafe9834907d05ddf55bff09">X_SHIFT</a></div><div class="ttdeci">#define X_SHIFT</div><div class="ttdef"><b>Definition:</b> <a href="a00647_source.html#l00040">intproto.h:40</a></div></div>
-<div class="ttc" id="aa02708_html_ac3c61907f0a19e9d9362bf95c4f5aaa4"><div class="ttname"><a href="a02708.html#ac3c61907f0a19e9d9362bf95c4f5aaa4">tesseract::Classify::ComputeIntCharNormArray</a></div><div class="ttdeci">void ComputeIntCharNormArray(const FEATURE_STRUCT &amp;norm_feature, uint8_t *char_norm_array)</div><div class="ttdef"><b>Definition:</b> <a href="a00614_source.html#l00062">float2int.cpp:62</a></div></div>
-<div class="ttc" id="aa02868_html_a4664d6a22a9d12f4011de4d877664c45"><div class="ttname"><a href="a02868.html#a4664d6a22a9d12f4011de4d877664c45">FEATURE_SET_STRUCT::Features</a></div><div class="ttdeci">FEATURE Features[1]</div><div class="ttdef"><b>Definition:</b> <a href="a00695_source.html#l00067">ocrfeatures.h:67</a></div></div>
-<div class="ttc" id="aa00647_html_abd4c49783ccd23c297ef5650ccce9c9c"><div class="ttname"><a href="a00647.html#abd4c49783ccd23c297ef5650ccce9c9c">Y_SHIFT</a></div><div class="ttdeci">#define Y_SHIFT</div><div class="ttdef"><b>Definition:</b> <a href="a00647_source.html#l00041">intproto.h:41</a></div></div>
-<div class="ttc" id="aa02864_html_acdddc3235f689b0d45574003fc3e3b1b"><div class="ttname"><a href="a02864.html#acdddc3235f689b0d45574003fc3e3b1b">FEATURE_STRUCT::Params</a></div><div class="ttdeci">float Params[1]</div><div class="ttdef"><b>Definition:</b> <a href="a00695_source.html#l00060">ocrfeatures.h:60</a></div></div>
-<div class="ttc" id="aa02868_html_af5f8cefc59003cce4cc41164e914bd4b"><div class="ttname"><a href="a02868.html#af5f8cefc59003cce4cc41164e914bd4b">FEATURE_SET_STRUCT::NumFeatures</a></div><div class="ttdeci">uint16_t NumFeatures</div><div class="ttdef"><b>Definition:</b> <a href="a00695_source.html#l00065">ocrfeatures.h:65</a></div></div>
-<div class="ttc" id="aa00707_html_ac00e1c5d2ac3096e0928e2186aee1aaca43884de5e2e87be26f9642b50135f98a"><div class="ttname"><a href="a00707.html#ac00e1c5d2ac3096e0928e2186aee1aaca43884de5e2e87be26f9642b50135f98a">PicoFeatY</a></div><div class="ttdef"><b>Definition:</b> <a href="a00707_source.html#l00043">picofeat.h:43</a></div></div>
-<div class="ttc" id="aa00647_html_a0be004c4069c9a09479eef2955f1097e"><div class="ttname"><a href="a00647.html#a0be004c4069c9a09479eef2955f1097e">ANGLE_SHIFT</a></div><div class="ttdeci">#define ANGLE_SHIFT</div><div class="ttdef"><b>Definition:</b> <a href="a00647_source.html#l00039">intproto.h:39</a></div></div>
-<div class="ttc" id="aa00590_html"><div class="ttname"><a href="a00590.html">classify.h</a></div></div>
-<div class="ttc" id="aa00647_html_a544a6c7d78d215e9a4da202daecfeb52"><div class="ttname"><a href="a00647.html#a544a6c7d78d215e9a4da202daecfeb52">INT_FEATURE_ARRAY</a></div><div class="ttdeci">INT_FEATURE_STRUCT INT_FEATURE_ARRAY[MAX_NUM_INT_FEATURES]</div><div class="ttdef"><b>Definition:</b> <a href="a00647_source.html#l00151">intproto.h:151</a></div></div>
-<div class="ttc" id="aa00614_html_a507d2964a00ad9a1d82e6c5ae21720be"><div class="ttname"><a href="a00614.html#a507d2964a00ad9a1d82e6c5ae21720be">MAX_INT_CHAR_NORM</a></div><div class="ttdeci">#define MAX_INT_CHAR_NORM</div><div class="ttdef"><b>Definition:</b> <a href="a00614_source.html#l00027">float2int.cpp:27</a></div></div>
-<div class="ttc" id="aa02708_html_a6ada4fb19fc39913901a09cf7e954b0f"><div class="ttname"><a href="a02708.html#a6ada4fb19fc39913901a09cf7e954b0f">tesseract::Classify::ComputeNormMatch</a></div><div class="ttdeci">float ComputeNormMatch(CLASS_ID ClassId, const FEATURE_STRUCT &amp;feature, bool DebugMatch)</div><div class="ttdef"><b>Definition:</b> <a href="a00686_source.html#l00093">normmatch.cpp:93</a></div></div>
-<div class="ttc" id="aa00689_html"><div class="ttname"><a href="a00689.html">normmatch.h</a></div></div>
-<div class="ttc" id="aa01539_html"><div class="ttname"><a href="a01539.html">tesseract</a></div><div class="ttdef"><b>Definition:</b> <a href="a00002_source.html#l00025">altorenderer.cpp:25</a></div></div>
-<div class="ttc" id="aa00644_html_a8cebc325d67fc72eb4c30dafd9900243"><div class="ttname"><a href="a00644.html#a8cebc325d67fc72eb4c30dafd9900243">CircBucketFor</a></div><div class="ttdeci">uint8_t CircBucketFor(float param, float offset, int num_buckets)</div><div class="ttdef"><b>Definition:</b> <a href="a00644_source.html#l00431">intproto.cpp:431</a></div></div>
-<div class="ttc" id="aa02868_html"><div class="ttname"><a href="a02868.html">FEATURE_SET_STRUCT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00695_source.html#l00064">ocrfeatures.h:64</a></div></div>
-<div class="ttc" id="aa00671_html_a2a4b69f9a2827dc98bc4cbc233118865a83297de004f4e58b9be2108c6cd08a23"><div class="ttname"><a href="a00671.html#a2a4b69f9a2827dc98bc4cbc233118865a83297de004f4e58b9be2108c6cd08a23">baseline</a></div><div class="ttdef"><b>Definition:</b> <a href="a00671_source.html#l00062">mfoutline.h:62</a></div></div>
-<div class="ttc" id="aa00707_html_ac00e1c5d2ac3096e0928e2186aee1aaca9895f2baa648985ab8ee5586c1563511"><div class="ttname"><a href="a00707.html#ac00e1c5d2ac3096e0928e2186aee1aaca9895f2baa648985ab8ee5586c1563511">PicoFeatDir</a></div><div class="ttdef"><b>Definition:</b> <a href="a00707_source.html#l00043">picofeat.h:43</a></div></div>
-<div class="ttc" id="aa02708_html_ae1f3fc88bf28a4a169273bcf2515610e"><div class="ttname"><a href="a02708.html#ae1f3fc88bf28a4a169273bcf2515610e">tesseract::Classify::ComputeIntFeatures</a></div><div class="ttdeci">void ComputeIntFeatures(FEATURE_SET Features, INT_FEATURE_ARRAY IntFeatures)</div><div class="ttdef"><b>Definition:</b> <a href="a00614_source.html#l00090">float2int.cpp:90</a></div></div>
-<div class="ttc" id="aa02864_html"><div class="ttname"><a href="a02864.html">FEATURE_STRUCT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00695_source.html#l00058">ocrfeatures.h:58</a></div></div>
-<div class="ttc" id="aa02708_html_aa92ef2f6a1f0e726d576a59644c3cc63"><div class="ttname"><a href="a02708.html#aa92ef2f6a1f0e726d576a59644c3cc63">tesseract::Classify::classify_norm_method</a></div><div class="ttdeci">int classify_norm_method</div><div class="ttdef"><b>Definition:</b> <a href="a00590_source.html#l00434">classify.h:434</a></div></div>
-<div class="ttc" id="aa00671_html"><div class="ttname"><a href="a00671.html">mfoutline.h</a></div></div>
-<div class="ttc" id="aa00707_html"><div class="ttname"><a href="a00707.html">picofeat.h</a></div></div>
-<div class="ttc" id="aa00617_html_a0cd5a36a70bcf28d6727fe56e419b5a2"><div class="ttname"><a href="a00617.html#a0cd5a36a70bcf28d6727fe56e419b5a2">BASELINE_Y_SHIFT</a></div><div class="ttdeci">#define BASELINE_Y_SHIFT</div><div class="ttdef"><b>Definition:</b> <a href="a00617_source.html#l00027">float2int.h:27</a></div></div>
-<div class="ttc" id="aa00707_html_ac00e1c5d2ac3096e0928e2186aee1aacaf28d56154a908256d7b3beb62977e2fc"><div class="ttname"><a href="a00707.html#ac00e1c5d2ac3096e0928e2186aee1aacaf28d56154a908256d7b3beb62977e2fc">PicoFeatX</a></div><div class="ttdef"><b>Definition:</b> <a href="a00707_source.html#l00043">picofeat.h:43</a></div></div>
+<div class="ttc" id="aa01818_html_a934f6d23c9a174e3efce87c78334885b"><div class="ttname"><a href="a01818.html#a934f6d23c9a174e3efce87c78334885b">tesseract::kRLM</a></div><div class="ttdeci">const char *const kRLM</div><div class="ttdoc">Right-to-Left Mark.</div><div class="ttdef"><b>Definition:</b> <a href="a00611_source.html#l00039">unicodes.cpp:39</a></div></div>
+<div class="ttc" id="aa01818_html_ac7b2d022c7d14c5b97b06266d380ffd9"><div class="ttname"><a href="a01818.html#ac7b2d022c7d14c5b97b06266d380ffd9">tesseract::kRLE</a></div><div class="ttdeci">const char *const kRLE</div><div class="ttdoc">Right-to-Left Embedding.</div><div class="ttdef"><b>Definition:</b> <a href="a00611_source.html#l00040">unicodes.cpp:40</a></div></div>
+<div class="ttc" id="aa01818_html_a3187702bdaeea23471bcd19386c60325"><div class="ttname"><a href="a01818.html#a3187702bdaeea23471bcd19386c60325">tesseract::kLRM</a></div><div class="ttdeci">const char *const kLRM</div><div class="ttdoc">Left-to-Right Mark.</div><div class="ttdef"><b>Definition:</b> <a href="a00611_source.html#l00038">unicodes.cpp:38</a></div></div>
+<div class="ttc" id="aa01818_html_a449a1a336e8ce20dd079c8359dd33999"><div class="ttname"><a href="a01818.html#a449a1a336e8ce20dd079c8359dd33999">tesseract::kPDF</a></div><div class="ttdeci">const char *const kPDF</div><div class="ttdoc">Pop Directional Formatting.</div><div class="ttdef"><b>Definition:</b> <a href="a00611_source.html#l00041">unicodes.cpp:41</a></div></div>
+<div class="ttc" id="aa01818_html"><div class="ttname"><a href="a01818.html">tesseract</a></div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00065">baseapi.h:65</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b8f5fb7b736ee5431a221bc7b817d6e0.html">classify</a></li><li class="navelem"><a class="el" href="a00614.html">float2int.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:14 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_be21c9400dd14e513865608c9a8a7e5a.html">ccutil</a></li><li class="navelem"><a class="el" href="a00614.html">unicodes.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:20 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/training/pango_font_info.h File Reference</title>
+<title>tesseract: /tesseract/src/training/lstmeval.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,66 +87,119 @@ $(document).ready(function(){initNavTree('a01316.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#typedef-members">Typedefs</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">pango_font_info.h File Reference</div>  </div>
+<div class="title">lstmeval.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;string&gt;</code><br />
-<code>#include &lt;unordered_map&gt;</code><br />
-<code>#include &lt;utility&gt;</code><br />
-<code>#include &lt;vector&gt;</code><br />
-<code>#include &quot;<a class="el" href="a01196_source.html">commandlineflags.h</a>&quot;</code><br />
-<code>#include &quot;pango/pango-font.h&quot;</code><br />
-<code>#include &quot;pango/pango.h&quot;</code><br />
-<code>#include &quot;pango/pangocairo.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="a01373_source.html">util.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a01253_source.html">commontraining.h</a>&quot;</code><br />
+<code>#include &lt;<a class="el" href="a00011_source.html">tesseract/genericvector.h</a>&gt;</code><br />
+<code>#include &quot;<a class="el" href="a01322_source.html">lstmtester.h</a>&quot;</code><br />
+<code>#include &lt;<a class="el" href="a00044_source.html">tesseract/strngs.h</a>&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00584_source.html">tprintf.h</a>&quot;</code><br />
 </div>
 <p><a href="a01316_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03448.html">tesseract::PangoFontInfo</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03452.html">tesseract::FontUtils</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:a01539"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html">tesseract</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:aecc7a1742fed875e05210e995739f10c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01316.html#aecc7a1742fed875e05210e995739f10c">char32</a> = signed int</td></tr>
-<tr class="separator:aecc7a1742fed875e05210e995739f10c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01316.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
+<tr class="separator:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Typedef Documentation</h2>
-<a id="aecc7a1742fed875e05210e995739f10c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aecc7a1742fed875e05210e995739f10c">&#9670;&nbsp;</a></span>char32</h2>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a3c04138a5bfe5d72780bb7e82a18e627"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c04138a5bfe5d72780bb7e82a18e627">&#9670;&nbsp;</a></span>main()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="a01316.html#aecc7a1742fed875e05210e995739f10c">char32</a> =  signed int</td>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>argv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a01316_source.html#l00033">33</a> of file <a class="el" href="a01316_source.html">pango_font_info.h</a>.</p>
-
+<p class="definition">Definition at line <a class="el" href="a01316_source.html#l00037">37</a> of file <a class="el" href="a01316_source.html">lstmeval.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                                {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  tesseract::CheckSharedLibraryVersion();</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <a class="code" href="a01250.html#a5177d61ebf73a60571198cb6eaa753ac">ParseArguments</a>(&amp;argc, &amp;argv);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <span class="keywordflow">if</span> (FLAGS_model.empty()) {</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Must provide a --model!\n&quot;</span>);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  }</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <span class="keywordflow">if</span> (FLAGS_eval_listfile.empty()) {</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Must provide a --eval_listfile!\n&quot;</span>);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  }</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <a class="code" href="a03086.html">tesseract::TessdataManager</a> mgr;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keywordflow">if</span> (!mgr.<a class="code" href="a03086.html#ae070706240e9b479dcbb3a561b962d34">Init</a>(FLAGS_model.c_str())) {</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">if</span> (FLAGS_traineddata.empty()) {</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;      <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Must supply --traineddata to eval a training checkpoint!\n&quot;</span>);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;      <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    }</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;%s is not a recognition model, trying training checkpoint...\n&quot;</span>,</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            FLAGS_model.c_str());</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">if</span> (!mgr.<a class="code" href="a03086.html#ae070706240e9b479dcbb3a561b962d34">Init</a>(FLAGS_traineddata.c_str())) {</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;      <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Failed to load language model from %s!\n&quot;</span>,</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;              FLAGS_traineddata.c_str());</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;      <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    }</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <a class="code" href="a02434.html">GenericVector&lt;char&gt;</a> model_data;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">if</span> (!<a class="code" href="a01818.html#afca99d632ed7bb0501445a718f06d23a">tesseract::LoadDataFromFile</a>(FLAGS_model.c_str(), &amp;model_data)) {</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;      <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Failed to load model from: %s\n&quot;</span>, FLAGS_model.c_str());</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;      <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    }</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    mgr.<a class="code" href="a03086.html#a0213a816f84d5f6bb500903aa3861d7b">OverwriteEntry</a>(<a class="code" href="a01818.html#a5f278974ef80900b460194614d4f1899a42b3faa90f5e5f117788cc38a7478521">tesseract::TESSDATA_LSTM</a>, &amp;model_data[0],</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                       model_data.<a class="code" href="a02434.html#a20cfad5c58c50cb85a9529d8ddbd96af">size</a>());</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  }</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <a class="code" href="a03878.html">tesseract::LSTMTester</a> tester(static_cast&lt;int64_t&gt;(FLAGS_max_image_MB) *</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                               1048576);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <span class="keywordflow">if</span> (!tester.LoadAllEvalData(FLAGS_eval_listfile.c_str())) {</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Failed to load eval data from: %s\n&quot;</span>, FLAGS_eval_listfile.c_str());</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  }</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <span class="keywordtype">double</span> errs = 0.0;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  <a class="code" href="a02542.html">STRING</a> result =</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;      tester.RunEvalSync(0, &amp;errs, mgr,</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                         <span class="comment">/*training_stage (irrelevant)*/</span> 0, FLAGS_verbosity);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;%s\n&quot;</span>, result.<a class="code" href="a02542.html#a552838a146145cb7993f42aefb740ea4">c_str</a>());</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;} <span class="comment">/* main */</span></div>
+</div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="aa03878_html"><div class="ttname"><a href="a03878.html">tesseract::LSTMTester</a></div><div class="ttdef"><b>Definition:</b> <a href="a01322_source.html#l00028">lstmtester.h:28</a></div></div>
+<div class="ttc" id="aa03086_html"><div class="ttname"><a href="a03086.html">tesseract::TessdataManager</a></div><div class="ttdef"><b>Definition:</b> <a href="a00578_source.html#l00126">tessdatamanager.h:126</a></div></div>
+<div class="ttc" id="aa01818_html_afca99d632ed7bb0501445a718f06d23a"><div class="ttname"><a href="a01818.html#afca99d632ed7bb0501445a718f06d23a">tesseract::LoadDataFromFile</a></div><div class="ttdeci">bool LoadDataFromFile(const char *filename, GenericVector&lt; char &gt; *data)</div><div class="ttdef"><b>Definition:</b> <a href="a00011_source.html#l00341">genericvector.h:341</a></div></div>
+<div class="ttc" id="aa02542_html"><div class="ttname"><a href="a02542.html">STRING</a></div><div class="ttdef"><b>Definition:</b> <a href="a00044_source.html#l00045">strngs.h:45</a></div></div>
+<div class="ttc" id="aa03086_html_a0213a816f84d5f6bb500903aa3861d7b"><div class="ttname"><a href="a03086.html#a0213a816f84d5f6bb500903aa3861d7b">tesseract::TessdataManager::OverwriteEntry</a></div><div class="ttdeci">void OverwriteEntry(TessdataType type, const char *data, int size)</div><div class="ttdef"><b>Definition:</b> <a href="a00575_source.html#l00145">tessdatamanager.cpp:145</a></div></div>
+<div class="ttc" id="aa02542_html_a552838a146145cb7993f42aefb740ea4"><div class="ttname"><a href="a02542.html#a552838a146145cb7993f42aefb740ea4">STRING::c_str</a></div><div class="ttdeci">const char * c_str() const</div><div class="ttdef"><b>Definition:</b> <a href="a00572_source.html#l00192">strngs.cpp:192</a></div></div>
+<div class="ttc" id="aa02434_html"><div class="ttname"><a href="a02434.html">GenericVector&lt; char &gt;</a></div></div>
+<div class="ttc" id="aa01250_html_a5177d61ebf73a60571198cb6eaa753ac"><div class="ttname"><a href="a01250.html#a5177d61ebf73a60571198cb6eaa753ac">ParseArguments</a></div><div class="ttdeci">void ParseArguments(int *argc, char ***argv)</div><div class="ttdef"><b>Definition:</b> <a href="a01250_source.html#l00122">commontraining.cpp:122</a></div></div>
+<div class="ttc" id="aa03086_html_ae070706240e9b479dcbb3a561b962d34"><div class="ttname"><a href="a03086.html#ae070706240e9b479dcbb3a561b962d34">tesseract::TessdataManager::Init</a></div><div class="ttdeci">bool Init(const char *data_file_name)</div><div class="ttdef"><b>Definition:</b> <a href="a00575_source.html#l00097">tessdatamanager.cpp:97</a></div></div>
+<div class="ttc" id="aa00581_html_a0c2bcd4462ec67ab0971b34a0f610f55"><div class="ttname"><a href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a></div><div class="ttdeci">DLLSYM void tprintf(const char *format,...)</div><div class="ttdef"><b>Definition:</b> <a href="a00581_source.html#l00034">tprintf.cpp:34</a></div></div>
+<div class="ttc" id="aa01818_html_a5f278974ef80900b460194614d4f1899a42b3faa90f5e5f117788cc38a7478521"><div class="ttname"><a href="a01818.html#a5f278974ef80900b460194614d4f1899a42b3faa90f5e5f117788cc38a7478521">tesseract::TESSDATA_LSTM</a></div><div class="ttdef"><b>Definition:</b> <a href="a00578_source.html#l00074">tessdatamanager.h:74</a></div></div>
+<div class="ttc" id="aa02434_html_a20cfad5c58c50cb85a9529d8ddbd96af"><div class="ttname"><a href="a02434.html#a20cfad5c58c50cb85a9529d8ddbd96af">GenericVector::size</a></div><div class="ttdeci">int size() const</div><div class="ttdef"><b>Definition:</b> <a href="a00011_source.html#l00071">genericvector.h:71</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7c7ae07dd2a999045cb78bf7ff8dcbc7.html">training</a></li><li class="navelem"><a class="el" href="a01316.html">pango_font_info.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7c7ae07dd2a999045cb78bf7ff8dcbc7.html">training</a></li><li class="navelem"><a class="el" href="a01316.html">lstmeval.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

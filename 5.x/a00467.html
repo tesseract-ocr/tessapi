@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/ccutil/fileerr.h File Reference</title>
+<title>tesseract: /tesseract/src/ccstruct/werd.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,250 +87,229 @@ $(document).ready(function(){initNavTree('a00467.html','');});
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">fileerr.h File Reference</div>  </div>
+<div class="title">werd.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="a00464_source.html">errcode.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a00476_source.html">bits16.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00509_source.html">elst2.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00554_source.html">params.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00461_source.html">stepblob.h</a>&quot;</code><br />
+<code>#include &lt;<a class="el" href="a00044_source.html">tesseract/strngs.h</a>&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00362_source.html">ocrrow.h</a>&quot;</code><br />
 </div>
 <p><a href="a00467_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02926.html">WERD</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:ad6968adbf8f2cc44adf333ec96efb0be"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00467.html#ad6968adbf8f2cc44adf333ec96efb0be">WERD_FLAGS</a> { <br />
+&#160;&#160;<a class="el" href="a00467.html#ad6968adbf8f2cc44adf333ec96efb0bea8741ef3078614d5d00f0898b2dbd5bd7">W_SEGMENTED</a>, 
+<a class="el" href="a00467.html#ad6968adbf8f2cc44adf333ec96efb0beafb8a30718938e1e273e054e550fefac5">W_ITALIC</a>, 
+<a class="el" href="a00467.html#ad6968adbf8f2cc44adf333ec96efb0bea2191ec3a46510d8a5879e97df8a44c37">W_BOLD</a>, 
+<a class="el" href="a00467.html#ad6968adbf8f2cc44adf333ec96efb0beaff21d7c8c8992120fff35942408a00d2">W_BOL</a>, 
+<br />
+&#160;&#160;<a class="el" href="a00467.html#ad6968adbf8f2cc44adf333ec96efb0bea62efb985a62d85e014ee5ab039dd50ce">W_EOL</a>, 
+<a class="el" href="a00467.html#ad6968adbf8f2cc44adf333ec96efb0bea81d9f266977ff9be129e4de409a124ed">W_NORMALIZED</a>, 
+<a class="el" href="a00467.html#ad6968adbf8f2cc44adf333ec96efb0bea3f41a0c5d64002c322177a4243a13aae">W_SCRIPT_HAS_XHEIGHT</a>, 
+<a class="el" href="a00467.html#ad6968adbf8f2cc44adf333ec96efb0bea8c3664a200b620de34a3cb691cb1e71c">W_SCRIPT_IS_LATIN</a>, 
+<br />
+&#160;&#160;<a class="el" href="a00467.html#ad6968adbf8f2cc44adf333ec96efb0beac5f734536428e7e43dffe5c87d72d14e">W_DONT_CHOP</a>, 
+<a class="el" href="a00467.html#ad6968adbf8f2cc44adf333ec96efb0beaa20dcde8552519bb81c4206b0e57a8ce">W_REP_CHAR</a>, 
+<a class="el" href="a00467.html#ad6968adbf8f2cc44adf333ec96efb0bea3580884b5b0335502fb928db4a0a2024">W_FUZZY_SP</a>, 
+<a class="el" href="a00467.html#ad6968adbf8f2cc44adf333ec96efb0bea675eadd051ea82d1f288751799bfa31c">W_FUZZY_NON</a>, 
+<br />
+&#160;&#160;<a class="el" href="a00467.html#ad6968adbf8f2cc44adf333ec96efb0beaecff222839a9a16c19d63463bfeb9ca7">W_INVERSE</a>
+<br />
+ }</td></tr>
+<tr class="separator:ad6968adbf8f2cc44adf333ec96efb0be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d51e432a32c55ab6c02df47f4ca62c4"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00467.html#a6d51e432a32c55ab6c02df47f4ca62c4">DISPLAY_FLAGS</a> { <br />
+&#160;&#160;<a class="el" href="a00467.html#a6d51e432a32c55ab6c02df47f4ca62c4a5847cc6ed455e6638b3c070319cd2d89">DF_BOX</a>, 
+<a class="el" href="a00467.html#a6d51e432a32c55ab6c02df47f4ca62c4a45d1d55c62ce1c09d56ccabf1ec023d4">DF_TEXT</a>, 
+<a class="el" href="a00467.html#a6d51e432a32c55ab6c02df47f4ca62c4af1487bbfe08f15ec84246120ce6d9006">DF_POLYGONAL</a>, 
+<a class="el" href="a00467.html#a6d51e432a32c55ab6c02df47f4ca62c4a39949203c336436f1958a9967d94a94c">DF_EDGE_STEP</a>, 
+<br />
+&#160;&#160;<a class="el" href="a00467.html#a6d51e432a32c55ab6c02df47f4ca62c4a014cb64174a13f7fabae61cb8db58577">DF_BN_POLYGONAL</a>, 
+<a class="el" href="a00467.html#a6d51e432a32c55ab6c02df47f4ca62c4a9a4b9fb96c286e337e19f8d7d978a429">DF_BLAMER</a>
+<br />
+ }</td></tr>
+<tr class="separator:a6d51e432a32c55ab6c02df47f4ca62c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a87bcfbb01b486030002f9a0bea203a4d"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a02536.html">ERRCODE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00467.html#a87bcfbb01b486030002f9a0bea203a4d">CANTOPENFILE</a> (&quot;Can't open file&quot;)</td></tr>
-<tr class="separator:a87bcfbb01b486030002f9a0bea203a4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af6695a86145ef9baffdf1986dd069b69"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a02536.html">ERRCODE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00467.html#af6695a86145ef9baffdf1986dd069b69">CANTCREATEFILE</a> (&quot;Can't create file&quot;)</td></tr>
-<tr class="separator:af6695a86145ef9baffdf1986dd069b69"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5c8550e2a42b3ce50f502e5b48a0ad5e"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a02536.html">ERRCODE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00467.html#a5c8550e2a42b3ce50f502e5b48a0ad5e">CANTMAKEPIPE</a> (&quot;Can't create pipe&quot;)</td></tr>
-<tr class="separator:a5c8550e2a42b3ce50f502e5b48a0ad5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15292bd76f6e4e1d2f5f9bb61e054aab"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a02536.html">ERRCODE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00467.html#a15292bd76f6e4e1d2f5f9bb61e054aab">CANTCONNECTPIPE</a> (&quot;Can't reconnect pipes to stdin/stdout&quot;)</td></tr>
-<tr class="separator:a15292bd76f6e4e1d2f5f9bb61e054aab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acfc6d6a42d6b8c23f9f50f35cb95684a"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a02536.html">ERRCODE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00467.html#acfc6d6a42d6b8c23f9f50f35cb95684a">READFAILED</a> (&quot;Read <a class="el" href="a00608.html#a66c7f757ef35e33a52ac2efe3f4e8247">of</a> file failed&quot;)</td></tr>
-<tr class="separator:acfc6d6a42d6b8c23f9f50f35cb95684a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a84959b71792eb12ff0c0b42c582086da"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a02536.html">ERRCODE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00467.html#a84959b71792eb12ff0c0b42c582086da">WRITEFAILED</a> (&quot;Write <a class="el" href="a00608.html#a66c7f757ef35e33a52ac2efe3f4e8247">of</a> file failed&quot;)</td></tr>
-<tr class="separator:a84959b71792eb12ff0c0b42c582086da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a290d8614e10676f95ca2fa692a3c5dcd"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a02536.html">ERRCODE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00467.html#a290d8614e10676f95ca2fa692a3c5dcd">SELECTFAILED</a> (&quot;Select failed&quot;)</td></tr>
-<tr class="separator:a290d8614e10676f95ca2fa692a3c5dcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a336d4286840d74ef5453abab9f598c75"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a02536.html">ERRCODE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00467.html#a336d4286840d74ef5453abab9f598c75">EXECFAILED</a> (&quot;Could not exec new process&quot;)</td></tr>
-<tr class="separator:a336d4286840d74ef5453abab9f598c75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a8c04307eb98f244554d5b2eb97ec56"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00467.html#a8a8c04307eb98f244554d5b2eb97ec56">word_comparator</a> (const void *word1p, const void *word2p)</td></tr>
+<tr class="separator:a8a8c04307eb98f244554d5b2eb97ec56"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="a6d51e432a32c55ab6c02df47f4ca62c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d51e432a32c55ab6c02df47f4ca62c4">&#9670;&nbsp;</a></span>DISPLAY_FLAGS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="a00467.html#a6d51e432a32c55ab6c02df47f4ca62c4">DISPLAY_FLAGS</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a6d51e432a32c55ab6c02df47f4ca62c4a5847cc6ed455e6638b3c070319cd2d89"></a>DF_BOX&#160;</td><td class="fielddoc"><p>Bounding box. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a6d51e432a32c55ab6c02df47f4ca62c4a45d1d55c62ce1c09d56ccabf1ec023d4"></a>DF_TEXT&#160;</td><td class="fielddoc"><p>Correct ascii. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a6d51e432a32c55ab6c02df47f4ca62c4af1487bbfe08f15ec84246120ce6d9006"></a>DF_POLYGONAL&#160;</td><td class="fielddoc"><p>Polyg approx. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a6d51e432a32c55ab6c02df47f4ca62c4a39949203c336436f1958a9967d94a94c"></a>DF_EDGE_STEP&#160;</td><td class="fielddoc"><p>Edge steps. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a6d51e432a32c55ab6c02df47f4ca62c4a014cb64174a13f7fabae61cb8db58577"></a>DF_BN_POLYGONAL&#160;</td><td class="fielddoc"><p>BL normalisd polyapx. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a6d51e432a32c55ab6c02df47f4ca62c4a9a4b9fb96c286e337e19f8d7d978a429"></a>DF_BLAMER&#160;</td><td class="fielddoc"><p>Blamer information. </p>
+</td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="a00467_source.html#l00043">43</a> of file <a class="el" href="a00467_source.html">werd.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                   {</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <span class="comment">/* Display flags bit number allocations */</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <a class="code" href="a00467.html#a6d51e432a32c55ab6c02df47f4ca62c4a5847cc6ed455e6638b3c070319cd2d89">DF_BOX</a>,           </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <a class="code" href="a00467.html#a6d51e432a32c55ab6c02df47f4ca62c4a45d1d55c62ce1c09d56ccabf1ec023d4">DF_TEXT</a>,          </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <a class="code" href="a00467.html#a6d51e432a32c55ab6c02df47f4ca62c4af1487bbfe08f15ec84246120ce6d9006">DF_POLYGONAL</a>,     </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <a class="code" href="a00467.html#a6d51e432a32c55ab6c02df47f4ca62c4a39949203c336436f1958a9967d94a94c">DF_EDGE_STEP</a>,     </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <a class="code" href="a00467.html#a6d51e432a32c55ab6c02df47f4ca62c4a014cb64174a13f7fabae61cb8db58577">DF_BN_POLYGONAL</a>,  </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <a class="code" href="a00467.html#a6d51e432a32c55ab6c02df47f4ca62c4a9a4b9fb96c286e337e19f8d7d978a429">DF_BLAMER</a>         </div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ad6968adbf8f2cc44adf333ec96efb0be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6968adbf8f2cc44adf333ec96efb0be">&#9670;&nbsp;</a></span>WERD_FLAGS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="a00467.html#ad6968adbf8f2cc44adf333ec96efb0be">WERD_FLAGS</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ad6968adbf8f2cc44adf333ec96efb0bea8741ef3078614d5d00f0898b2dbd5bd7"></a>W_SEGMENTED&#160;</td><td class="fielddoc"><p>correctly segmented </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad6968adbf8f2cc44adf333ec96efb0beafb8a30718938e1e273e054e550fefac5"></a>W_ITALIC&#160;</td><td class="fielddoc"><p>italic text </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad6968adbf8f2cc44adf333ec96efb0bea2191ec3a46510d8a5879e97df8a44c37"></a>W_BOLD&#160;</td><td class="fielddoc"><p>bold text </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad6968adbf8f2cc44adf333ec96efb0beaff21d7c8c8992120fff35942408a00d2"></a>W_BOL&#160;</td><td class="fielddoc"><p>start of line </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad6968adbf8f2cc44adf333ec96efb0bea62efb985a62d85e014ee5ab039dd50ce"></a>W_EOL&#160;</td><td class="fielddoc"><p>end of line </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad6968adbf8f2cc44adf333ec96efb0bea81d9f266977ff9be129e4de409a124ed"></a>W_NORMALIZED&#160;</td><td class="fielddoc"><p>flags </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad6968adbf8f2cc44adf333ec96efb0bea3f41a0c5d64002c322177a4243a13aae"></a>W_SCRIPT_HAS_XHEIGHT&#160;</td><td class="fielddoc"><p>x-height concept makes sense. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad6968adbf8f2cc44adf333ec96efb0bea8c3664a200b620de34a3cb691cb1e71c"></a>W_SCRIPT_IS_LATIN&#160;</td><td class="fielddoc"><p>Special case latin for y. splitting. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad6968adbf8f2cc44adf333ec96efb0beac5f734536428e7e43dffe5c87d72d14e"></a>W_DONT_CHOP&#160;</td><td class="fielddoc"><p>fixed pitch chopped </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad6968adbf8f2cc44adf333ec96efb0beaa20dcde8552519bb81c4206b0e57a8ce"></a>W_REP_CHAR&#160;</td><td class="fielddoc"><p>repeated character </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad6968adbf8f2cc44adf333ec96efb0bea3580884b5b0335502fb928db4a0a2024"></a>W_FUZZY_SP&#160;</td><td class="fielddoc"><p>fuzzy space </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad6968adbf8f2cc44adf333ec96efb0bea675eadd051ea82d1f288751799bfa31c"></a>W_FUZZY_NON&#160;</td><td class="fielddoc"><p>fuzzy nonspace </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad6968adbf8f2cc44adf333ec96efb0beaecff222839a9a16c19d63463bfeb9ca7"></a>W_INVERSE&#160;</td><td class="fielddoc"><p>white on black </p>
+</td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="a00467_source.html#l00027">27</a> of file <a class="el" href="a00467_source.html">werd.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                {</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <a class="code" href="a00467.html#ad6968adbf8f2cc44adf333ec96efb0bea8741ef3078614d5d00f0898b2dbd5bd7">W_SEGMENTED</a>,           </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <a class="code" href="a00467.html#ad6968adbf8f2cc44adf333ec96efb0beafb8a30718938e1e273e054e550fefac5">W_ITALIC</a>,              </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <a class="code" href="a00467.html#ad6968adbf8f2cc44adf333ec96efb0bea2191ec3a46510d8a5879e97df8a44c37">W_BOLD</a>,                </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <a class="code" href="a00467.html#ad6968adbf8f2cc44adf333ec96efb0beaff21d7c8c8992120fff35942408a00d2">W_BOL</a>,                 </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <a class="code" href="a00467.html#ad6968adbf8f2cc44adf333ec96efb0bea62efb985a62d85e014ee5ab039dd50ce">W_EOL</a>,                 </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <a class="code" href="a00467.html#ad6968adbf8f2cc44adf333ec96efb0bea81d9f266977ff9be129e4de409a124ed">W_NORMALIZED</a>,          </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <a class="code" href="a00467.html#ad6968adbf8f2cc44adf333ec96efb0bea3f41a0c5d64002c322177a4243a13aae">W_SCRIPT_HAS_XHEIGHT</a>,  </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <a class="code" href="a00467.html#ad6968adbf8f2cc44adf333ec96efb0bea8c3664a200b620de34a3cb691cb1e71c">W_SCRIPT_IS_LATIN</a>,     </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <a class="code" href="a00467.html#ad6968adbf8f2cc44adf333ec96efb0beac5f734536428e7e43dffe5c87d72d14e">W_DONT_CHOP</a>,           </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <a class="code" href="a00467.html#ad6968adbf8f2cc44adf333ec96efb0beaa20dcde8552519bb81c4206b0e57a8ce">W_REP_CHAR</a>,            </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <a class="code" href="a00467.html#ad6968adbf8f2cc44adf333ec96efb0bea3580884b5b0335502fb928db4a0a2024">W_FUZZY_SP</a>,            </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <a class="code" href="a00467.html#ad6968adbf8f2cc44adf333ec96efb0bea675eadd051ea82d1f288751799bfa31c">W_FUZZY_NON</a>,           </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <a class="code" href="a00467.html#ad6968adbf8f2cc44adf333ec96efb0beaecff222839a9a16c19d63463bfeb9ca7">W_INVERSE</a>              </div>
+</div><!-- fragment -->
+</div>
+</div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a15292bd76f6e4e1d2f5f9bb61e054aab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a15292bd76f6e4e1d2f5f9bb61e054aab">&#9670;&nbsp;</a></span>CANTCONNECTPIPE()</h2>
+<a id="a8a8c04307eb98f244554d5b2eb97ec56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a8c04307eb98f244554d5b2eb97ec56">&#9670;&nbsp;</a></span>word_comparator()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="a02536.html">ERRCODE</a> CANTCONNECTPIPE </td>
+          <td class="memname">int word_comparator </td>
           <td>(</td>
-          <td class="paramtype">&quot;Can't reconnect pipes to stdin/stdout&quot;&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>word1p</em>, </td>
         </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="af6695a86145ef9baffdf1986dd069b69"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af6695a86145ef9baffdf1986dd069b69">&#9670;&nbsp;</a></span>CANTCREATEFILE()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="a02536.html">ERRCODE</a> CANTCREATEFILE </td>
-          <td>(</td>
-          <td class="paramtype">&quot;Can't create file&quot;&#160;</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>word2p</em>&#160;</td>
         </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a5c8550e2a42b3ce50f502e5b48a0ad5e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5c8550e2a42b3ce50f502e5b48a0ad5e">&#9670;&nbsp;</a></span>CANTMAKEPIPE()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="a02536.html">ERRCODE</a> CANTMAKEPIPE </td>
-          <td>(</td>
-          <td class="paramtype">&quot;Can't create pipe&quot;&#160;</td>
-          <td class="paramname"></td><td>)</td>
           <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
+<p><a class="el" href="a00464.html#a8a8c04307eb98f244554d5b2eb97ec56">word_comparator()</a></p>
+<p>word comparator used to sort a word list so that words are in increasing order of left edge. </p>
 
-</div>
-</div>
-<a id="a87bcfbb01b486030002f9a0bea203a4d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a87bcfbb01b486030002f9a0bea203a4d">&#9670;&nbsp;</a></span>CANTOPENFILE()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr <a class="el" href="a02536.html">ERRCODE</a> CANTOPENFILE </td>
-          <td>(</td>
-          <td class="paramtype">&quot;Can't open file&quot;&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a336d4286840d74ef5453abab9f598c75"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a336d4286840d74ef5453abab9f598c75">&#9670;&nbsp;</a></span>EXECFAILED()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr <a class="el" href="a02536.html">ERRCODE</a> EXECFAILED </td>
-          <td>(</td>
-          <td class="paramtype">&quot;Could not exec new process&quot;&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="acfc6d6a42d6b8c23f9f50f35cb95684a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acfc6d6a42d6b8c23f9f50f35cb95684a">&#9670;&nbsp;</a></span>READFAILED()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr <a class="el" href="a02536.html">ERRCODE</a> READFAILED </td>
-          <td>(</td>
-          <td class="paramtype">&quot;Read <a class="el" href="a00608.html#a66c7f757ef35e33a52ac2efe3f4e8247">of</a> file failed&quot;&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a290d8614e10676f95ca2fa692a3c5dcd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a290d8614e10676f95ca2fa692a3c5dcd">&#9670;&nbsp;</a></span>SELECTFAILED()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr <a class="el" href="a02536.html">ERRCODE</a> SELECTFAILED </td>
-          <td>(</td>
-          <td class="paramtype">&quot;Select failed&quot;&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a84959b71792eb12ff0c0b42c582086da"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a84959b71792eb12ff0c0b42c582086da">&#9670;&nbsp;</a></span>WRITEFAILED()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr <a class="el" href="a02536.html">ERRCODE</a> WRITEFAILED </td>
-          <td>(</td>
-          <td class="paramtype">&quot;Write <a class="el" href="a00608.html#a66c7f757ef35e33a52ac2efe3f4e8247">of</a> file failed&quot;&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
+<p class="definition">Definition at line <a class="el" href="a00464_source.html#l00369">369</a> of file <a class="el" href="a00464_source.html">werd.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;                                                            {</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;  <span class="keyword">const</span> <a class="code" href="a02926.html">WERD</a>* word1 = *reinterpret_cast&lt;const WERD* const*&gt;(word1p);</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;  <span class="keyword">const</span> <a class="code" href="a02926.html">WERD</a>* word2 = *reinterpret_cast&lt;const WERD* const*&gt;(word2p);</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;  <span class="keywordflow">return</span> word1-&gt;<a class="code" href="a02926.html#ad35a2fd78555195a3dedcdd01094d0d4">bounding_box</a>().<a class="code" href="a02898.html#a8e9dce0d30d2213598cd4befe0028c99">left</a>() - word2-&gt;<a class="code" href="a02926.html#ad35a2fd78555195a3dedcdd01094d0d4">bounding_box</a>().<a class="code" href="a02898.html#a8e9dce0d30d2213598cd4befe0028c99">left</a>();</div>
+</div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="aa00467_html_ad6968adbf8f2cc44adf333ec96efb0bea8c3664a200b620de34a3cb691cb1e71c"><div class="ttname"><a href="a00467.html#ad6968adbf8f2cc44adf333ec96efb0bea8c3664a200b620de34a3cb691cb1e71c">W_SCRIPT_IS_LATIN</a></div><div class="ttdoc">Special case latin for y. splitting.</div><div class="ttdef"><b>Definition:</b> <a href="a00467_source.html#l00050">werd.h:50</a></div></div>
+<div class="ttc" id="aa00467_html_ad6968adbf8f2cc44adf333ec96efb0beaa20dcde8552519bb81c4206b0e57a8ce"><div class="ttname"><a href="a00467.html#ad6968adbf8f2cc44adf333ec96efb0beaa20dcde8552519bb81c4206b0e57a8ce">W_REP_CHAR</a></div><div class="ttdoc">repeated character</div><div class="ttdef"><b>Definition:</b> <a href="a00467_source.html#l00052">werd.h:52</a></div></div>
+<div class="ttc" id="aa00467_html_ad6968adbf8f2cc44adf333ec96efb0beac5f734536428e7e43dffe5c87d72d14e"><div class="ttname"><a href="a00467.html#ad6968adbf8f2cc44adf333ec96efb0beac5f734536428e7e43dffe5c87d72d14e">W_DONT_CHOP</a></div><div class="ttdoc">fixed pitch chopped</div><div class="ttdef"><b>Definition:</b> <a href="a00467_source.html#l00051">werd.h:51</a></div></div>
+<div class="ttc" id="aa02926_html_ad35a2fd78555195a3dedcdd01094d0d4"><div class="ttname"><a href="a02926.html#ad35a2fd78555195a3dedcdd01094d0d4">WERD::bounding_box</a></div><div class="ttdeci">TBOX bounding_box() const</div><div class="ttdef"><b>Definition:</b> <a href="a00464_source.html#l00147">werd.cpp:147</a></div></div>
+<div class="ttc" id="aa00467_html_a6d51e432a32c55ab6c02df47f4ca62c4a45d1d55c62ce1c09d56ccabf1ec023d4"><div class="ttname"><a href="a00467.html#a6d51e432a32c55ab6c02df47f4ca62c4a45d1d55c62ce1c09d56ccabf1ec023d4">DF_TEXT</a></div><div class="ttdoc">Correct ascii.</div><div class="ttdef"><b>Definition:</b> <a href="a00467_source.html#l00046">werd.h:46</a></div></div>
+<div class="ttc" id="aa00467_html_ad6968adbf8f2cc44adf333ec96efb0bea3f41a0c5d64002c322177a4243a13aae"><div class="ttname"><a href="a00467.html#ad6968adbf8f2cc44adf333ec96efb0bea3f41a0c5d64002c322177a4243a13aae">W_SCRIPT_HAS_XHEIGHT</a></div><div class="ttdoc">x-height concept makes sense.</div><div class="ttdef"><b>Definition:</b> <a href="a00467_source.html#l00049">werd.h:49</a></div></div>
+<div class="ttc" id="aa00467_html_ad6968adbf8f2cc44adf333ec96efb0bea675eadd051ea82d1f288751799bfa31c"><div class="ttname"><a href="a00467.html#ad6968adbf8f2cc44adf333ec96efb0bea675eadd051ea82d1f288751799bfa31c">W_FUZZY_NON</a></div><div class="ttdoc">fuzzy nonspace</div><div class="ttdef"><b>Definition:</b> <a href="a00467_source.html#l00054">werd.h:54</a></div></div>
+<div class="ttc" id="aa00467_html_ad6968adbf8f2cc44adf333ec96efb0bea62efb985a62d85e014ee5ab039dd50ce"><div class="ttname"><a href="a00467.html#ad6968adbf8f2cc44adf333ec96efb0bea62efb985a62d85e014ee5ab039dd50ce">W_EOL</a></div><div class="ttdoc">end of line</div><div class="ttdef"><b>Definition:</b> <a href="a00467_source.html#l00047">werd.h:47</a></div></div>
+<div class="ttc" id="aa00467_html_a6d51e432a32c55ab6c02df47f4ca62c4a9a4b9fb96c286e337e19f8d7d978a429"><div class="ttname"><a href="a00467.html#a6d51e432a32c55ab6c02df47f4ca62c4a9a4b9fb96c286e337e19f8d7d978a429">DF_BLAMER</a></div><div class="ttdoc">Blamer information.</div><div class="ttdef"><b>Definition:</b> <a href="a00467_source.html#l00050">werd.h:50</a></div></div>
+<div class="ttc" id="aa00467_html_a6d51e432a32c55ab6c02df47f4ca62c4a39949203c336436f1958a9967d94a94c"><div class="ttname"><a href="a00467.html#a6d51e432a32c55ab6c02df47f4ca62c4a39949203c336436f1958a9967d94a94c">DF_EDGE_STEP</a></div><div class="ttdoc">Edge steps.</div><div class="ttdef"><b>Definition:</b> <a href="a00467_source.html#l00048">werd.h:48</a></div></div>
+<div class="ttc" id="aa00467_html_ad6968adbf8f2cc44adf333ec96efb0bea81d9f266977ff9be129e4de409a124ed"><div class="ttname"><a href="a00467.html#ad6968adbf8f2cc44adf333ec96efb0bea81d9f266977ff9be129e4de409a124ed">W_NORMALIZED</a></div><div class="ttdoc">flags</div><div class="ttdef"><b>Definition:</b> <a href="a00467_source.html#l00048">werd.h:48</a></div></div>
+<div class="ttc" id="aa00467_html_a6d51e432a32c55ab6c02df47f4ca62c4a5847cc6ed455e6638b3c070319cd2d89"><div class="ttname"><a href="a00467.html#a6d51e432a32c55ab6c02df47f4ca62c4a5847cc6ed455e6638b3c070319cd2d89">DF_BOX</a></div><div class="ttdoc">Bounding box.</div><div class="ttdef"><b>Definition:</b> <a href="a00467_source.html#l00045">werd.h:45</a></div></div>
+<div class="ttc" id="aa00467_html_a6d51e432a32c55ab6c02df47f4ca62c4a014cb64174a13f7fabae61cb8db58577"><div class="ttname"><a href="a00467.html#a6d51e432a32c55ab6c02df47f4ca62c4a014cb64174a13f7fabae61cb8db58577">DF_BN_POLYGONAL</a></div><div class="ttdoc">BL normalisd polyapx.</div><div class="ttdef"><b>Definition:</b> <a href="a00467_source.html#l00049">werd.h:49</a></div></div>
+<div class="ttc" id="aa00467_html_ad6968adbf8f2cc44adf333ec96efb0beaecff222839a9a16c19d63463bfeb9ca7"><div class="ttname"><a href="a00467.html#ad6968adbf8f2cc44adf333ec96efb0beaecff222839a9a16c19d63463bfeb9ca7">W_INVERSE</a></div><div class="ttdoc">white on black</div><div class="ttdef"><b>Definition:</b> <a href="a00467_source.html#l00055">werd.h:55</a></div></div>
+<div class="ttc" id="aa00467_html_ad6968adbf8f2cc44adf333ec96efb0bea3580884b5b0335502fb928db4a0a2024"><div class="ttname"><a href="a00467.html#ad6968adbf8f2cc44adf333ec96efb0bea3580884b5b0335502fb928db4a0a2024">W_FUZZY_SP</a></div><div class="ttdoc">fuzzy space</div><div class="ttdef"><b>Definition:</b> <a href="a00467_source.html#l00053">werd.h:53</a></div></div>
+<div class="ttc" id="aa02926_html"><div class="ttname"><a href="a02926.html">WERD</a></div><div class="ttdef"><b>Definition:</b> <a href="a00467_source.html#l00055">werd.h:55</a></div></div>
+<div class="ttc" id="aa02898_html_a8e9dce0d30d2213598cd4befe0028c99"><div class="ttname"><a href="a02898.html#a8e9dce0d30d2213598cd4befe0028c99">TBOX::left</a></div><div class="ttdeci">int16_t left() const</div><div class="ttdef"><b>Definition:</b> <a href="a00431_source.html#l00071">rect.h:71</a></div></div>
+<div class="ttc" id="aa00467_html_ad6968adbf8f2cc44adf333ec96efb0bea2191ec3a46510d8a5879e97df8a44c37"><div class="ttname"><a href="a00467.html#ad6968adbf8f2cc44adf333ec96efb0bea2191ec3a46510d8a5879e97df8a44c37">W_BOLD</a></div><div class="ttdoc">bold text</div><div class="ttdef"><b>Definition:</b> <a href="a00467_source.html#l00045">werd.h:45</a></div></div>
+<div class="ttc" id="aa00467_html_a6d51e432a32c55ab6c02df47f4ca62c4af1487bbfe08f15ec84246120ce6d9006"><div class="ttname"><a href="a00467.html#a6d51e432a32c55ab6c02df47f4ca62c4af1487bbfe08f15ec84246120ce6d9006">DF_POLYGONAL</a></div><div class="ttdoc">Polyg approx.</div><div class="ttdef"><b>Definition:</b> <a href="a00467_source.html#l00047">werd.h:47</a></div></div>
+<div class="ttc" id="aa00467_html_ad6968adbf8f2cc44adf333ec96efb0bea8741ef3078614d5d00f0898b2dbd5bd7"><div class="ttname"><a href="a00467.html#ad6968adbf8f2cc44adf333ec96efb0bea8741ef3078614d5d00f0898b2dbd5bd7">W_SEGMENTED</a></div><div class="ttdoc">correctly segmented</div><div class="ttdef"><b>Definition:</b> <a href="a00467_source.html#l00043">werd.h:43</a></div></div>
+<div class="ttc" id="aa00467_html_ad6968adbf8f2cc44adf333ec96efb0beaff21d7c8c8992120fff35942408a00d2"><div class="ttname"><a href="a00467.html#ad6968adbf8f2cc44adf333ec96efb0beaff21d7c8c8992120fff35942408a00d2">W_BOL</a></div><div class="ttdoc">start of line</div><div class="ttdef"><b>Definition:</b> <a href="a00467_source.html#l00046">werd.h:46</a></div></div>
+<div class="ttc" id="aa00467_html_ad6968adbf8f2cc44adf333ec96efb0beafb8a30718938e1e273e054e550fefac5"><div class="ttname"><a href="a00467.html#ad6968adbf8f2cc44adf333ec96efb0beafb8a30718938e1e273e054e550fefac5">W_ITALIC</a></div><div class="ttdoc">italic text</div><div class="ttdef"><b>Definition:</b> <a href="a00467_source.html#l00044">werd.h:44</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_be21c9400dd14e513865608c9a8a7e5a.html">ccutil</a></li><li class="navelem"><a class="el" href="a00467.html">fileerr.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_27285da2200a3bef8a8e2dba4d21412a.html">ccstruct</a></li><li class="navelem"><a class="el" href="a00467.html">werd.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

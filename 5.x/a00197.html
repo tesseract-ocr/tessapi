@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/ccstruct/blamer.h File Reference</title>
+<title>tesseract: /tesseract/src/ccmain/pgedit.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,158 +89,429 @@ $(document).ready(function(){initNavTree('a00197.html','');});
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#enum-members">Enumerations</a>  </div>
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
-<div class="title">blamer.h File Reference</div>  </div>
+<div class="title">pgedit.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;cstdint&gt;</code><br />
-<code>#include &lt;cstring&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00227_source.html">boxword.h</a>&quot;</code><br />
-<code>#include &lt;tesseract/genericvector.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00329_source.html">params_training_featdef.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00374_source.html">ratngs.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00380_source.html">rect.h</a>&quot;</code><br />
-<code>#include &lt;tesseract/strngs.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00533_source.html">tprintf.h</a>&quot;</code><br />
-<code>#include &lt;tesseract/unichar.h&gt;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a00554_source.html">params.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a01469_source.html">scrollview.h</a>&quot;</code><br />
 </div>
 <p><a href="a00197_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02204.html">BlamerBundle</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02646.html">PGEventHandler</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a01539"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html">tesseract</a></td></tr>
+<tr class="memitem:a01818"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html">tesseract</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:a8faf52e106c04bfdc9898ffa90b821e1"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00197.html#a8faf52e106c04bfdc9898ffa90b821e1">IncorrectResultReason</a> { <br />
-&#160;&#160;<a class="el" href="a00197.html#a8faf52e106c04bfdc9898ffa90b821e1a4f5ff200b61e6226eb6d74aec188e769">IRR_CORRECT</a>, 
-<a class="el" href="a00197.html#a8faf52e106c04bfdc9898ffa90b821e1a9b70b64836694fc6dc4a7a6035b2dad8">IRR_CLASSIFIER</a>, 
-<a class="el" href="a00197.html#a8faf52e106c04bfdc9898ffa90b821e1a4c27b1a4f36ac4410ec500e4c7a1561c">IRR_CHOPPER</a>, 
-<a class="el" href="a00197.html#a8faf52e106c04bfdc9898ffa90b821e1a77542e0fa096277d7e600582d9b295d9">IRR_CLASS_LM_TRADEOFF</a>, 
-<br />
-&#160;&#160;<a class="el" href="a00197.html#a8faf52e106c04bfdc9898ffa90b821e1a04a64916350490fd4e5044e0387691ae">IRR_PAGE_LAYOUT</a>, 
-<a class="el" href="a00197.html#a8faf52e106c04bfdc9898ffa90b821e1ae6c5b07f9dc57fa9513f706cba5df27e">IRR_SEGSEARCH_HEUR</a>, 
-<a class="el" href="a00197.html#a8faf52e106c04bfdc9898ffa90b821e1a7c78c60fb2b9b0c1f2d5737883b07cf2">IRR_SEGSEARCH_PP</a>, 
-<a class="el" href="a00197.html#a8faf52e106c04bfdc9898ffa90b821e1aec8f086813191f1f038ad3a6e6aa1d04">IRR_CLASS_OLD_LM_TRADEOFF</a>, 
-<br />
-&#160;&#160;<a class="el" href="a00197.html#a8faf52e106c04bfdc9898ffa90b821e1a4779671dba2b7a68bfc0a4ca7e16a56b">IRR_ADAPTION</a>, 
-<a class="el" href="a00197.html#a8faf52e106c04bfdc9898ffa90b821e1ac05a52dad11e648af550df6dfcb7670c">IRR_NO_TRUTH_SPLIT</a>, 
-<a class="el" href="a00197.html#a8faf52e106c04bfdc9898ffa90b821e1a25d5b9457d6a31e2e1114c0bf8d0a795">IRR_NO_TRUTH</a>, 
-<a class="el" href="a00197.html#a8faf52e106c04bfdc9898ffa90b821e1abf247997ab473968746db80274036078">IRR_UNKNOWN</a>, 
-<br />
-&#160;&#160;<a class="el" href="a00197.html#a8faf52e106c04bfdc9898ffa90b821e1a5b7e21438ec02ceeba07bf96049d84d5">IRR_NUM_REASONS</a>
-<br />
- }</td></tr>
-<tr class="separator:a8faf52e106c04bfdc9898ffa90b821e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a8edeb7aea5ea119ad5d4d27d6b84ee20"><td class="memItemLeft" align="right" valign="top">BLOCK_LIST *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00197.html#a8edeb7aea5ea119ad5d4d27d6b84ee20">current_block_list</a></td></tr>
+<tr class="separator:a8edeb7aea5ea119ad5d4d27d6b84ee20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adad8d0d269314a0e2bc4e8b3039d2839"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00197.html#adad8d0d269314a0e2bc4e8b3039d2839">editor_image_win_name</a> = &quot;EditorImage&quot;</td></tr>
+<tr class="separator:adad8d0d269314a0e2bc4e8b3039d2839"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb7af6bbdd35600c1bdd1b8ad6eca463"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00197.html#acb7af6bbdd35600c1bdd1b8ad6eca463">editor_image_xpos</a> = 590</td></tr>
+<tr class="separator:acb7af6bbdd35600c1bdd1b8ad6eca463"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec61cd4df7d401121499b4ca26e7ddd7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00197.html#aec61cd4df7d401121499b4ca26e7ddd7">editor_image_ypos</a> = 10</td></tr>
+<tr class="separator:aec61cd4df7d401121499b4ca26e7ddd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ba73dc7320f26139d6242d5b425e836"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00197.html#a4ba73dc7320f26139d6242d5b425e836">editor_image_height</a> = 680</td></tr>
+<tr class="separator:a4ba73dc7320f26139d6242d5b425e836"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee604901c8f1d114ab97d87d0cf020d9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00197.html#aee604901c8f1d114ab97d87d0cf020d9">editor_image_width</a> = 655</td></tr>
+<tr class="separator:aee604901c8f1d114ab97d87d0cf020d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad448b00aaf6308a42ceab7c59495c6de"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00197.html#ad448b00aaf6308a42ceab7c59495c6de">editor_image_word_bb_color</a> = BLUE</td></tr>
+<tr class="separator:ad448b00aaf6308a42ceab7c59495c6de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a389a38d880e6f93080f323639b5339"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00197.html#a5a389a38d880e6f93080f323639b5339">editor_image_blob_bb_color</a> = YELLOW</td></tr>
+<tr class="separator:a5a389a38d880e6f93080f323639b5339"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab264905aef20f0e5234e193dd4d8e7e9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00197.html#ab264905aef20f0e5234e193dd4d8e7e9">editor_image_text_color</a> = WHITE</td></tr>
+<tr class="separator:ab264905aef20f0e5234e193dd4d8e7e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa63748d150abbfaa353ec08deedac738"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00197.html#aa63748d150abbfaa353ec08deedac738">editor_dbwin_name</a> = &quot;EditorDBWin&quot;</td></tr>
+<tr class="separator:aa63748d150abbfaa353ec08deedac738"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec9d97fa8363b502c1143615eeeb3951"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00197.html#aec9d97fa8363b502c1143615eeeb3951">editor_dbwin_xpos</a> = 50</td></tr>
+<tr class="separator:aec9d97fa8363b502c1143615eeeb3951"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e390bca19223821f59eb99e2d9c4f66"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00197.html#a6e390bca19223821f59eb99e2d9c4f66">editor_dbwin_ypos</a> = 500</td></tr>
+<tr class="separator:a6e390bca19223821f59eb99e2d9c4f66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ea506217f1152d488f6d606cb6c7400"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00197.html#a4ea506217f1152d488f6d606cb6c7400">editor_dbwin_height</a> = 24</td></tr>
+<tr class="separator:a4ea506217f1152d488f6d606cb6c7400"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32c83bcbcb3b432223416b42d90fe5f6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00197.html#a32c83bcbcb3b432223416b42d90fe5f6">editor_dbwin_width</a> = 80</td></tr>
+<tr class="separator:a32c83bcbcb3b432223416b42d90fe5f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b1a171f66cb26c91ba0e172a3e37b96"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00197.html#a3b1a171f66cb26c91ba0e172a3e37b96">editor_word_name</a> = &quot;BlnWords&quot;</td></tr>
+<tr class="separator:a3b1a171f66cb26c91ba0e172a3e37b96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1396e815e23f520c66e354c20ace2287"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00197.html#a1396e815e23f520c66e354c20ace2287">editor_word_xpos</a> = 60</td></tr>
+<tr class="separator:a1396e815e23f520c66e354c20ace2287"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74cbd2ca9b6c91e611bf40ff929e0ec2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00197.html#a74cbd2ca9b6c91e611bf40ff929e0ec2">editor_word_ypos</a> = 510</td></tr>
+<tr class="separator:a74cbd2ca9b6c91e611bf40ff929e0ec2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad05bed2c7da47d78ccc688bc8c9232b0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00197.html#ad05bed2c7da47d78ccc688bc8c9232b0">editor_word_height</a> = 240</td></tr>
+<tr class="separator:ad05bed2c7da47d78ccc688bc8c9232b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2773a9981baf7829a313622b2a798474"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00197.html#a2773a9981baf7829a313622b2a798474">editor_word_width</a> = 655</td></tr>
+<tr class="separator:a2773a9981baf7829a313622b2a798474"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4d61c8872f78ab7ab812c51f5ea2371"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00197.html#ae4d61c8872f78ab7ab812c51f5ea2371">editor_smd_scale_factor</a> = 1.0</td></tr>
+<tr class="separator:ae4d61c8872f78ab7ab812c51f5ea2371"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Enumeration Type Documentation</h2>
-<a id="a8faf52e106c04bfdc9898ffa90b821e1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8faf52e106c04bfdc9898ffa90b821e1">&#9670;&nbsp;</a></span>IncorrectResultReason</h2>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a8edeb7aea5ea119ad5d4d27d6b84ee20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8edeb7aea5ea119ad5d4d27d6b84ee20">&#9670;&nbsp;</a></span>current_block_list</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="a00197.html#a8faf52e106c04bfdc9898ffa90b821e1">IncorrectResultReason</a></td>
+          <td class="memname">BLOCK_LIST* current_block_list</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a8faf52e106c04bfdc9898ffa90b821e1a4f5ff200b61e6226eb6d74aec188e769"></a>IRR_CORRECT&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8faf52e106c04bfdc9898ffa90b821e1a9b70b64836694fc6dc4a7a6035b2dad8"></a>IRR_CLASSIFIER&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8faf52e106c04bfdc9898ffa90b821e1a4c27b1a4f36ac4410ec500e4c7a1561c"></a>IRR_CHOPPER&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8faf52e106c04bfdc9898ffa90b821e1a77542e0fa096277d7e600582d9b295d9"></a>IRR_CLASS_LM_TRADEOFF&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8faf52e106c04bfdc9898ffa90b821e1a04a64916350490fd4e5044e0387691ae"></a>IRR_PAGE_LAYOUT&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8faf52e106c04bfdc9898ffa90b821e1ae6c5b07f9dc57fa9513f706cba5df27e"></a>IRR_SEGSEARCH_HEUR&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8faf52e106c04bfdc9898ffa90b821e1a7c78c60fb2b9b0c1f2d5737883b07cf2"></a>IRR_SEGSEARCH_PP&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8faf52e106c04bfdc9898ffa90b821e1aec8f086813191f1f038ad3a6e6aa1d04"></a>IRR_CLASS_OLD_LM_TRADEOFF&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8faf52e106c04bfdc9898ffa90b821e1a4779671dba2b7a68bfc0a4ca7e16a56b"></a>IRR_ADAPTION&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8faf52e106c04bfdc9898ffa90b821e1ac05a52dad11e648af550df6dfcb7670c"></a>IRR_NO_TRUTH_SPLIT&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8faf52e106c04bfdc9898ffa90b821e1a25d5b9457d6a31e2e1114c0bf8d0a795"></a>IRR_NO_TRUTH&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8faf52e106c04bfdc9898ffa90b821e1abf247997ab473968746db80274036078"></a>IRR_UNKNOWN&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8faf52e106c04bfdc9898ffa90b821e1a5b7e21438ec02ceeba07bf96049d84d5"></a>IRR_NUM_REASONS&#160;</td><td class="fielddoc"></td></tr>
-</table>
 
-<p class="definition">Definition at line <a class="el" href="a00197_source.html#l00052">52</a> of file <a class="el" href="a00197_source.html">blamer.h</a>.</p>
-<div class="fragment"><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                           {</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="comment">// The text recorded in best choice == truth text</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <a class="code" href="a00197.html#a8faf52e106c04bfdc9898ffa90b821e1a4f5ff200b61e6226eb6d74aec188e769">IRR_CORRECT</a>,</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <span class="comment">// Either: Top choice is incorrect and is a dictionary word (language model</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="comment">// is unlikely to help correct such errors, so blame the classifier).</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="comment">// Or: the correct unichar was not included in shortlist produced by the</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="comment">// classifier at all.</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <a class="code" href="a00197.html#a8faf52e106c04bfdc9898ffa90b821e1a9b70b64836694fc6dc4a7a6035b2dad8">IRR_CLASSIFIER</a>,</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <span class="comment">// Chopper have not found one or more splits that correspond to the correct</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <span class="comment">// character bounding boxes recorded in BlamerBundle::truth_word.</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <a class="code" href="a00197.html#a8faf52e106c04bfdc9898ffa90b821e1a4c27b1a4f36ac4410ec500e4c7a1561c">IRR_CHOPPER</a>,</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <span class="comment">// Classifier did include correct unichars for each blob in the correct</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="comment">// segmentation, however its rating could have been too bad to allow the</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="comment">// language model to pull out the correct choice. On the other hand the</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <span class="comment">// strength of the language model might have been too weak to favor the</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <span class="comment">// correct answer, this we call this case a classifier-language model</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <span class="comment">// tradeoff error.</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <a class="code" href="a00197.html#a8faf52e106c04bfdc9898ffa90b821e1a77542e0fa096277d7e600582d9b295d9">IRR_CLASS_LM_TRADEOFF</a>,</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="comment">// Page layout failed to produce the correct bounding box. Blame page layout</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <span class="comment">// if the truth was not found for the word, which implies that the bounding</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <span class="comment">// box of the word was incorrect (no truth word had a similar bounding box).</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  <a class="code" href="a00197.html#a8faf52e106c04bfdc9898ffa90b821e1a04a64916350490fd4e5044e0387691ae">IRR_PAGE_LAYOUT</a>,</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <span class="comment">// SegSearch heuristic prevented one or more blobs from the correct</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <span class="comment">// segmentation state to be classified (e.g. the blob was too wide).</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  <a class="code" href="a00197.html#a8faf52e106c04bfdc9898ffa90b821e1ae6c5b07f9dc57fa9513f706cba5df27e">IRR_SEGSEARCH_HEUR</a>,</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  <span class="comment">// The correct segmentaiton state was not explored because of poor SegSearch</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  <span class="comment">// pain point prioritization. We blame SegSearch pain point prioritization</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <span class="comment">// if the best rating of a choice constructed from correct segmentation is</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  <span class="comment">// better than that of the best choice (i.e. if we got to explore the correct</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  <span class="comment">// segmentation state, language model would have picked the correct choice).</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <a class="code" href="a00197.html#a8faf52e106c04bfdc9898ffa90b821e1a7c78c60fb2b9b0c1f2d5737883b07cf2">IRR_SEGSEARCH_PP</a>,</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  <span class="comment">// Same as IRR_CLASS_LM_TRADEOFF, but used when we only run chopper on a word,</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  <span class="comment">// and thus use the old language model (permuters).</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  <span class="comment">// TODO(antonova): integrate the new language mode with chopper</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  <a class="code" href="a00197.html#a8faf52e106c04bfdc9898ffa90b821e1aec8f086813191f1f038ad3a6e6aa1d04">IRR_CLASS_OLD_LM_TRADEOFF</a>,</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  <span class="comment">// If there is an incorrect adaptive template match with a better score than</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  <span class="comment">// a correct one (either pre-trained or adapted), mark this as adaption error.</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  <a class="code" href="a00197.html#a8faf52e106c04bfdc9898ffa90b821e1a4779671dba2b7a68bfc0a4ca7e16a56b">IRR_ADAPTION</a>,</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  <span class="comment">// split_and_recog_word() failed to find a suitable split in truth.</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  <a class="code" href="a00197.html#a8faf52e106c04bfdc9898ffa90b821e1ac05a52dad11e648af550df6dfcb7670c">IRR_NO_TRUTH_SPLIT</a>,</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  <span class="comment">// Truth is not available for this word (e.g. when words in corrected content</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <span class="comment">// file are turned into ~~~~ because an appropriate alignment was not found.</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  <a class="code" href="a00197.html#a8faf52e106c04bfdc9898ffa90b821e1a25d5b9457d6a31e2e1114c0bf8d0a795">IRR_NO_TRUTH</a>,</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  <span class="comment">// The text recorded in best choice != truth text, but none of the above</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  <span class="comment">// reasons are set.</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  <a class="code" href="a00197.html#a8faf52e106c04bfdc9898ffa90b821e1abf247997ab473968746db80274036078">IRR_UNKNOWN</a>,</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  <a class="code" href="a00197.html#a8faf52e106c04bfdc9898ffa90b821e1a5b7e21438ec02ceeba07bf96049d84d5">IRR_NUM_REASONS</a></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;};</div>
-</div><!-- fragment -->
+</div>
+</div>
+<a id="a4ea506217f1152d488f6d606cb6c7400"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ea506217f1152d488f6d606cb6c7400">&#9670;&nbsp;</a></span>editor_dbwin_height</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int editor_dbwin_height = 24</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>"Editor debug window height" <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="a00194_source.html#l00135">135</a> of file <a class="el" href="a00194_source.html">pgedit.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aa63748d150abbfaa353ec08deedac738"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa63748d150abbfaa353ec08deedac738">&#9670;&nbsp;</a></span>editor_dbwin_name</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* editor_dbwin_name = &quot;EditorDBWin&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>"Editor debug window name" <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="a00194_source.html#l00132">132</a> of file <a class="el" href="a00194_source.html">pgedit.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a32c83bcbcb3b432223416b42d90fe5f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32c83bcbcb3b432223416b42d90fe5f6">&#9670;&nbsp;</a></span>editor_dbwin_width</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int editor_dbwin_width = 80</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>"Editor debug window width" <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="a00194_source.html#l00136">136</a> of file <a class="el" href="a00194_source.html">pgedit.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aec9d97fa8363b502c1143615eeeb3951"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec9d97fa8363b502c1143615eeeb3951">&#9670;&nbsp;</a></span>editor_dbwin_xpos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int editor_dbwin_xpos = 50</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>"Editor debug window X Pos" <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="a00194_source.html#l00133">133</a> of file <a class="el" href="a00194_source.html">pgedit.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a6e390bca19223821f59eb99e2d9c4f66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e390bca19223821f59eb99e2d9c4f66">&#9670;&nbsp;</a></span>editor_dbwin_ypos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int editor_dbwin_ypos = 500</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>"Editor debug window Y Pos" <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="a00194_source.html#l00134">134</a> of file <a class="el" href="a00194_source.html">pgedit.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a5a389a38d880e6f93080f323639b5339"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a389a38d880e6f93080f323639b5339">&#9670;&nbsp;</a></span>editor_image_blob_bb_color</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int editor_image_blob_bb_color = YELLOW</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>"Blob bounding box colour" <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="a00194_source.html#l00127">127</a> of file <a class="el" href="a00194_source.html">pgedit.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a4ba73dc7320f26139d6242d5b425e836"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ba73dc7320f26139d6242d5b425e836">&#9670;&nbsp;</a></span>editor_image_height</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int editor_image_height = 680</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>"Editor image height" <br  />
+ </p>
+
+</div>
+</div>
+<a id="ab264905aef20f0e5234e193dd4d8e7e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab264905aef20f0e5234e193dd4d8e7e9">&#9670;&nbsp;</a></span>editor_image_text_color</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int editor_image_text_color = WHITE</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>"Correct text colour" <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="a00194_source.html#l00129">129</a> of file <a class="el" href="a00194_source.html">pgedit.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aee604901c8f1d114ab97d87d0cf020d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee604901c8f1d114ab97d87d0cf020d9">&#9670;&nbsp;</a></span>editor_image_width</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int editor_image_width = 655</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>"Editor image width" <br  />
+ </p>
+
+</div>
+</div>
+<a id="adad8d0d269314a0e2bc4e8b3039d2839"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adad8d0d269314a0e2bc4e8b3039d2839">&#9670;&nbsp;</a></span>editor_image_win_name</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* editor_image_win_name = &quot;EditorImage&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>"Editor image window name" <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="a00194_source.html#l00120">120</a> of file <a class="el" href="a00194_source.html">pgedit.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ad448b00aaf6308a42ceab7c59495c6de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad448b00aaf6308a42ceab7c59495c6de">&#9670;&nbsp;</a></span>editor_image_word_bb_color</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int editor_image_word_bb_color = BLUE</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>"Word bounding box colour" <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="a00194_source.html#l00125">125</a> of file <a class="el" href="a00194_source.html">pgedit.cpp</a>.</p>
+
+</div>
+</div>
+<a id="acb7af6bbdd35600c1bdd1b8ad6eca463"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb7af6bbdd35600c1bdd1b8ad6eca463">&#9670;&nbsp;</a></span>editor_image_xpos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int editor_image_xpos = 590</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>"Editor image X Pos" <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="a00194_source.html#l00121">121</a> of file <a class="el" href="a00194_source.html">pgedit.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aec61cd4df7d401121499b4ca26e7ddd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec61cd4df7d401121499b4ca26e7ddd7">&#9670;&nbsp;</a></span>editor_image_ypos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int editor_image_ypos = 10</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>"Editor image Y Pos" <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="a00194_source.html#l00122">122</a> of file <a class="el" href="a00194_source.html">pgedit.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ae4d61c8872f78ab7ab812c51f5ea2371"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4d61c8872f78ab7ab812c51f5ea2371">&#9670;&nbsp;</a></span>editor_smd_scale_factor</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double editor_smd_scale_factor = 1.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>"Scaling for smd image" <br  />
+ </p>
+
+</div>
+</div>
+<a id="ad05bed2c7da47d78ccc688bc8c9232b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad05bed2c7da47d78ccc688bc8c9232b0">&#9670;&nbsp;</a></span>editor_word_height</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int editor_word_height = 240</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>"Word window height" <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="a00194_source.html#l00141">141</a> of file <a class="el" href="a00194_source.html">pgedit.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a3b1a171f66cb26c91ba0e172a3e37b96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b1a171f66cb26c91ba0e172a3e37b96">&#9670;&nbsp;</a></span>editor_word_name</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* editor_word_name = &quot;BlnWords&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>"BL normalised word window" <br  />
+</p>
+<p>"BL normalized word window" <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="a00194_source.html#l00138">138</a> of file <a class="el" href="a00194_source.html">pgedit.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a2773a9981baf7829a313622b2a798474"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2773a9981baf7829a313622b2a798474">&#9670;&nbsp;</a></span>editor_word_width</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int editor_word_width = 655</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>"Word window width" <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="a00194_source.html#l00142">142</a> of file <a class="el" href="a00194_source.html">pgedit.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a1396e815e23f520c66e354c20ace2287"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1396e815e23f520c66e354c20ace2287">&#9670;&nbsp;</a></span>editor_word_xpos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int editor_word_xpos = 60</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>"Word window X Pos" <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="a00194_source.html#l00139">139</a> of file <a class="el" href="a00194_source.html">pgedit.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a74cbd2ca9b6c91e611bf40ff929e0ec2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74cbd2ca9b6c91e611bf40ff929e0ec2">&#9670;&nbsp;</a></span>editor_word_ypos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int editor_word_ypos = 510</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>"Word window Y Pos" <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="a00194_source.html#l00140">140</a> of file <a class="el" href="a00194_source.html">pgedit.cpp</a>.</p>
+
 </div>
 </div>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa00197_html_a8faf52e106c04bfdc9898ffa90b821e1a4c27b1a4f36ac4410ec500e4c7a1561c"><div class="ttname"><a href="a00197.html#a8faf52e106c04bfdc9898ffa90b821e1a4c27b1a4f36ac4410ec500e4c7a1561c">IRR_CHOPPER</a></div><div class="ttdef"><b>Definition:</b> <a href="a00197_source.html#l00062">blamer.h:62</a></div></div>
-<div class="ttc" id="aa00197_html_a8faf52e106c04bfdc9898ffa90b821e1a9b70b64836694fc6dc4a7a6035b2dad8"><div class="ttname"><a href="a00197.html#a8faf52e106c04bfdc9898ffa90b821e1a9b70b64836694fc6dc4a7a6035b2dad8">IRR_CLASSIFIER</a></div><div class="ttdef"><b>Definition:</b> <a href="a00197_source.html#l00059">blamer.h:59</a></div></div>
-<div class="ttc" id="aa00197_html_a8faf52e106c04bfdc9898ffa90b821e1a5b7e21438ec02ceeba07bf96049d84d5"><div class="ttname"><a href="a00197.html#a8faf52e106c04bfdc9898ffa90b821e1a5b7e21438ec02ceeba07bf96049d84d5">IRR_NUM_REASONS</a></div><div class="ttdef"><b>Definition:</b> <a href="a00197_source.html#l00099">blamer.h:99</a></div></div>
-<div class="ttc" id="aa00197_html_a8faf52e106c04bfdc9898ffa90b821e1a04a64916350490fd4e5044e0387691ae"><div class="ttname"><a href="a00197.html#a8faf52e106c04bfdc9898ffa90b821e1a04a64916350490fd4e5044e0387691ae">IRR_PAGE_LAYOUT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00197_source.html#l00073">blamer.h:73</a></div></div>
-<div class="ttc" id="aa00197_html_a8faf52e106c04bfdc9898ffa90b821e1ac05a52dad11e648af550df6dfcb7670c"><div class="ttname"><a href="a00197.html#a8faf52e106c04bfdc9898ffa90b821e1ac05a52dad11e648af550df6dfcb7670c">IRR_NO_TRUTH_SPLIT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00197_source.html#l00091">blamer.h:91</a></div></div>
-<div class="ttc" id="aa00197_html_a8faf52e106c04bfdc9898ffa90b821e1a4779671dba2b7a68bfc0a4ca7e16a56b"><div class="ttname"><a href="a00197.html#a8faf52e106c04bfdc9898ffa90b821e1a4779671dba2b7a68bfc0a4ca7e16a56b">IRR_ADAPTION</a></div><div class="ttdef"><b>Definition:</b> <a href="a00197_source.html#l00089">blamer.h:89</a></div></div>
-<div class="ttc" id="aa00197_html_a8faf52e106c04bfdc9898ffa90b821e1a77542e0fa096277d7e600582d9b295d9"><div class="ttname"><a href="a00197.html#a8faf52e106c04bfdc9898ffa90b821e1a77542e0fa096277d7e600582d9b295d9">IRR_CLASS_LM_TRADEOFF</a></div><div class="ttdef"><b>Definition:</b> <a href="a00197_source.html#l00069">blamer.h:69</a></div></div>
-<div class="ttc" id="aa00197_html_a8faf52e106c04bfdc9898ffa90b821e1a7c78c60fb2b9b0c1f2d5737883b07cf2"><div class="ttname"><a href="a00197.html#a8faf52e106c04bfdc9898ffa90b821e1a7c78c60fb2b9b0c1f2d5737883b07cf2">IRR_SEGSEARCH_PP</a></div><div class="ttdef"><b>Definition:</b> <a href="a00197_source.html#l00082">blamer.h:82</a></div></div>
-<div class="ttc" id="aa00197_html_a8faf52e106c04bfdc9898ffa90b821e1aec8f086813191f1f038ad3a6e6aa1d04"><div class="ttname"><a href="a00197.html#a8faf52e106c04bfdc9898ffa90b821e1aec8f086813191f1f038ad3a6e6aa1d04">IRR_CLASS_OLD_LM_TRADEOFF</a></div><div class="ttdef"><b>Definition:</b> <a href="a00197_source.html#l00086">blamer.h:86</a></div></div>
-<div class="ttc" id="aa00197_html_a8faf52e106c04bfdc9898ffa90b821e1a4f5ff200b61e6226eb6d74aec188e769"><div class="ttname"><a href="a00197.html#a8faf52e106c04bfdc9898ffa90b821e1a4f5ff200b61e6226eb6d74aec188e769">IRR_CORRECT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00197_source.html#l00054">blamer.h:54</a></div></div>
-<div class="ttc" id="aa00197_html_a8faf52e106c04bfdc9898ffa90b821e1ae6c5b07f9dc57fa9513f706cba5df27e"><div class="ttname"><a href="a00197.html#a8faf52e106c04bfdc9898ffa90b821e1ae6c5b07f9dc57fa9513f706cba5df27e">IRR_SEGSEARCH_HEUR</a></div><div class="ttdef"><b>Definition:</b> <a href="a00197_source.html#l00076">blamer.h:76</a></div></div>
-<div class="ttc" id="aa00197_html_a8faf52e106c04bfdc9898ffa90b821e1abf247997ab473968746db80274036078"><div class="ttname"><a href="a00197.html#a8faf52e106c04bfdc9898ffa90b821e1abf247997ab473968746db80274036078">IRR_UNKNOWN</a></div><div class="ttdef"><b>Definition:</b> <a href="a00197_source.html#l00097">blamer.h:97</a></div></div>
-<div class="ttc" id="aa00197_html_a8faf52e106c04bfdc9898ffa90b821e1a25d5b9457d6a31e2e1114c0bf8d0a795"><div class="ttname"><a href="a00197.html#a8faf52e106c04bfdc9898ffa90b821e1a25d5b9457d6a31e2e1114c0bf8d0a795">IRR_NO_TRUTH</a></div><div class="ttdef"><b>Definition:</b> <a href="a00197_source.html#l00094">blamer.h:94</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_27285da2200a3bef8a8e2dba4d21412a.html">ccstruct</a></li><li class="navelem"><a class="el" href="a00197.html">blamer.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_43edf6714a3bf7b9dbcd0e0e50a1a1a7.html">ccmain</a></li><li class="navelem"><a class="el" href="a00197.html">pgedit.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

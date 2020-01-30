@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/classify/protos.cpp Source File</title>
+<title>tesseract: /tesseract/src/classify/mf.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,15 +87,15 @@ $(document).ready(function(){initNavTree('a00710_source.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">protos.cpp</div>  </div>
+<div class="title">mf.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="a00710.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/******************************************************************************</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * File:        protos.cpp  (Formerly protos.c)</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * Author:      Mark Seaman, OCR Technology</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> * (c) Copyright 1987, Hewlett-Packard Company.</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> ** Filename:    mf.h</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> ** Purpose:     Micro-feature interface to flexible feature extractor.</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> ** Author:      Dan Johnson</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> **</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> ** (c) Copyright Hewlett-Packard Company, 1988.</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> ** Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> ** you may not use this file except in compliance with the License.</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> ** You may obtain a copy of the License at</span></div>
@@ -105,190 +105,49 @@ $(document).ready(function(){initNavTree('a00710_source.html','');});
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> ** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> ** See the License for the specific language governing permissions and</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> ** limitations under the License.</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> *****************************************************************************/</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">/*----------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">              I n c l u d e s</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="a00710.html#a525335710b53cb064ca56b936120431e">   20</a></span>&#160;<span class="comment">----------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#define _USE_MATH_DEFINES       // for M_PI</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00713.html">protos.h</a>&quot;</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;cmath&gt;</span>                <span class="comment">// for M_PI</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &lt;cstdio&gt;</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00752.html">emalloc.h</a>&quot;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00746.html">callcpp.h</a>&quot;</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00533.html">tprintf.h</a>&quot;</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00590.html">classify.h</a>&quot;</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00503.html">params.h</a>&quot;</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00647.html">intproto.h</a>&quot;</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="a00710.html#a84b07ab4cf4e8b013de05ee603af79e8">   31</a></span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="a00710.html#aab82a0eabce6034ba0e416fb1cd4757d">   32</a></span>&#160;<span class="preprocessor">#define PROTO_INCREMENT   32</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#define CONFIG_INCREMENT  16</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">/*----------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">              F u n c t i o n s</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">----------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keywordtype">int</span> <a class="code" href="a00710.html#a922ce6793eb82e1f8224ed372b75aa24">AddConfigToClass</a>(<a class="code" href="a02876.html">CLASS_TYPE</a> Class) {</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="keywordtype">int</span> NewNumConfigs;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <span class="keywordtype">int</span> NewConfig;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keywordtype">int</span> MaxNumProtos;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <a class="code" href="a00740.html#a3ac8e43e611208cef7a7169e0058a3c2">BIT_VECTOR</a> <a class="code" href="a01199.html#a1630a3dc82a9a7cef07bb6153df9eb9c">Config</a>;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  MaxNumProtos = Class-&gt;<a class="code" href="a02876.html#ac5a54dcebe52e335664add85c656c47a">MaxNumProtos</a>;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <a class="code" href="a00464.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a>(MaxNumProtos &lt;= <a class="code" href="a00647.html#a3e890a5d21d8456ad197510fd7caf277">MAX_NUM_PROTOS</a>);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <span class="keywordflow">if</span> (Class-&gt;<a class="code" href="a02876.html#a304b3c6d022c36c45cfec1de288a4791">NumConfigs</a> &gt;= Class-&gt;<a class="code" href="a02876.html#adaa910188aca1fe9d77ba2549b426dba">MaxNumConfigs</a>) {</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="comment">/* add configs in CONFIG_INCREMENT chunks at a time */</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    NewNumConfigs = (((Class-&gt;<a class="code" href="a02876.html#adaa910188aca1fe9d77ba2549b426dba">MaxNumConfigs</a> + <a class="code" href="a00710.html#aab82a0eabce6034ba0e416fb1cd4757d">CONFIG_INCREMENT</a>) /</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;      <a class="code" href="a00710.html#aab82a0eabce6034ba0e416fb1cd4757d">CONFIG_INCREMENT</a>) * <a class="code" href="a00710.html#aab82a0eabce6034ba0e416fb1cd4757d">CONFIG_INCREMENT</a>);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    Class-&gt;<a class="code" href="a02876.html#ac5524279d10e5bafe306355d72309b69">Configurations</a> =</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;      static_cast&lt;CONFIGS&gt;(<a class="code" href="a00749.html#a2bd9b4f7899f8798018497faa3b12eed">Erealloc</a> (Class-&gt;<a class="code" href="a02876.html#ac5524279d10e5bafe306355d72309b69">Configurations</a>,</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;      sizeof (<a class="code" href="a00740.html#a3ac8e43e611208cef7a7169e0058a3c2">BIT_VECTOR</a>) * NewNumConfigs));</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    Class-&gt;<a class="code" href="a02876.html#adaa910188aca1fe9d77ba2549b426dba">MaxNumConfigs</a> = NewNumConfigs;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  }</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  NewConfig = Class-&gt;<a class="code" href="a02876.html#a304b3c6d022c36c45cfec1de288a4791">NumConfigs</a>++;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <a class="code" href="a01199.html#a1630a3dc82a9a7cef07bb6153df9eb9c">Config</a> = NewBitVector(<a class="code" href="a00647.html#a3e890a5d21d8456ad197510fd7caf277">MAX_NUM_PROTOS</a>);</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  Class-&gt;<a class="code" href="a02876.html#ac5524279d10e5bafe306355d72309b69">Configurations</a>[NewConfig] = <a class="code" href="a01199.html#a1630a3dc82a9a7cef07bb6153df9eb9c">Config</a>;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  zero_all_bits (<a class="code" href="a01199.html#a1630a3dc82a9a7cef07bb6153df9eb9c">Config</a>, WordsInVectorOfSize(<a class="code" href="a00647.html#a3e890a5d21d8456ad197510fd7caf277">MAX_NUM_PROTOS</a>));</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <span class="keywordflow">return</span> (NewConfig);</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;}</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="keywordtype">int</span> <a class="code" href="a00710.html#a8a197adbd5718ec39c2b6a4a74694aa4">AddProtoToClass</a>(<a class="code" href="a02876.html">CLASS_TYPE</a> Class) {</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  <span class="keywordflow">if</span> (Class-&gt;<a class="code" href="a02876.html#a3ade1e057bbc57fab6cf8cf0c3df893b">NumProtos</a> &gt;= Class-&gt;<a class="code" href="a02876.html#ac5a54dcebe52e335664add85c656c47a">MaxNumProtos</a>) {</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="comment">/* add protos in PROTO_INCREMENT chunks at a time */</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordtype">int</span> NewNumProtos = (((Class-&gt;<a class="code" href="a02876.html#ac5a54dcebe52e335664add85c656c47a">MaxNumProtos</a> + <a class="code" href="a00710.html#a84b07ab4cf4e8b013de05ee603af79e8">PROTO_INCREMENT</a>) /</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;      <a class="code" href="a00710.html#a84b07ab4cf4e8b013de05ee603af79e8">PROTO_INCREMENT</a>) * <a class="code" href="a00710.html#a84b07ab4cf4e8b013de05ee603af79e8">PROTO_INCREMENT</a>);</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    Class-&gt;<a class="code" href="a02876.html#add1a2c4f7b02eb438c377242495013ef">Prototypes</a> = static_cast&lt;PROTO&gt;(<a class="code" href="a00749.html#a2bd9b4f7899f8798018497faa3b12eed">Erealloc</a> (Class-&gt;<a class="code" href="a02876.html#add1a2c4f7b02eb438c377242495013ef">Prototypes</a>,</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;      sizeof (<a class="code" href="a02872.html">PROTO_STRUCT</a>) *</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;      NewNumProtos));</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    Class-&gt;<a class="code" href="a02876.html#ac5a54dcebe52e335664add85c656c47a">MaxNumProtos</a> = NewNumProtos;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <a class="code" href="a00464.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a>(NewNumProtos &lt;= <a class="code" href="a00647.html#a3e890a5d21d8456ad197510fd7caf277">MAX_NUM_PROTOS</a>);</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  }</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  <span class="keywordtype">int</span> NewProto = Class-&gt;<a class="code" href="a02876.html#a3ade1e057bbc57fab6cf8cf0c3df893b">NumProtos</a>++;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  <a class="code" href="a00464.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a>(Class-&gt;<a class="code" href="a02876.html#a3ade1e057bbc57fab6cf8cf0c3df893b">NumProtos</a> &lt;= <a class="code" href="a00647.html#a3e890a5d21d8456ad197510fd7caf277">MAX_NUM_PROTOS</a>);</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  <span class="keywordflow">return</span> (NewProto);</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;}</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment">/**********************************************************************</span></div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment"> * FillABC</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="a00713.html#ac0d58978bbcf0c732ae94fb554bccd3b">  105</a></span>&#160;<span class="comment"> * Fill in Protos A, B, C fields based on the X, Y, Angle fields.</span></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment"> **********************************************************************/</span></div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00710.html#ac0d58978bbcf0c732ae94fb554bccd3b">FillABC</a>(<a class="code" href="a02872.html">PROTO</a> Proto) {</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  <span class="keywordtype">float</span> Slope, Intercept, Normalizer;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  Slope = tan(Proto-&gt;<a class="code" href="a02872.html#a07e33c3a5ccb9b3d318e4750bcbe340e">Angle</a> * 2.0 * M_PI);</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  Intercept = Proto-&gt;<a class="code" href="a02872.html#a8974b76a07b68f963954594541242f05">Y</a> - Slope * Proto-&gt;<a class="code" href="a02872.html#afbdee73d6feb9d9d9c1f8b70553a9c40">X</a>;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  Normalizer = 1.0 / sqrt (Slope * Slope + 1.0);</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  Proto-&gt;<a class="code" href="a02872.html#aca304fd46a99a4b3df8ec4dea843467e">A</a> = Slope * Normalizer;</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  Proto-&gt;<a class="code" href="a02872.html#aa58c91889ec6e353047e25aef9603377">B</a> = -Normalizer;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  Proto-&gt;<a class="code" href="a02872.html#acea7d4da924df8c651a7601ea25f12da">C</a> = Intercept * Normalizer;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;}</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment">/**********************************************************************</span></div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment"> * FreeClass</span></div>
-<div class="line"><a name="l00121"></a><span class="lineno"><a class="line" href="a00713.html#a751a34c0eb8b7dcba1439287dd3eb3d5">  121</a></span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment"> * Deallocate the memory consumed by the specified class.</span></div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment"> **********************************************************************/</span></div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00710.html#a751a34c0eb8b7dcba1439287dd3eb3d5">FreeClass</a>(<a class="code" href="a02876.html">CLASS_TYPE</a> Class) {</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;  <span class="keywordflow">if</span> (Class) {</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <a class="code" href="a00710.html#a8c42a896530af773ecb7de6ea5186b40">FreeClassFields</a>(Class);</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keyword">delete</span> Class;</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;  }</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;}</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment">/**********************************************************************</span></div>
-<div class="line"><a name="l00133"></a><span class="lineno"><a class="line" href="a00713.html#a8c42a896530af773ecb7de6ea5186b40">  133</a></span>&#160;<span class="comment"> * FreeClassFields</span></div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="comment"> * Deallocate the memory consumed by subfields of the specified class.</span></div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="comment"> **********************************************************************/</span></div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00710.html#a8c42a896530af773ecb7de6ea5186b40">FreeClassFields</a>(<a class="code" href="a02876.html">CLASS_TYPE</a> Class) {</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;  <span class="keywordtype">int</span> i;</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; </div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;  <span class="keywordflow">if</span> (Class) {</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    <span class="keywordflow">if</span> (Class-&gt;<a class="code" href="a02876.html#ac5a54dcebe52e335664add85c656c47a">MaxNumProtos</a> &gt; 0) free(Class-&gt;<a class="code" href="a02876.html#add1a2c4f7b02eb438c377242495013ef">Prototypes</a>);</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    <span class="keywordflow">if</span> (Class-&gt;<a class="code" href="a02876.html#adaa910188aca1fe9d77ba2549b426dba">MaxNumConfigs</a> &gt; 0) {</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;      <span class="keywordflow">for</span> (i = 0; i &lt; Class-&gt;<a class="code" href="a02876.html#a304b3c6d022c36c45cfec1de288a4791">NumConfigs</a>; i++)</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        FreeBitVector (Class-&gt;<a class="code" href="a02876.html#ac5524279d10e5bafe306355d72309b69">Configurations</a>[i]);</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;      free(Class-&gt;<a class="code" href="a02876.html#ac5524279d10e5bafe306355d72309b69">Configurations</a>);</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    }</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;  }</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;}</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="comment">/**********************************************************************</span></div>
-<div class="line"><a name="l00151"></a><span class="lineno"><a class="line" href="a00713.html#ae1b779964924a618a307d8d6f0ec6dff">  151</a></span>&#160;<span class="comment"> * NewClass</span></div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="comment"> * Allocate a new class with enough memory to hold the specified number</span></div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="comment"> * of prototypes and configurations.</span></div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="comment"> **********************************************************************/</span></div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<a class="code" href="a02876.html">CLASS_TYPE</a> <a class="code" href="a00710.html#ae1b779964924a618a307d8d6f0ec6dff">NewClass</a>(<span class="keywordtype">int</span> NumProtos, <span class="keywordtype">int</span> NumConfigs) {</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;  <a class="code" href="a02876.html">CLASS_TYPE</a> Class;</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;  Class = <span class="keyword">new</span> <a class="code" href="a02876.html">CLASS_STRUCT</a>;</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;  <span class="keywordflow">if</span> (NumProtos &gt; 0)</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    Class-&gt;<a class="code" href="a02876.html#add1a2c4f7b02eb438c377242495013ef">Prototypes</a> = static_cast&lt;PROTO&gt;(<a class="code" href="a00749.html#a9bdc0885c33bbb5b062c77b1d90e2305">Emalloc</a> (NumProtos * <span class="keyword">sizeof</span> (<a class="code" href="a02872.html">PROTO_STRUCT</a>)));</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160; </div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;  <span class="keywordflow">if</span> (NumConfigs &gt; 0)</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    Class-&gt;<a class="code" href="a02876.html#ac5524279d10e5bafe306355d72309b69">Configurations</a> = static_cast&lt;CONFIGS&gt;(<a class="code" href="a00749.html#a9bdc0885c33bbb5b062c77b1d90e2305">Emalloc</a> (NumConfigs *</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;      <span class="keyword">sizeof</span> (<a class="code" href="a00740.html#a3ac8e43e611208cef7a7169e0058a3c2">BIT_VECTOR</a>)));</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;  Class-&gt;<a class="code" href="a02876.html#ac5a54dcebe52e335664add85c656c47a">MaxNumProtos</a> = NumProtos;</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;  Class-&gt;<a class="code" href="a02876.html#adaa910188aca1fe9d77ba2549b426dba">MaxNumConfigs</a> = NumConfigs;</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;  Class-&gt;<a class="code" href="a02876.html#a3ade1e057bbc57fab6cf8cf0c3df893b">NumProtos</a> = 0;</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;  Class-&gt;<a class="code" href="a02876.html#a304b3c6d022c36c45cfec1de288a4791">NumConfigs</a> = 0;</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;  <span class="keywordflow">return</span> (Class);</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160; </div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;}</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> ******************************************************************************/</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#ifndef MF_H</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#define MF_H</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00746.html">ocrfeatures.h</a>&quot;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00260.html">blobs.h</a>&quot;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="a00710.html#a0ae9eb66d190c70000f710f7c11977af">   26</a></span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span> {</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <a class="code" href="a00710.html#a0ae9eb66d190c70000f710f7c11977afa6e5b6d39513820252795a81c22a85094">MFXPosition</a>, <a class="code" href="a00710.html#a0ae9eb66d190c70000f710f7c11977afa86c3fede274bd6e6fad789032ba86695">MFYPosition</a>,</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <a class="code" href="a00710.html#a0ae9eb66d190c70000f710f7c11977afa29b85f8df2366e185699f12117ed1b54">MFLength</a>, <a class="code" href="a00710.html#a0ae9eb66d190c70000f710f7c11977afa6bbdda7793b58667c8ffbf57a38e7436">MFDirection</a>, <a class="code" href="a00710.html#a0ae9eb66d190c70000f710f7c11977afa84f738cc38f82afce789bb6e9908a2cd">MFBulge1</a>, <a class="code" href="a00710.html#a0ae9eb66d190c70000f710f7c11977afa11c81e882c3753f597780e69582c06b1">MFBulge2</a>,</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <a class="code" href="a00710.html#a0ae9eb66d190c70000f710f7c11977afa1c44793580a78fadeffdefc28065e682">MFCount</a>  <span class="comment">// For array sizes.</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;} <a class="code" href="a00710.html#a0ae9eb66d190c70000f710f7c11977af">MF_PARAM_NAME</a>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="a00710.html#a29d1eef9328292867329303f9f60c5cb">   32</a></span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">float</span> <a class="code" href="a00710.html#a29d1eef9328292867329303f9f60c5cb">MicroFeature</a>[<a class="code" href="a00710.html#a0ae9eb66d190c70000f710f7c11977afa1c44793580a78fadeffdefc28065e682">MFCount</a>];</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">/*----------------------------------------------------------------------------</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">          Private Function Prototypes</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">-----------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<a class="code" href="a03326.html">FEATURE_SET</a> <a class="code" href="a00710.html#a65d3fa9ad9b625a37b5b5a8254156bac">ExtractMicros</a>(<a class="code" href="a02690.html">TBLOB</a>* Blob, <span class="keyword">const</span> <a class="code" href="a02798.html">DENORM</a>&amp; cn_denorm);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa00503_html"><div class="ttname"><a href="a00503.html">params.h</a></div></div>
-<div class="ttc" id="aa02876_html_ac5a54dcebe52e335664add85c656c47a"><div class="ttname"><a href="a02876.html#ac5a54dcebe52e335664add85c656c47a">CLASS_STRUCT::MaxNumProtos</a></div><div class="ttdeci">int16_t MaxNumProtos</div><div class="ttdef"><b>Definition:</b> <a href="a00713_source.html#l00054">protos.h:54</a></div></div>
-<div class="ttc" id="aa02876_html_a3ade1e057bbc57fab6cf8cf0c3df893b"><div class="ttname"><a href="a02876.html#a3ade1e057bbc57fab6cf8cf0c3df893b">CLASS_STRUCT::NumProtos</a></div><div class="ttdeci">int16_t NumProtos</div><div class="ttdef"><b>Definition:</b> <a href="a00713_source.html#l00053">protos.h:53</a></div></div>
-<div class="ttc" id="aa00749_html_a2bd9b4f7899f8798018497faa3b12eed"><div class="ttname"><a href="a00749.html#a2bd9b4f7899f8798018497faa3b12eed">Erealloc</a></div><div class="ttdeci">void * Erealloc(void *ptr, int size)</div><div class="ttdef"><b>Definition:</b> <a href="a00749_source.html#l00038">emalloc.cpp:38</a></div></div>
-<div class="ttc" id="aa02872_html_aa58c91889ec6e353047e25aef9603377"><div class="ttname"><a href="a02872.html#aa58c91889ec6e353047e25aef9603377">PROTO_STRUCT::B</a></div><div class="ttdeci">float B</div><div class="ttdef"><b>Definition:</b> <a href="a00713_source.html#l00036">protos.h:36</a></div></div>
-<div class="ttc" id="aa00752_html"><div class="ttname"><a href="a00752.html">emalloc.h</a></div></div>
-<div class="ttc" id="aa02872_html_acea7d4da924df8c651a7601ea25f12da"><div class="ttname"><a href="a02872.html#acea7d4da924df8c651a7601ea25f12da">PROTO_STRUCT::C</a></div><div class="ttdeci">float C</div><div class="ttdef"><b>Definition:</b> <a href="a00713_source.html#l00037">protos.h:37</a></div></div>
-<div class="ttc" id="aa02872_html"><div class="ttname"><a href="a02872.html">PROTO_STRUCT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00713_source.html#l00034">protos.h:34</a></div></div>
-<div class="ttc" id="aa02872_html_afbdee73d6feb9d9d9c1f8b70553a9c40"><div class="ttname"><a href="a02872.html#afbdee73d6feb9d9d9c1f8b70553a9c40">PROTO_STRUCT::X</a></div><div class="ttdeci">float X</div><div class="ttdef"><b>Definition:</b> <a href="a00713_source.html#l00038">protos.h:38</a></div></div>
-<div class="ttc" id="aa02876_html_ac5524279d10e5bafe306355d72309b69"><div class="ttname"><a href="a02876.html#ac5524279d10e5bafe306355d72309b69">CLASS_STRUCT::Configurations</a></div><div class="ttdeci">CONFIGS Configurations</div><div class="ttdef"><b>Definition:</b> <a href="a00713_source.html#l00058">protos.h:58</a></div></div>
-<div class="ttc" id="aa00533_html"><div class="ttname"><a href="a00533.html">tprintf.h</a></div></div>
-<div class="ttc" id="aa02876_html_a304b3c6d022c36c45cfec1de288a4791"><div class="ttname"><a href="a02876.html#a304b3c6d022c36c45cfec1de288a4791">CLASS_STRUCT::NumConfigs</a></div><div class="ttdeci">int16_t NumConfigs</div><div class="ttdef"><b>Definition:</b> <a href="a00713_source.html#l00056">protos.h:56</a></div></div>
-<div class="ttc" id="aa00713_html"><div class="ttname"><a href="a00713.html">protos.h</a></div></div>
-<div class="ttc" id="aa02872_html_aca304fd46a99a4b3df8ec4dea843467e"><div class="ttname"><a href="a02872.html#aca304fd46a99a4b3df8ec4dea843467e">PROTO_STRUCT::A</a></div><div class="ttdeci">float A</div><div class="ttdef"><b>Definition:</b> <a href="a00713_source.html#l00035">protos.h:35</a></div></div>
-<div class="ttc" id="aa00710_html_ac0d58978bbcf0c732ae94fb554bccd3b"><div class="ttname"><a href="a00710.html#ac0d58978bbcf0c732ae94fb554bccd3b">FillABC</a></div><div class="ttdeci">void FillABC(PROTO Proto)</div><div class="ttdef"><b>Definition:</b> <a href="a00710_source.html#l00105">protos.cpp:105</a></div></div>
-<div class="ttc" id="aa00749_html_a9bdc0885c33bbb5b062c77b1d90e2305"><div class="ttname"><a href="a00749.html#a9bdc0885c33bbb5b062c77b1d90e2305">Emalloc</a></div><div class="ttdeci">void * Emalloc(int Size)</div><div class="ttdef"><b>Definition:</b> <a href="a00749_source.html#l00031">emalloc.cpp:31</a></div></div>
-<div class="ttc" id="aa00710_html_a84b07ab4cf4e8b013de05ee603af79e8"><div class="ttname"><a href="a00710.html#a84b07ab4cf4e8b013de05ee603af79e8">PROTO_INCREMENT</a></div><div class="ttdeci">#define PROTO_INCREMENT</div><div class="ttdef"><b>Definition:</b> <a href="a00710_source.html#l00031">protos.cpp:31</a></div></div>
-<div class="ttc" id="aa00746_html"><div class="ttname"><a href="a00746.html">callcpp.h</a></div></div>
-<div class="ttc" id="aa01199_html_a1630a3dc82a9a7cef07bb6153df9eb9c"><div class="ttname"><a href="a01199.html#a1630a3dc82a9a7cef07bb6153df9eb9c">Config</a></div><div class="ttdeci">CLUSTERCONFIG Config</div><div class="ttdef"><b>Definition:</b> <a href="a01199_source.html#l00088">commontraining.cpp:88</a></div></div>
-<div class="ttc" id="aa00740_html_a3ac8e43e611208cef7a7169e0058a3c2"><div class="ttname"><a href="a00740.html#a3ac8e43e611208cef7a7169e0058a3c2">BIT_VECTOR</a></div><div class="ttdeci">uint32_t * BIT_VECTOR</div><div class="ttdef"><b>Definition:</b> <a href="a00740_source.html#l00027">bitvec.h:27</a></div></div>
-<div class="ttc" id="aa02876_html_adaa910188aca1fe9d77ba2549b426dba"><div class="ttname"><a href="a02876.html#adaa910188aca1fe9d77ba2549b426dba">CLASS_STRUCT::MaxNumConfigs</a></div><div class="ttdeci">int16_t MaxNumConfigs</div><div class="ttdef"><b>Definition:</b> <a href="a00713_source.html#l00057">protos.h:57</a></div></div>
-<div class="ttc" id="aa02872_html_a8974b76a07b68f963954594541242f05"><div class="ttname"><a href="a02872.html#a8974b76a07b68f963954594541242f05">PROTO_STRUCT::Y</a></div><div class="ttdeci">float Y</div><div class="ttdef"><b>Definition:</b> <a href="a00713_source.html#l00039">protos.h:39</a></div></div>
-<div class="ttc" id="aa00710_html_a8a197adbd5718ec39c2b6a4a74694aa4"><div class="ttname"><a href="a00710.html#a8a197adbd5718ec39c2b6a4a74694aa4">AddProtoToClass</a></div><div class="ttdeci">int AddProtoToClass(CLASS_TYPE Class)</div><div class="ttdef"><b>Definition:</b> <a href="a00710_source.html#l00082">protos.cpp:82</a></div></div>
-<div class="ttc" id="aa00590_html"><div class="ttname"><a href="a00590.html">classify.h</a></div></div>
-<div class="ttc" id="aa00710_html_a751a34c0eb8b7dcba1439287dd3eb3d5"><div class="ttname"><a href="a00710.html#a751a34c0eb8b7dcba1439287dd3eb3d5">FreeClass</a></div><div class="ttdeci">void FreeClass(CLASS_TYPE Class)</div><div class="ttdef"><b>Definition:</b> <a href="a00710_source.html#l00121">protos.cpp:121</a></div></div>
-<div class="ttc" id="aa00710_html_aab82a0eabce6034ba0e416fb1cd4757d"><div class="ttname"><a href="a00710.html#aab82a0eabce6034ba0e416fb1cd4757d">CONFIG_INCREMENT</a></div><div class="ttdeci">#define CONFIG_INCREMENT</div><div class="ttdef"><b>Definition:</b> <a href="a00710_source.html#l00032">protos.cpp:32</a></div></div>
-<div class="ttc" id="aa00647_html_a3e890a5d21d8456ad197510fd7caf277"><div class="ttname"><a href="a00647.html#a3e890a5d21d8456ad197510fd7caf277">MAX_NUM_PROTOS</a></div><div class="ttdeci">#define MAX_NUM_PROTOS</div><div class="ttdef"><b>Definition:</b> <a href="a00647_source.html#l00047">intproto.h:47</a></div></div>
-<div class="ttc" id="aa02876_html"><div class="ttname"><a href="a02876.html">CLASS_STRUCT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00713_source.html#l00045">protos.h:45</a></div></div>
-<div class="ttc" id="aa00647_html"><div class="ttname"><a href="a00647.html">intproto.h</a></div></div>
-<div class="ttc" id="aa00464_html_a93a603f4063a6b9403d81caa245a583b"><div class="ttname"><a href="a00464.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a></div><div class="ttdeci">#define ASSERT_HOST(x)</div><div class="ttdef"><b>Definition:</b> <a href="a00464_source.html#l00087">errcode.h:87</a></div></div>
-<div class="ttc" id="aa02872_html_a07e33c3a5ccb9b3d318e4750bcbe340e"><div class="ttname"><a href="a02872.html#a07e33c3a5ccb9b3d318e4750bcbe340e">PROTO_STRUCT::Angle</a></div><div class="ttdeci">float Angle</div><div class="ttdef"><b>Definition:</b> <a href="a00713_source.html#l00040">protos.h:40</a></div></div>
-<div class="ttc" id="aa00710_html_a8c42a896530af773ecb7de6ea5186b40"><div class="ttname"><a href="a00710.html#a8c42a896530af773ecb7de6ea5186b40">FreeClassFields</a></div><div class="ttdeci">void FreeClassFields(CLASS_TYPE Class)</div><div class="ttdef"><b>Definition:</b> <a href="a00710_source.html#l00133">protos.cpp:133</a></div></div>
-<div class="ttc" id="aa00710_html_a922ce6793eb82e1f8224ed372b75aa24"><div class="ttname"><a href="a00710.html#a922ce6793eb82e1f8224ed372b75aa24">AddConfigToClass</a></div><div class="ttdeci">int AddConfigToClass(CLASS_TYPE Class)</div><div class="ttdef"><b>Definition:</b> <a href="a00710_source.html#l00045">protos.cpp:45</a></div></div>
-<div class="ttc" id="aa02876_html_add1a2c4f7b02eb438c377242495013ef"><div class="ttname"><a href="a02876.html#add1a2c4f7b02eb438c377242495013ef">CLASS_STRUCT::Prototypes</a></div><div class="ttdeci">PROTO Prototypes</div><div class="ttdef"><b>Definition:</b> <a href="a00713_source.html#l00055">protos.h:55</a></div></div>
-<div class="ttc" id="aa00710_html_ae1b779964924a618a307d8d6f0ec6dff"><div class="ttname"><a href="a00710.html#ae1b779964924a618a307d8d6f0ec6dff">NewClass</a></div><div class="ttdeci">CLASS_TYPE NewClass(int NumProtos, int NumConfigs)</div><div class="ttdef"><b>Definition:</b> <a href="a00710_source.html#l00151">protos.cpp:151</a></div></div>
+<div class="ttc" id="aa00710_html_a0ae9eb66d190c70000f710f7c11977afa1c44793580a78fadeffdefc28065e682"><div class="ttname"><a href="a00710.html#a0ae9eb66d190c70000f710f7c11977afa1c44793580a78fadeffdefc28065e682">MFCount</a></div><div class="ttdef"><b>Definition:</b> <a href="a00710_source.html#l00043">mf.h:43</a></div></div>
+<div class="ttc" id="aa00710_html_a0ae9eb66d190c70000f710f7c11977afa84f738cc38f82afce789bb6e9908a2cd"><div class="ttname"><a href="a00710.html#a0ae9eb66d190c70000f710f7c11977afa84f738cc38f82afce789bb6e9908a2cd">MFBulge1</a></div><div class="ttdef"><b>Definition:</b> <a href="a00710_source.html#l00042">mf.h:42</a></div></div>
+<div class="ttc" id="aa00710_html_a0ae9eb66d190c70000f710f7c11977af"><div class="ttname"><a href="a00710.html#a0ae9eb66d190c70000f710f7c11977af">MF_PARAM_NAME</a></div><div class="ttdeci">MF_PARAM_NAME</div><div class="ttdef"><b>Definition:</b> <a href="a00710_source.html#l00026">mf.h:26</a></div></div>
+<div class="ttc" id="aa00260_html"><div class="ttname"><a href="a00260.html">blobs.h</a></div></div>
+<div class="ttc" id="aa00710_html_a0ae9eb66d190c70000f710f7c11977afa6e5b6d39513820252795a81c22a85094"><div class="ttname"><a href="a00710.html#a0ae9eb66d190c70000f710f7c11977afa6e5b6d39513820252795a81c22a85094">MFXPosition</a></div><div class="ttdef"><b>Definition:</b> <a href="a00710_source.html#l00041">mf.h:41</a></div></div>
+<div class="ttc" id="aa00710_html_a65d3fa9ad9b625a37b5b5a8254156bac"><div class="ttname"><a href="a00710.html#a65d3fa9ad9b625a37b5b5a8254156bac">ExtractMicros</a></div><div class="ttdeci">FEATURE_SET ExtractMicros(TBLOB *Blob, const DENORM &amp;cn_denorm)</div><div class="ttdef"><b>Definition:</b> <a href="a00707_source.html#l00043">mf.cpp:43</a></div></div>
+<div class="ttc" id="aa00746_html"><div class="ttname"><a href="a00746.html">ocrfeatures.h</a></div></div>
+<div class="ttc" id="aa00710_html_a0ae9eb66d190c70000f710f7c11977afa11c81e882c3753f597780e69582c06b1"><div class="ttname"><a href="a00710.html#a0ae9eb66d190c70000f710f7c11977afa11c81e882c3753f597780e69582c06b1">MFBulge2</a></div><div class="ttdef"><b>Definition:</b> <a href="a00710_source.html#l00042">mf.h:42</a></div></div>
+<div class="ttc" id="aa00710_html_a0ae9eb66d190c70000f710f7c11977afa29b85f8df2366e185699f12117ed1b54"><div class="ttname"><a href="a00710.html#a0ae9eb66d190c70000f710f7c11977afa29b85f8df2366e185699f12117ed1b54">MFLength</a></div><div class="ttdef"><b>Definition:</b> <a href="a00710_source.html#l00042">mf.h:42</a></div></div>
+<div class="ttc" id="aa03326_html"><div class="ttname"><a href="a03326.html">FEATURE_SET_STRUCT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00746_source.html#l00064">ocrfeatures.h:64</a></div></div>
+<div class="ttc" id="aa02690_html"><div class="ttname"><a href="a02690.html">TBLOB</a></div><div class="ttdef"><b>Definition:</b> <a href="a00260_source.html#l00282">blobs.h:282</a></div></div>
+<div class="ttc" id="aa00710_html_a0ae9eb66d190c70000f710f7c11977afa6bbdda7793b58667c8ffbf57a38e7436"><div class="ttname"><a href="a00710.html#a0ae9eb66d190c70000f710f7c11977afa6bbdda7793b58667c8ffbf57a38e7436">MFDirection</a></div><div class="ttdef"><b>Definition:</b> <a href="a00710_source.html#l00042">mf.h:42</a></div></div>
+<div class="ttc" id="aa00710_html_a29d1eef9328292867329303f9f60c5cb"><div class="ttname"><a href="a00710.html#a29d1eef9328292867329303f9f60c5cb">MicroFeature</a></div><div class="ttdeci">float MicroFeature[MFCount]</div><div class="ttdef"><b>Definition:</b> <a href="a00710_source.html#l00032">mf.h:32</a></div></div>
+<div class="ttc" id="aa00710_html_a0ae9eb66d190c70000f710f7c11977afa86c3fede274bd6e6fad789032ba86695"><div class="ttname"><a href="a00710.html#a0ae9eb66d190c70000f710f7c11977afa86c3fede274bd6e6fad789032ba86695">MFYPosition</a></div><div class="ttdef"><b>Definition:</b> <a href="a00710_source.html#l00041">mf.h:41</a></div></div>
+<div class="ttc" id="aa02798_html"><div class="ttname"><a href="a02798.html">DENORM</a></div><div class="ttdef"><b>Definition:</b> <a href="a00344_source.html#l00049">normalis.h:49</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b8f5fb7b736ee5431a221bc7b817d6e0.html">classify</a></li><li class="navelem"><a class="el" href="a00710.html">protos.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:14 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b8f5fb7b736ee5431a221bc7b817d6e0.html">classify</a></li><li class="navelem"><a class="el" href="a00710.html">mf.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:20 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/ccmain/pagewalk.cpp File Reference</title>
+<title>tesseract: /tesseract/src/ccmain/control.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,28 +87,83 @@ $(document).ready(function(){initNavTree('a00122.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#enum-members">Enumerations</a>  </div>
   <div class="headertitle">
-<div class="title">pagewalk.cpp File Reference</div>  </div>
+<div class="title">control.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="a00323_source.html">pageres.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00173_source.html">tesseractclass.h</a>&quot;</code><br />
-</div>
+
 <p><a href="a00122_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:a01539"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html">tesseract</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:af9ff5a7d7a1b9eeea7ce4106bffa7eee"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eee">ACCEPTABLE_WERD_TYPE</a> { <br />
+&#160;&#160;<a class="el" href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eeeaab0741a5a5ff9757ca343af255353ba0">AC_UNACCEPTABLE</a>, 
+<a class="el" href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eeeaf8e947b78fa9ddbd1172c0157a3516ff">AC_LOWER_CASE</a>, 
+<a class="el" href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eeead58aa8857ae2a3ec6a90b29a849700d7">AC_UPPER_CASE</a>, 
+<a class="el" href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eeea71786bea8ae4bacc2670610dde24e707">AC_INITIAL_CAP</a>, 
+<br />
+&#160;&#160;<a class="el" href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eeea7bae128b501c1b34213e7ce6b17f7988">AC_LC_ABBREV</a>, 
+<a class="el" href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eeea6d37e3775faa628c72b7953f89caeb22">AC_UC_ABBREV</a>
+<br />
+ }</td></tr>
+<tr class="separator:af9ff5a7d7a1b9eeea7ce4106bffa7eee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Module-independent matcher controller. </p>
+
+<p class="definition">Definition in file <a class="el" href="a00122_source.html">control.h</a>.</p>
+</div><h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="af9ff5a7d7a1b9eeea7ce4106bffa7eee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9ff5a7d7a1b9eeea7ce4106bffa7eee">&#9670;&nbsp;</a></span>ACCEPTABLE_WERD_TYPE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eee">ACCEPTABLE_WERD_TYPE</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="af9ff5a7d7a1b9eeea7ce4106bffa7eeeaab0741a5a5ff9757ca343af255353ba0"></a>AC_UNACCEPTABLE&#160;</td><td class="fielddoc"><p>Unacceptable word. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="af9ff5a7d7a1b9eeea7ce4106bffa7eeeaf8e947b78fa9ddbd1172c0157a3516ff"></a>AC_LOWER_CASE&#160;</td><td class="fielddoc"><p>ALL lower case. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="af9ff5a7d7a1b9eeea7ce4106bffa7eeead58aa8857ae2a3ec6a90b29a849700d7"></a>AC_UPPER_CASE&#160;</td><td class="fielddoc"><p>ALL upper case. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="af9ff5a7d7a1b9eeea7ce4106bffa7eeea71786bea8ae4bacc2670610dde24e707"></a>AC_INITIAL_CAP&#160;</td><td class="fielddoc"><p>ALL but initial lc. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="af9ff5a7d7a1b9eeea7ce4106bffa7eeea7bae128b501c1b34213e7ce6b17f7988"></a>AC_LC_ABBREV&#160;</td><td class="fielddoc"><p>a.b.c. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="af9ff5a7d7a1b9eeea7ce4106bffa7eeea6d37e3775faa628c72b7953f89caeb22"></a>AC_UC_ABBREV&#160;</td><td class="fielddoc"><p>A.B.C. </p>
+</td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="a00122_source.html#l00027">27</a> of file <a class="el" href="a00122_source.html">control.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <a class="code" href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eeeaab0741a5a5ff9757ca343af255353ba0">AC_UNACCEPTABLE</a>,               </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <a class="code" href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eeeaf8e947b78fa9ddbd1172c0157a3516ff">AC_LOWER_CASE</a>,                 </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <a class="code" href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eeead58aa8857ae2a3ec6a90b29a849700d7">AC_UPPER_CASE</a>,                 </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <a class="code" href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eeea71786bea8ae4bacc2670610dde24e707">AC_INITIAL_CAP</a>,                </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <a class="code" href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eeea7bae128b501c1b34213e7ce6b17f7988">AC_LC_ABBREV</a>,                  </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <a class="code" href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eeea6d37e3775faa628c72b7953f89caeb22">AC_UC_ABBREV</a>                   </div>
+</div><!-- fragment -->
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="aa00122_html_af9ff5a7d7a1b9eeea7ce4106bffa7eeea7bae128b501c1b34213e7ce6b17f7988"><div class="ttname"><a href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eeea7bae128b501c1b34213e7ce6b17f7988">AC_LC_ABBREV</a></div><div class="ttdoc">a.b.c.</div><div class="ttdef"><b>Definition:</b> <a href="a00122_source.html#l00033">control.h:33</a></div></div>
+<div class="ttc" id="aa00122_html_af9ff5a7d7a1b9eeea7ce4106bffa7eeea6d37e3775faa628c72b7953f89caeb22"><div class="ttname"><a href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eeea6d37e3775faa628c72b7953f89caeb22">AC_UC_ABBREV</a></div><div class="ttdoc">A.B.C.</div><div class="ttdef"><b>Definition:</b> <a href="a00122_source.html#l00034">control.h:34</a></div></div>
+<div class="ttc" id="aa00122_html_af9ff5a7d7a1b9eeea7ce4106bffa7eeead58aa8857ae2a3ec6a90b29a849700d7"><div class="ttname"><a href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eeead58aa8857ae2a3ec6a90b29a849700d7">AC_UPPER_CASE</a></div><div class="ttdoc">ALL upper case.</div><div class="ttdef"><b>Definition:</b> <a href="a00122_source.html#l00031">control.h:31</a></div></div>
+<div class="ttc" id="aa00122_html_af9ff5a7d7a1b9eeea7ce4106bffa7eeeaf8e947b78fa9ddbd1172c0157a3516ff"><div class="ttname"><a href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eeeaf8e947b78fa9ddbd1172c0157a3516ff">AC_LOWER_CASE</a></div><div class="ttdoc">ALL lower case.</div><div class="ttdef"><b>Definition:</b> <a href="a00122_source.html#l00030">control.h:30</a></div></div>
+<div class="ttc" id="aa00122_html_af9ff5a7d7a1b9eeea7ce4106bffa7eeeaab0741a5a5ff9757ca343af255353ba0"><div class="ttname"><a href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eeeaab0741a5a5ff9757ca343af255353ba0">AC_UNACCEPTABLE</a></div><div class="ttdoc">Unacceptable word.</div><div class="ttdef"><b>Definition:</b> <a href="a00122_source.html#l00029">control.h:29</a></div></div>
+<div class="ttc" id="aa00122_html_af9ff5a7d7a1b9eeea7ce4106bffa7eeea71786bea8ae4bacc2670610dde24e707"><div class="ttname"><a href="a00122.html#af9ff5a7d7a1b9eeea7ce4106bffa7eeea71786bea8ae4bacc2670610dde24e707">AC_INITIAL_CAP</a></div><div class="ttdoc">ALL but initial lc.</div><div class="ttdef"><b>Definition:</b> <a href="a00122_source.html#l00032">control.h:32</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_43edf6714a3bf7b9dbcd0e0e50a1a1a7.html">ccmain</a></li><li class="navelem"><a class="el" href="a00122.html">pagewalk.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_43edf6714a3bf7b9dbcd0e0e50a1a1a7.html">ccmain</a></li><li class="navelem"><a class="el" href="a00122.html">control.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

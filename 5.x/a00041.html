@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/arch/dotproductsse.cpp File Reference</title>
+<title>tesseract: /tesseract/include/tesseract/serialis.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,36 +87,112 @@ $(document).ready(function(){initNavTree('a00041.html','');});
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
+<a href="#define-members">Macros</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">dotproductsse.cpp File Reference</div>  </div>
+<div class="title">serialis.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;emmintrin.h&gt;</code><br />
-<code>#include &lt;smmintrin.h&gt;</code><br />
-<code>#include &lt;cstdint&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00032_source.html">dotproduct.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;cstdint&gt;</code><br />
+<code>#include &lt;cstdio&gt;</code><br />
+<code>#include &lt;cstdlib&gt;</code><br />
+<code>#include &lt;cstring&gt;</code><br />
 </div>
 <p><a href="a00041_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02434.html">GenericVector&lt; T &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02538.html">tesseract::TFile</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a01539"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html">tesseract</a></td></tr>
+<tr class="memitem:a01818"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html">tesseract</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:adc858fd865cb4f529784fbc52d4d2b87"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00041.html#adc858fd865cb4f529784fbc52d4d2b87">QUOTE_IT</a>(parm)&#160;&#160;&#160;#parm</td></tr>
+<tr class="separator:adc858fd865cb4f529784fbc52d4d2b87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:acbab1876fc11673cc0747b146971e529"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#acbab1876fc11673cc0747b146971e529">tesseract::FileReader</a> = bool(*)(const char *filename, <a class="el" href="a02434.html">GenericVector</a>&lt; char &gt; *data)</td></tr>
+<tr class="separator:acbab1876fc11673cc0747b146971e529"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae703693e25150a8c8630e13e89d63ecc"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#ae703693e25150a8c8630e13e89d63ecc">tesseract::FileWriter</a> = bool(*)(const <a class="el" href="a02434.html">GenericVector</a>&lt; char &gt; &amp;data, const char *filename)</td></tr>
+<tr class="separator:ae703693e25150a8c8630e13e89d63ecc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ad3b5fe062bd97bc8cb1117a29fa24ac2"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#ad3b5fe062bd97bc8cb1117a29fa24ac2">tesseract::DotProductSSE</a> (const double *u, const double *v, int n)</td></tr>
-<tr class="separator:ad3b5fe062bd97bc8cb1117a29fa24ac2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8537f959e94a6a8896ac7e5c3a40ff89"><td class="memTemplParams" colspan="2">template&lt;typename T , size_t N&gt; </td></tr>
+<tr class="memitem:a8537f959e94a6a8896ac7e5c3a40ff89"><td class="memTemplItemLeft" align="right" valign="top">constexpr size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a01818.html#a8537f959e94a6a8896ac7e5c3a40ff89">tesseract::countof</a> (T const (&amp;)[N]) noexcept</td></tr>
+<tr class="separator:a8537f959e94a6a8896ac7e5c3a40ff89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a522554508e3ceb96201f3f3f697df7ae"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a522554508e3ceb96201f3f3f697df7ae">tesseract::DeSerialize</a> (FILE *fp, char *data, size_t n=1)</td></tr>
+<tr class="separator:a522554508e3ceb96201f3f3f697df7ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01fcfcebffc569d3a293bedc9462bec4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a01fcfcebffc569d3a293bedc9462bec4">tesseract::DeSerialize</a> (FILE *fp, float *data, size_t n=1)</td></tr>
+<tr class="separator:a01fcfcebffc569d3a293bedc9462bec4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36c188184043979f388353109a031511"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a36c188184043979f388353109a031511">tesseract::DeSerialize</a> (FILE *fp, int8_t *data, size_t n=1)</td></tr>
+<tr class="separator:a36c188184043979f388353109a031511"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8dcab63f0e9b79e4c6519d1773230f2e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a8dcab63f0e9b79e4c6519d1773230f2e">tesseract::DeSerialize</a> (FILE *fp, int16_t *data, size_t n=1)</td></tr>
+<tr class="separator:a8dcab63f0e9b79e4c6519d1773230f2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c6dbdc831e7600a8b0a958a30c31467"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a2c6dbdc831e7600a8b0a958a30c31467">tesseract::DeSerialize</a> (FILE *fp, int32_t *data, size_t n=1)</td></tr>
+<tr class="separator:a2c6dbdc831e7600a8b0a958a30c31467"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acca4a349e9b671ab706358243940bc6b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#acca4a349e9b671ab706358243940bc6b">tesseract::DeSerialize</a> (FILE *fp, uint8_t *data, size_t n=1)</td></tr>
+<tr class="separator:acca4a349e9b671ab706358243940bc6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95fcc4d784f01cbd4b033b49eb5bfa87"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a95fcc4d784f01cbd4b033b49eb5bfa87">tesseract::DeSerialize</a> (FILE *fp, uint16_t *data, size_t n=1)</td></tr>
+<tr class="separator:a95fcc4d784f01cbd4b033b49eb5bfa87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2821d3ce1fbb114ad1735d0a91b600a1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a2821d3ce1fbb114ad1735d0a91b600a1">tesseract::DeSerialize</a> (FILE *fp, uint32_t *data, size_t n=1)</td></tr>
+<tr class="separator:a2821d3ce1fbb114ad1735d0a91b600a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe7f068f18d05b9fb1d26dcafd7459c5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#afe7f068f18d05b9fb1d26dcafd7459c5">tesseract::Serialize</a> (FILE *fp, const char *data, size_t n=1)</td></tr>
+<tr class="separator:afe7f068f18d05b9fb1d26dcafd7459c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63b14dacf0ca6f99d02775342a86f970"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a63b14dacf0ca6f99d02775342a86f970">tesseract::Serialize</a> (FILE *fp, const float *data, size_t n=1)</td></tr>
+<tr class="separator:a63b14dacf0ca6f99d02775342a86f970"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe786de2b4f1330af6f1d1ca441ba012"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#abe786de2b4f1330af6f1d1ca441ba012">tesseract::Serialize</a> (FILE *fp, const int8_t *data, size_t n=1)</td></tr>
+<tr class="separator:abe786de2b4f1330af6f1d1ca441ba012"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b178a6d0ff3898b7eacc3911a15c53a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a6b178a6d0ff3898b7eacc3911a15c53a">tesseract::Serialize</a> (FILE *fp, const int16_t *data, size_t n=1)</td></tr>
+<tr class="separator:a6b178a6d0ff3898b7eacc3911a15c53a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe2307f6c3c2c2111570b56ecd4b99f5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#abe2307f6c3c2c2111570b56ecd4b99f5">tesseract::Serialize</a> (FILE *fp, const int32_t *data, size_t n=1)</td></tr>
+<tr class="separator:abe2307f6c3c2c2111570b56ecd4b99f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e62a0f9606c212224b80c55b800351d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a5e62a0f9606c212224b80c55b800351d">tesseract::Serialize</a> (FILE *fp, const uint8_t *data, size_t n=1)</td></tr>
+<tr class="separator:a5e62a0f9606c212224b80c55b800351d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab43749887acb855ede05625bbb8f4b33"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#ab43749887acb855ede05625bbb8f4b33">tesseract::Serialize</a> (FILE *fp, const uint16_t *data, size_t n=1)</td></tr>
+<tr class="separator:ab43749887acb855ede05625bbb8f4b33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04751dcd6febfe498a20c572f215c94c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a04751dcd6febfe498a20c572f215c94c">tesseract::Serialize</a> (FILE *fp, const uint32_t *data, size_t n=1)</td></tr>
+<tr class="separator:a04751dcd6febfe498a20c572f215c94c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="adc858fd865cb4f529784fbc52d4d2b87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc858fd865cb4f529784fbc52d4d2b87">&#9670;&nbsp;</a></span>QUOTE_IT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define QUOTE_IT</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">parm</td><td>)</td>
+          <td>&#160;&#160;&#160;#parm</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00041_source.html#l00035">35</a> of file <a class="el" href="a00041_source.html">serialis.h</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_70d5e250c66d001b18da37689179cade.html">arch</a></li><li class="navelem"><a class="el" href="a00041.html">dotproductsse.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_00200a555532e7ec3afbcddd6091e65a.html">tesseract</a></li><li class="navelem"><a class="el" href="a00041.html">serialis.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

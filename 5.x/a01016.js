@@ -1,10 +1,11 @@
 var a01016 =
 [
-    [ "OL_BUCKETS", "a03268.html", "a03268" ],
-    [ "BUCKETSIZE", "a01016.html#a1697ba8bc67aab0eb972da5596ee5cc9", null ],
-    [ "capture_children", "a01016.html#a760372391a5906a5a6a57b241ccbe157", null ],
-    [ "empty_buckets", "a01016.html#a448e1f9764807e5383235b51b2984ae1", null ],
-    [ "extract_edges", "a01016.html#a16ca13da58e65267e7e34355091ca891", null ],
-    [ "fill_buckets", "a01016.html#ad9597834f89a0acb1b78514a7a3feb6d", null ],
-    [ "outlines_to_blobs", "a01016.html#ae0cc26838f9973f097882b899b69b249", null ]
+    [ "kMaxLargeOverlapsWithMedium", "a01016.html#a32d5a83c9d50b348fb071ebfe543aaee", null ],
+    [ "kMaxLargeOverlapsWithSmall", "a01016.html#a3a426b02bca50b86771f72e232473731", null ],
+    [ "kMaxMediumOverlapsWithSmall", "a01016.html#a223bb3b024d6a8cc9f67be9c3256eab6", null ],
+    [ "kMaxSmallNeighboursPerPix", "a01016.html#acc370cbda4181ad132c73ad679cd7b62", null ],
+    [ "kMinGoodTextPARatio", "a01016.html#a127b07e8133a6a81822ba5b58a0ddef5", null ],
+    [ "kNoisePadding", "a01016.html#a3b862db5dec2761daccc3215b5082c4f", null ],
+    [ "kOriginalNoiseMultiple", "a01016.html#a2c7d6e5fba3f18650dca66e06f1dc7ef", null ],
+    [ "kPhotoOffsetFraction", "a01016.html#ad4251cb7939f87518909d0e342ef929c", null ]
 ];

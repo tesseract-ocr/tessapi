@@ -1,4 +1,5 @@
 var a00188 =
 [
-    [ "make_pseudo_word", "a00188.html#a4033d1ec3632e2e780817fc5932f5951", null ]
+    [ "MAX_ITEMS_IN_SUBMENU", "a00188.html#af94c38e929ceed34c7f57e032824492c", null ],
+    [ "VARDIR", "a00188.html#a885bbceac3da2daacf10048f43cc015f", null ]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/textord/cjkpitch.h File Reference</title>
+<title>tesseract: /tesseract/src/lstm/weightmatrix.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,96 +87,39 @@ $(document).ready(function(){initNavTree('a00974.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle">
-<div class="title">cjkpitch.h File Reference</div>  </div>
+<div class="title">weightmatrix.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="a00203_source.html">blobbox.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;memory&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00011_source.html">tesseract/genericvector.h</a>&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00098_source.html">intsimdmatrix.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00332_source.html">matrix.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00584_source.html">tprintf.h</a>&quot;</code><br />
 </div>
 <p><a href="a00974_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a569376d5bd104938452ead2e78c21158"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00974.html#a569376d5bd104938452ead2e78c21158">compute_fixed_pitch_cjk</a> (<a class="el" href="a02400.html">ICOORD</a> page_tr, TO_BLOCK_LIST *port_blocks)</td></tr>
-<tr class="separator:a569376d5bd104938452ead2e78c21158"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03606.html">tesseract::TransposedArray</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03610.html">tesseract::WeightMatrix</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:a01818"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html">tesseract</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="a569376d5bd104938452ead2e78c21158"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a569376d5bd104938452ead2e78c21158">&#9670;&nbsp;</a></span>compute_fixed_pitch_cjk()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void compute_fixed_pitch_cjk </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a02400.html">ICOORD</a>&#160;</td>
-          <td class="paramname"><em>page_tr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">TO_BLOCK_LIST *&#160;</td>
-          <td class="paramname"><em>port_blocks</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00971_source.html#l01040">1040</a> of file <a class="el" href="a00971_source.html">cjkpitch.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l01041"></a><span class="lineno"> 1041</span>&#160;                                                         {</div>
-<div class="line"><a name="l01042"></a><span class="lineno"> 1042</span>&#160;  FPAnalyzer analyzer(page_tr, port_blocks);</div>
-<div class="line"><a name="l01043"></a><span class="lineno"> 1043</span>&#160;  <span class="keywordflow">if</span> (analyzer.num_rows() == 0) <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l01044"></a><span class="lineno"> 1044</span>&#160; </div>
-<div class="line"><a name="l01045"></a><span class="lineno"> 1045</span>&#160;  analyzer.Pass1Analyze();</div>
-<div class="line"><a name="l01046"></a><span class="lineno"> 1046</span>&#160;  analyzer.EstimatePitch(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l01047"></a><span class="lineno"> 1047</span>&#160; </div>
-<div class="line"><a name="l01048"></a><span class="lineno"> 1048</span>&#160;  <span class="comment">// Perform pass1 analysis again with the initial estimation of row</span></div>
-<div class="line"><a name="l01049"></a><span class="lineno"> 1049</span>&#160;  <span class="comment">// pitches, for better estimation.</span></div>
-<div class="line"><a name="l01050"></a><span class="lineno"> 1050</span>&#160;  analyzer.Pass1Analyze();</div>
-<div class="line"><a name="l01051"></a><span class="lineno"> 1051</span>&#160;  analyzer.EstimatePitch(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l01052"></a><span class="lineno"> 1052</span>&#160; </div>
-<div class="line"><a name="l01053"></a><span class="lineno"> 1053</span>&#160;  <span class="comment">// Early exit if the page doesn&#39;t seem to contain fixed pitch rows.</span></div>
-<div class="line"><a name="l01054"></a><span class="lineno"> 1054</span>&#160;  <span class="keywordflow">if</span> (!analyzer.maybe_fixed_pitch()) {</div>
-<div class="line"><a name="l01055"></a><span class="lineno"> 1055</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="a01133.html#a1e4587adb2fa810c79228ddca88b6e65">textord_debug_pitch_test</a>) {</div>
-<div class="line"><a name="l01056"></a><span class="lineno"> 1056</span>&#160;      <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Page doesn&#39;t seem to contain fixed pitch rows\n&quot;</span>);</div>
-<div class="line"><a name="l01057"></a><span class="lineno"> 1057</span>&#160;    }</div>
-<div class="line"><a name="l01058"></a><span class="lineno"> 1058</span>&#160;    <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l01059"></a><span class="lineno"> 1059</span>&#160;  }</div>
-<div class="line"><a name="l01060"></a><span class="lineno"> 1060</span>&#160; </div>
-<div class="line"><a name="l01061"></a><span class="lineno"> 1061</span>&#160;  <span class="keywordtype">unsigned</span> iteration = 0;</div>
-<div class="line"><a name="l01062"></a><span class="lineno"> 1062</span>&#160;  <span class="keywordflow">do</span> {</div>
-<div class="line"><a name="l01063"></a><span class="lineno"> 1063</span>&#160;    analyzer.MergeFragments();</div>
-<div class="line"><a name="l01064"></a><span class="lineno"> 1064</span>&#160;    analyzer.FinalizeLargeChars();</div>
-<div class="line"><a name="l01065"></a><span class="lineno"> 1065</span>&#160;    analyzer.EstimatePitch(<span class="keyword">false</span>);</div>
-<div class="line"><a name="l01066"></a><span class="lineno"> 1066</span>&#160;    iteration++;</div>
-<div class="line"><a name="l01067"></a><span class="lineno"> 1067</span>&#160;  } <span class="keywordflow">while</span> (analyzer.Pass2Analyze() &amp;&amp; iteration &lt; analyzer.max_iteration());</div>
-<div class="line"><a name="l01068"></a><span class="lineno"> 1068</span>&#160; </div>
-<div class="line"><a name="l01069"></a><span class="lineno"> 1069</span>&#160;  <span class="keywordflow">if</span> (<a class="code" href="a01133.html#a1e4587adb2fa810c79228ddca88b6e65">textord_debug_pitch_test</a>) {</div>
-<div class="line"><a name="l01070"></a><span class="lineno"> 1070</span>&#160;    <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;compute_fixed_pitch_cjk finished after %u iteration (limit=%u)\n&quot;</span>,</div>
-<div class="line"><a name="l01071"></a><span class="lineno"> 1071</span>&#160;            iteration, analyzer.max_iteration());</div>
-<div class="line"><a name="l01072"></a><span class="lineno"> 1072</span>&#160;  }</div>
-<div class="line"><a name="l01073"></a><span class="lineno"> 1073</span>&#160; </div>
-<div class="line"><a name="l01074"></a><span class="lineno"> 1074</span>&#160;  analyzer.OutputEstimations();</div>
-<div class="line"><a name="l01075"></a><span class="lineno"> 1075</span>&#160;  <span class="keywordflow">if</span> (<a class="code" href="a01133.html#a1e4587adb2fa810c79228ddca88b6e65">textord_debug_pitch_test</a>) analyzer.DebugOutputResult();</div>
-<div class="line"><a name="l01076"></a><span class="lineno"> 1076</span>&#160;}</div>
-</div><!-- fragment -->
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa01133_html_a1e4587adb2fa810c79228ddca88b6e65"><div class="ttname"><a href="a01133.html#a1e4587adb2fa810c79228ddca88b6e65">textord_debug_pitch_test</a></div><div class="ttdeci">bool textord_debug_pitch_test</div><div class="ttdef"><b>Definition:</b> <a href="a01133_source.html#l00038">topitch.cpp:38</a></div></div>
-<div class="ttc" id="aa00530_html_a0c2bcd4462ec67ab0971b34a0f610f55"><div class="ttname"><a href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a></div><div class="ttdeci">DLLSYM void tprintf(const char *format,...)</div><div class="ttdef"><b>Definition:</b> <a href="a00530_source.html#l00034">tprintf.cpp:34</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_930fe0a3c40775bbdbdb97cea0f56396.html">textord</a></li><li class="navelem"><a class="el" href="a00974.html">cjkpitch.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_57c32823bf7301c39893cc8d5b3eca8e.html">lstm</a></li><li class="navelem"><a class="el" href="a00974.html">weightmatrix.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/classify/picofeat.h Source File</title>
+<title>tesseract: /tesseract/src/classify/mf.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,14 +87,14 @@ $(document).ready(function(){initNavTree('a00707_source.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">picofeat.h</div>  </div>
+<div class="title">mf.cpp</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="a00707.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/******************************************************************************</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> ** Filename:    picofeat.h</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> ** Purpose:     Definition of pico features.</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> ** Filename:    mf.c</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> ** Purpose:     Micro-feature interface to flexible feature extractor.</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> ** Author:      Dan Johnson</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> ** History:     9/4/90, DSJ, Created.</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> ** History:     Thu May 24 09:08:38 1990, DSJ, Created.</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> **</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> ** (c) Copyright Hewlett-Packard Company, 1988.</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> ** Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
@@ -107,69 +107,103 @@ $(document).ready(function(){initNavTree('a00707_source.html','');});
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> ** See the License for the specific language governing permissions and</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> ** limitations under the License.</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> ******************************************************************************/</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#ifndef PICOFEAT_H</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#define PICOFEAT_H</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00695.html">ocrfeatures.h</a>&quot;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00503.html">params.h</a>&quot;</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="a00707.html#a25c105f6b5ef77e1565388f318056f8c">   28</a></span>&#160;<span class="comment">// Enum for the order/type of params in IntFeatDesc.</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">enum</span> <a class="code" href="a00707.html#a25c105f6b5ef77e1565388f318056f8c">IntParams</a> {</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <a class="code" href="a00707.html#a25c105f6b5ef77e1565388f318056f8ca52fc06c8638074204be3a7f9a35d65b1">IntX</a>,   <span class="comment">// x-position (0-255).</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <a class="code" href="a00707.html#a25c105f6b5ef77e1565388f318056f8ca87c5652cf1b4b1a9a7f7b91a9bc48808">IntY</a>,   <span class="comment">// y-position (0-255).</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <a class="code" href="a00707.html#a25c105f6b5ef77e1565388f318056f8ca37a015c1bac0b61d97b95193172240ed">IntDir</a>  <span class="comment">// Direction (0-255, circular).</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;};</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="a00707.html#a41a4b5a66040b8b2deb004bd33909009">   35</a></span>&#160;<span class="comment">// Enum for the order/type of params in GeoFeatDesc.</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="a00707.html#a41a4b5a66040b8b2deb004bd33909009a45ab6326da25c47511791071ad13f62a">   36</a></span>&#160;<span class="keyword">enum</span> <a class="code" href="a00707.html#a41a4b5a66040b8b2deb004bd33909009">GeoParams</a> {</div>
-<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="a00707.html#a41a4b5a66040b8b2deb004bd33909009af270e2a7660aa4121f6693faa62de67c">   37</a></span>&#160;  <a class="code" href="a00707.html#a41a4b5a66040b8b2deb004bd33909009a45ab6326da25c47511791071ad13f62a">GeoBottom</a>,  <span class="comment">// Bounding box bottom in baseline space (0-255).</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="a00707.html#a41a4b5a66040b8b2deb004bd33909009a1840e5fe9bffa7db328236bd0ad20bd7">   38</a></span>&#160;  <a class="code" href="a00707.html#a41a4b5a66040b8b2deb004bd33909009af270e2a7660aa4121f6693faa62de67c">GeoTop</a>,     <span class="comment">// Bounding box top in baseline space (0-255).</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <a class="code" href="a00707.html#a41a4b5a66040b8b2deb004bd33909009a1840e5fe9bffa7db328236bd0ad20bd7">GeoWidth</a>,   <span class="comment">// Bounding box width in baseline space (0-255).</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="a00707.html#a41a4b5a66040b8b2deb004bd33909009af5bbc18811bb7a574c082e4a6f654db7">   40</a></span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <a class="code" href="a00707.html#a41a4b5a66040b8b2deb004bd33909009af5bbc18811bb7a574c082e4a6f654db7">GeoCount</a>  <span class="comment">// Number of geo features.</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;};</div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="a00707.html#ac00e1c5d2ac3096e0928e2186aee1aaca43884de5e2e87be26f9642b50135f98a">   43</a></span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="a00707.html#a25c105f6b5ef77e1565388f318056f8ca52fc06c8638074204be3a7f9a35d65b1">   44</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span> { <a class="code" href="a00707.html#ac00e1c5d2ac3096e0928e2186aee1aaca43884de5e2e87be26f9642b50135f98a">PicoFeatY</a>, <a class="code" href="a00707.html#ac00e1c5d2ac3096e0928e2186aee1aaca9895f2baa648985ab8ee5586c1563511">PicoFeatDir</a>, <a class="code" href="a00707.html#ac00e1c5d2ac3096e0928e2186aee1aacaf28d56154a908256d7b3beb62977e2fc">PicoFeatX</a> } <a class="code" href="a00707.html#ac00e1c5d2ac3096e0928e2186aee1aac">PICO_FEAT_PARAM_NAME</a>;</div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="a00707.html#a547a9b8f4afa51bb6c9066d5848c068d">   45</a></span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="a00707.html#a25c105f6b5ef77e1565388f318056f8ca37a015c1bac0b61d97b95193172240ed">   46</a></span>&#160;<span class="preprocessor">#define MAX_PICO_FEATURES (1000)</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">/*---------------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">          Variables</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">----------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">extern</span> <a class="code" href="a00503.html#ac9b655e8ebd14897cfc161f2f47797a0">double_VAR_H</a>(<a class="code" href="a00707.html#ade0cbc6650cd99b83ecc2c1a828a4bee">classify_pico_feature_length</a>, 0.05, <span class="stringliteral">&quot;Pico Feature Length&quot;</span>);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#define GetPicoFeatureLength() (PicoFeatureLength)</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword">extern</span> TESS_API <span class="keywordtype">float</span> <a class="code" href="a00707.html#a5fb0325a4196a4ea24ba3d256844e467">PicoFeatureLength</a>;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">/*----------------------------------------------------------------------------</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">          Include Files and Type Defines</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">----------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00710.html">mf.h</a>&quot;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00662.html">featdefs.h</a>&quot;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00716.html">mfdefs.h</a>&quot;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00728.html">mfx.h</a>&quot;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &lt;cmath&gt;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">/*----------------------------------------------------------------------------</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">        Global Data Definitions and Declarations</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">----------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">/*----------------------------------------------------------------------------</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">              Private Code</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">----------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="a00710.html#a65d3fa9ad9b625a37b5b5a8254156bac">   43</a></span>&#160;<a class="code" href="a03326.html">FEATURE_SET</a> <a class="code" href="a00707.html#a65d3fa9ad9b625a37b5b5a8254156bac">ExtractMicros</a>(<a class="code" href="a02690.html">TBLOB</a>* Blob, <span class="keyword">const</span> <a class="code" href="a02798.html">DENORM</a>&amp; cn_denorm) {</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <span class="keywordtype">int</span> NumFeatures;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <a class="code" href="a03374.html">MICROFEATURES</a> Features, OldFeatures;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <a class="code" href="a03326.html">FEATURE_SET</a> FeatureSet;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <a class="code" href="a03322.html">FEATURE</a> Feature;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <a class="code" href="a00716.html#a48288195254495e88ac033d20d13aa31">MICROFEATURE</a> OldFeature;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  OldFeatures = <a class="code" href="a00725.html#a807f06b47c5b936507ee2895e1452afa">BlobMicroFeatures</a>(Blob, cn_denorm);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <span class="keywordflow">if</span> (OldFeatures == <span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  NumFeatures = <a class="code" href="a00806.html#acd4ea858d7133e40518e0832ff9d94b2">count</a> (OldFeatures);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  FeatureSet = <a class="code" href="a00743.html#acdf1bcf73857cfc37fe8d667203bc875">NewFeatureSet</a> (NumFeatures);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  Features = OldFeatures;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <a class="code" href="a00809.html#a2cf19ba78be6b54f66823d58f34f2a53">iterate</a>(Features) {</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    OldFeature = <span class="keyword">reinterpret_cast&lt;</span><a class="code" href="a00716.html#a48288195254495e88ac033d20d13aa31">MICROFEATURE</a><span class="keyword">&gt;</span><a class="code" href="a00809.html#a69547be764424f18b0be535400747978">first_node</a> (Features);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    Feature = <a class="code" href="a00743.html#a32a08c42617c8dd6a156c1c8d7fb2cbb">NewFeature</a> (&amp;<a class="code" href="a00662.html#aa889ab53df925b2ccc5a2871eca3eff7">MicroFeatureDesc</a>);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    Feature-&gt;<a class="code" href="a03322.html#acdddc3235f689b0d45574003fc3e3b1b">Params</a>[<a class="code" href="a00710.html#a0ae9eb66d190c70000f710f7c11977afa6bbdda7793b58667c8ffbf57a38e7436">MFDirection</a>] = OldFeature[<a class="code" href="a00716.html#ac815b03ec48abf99301f44140ff0b0a9">ORIENTATION</a>];</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    Feature-&gt;<a class="code" href="a03322.html#acdddc3235f689b0d45574003fc3e3b1b">Params</a>[<a class="code" href="a00710.html#a0ae9eb66d190c70000f710f7c11977afa6e5b6d39513820252795a81c22a85094">MFXPosition</a>] = OldFeature[<a class="code" href="a00716.html#aa14d8a5c035963734f527261a209c402">XPOSITION</a>];</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    Feature-&gt;<a class="code" href="a03322.html#acdddc3235f689b0d45574003fc3e3b1b">Params</a>[<a class="code" href="a00710.html#a0ae9eb66d190c70000f710f7c11977afa86c3fede274bd6e6fad789032ba86695">MFYPosition</a>] = OldFeature[<a class="code" href="a00716.html#ab4a43f7e9f215f0fb311fdb0f54fe1bf">YPOSITION</a>];</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    Feature-&gt;<a class="code" href="a03322.html#acdddc3235f689b0d45574003fc3e3b1b">Params</a>[<a class="code" href="a00710.html#a0ae9eb66d190c70000f710f7c11977afa29b85f8df2366e185699f12117ed1b54">MFLength</a>] = OldFeature[<a class="code" href="a00716.html#aab9af949da5ae4ae116df014c0d22d1e">MFLENGTH</a>];</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="comment">// Bulge features are deprecated and should not be used.  Set to 0.</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    Feature-&gt;<a class="code" href="a03322.html#acdddc3235f689b0d45574003fc3e3b1b">Params</a>[<a class="code" href="a00710.html#a0ae9eb66d190c70000f710f7c11977afa84f738cc38f82afce789bb6e9908a2cd">MFBulge1</a>] = 0.0f;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    Feature-&gt;<a class="code" href="a03322.html#acdddc3235f689b0d45574003fc3e3b1b">Params</a>[<a class="code" href="a00710.html#a0ae9eb66d190c70000f710f7c11977afa11c81e882c3753f597780e69582c06b1">MFBulge2</a>] = 0.0f;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="preprocessor">#ifndef _WIN32</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="comment">// Assert that feature parameters are well defined.</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordtype">int</span> i;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordflow">for</span> (i = 0; i &lt; Feature-&gt;<a class="code" href="a03322.html#a1a034f275ff504afd63bd99643fae589">Type</a>-&gt;<a class="code" href="a03318.html#ae276ef0b2d76b9e37c74065737c64f83">NumParams</a>; i++) {</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;      <a class="code" href="a00515.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a>(!std::isnan(Feature-&gt;<a class="code" href="a03322.html#acdddc3235f689b0d45574003fc3e3b1b">Params</a>[i]));</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    }</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <a class="code" href="a00743.html#a88ff5e23ace03b3fbfbb891604dd5bc6">AddFeature</a>(FeatureSet, Feature);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  }</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <a class="code" href="a00713.html#afd75dd0b29a6b9bf0c5a31b3484bd0d9">FreeMicroFeatures</a>(OldFeatures);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  <span class="keywordflow">return</span> FeatureSet;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;}                                <span class="comment">/* ExtractMicros */</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa00503_html"><div class="ttname"><a href="a00503.html">params.h</a></div></div>
-<div class="ttc" id="aa00707_html_a41a4b5a66040b8b2deb004bd33909009af5bbc18811bb7a574c082e4a6f654db7"><div class="ttname"><a href="a00707.html#a41a4b5a66040b8b2deb004bd33909009af5bbc18811bb7a574c082e4a6f654db7">GeoCount</a></div><div class="ttdef"><b>Definition:</b> <a href="a00707_source.html#l00040">picofeat.h:40</a></div></div>
-<div class="ttc" id="aa00707_html_a25c105f6b5ef77e1565388f318056f8ca52fc06c8638074204be3a7f9a35d65b1"><div class="ttname"><a href="a00707.html#a25c105f6b5ef77e1565388f318056f8ca52fc06c8638074204be3a7f9a35d65b1">IntX</a></div><div class="ttdef"><b>Definition:</b> <a href="a00707_source.html#l00044">picofeat.h:44</a></div></div>
-<div class="ttc" id="aa00695_html"><div class="ttname"><a href="a00695.html">ocrfeatures.h</a></div></div>
-<div class="ttc" id="aa00503_html_ac9b655e8ebd14897cfc161f2f47797a0"><div class="ttname"><a href="a00503.html#ac9b655e8ebd14897cfc161f2f47797a0">double_VAR_H</a></div><div class="ttdeci">#define double_VAR_H(name, val, comment)</div><div class="ttdef"><b>Definition:</b> <a href="a00503_source.html#l00298">params.h:298</a></div></div>
-<div class="ttc" id="aa00707_html_a41a4b5a66040b8b2deb004bd33909009af270e2a7660aa4121f6693faa62de67c"><div class="ttname"><a href="a00707.html#a41a4b5a66040b8b2deb004bd33909009af270e2a7660aa4121f6693faa62de67c">GeoTop</a></div><div class="ttdef"><b>Definition:</b> <a href="a00707_source.html#l00037">picofeat.h:37</a></div></div>
-<div class="ttc" id="aa00707_html_ac00e1c5d2ac3096e0928e2186aee1aac"><div class="ttname"><a href="a00707.html#ac00e1c5d2ac3096e0928e2186aee1aac">PICO_FEAT_PARAM_NAME</a></div><div class="ttdeci">PICO_FEAT_PARAM_NAME</div><div class="ttdef"><b>Definition:</b> <a href="a00707_source.html#l00043">picofeat.h:43</a></div></div>
-<div class="ttc" id="aa00707_html_ac00e1c5d2ac3096e0928e2186aee1aaca43884de5e2e87be26f9642b50135f98a"><div class="ttname"><a href="a00707.html#ac00e1c5d2ac3096e0928e2186aee1aaca43884de5e2e87be26f9642b50135f98a">PicoFeatY</a></div><div class="ttdef"><b>Definition:</b> <a href="a00707_source.html#l00043">picofeat.h:43</a></div></div>
-<div class="ttc" id="aa00707_html_a41a4b5a66040b8b2deb004bd33909009a45ab6326da25c47511791071ad13f62a"><div class="ttname"><a href="a00707.html#a41a4b5a66040b8b2deb004bd33909009a45ab6326da25c47511791071ad13f62a">GeoBottom</a></div><div class="ttdef"><b>Definition:</b> <a href="a00707_source.html#l00036">picofeat.h:36</a></div></div>
-<div class="ttc" id="aa00707_html_a41a4b5a66040b8b2deb004bd33909009a1840e5fe9bffa7db328236bd0ad20bd7"><div class="ttname"><a href="a00707.html#a41a4b5a66040b8b2deb004bd33909009a1840e5fe9bffa7db328236bd0ad20bd7">GeoWidth</a></div><div class="ttdef"><b>Definition:</b> <a href="a00707_source.html#l00038">picofeat.h:38</a></div></div>
-<div class="ttc" id="aa00707_html_a25c105f6b5ef77e1565388f318056f8c"><div class="ttname"><a href="a00707.html#a25c105f6b5ef77e1565388f318056f8c">IntParams</a></div><div class="ttdeci">IntParams</div><div class="ttdef"><b>Definition:</b> <a href="a00707_source.html#l00028">picofeat.h:28</a></div></div>
-<div class="ttc" id="aa00707_html_a25c105f6b5ef77e1565388f318056f8ca87c5652cf1b4b1a9a7f7b91a9bc48808"><div class="ttname"><a href="a00707.html#a25c105f6b5ef77e1565388f318056f8ca87c5652cf1b4b1a9a7f7b91a9bc48808">IntY</a></div><div class="ttdef"><b>Definition:</b> <a href="a00707_source.html#l00045">picofeat.h:45</a></div></div>
-<div class="ttc" id="aa00707_html_a25c105f6b5ef77e1565388f318056f8ca37a015c1bac0b61d97b95193172240ed"><div class="ttname"><a href="a00707.html#a25c105f6b5ef77e1565388f318056f8ca37a015c1bac0b61d97b95193172240ed">IntDir</a></div><div class="ttdef"><b>Definition:</b> <a href="a00707_source.html#l00046">picofeat.h:46</a></div></div>
-<div class="ttc" id="aa00707_html_ac00e1c5d2ac3096e0928e2186aee1aaca9895f2baa648985ab8ee5586c1563511"><div class="ttname"><a href="a00707.html#ac00e1c5d2ac3096e0928e2186aee1aaca9895f2baa648985ab8ee5586c1563511">PicoFeatDir</a></div><div class="ttdef"><b>Definition:</b> <a href="a00707_source.html#l00043">picofeat.h:43</a></div></div>
-<div class="ttc" id="aa00707_html_a41a4b5a66040b8b2deb004bd33909009"><div class="ttname"><a href="a00707.html#a41a4b5a66040b8b2deb004bd33909009">GeoParams</a></div><div class="ttdeci">GeoParams</div><div class="ttdef"><b>Definition:</b> <a href="a00707_source.html#l00035">picofeat.h:35</a></div></div>
-<div class="ttc" id="aa00707_html_a5fb0325a4196a4ea24ba3d256844e467"><div class="ttname"><a href="a00707.html#a5fb0325a4196a4ea24ba3d256844e467">PicoFeatureLength</a></div><div class="ttdeci">TESS_API float PicoFeatureLength</div></div>
-<div class="ttc" id="aa00707_html_ade0cbc6650cd99b83ecc2c1a828a4bee"><div class="ttname"><a href="a00707.html#ade0cbc6650cd99b83ecc2c1a828a4bee">classify_pico_feature_length</a></div><div class="ttdeci">double classify_pico_feature_length</div><div class="ttdef"><b>Definition:</b> <a href="a00704_source.html#l00036">picofeat.cpp:36</a></div></div>
-<div class="ttc" id="aa00707_html_ac00e1c5d2ac3096e0928e2186aee1aacaf28d56154a908256d7b3beb62977e2fc"><div class="ttname"><a href="a00707.html#ac00e1c5d2ac3096e0928e2186aee1aacaf28d56154a908256d7b3beb62977e2fc">PicoFeatX</a></div><div class="ttdef"><b>Definition:</b> <a href="a00707_source.html#l00043">picofeat.h:43</a></div></div>
+<div class="ttc" id="aa00728_html"><div class="ttname"><a href="a00728.html">mfx.h</a></div></div>
+<div class="ttc" id="aa00716_html"><div class="ttname"><a href="a00716.html">mfdefs.h</a></div></div>
+<div class="ttc" id="aa00710_html_a0ae9eb66d190c70000f710f7c11977afa84f738cc38f82afce789bb6e9908a2cd"><div class="ttname"><a href="a00710.html#a0ae9eb66d190c70000f710f7c11977afa84f738cc38f82afce789bb6e9908a2cd">MFBulge1</a></div><div class="ttdef"><b>Definition:</b> <a href="a00710_source.html#l00042">mf.h:42</a></div></div>
+<div class="ttc" id="aa00743_html_a88ff5e23ace03b3fbfbb891604dd5bc6"><div class="ttname"><a href="a00743.html#a88ff5e23ace03b3fbfbb891604dd5bc6">AddFeature</a></div><div class="ttdeci">bool AddFeature(FEATURE_SET FeatureSet, FEATURE Feature)</div><div class="ttdef"><b>Definition:</b> <a href="a00743_source.html#l00039">ocrfeatures.cpp:39</a></div></div>
+<div class="ttc" id="aa00707_html_a65d3fa9ad9b625a37b5b5a8254156bac"><div class="ttname"><a href="a00707.html#a65d3fa9ad9b625a37b5b5a8254156bac">ExtractMicros</a></div><div class="ttdeci">FEATURE_SET ExtractMicros(TBLOB *Blob, const DENORM &amp;cn_denorm)</div><div class="ttdef"><b>Definition:</b> <a href="a00707_source.html#l00043">mf.cpp:43</a></div></div>
+<div class="ttc" id="aa00809_html_a69547be764424f18b0be535400747978"><div class="ttname"><a href="a00809.html#a69547be764424f18b0be535400747978">first_node</a></div><div class="ttdeci">#define first_node(l)</div><div class="ttdef"><b>Definition:</b> <a href="a00809_source.html#l00084">oldlist.h:84</a></div></div>
+<div class="ttc" id="aa00515_html_a93a603f4063a6b9403d81caa245a583b"><div class="ttname"><a href="a00515.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a></div><div class="ttdeci">#define ASSERT_HOST(x)</div><div class="ttdef"><b>Definition:</b> <a href="a00515_source.html#l00087">errcode.h:87</a></div></div>
+<div class="ttc" id="aa03374_html"><div class="ttname"><a href="a03374.html">list_rec</a></div><div class="ttdef"><b>Definition:</b> <a href="a00809_source.html#l00073">oldlist.h:73</a></div></div>
+<div class="ttc" id="aa00713_html_afd75dd0b29a6b9bf0c5a31b3484bd0d9"><div class="ttname"><a href="a00713.html#afd75dd0b29a6b9bf0c5a31b3484bd0d9">FreeMicroFeatures</a></div><div class="ttdeci">void FreeMicroFeatures(MICROFEATURES MicroFeatures)</div><div class="ttdef"><b>Definition:</b> <a href="a00713_source.html#l00041">mfdefs.cpp:41</a></div></div>
+<div class="ttc" id="aa00710_html"><div class="ttname"><a href="a00710.html">mf.h</a></div></div>
+<div class="ttc" id="aa03322_html"><div class="ttname"><a href="a03322.html">FEATURE_STRUCT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00746_source.html#l00058">ocrfeatures.h:58</a></div></div>
+<div class="ttc" id="aa00716_html_aa14d8a5c035963734f527261a209c402"><div class="ttname"><a href="a00716.html#aa14d8a5c035963734f527261a209c402">XPOSITION</a></div><div class="ttdeci">#define XPOSITION</div><div class="ttdef"><b>Definition:</b> <a href="a00716_source.html#l00035">mfdefs.h:35</a></div></div>
+<div class="ttc" id="aa00710_html_a0ae9eb66d190c70000f710f7c11977afa6e5b6d39513820252795a81c22a85094"><div class="ttname"><a href="a00710.html#a0ae9eb66d190c70000f710f7c11977afa6e5b6d39513820252795a81c22a85094">MFXPosition</a></div><div class="ttdef"><b>Definition:</b> <a href="a00710_source.html#l00041">mf.h:41</a></div></div>
+<div class="ttc" id="aa00716_html_ac815b03ec48abf99301f44140ff0b0a9"><div class="ttname"><a href="a00716.html#ac815b03ec48abf99301f44140ff0b0a9">ORIENTATION</a></div><div class="ttdeci">#define ORIENTATION</div><div class="ttdef"><b>Definition:</b> <a href="a00716_source.html#l00038">mfdefs.h:38</a></div></div>
+<div class="ttc" id="aa03318_html_ae276ef0b2d76b9e37c74065737c64f83"><div class="ttname"><a href="a03318.html#ae276ef0b2d76b9e37c74065737c64f83">FEATURE_DESC_STRUCT::NumParams</a></div><div class="ttdeci">uint16_t NumParams</div><div class="ttdef"><b>Definition:</b> <a href="a00746_source.html#l00052">ocrfeatures.h:52</a></div></div>
+<div class="ttc" id="aa00710_html_a0ae9eb66d190c70000f710f7c11977afa11c81e882c3753f597780e69582c06b1"><div class="ttname"><a href="a00710.html#a0ae9eb66d190c70000f710f7c11977afa11c81e882c3753f597780e69582c06b1">MFBulge2</a></div><div class="ttdef"><b>Definition:</b> <a href="a00710_source.html#l00042">mf.h:42</a></div></div>
+<div class="ttc" id="aa00710_html_a0ae9eb66d190c70000f710f7c11977afa29b85f8df2366e185699f12117ed1b54"><div class="ttname"><a href="a00710.html#a0ae9eb66d190c70000f710f7c11977afa29b85f8df2366e185699f12117ed1b54">MFLength</a></div><div class="ttdef"><b>Definition:</b> <a href="a00710_source.html#l00042">mf.h:42</a></div></div>
+<div class="ttc" id="aa03322_html_acdddc3235f689b0d45574003fc3e3b1b"><div class="ttname"><a href="a03322.html#acdddc3235f689b0d45574003fc3e3b1b">FEATURE_STRUCT::Params</a></div><div class="ttdeci">float Params[1]</div><div class="ttdef"><b>Definition:</b> <a href="a00746_source.html#l00060">ocrfeatures.h:60</a></div></div>
+<div class="ttc" id="aa03322_html_a1a034f275ff504afd63bd99643fae589"><div class="ttname"><a href="a03322.html#a1a034f275ff504afd63bd99643fae589">FEATURE_STRUCT::Type</a></div><div class="ttdeci">const FEATURE_DESC_STRUCT * Type</div><div class="ttdef"><b>Definition:</b> <a href="a00746_source.html#l00059">ocrfeatures.h:59</a></div></div>
+<div class="ttc" id="aa00662_html_aa889ab53df925b2ccc5a2871eca3eff7"><div class="ttname"><a href="a00662.html#aa889ab53df925b2ccc5a2871eca3eff7">MicroFeatureDesc</a></div><div class="ttdeci">const FEATURE_DESC_STRUCT MicroFeatureDesc</div></div>
+<div class="ttc" id="aa00743_html_a32a08c42617c8dd6a156c1c8d7fb2cbb"><div class="ttname"><a href="a00743.html#a32a08c42617c8dd6a156c1c8d7fb2cbb">NewFeature</a></div><div class="ttdeci">FEATURE NewFeature(const FEATURE_DESC_STRUCT *FeatureDesc)</div><div class="ttdef"><b>Definition:</b> <a href="a00743_source.html#l00077">ocrfeatures.cpp:77</a></div></div>
+<div class="ttc" id="aa03326_html"><div class="ttname"><a href="a03326.html">FEATURE_SET_STRUCT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00746_source.html#l00064">ocrfeatures.h:64</a></div></div>
+<div class="ttc" id="aa00716_html_ab4a43f7e9f215f0fb311fdb0f54fe1bf"><div class="ttname"><a href="a00716.html#ab4a43f7e9f215f0fb311fdb0f54fe1bf">YPOSITION</a></div><div class="ttdeci">#define YPOSITION</div><div class="ttdef"><b>Definition:</b> <a href="a00716_source.html#l00036">mfdefs.h:36</a></div></div>
+<div class="ttc" id="aa00743_html_acdf1bcf73857cfc37fe8d667203bc875"><div class="ttname"><a href="a00743.html#acdf1bcf73857cfc37fe8d667203bc875">NewFeatureSet</a></div><div class="ttdeci">FEATURE_SET NewFeatureSet(int NumFeatures)</div><div class="ttdef"><b>Definition:</b> <a href="a00743_source.html#l00093">ocrfeatures.cpp:93</a></div></div>
+<div class="ttc" id="aa00806_html_acd4ea858d7133e40518e0832ff9d94b2"><div class="ttname"><a href="a00806.html#acd4ea858d7133e40518e0832ff9d94b2">count</a></div><div class="ttdeci">int count(LIST var_list)</div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00079">oldlist.cpp:79</a></div></div>
+<div class="ttc" id="aa02690_html"><div class="ttname"><a href="a02690.html">TBLOB</a></div><div class="ttdef"><b>Definition:</b> <a href="a00260_source.html#l00282">blobs.h:282</a></div></div>
+<div class="ttc" id="aa00662_html"><div class="ttname"><a href="a00662.html">featdefs.h</a></div></div>
+<div class="ttc" id="aa00809_html_a2cf19ba78be6b54f66823d58f34f2a53"><div class="ttname"><a href="a00809.html#a2cf19ba78be6b54f66823d58f34f2a53">iterate</a></div><div class="ttdeci">#define iterate(l)</div><div class="ttdef"><b>Definition:</b> <a href="a00809_source.html#l00092">oldlist.h:92</a></div></div>
+<div class="ttc" id="aa00725_html_a807f06b47c5b936507ee2895e1452afa"><div class="ttname"><a href="a00725.html#a807f06b47c5b936507ee2895e1452afa">BlobMicroFeatures</a></div><div class="ttdeci">MICROFEATURES BlobMicroFeatures(TBLOB *Blob, const DENORM &amp;cn_denorm)</div><div class="ttdef"><b>Definition:</b> <a href="a00725_source.html#l00060">mfx.cpp:60</a></div></div>
+<div class="ttc" id="aa00710_html_a0ae9eb66d190c70000f710f7c11977afa6bbdda7793b58667c8ffbf57a38e7436"><div class="ttname"><a href="a00710.html#a0ae9eb66d190c70000f710f7c11977afa6bbdda7793b58667c8ffbf57a38e7436">MFDirection</a></div><div class="ttdef"><b>Definition:</b> <a href="a00710_source.html#l00042">mf.h:42</a></div></div>
+<div class="ttc" id="aa00710_html_a0ae9eb66d190c70000f710f7c11977afa86c3fede274bd6e6fad789032ba86695"><div class="ttname"><a href="a00710.html#a0ae9eb66d190c70000f710f7c11977afa86c3fede274bd6e6fad789032ba86695">MFYPosition</a></div><div class="ttdef"><b>Definition:</b> <a href="a00710_source.html#l00041">mf.h:41</a></div></div>
+<div class="ttc" id="aa00716_html_aab9af949da5ae4ae116df014c0d22d1e"><div class="ttname"><a href="a00716.html#aab9af949da5ae4ae116df014c0d22d1e">MFLENGTH</a></div><div class="ttdeci">#define MFLENGTH</div><div class="ttdef"><b>Definition:</b> <a href="a00716_source.html#l00037">mfdefs.h:37</a></div></div>
+<div class="ttc" id="aa00716_html_a48288195254495e88ac033d20d13aa31"><div class="ttname"><a href="a00716.html#a48288195254495e88ac033d20d13aa31">MICROFEATURE</a></div><div class="ttdeci">float * MICROFEATURE</div><div class="ttdef"><b>Definition:</b> <a href="a00716_source.html#l00032">mfdefs.h:32</a></div></div>
+<div class="ttc" id="aa02798_html"><div class="ttname"><a href="a02798.html">DENORM</a></div><div class="ttdef"><b>Definition:</b> <a href="a00344_source.html#l00049">normalis.h:49</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b8f5fb7b736ee5431a221bc7b817d6e0.html">classify</a></li><li class="navelem"><a class="el" href="a00707.html">picofeat.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:14 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b8f5fb7b736ee5431a221bc7b817d6e0.html">classify</a></li><li class="navelem"><a class="el" href="a00707.html">mf.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:20 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

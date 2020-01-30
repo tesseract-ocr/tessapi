@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['tweak_5frow_5fbaseline_15231',['tweak_row_baseline',['../a02356.html#afc6deb99d649bb50497f4666630ecb7f',1,'ROW::tweak_row_baseline()'],['../a02428.html#afc6deb99d649bb50497f4666630ecb7f',1,'QSPLINE::tweak_row_baseline()']]]
+  ['sorted_5ffloats_16788',['SORTED_FLOATS',['../a03758.html#aef8186f49aebf966706617113b8082b5',1,'SORTED_FLOAT']]],
+  ['swap_16789',['swap',['../a03602.html#a5c614f6c6434b7c4308643e7e5b382c9',1,'tesseract::TFNetworkModel']]]
 ];

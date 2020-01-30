@@ -1,13 +1,9 @@
 var a01094 =
 [
-    [ "StrokeWidth", "a03312.html", "a03312" ],
-    [ "LeftOrRight", "a01094.html#acd121b57d321ca8511db069f603d071f", [
-      [ "LR_LEFT", "a01094.html#acd121b57d321ca8511db069f603d071fa83d27ea7b63eb91b9feed005a2f46ec9", null ],
-      [ "LR_RIGHT", "a01094.html#acd121b57d321ca8511db069f603d071facb1914d58c6a7acb6ddb9563a46a1046", null ]
-    ] ],
-    [ "PartitionFindResult", "a01094.html#a2987d37792e5b3297193091de3911634", [
-      [ "PFR_OK", "a01094.html#a2987d37792e5b3297193091de3911634a0a35bbb694c579efc7e7ded8a8a63e73", null ],
-      [ "PFR_SKEW", "a01094.html#a2987d37792e5b3297193091de3911634a60a7950f62d772f395a6f1a404f4b8b6", null ],
-      [ "PFR_NOISE", "a01094.html#a2987d37792e5b3297193091de3911634af5682e259ea2132d1705be1dc1ddebe1", null ]
-    ] ]
+    [ "kMaxRectangularFraction", "a01094.html#ae6dc7638052b18db703d824259f9d39e", null ],
+    [ "kMaxRectangularGradient", "a01094.html#ac980c05231fe3f7a8cb4c7ed7f9b6516", null ],
+    [ "kMinColorDifference", "a01094.html#aa76be4c175875d95748cec9f9d5467e3", null ],
+    [ "kMinImageFindSize", "a01094.html#ad923bf9132f3e7cfd57199a3190c446c", null ],
+    [ "kMinRectangularFraction", "a01094.html#a1f21fe8acb13b4e1904e1d1157183d0d", null ],
+    [ "kRMSFitScaling", "a01094.html#a351af5b8ad4d2b3fd95e59d758f13e7a", null ]
 ];

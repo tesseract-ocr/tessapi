@@ -1,7 +1,8 @@
 var a00398 =
 [
-    [ "SPLIT", "a02456.html", "a02456" ],
-    [ "make_edgept", "a00398.html#abe45460790758fd43e35acbad4eed1c5", null ],
-    [ "remove_edgept", "a00398.html#ada6ba0f2954768ab4b7d9d2cf165dee0", null ],
-    [ "wordrec_display_splits", "a00398.html#ac251ee3f4ff4145a52a8ba54a1b26743", null ]
+    [ "ApproximateOutline", "a00398.html#a95836c79b09910877bd1b39a59c7d5a0", null ],
+    [ "cutline", "a00398.html#aa0f03bd75099af8feca58259b9f3f48d", null ],
+    [ "edgesteps_to_edgepts", "a00398.html#aa63082dea164750c7abb7944becd6f5e", null ],
+    [ "fix2", "a00398.html#a90ebde0147c2a36a0b1a216645a4eed8", null ],
+    [ "poly2", "a00398.html#ab1a151f8dbd379f2ecf2d59f9ce2bc23", null ]
 ];

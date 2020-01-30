@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/ccmain/tessvars.cpp Source File</title>
+<title>tesseract: /tesseract/src/ccmain/par_control.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,42 +87,104 @@ $(document).ready(function(){initNavTree('a00176_source.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">tessvars.cpp</div>  </div>
+<div class="title">par_control.cpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00176.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**********************************************************************</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * File:        tessvars.cpp  (Formerly tessvars.c)</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * Description: Variables and other globals for tessedit.</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * Author:      Ray Smith</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * Created:     Mon Apr 13 13:13:23 BST 1992</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> * (C) Copyright 1992, Hewlett-Packard Ltd.</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> ** Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> ** you may not use this file except in compliance with the License.</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> ** You may obtain a copy of the License at</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> ** http://www.apache.org/licenses/LICENSE-2.0</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> ** Unless required by applicable law or agreed to in writing, software</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> ** distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> ** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> ** See the License for the specific language governing permissions and</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> ** limitations under the License.</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"> **********************************************************************/</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;cstdio&gt;</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include  &quot;<a class="code" href="a00179.html">tessvars.h</a>&quot;</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="a00179.html#adff672a9cdb59d57a0d142954a6a3899">   23</a></span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;FILE *<a class="code" href="a00176.html#adff672a9cdb59d57a0d142954a6a3899">debug_fp</a> = stderr;  <span class="comment">// write debug stuff here</span></div>
+<a href="a00176.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// File:        par_control.cpp</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// Description: Control code for parallel implementation.</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// Author:      Ray Smith</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">// (C) Copyright 2013, Google Inc.</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// you may not use this file except in compliance with the License.</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">// You may obtain a copy of the License at</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// http://www.apache.org/licenses/LICENSE-2.0</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">// Unless required by applicable law or agreed to in writing, software</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">// See the License for the specific language governing permissions and</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">// limitations under the License.</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00224.html">tesseractclass.h</a>&quot;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#ifdef _OPENMP</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;omp.h&gt;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#endif  // _OPENMP</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">namespace </span><a class="code" href="a01818.html">tesseract</a> {</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="a02586.html">   26</a></span>&#160;<span class="keyword">struct </span><a class="code" href="a02586.html">BlobData</a> {</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  <a class="code" href="a02586.html#a90924028a3c736d2676da2c685e1f1d1">BlobData</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="a02586.html#aa3d6ccb409a8a26011d7c15271bad958">   28</a></span>&#160;  <a class="code" href="a02586.html#aa3d6ccb409a8a26011d7c15271bad958">BlobData</a>(<span class="keywordtype">int</span> index, <a class="code" href="a02658.html">Tesseract</a>* tess, <span class="keyword">const</span> <a class="code" href="a02830.html">WERD_RES</a>&amp; word)</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    : <a class="code" href="a02586.html#ab15b8a5ff819a51de45b80f4c6265ed8">blob</a>(word.chopped_word-&gt;blobs[index]),</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;      <a class="code" href="a01818.html">tesseract</a>(tess),</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;      <a class="code" href="a02586.html#a679a1d28f4639f10988daef5ffc71299">choices</a>(&amp;(*word.ratings)(index, index)) {}</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="a02586.html#ab15b8a5ff819a51de45b80f4c6265ed8">   33</a></span>&#160;  <a class="code" href="a02690.html">TBLOB</a>* <a class="code" href="a02586.html#ab15b8a5ff819a51de45b80f4c6265ed8">blob</a> = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="a02586.html#a5da081347843c94b7ac08923e93067ca">   34</a></span>&#160;  <a class="code" href="a02658.html">Tesseract</a>* <a class="code" href="a01818.html">tesseract</a> = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="a02586.html#a679a1d28f4639f10988daef5ffc71299">   35</a></span>&#160;  BLOB_CHOICE_LIST** <a class="code" href="a02586.html#a679a1d28f4639f10988daef5ffc71299">choices</a> = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;};</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="a02658.html#aed023036d84d981089ea0a0828e0e595">   38</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02658.html#aed023036d84d981089ea0a0828e0e595">Tesseract::PrerecAllWordsPar</a>(<span class="keyword">const</span> <a class="code" href="a02434.html">GenericVector&lt;WordData&gt;</a>&amp; words) {</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <span class="comment">// Prepare all the blobs.</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <a class="code" href="a02434.html">GenericVector&lt;BlobData&gt;</a> blobs;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> w = 0; w &lt; words.<a class="code" href="a02434.html#a20cfad5c58c50cb85a9529d8ddbd96af">size</a>(); ++w) {</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordflow">if</span> (words[w].word-&gt;ratings != <span class="keyword">nullptr</span> &amp;&amp;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        words[w].word-&gt;ratings-&gt;<a class="code" href="a02434.html#abd0a875f98a1d78613ed3521d96e5300">get</a>(0, 0) == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;      <span class="keywordflow">for</span> (<span class="keywordtype">int</span> s = 0; s &lt; words[w].lang_words.<a class="code" href="a02434.html#a20cfad5c58c50cb85a9529d8ddbd96af">size</a>(); ++s) {</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <a class="code" href="a02658.html">Tesseract</a>* sub = s &lt; sub_langs_.size() ? sub_langs_[s] : <span class="keyword">this</span>;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keyword">const</span> <a class="code" href="a02830.html">WERD_RES</a>&amp; word = *words[w].lang_words[s];</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> b = 0; b &lt; word.<a class="code" href="a02830.html#ad1d449f93bb0150bc7ef0d9b59ed27ba">chopped_word</a>-&gt;<a class="code" href="a02694.html#a0d5347723ece084faf8f3d0dba6dd219">NumBlobs</a>(); ++b) {</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;          blobs.<a class="code" href="a02434.html#a0dc89fe2a365b04a61017f9d78c1a303">push_back</a>(<a class="code" href="a02586.html">BlobData</a>(b, sub, word));</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        }</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;      }</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    }</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  }</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="comment">// Pre-classify all the blobs.</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="keywordflow">if</span> (<a class="code" href="a02658.html#ac6f6a4356167ad8933a615eee41eca96">tessedit_parallelize</a> &gt; 1) {</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#ifdef _OPENMP</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#pragma omp parallel for num_threads(10)</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#endif  // _OPENMP</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> b = 0; b &lt; blobs.<a class="code" href="a02434.html#a20cfad5c58c50cb85a9529d8ddbd96af">size</a>(); ++b) {</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;      *blobs[b].choices =</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;          blobs[b].tesseract-&gt;classify_blob(blobs[b].blob, <span class="stringliteral">&quot;par&quot;</span>, <a class="code" href="a00797.html#a17bc059e437838f094a5a25c2d5ab88fab548046646b36c12aa6ba841de500094">White</a>, <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    }</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="comment">// TODO(AMD) parallelize this.</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> b = 0; b &lt; blobs.<a class="code" href="a02434.html#a20cfad5c58c50cb85a9529d8ddbd96af">size</a>(); ++b) {</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;      *blobs[b].choices =</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;          blobs[b].tesseract-&gt;classify_blob(blobs[b].blob, <span class="stringliteral">&quot;par&quot;</span>, <a class="code" href="a00797.html#a17bc059e437838f094a5a25c2d5ab88fab548046646b36c12aa6ba841de500094">White</a>, <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    }</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  }</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;}</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;}  <span class="comment">// namespace tesseract.</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa00179_html"><div class="ttname"><a href="a00179.html">tessvars.h</a></div></div>
-<div class="ttc" id="aa00176_html_adff672a9cdb59d57a0d142954a6a3899"><div class="ttname"><a href="a00176.html#adff672a9cdb59d57a0d142954a6a3899">debug_fp</a></div><div class="ttdeci">FILE * debug_fp</div><div class="ttdef"><b>Definition:</b> <a href="a00176_source.html#l00023">tessvars.cpp:23</a></div></div>
+<div class="ttc" id="aa02586_html_aa3d6ccb409a8a26011d7c15271bad958"><div class="ttname"><a href="a02586.html#aa3d6ccb409a8a26011d7c15271bad958">tesseract::BlobData::BlobData</a></div><div class="ttdeci">BlobData(int index, Tesseract *tess, const WERD_RES &amp;word)</div><div class="ttdef"><b>Definition:</b> <a href="a00176_source.html#l00028">par_control.cpp:28</a></div></div>
+<div class="ttc" id="aa00224_html"><div class="ttname"><a href="a00224.html">tesseractclass.h</a></div></div>
+<div class="ttc" id="aa02586_html_a90924028a3c736d2676da2c685e1f1d1"><div class="ttname"><a href="a02586.html#a90924028a3c736d2676da2c685e1f1d1">tesseract::BlobData::BlobData</a></div><div class="ttdeci">BlobData()=default</div></div>
+<div class="ttc" id="aa02658_html"><div class="ttname"><a href="a02658.html">tesseract::Tesseract</a></div><div class="ttdef"><b>Definition:</b> <a href="a00224_source.html#l00172">tesseractclass.h:172</a></div></div>
+<div class="ttc" id="aa02586_html"><div class="ttname"><a href="a02586.html">tesseract::BlobData</a></div><div class="ttdef"><b>Definition:</b> <a href="a00176_source.html#l00026">par_control.cpp:26</a></div></div>
+<div class="ttc" id="aa02830_html"><div class="ttname"><a href="a02830.html">WERD_RES</a></div><div class="ttdef"><b>Definition:</b> <a href="a00374_source.html#l00160">pageres.h:160</a></div></div>
+<div class="ttc" id="aa02586_html_a679a1d28f4639f10988daef5ffc71299"><div class="ttname"><a href="a02586.html#a679a1d28f4639f10988daef5ffc71299">tesseract::BlobData::choices</a></div><div class="ttdeci">BLOB_CHOICE_LIST ** choices</div><div class="ttdef"><b>Definition:</b> <a href="a00176_source.html#l00035">par_control.cpp:35</a></div></div>
+<div class="ttc" id="aa02434_html_a0dc89fe2a365b04a61017f9d78c1a303"><div class="ttname"><a href="a02434.html#a0dc89fe2a365b04a61017f9d78c1a303">GenericVector::push_back</a></div><div class="ttdeci">int push_back(T object)</div><div class="ttdef"><b>Definition:</b> <a href="a00011_source.html#l00799">genericvector.h:799</a></div></div>
+<div class="ttc" id="aa02658_html_aed023036d84d981089ea0a0828e0e595"><div class="ttname"><a href="a02658.html#aed023036d84d981089ea0a0828e0e595">tesseract::Tesseract::PrerecAllWordsPar</a></div><div class="ttdeci">void PrerecAllWordsPar(const GenericVector&lt; WordData &gt; &amp;words)</div><div class="ttdef"><b>Definition:</b> <a href="a00176_source.html#l00038">par_control.cpp:38</a></div></div>
+<div class="ttc" id="aa02830_html_ad1d449f93bb0150bc7ef0d9b59ed27ba"><div class="ttname"><a href="a02830.html#ad1d449f93bb0150bc7ef0d9b59ed27ba">WERD_RES::chopped_word</a></div><div class="ttdeci">TWERD * chopped_word</div><div class="ttdef"><b>Definition:</b> <a href="a00374_source.html#l00206">pageres.h:206</a></div></div>
+<div class="ttc" id="aa01818_html"><div class="ttname"><a href="a01818.html">tesseract</a></div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00065">baseapi.h:65</a></div></div>
+<div class="ttc" id="aa02658_html_ac6f6a4356167ad8933a615eee41eca96"><div class="ttname"><a href="a02658.html#ac6f6a4356167ad8933a615eee41eca96">tesseract::Tesseract::tessedit_parallelize</a></div><div class="ttdeci">int tessedit_parallelize</div><div class="ttdef"><b>Definition:</b> <a href="a00224_source.html#l01074">tesseractclass.h:1074</a></div></div>
+<div class="ttc" id="aa02434_html"><div class="ttname"><a href="a02434.html">GenericVector</a></div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00040">baseapi.h:40</a></div></div>
+<div class="ttc" id="aa02690_html"><div class="ttname"><a href="a02690.html">TBLOB</a></div><div class="ttdef"><b>Definition:</b> <a href="a00260_source.html#l00282">blobs.h:282</a></div></div>
+<div class="ttc" id="aa02434_html_abd0a875f98a1d78613ed3521d96e5300"><div class="ttname"><a href="a02434.html#abd0a875f98a1d78613ed3521d96e5300">GenericVector::get</a></div><div class="ttdeci">T &amp; get(int index) const</div><div class="ttdef"><b>Definition:</b> <a href="a00011_source.html#l00716">genericvector.h:716</a></div></div>
+<div class="ttc" id="aa00797_html_a17bc059e437838f094a5a25c2d5ab88fab548046646b36c12aa6ba841de500094"><div class="ttname"><a href="a00797.html#a17bc059e437838f094a5a25c2d5ab88fab548046646b36c12aa6ba841de500094">White</a></div><div class="ttdef"><b>Definition:</b> <a href="a00797_source.html#l00028">callcpp.h:28</a></div></div>
+<div class="ttc" id="aa02434_html_a20cfad5c58c50cb85a9529d8ddbd96af"><div class="ttname"><a href="a02434.html#a20cfad5c58c50cb85a9529d8ddbd96af">GenericVector::size</a></div><div class="ttdeci">int size() const</div><div class="ttdef"><b>Definition:</b> <a href="a00011_source.html#l00071">genericvector.h:71</a></div></div>
+<div class="ttc" id="aa02586_html_ab15b8a5ff819a51de45b80f4c6265ed8"><div class="ttname"><a href="a02586.html#ab15b8a5ff819a51de45b80f4c6265ed8">tesseract::BlobData::blob</a></div><div class="ttdeci">TBLOB * blob</div><div class="ttdef"><b>Definition:</b> <a href="a00176_source.html#l00033">par_control.cpp:33</a></div></div>
+<div class="ttc" id="aa02694_html_a0d5347723ece084faf8f3d0dba6dd219"><div class="ttname"><a href="a02694.html#a0d5347723ece084faf8f3d0dba6dd219">TWERD::NumBlobs</a></div><div class="ttdeci">int NumBlobs() const</div><div class="ttdef"><b>Definition:</b> <a href="a00260_source.html#l00446">blobs.h:446</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_43edf6714a3bf7b9dbcd0e0e50a1a1a7.html">ccmain</a></li><li class="navelem"><a class="el" href="a00176.html">tessvars.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:14 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_43edf6714a3bf7b9dbcd0e0e50a1a1a7.html">ccmain</a></li><li class="navelem"><a class="el" href="a00176.html">par_control.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:19 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

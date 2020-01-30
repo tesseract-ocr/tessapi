@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/classify/clusttool.h File Reference</title>
+<title>tesseract: /tesseract/src/ccutil/unicharset.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,271 +87,78 @@ $(document).ready(function(){initNavTree('a00602.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
-<div class="title">clusttool.h File Reference</div>  </div>
+<div class="title">unicharset.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;cstdio&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00596_source.html">cluster.h</a>&quot;</code><br />
-<code>#include &lt;tesseract/serialis.h&gt;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a00605_source.html">unicharset.h</a>&quot;</code><br />
+<code>#include &lt;algorithm&gt;</code><br />
+<code>#include &lt;cassert&gt;</code><br />
+<code>#include &lt;cstdio&gt;</code><br />
+<code>#include &lt;cstring&gt;</code><br />
+<code>#include &lt;iomanip&gt;</code><br />
+<code>#include &lt;locale&gt;</code><br />
+<code>#include &lt;sstream&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00554_source.html">params.h</a>&quot;</code><br />
+<code>#include &lt;<a class="el" href="a00041_source.html">tesseract/serialis.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00050_source.html">tesseract/unichar.h</a>&gt;</code><br />
 </div>
 <p><a href="a00602_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:affb9d870273779781b16f701afc7510a"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00602.html#affb9d870273779781b16f701afc7510a">ReadSampleSize</a> (tesseract::TFile *fp)</td></tr>
-<tr class="separator:affb9d870273779781b16f701afc7510a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afcbf00f9d2fef4df885c4939daf9d306"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a02856.html">PARAM_DESC</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00602.html#afcbf00f9d2fef4df885c4939daf9d306">ReadParamDesc</a> (tesseract::TFile *fp, uint16_t N)</td></tr>
-<tr class="separator:afcbf00f9d2fef4df885c4939daf9d306"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad75ce1b06f0b68f3fef24e5f1666b239"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a02744.html">PROTOTYPE</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00602.html#ad75ce1b06f0b68f3fef24e5f1666b239">ReadPrototype</a> (tesseract::TFile *fp, uint16_t N)</td></tr>
-<tr class="separator:ad75ce1b06f0b68f3fef24e5f1666b239"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a994913437e21500535a6b888cfcd6ce5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00602.html#a994913437e21500535a6b888cfcd6ce5">WriteParamDesc</a> (FILE *File, uint16_t N, const <a class="el" href="a02856.html">PARAM_DESC</a> ParamDesc[])</td></tr>
-<tr class="separator:a994913437e21500535a6b888cfcd6ce5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1451e0b1d82b4208c88f47f3734f608e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00602.html#a1451e0b1d82b4208c88f47f3734f608e">WritePrototype</a> (FILE *File, uint16_t N, <a class="el" href="a02744.html">PROTOTYPE</a> *Proto)</td></tr>
-<tr class="separator:a1451e0b1d82b4208c88f47f3734f608e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03110.html">LocalFilePointer</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:adc8d0ca6841f77218a8db3e9b8c61b75"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00602.html#adc8d0ca6841f77218a8db3e9b8c61b75">kMinXHeightFraction</a> = 0.25</td></tr>
+<tr class="separator:adc8d0ca6841f77218a8db3e9b8c61b75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26f266710ee10c783d867b473b89490d"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00602.html#a26f266710ee10c783d867b473b89490d">kMinCapHeightFraction</a> = 0.05</td></tr>
+<tr class="separator:a26f266710ee10c783d867b473b89490d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="afcbf00f9d2fef4df885c4939daf9d306"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afcbf00f9d2fef4df885c4939daf9d306">&#9670;&nbsp;</a></span>ReadParamDesc()</h2>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a26f266710ee10c783d867b473b89490d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26f266710ee10c783d867b473b89490d">&#9670;&nbsp;</a></span>kMinCapHeightFraction</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a02856.html">PARAM_DESC</a>* ReadParamDesc </td>
-          <td>(</td>
-          <td class="paramtype">tesseract::TFile *&#160;</td>
-          <td class="paramname"><em>fp</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint16_t&#160;</td>
-          <td class="paramname"><em>N</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="memname">const double kMinCapHeightFraction = 0.05</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="a00602_source.html#l00059">59</a> of file <a class="el" href="a00602_source.html">unicharset.cpp</a>.</p>
+
 </div>
 </div>
-<a id="ad75ce1b06f0b68f3fef24e5f1666b239"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad75ce1b06f0b68f3fef24e5f1666b239">&#9670;&nbsp;</a></span>ReadPrototype()</h2>
+<a id="adc8d0ca6841f77218a8db3e9b8c61b75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc8d0ca6841f77218a8db3e9b8c61b75">&#9670;&nbsp;</a></span>kMinXHeightFraction</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a02744.html">PROTOTYPE</a>* ReadPrototype </td>
-          <td>(</td>
-          <td class="paramtype">tesseract::TFile *&#160;</td>
-          <td class="paramname"><em>fp</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint16_t&#160;</td>
-          <td class="paramname"><em>N</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="memname">const double kMinXHeightFraction = 0.25</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<a id="affb9d870273779781b16f701afc7510a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#affb9d870273779781b16f701afc7510a">&#9670;&nbsp;</a></span>ReadSampleSize()</h2>
+<p class="definition">Definition at line <a class="el" href="a00602_source.html#l00058">58</a> of file <a class="el" href="a00602_source.html">unicharset.cpp</a>.</p>
 
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint16_t ReadSampleSize </td>
-          <td>(</td>
-          <td class="paramtype">tesseract::TFile *&#160;</td>
-          <td class="paramname"><em>fp</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a994913437e21500535a6b888cfcd6ce5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a994913437e21500535a6b888cfcd6ce5">&#9670;&nbsp;</a></span>WriteParamDesc()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void WriteParamDesc </td>
-          <td>(</td>
-          <td class="paramtype">FILE *&#160;</td>
-          <td class="paramname"><em>File</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint16_t&#160;</td>
-          <td class="paramname"><em>N</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="a02856.html">PARAM_DESC</a>&#160;</td>
-          <td class="paramname"><em>ParamDesc</em>[]&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>This routine writes an array of dimension descriptors to the specified text file. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">File</td><td>open text file to write param descriptors to </td></tr>
-    <tr><td class="paramname">N</td><td>number of param descriptors to write </td></tr>
-    <tr><td class="paramname">ParamDesc</td><td>array of param descriptors to write </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="a00599_source.html#l00255">255</a> of file <a class="el" href="a00599_source.html">clusttool.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;                                                                          {</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;  <span class="keywordtype">int</span> i;</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160; </div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;  <span class="keywordflow">for</span> (i = 0; i &lt; N; i++) {</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    <span class="keywordflow">if</span> (ParamDesc[i].Circular)</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;      fprintf (File, <span class="stringliteral">&quot;circular &quot;</span>);</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;      fprintf (File, <span class="stringliteral">&quot;linear   &quot;</span>);</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160; </div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    <span class="keywordflow">if</span> (ParamDesc[i].NonEssential)</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;      fprintf (File, <span class="stringliteral">&quot;non-essential &quot;</span>);</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;      fprintf (File, <span class="stringliteral">&quot;essential     &quot;</span>);</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160; </div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    fprintf (File, <span class="stringliteral">&quot;%10.6f %10.6f\n&quot;</span>, ParamDesc[i].Min, ParamDesc[i].Max);</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;  }</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;}</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="a1451e0b1d82b4208c88f47f3734f608e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1451e0b1d82b4208c88f47f3734f608e">&#9670;&nbsp;</a></span>WritePrototype()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void WritePrototype </td>
-          <td>(</td>
-          <td class="paramtype">FILE *&#160;</td>
-          <td class="paramname"><em>File</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint16_t&#160;</td>
-          <td class="paramname"><em>N</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="a02744.html">PROTOTYPE</a> *&#160;</td>
-          <td class="paramname"><em>Proto</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>This routine writes a textual description of a prototype to the specified text file. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">File</td><td>open text file to write prototype to </td></tr>
-    <tr><td class="paramname">N</td><td>number of dimensions in feature space </td></tr>
-    <tr><td class="paramname">Proto</td><td>prototype to write out </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="a00599_source.html#l00280">280</a> of file <a class="el" href="a00599_source.html">clusttool.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;                                                              {</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;  <span class="keywordtype">int</span> i;</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160; </div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;  <span class="keywordflow">if</span> (Proto-&gt;<a class="code" href="a02744.html#abe68ea2bc484a6f5abf36f3bbd6fe2ce">Significant</a>)</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    fprintf (File, <span class="stringliteral">&quot;significant   &quot;</span>);</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;  <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    fprintf (File, <span class="stringliteral">&quot;insignificant &quot;</span>);</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;  WriteProtoStyle (File, static_cast&lt;PROTOSTYLE&gt;(Proto-&gt;<a class="code" href="a02744.html#aad81f08b6e171698866b445c0b3d4b35">Style</a>));</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;  fprintf (File, <span class="stringliteral">&quot;%6d\n\t&quot;</span>, Proto-&gt;<a class="code" href="a02744.html#a2ba6bfd64f308a26cdd0a75c52e002f5">NumSamples</a>);</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;  WriteNFloats (File, N, Proto-&gt;<a class="code" href="a02744.html#aaf23ee38e17c1bf39f4ac6a47584f8ac">Mean</a>);</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;  fprintf (File, <span class="stringliteral">&quot;\t&quot;</span>);</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160; </div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;  <span class="keywordflow">switch</span> (Proto-&gt;<a class="code" href="a02744.html#aad81f08b6e171698866b445c0b3d4b35">Style</a>) {</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    <span class="keywordflow">case</span> <a class="code" href="a00596.html#a2bf647f23b4a059a559e4d991437c9eaa93d6901f160899d15f69322530595f4f">spherical</a>:</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;      WriteNFloats (File, 1, &amp;(Proto-&gt;<a class="code" href="a02744.html#a35cf2e2dd8cc8b0e9476ad49f36abd24">Variance</a>.<a class="code" href="a02740.html#a7bc5443951233bcccc5f13d5959dfa27">Spherical</a>));</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;      <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    <span class="keywordflow">case</span> <a class="code" href="a00596.html#a2bf647f23b4a059a559e4d991437c9eaa39d32ff639641ca169c9729c58614459">elliptical</a>:</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;      WriteNFloats (File, N, Proto-&gt;<a class="code" href="a02744.html#a35cf2e2dd8cc8b0e9476ad49f36abd24">Variance</a>.<a class="code" href="a02740.html#aac67dbd3e7e8d6f21810bafc51313cc6">Elliptical</a>);</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;      <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    <span class="keywordflow">case</span> <a class="code" href="a00596.html#a2bf647f23b4a059a559e4d991437c9eaab164032fff82a847826b4887d9e7be58">mixed</a>:</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;      <span class="keywordflow">for</span> (i = 0; i &lt; N; i++)</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;      <span class="keywordflow">switch</span> (Proto-&gt;<a class="code" href="a02744.html#ae53408c33cdd473a9ed1f028e8172b0b">Distrib</a>[i]) {</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;        <span class="keywordflow">case</span> <a class="code" href="a00596.html#ade80fdcd8f2dde57393f56d0cdfaeed0aebc81705969b8c5ae986b0b2ec08d1d5">normal</a>:</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;          fprintf (File, <span class="stringliteral">&quot; %9s&quot;</span>, <span class="stringliteral">&quot;normal&quot;</span>);</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;          <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;        <span class="keywordflow">case</span> <a class="code" href="a00596.html#ade80fdcd8f2dde57393f56d0cdfaeed0a56013d9ac59a24fb94d9acb932a04b2f">uniform</a>:</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;          fprintf (File, <span class="stringliteral">&quot; %9s&quot;</span>, <span class="stringliteral">&quot;uniform&quot;</span>);</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;          <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;        <span class="keywordflow">case</span> <a class="code" href="a00596.html#ade80fdcd8f2dde57393f56d0cdfaeed0a21504929e31ddde091641bb817e32320">D_random</a>:</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;          fprintf (File, <span class="stringliteral">&quot; %9s&quot;</span>, <span class="stringliteral">&quot;random&quot;</span>);</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;          <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;        <span class="keywordflow">case</span> <a class="code" href="a00596.html#ade80fdcd8f2dde57393f56d0cdfaeed0a1223ae56d204b110bd185b7dbdda258e">DISTRIBUTION_COUNT</a>:</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;          <a class="code" href="a00464.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a>(!<span class="stringliteral">&quot;Distribution count not allowed!&quot;</span>);</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;      }</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;      fprintf (File, <span class="stringliteral">&quot;\n\t&quot;</span>);</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;      WriteNFloats (File, N, Proto-&gt;<a class="code" href="a02744.html#a35cf2e2dd8cc8b0e9476ad49f36abd24">Variance</a>.<a class="code" href="a02740.html#aac67dbd3e7e8d6f21810bafc51313cc6">Elliptical</a>);</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;  }</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;}</div>
-</div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa02744_html_aad81f08b6e171698866b445c0b3d4b35"><div class="ttname"><a href="a02744.html#aad81f08b6e171698866b445c0b3d4b35">PROTOTYPE::Style</a></div><div class="ttdeci">unsigned Style</div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00069">cluster.h:69</a></div></div>
-<div class="ttc" id="aa02744_html_ae53408c33cdd473a9ed1f028e8172b0b"><div class="ttname"><a href="a02744.html#ae53408c33cdd473a9ed1f028e8172b0b">PROTOTYPE::Distrib</a></div><div class="ttdeci">DISTRIBUTION * Distrib</div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00072">cluster.h:72</a></div></div>
-<div class="ttc" id="aa00596_html_a2bf647f23b4a059a559e4d991437c9eaab164032fff82a847826b4887d9e7be58"><div class="ttname"><a href="a00596.html#a2bf647f23b4a059a559e4d991437c9eaab164032fff82a847826b4887d9e7be58">mixed</a></div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00043">cluster.h:43</a></div></div>
-<div class="ttc" id="aa02744_html_a2ba6bfd64f308a26cdd0a75c52e002f5"><div class="ttname"><a href="a02744.html#a2ba6bfd64f308a26cdd0a75c52e002f5">PROTOTYPE::NumSamples</a></div><div class="ttdeci">unsigned NumSamples</div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00070">cluster.h:70</a></div></div>
-<div class="ttc" id="aa00596_html_a2bf647f23b4a059a559e4d991437c9eaa93d6901f160899d15f69322530595f4f"><div class="ttname"><a href="a00596.html#a2bf647f23b4a059a559e4d991437c9eaa93d6901f160899d15f69322530595f4f">spherical</a></div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00043">cluster.h:43</a></div></div>
-<div class="ttc" id="aa00596_html_ade80fdcd8f2dde57393f56d0cdfaeed0a1223ae56d204b110bd185b7dbdda258e"><div class="ttname"><a href="a00596.html#ade80fdcd8f2dde57393f56d0cdfaeed0a1223ae56d204b110bd185b7dbdda258e">DISTRIBUTION_COUNT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00055">cluster.h:55</a></div></div>
-<div class="ttc" id="aa02740_html_a7bc5443951233bcccc5f13d5959dfa27"><div class="ttname"><a href="a02740.html#a7bc5443951233bcccc5f13d5959dfa27">FLOATUNION::Spherical</a></div><div class="ttdeci">float Spherical</div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00058">cluster.h:58</a></div></div>
-<div class="ttc" id="aa00596_html_ade80fdcd8f2dde57393f56d0cdfaeed0a21504929e31ddde091641bb817e32320"><div class="ttname"><a href="a00596.html#ade80fdcd8f2dde57393f56d0cdfaeed0a21504929e31ddde091641bb817e32320">D_random</a></div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00055">cluster.h:55</a></div></div>
-<div class="ttc" id="aa00464_html_a93a603f4063a6b9403d81caa245a583b"><div class="ttname"><a href="a00464.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a></div><div class="ttdeci">#define ASSERT_HOST(x)</div><div class="ttdef"><b>Definition:</b> <a href="a00464_source.html#l00087">errcode.h:87</a></div></div>
-<div class="ttc" id="aa02744_html_abe68ea2bc484a6f5abf36f3bbd6fe2ce"><div class="ttname"><a href="a02744.html#abe68ea2bc484a6f5abf36f3bbd6fe2ce">PROTOTYPE::Significant</a></div><div class="ttdeci">bool Significant</div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00063">cluster.h:63</a></div></div>
-<div class="ttc" id="aa00596_html_ade80fdcd8f2dde57393f56d0cdfaeed0aebc81705969b8c5ae986b0b2ec08d1d5"><div class="ttname"><a href="a00596.html#ade80fdcd8f2dde57393f56d0cdfaeed0aebc81705969b8c5ae986b0b2ec08d1d5">normal</a></div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00055">cluster.h:55</a></div></div>
-<div class="ttc" id="aa00596_html_a2bf647f23b4a059a559e4d991437c9eaa39d32ff639641ca169c9729c58614459"><div class="ttname"><a href="a00596.html#a2bf647f23b4a059a559e4d991437c9eaa39d32ff639641ca169c9729c58614459">elliptical</a></div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00043">cluster.h:43</a></div></div>
-<div class="ttc" id="aa02744_html_a35cf2e2dd8cc8b0e9476ad49f36abd24"><div class="ttname"><a href="a02744.html#a35cf2e2dd8cc8b0e9476ad49f36abd24">PROTOTYPE::Variance</a></div><div class="ttdeci">FLOATUNION Variance</div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00076">cluster.h:76</a></div></div>
-<div class="ttc" id="aa00596_html_ade80fdcd8f2dde57393f56d0cdfaeed0a56013d9ac59a24fb94d9acb932a04b2f"><div class="ttname"><a href="a00596.html#ade80fdcd8f2dde57393f56d0cdfaeed0a56013d9ac59a24fb94d9acb932a04b2f">uniform</a></div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00055">cluster.h:55</a></div></div>
-<div class="ttc" id="aa02744_html_aaf23ee38e17c1bf39f4ac6a47584f8ac"><div class="ttname"><a href="a02744.html#aaf23ee38e17c1bf39f4ac6a47584f8ac">PROTOTYPE::Mean</a></div><div class="ttdeci">float * Mean</div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00073">cluster.h:73</a></div></div>
-<div class="ttc" id="aa02740_html_aac67dbd3e7e8d6f21810bafc51313cc6"><div class="ttname"><a href="a02740.html#aac67dbd3e7e8d6f21810bafc51313cc6">FLOATUNION::Elliptical</a></div><div class="ttdeci">float * Elliptical</div><div class="ttdef"><b>Definition:</b> <a href="a00596_source.html#l00059">cluster.h:59</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b8f5fb7b736ee5431a221bc7b817d6e0.html">classify</a></li><li class="navelem"><a class="el" href="a00602.html">clusttool.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_be21c9400dd14e513865608c9a8a7e5a.html">ccutil</a></li><li class="navelem"><a class="el" href="a00602.html">unicharset.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/lstm/stridemap.h File Reference</title>
+<title>tesseract: /tesseract/src/lstm/networkio.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,46 +87,40 @@ $(document).ready(function(){initNavTree('a00905.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#enum-members">Enumerations</a>  </div>
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
-<div class="title">stridemap.h File Reference</div>  </div>
+<div class="title">networkio.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;cstring&gt;</code><br />
-<code>#include &lt;vector&gt;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a00908_source.html">networkio.h</a>&quot;</code><br />
+<code>#include &lt;cfloat&gt;</code><br />
+<code>#include &quot;allheaders.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00869_source.html">functions.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00455_source.html">statistc.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00584_source.html">tprintf.h</a>&quot;</code><br />
 </div>
 <p><a href="a00905_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03128.html">tesseract::StrideMap</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03132.html">tesseract::StrideMap::Index</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a01539"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html">tesseract</a></td></tr>
+<tr class="memitem:a01818"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html">tesseract</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:aaa87baf6c9f3af8e6ab4dd61cf2bfe85"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#aaa87baf6c9f3af8e6ab4dd61cf2bfe85">tesseract::FlexDimensions</a> { <a class="el" href="a01539.html#aaa87baf6c9f3af8e6ab4dd61cf2bfe85a996324f141c5a6f3fe5828c837c03d51">tesseract::FD_BATCH</a>, 
-<a class="el" href="a01539.html#aaa87baf6c9f3af8e6ab4dd61cf2bfe85ab54b0f714629ea13eba06690d9005afd">tesseract::FD_HEIGHT</a>, 
-<a class="el" href="a01539.html#aaa87baf6c9f3af8e6ab4dd61cf2bfe85a4f3b5a320e8771ddafe87eaf5adaad08">tesseract::FD_WIDTH</a>, 
-<a class="el" href="a01539.html#aaa87baf6c9f3af8e6ab4dd61cf2bfe85a66d3b6aa5bc945465b376dbc09b27c56">tesseract::FD_DIMSIZE</a>
- }</td></tr>
-<tr class="separator:aaa87baf6c9f3af8e6ab4dd61cf2bfe85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a898ea1829fee3aa8947d9d15060c9a21"><td class="memItemLeft" align="right" valign="top">const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a898ea1829fee3aa8947d9d15060c9a21">tesseract::kMinCertainty</a> = -20.0f</td></tr>
+<tr class="separator:a898ea1829fee3aa8947d9d15060c9a21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af46ae419362dd200de1fb3c395393422"><td class="memItemLeft" align="right" valign="top">const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#af46ae419362dd200de1fb3c395393422">tesseract::kMinProb</a> = exp(kMinCertainty)</td></tr>
+<tr class="separator:af46ae419362dd200de1fb3c395393422"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_57c32823bf7301c39893cc8d5b3eca8e.html">lstm</a></li><li class="navelem"><a class="el" href="a00905.html">stridemap.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_57c32823bf7301c39893cc8d5b3eca8e.html">lstm</a></li><li class="navelem"><a class="el" href="a00905.html">networkio.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

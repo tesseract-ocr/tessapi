@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/opencl/oclkernels.h File Reference</title>
+<title>tesseract: /tesseract/src/lstm/recodebeam.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,47 +87,43 @@ $(document).ready(function(){initNavTree('a00926.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#define-members">Macros</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle">
-<div class="title">oclkernels.h File Reference</div>  </div>
+<div class="title">recodebeam.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
+<div class="textblock"><code>#include &quot;<a class="el" href="a00929_source.html">recodebeam.h</a>&quot;</code><br />
+<code>#include &lt;deque&gt;</code><br />
+<code>#include &lt;map&gt;</code><br />
+<code>#include &lt;set&gt;</code><br />
+<code>#include &lt;tuple&gt;</code><br />
+<code>#include &lt;unordered_set&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00908_source.html">networkio.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00374_source.html">pageres.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00593_source.html">unicharcompress.h</a>&quot;</code><br />
+<code>#include &lt;algorithm&gt;</code><br />
+</div>
 <p><a href="a00926_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:a0081febcd5eb81ba92dcf93359a1b0ea"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00926.html#a0081febcd5eb81ba92dcf93359a1b0ea">KERNEL</a>(...)&#160;&#160;&#160;#__VA_ARGS__ &quot;\n&quot;</td></tr>
-<tr class="separator:a0081febcd5eb81ba92dcf93359a1b0ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03550.html">tesseract::greater_than</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:a01818"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html">tesseract</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a0081febcd5eb81ba92dcf93359a1b0ea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0081febcd5eb81ba92dcf93359a1b0ea">&#9670;&nbsp;</a></span>KERNEL</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define KERNEL</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>...</em></td><td>)</td>
-          <td>&#160;&#160;&#160;#__VA_ARGS__ &quot;\n&quot;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00926_source.html#l00015">15</a> of file <a class="el" href="a00926_source.html">oclkernels.h</a>.</p>
-
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_0f3b9fbb4618702e0c3f1f6fecbfd9bc.html">opencl</a></li><li class="navelem"><a class="el" href="a00926.html">oclkernels.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_57c32823bf7301c39893cc8d5b3eca8e.html">lstm</a></li><li class="navelem"><a class="el" href="a00926.html">recodebeam.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

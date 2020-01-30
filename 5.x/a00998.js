@@ -1,5 +1,5 @@
 var a00998 =
 [
-    [ "ColPartitionSet", "a03256.html", "a03256" ],
-    [ "PartSetVector", "a00998.html#a6fb32beebbc5c707d14869180acab99c", null ]
+    [ "TraceBlockOnReducedPix", "a00998.html#a6cee1dea0a3fdece76728ad65ab48563", null ],
+    [ "TraceOutlineOnReducedPix", "a00998.html#a904ab4d9c9e49e83c5d3800d57d433cb", null ]
 ];

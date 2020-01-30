@@ -1,4 +1,4 @@
 var a00407 =
 [
-    [ "kMaxPerimeterWidthRatio", "a00407.html#a532c9f8a6c6371b621bbc5f40cc6da81", null ]
+    [ "kMinVariance", "a00407.html#a8e3123427d0d0de23b5e5a1915b54532", null ]
 ];

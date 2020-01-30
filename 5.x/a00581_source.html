@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/classify/blobclass.cpp Source File</title>
+<title>tesseract: /tesseract/src/ccutil/tprintf.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,15 +87,15 @@ $(document).ready(function(){initNavTree('a00581_source.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">blobclass.cpp</div>  </div>
+<div class="title">tprintf.cpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00581.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/******************************************************************************</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> **      Filename:       blobclass.c</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> **      Purpose:        High level blob classification and training routines.</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> **      Author:         Dan Johnson</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> **</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> **      (c) Copyright Hewlett-Packard Company, 1988.</span></div>
+<a href="a00581.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**********************************************************************</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * File:        tprintf.cpp</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * Description: Trace version of printf - portable between UX and NT</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * Author:      Phil Cheatle</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> * (C) Copyright 1995, Hewlett-Packard Ltd.</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> ** Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> ** you may not use this file except in compliance with the License.</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> ** You may obtain a copy of the License at</span></div>
@@ -105,128 +105,72 @@ $(document).ready(function(){initNavTree('a00581_source.html','');});
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> ** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> ** See the License for the specific language governing permissions and</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> ** limitations under the License.</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> ******************************************************************************/</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00584.html">blobclass.h</a>&quot;</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;cstdio&gt;</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00590.html">classify.h</a>&quot;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00611.html">featdefs.h</a>&quot;</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00659.html">mf.h</a>&quot;</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00683.html">normfeat.h</a>&quot;</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> kUnknownFontName[] = <span class="stringliteral">&quot;UnknownFont&quot;</span>;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> **********************************************************************/</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">// Include automatically generated configuration file if running autoconf.</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#ifdef HAVE_CONFIG_H</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;config_auto.h&quot;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &lt;cstdio&gt;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &lt;cstdarg&gt;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00554.html">params.h</a>&quot;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00044.html">tesseract/strngs.h</a>&gt;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00584.html">tprintf.h</a>&quot;</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="a00581.html#a51d90ea93d4b55e086cb490f7478e684">   29</a></span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#define MAX_MSG_LEN 2048</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">static</span> <a class="code" href="a00503.html#abaa7778083ba376d8c70a59631d4a6ab">STRING_VAR</a>(classify_font_name, kUnknownFontName,</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;                  <span class="stringliteral">&quot;Default font name to be used in training&quot;</span>);</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">namespace </span><a class="code" href="a01539.html">tesseract</a> {</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">// Finds the name of the training font and returns it in fontname, by cutting</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">// it out based on the expectation that the filename is of the form:</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">// /path/to/dir/[lang].[fontname].exp[num]</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">// The [lang], [fontname] and [num] fields should not have &#39;.&#39; characters.</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">// If the global parameter classify_font_name is set, its value is used instead.</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="a01539.html#aa011b40b5e90b4087d0e42ea5fcce12c">   45</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a01539.html#aa011b40b5e90b4087d0e42ea5fcce12c">ExtractFontName</a>(<span class="keyword">const</span> STRING&amp; filename, STRING* fontname) {</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  *fontname = classify_font_name;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="keywordflow">if</span> (*fontname == kUnknownFontName) {</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="comment">// filename is expected to be of the form [lang].[fontname].exp[num]</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="comment">// The [lang], [fontname] and [num] fields should not have &#39;.&#39; characters.</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *basename = strrchr(filename.c_str(), <span class="charliteral">&#39;/&#39;</span>);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *firstdot = strchr(basename ? basename : filename.c_str(), <span class="charliteral">&#39;.&#39;</span>);</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *lastdot  = strrchr(filename.c_str(), <span class="charliteral">&#39;.&#39;</span>);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordflow">if</span> (firstdot != lastdot &amp;&amp; firstdot != <span class="keyword">nullptr</span> &amp;&amp; lastdot != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;      ++firstdot;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;      *fontname = firstdot;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;      fontname-&gt;truncate_at(lastdot - firstdot);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    }</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">static</span> <a class="code" href="a00554.html#abaa7778083ba376d8c70a59631d4a6ab">STRING_VAR</a>(debug_file, <span class="stringliteral">&quot;&quot;</span>, <span class="stringliteral">&quot;File to send tprintf output to&quot;</span>);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="a00584.html#a0c012ad70a57d03771394370a06e57cf">   34</a></span>&#160;<span class="comment">// Trace printf</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<a class="code" href="a00029.html#ab90d161af4ce92c48d61bb06c325308f">DLLSYM</a> <span class="keywordtype">void</span> <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *format, ...)</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;{</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span>* debug_file_name = debug_file.c_str();</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <span class="keyword">static</span> FILE *debugfp = <span class="keyword">nullptr</span>;   <span class="comment">// debug file</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <span class="keywordflow">if</span> (debug_file_name == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="comment">// This should not happen.</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  }</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#ifdef _WIN32</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="comment">// Replace /dev/null by nul for Windows.</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="keywordflow">if</span> (strcmp(debug_file_name, <span class="stringliteral">&quot;/dev/null&quot;</span>) == 0) {</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    debug_file_name = <span class="stringliteral">&quot;nul&quot;</span>;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    debug_file.set_value(debug_file_name);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  }</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="keywordflow">if</span> (debugfp == <span class="keyword">nullptr</span> &amp;&amp; debug_file_name[0] != <span class="charliteral">&#39;\0&#39;</span>) {</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    debugfp = fopen(debug_file_name, <span class="stringliteral">&quot;wb&quot;</span>);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (debugfp != <span class="keyword">nullptr</span> &amp;&amp; debug_file_name[0] == <span class="charliteral">&#39;\0&#39;</span>) {</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    fclose(debugfp);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    debugfp = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  }</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;}</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">// Extracts features from the given blob and saves them in the tr_file_data_</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">// member variable.</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">// fontname:  Name of font that this blob was printed in.</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">// cn_denorm: Character normalization transformation to apply to the blob.</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">// fx_info:   Character normalization parameters computed with cn_denorm.</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">// blob_text: Ground truth text for the blob.</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="a02708.html#aef52f3c9cec32fe17a10f77e1448aaa6">   70</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02708.html#aef52f3c9cec32fe17a10f77e1448aaa6">Classify::LearnBlob</a>(<span class="keyword">const</span> STRING&amp; fontname, <a class="code" href="a02232.html">TBLOB</a>* blob,</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                         <span class="keyword">const</span> <a class="code" href="a02340.html">DENORM</a>&amp; cn_denorm,</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                         <span class="keyword">const</span> <a class="code" href="a02772.html">INT_FX_RESULT_STRUCT</a>&amp; fx_info,</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                         <span class="keyword">const</span> <span class="keywordtype">char</span>* blob_text) {</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <a class="code" href="a02756.html">CHAR_DESC</a> CharDesc = <a class="code" href="a00608.html#a860f7517bac9477e79551e501df549ed">NewCharDescription</a>(<a class="code" href="a02708.html#a6ebcfd2968c704f99efd40075ecdb138">feature_defs_</a>);</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  CharDesc-&gt;<a class="code" href="a02756.html#ae04ec3a6b5e474d83930ff3e57a42acb">FeatureSets</a>[0] = <a class="code" href="a00656.html#a65d3fa9ad9b625a37b5b5a8254156bac">ExtractMicros</a>(blob, cn_denorm);</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  CharDesc-&gt;<a class="code" href="a02756.html#ae04ec3a6b5e474d83930ff3e57a42acb">FeatureSets</a>[1] = <a class="code" href="a00680.html#a809c040b2d2dbb0ce82c124e0787e06c">ExtractCharNormFeatures</a>(fx_info);</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  CharDesc-&gt;<a class="code" href="a02756.html#ae04ec3a6b5e474d83930ff3e57a42acb">FeatureSets</a>[2] = <a class="code" href="a02708.html#ab92981e0e78896a6492bd3c5e104cb80">ExtractIntCNFeatures</a>(*blob, fx_info);</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  CharDesc-&gt;<a class="code" href="a02756.html#ae04ec3a6b5e474d83930ff3e57a42acb">FeatureSets</a>[3] = <a class="code" href="a02708.html#aefa32701abe56b64aa8720bfb5303093">ExtractIntGeoFeatures</a>(*blob, fx_info);</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  <span class="keywordflow">if</span> (<a class="code" href="a00608.html#af8fa799b7b0c0c8e18648a521ef2775f">ValidCharDescription</a>(<a class="code" href="a02708.html#a6ebcfd2968c704f99efd40075ecdb138">feature_defs_</a>, CharDesc)) {</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="comment">// Label the features with a class name and font name.</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    tr_file_data_ += <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    tr_file_data_ += fontname;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    tr_file_data_ += <span class="stringliteral">&quot; &quot;</span>;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    tr_file_data_ += blob_text;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    tr_file_data_ += <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="comment">// write micro-features to file and clean up</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <a class="code" href="a00608.html#a7ec256eeb477e0fd9bb2124e54c13f34">WriteCharDescription</a>(<a class="code" href="a02708.html#a6ebcfd2968c704f99efd40075ecdb138">feature_defs_</a>, CharDesc, &amp;tr_file_data_);</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Blob learned was invalid!\n&quot;</span>);</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  }</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <a class="code" href="a00608.html#ae2a92eefc3755300284119692527e3b9">FreeCharDescription</a>(CharDesc);</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;}                                <span class="comment">// LearnBlob</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">// Writes stored training data to a .tr file based on the given filename.</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">// Returns false on error.</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="a02708.html#a8373b3d764ce82b5be835abea34ebd32">   98</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a02708.html#a8373b3d764ce82b5be835abea34ebd32">Classify::WriteTRFile</a>(<span class="keyword">const</span> STRING&amp; filename) {</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  <span class="keywordtype">bool</span> result = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  STRING tr_filename = filename + <span class="stringliteral">&quot;.tr&quot;</span>;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  FILE* fp = fopen(tr_filename.c_str(), <span class="stringliteral">&quot;wb&quot;</span>);</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  <span class="keywordflow">if</span> (fp) {</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    result =</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;      <a class="code" href="a01539.html#aac98ce8ed0ca122cbdd178773b3bb4a7">tesseract::Serialize</a>(fp, &amp;tr_file_data_[0], tr_file_data_.length());</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    fclose(fp);</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  }</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;  tr_file_data_.truncate_at(0);</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;}</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;}  <span class="comment">// namespace tesseract.</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  va_list args;            <span class="comment">// variable args</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  va_start(args, format);  <span class="comment">// variable list</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <span class="keywordflow">if</span> (debugfp != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    vfprintf(debugfp, format, args);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    vfprintf(stderr, format, args);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  }</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  va_end(args);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa02708_html_a8373b3d764ce82b5be835abea34ebd32"><div class="ttname"><a href="a02708.html#a8373b3d764ce82b5be835abea34ebd32">tesseract::Classify::WriteTRFile</a></div><div class="ttdeci">bool WriteTRFile(const STRING &amp;filename)</div><div class="ttdef"><b>Definition:</b> <a href="a00581_source.html#l00098">blobclass.cpp:98</a></div></div>
-<div class="ttc" id="aa02708_html_aef52f3c9cec32fe17a10f77e1448aaa6"><div class="ttname"><a href="a02708.html#aef52f3c9cec32fe17a10f77e1448aaa6">tesseract::Classify::LearnBlob</a></div><div class="ttdeci">void LearnBlob(const STRING &amp;fontname, TBLOB *Blob, const DENORM &amp;cn_denorm, const INT_FX_RESULT_STRUCT &amp;fx_info, const char *blob_text)</div><div class="ttdef"><b>Definition:</b> <a href="a00581_source.html#l00070">blobclass.cpp:70</a></div></div>
-<div class="ttc" id="aa00608_html_a7ec256eeb477e0fd9bb2124e54c13f34"><div class="ttname"><a href="a00608.html#a7ec256eeb477e0fd9bb2124e54c13f34">WriteCharDescription</a></div><div class="ttdeci">void WriteCharDescription(const FEATURE_DEFS_STRUCT &amp;FeatureDefs, CHAR_DESC CharDesc, STRING *str)</div><div class="ttdef"><b>Definition:</b> <a href="a00608_source.html#l00173">featdefs.cpp:173</a></div></div>
-<div class="ttc" id="aa02772_html"><div class="ttname"><a href="a02772.html">INT_FX_RESULT_STRUCT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00635_source.html#l00034">intfx.h:34</a></div></div>
-<div class="ttc" id="aa00659_html"><div class="ttname"><a href="a00659.html">mf.h</a></div></div>
-<div class="ttc" id="aa00608_html_af8fa799b7b0c0c8e18648a521ef2775f"><div class="ttname"><a href="a00608.html#af8fa799b7b0c0c8e18648a521ef2775f">ValidCharDescription</a></div><div class="ttdeci">bool ValidCharDescription(const FEATURE_DEFS_STRUCT &amp;FeatureDefs, CHAR_DESC CharDesc)</div><div class="ttdef"><b>Definition:</b> <a href="a00608_source.html#l00194">featdefs.cpp:194</a></div></div>
-<div class="ttc" id="aa00611_html"><div class="ttname"><a href="a00611.html">featdefs.h</a></div></div>
-<div class="ttc" id="aa00683_html"><div class="ttname"><a href="a00683.html">normfeat.h</a></div></div>
-<div class="ttc" id="aa00530_html_a0c2bcd4462ec67ab0971b34a0f610f55"><div class="ttname"><a href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a></div><div class="ttdeci">DLLSYM void tprintf(const char *format,...)</div><div class="ttdef"><b>Definition:</b> <a href="a00530_source.html#l00034">tprintf.cpp:34</a></div></div>
-<div class="ttc" id="aa02708_html_a6ebcfd2968c704f99efd40075ecdb138"><div class="ttname"><a href="a02708.html#a6ebcfd2968c704f99efd40075ecdb138">tesseract::Classify::feature_defs_</a></div><div class="ttdeci">FEATURE_DEFS_STRUCT feature_defs_</div><div class="ttdef"><b>Definition:</b> <a href="a00590_source.html#l00541">classify.h:541</a></div></div>
-<div class="ttc" id="aa00608_html_ae2a92eefc3755300284119692527e3b9"><div class="ttname"><a href="a00608.html#ae2a92eefc3755300284119692527e3b9">FreeCharDescription</a></div><div class="ttdeci">void FreeCharDescription(CHAR_DESC CharDesc)</div><div class="ttdef"><b>Definition:</b> <a href="a00608_source.html#l00128">featdefs.cpp:128</a></div></div>
-<div class="ttc" id="aa00503_html_abaa7778083ba376d8c70a59631d4a6ab"><div class="ttname"><a href="a00503.html#abaa7778083ba376d8c70a59631d4a6ab">STRING_VAR</a></div><div class="ttdeci">#define STRING_VAR(name, val, comment)</div><div class="ttdef"><b>Definition:</b> <a href="a00503_source.html#l00306">params.h:306</a></div></div>
-<div class="ttc" id="aa00608_html_a860f7517bac9477e79551e501df549ed"><div class="ttname"><a href="a00608.html#a860f7517bac9477e79551e501df549ed">NewCharDescription</a></div><div class="ttdeci">CHAR_DESC NewCharDescription(const FEATURE_DEFS_STRUCT &amp;FeatureDefs)</div><div class="ttdef"><b>Definition:</b> <a href="a00608_source.html#l00147">featdefs.cpp:147</a></div></div>
-<div class="ttc" id="aa00590_html"><div class="ttname"><a href="a00590.html">classify.h</a></div></div>
-<div class="ttc" id="aa02708_html_ab92981e0e78896a6492bd3c5e104cb80"><div class="ttname"><a href="a02708.html#ab92981e0e78896a6492bd3c5e104cb80">tesseract::Classify::ExtractIntCNFeatures</a></div><div class="ttdeci">FEATURE_SET ExtractIntCNFeatures(const TBLOB &amp;blob, const INT_FX_RESULT_STRUCT &amp;fx_info)</div><div class="ttdef"><b>Definition:</b> <a href="a00704_source.html#l00216">picofeat.cpp:216</a></div></div>
-<div class="ttc" id="aa01539_html_aa011b40b5e90b4087d0e42ea5fcce12c"><div class="ttname"><a href="a01539.html#aa011b40b5e90b4087d0e42ea5fcce12c">tesseract::ExtractFontName</a></div><div class="ttdeci">void ExtractFontName(const STRING &amp;filename, STRING *fontname)</div><div class="ttdef"><b>Definition:</b> <a href="a00581_source.html#l00045">blobclass.cpp:45</a></div></div>
-<div class="ttc" id="aa02708_html_aefa32701abe56b64aa8720bfb5303093"><div class="ttname"><a href="a02708.html#aefa32701abe56b64aa8720bfb5303093">tesseract::Classify::ExtractIntGeoFeatures</a></div><div class="ttdeci">FEATURE_SET ExtractIntGeoFeatures(const TBLOB &amp;blob, const INT_FX_RESULT_STRUCT &amp;fx_info)</div><div class="ttdef"><b>Definition:</b> <a href="a00704_source.html#l00246">picofeat.cpp:246</a></div></div>
-<div class="ttc" id="aa00584_html"><div class="ttname"><a href="a00584.html">blobclass.h</a></div></div>
-<div class="ttc" id="aa02232_html"><div class="ttname"><a href="a02232.html">TBLOB</a></div><div class="ttdef"><b>Definition:</b> <a href="a00209_source.html#l00282">blobs.h:282</a></div></div>
-<div class="ttc" id="aa01539_html"><div class="ttname"><a href="a01539.html">tesseract</a></div><div class="ttdef"><b>Definition:</b> <a href="a00002_source.html#l00025">altorenderer.cpp:25</a></div></div>
-<div class="ttc" id="aa02756_html"><div class="ttname"><a href="a02756.html">CHAR_DESC_STRUCT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00611_source.html#l00038">featdefs.h:38</a></div></div>
-<div class="ttc" id="aa02756_html_ae04ec3a6b5e474d83930ff3e57a42acb"><div class="ttname"><a href="a02756.html#ae04ec3a6b5e474d83930ff3e57a42acb">CHAR_DESC_STRUCT::FeatureSets</a></div><div class="ttdeci">FEATURE_SET FeatureSets[NUM_FEATURE_TYPES]</div><div class="ttdef"><b>Definition:</b> <a href="a00611_source.html#l00040">featdefs.h:40</a></div></div>
-<div class="ttc" id="aa02340_html"><div class="ttname"><a href="a02340.html">DENORM</a></div><div class="ttdef"><b>Definition:</b> <a href="a00293_source.html#l00049">normalis.h:49</a></div></div>
-<div class="ttc" id="aa00656_html_a65d3fa9ad9b625a37b5b5a8254156bac"><div class="ttname"><a href="a00656.html#a65d3fa9ad9b625a37b5b5a8254156bac">ExtractMicros</a></div><div class="ttdeci">FEATURE_SET ExtractMicros(TBLOB *Blob, const DENORM &amp;cn_denorm)</div><div class="ttdef"><b>Definition:</b> <a href="a00656_source.html#l00043">mf.cpp:43</a></div></div>
-<div class="ttc" id="aa00680_html_a809c040b2d2dbb0ce82c124e0787e06c"><div class="ttname"><a href="a00680.html#a809c040b2d2dbb0ce82c124e0787e06c">ExtractCharNormFeatures</a></div><div class="ttdeci">FEATURE_SET ExtractCharNormFeatures(const INT_FX_RESULT_STRUCT &amp;fx_info)</div><div class="ttdef"><b>Definition:</b> <a href="a00680_source.html#l00060">normfeat.cpp:60</a></div></div>
-<div class="ttc" id="aa01539_html_aac98ce8ed0ca122cbdd178773b3bb4a7"><div class="ttname"><a href="a01539.html#aac98ce8ed0ca122cbdd178773b3bb4a7">tesseract::Serialize</a></div><div class="ttdeci">bool Serialize(FILE *fp, const char *data, size_t n)</div><div class="ttdef"><b>Definition:</b> <a href="a00515_source.html#l00073">serialis.cpp:73</a></div></div>
+<div class="ttc" id="aa00044_html"><div class="ttname"><a href="a00044.html">strngs.h</a></div></div>
+<div class="ttc" id="aa00554_html"><div class="ttname"><a href="a00554.html">params.h</a></div></div>
+<div class="ttc" id="aa00554_html_abaa7778083ba376d8c70a59631d4a6ab"><div class="ttname"><a href="a00554.html#abaa7778083ba376d8c70a59631d4a6ab">STRING_VAR</a></div><div class="ttdeci">#define STRING_VAR(name, val, comment)</div><div class="ttdef"><b>Definition:</b> <a href="a00554_source.html#l00306">params.h:306</a></div></div>
+<div class="ttc" id="aa00029_html_ab90d161af4ce92c48d61bb06c325308f"><div class="ttname"><a href="a00029.html#ab90d161af4ce92c48d61bb06c325308f">DLLSYM</a></div><div class="ttdeci">#define DLLSYM</div><div class="ttdef"><b>Definition:</b> <a href="a00029_source.html#l00021">platform.h:21</a></div></div>
+<div class="ttc" id="aa00584_html"><div class="ttname"><a href="a00584.html">tprintf.h</a></div></div>
+<div class="ttc" id="aa00581_html_a0c2bcd4462ec67ab0971b34a0f610f55"><div class="ttname"><a href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a></div><div class="ttdeci">DLLSYM void tprintf(const char *format,...)</div><div class="ttdef"><b>Definition:</b> <a href="a00581_source.html#l00034">tprintf.cpp:34</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b8f5fb7b736ee5431a221bc7b817d6e0.html">classify</a></li><li class="navelem"><a class="el" href="a00581.html">blobclass.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:14 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_be21c9400dd14e513865608c9a8a7e5a.html">ccutil</a></li><li class="navelem"><a class="el" href="a00581.html">tprintf.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:20 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

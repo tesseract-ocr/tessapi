@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/training/commandlineflags.h File Reference</title>
+<title>tesseract: /tesseract/src/textord/tospace.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -88,469 +88,44 @@ $(document).ready(function(){initNavTree('a01196.html','');});
 <div class="header">
   <div class="summary">
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#define-members">Macros</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#define-members">Macros</a>  </div>
   <div class="headertitle">
-<div class="title">commandlineflags.h File Reference</div>  </div>
+<div class="title">tospace.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;cstdlib&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00503_source.html">params.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a01061_source.html">drawtord.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00455_source.html">statistc.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a01181_source.html">textord.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a01202_source.html">tovars.h</a>&quot;</code><br />
+<code>#include &lt;algorithm&gt;</code><br />
+<code>#include &lt;memory&gt;</code><br />
 </div>
 <p><a href="a01196_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a01539"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html">tesseract</a></td></tr>
+<tr class="memitem:a01818"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html">tesseract</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:ad748a6074d71dbad0eefb8e9f5a92bb0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01196.html#ad748a6074d71dbad0eefb8e9f5a92bb0">INT_PARAM_FLAG</a>(name,  val,  comment)&#160;&#160;&#160;<a class="el" href="a00503.html#a554d43d0cf0e3f9552921941d9e147bd">INT_VAR</a>(FLAGS_##name, val, comment)</td></tr>
-<tr class="separator:ad748a6074d71dbad0eefb8e9f5a92bb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e09690c0916d41fdffade0bdaed4a3c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01196.html#a2e09690c0916d41fdffade0bdaed4a3c">DECLARE_INT_PARAM_FLAG</a>(name)&#160;&#160;&#160;extern <a class="el" href="a00503.html#a860ed47a3e223fcf5c06eed07fbc649f">INT_VAR_H</a>(FLAGS_##name, 0, &quot;&quot;)</td></tr>
-<tr class="separator:a2e09690c0916d41fdffade0bdaed4a3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0f2a745854800cb30fd76f82a7a11958"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01196.html#a0f2a745854800cb30fd76f82a7a11958">DOUBLE_PARAM_FLAG</a>(name,  val,  comment)&#160;&#160;&#160;<a class="el" href="a00503.html#aa855c84dbbf962a5533a96e1f458c690">double_VAR</a>(FLAGS_##name, val, comment)</td></tr>
-<tr class="separator:a0f2a745854800cb30fd76f82a7a11958"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55ce06dbb612ec555a3dc4c72ee64f37"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01196.html#a55ce06dbb612ec555a3dc4c72ee64f37">DECLARE_DOUBLE_PARAM_FLAG</a>(name)&#160;&#160;&#160;extern <a class="el" href="a00503.html#ac9b655e8ebd14897cfc161f2f47797a0">double_VAR_H</a>(FLAGS_##name, &quot;&quot;, &quot;&quot;)</td></tr>
-<tr class="separator:a55ce06dbb612ec555a3dc4c72ee64f37"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a84d5923c9e3581b99db3cacbfee2467a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01196.html#a84d5923c9e3581b99db3cacbfee2467a">BOOL_PARAM_FLAG</a>(name,  val,  comment)&#160;&#160;&#160;<a class="el" href="a00503.html#a442e7f541a050acf5ebda026db177877">BOOL_VAR</a>(FLAGS_##name, val, comment)</td></tr>
-<tr class="separator:a84d5923c9e3581b99db3cacbfee2467a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a855de1546e8b2e21be494213f582a1a8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01196.html#a855de1546e8b2e21be494213f582a1a8">DECLARE_BOOL_PARAM_FLAG</a>(name)&#160;&#160;&#160;extern <a class="el" href="a00503.html#a2d4425c5a3f3c3eeeed987128d4cd419">BOOL_VAR_H</a>(FLAGS_##name, 0, &quot;&quot;)</td></tr>
-<tr class="separator:a855de1546e8b2e21be494213f582a1a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae27a3cb8977a05a660ea49ebece9f518"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01196.html#ae27a3cb8977a05a660ea49ebece9f518">STRING_PARAM_FLAG</a>(name,  val,  comment)&#160;&#160;&#160;<a class="el" href="a00503.html#abaa7778083ba376d8c70a59631d4a6ab">STRING_VAR</a>(FLAGS_##name, val, comment)</td></tr>
-<tr class="separator:ae27a3cb8977a05a660ea49ebece9f518"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a87a885957cbc36af45212ba399d6c815"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01196.html#a87a885957cbc36af45212ba399d6c815">DECLARE_STRING_PARAM_FLAG</a>(name)&#160;&#160;&#160;extern <a class="el" href="a00503.html#a4de8a1a302b34b48cc9cabad1b611802">STRING_VAR_H</a>(FLAGS_##name, &quot;&quot;, &quot;&quot;)</td></tr>
-<tr class="separator:a87a885957cbc36af45212ba399d6c815"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a569fec4a675c52515bf46d268671c822"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01196.html#a569fec4a675c52515bf46d268671c822">DECLARE_INT_PARAM_FLAG</a> (debug_level)</td></tr>
-<tr class="separator:a569fec4a675c52515bf46d268671c822"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae29834ed66efca59d89938ee1ddeb922"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01196.html#ae29834ed66efca59d89938ee1ddeb922">DECLARE_STRING_PARAM_FLAG</a> (D)</td></tr>
-<tr class="separator:ae29834ed66efca59d89938ee1ddeb922"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a29fa318bde2ce276b44ea78e4b475109"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01196.html#a29fa318bde2ce276b44ea78e4b475109">DECLARE_STRING_PARAM_FLAG</a> (F)</td></tr>
-<tr class="separator:a29fa318bde2ce276b44ea78e4b475109"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a178495cb1271b6e7a0aa46c16c12ad41"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01196.html#a178495cb1271b6e7a0aa46c16c12ad41">DECLARE_STRING_PARAM_FLAG</a> (O)</td></tr>
-<tr class="separator:a178495cb1271b6e7a0aa46c16c12ad41"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1cba22b5b0246ff53d13bc9cbcd11dca"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01196.html#a1cba22b5b0246ff53d13bc9cbcd11dca">DECLARE_STRING_PARAM_FLAG</a> (U)</td></tr>
-<tr class="separator:a1cba22b5b0246ff53d13bc9cbcd11dca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a30e1d6a2e2b349fc2dc1c25808302306"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01196.html#a30e1d6a2e2b349fc2dc1c25808302306">DECLARE_STRING_PARAM_FLAG</a> (X)</td></tr>
-<tr class="separator:a30e1d6a2e2b349fc2dc1c25808302306"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aede036d63254ff94f4d6e5f8f629b566"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01196.html#aede036d63254ff94f4d6e5f8f629b566">DECLARE_STRING_PARAM_FLAG</a> (fonts_dir)</td></tr>
-<tr class="separator:aede036d63254ff94f4d6e5f8f629b566"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f52609025a7265adc2ecdf075baa235"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01196.html#a8f52609025a7265adc2ecdf075baa235">DECLARE_STRING_PARAM_FLAG</a> (fontconfig_tmpdir)</td></tr>
-<tr class="separator:a8f52609025a7265adc2ecdf075baa235"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a420856238fe74df038880367b8faf2e4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01196.html#a420856238fe74df038880367b8faf2e4">DECLARE_STRING_PARAM_FLAG</a> (output_trainer)</td></tr>
-<tr class="separator:a420856238fe74df038880367b8faf2e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada6b3784932de25658b118cf4a2b1195"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01196.html#ada6b3784932de25658b118cf4a2b1195">DECLARE_STRING_PARAM_FLAG</a> (test_ch)</td></tr>
-<tr class="separator:ada6b3784932de25658b118cf4a2b1195"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a07614d344b574ebcc2d3ae4d68fad1d5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#a07614d344b574ebcc2d3ae4d68fad1d5">tesseract::ParseCommandLineFlags</a> (const char *usage, int *argc, char ***argv, const bool remove_flags)</td></tr>
-<tr class="separator:a07614d344b574ebcc2d3ae4d68fad1d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22abbfce8776ec4773a672fd1544d21c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01196.html#a22abbfce8776ec4773a672fd1544d21c">MAXSPACING</a>&#160;&#160;&#160;128      /*max expected spacing in pix */</td></tr>
+<tr class="separator:a22abbfce8776ec4773a672fd1544d21c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a84d5923c9e3581b99db3cacbfee2467a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a84d5923c9e3581b99db3cacbfee2467a">&#9670;&nbsp;</a></span>BOOL_PARAM_FLAG</h2>
+<a id="a22abbfce8776ec4773a672fd1544d21c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22abbfce8776ec4773a672fd1544d21c">&#9670;&nbsp;</a></span>MAXSPACING</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define BOOL_PARAM_FLAG</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">name, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">val, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">comment&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>&#160;&#160;&#160;<a class="el" href="a00503.html#a442e7f541a050acf5ebda026db177877">BOOL_VAR</a>(FLAGS_##name, val, comment)</td>
+          <td class="memname">#define MAXSPACING&#160;&#160;&#160;128      /*max expected spacing in pix */</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a01196_source.html#l00033">33</a> of file <a class="el" href="a01196_source.html">commandlineflags.h</a>.</p>
-
-</div>
-</div>
-<a id="a855de1546e8b2e21be494213f582a1a8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a855de1546e8b2e21be494213f582a1a8">&#9670;&nbsp;</a></span>DECLARE_BOOL_PARAM_FLAG</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define DECLARE_BOOL_PARAM_FLAG</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">name</td><td>)</td>
-          <td>&#160;&#160;&#160;extern <a class="el" href="a00503.html#a2d4425c5a3f3c3eeeed987128d4cd419">BOOL_VAR_H</a>(FLAGS_##name, 0, &quot;&quot;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a01196_source.html#l00035">35</a> of file <a class="el" href="a01196_source.html">commandlineflags.h</a>.</p>
-
-</div>
-</div>
-<a id="a55ce06dbb612ec555a3dc4c72ee64f37"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a55ce06dbb612ec555a3dc4c72ee64f37">&#9670;&nbsp;</a></span>DECLARE_DOUBLE_PARAM_FLAG</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define DECLARE_DOUBLE_PARAM_FLAG</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">name</td><td>)</td>
-          <td>&#160;&#160;&#160;extern <a class="el" href="a00503.html#ac9b655e8ebd14897cfc161f2f47797a0">double_VAR_H</a>(FLAGS_##name, &quot;&quot;, &quot;&quot;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a01196_source.html#l00031">31</a> of file <a class="el" href="a01196_source.html">commandlineflags.h</a>.</p>
-
-</div>
-</div>
-<a id="a2e09690c0916d41fdffade0bdaed4a3c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2e09690c0916d41fdffade0bdaed4a3c">&#9670;&nbsp;</a></span>DECLARE_INT_PARAM_FLAG</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define DECLARE_INT_PARAM_FLAG</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">name</td><td>)</td>
-          <td>&#160;&#160;&#160;extern <a class="el" href="a00503.html#a860ed47a3e223fcf5c06eed07fbc649f">INT_VAR_H</a>(FLAGS_##name, 0, &quot;&quot;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a01196_source.html#l00027">27</a> of file <a class="el" href="a01196_source.html">commandlineflags.h</a>.</p>
-
-</div>
-</div>
-<a id="a87a885957cbc36af45212ba399d6c815"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a87a885957cbc36af45212ba399d6c815">&#9670;&nbsp;</a></span>DECLARE_STRING_PARAM_FLAG</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define DECLARE_STRING_PARAM_FLAG</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">name</td><td>)</td>
-          <td>&#160;&#160;&#160;extern <a class="el" href="a00503.html#a4de8a1a302b34b48cc9cabad1b611802">STRING_VAR_H</a>(FLAGS_##name, &quot;&quot;, &quot;&quot;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a01196_source.html#l00039">39</a> of file <a class="el" href="a01196_source.html">commandlineflags.h</a>.</p>
-
-</div>
-</div>
-<a id="a0f2a745854800cb30fd76f82a7a11958"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0f2a745854800cb30fd76f82a7a11958">&#9670;&nbsp;</a></span>DOUBLE_PARAM_FLAG</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define DOUBLE_PARAM_FLAG</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">name, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">val, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">comment&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>&#160;&#160;&#160;<a class="el" href="a00503.html#aa855c84dbbf962a5533a96e1f458c690">double_VAR</a>(FLAGS_##name, val, comment)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a01196_source.html#l00029">29</a> of file <a class="el" href="a01196_source.html">commandlineflags.h</a>.</p>
-
-</div>
-</div>
-<a id="ad748a6074d71dbad0eefb8e9f5a92bb0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad748a6074d71dbad0eefb8e9f5a92bb0">&#9670;&nbsp;</a></span>INT_PARAM_FLAG</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define INT_PARAM_FLAG</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">name, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">val, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">comment&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>&#160;&#160;&#160;<a class="el" href="a00503.html#a554d43d0cf0e3f9552921941d9e147bd">INT_VAR</a>(FLAGS_##name, val, comment)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a01196_source.html#l00025">25</a> of file <a class="el" href="a01196_source.html">commandlineflags.h</a>.</p>
-
-</div>
-</div>
-<a id="ae27a3cb8977a05a660ea49ebece9f518"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae27a3cb8977a05a660ea49ebece9f518">&#9670;&nbsp;</a></span>STRING_PARAM_FLAG</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define STRING_PARAM_FLAG</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">name, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">val, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">comment&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>&#160;&#160;&#160;<a class="el" href="a00503.html#abaa7778083ba376d8c70a59631d4a6ab">STRING_VAR</a>(FLAGS_##name, val, comment)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a01196_source.html#l00037">37</a> of file <a class="el" href="a01196_source.html">commandlineflags.h</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="a569fec4a675c52515bf46d268671c822"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a569fec4a675c52515bf46d268671c822">&#9670;&nbsp;</a></span>DECLARE_INT_PARAM_FLAG()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">DECLARE_INT_PARAM_FLAG </td>
-          <td>(</td>
-          <td class="paramtype">debug_level&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ae29834ed66efca59d89938ee1ddeb922"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae29834ed66efca59d89938ee1ddeb922">&#9670;&nbsp;</a></span>DECLARE_STRING_PARAM_FLAG() <span class="overload">[1/9]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">DECLARE_STRING_PARAM_FLAG </td>
-          <td>(</td>
-          <td class="paramtype">D&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a29fa318bde2ce276b44ea78e4b475109"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a29fa318bde2ce276b44ea78e4b475109">&#9670;&nbsp;</a></span>DECLARE_STRING_PARAM_FLAG() <span class="overload">[2/9]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">DECLARE_STRING_PARAM_FLAG </td>
-          <td>(</td>
-          <td class="paramtype">F&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a8f52609025a7265adc2ecdf075baa235"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8f52609025a7265adc2ecdf075baa235">&#9670;&nbsp;</a></span>DECLARE_STRING_PARAM_FLAG() <span class="overload">[3/9]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">DECLARE_STRING_PARAM_FLAG </td>
-          <td>(</td>
-          <td class="paramtype">fontconfig_tmpdir&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aede036d63254ff94f4d6e5f8f629b566"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aede036d63254ff94f4d6e5f8f629b566">&#9670;&nbsp;</a></span>DECLARE_STRING_PARAM_FLAG() <span class="overload">[4/9]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">DECLARE_STRING_PARAM_FLAG </td>
-          <td>(</td>
-          <td class="paramtype">fonts_dir&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a178495cb1271b6e7a0aa46c16c12ad41"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a178495cb1271b6e7a0aa46c16c12ad41">&#9670;&nbsp;</a></span>DECLARE_STRING_PARAM_FLAG() <span class="overload">[5/9]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">DECLARE_STRING_PARAM_FLAG </td>
-          <td>(</td>
-          <td class="paramtype">O&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a420856238fe74df038880367b8faf2e4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a420856238fe74df038880367b8faf2e4">&#9670;&nbsp;</a></span>DECLARE_STRING_PARAM_FLAG() <span class="overload">[6/9]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">DECLARE_STRING_PARAM_FLAG </td>
-          <td>(</td>
-          <td class="paramtype">output_trainer&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ada6b3784932de25658b118cf4a2b1195"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ada6b3784932de25658b118cf4a2b1195">&#9670;&nbsp;</a></span>DECLARE_STRING_PARAM_FLAG() <span class="overload">[7/9]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">DECLARE_STRING_PARAM_FLAG </td>
-          <td>(</td>
-          <td class="paramtype">test_ch&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a1cba22b5b0246ff53d13bc9cbcd11dca"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1cba22b5b0246ff53d13bc9cbcd11dca">&#9670;&nbsp;</a></span>DECLARE_STRING_PARAM_FLAG() <span class="overload">[8/9]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">DECLARE_STRING_PARAM_FLAG </td>
-          <td>(</td>
-          <td class="paramtype">U&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a30e1d6a2e2b349fc2dc1c25808302306"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a30e1d6a2e2b349fc2dc1c25808302306">&#9670;&nbsp;</a></span>DECLARE_STRING_PARAM_FLAG() <span class="overload">[9/9]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">DECLARE_STRING_PARAM_FLAG </td>
-          <td>(</td>
-          <td class="paramtype">X&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p class="definition">Definition at line <a class="el" href="a01196_source.html#l00040">40</a> of file <a class="el" href="a01196_source.html">tospace.cpp</a>.</p>
 
 </div>
 </div>
@@ -559,8 +134,8 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7c7ae07dd2a999045cb78bf7ff8dcbc7.html">training</a></li><li class="navelem"><a class="el" href="a01196.html">commandlineflags.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_930fe0a3c40775bbdbdb97cea0f56396.html">textord</a></li><li class="navelem"><a class="el" href="a01196.html">tospace.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

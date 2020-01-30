@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/classify/mfdefs.cpp Source File</title>
+<title>tesseract: /tesseract/src/classify/featdefs.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,12 +87,12 @@ $(document).ready(function(){initNavTree('a00662_source.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">mfdefs.cpp</div>  </div>
+<div class="title">featdefs.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="a00662.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/******************************************************************************</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> ** Filename:    mfdefs.cpp</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> ** Purpose:     Basic routines for manipulating micro-features</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> ** Filename:    featdefs.h</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> ** Purpose:     Definitions of currently defined feature types.</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> ** Author:      Dan Johnson</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> **</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> ** (c) Copyright Hewlett-Packard Company, 1988.</span></div>
@@ -106,41 +106,101 @@ $(document).ready(function(){initNavTree('a00662_source.html','');});
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> ** See the License for the specific language governing permissions and</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> ** limitations under the License.</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> ******************************************************************************/</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">/*----------------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">          Include Files and Type Defines</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">----------------------------------------------------------------------------**/</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00665.html">mfdefs.h</a>&quot;</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00752.html">emalloc.h</a>&quot;</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;cmath&gt;</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">/*----------------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">              Public Code</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">----------------------------------------------------------------------------**/</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<a class="code" href="a00665.html#a48288195254495e88ac033d20d13aa31">MICROFEATURE</a> <a class="code" href="a00662.html#a10606897d42fff8ca71fb36795bd581e">NewMicroFeature</a>() {</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <span class="keywordflow">return</span> (static_cast&lt;MICROFEATURE&gt;(<a class="code" href="a00749.html#a9bdc0885c33bbb5b062c77b1d90e2305">Emalloc</a> (<span class="keyword">sizeof</span> (<a class="code" href="a00665.html#a982f5f0554d0580d6e919b346a5c0099">MFBLOCK</a>))));</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;}                                <span class="comment">/* NewMicroFeature */</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00662.html#afd75dd0b29a6b9bf0c5a31b3484bd0d9">FreeMicroFeatures</a>(<a class="code" href="a02920.html">MICROFEATURES</a> MicroFeatures) {</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <a class="code" href="a00755.html#a1a1efc1a269e5bb5bf16c1a174363ba4">destroy_nodes</a>(MicroFeatures, <a class="code" href="a00749.html#af846576ae65dc13e49ddc616e17baa27">Efree</a>);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;}                                <span class="comment">/* FreeMicroFeatures */</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#ifndef FEATDEFS_H</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#define FEATDEFS_H</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00746.html">ocrfeatures.h</a>&quot;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="a00662.html#aff5d3186888ac3dbd87adcc54b7f2ecf">   26</a></span>&#160;<span class="comment">/* Enumerate the different types of features currently defined. */</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#define NUM_FEATURE_TYPES 4</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">extern</span> <a class="code" href="a00029.html#a86e51270628c53ce7e2c23b1c2b4490e">TESS_API</a> <span class="keyword">const</span> <span class="keywordtype">char</span>* <span class="keyword">const</span> <a class="code" href="a00662.html#a6781dc960db654977a5c696ca44407d6">kMicroFeatureType</a>;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">extern</span> <a class="code" href="a00029.html#a86e51270628c53ce7e2c23b1c2b4490e">TESS_API</a> <span class="keyword">const</span> <span class="keywordtype">char</span>* <span class="keyword">const</span> <a class="code" href="a00662.html#a1721f38e30ba7e6f0473bf08cddea58f">kCNFeatureType</a>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">extern</span> <a class="code" href="a00029.html#a86e51270628c53ce7e2c23b1c2b4490e">TESS_API</a> <span class="keyword">const</span> <span class="keywordtype">char</span>* <span class="keyword">const</span> <a class="code" href="a00662.html#a932f3dd36ff509924434534b4292074b">kIntFeatureType</a>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">extern</span> <a class="code" href="a00029.html#a86e51270628c53ce7e2c23b1c2b4490e">TESS_API</a> <span class="keyword">const</span> <span class="keywordtype">char</span>* <span class="keyword">const</span> <a class="code" href="a00662.html#afabf946423972bb31424564a9e0ead68">kGeoFeatureType</a>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">/* A character is described by multiple sets of extracted features.  Each</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">  set contains a number of features of a particular type, for example, a</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">  set of bays, or a set of closures, or a set of microfeatures.  Each</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">  feature consists of a number of parameters.  All features within a</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">  feature set contain the same number of parameters.*/</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="a03214.html">   38</a></span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="a03214.html#aa1ea5b561576445f0f41da1afc10b1b0">   39</a></span>&#160;<span class="keyword">struct </span><a class="code" href="a03214.html">CHAR_DESC_STRUCT</a> {</div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="a03214.html#ae04ec3a6b5e474d83930ff3e57a42acb">   40</a></span>&#160;  uint32_t <a class="code" href="a03214.html#aa1ea5b561576445f0f41da1afc10b1b0">NumFeatureSets</a>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <a class="code" href="a03326.html">FEATURE_SET</a> <a class="code" href="a03214.html#ae04ec3a6b5e474d83930ff3e57a42acb">FeatureSets</a>[<a class="code" href="a00662.html#aff5d3186888ac3dbd87adcc54b7f2ecf">NUM_FEATURE_TYPES</a>];</div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="a00662.html#a328d8357302c5e1ee7f11f6ee34577f3">   42</a></span>&#160;};</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">using</span> <a class="code" href="a03214.html">CHAR_DESC</a> = <a class="code" href="a03214.html">CHAR_DESC_STRUCT</a> *;</div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="a03218.html">   44</a></span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="a03218.html#a6c1a7c245772a264c5c40241b6e7175a">   45</a></span>&#160;<span class="keyword">struct </span><a class="code" href="a03218.html">FEATURE_DEFS_STRUCT</a> {</div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="a03218.html#ab09a6d77d42a8a2b5882bbc27ee4f23c">   46</a></span>&#160;  int32_t <a class="code" href="a03218.html#a6c1a7c245772a264c5c40241b6e7175a">NumFeatureTypes</a>;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="keyword">const</span> <a class="code" href="a03318.html">FEATURE_DESC_STRUCT</a>* <a class="code" href="a03218.html#ab09a6d77d42a8a2b5882bbc27ee4f23c">FeatureDesc</a>[<a class="code" href="a00662.html#aff5d3186888ac3dbd87adcc54b7f2ecf">NUM_FEATURE_TYPES</a>];</div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="a00662.html#a3d87491bc8c74401376efa5e1793e2a2">   48</a></span>&#160;};</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keyword">using</span> <a class="code" href="a03218.html">FEATURE_DEFS</a> = <a class="code" href="a03218.html">FEATURE_DEFS_STRUCT</a> *;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">/*----------------------------------------------------------------------</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">    Generic functions for manipulating character descriptions</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">----------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00662.html#a6e4c84ab01e39577e4a74d9ab1eff68b">InitFeatureDefs</a>(<a class="code" href="a03218.html">FEATURE_DEFS_STRUCT</a> *featuredefs);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00662.html#ae2a92eefc3755300284119692527e3b9">FreeCharDescription</a>(<a class="code" href="a03214.html">CHAR_DESC</a> CharDesc);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<a class="code" href="a03214.html">CHAR_DESC</a> <a class="code" href="a00662.html#a860f7517bac9477e79551e501df549ed">NewCharDescription</a>(<span class="keyword">const</span> <a class="code" href="a03218.html">FEATURE_DEFS_STRUCT</a> &amp;FeatureDefs);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a00662.html#af8fa799b7b0c0c8e18648a521ef2775f">ValidCharDescription</a>(<span class="keyword">const</span> <a class="code" href="a03218.html">FEATURE_DEFS_STRUCT</a> &amp;FeatureDefs,</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                          <a class="code" href="a03214.html">CHAR_DESC</a> CharDesc);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00662.html#a7ec256eeb477e0fd9bb2124e54c13f34">WriteCharDescription</a>(<span class="keyword">const</span> <a class="code" href="a03218.html">FEATURE_DEFS_STRUCT</a>&amp; FeatureDefs,</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                          <a class="code" href="a03214.html">CHAR_DESC</a> CharDesc, <a class="code" href="a02542.html">STRING</a>* str);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<a class="code" href="a03214.html">CHAR_DESC</a> <a class="code" href="a00662.html#ae1558f5d4119a9e651a85e10887be9f3">ReadCharDescription</a>(<span class="keyword">const</span> <a class="code" href="a03218.html">FEATURE_DEFS_STRUCT</a> &amp;FeatureDefs,</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                              FILE *File);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;uint32_t <a class="code" href="a00662.html#a96bfe8f02db0cc4dea42e9a9e9a98630">ShortNameToFeatureType</a>(<span class="keyword">const</span> <a class="code" href="a03218.html">FEATURE_DEFS_STRUCT</a> &amp;FeatureDefs,</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                                <span class="keyword">const</span> <span class="keywordtype">char</span> *ShortName);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keyword">extern</span> <span class="keyword">const</span> <a class="code" href="a03318.html">FEATURE_DESC_STRUCT</a> <a class="code" href="a00662.html#aa889ab53df925b2ccc5a2871eca3eff7">MicroFeatureDesc</a>;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keyword">extern</span> <a class="code" href="a00029.html#a86e51270628c53ce7e2c23b1c2b4490e">TESS_API</a> <span class="keyword">const</span> <a class="code" href="a03318.html">FEATURE_DESC_STRUCT</a> <a class="code" href="a00662.html#a6874f1e9456afb7479b229bcb58d95a8">PicoFeatDesc</a>;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keyword">extern</span> <span class="keyword">const</span> <a class="code" href="a03318.html">FEATURE_DESC_STRUCT</a> <a class="code" href="a00662.html#aeaae0c3ba332fe6addd19ed202a3ecb7">CharNormDesc</a>;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keyword">extern</span> <span class="keyword">const</span> <a class="code" href="a03318.html">FEATURE_DESC_STRUCT</a> <a class="code" href="a00662.html#a72a26e08f0fd9771c2b6af211bb1a6c3">OutlineFeatDesc</a>;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keyword">extern</span> <span class="keyword">const</span> <a class="code" href="a03318.html">FEATURE_DESC_STRUCT</a> <a class="code" href="a00662.html#abcae860ec494b3a15b6db31638a1d2f2">IntFeatDesc</a>;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keyword">extern</span> <span class="keyword">const</span> <a class="code" href="a03318.html">FEATURE_DESC_STRUCT</a> <a class="code" href="a00662.html#ad083578933c187809f33f7e7cb6aac48">GeoFeatDesc</a>;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa00662_html_a10606897d42fff8ca71fb36795bd581e"><div class="ttname"><a href="a00662.html#a10606897d42fff8ca71fb36795bd581e">NewMicroFeature</a></div><div class="ttdeci">MICROFEATURE NewMicroFeature()</div><div class="ttdef"><b>Definition:</b> <a href="a00662_source.html#l00032">mfdefs.cpp:32</a></div></div>
-<div class="ttc" id="aa00752_html"><div class="ttname"><a href="a00752.html">emalloc.h</a></div></div>
-<div class="ttc" id="aa00665_html_a982f5f0554d0580d6e919b346a5c0099"><div class="ttname"><a href="a00665.html#a982f5f0554d0580d6e919b346a5c0099">MFBLOCK</a></div><div class="ttdeci">float MFBLOCK[MFSIZE]</div><div class="ttdef"><b>Definition:</b> <a href="a00665_source.html#l00031">mfdefs.h:31</a></div></div>
-<div class="ttc" id="aa00749_html_a9bdc0885c33bbb5b062c77b1d90e2305"><div class="ttname"><a href="a00749.html#a9bdc0885c33bbb5b062c77b1d90e2305">Emalloc</a></div><div class="ttdeci">void * Emalloc(int Size)</div><div class="ttdef"><b>Definition:</b> <a href="a00749_source.html#l00031">emalloc.cpp:31</a></div></div>
-<div class="ttc" id="aa00662_html_afd75dd0b29a6b9bf0c5a31b3484bd0d9"><div class="ttname"><a href="a00662.html#afd75dd0b29a6b9bf0c5a31b3484bd0d9">FreeMicroFeatures</a></div><div class="ttdeci">void FreeMicroFeatures(MICROFEATURES MicroFeatures)</div><div class="ttdef"><b>Definition:</b> <a href="a00662_source.html#l00041">mfdefs.cpp:41</a></div></div>
-<div class="ttc" id="aa00665_html_a48288195254495e88ac033d20d13aa31"><div class="ttname"><a href="a00665.html#a48288195254495e88ac033d20d13aa31">MICROFEATURE</a></div><div class="ttdeci">float * MICROFEATURE</div><div class="ttdef"><b>Definition:</b> <a href="a00665_source.html#l00032">mfdefs.h:32</a></div></div>
-<div class="ttc" id="aa00749_html_af846576ae65dc13e49ddc616e17baa27"><div class="ttname"><a href="a00749.html#af846576ae65dc13e49ddc616e17baa27">Efree</a></div><div class="ttdeci">void Efree(void *ptr)</div><div class="ttdef"><b>Definition:</b> <a href="a00749_source.html#l00045">emalloc.cpp:45</a></div></div>
-<div class="ttc" id="aa00755_html_a1a1efc1a269e5bb5bf16c1a174363ba4"><div class="ttname"><a href="a00755.html#a1a1efc1a269e5bb5bf16c1a174363ba4">destroy_nodes</a></div><div class="ttdeci">void destroy_nodes(LIST list, void_dest destructor)</div><div class="ttdef"><b>Definition:</b> <a href="a00755_source.html#l00138">oldlist.cpp:138</a></div></div>
-<div class="ttc" id="aa02920_html"><div class="ttname"><a href="a02920.html">list_rec</a></div><div class="ttdef"><b>Definition:</b> <a href="a00758_source.html#l00073">oldlist.h:73</a></div></div>
-<div class="ttc" id="aa00665_html"><div class="ttname"><a href="a00665.html">mfdefs.h</a></div></div>
+<div class="ttc" id="aa00662_html_ae1558f5d4119a9e651a85e10887be9f3"><div class="ttname"><a href="a00662.html#ae1558f5d4119a9e651a85e10887be9f3">ReadCharDescription</a></div><div class="ttdeci">CHAR_DESC ReadCharDescription(const FEATURE_DEFS_STRUCT &amp;FeatureDefs, FILE *File)</div><div class="ttdef"><b>Definition:</b> <a href="a00659_source.html#l00235">featdefs.cpp:235</a></div></div>
+<div class="ttc" id="aa00662_html_a96bfe8f02db0cc4dea42e9a9e9a98630"><div class="ttname"><a href="a00662.html#a96bfe8f02db0cc4dea42e9a9e9a98630">ShortNameToFeatureType</a></div><div class="ttdeci">uint32_t ShortNameToFeatureType(const FEATURE_DEFS_STRUCT &amp;FeatureDefs, const char *ShortName)</div><div class="ttdef"><b>Definition:</b> <a href="a00659_source.html#l00269">featdefs.cpp:269</a></div></div>
+<div class="ttc" id="aa00662_html_af8fa799b7b0c0c8e18648a521ef2775f"><div class="ttname"><a href="a00662.html#af8fa799b7b0c0c8e18648a521ef2775f">ValidCharDescription</a></div><div class="ttdeci">bool ValidCharDescription(const FEATURE_DEFS_STRUCT &amp;FeatureDefs, CHAR_DESC CharDesc)</div><div class="ttdef"><b>Definition:</b> <a href="a00659_source.html#l00194">featdefs.cpp:194</a></div></div>
+<div class="ttc" id="aa03214_html_ae04ec3a6b5e474d83930ff3e57a42acb"><div class="ttname"><a href="a03214.html#ae04ec3a6b5e474d83930ff3e57a42acb">CHAR_DESC_STRUCT::FeatureSets</a></div><div class="ttdeci">FEATURE_SET FeatureSets[NUM_FEATURE_TYPES]</div><div class="ttdef"><b>Definition:</b> <a href="a00662_source.html#l00040">featdefs.h:40</a></div></div>
+<div class="ttc" id="aa00662_html_ad083578933c187809f33f7e7cb6aac48"><div class="ttname"><a href="a00662.html#ad083578933c187809f33f7e7cb6aac48">GeoFeatDesc</a></div><div class="ttdeci">const FEATURE_DESC_STRUCT GeoFeatDesc</div></div>
+<div class="ttc" id="aa02542_html"><div class="ttname"><a href="a02542.html">STRING</a></div><div class="ttdef"><b>Definition:</b> <a href="a00044_source.html#l00045">strngs.h:45</a></div></div>
+<div class="ttc" id="aa00662_html_afabf946423972bb31424564a9e0ead68"><div class="ttname"><a href="a00662.html#afabf946423972bb31424564a9e0ead68">kGeoFeatureType</a></div><div class="ttdeci">const TESS_API char *const kGeoFeatureType</div><div class="ttdef"><b>Definition:</b> <a href="a00659_source.html#l00034">featdefs.cpp:34</a></div></div>
+<div class="ttc" id="aa00662_html_a860f7517bac9477e79551e501df549ed"><div class="ttname"><a href="a00662.html#a860f7517bac9477e79551e501df549ed">NewCharDescription</a></div><div class="ttdeci">CHAR_DESC NewCharDescription(const FEATURE_DEFS_STRUCT &amp;FeatureDefs)</div><div class="ttdef"><b>Definition:</b> <a href="a00659_source.html#l00147">featdefs.cpp:147</a></div></div>
+<div class="ttc" id="aa00662_html_a72a26e08f0fd9771c2b6af211bb1a6c3"><div class="ttname"><a href="a00662.html#a72a26e08f0fd9771c2b6af211bb1a6c3">OutlineFeatDesc</a></div><div class="ttdeci">const FEATURE_DESC_STRUCT OutlineFeatDesc</div></div>
+<div class="ttc" id="aa03218_html_ab09a6d77d42a8a2b5882bbc27ee4f23c"><div class="ttname"><a href="a03218.html#ab09a6d77d42a8a2b5882bbc27ee4f23c">FEATURE_DEFS_STRUCT::FeatureDesc</a></div><div class="ttdeci">const FEATURE_DESC_STRUCT * FeatureDesc[NUM_FEATURE_TYPES]</div><div class="ttdef"><b>Definition:</b> <a href="a00662_source.html#l00046">featdefs.h:46</a></div></div>
+<div class="ttc" id="aa03218_html_a6c1a7c245772a264c5c40241b6e7175a"><div class="ttname"><a href="a03218.html#a6c1a7c245772a264c5c40241b6e7175a">FEATURE_DEFS_STRUCT::NumFeatureTypes</a></div><div class="ttdeci">int32_t NumFeatureTypes</div><div class="ttdef"><b>Definition:</b> <a href="a00662_source.html#l00045">featdefs.h:45</a></div></div>
+<div class="ttc" id="aa00746_html"><div class="ttname"><a href="a00746.html">ocrfeatures.h</a></div></div>
+<div class="ttc" id="aa03318_html"><div class="ttname"><a href="a03318.html">FEATURE_DESC_STRUCT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00746_source.html#l00051">ocrfeatures.h:51</a></div></div>
+<div class="ttc" id="aa03218_html"><div class="ttname"><a href="a03218.html">FEATURE_DEFS_STRUCT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00662_source.html#l00044">featdefs.h:44</a></div></div>
+<div class="ttc" id="aa00662_html_a6e4c84ab01e39577e4a74d9ab1eff68b"><div class="ttname"><a href="a00662.html#a6e4c84ab01e39577e4a74d9ab1eff68b">InitFeatureDefs</a></div><div class="ttdeci">void InitFeatureDefs(FEATURE_DEFS_STRUCT *featuredefs)</div><div class="ttdef"><b>Definition:</b> <a href="a00659_source.html#l00111">featdefs.cpp:111</a></div></div>
+<div class="ttc" id="aa00662_html_aa889ab53df925b2ccc5a2871eca3eff7"><div class="ttname"><a href="a00662.html#aa889ab53df925b2ccc5a2871eca3eff7">MicroFeatureDesc</a></div><div class="ttdeci">const FEATURE_DESC_STRUCT MicroFeatureDesc</div></div>
+<div class="ttc" id="aa03326_html"><div class="ttname"><a href="a03326.html">FEATURE_SET_STRUCT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00746_source.html#l00064">ocrfeatures.h:64</a></div></div>
+<div class="ttc" id="aa03214_html"><div class="ttname"><a href="a03214.html">CHAR_DESC_STRUCT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00662_source.html#l00038">featdefs.h:38</a></div></div>
+<div class="ttc" id="aa00662_html_a1721f38e30ba7e6f0473bf08cddea58f"><div class="ttname"><a href="a00662.html#a1721f38e30ba7e6f0473bf08cddea58f">kCNFeatureType</a></div><div class="ttdeci">const TESS_API char *const kCNFeatureType</div><div class="ttdef"><b>Definition:</b> <a href="a00659_source.html#l00032">featdefs.cpp:32</a></div></div>
+<div class="ttc" id="aa00662_html_aff5d3186888ac3dbd87adcc54b7f2ecf"><div class="ttname"><a href="a00662.html#aff5d3186888ac3dbd87adcc54b7f2ecf">NUM_FEATURE_TYPES</a></div><div class="ttdeci">#define NUM_FEATURE_TYPES</div><div class="ttdef"><b>Definition:</b> <a href="a00662_source.html#l00026">featdefs.h:26</a></div></div>
+<div class="ttc" id="aa00662_html_a6874f1e9456afb7479b229bcb58d95a8"><div class="ttname"><a href="a00662.html#a6874f1e9456afb7479b229bcb58d95a8">PicoFeatDesc</a></div><div class="ttdeci">const TESS_API FEATURE_DESC_STRUCT PicoFeatDesc</div></div>
+<div class="ttc" id="aa00662_html_aeaae0c3ba332fe6addd19ed202a3ecb7"><div class="ttname"><a href="a00662.html#aeaae0c3ba332fe6addd19ed202a3ecb7">CharNormDesc</a></div><div class="ttdeci">const FEATURE_DESC_STRUCT CharNormDesc</div></div>
+<div class="ttc" id="aa00662_html_ae2a92eefc3755300284119692527e3b9"><div class="ttname"><a href="a00662.html#ae2a92eefc3755300284119692527e3b9">FreeCharDescription</a></div><div class="ttdeci">void FreeCharDescription(CHAR_DESC CharDesc)</div><div class="ttdef"><b>Definition:</b> <a href="a00659_source.html#l00128">featdefs.cpp:128</a></div></div>
+<div class="ttc" id="aa00662_html_a932f3dd36ff509924434534b4292074b"><div class="ttname"><a href="a00662.html#a932f3dd36ff509924434534b4292074b">kIntFeatureType</a></div><div class="ttdeci">const TESS_API char *const kIntFeatureType</div><div class="ttdef"><b>Definition:</b> <a href="a00659_source.html#l00033">featdefs.cpp:33</a></div></div>
+<div class="ttc" id="aa00662_html_abcae860ec494b3a15b6db31638a1d2f2"><div class="ttname"><a href="a00662.html#abcae860ec494b3a15b6db31638a1d2f2">IntFeatDesc</a></div><div class="ttdeci">const FEATURE_DESC_STRUCT IntFeatDesc</div></div>
+<div class="ttc" id="aa00029_html_a86e51270628c53ce7e2c23b1c2b4490e"><div class="ttname"><a href="a00029.html#a86e51270628c53ce7e2c23b1c2b4490e">TESS_API</a></div><div class="ttdeci">#define TESS_API</div><div class="ttdef"><b>Definition:</b> <a href="a00029_source.html#l00054">platform.h:54</a></div></div>
+<div class="ttc" id="aa03214_html_aa1ea5b561576445f0f41da1afc10b1b0"><div class="ttname"><a href="a03214.html#aa1ea5b561576445f0f41da1afc10b1b0">CHAR_DESC_STRUCT::NumFeatureSets</a></div><div class="ttdeci">uint32_t NumFeatureSets</div><div class="ttdef"><b>Definition:</b> <a href="a00662_source.html#l00039">featdefs.h:39</a></div></div>
+<div class="ttc" id="aa00662_html_a7ec256eeb477e0fd9bb2124e54c13f34"><div class="ttname"><a href="a00662.html#a7ec256eeb477e0fd9bb2124e54c13f34">WriteCharDescription</a></div><div class="ttdeci">void WriteCharDescription(const FEATURE_DEFS_STRUCT &amp;FeatureDefs, CHAR_DESC CharDesc, STRING *str)</div><div class="ttdef"><b>Definition:</b> <a href="a00659_source.html#l00173">featdefs.cpp:173</a></div></div>
+<div class="ttc" id="aa00662_html_a6781dc960db654977a5c696ca44407d6"><div class="ttname"><a href="a00662.html#a6781dc960db654977a5c696ca44407d6">kMicroFeatureType</a></div><div class="ttdeci">const TESS_API char *const kMicroFeatureType</div><div class="ttdef"><b>Definition:</b> <a href="a00659_source.html#l00031">featdefs.cpp:31</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b8f5fb7b736ee5431a221bc7b817d6e0.html">classify</a></li><li class="navelem"><a class="el" href="a00662.html">mfdefs.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:14 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b8f5fb7b736ee5431a221bc7b817d6e0.html">classify</a></li><li class="navelem"><a class="el" href="a00662.html">featdefs.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:20 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

@@ -1,11 +1,10 @@
 var a00743 =
 [
-    [ "c_clear_window", "a00743.html#afdb928ca6fcb1a387ca1fa91f88130dc", null ],
-    [ "c_create_window", "a00743.html#a2f7d967080f5bab49d5056dce23305ec", null ],
-    [ "c_draw", "a00743.html#a1985867f80140c430e3fa0d8d7430a44", null ],
-    [ "c_line_color_index", "a00743.html#a48077e4a1f221a9febc643bdb5b4e8fe", null ],
-    [ "c_make_current", "a00743.html#ac91d916a53eb48572d9937d0d93b558c", null ],
-    [ "c_move", "a00743.html#a411da919a36d0da4caf6a6775a66cea4", null ],
-    [ "cprintf", "a00743.html#a21679e7fec2d69db23107348fa13c153", null ],
-    [ "window_wait", "a00743.html#a51dc37eb580fe7f758275685e5ce0d59", null ]
+    [ "AddFeature", "a00743.html#a88ff5e23ace03b3fbfbb891604dd5bc6", null ],
+    [ "FreeFeature", "a00743.html#acaf54a6410150ec74f66ec6621f1352f", null ],
+    [ "FreeFeatureSet", "a00743.html#a72b29c3d875eb9a2241385b1f1388b2d", null ],
+    [ "NewFeature", "a00743.html#a32a08c42617c8dd6a156c1c8d7fb2cbb", null ],
+    [ "NewFeatureSet", "a00743.html#acdf1bcf73857cfc37fe8d667203bc875", null ],
+    [ "ReadFeatureSet", "a00743.html#adbac3342338c1fb0f38aad20c3c324d8", null ],
+    [ "WriteFeatureSet", "a00743.html#a44ea92b531291019aad76b8941cc75af", null ]
 ];

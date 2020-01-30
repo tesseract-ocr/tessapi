@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['gridsearch_3c_20bbc_2c_20bbc_5fclist_2c_20bbc_5fc_5fit_20_3e_15214',['GridSearch&lt; BBC, BBC_CLIST, BBC_C_IT &gt;',['../a03192.html#a63d895957e5663cd516fde667084fca6',1,'tesseract::BBGrid']]]
+  ['fcoord_16765',['FCOORD',['../a02858.html#aee0ec96b56f138969beae84337f57640',1,'ICOORD']]],
+  ['fontutils_16766',['FontUtils',['../a03902.html#add520096c0fdb9217ac2c2c004f9ed31',1,'tesseract::PangoFontInfo']]]
 ];

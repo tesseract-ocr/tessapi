@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/ccmain/fixspace.h Source File</title>
+<title>tesseract: /tesseract/src/arch/dotproductfma.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,52 +87,74 @@ $(document).ready(function(){initNavTree('a00089_source.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">fixspace.h</div>  </div>
+<div class="title">dotproductfma.cpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00089.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/******************************************************************</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * File:        fixspace.h  (Formerly fixspace.h)</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * Description: Implements a pass over the page res, exploring the alternative</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *              spacing possibilities, trying to use context to improve the</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> *              word spacing</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> * Author:      Phil Cheatle</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> * Created:     Thu Oct 21 11:38:43 BST 1993</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> * (C) Copyright 1993, Hewlett-Packard Ltd.</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> ** Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> ** you may not use this file except in compliance with the License.</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> ** You may obtain a copy of the License at</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> ** http://www.apache.org/licenses/LICENSE-2.0</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> ** Unless required by applicable law or agreed to in writing, software</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> ** distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> ** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> ** See the License for the specific language governing permissions and</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"> ** limitations under the License.</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment"> **********************************************************************/</span></div>
+<a href="a00089.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// File:        dotproductfma.cpp</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// Description: Architecture-specific dot-product function.</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// Author:      Stefan Weil</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">// (C) Copyright 2015, Google Inc.</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// you may not use this file except in compliance with the License.</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">// You may obtain a copy of the License at</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// http://www.apache.org/licenses/LICENSE-2.0</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">// Unless required by applicable law or agreed to in writing, software</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">// See the License for the specific language governing permissions and</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">// limitations under the License.</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#if !defined(__FMA__)</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#error Implementation only for FMA capable architectures</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#ifndef FIXSPACE_H</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#define FIXSPACE_H</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">class </span><a class="code" href="a02372.html">WERD_RES</a>;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">class </span>WERD_RES_LIST;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;immintrin.h&gt;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;cstdint&gt;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00083.html">dotproduct.h</a>&quot;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">namespace </span><a class="code" href="a01818.html">tesseract</a> {</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00089.html#aa9c4bc6127388800d066093c261667ea">initialise_search</a>(WERD_RES_LIST &amp;src_list, WERD_RES_LIST &amp;new_list);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00089.html#a7373a91e50199f38d52143e22c269f92">transform_to_next_perm</a>(WERD_RES_LIST &amp;words);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00089.html#a3a25422c78dc87ddee3165c73a1d7ce7">fixspace_dbg</a>(<a class="code" href="a02372.html">WERD_RES</a> *word);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">// Computes and returns the dot product of the n-vectors u and v.</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">// Uses Intel FMA intrinsics to access the SIMD instruction set.</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="a01818.html#ab1837ad1dc5a0a43ba1b08e888a0f620">   30</a></span>&#160;<span class="keywordtype">double</span> <a class="code" href="a01818.html#ab1837ad1dc5a0a43ba1b08e888a0f620">DotProductFMA</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>* u, <span class="keyword">const</span> <span class="keywordtype">double</span>* v, <span class="keywordtype">int</span> n) {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> quot = n / 8;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> rem = n % 8;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  __m256d t0 = _mm256_setzero_pd();</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  __m256d t1 = _mm256_setzero_pd();</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> k = 0; k &lt; quot; k++) {</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    __m256d f0 = _mm256_loadu_pd(u);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    __m256d f1 = _mm256_loadu_pd(v);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    t0 = _mm256_fmadd_pd(f0, f1, t0);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    u += 4;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    v += 4;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    __m256d f2 = _mm256_loadu_pd(u);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    __m256d f3 = _mm256_loadu_pd(v);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    t1 = _mm256_fmadd_pd(f2, f3, t1);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    u += 4;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    v += 4;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  }</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  t0 = _mm256_hadd_pd(t0, t1);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <span class="keyword">alignas</span>(32) <span class="keywordtype">double</span> tmp[4];</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  _mm256_store_pd(tmp, t0);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keywordtype">double</span> result = tmp[0] + tmp[1] + tmp[2] + tmp[3];</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> k = 0; k &lt; rem; k++) {</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    result += *u++ * *v++;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  }</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;}</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;}  <span class="comment">// namespace tesseract.</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa02372_html"><div class="ttname"><a href="a02372.html">WERD_RES</a></div><div class="ttdef"><b>Definition:</b> <a href="a00323_source.html#l00160">pageres.h:160</a></div></div>
-<div class="ttc" id="aa00089_html_aa9c4bc6127388800d066093c261667ea"><div class="ttname"><a href="a00089.html#aa9c4bc6127388800d066093c261667ea">initialise_search</a></div><div class="ttdeci">void initialise_search(WERD_RES_LIST &amp;src_list, WERD_RES_LIST &amp;new_list)</div><div class="ttdef"><b>Definition:</b> <a href="a00086_source.html#l00203">fixspace.cpp:203</a></div></div>
-<div class="ttc" id="aa00089_html_a7373a91e50199f38d52143e22c269f92"><div class="ttname"><a href="a00089.html#a7373a91e50199f38d52143e22c269f92">transform_to_next_perm</a></div><div class="ttdeci">void transform_to_next_perm(WERD_RES_LIST &amp;words)</div><div class="ttdef"><b>Definition:</b> <a href="a00086_source.html#l00398">fixspace.cpp:398</a></div></div>
-<div class="ttc" id="aa00089_html_a3a25422c78dc87ddee3165c73a1d7ce7"><div class="ttname"><a href="a00089.html#a3a25422c78dc87ddee3165c73a1d7ce7">fixspace_dbg</a></div><div class="ttdeci">void fixspace_dbg(WERD_RES *word)</div><div class="ttdef"><b>Definition:</b> <a href="a00086_source.html#l00821">fixspace.cpp:821</a></div></div>
+<div class="ttc" id="aa01818_html_ab1837ad1dc5a0a43ba1b08e888a0f620"><div class="ttname"><a href="a01818.html#ab1837ad1dc5a0a43ba1b08e888a0f620">tesseract::DotProductFMA</a></div><div class="ttdeci">double DotProductFMA(const double *u, const double *v, int n)</div><div class="ttdef"><b>Definition:</b> <a href="a00089_source.html#l00030">dotproductfma.cpp:30</a></div></div>
+<div class="ttc" id="aa00083_html"><div class="ttname"><a href="a00083.html">dotproduct.h</a></div></div>
+<div class="ttc" id="aa01818_html"><div class="ttname"><a href="a01818.html">tesseract</a></div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00065">baseapi.h:65</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_43edf6714a3bf7b9dbcd0e0e50a1a1a7.html">ccmain</a></li><li class="navelem"><a class="el" href="a00089.html">fixspace.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:14 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_70d5e250c66d001b18da37689179cade.html">arch</a></li><li class="navelem"><a class="el" href="a00089.html">dotproductfma.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:19 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

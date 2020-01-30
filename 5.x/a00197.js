@@ -1,19 +1,24 @@
 var a00197 =
 [
-    [ "BlamerBundle", "a02204.html", "a02204" ],
-    [ "IncorrectResultReason", "a00197.html#a8faf52e106c04bfdc9898ffa90b821e1", [
-      [ "IRR_CORRECT", "a00197.html#a8faf52e106c04bfdc9898ffa90b821e1a4f5ff200b61e6226eb6d74aec188e769", null ],
-      [ "IRR_CLASSIFIER", "a00197.html#a8faf52e106c04bfdc9898ffa90b821e1a9b70b64836694fc6dc4a7a6035b2dad8", null ],
-      [ "IRR_CHOPPER", "a00197.html#a8faf52e106c04bfdc9898ffa90b821e1a4c27b1a4f36ac4410ec500e4c7a1561c", null ],
-      [ "IRR_CLASS_LM_TRADEOFF", "a00197.html#a8faf52e106c04bfdc9898ffa90b821e1a77542e0fa096277d7e600582d9b295d9", null ],
-      [ "IRR_PAGE_LAYOUT", "a00197.html#a8faf52e106c04bfdc9898ffa90b821e1a04a64916350490fd4e5044e0387691ae", null ],
-      [ "IRR_SEGSEARCH_HEUR", "a00197.html#a8faf52e106c04bfdc9898ffa90b821e1ae6c5b07f9dc57fa9513f706cba5df27e", null ],
-      [ "IRR_SEGSEARCH_PP", "a00197.html#a8faf52e106c04bfdc9898ffa90b821e1a7c78c60fb2b9b0c1f2d5737883b07cf2", null ],
-      [ "IRR_CLASS_OLD_LM_TRADEOFF", "a00197.html#a8faf52e106c04bfdc9898ffa90b821e1aec8f086813191f1f038ad3a6e6aa1d04", null ],
-      [ "IRR_ADAPTION", "a00197.html#a8faf52e106c04bfdc9898ffa90b821e1a4779671dba2b7a68bfc0a4ca7e16a56b", null ],
-      [ "IRR_NO_TRUTH_SPLIT", "a00197.html#a8faf52e106c04bfdc9898ffa90b821e1ac05a52dad11e648af550df6dfcb7670c", null ],
-      [ "IRR_NO_TRUTH", "a00197.html#a8faf52e106c04bfdc9898ffa90b821e1a25d5b9457d6a31e2e1114c0bf8d0a795", null ],
-      [ "IRR_UNKNOWN", "a00197.html#a8faf52e106c04bfdc9898ffa90b821e1abf247997ab473968746db80274036078", null ],
-      [ "IRR_NUM_REASONS", "a00197.html#a8faf52e106c04bfdc9898ffa90b821e1a5b7e21438ec02ceeba07bf96049d84d5", null ]
-    ] ]
+    [ "PGEventHandler", "a02646.html", "a02646" ],
+    [ "current_block_list", "a00197.html#a8edeb7aea5ea119ad5d4d27d6b84ee20", null ],
+    [ "editor_dbwin_height", "a00197.html#a4ea506217f1152d488f6d606cb6c7400", null ],
+    [ "editor_dbwin_name", "a00197.html#aa63748d150abbfaa353ec08deedac738", null ],
+    [ "editor_dbwin_width", "a00197.html#a32c83bcbcb3b432223416b42d90fe5f6", null ],
+    [ "editor_dbwin_xpos", "a00197.html#aec9d97fa8363b502c1143615eeeb3951", null ],
+    [ "editor_dbwin_ypos", "a00197.html#a6e390bca19223821f59eb99e2d9c4f66", null ],
+    [ "editor_image_blob_bb_color", "a00197.html#a5a389a38d880e6f93080f323639b5339", null ],
+    [ "editor_image_height", "a00197.html#a4ba73dc7320f26139d6242d5b425e836", null ],
+    [ "editor_image_text_color", "a00197.html#ab264905aef20f0e5234e193dd4d8e7e9", null ],
+    [ "editor_image_width", "a00197.html#aee604901c8f1d114ab97d87d0cf020d9", null ],
+    [ "editor_image_win_name", "a00197.html#adad8d0d269314a0e2bc4e8b3039d2839", null ],
+    [ "editor_image_word_bb_color", "a00197.html#ad448b00aaf6308a42ceab7c59495c6de", null ],
+    [ "editor_image_xpos", "a00197.html#acb7af6bbdd35600c1bdd1b8ad6eca463", null ],
+    [ "editor_image_ypos", "a00197.html#aec61cd4df7d401121499b4ca26e7ddd7", null ],
+    [ "editor_smd_scale_factor", "a00197.html#ae4d61c8872f78ab7ab812c51f5ea2371", null ],
+    [ "editor_word_height", "a00197.html#ad05bed2c7da47d78ccc688bc8c9232b0", null ],
+    [ "editor_word_name", "a00197.html#a3b1a171f66cb26c91ba0e172a3e37b96", null ],
+    [ "editor_word_width", "a00197.html#a2773a9981baf7829a313622b2a798474", null ],
+    [ "editor_word_xpos", "a00197.html#a1396e815e23f520c66e354c20ace2287", null ],
+    [ "editor_word_ypos", "a00197.html#a74cbd2ca9b6c91e611bf40ff929e0ec2", null ]
 ];

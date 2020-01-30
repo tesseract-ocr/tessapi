@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/ccstruct/pdblock.cpp File Reference</title>
+<title>tesseract: /tesseract/src/ccstruct/matrix.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,99 +87,78 @@ $(document).ready(function(){initNavTree('a00332.html','');});
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Macros</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#typedef-members">Typedefs</a>  </div>
   <div class="headertitle">
-<div class="title">pdblock.cpp File Reference</div>  </div>
+<div class="title">matrix.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;allheaders.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00335_source.html">pdblock.h</a>&quot;</code><br />
-<code>#include &lt;cstdlib&gt;</code><br />
-<code>#include &lt;memory&gt;</code><br />
-<code>#include &lt;cinttypes&gt;</code><br />
+<div class="textblock"><code>#include &lt;algorithm&gt;</code><br />
+<code>#include &lt;cmath&gt;</code><br />
+<code>#include &lt;cstdint&gt;</code><br />
+<code>#include &lt;cstdio&gt;</code><br />
+<code>#include &lt;cstring&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00515_source.html">errcode.h</a>&quot;</code><br />
+<code>#include &lt;<a class="el" href="a00014_source.html">tesseract/helpers.h</a>&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00539_source.html">kdpair.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00392_source.html">points.h</a>&quot;</code><br />
+<code>#include &lt;<a class="el" href="a00041_source.html">tesseract/serialis.h</a>&gt;</code><br />
 </div>
 <p><a href="a00332_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02566.html">GENERIC_2D_ARRAY&lt; T &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02782.html">BandTriMatrix&lt; T &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02786.html">MATRIX</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02790.html">MATRIX_COORD</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:ad0e3ca9368f7687b1a72cf083cad3033"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00332.html#ad0e3ca9368f7687b1a72cf083cad3033">BLOCK_LABEL_HEIGHT</a>&#160;&#160;&#160;150</td></tr>
-<tr class="separator:ad0e3ca9368f7687b1a72cf083cad3033"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c21a86b19e78482e6c7384c47c2457d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00332.html#a5c21a86b19e78482e6c7384c47c2457d">NOT_CLASSIFIED</a>&#160;&#160;&#160;static_cast&lt;BLOB_CHOICE_LIST*&gt;(nullptr)</td></tr>
+<tr class="separator:a5c21a86b19e78482e6c7384c47c2457d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:ac2ef5a666afa27f1bc7a1847459dc0b9"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a02536.html">ERRCODE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00332.html#ac2ef5a666afa27f1bc7a1847459dc0b9">BADBLOCKLINE</a> (&quot;Y coordinate in block out <a class="el" href="a00608.html#a66c7f757ef35e33a52ac2efe3f4e8247">of</a> bounds&quot;)</td></tr>
-<tr class="separator:ac2ef5a666afa27f1bc7a1847459dc0b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef554a002a62904bb697a6f6fa99985c"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a02536.html">ERRCODE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00332.html#aef554a002a62904bb697a6f6fa99985c">LOSTBLOCKLINE</a> (&quot;Can't find rectangle for line&quot;)</td></tr>
-<tr class="separator:aef554a002a62904bb697a6f6fa99985c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:afd2ffe68a8eaf0886767e8a3a76268f9"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00332.html#afd2ffe68a8eaf0886767e8a3a76268f9">MatrixCoordPair</a> = <a class="el" href="a03014.html">tesseract::KDPairInc</a>&lt; float, <a class="el" href="a02790.html">MATRIX_COORD</a> &gt;</td></tr>
+<tr class="separator:afd2ffe68a8eaf0886767e8a3a76268f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="ad0e3ca9368f7687b1a72cf083cad3033"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad0e3ca9368f7687b1a72cf083cad3033">&#9670;&nbsp;</a></span>BLOCK_LABEL_HEIGHT</h2>
+<a id="a5c21a86b19e78482e6c7384c47c2457d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c21a86b19e78482e6c7384c47c2457d">&#9670;&nbsp;</a></span>NOT_CLASSIFIED</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define BLOCK_LABEL_HEIGHT&#160;&#160;&#160;150</td>
+          <td class="memname">#define NOT_CLASSIFIED&#160;&#160;&#160;static_cast&lt;BLOB_CHOICE_LIST*&gt;(nullptr)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00332_source.html#l00029">29</a> of file <a class="el" href="a00332_source.html">pdblock.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00332_source.html#l00040">40</a> of file <a class="el" href="a00332_source.html">matrix.h</a>.</p>
 
 </div>
 </div>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="ac2ef5a666afa27f1bc7a1847459dc0b9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac2ef5a666afa27f1bc7a1847459dc0b9">&#9670;&nbsp;</a></span>BADBLOCKLINE()</h2>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="afd2ffe68a8eaf0886767e8a3a76268f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd2ffe68a8eaf0886767e8a3a76268f9">&#9670;&nbsp;</a></span>MatrixCoordPair</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="a02536.html">ERRCODE</a> BADBLOCKLINE </td>
-          <td>(</td>
-          <td class="paramtype">&quot;Y coordinate in block out <a class="el" href="a00608.html#a66c7f757ef35e33a52ac2efe3f4e8247">of</a> bounds&quot;&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td class="memname">using <a class="el" href="a00332.html#afd2ffe68a8eaf0886767e8a3a76268f9">MatrixCoordPair</a> =  <a class="el" href="a03014.html">tesseract::KDPairInc</a>&lt;float, <a class="el" href="a02790.html">MATRIX_COORD</a>&gt;</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<a id="aef554a002a62904bb697a6f6fa99985c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aef554a002a62904bb697a6f6fa99985c">&#9670;&nbsp;</a></span>LOSTBLOCKLINE()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr <a class="el" href="a02536.html">ERRCODE</a> LOSTBLOCKLINE </td>
-          <td>(</td>
-          <td class="paramtype">&quot;Can't find rectangle for line&quot;&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
+<p class="definition">Definition at line <a class="el" href="a00332_source.html#l00637">637</a> of file <a class="el" href="a00332_source.html">matrix.h</a>.</p>
 
 </div>
 </div>
@@ -188,8 +167,8 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_27285da2200a3bef8a8e2dba4d21412a.html">ccstruct</a></li><li class="navelem"><a class="el" href="a00332.html">pdblock.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_27285da2200a3bef8a8e2dba4d21412a.html">ccstruct</a></li><li class="navelem"><a class="el" href="a00332.html">matrix.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

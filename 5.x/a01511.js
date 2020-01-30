@@ -1,7 +1,8 @@
 var a01511 =
 [
-    [ "display_edgepts", "a01511.html#a4ce0ea2dbe7f9c1e27849c005309ad9f", null ],
-    [ "draw_blob_edges", "a01511.html#ae2440305a17a8a14c0e1c74e035934a3", null ],
-    [ "mark_outline", "a01511.html#a58186147d8297e9600d4176629dc4765", null ],
-    [ "edge_window", "a01511.html#a37713d15c49a322a3a468db0f0c26d98", null ]
+    [ "BAD_PRIORITY", "a01511.html#a3fd320d93290a64ff24687ec596f1f61", null ],
+    [ "MAX_NUM_SEAMS", "a01511.html#aec46796fda71456341a9591d1b42b5f8", null ],
+    [ "NO_FULL_PRIORITY", "a01511.html#a149d8b9e54f546955de3fa68bf5bf521", null ],
+    [ "partial_split_priority", "a01511.html#a89f8eb5089f8bf157471ccab31e5c54b", null ],
+    [ "SPLIT_CLOSENESS", "a01511.html#a137ecd53cc1a098b2943e48aff99c6b6", null ]
 ];

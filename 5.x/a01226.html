@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/training/fileio.cpp File Reference</title>
+<title>tesseract: /tesseract/src/training/boxchar.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,36 +87,61 @@ $(document).ready(function(){initNavTree('a01226.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
-<div class="title">fileio.cpp File Reference</div>  </div>
+<div class="title">boxchar.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;glob.h&gt;</code><br />
-<code>#include &lt;unistd.h&gt;</code><br />
-<code>#include &lt;cstdlib&gt;</code><br />
-<code>#include &lt;cstdio&gt;</code><br />
-<code>#include &lt;string&gt;</code><br />
-<code>#include &lt;cerrno&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00464_source.html">errcode.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a01229_source.html">fileio.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00479_source.html">host.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00533_source.html">tprintf.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a01229_source.html">boxchar.h</a>&quot;</code><br />
+<code>#include &lt;cstddef&gt;</code><br />
+<code>#include &lt;algorithm&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &quot;<a class="el" href="a01280_source.html">fileio.h</a>&quot;</code><br />
+<code>#include &lt;<a class="el" href="a00011_source.html">tesseract/genericvector.h</a>&gt;</code><br />
+<code>#include &quot;<a class="el" href="a01361_source.html">normstrngs.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00584_source.html">tprintf.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00605_source.html">unicharset.h</a>&quot;</code><br />
+<code>#include &quot;unicode/uchar.h&quot;</code><br />
 </div>
 <p><a href="a01226_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a01539"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html">tesseract</a></td></tr>
+<tr class="memitem:a01818"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html">tesseract</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a91a33859bc33d7965d5276e1debd6a9c"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01226.html#a91a33859bc33d7965d5276e1debd6a9c">kMinNewlineRatio</a> = 5</td></tr>
+<tr class="separator:a91a33859bc33d7965d5276e1debd6a9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6188675c2a5f53695fc07b8f22c977ab"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a6188675c2a5f53695fc07b8f22c977ab">tesseract::kMaxLineLength</a> = 1024</td></tr>
+<tr class="separator:a6188675c2a5f53695fc07b8f22c977ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a91a33859bc33d7965d5276e1debd6a9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91a33859bc33d7965d5276e1debd6a9c">&#9670;&nbsp;</a></span>kMinNewlineRatio</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int kMinNewlineRatio = 5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a01226_source.html#l00036">36</a> of file <a class="el" href="a01226_source.html">boxchar.cpp</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7c7ae07dd2a999045cb78bf7ff8dcbc7.html">training</a></li><li class="navelem"><a class="el" href="a01226.html">fileio.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7c7ae07dd2a999045cb78bf7ff8dcbc7.html">training</a></li><li class="navelem"><a class="el" href="a01226.html">boxchar.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

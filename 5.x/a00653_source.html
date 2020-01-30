@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/classify/kdtree.h Source File</title>
+<title>tesseract: /tesseract/src/classify/clusttool.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,13 +87,13 @@ $(document).ready(function(){initNavTree('a00653_source.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">kdtree.h</div>  </div>
+<div class="title">clusttool.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="a00653.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/******************************************************************************</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> ** Filename:   kdtree.h</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> ** Purpose:    Definition of K-D tree access routines.</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> ** Author:     Dan Johnson</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> ** Filename: clusttool.h</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> ** Purpose:  Definition of clustering utility tools</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> ** Author:   Dan Johnson</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> **</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> ** (c) Copyright Hewlett-Packard Company, 1988.</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> ** Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
@@ -105,114 +105,47 @@ $(document).ready(function(){initNavTree('a00653_source.html','');});
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> ** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> ** See the License for the specific language governing permissions and</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> ** limitations under the License.</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> *****************************************************************************/</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> ******************************************************************************/</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#ifndef KDTREE_H</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#define KDTREE_H</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#ifndef TESSERACT_CLASSIFY_CLUSTTOOL_H_</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#define TESSERACT_CLASSIFY_CLUSTTOOL_H_</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">/*-----------------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">          Include Files and Type Defines</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">-----------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00695.html">ocrfeatures.h</a>&quot;</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="a00653.html#a1d60f69e882d1a8a95a1106c4c593bfb">   25</a></span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">using</span> <a class="code" href="a00653.html#a1d60f69e882d1a8a95a1106c4c593bfb">void_proc</a> = void (*)(...);</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="a02840.html#a4cf6a9ce5397fc92b6b60eec881e0efc">   38</a></span>&#160;<span class="keyword">struct </span><a class="code" href="a02840.html">KDNODE</a> {</div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="a02840.html#afd5eeb76bcf3d1ba9b387e0cd4e9ce16">   39</a></span>&#160;  <span class="keywordtype">float</span>* <a class="code" href="a02840.html#a4cf6a9ce5397fc92b6b60eec881e0efc">Key</a>;          </div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="a02840.html#a615628671cc352ae7071104e0fcf0701">   40</a></span>&#160;  <span class="keywordtype">void</span>* <a class="code" href="a02840.html#afd5eeb76bcf3d1ba9b387e0cd4e9ce16">Data</a>;          </div>
-<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="a02840.html#a4e6aa5abd6c7207585010298b3fbad34">   41</a></span>&#160;  <span class="keywordtype">float</span> <a class="code" href="a02840.html#a615628671cc352ae7071104e0fcf0701">BranchPoint</a>;   </div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="a02840.html#a06977c7752b157540446329009ef6595">   42</a></span>&#160;  <span class="keywordtype">float</span> <a class="code" href="a02840.html#a4e6aa5abd6c7207585010298b3fbad34">LeftBranch</a>;    </div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="a02840.html#a66ffa1cc4e73e45599978f8f6416e350">   43</a></span>&#160;  <span class="keywordtype">float</span> <a class="code" href="a02840.html#a06977c7752b157540446329009ef6595">RightBranch</a>;   </div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="a02840.html#a699e9e67472e12f86bbb5c1effdb4fa3">   44</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="a02840.html">KDNODE</a>* <a class="code" href="a02840.html#a66ffa1cc4e73e45599978f8f6416e350">Left</a>; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <span class="keyword">struct </span><a class="code" href="a02840.html">KDNODE</a>* <a class="code" href="a02840.html#a699e9e67472e12f86bbb5c1effdb4fa3">Right</a>;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;};</div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="a02844.html">   47</a></span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="a02844.html#a698bf29f45b666595e93d0aaa6168457">   48</a></span>&#160;<span class="keyword">struct </span><a class="code" href="a02844.html">KDTREE</a> {</div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="a02844.html#ab52e8a6004fc595de526dfa831c2e725">   49</a></span>&#160;  int16_t <a class="code" href="a02844.html#a698bf29f45b666595e93d0aaa6168457">KeySize</a>;       <span class="comment">/* number of dimensions in the tree */</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="a02844.html#a486dfb881bc360bbfbd36248bba80552">   50</a></span>&#160;  <a class="code" href="a02840.html">KDNODE</a> <a class="code" href="a02844.html#ab52e8a6004fc595de526dfa831c2e725">Root</a>;           <span class="comment">/* Root.Left points to actual root node */</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <a class="code" href="a02856.html">PARAM_DESC</a> <a class="code" href="a02844.html#a486dfb881bc360bbfbd36248bba80552">KeyDesc</a>[1]; <span class="comment">/* description of each dimension */</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;};</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">/*----------------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">            Macros</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="a00653.html#aa17af5e06853a731f52d4b4a84c3df90">   56</a></span>&#160;<span class="comment">-----------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#define RootOf(T) ((T)-&gt;Root.Left-&gt;Data)</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">/*-----------------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">          Public Function Prototypes</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">-----------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<a class="code" href="a02844.html">KDTREE</a>* <a class="code" href="a00653.html#a73ea2156bc8f7cfc9adcc0b3a5b8b15c">MakeKDTree</a>(int16_t KeySize, <span class="keyword">const</span> <a class="code" href="a02856.html">PARAM_DESC</a> KeyDesc[]);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00653.html#a25b5f5ed44816d6ec2d546cd8b36e33f">KDStore</a>(<a class="code" href="a02844.html">KDTREE</a>* Tree, <span class="keywordtype">float</span>* Key, <span class="keywordtype">void</span>* Data);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00653.html#abc8167fe19a9b173fcc4c9694e89498e">KDDelete</a>(<a class="code" href="a02844.html">KDTREE</a>* Tree, <span class="keywordtype">float</span> Key[], <span class="keywordtype">void</span>* Data);</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00653.html#a4ae5c4107c450db0fe65fdff5be08af4">KDNearestNeighborSearch</a>(<a class="code" href="a02844.html">KDTREE</a>* Tree, <span class="keywordtype">float</span> Query[], <span class="keywordtype">int</span> QuerySize,</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                             <span class="keywordtype">float</span> MaxDistance, <span class="keywordtype">int</span>* NumberOfResults,</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                             <span class="keywordtype">void</span>** NBuffer, <span class="keywordtype">float</span> DBuffer[]);</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00653.html#a84d80224322dcba34d276906a638fc6d">KDWalk</a>(<a class="code" href="a02844.html">KDTREE</a>* Tree, <a class="code" href="a00653.html#a1d60f69e882d1a8a95a1106c4c593bfb">void_proc</a> Action, <span class="keywordtype">void</span>* context);</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00653.html#a37e4019555a2b5284b17237373913346">FreeKDTree</a>(<a class="code" href="a02844.html">KDTREE</a>* Tree);</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">/*-----------------------------------------------------------------------------</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">          Private Function Prototypes</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">-----------------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<a class="code" href="a02840.html">KDNODE</a>* <a class="code" href="a00653.html#a518580bc5292633120eca883bedd9561">MakeKDNode</a>(<a class="code" href="a02844.html">KDTREE</a>* tree, <span class="keywordtype">float</span> Key[], <span class="keywordtype">void</span>* Data, <span class="keywordtype">int</span> Index);</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00653.html#a21cd787524746ef057017f6c2a543345">FreeKDNode</a>(<a class="code" href="a02840.html">KDNODE</a>* Node);</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="keywordtype">float</span> <a class="code" href="a00653.html#ac19360bcf5a256e10f0bcc726261a33d">DistanceSquared</a>(<span class="keywordtype">int</span> k, <a class="code" href="a02856.html">PARAM_DESC</a>* dim, <span class="keywordtype">float</span> p1[], <span class="keywordtype">float</span> p2[]);</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="keywordtype">float</span> <a class="code" href="a00653.html#a2c851b9c1d2b32d2242195d6a9c19487">ComputeDistance</a>(<span class="keywordtype">int</span> k, <a class="code" href="a02856.html">PARAM_DESC</a>* dim, <span class="keywordtype">float</span> p1[], <span class="keywordtype">float</span> p2[]);</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keywordtype">int</span> <a class="code" href="a00653.html#a8c049d80c7249e815d8aa80c91a9eb47">QueryInSearch</a>(<a class="code" href="a02844.html">KDTREE</a>* tree);</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00653.html#a0ff36c896ff0c75e390fa815105b76ee">Walk</a>(<a class="code" href="a02844.html">KDTREE</a>* tree, <a class="code" href="a00653.html#a1d60f69e882d1a8a95a1106c4c593bfb">void_proc</a> <a class="code" href="a01548.html#ae88f73f69c3427ef726b7470ed95cccc">action</a>, <span class="keywordtype">void</span>* context, <a class="code" href="a02840.html">KDNODE</a>* SubTree,</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;          int32_t Level);</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00653.html#af3be65344ced84a11159bc0bea5de60f">InsertNodes</a>(<a class="code" href="a02844.html">KDTREE</a>* tree, <a class="code" href="a02840.html">KDNODE</a>* nodes);</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00653.html#aa1e7c0f4e7719b87f25e6fa67c62a4e9">FreeSubTree</a>(<a class="code" href="a02840.html">KDNODE</a>* SubTree);</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">//--------------------------Include Files---------------------------------------</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;cstdio&gt;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00647.html">cluster.h</a>&quot;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00041.html">tesseract/serialis.h</a>&gt;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">/*-------------------------------------------------------------------------</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">        Public Function Prototype</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">--------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;uint16_t <a class="code" href="a00653.html#affb9d870273779781b16f701afc7510a">ReadSampleSize</a>(<a class="code" href="a02538.html">tesseract::TFile</a> *fp);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<a class="code" href="a03314.html">PARAM_DESC</a> *<a class="code" href="a00653.html#afcbf00f9d2fef4df885c4939daf9d306">ReadParamDesc</a>(<a class="code" href="a02538.html">tesseract::TFile</a> *fp, uint16_t N);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<a class="code" href="a03202.html">PROTOTYPE</a> *<a class="code" href="a00653.html#ad75ce1b06f0b68f3fef24e5f1666b239">ReadPrototype</a>(<a class="code" href="a02538.html">tesseract::TFile</a> *fp, uint16_t N);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00653.html#a994913437e21500535a6b888cfcd6ce5">WriteParamDesc</a>(FILE *File, uint16_t N, <span class="keyword">const</span> <a class="code" href="a03314.html">PARAM_DESC</a> ParamDesc[]);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00653.html#a1451e0b1d82b4208c88f47f3734f608e">WritePrototype</a>(FILE *File, uint16_t N, <a class="code" href="a03202.html">PROTOTYPE</a> *Proto);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#endif  // TESSERACT_CLASSIFY_CLUSTTOOL_H_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa00653_html_abc8167fe19a9b173fcc4c9694e89498e"><div class="ttname"><a href="a00653.html#abc8167fe19a9b173fcc4c9694e89498e">KDDelete</a></div><div class="ttdeci">void KDDelete(KDTREE *Tree, float Key[], void *Data)</div><div class="ttdef"><b>Definition:</b> <a href="a00650_source.html#l00252">kdtree.cpp:252</a></div></div>
-<div class="ttc" id="aa00653_html_aa1e7c0f4e7719b87f25e6fa67c62a4e9"><div class="ttname"><a href="a00653.html#aa1e7c0f4e7719b87f25e6fa67c62a4e9">FreeSubTree</a></div><div class="ttdeci">void FreeSubTree(KDNODE *SubTree)</div><div class="ttdef"><b>Definition:</b> <a href="a00650_source.html#l00531">kdtree.cpp:531</a></div></div>
-<div class="ttc" id="aa00653_html_a518580bc5292633120eca883bedd9561"><div class="ttname"><a href="a00653.html#a518580bc5292633120eca883bedd9561">MakeKDNode</a></div><div class="ttdeci">KDNODE * MakeKDNode(KDTREE *tree, float Key[], void *Data, int Index)</div><div class="ttdef"><b>Definition:</b> <a href="a00650_source.html#l00351">kdtree.cpp:351</a></div></div>
-<div class="ttc" id="aa02844_html_a486dfb881bc360bbfbd36248bba80552"><div class="ttname"><a href="a02844.html#a486dfb881bc360bbfbd36248bba80552">KDTREE::KeyDesc</a></div><div class="ttdeci">PARAM_DESC KeyDesc[1]</div><div class="ttdef"><b>Definition:</b> <a href="a00653_source.html#l00050">kdtree.h:50</a></div></div>
-<div class="ttc" id="aa00653_html_a2c851b9c1d2b32d2242195d6a9c19487"><div class="ttname"><a href="a00653.html#a2c851b9c1d2b32d2242195d6a9c19487">ComputeDistance</a></div><div class="ttdeci">float ComputeDistance(int k, PARAM_DESC *dim, float p1[], float p2[])</div><div class="ttdef"><b>Definition:</b> <a href="a00650_source.html#l00447">kdtree.cpp:447</a></div></div>
-<div class="ttc" id="aa00653_html_a4ae5c4107c450db0fe65fdff5be08af4"><div class="ttname"><a href="a00653.html#a4ae5c4107c450db0fe65fdff5be08af4">KDNearestNeighborSearch</a></div><div class="ttdeci">void KDNearestNeighborSearch(KDTREE *Tree, float Query[], int QuerySize, float MaxDistance, int *NumberOfResults, void **NBuffer, float DBuffer[])</div><div class="ttdef"><b>Definition:</b> <a href="a00650_source.html#l00304">kdtree.cpp:304</a></div></div>
-<div class="ttc" id="aa02840_html_a4e6aa5abd6c7207585010298b3fbad34"><div class="ttname"><a href="a02840.html#a4e6aa5abd6c7207585010298b3fbad34">KDNODE::LeftBranch</a></div><div class="ttdeci">float LeftBranch</div><div class="ttdef"><b>Definition:</b> <a href="a00653_source.html#l00041">kdtree.h:41</a></div></div>
-<div class="ttc" id="aa02844_html_a698bf29f45b666595e93d0aaa6168457"><div class="ttname"><a href="a02844.html#a698bf29f45b666595e93d0aaa6168457">KDTREE::KeySize</a></div><div class="ttdeci">int16_t KeySize</div><div class="ttdef"><b>Definition:</b> <a href="a00653_source.html#l00048">kdtree.h:48</a></div></div>
-<div class="ttc" id="aa00695_html"><div class="ttname"><a href="a00695.html">ocrfeatures.h</a></div></div>
-<div class="ttc" id="aa02844_html"><div class="ttname"><a href="a02844.html">KDTREE</a></div><div class="ttdef"><b>Definition:</b> <a href="a00653_source.html#l00047">kdtree.h:47</a></div></div>
-<div class="ttc" id="aa02840_html_a699e9e67472e12f86bbb5c1effdb4fa3"><div class="ttname"><a href="a02840.html#a699e9e67472e12f86bbb5c1effdb4fa3">KDNODE::Right</a></div><div class="ttdeci">struct KDNODE * Right</div><div class="ttdef"><b>Definition:</b> <a href="a00653_source.html#l00044">kdtree.h:44</a></div></div>
-<div class="ttc" id="aa00653_html_a25b5f5ed44816d6ec2d546cd8b36e33f"><div class="ttname"><a href="a00653.html#a25b5f5ed44816d6ec2d546cd8b36e33f">KDStore</a></div><div class="ttdeci">void KDStore(KDTREE *Tree, float *Key, void *Data)</div><div class="ttdef"><b>Definition:</b> <a href="a00650_source.html#l00211">kdtree.cpp:211</a></div></div>
-<div class="ttc" id="aa00653_html_ac19360bcf5a256e10f0bcc726261a33d"><div class="ttname"><a href="a00653.html#ac19360bcf5a256e10f0bcc726261a33d">DistanceSquared</a></div><div class="ttdeci">float DistanceSquared(int k, PARAM_DESC *dim, float p1[], float p2[])</div><div class="ttdef"><b>Definition:</b> <a href="a00650_source.html#l00426">kdtree.cpp:426</a></div></div>
-<div class="ttc" id="aa02840_html_a4cf6a9ce5397fc92b6b60eec881e0efc"><div class="ttname"><a href="a02840.html#a4cf6a9ce5397fc92b6b60eec881e0efc">KDNODE::Key</a></div><div class="ttdeci">float * Key</div><div class="ttdef"><b>Definition:</b> <a href="a00653_source.html#l00038">kdtree.h:38</a></div></div>
-<div class="ttc" id="aa00653_html_a0ff36c896ff0c75e390fa815105b76ee"><div class="ttname"><a href="a00653.html#a0ff36c896ff0c75e390fa815105b76ee">Walk</a></div><div class="ttdeci">void Walk(KDTREE *tree, void_proc action, void *context, KDNODE *SubTree, int32_t Level)</div><div class="ttdef"><b>Definition:</b> <a href="a00650_source.html#l00511">kdtree.cpp:511</a></div></div>
-<div class="ttc" id="aa00653_html_a21cd787524746ef057017f6c2a543345"><div class="ttname"><a href="a00653.html#a21cd787524746ef057017f6c2a543345">FreeKDNode</a></div><div class="ttdeci">void FreeKDNode(KDNODE *Node)</div><div class="ttdef"><b>Definition:</b> <a href="a00650_source.html#l00369">kdtree.cpp:369</a></div></div>
-<div class="ttc" id="aa02840_html_a615628671cc352ae7071104e0fcf0701"><div class="ttname"><a href="a02840.html#a615628671cc352ae7071104e0fcf0701">KDNODE::BranchPoint</a></div><div class="ttdeci">float BranchPoint</div><div class="ttdef"><b>Definition:</b> <a href="a00653_source.html#l00040">kdtree.h:40</a></div></div>
-<div class="ttc" id="aa02840_html_a06977c7752b157540446329009ef6595"><div class="ttname"><a href="a02840.html#a06977c7752b157540446329009ef6595">KDNODE::RightBranch</a></div><div class="ttdeci">float RightBranch</div><div class="ttdef"><b>Definition:</b> <a href="a00653_source.html#l00042">kdtree.h:42</a></div></div>
-<div class="ttc" id="aa02840_html_a66ffa1cc4e73e45599978f8f6416e350"><div class="ttname"><a href="a02840.html#a66ffa1cc4e73e45599978f8f6416e350">KDNODE::Left</a></div><div class="ttdeci">struct KDNODE * Left</div><div class="ttdef"><b>Definition:</b> <a href="a00653_source.html#l00043">kdtree.h:43</a></div></div>
-<div class="ttc" id="aa02840_html_afd5eeb76bcf3d1ba9b387e0cd4e9ce16"><div class="ttname"><a href="a02840.html#afd5eeb76bcf3d1ba9b387e0cd4e9ce16">KDNODE::Data</a></div><div class="ttdeci">void * Data</div><div class="ttdef"><b>Definition:</b> <a href="a00653_source.html#l00039">kdtree.h:39</a></div></div>
-<div class="ttc" id="aa00653_html_af3be65344ced84a11159bc0bea5de60f"><div class="ttname"><a href="a00653.html#af3be65344ced84a11159bc0bea5de60f">InsertNodes</a></div><div class="ttdeci">void InsertNodes(KDTREE *tree, KDNODE *nodes)</div><div class="ttdef"><b>Definition:</b> <a href="a00650_source.html#l00521">kdtree.cpp:521</a></div></div>
-<div class="ttc" id="aa01548_html_ae88f73f69c3427ef726b7470ed95cccc"><div class="ttname"><a href="a01548.html#ae88f73f69c3427ef726b7470ed95cccc">tesstrain_utils.action</a></div><div class="ttdeci">action</div><div class="ttdef"><b>Definition:</b> <a href="a01346_source.html#l00159">tesstrain_utils.py:159</a></div></div>
-<div class="ttc" id="aa02856_html"><div class="ttname"><a href="a02856.html">PARAM_DESC</a></div><div class="ttdef"><b>Definition:</b> <a href="a00695_source.html#l00041">ocrfeatures.h:41</a></div></div>
-<div class="ttc" id="aa02840_html"><div class="ttname"><a href="a02840.html">KDNODE</a></div><div class="ttdef"><b>Definition:</b> <a href="a00653_source.html#l00037">kdtree.h:37</a></div></div>
-<div class="ttc" id="aa00653_html_a84d80224322dcba34d276906a638fc6d"><div class="ttname"><a href="a00653.html#a84d80224322dcba34d276906a638fc6d">KDWalk</a></div><div class="ttdeci">void KDWalk(KDTREE *Tree, void_proc Action, void *context)</div><div class="ttdef"><b>Definition:</b> <a href="a00650_source.html#l00314">kdtree.cpp:314</a></div></div>
-<div class="ttc" id="aa00653_html_a73ea2156bc8f7cfc9adcc0b3a5b8b15c"><div class="ttname"><a href="a00653.html#a73ea2156bc8f7cfc9adcc0b3a5b8b15c">MakeKDTree</a></div><div class="ttdeci">KDTREE * MakeKDTree(int16_t KeySize, const PARAM_DESC KeyDesc[])</div><div class="ttdef"><b>Definition:</b> <a href="a00650_source.html#l00179">kdtree.cpp:179</a></div></div>
-<div class="ttc" id="aa00653_html_a8c049d80c7249e815d8aa80c91a9eb47"><div class="ttname"><a href="a00653.html#a8c049d80c7249e815d8aa80c91a9eb47">QueryInSearch</a></div><div class="ttdeci">int QueryInSearch(KDTREE *tree)</div></div>
-<div class="ttc" id="aa00653_html_a1d60f69e882d1a8a95a1106c4c593bfb"><div class="ttname"><a href="a00653.html#a1d60f69e882d1a8a95a1106c4c593bfb">void_proc</a></div><div class="ttdeci">void(*)(...) void_proc</div><div class="ttdef"><b>Definition:</b> <a href="a00653_source.html#l00025">kdtree.h:25</a></div></div>
-<div class="ttc" id="aa02844_html_ab52e8a6004fc595de526dfa831c2e725"><div class="ttname"><a href="a02844.html#ab52e8a6004fc595de526dfa831c2e725">KDTREE::Root</a></div><div class="ttdeci">KDNODE Root</div><div class="ttdef"><b>Definition:</b> <a href="a00653_source.html#l00049">kdtree.h:49</a></div></div>
-<div class="ttc" id="aa00653_html_a37e4019555a2b5284b17237373913346"><div class="ttname"><a href="a00653.html#a37e4019555a2b5284b17237373913346">FreeKDTree</a></div><div class="ttdeci">void FreeKDTree(KDTREE *Tree)</div><div class="ttdef"><b>Definition:</b> <a href="a00650_source.html#l00330">kdtree.cpp:330</a></div></div>
+<div class="ttc" id="aa00653_html_ad75ce1b06f0b68f3fef24e5f1666b239"><div class="ttname"><a href="a00653.html#ad75ce1b06f0b68f3fef24e5f1666b239">ReadPrototype</a></div><div class="ttdeci">PROTOTYPE * ReadPrototype(tesseract::TFile *fp, uint16_t N)</div><div class="ttdef"><b>Definition:</b> <a href="a00650_source.html#l00176">clusttool.cpp:176</a></div></div>
+<div class="ttc" id="aa00653_html_a994913437e21500535a6b888cfcd6ce5"><div class="ttname"><a href="a00653.html#a994913437e21500535a6b888cfcd6ce5">WriteParamDesc</a></div><div class="ttdeci">void WriteParamDesc(FILE *File, uint16_t N, const PARAM_DESC ParamDesc[])</div><div class="ttdef"><b>Definition:</b> <a href="a00650_source.html#l00255">clusttool.cpp:255</a></div></div>
+<div class="ttc" id="aa00653_html_a1451e0b1d82b4208c88f47f3734f608e"><div class="ttname"><a href="a00653.html#a1451e0b1d82b4208c88f47f3734f608e">WritePrototype</a></div><div class="ttdeci">void WritePrototype(FILE *File, uint16_t N, PROTOTYPE *Proto)</div><div class="ttdef"><b>Definition:</b> <a href="a00650_source.html#l00280">clusttool.cpp:280</a></div></div>
+<div class="ttc" id="aa00653_html_afcbf00f9d2fef4df885c4939daf9d306"><div class="ttname"><a href="a00653.html#afcbf00f9d2fef4df885c4939daf9d306">ReadParamDesc</a></div><div class="ttdeci">PARAM_DESC * ReadParamDesc(tesseract::TFile *fp, uint16_t N)</div><div class="ttdef"><b>Definition:</b> <a href="a00650_source.html#l00140">clusttool.cpp:140</a></div></div>
+<div class="ttc" id="aa03202_html"><div class="ttname"><a href="a03202.html">PROTOTYPE</a></div><div class="ttdef"><b>Definition:</b> <a href="a00647_source.html#l00062">cluster.h:62</a></div></div>
+<div class="ttc" id="aa02538_html"><div class="ttname"><a href="a02538.html">tesseract::TFile</a></div><div class="ttdef"><b>Definition:</b> <a href="a00041_source.html#l00075">serialis.h:75</a></div></div>
+<div class="ttc" id="aa03314_html"><div class="ttname"><a href="a03314.html">PARAM_DESC</a></div><div class="ttdef"><b>Definition:</b> <a href="a00746_source.html#l00041">ocrfeatures.h:41</a></div></div>
+<div class="ttc" id="aa00647_html"><div class="ttname"><a href="a00647.html">cluster.h</a></div></div>
+<div class="ttc" id="aa00653_html_affb9d870273779781b16f701afc7510a"><div class="ttname"><a href="a00653.html#affb9d870273779781b16f701afc7510a">ReadSampleSize</a></div><div class="ttdeci">uint16_t ReadSampleSize(tesseract::TFile *fp)</div><div class="ttdef"><b>Definition:</b> <a href="a00650_source.html#l00120">clusttool.cpp:120</a></div></div>
+<div class="ttc" id="aa00041_html"><div class="ttname"><a href="a00041.html">serialis.h</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b8f5fb7b736ee5431a221bc7b817d6e0.html">classify</a></li><li class="navelem"><a class="el" href="a00653.html">kdtree.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:14 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b8f5fb7b736ee5431a221bc7b817d6e0.html">classify</a></li><li class="navelem"><a class="el" href="a00653.html">clusttool.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:20 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

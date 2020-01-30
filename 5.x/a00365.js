@@ -1,4 +1,6 @@
 var a00365 =
 [
-    [ "QSPLINE_PRECISION", "a00365.html#a5c2f35a8400249d498f29982dfc63bf7", null ]
+    [ "HistogramRect", "a00365.html#a6601a260946a730407fc6ef4f69d8725", null ],
+    [ "OtsuStats", "a00365.html#aa38847c682089329f7cec83a5bcb714b", null ],
+    [ "OtsuThreshold", "a00365.html#a865a6eb28d729e208b513acbe716f22d", null ]
 ];

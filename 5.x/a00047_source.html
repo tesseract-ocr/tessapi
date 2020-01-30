@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/arch/intsimdmatrix.h Source File</title>
+<title>tesseract: /tesseract/include/tesseract/thresholder.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,156 +87,184 @@ $(document).ready(function(){initNavTree('a00047_source.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">intsimdmatrix.h</div>  </div>
+<div class="title">thresholder.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00047.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// File:        intsimdmatrix.h</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// Description: Base class for 8-bit int SIMD matrix multipliers.</span></div>
+<a href="a00047.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// File:        thresholder.h</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// Description: Base API for thresholding images in tesseract.</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// Author:      Ray Smith</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">// Created:     Tue Aug 15 07:37:20 PST 2017</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">//</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">// (C) Copyright 2017, Google Inc.</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">// you may not use this file except in compliance with the License.</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// You may obtain a copy of the License at</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">// http://www.apache.org/licenses/LICENSE-2.0</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// Unless required by applicable law or agreed to in writing, software</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">// See the License for the specific language governing permissions and</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">// limitations under the License.</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">// (C) Copyright 2008, Google Inc.</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// you may not use this file except in compliance with the License.</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">// You may obtain a copy of the License at</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// http://www.apache.org/licenses/LICENSE-2.0</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">// Unless required by applicable law or agreed to in writing, software</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">// See the License for the specific language governing permissions and</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">// limitations under the License.</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#ifndef TESSERACT_ARCH_INTSIMDMATRIX_H_</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#define TESSERACT_ARCH_INTSIMDMATRIX_H_</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#ifndef TESSERACT_CCMAIN_THRESHOLDER_H_</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#define TESSERACT_CCMAIN_THRESHOLDER_H_</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;cstdint&gt;</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00029.html">platform.h</a>&quot;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00032.html">publictypes.h</a>&quot;</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="a02104.html">   26</a></span>&#160;<span class="keyword">class </span><a class="code" href="a02104.html">GENERIC_2D_ARRAY</a>;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="a02108.html">   28</a></span>&#160;<span class="keyword">class </span><a class="code" href="a02108.html">GenericVector</a>;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">namespace </span><a class="code" href="a01539.html">tesseract</a> {</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">// Base class for a SIMD function to multiply a matrix by a vector, with sources</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">// of 8-bit signed integer, and result in a double, after appropriate scaling.</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">// Assumes a specific method of multiplication that can be applied to any size</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">// and number of SIMD registers as follows:</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">// int32_t results are computed with num_outputs_per_register_ in each of</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">// max_output_registers_ result registers, repeatedly until it would make too</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">// many results, then the number of registers is halved, and so-on down to a</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">// single result register. The last calculation only outputs the required number</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">// of results instead of writing beyond the bounds. Eg: matrix has 75 outputs,</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">//  num_outputs_per_register_ = 4, and max_output_registers_ = 8,</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">// Step 1: 8x4=32 results are computed,</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">// Step 2: 8x4=32 again, total 64,</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">// Step 3: 2x4=8 (since 8x4 is too many, so is 4x4), total 72,</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">// Step 4: 1x3, total 75.</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">// Each step above is computed using a PartialFunc, which runs over the input</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">// vector once. The input is read one registerful of num_inputs_per_register_</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">// at a time (presumably 4x num_outputs_per_register_ since they are int8_t)</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">// so the inputs MUST BE PADDED to a multiple of num_inputs_per_register_.</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">// Since it is slow (on Intel at least) to horizontally add in a register,</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">// provision is made to process num_inputs_per_group_ inputs at a time, with</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">// the group being replicated num_input_groups_ times and multiplied by a</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">// num_inputs_per_group_ by num_input_groups_ rectangle of the weights matrix.</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">// This is most convenient if num_inputs_per_group_ is 4, and the product</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">// sign-extends and sums 8x8=16 bit results to 32 bits, adding 4 adjacent</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">// results in the process, but it doesn&#39;t have to be implemented that way.</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">// The weights are re-ordered by Init() to be used sequentially by the above</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">// algorithm, followed by the biases, so they can be added at the end.</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">// The base class computes the base C++ implementation.</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">// NOTE that, although the subclasses execute on different SIMD hardware, no</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">// virtual methods are needed, as the constructor sets up everything that</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">// is required to allow the base class implementation to do all the work.</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="a02112.html">   63</a></span>&#160;<span class="keyword">struct </span><a class="code" href="a02112.html">IntSimdMatrix</a> {</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="comment">// Computes a reshaped copy of the weight matrix w.</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a02112.html#ae5a22fcb2e02cf42b16ca3e49673460a">Init</a>(<span class="keyword">const</span> <a class="code" href="a02104.html">GENERIC_2D_ARRAY&lt;int8_t&gt;</a>&amp; w,</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            std::vector&lt;int8_t&gt;&amp; shaped_w) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">struct </span>Pix;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">namespace </span><a class="code" href="a01818.html">tesseract</a> {</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="a02550.html">   35</a></span>&#160;<span class="keyword">class </span><a class="code" href="a00029.html#a86e51270628c53ce7e2c23b1c2b4490e">TESS_API</a> <a class="code" href="a02550.html">ImageThresholder</a> {</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <a class="code" href="a02550.html">ImageThresholder</a>();</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <span class="keyword">virtual</span> ~<a class="code" href="a02550.html">ImageThresholder</a>();</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> Clear();</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <span class="keywordtype">bool</span> IsEmpty() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="keywordtype">void</span> SetImage(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>* imagedata, <span class="keywordtype">int</span> width, <span class="keywordtype">int</span> height,</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                <span class="keywordtype">int</span> bytes_per_pixel, <span class="keywordtype">int</span> bytes_per_line);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="keywordtype">void</span> SetRectangle(<span class="keywordtype">int</span> left, <span class="keywordtype">int</span> top, <span class="keywordtype">int</span> width, <span class="keywordtype">int</span> height);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> GetImageSizes(<span class="keywordtype">int</span>* left, <span class="keywordtype">int</span>* top, <span class="keywordtype">int</span>* width, <span class="keywordtype">int</span>* height,</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                             <span class="keywordtype">int</span>* imagewidth, <span class="keywordtype">int</span>* imageheight);</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <span class="comment">// Rounds the size up to a multiple of the input register size (in int8_t).</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="a02112.html#aa1f04190c56fc632d8da1a35caf496a5">   69</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="a02112.html#aa1f04190c56fc632d8da1a35caf496a5">RoundInputs</a>(<span class="keywordtype">int</span> size)<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="a02112.html#acf9f1a5093e7fa9de9c107b543404d0f">Roundup</a>(size, <a class="code" href="a02112.html#ad17ed5688109967a28d46853f5babbab">num_inputs_per_register_</a>);</div>
+<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="a02550.html#a5f22084ceecb9a9efbd7dccb36f05f90">   69</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="a02550.html#a5f22084ceecb9a9efbd7dccb36f05f90">IsColor</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordflow">return</span> pix_channels_ &gt;= 3;</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  }</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <span class="comment">// Rounds the size up to a multiple of the output register size (in int32_t).</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="a02112.html#a74a99972e32fe1659f839791bb7dde49">   73</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="a02112.html#a74a99972e32fe1659f839791bb7dde49">RoundOutputs</a>(<span class="keywordtype">int</span> size)<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="a02112.html#acf9f1a5093e7fa9de9c107b543404d0f">Roundup</a>(size, <a class="code" href="a02112.html#a8760aa1d64a18e46cc77698f2381177c">num_outputs_per_register_</a>);</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  }</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  <span class="comment">// Computes matrix.vector v = Wu.</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  <span class="comment">// u is of size W.dim2() - 1 and the output v is of size W.dim1().</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <span class="comment">// u is imagined to have an extra element at the end with value 1, to</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  <span class="comment">// implement the bias, but it doesn&#39;t actually have it.</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  <span class="comment">// Computes the base C++ implementation.</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="a02112.html#a5d4937d3e1f64e131bc2add26478500a">MatrixDotVector</a>(<span class="keyword">const</span> <a class="code" href="a02104.html">GENERIC_2D_ARRAY&lt;int8_t&gt;</a>&amp; w,</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                              <span class="keyword">const</span> <a class="code" href="a02108.html">GenericVector&lt;double&gt;</a>&amp; scales,</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                              <span class="keyword">const</span> int8_t* u, <span class="keywordtype">double</span>* v);</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  <span class="comment">// Rounds the input up to a multiple of the given factor.</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="a02112.html#acf9f1a5093e7fa9de9c107b543404d0f">   87</a></span>&#160;  <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="a02112.html#acf9f1a5093e7fa9de9c107b543404d0f">Roundup</a>(<span class="keywordtype">int</span> input, <span class="keywordtype">int</span> factor) {</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keywordflow">return</span> (input + factor - 1) / factor * factor;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  }</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  <span class="comment">// Computes matrix.vector v = Wu.</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  <span class="comment">// u is of size W.dim2() - 1 and the output v is of size W.dim1().</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <span class="comment">// u is imagined to have an extra element at the end with value 1, to</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  <span class="comment">// implement the bias, but it doesn&#39;t actually have it.</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  <span class="comment">// Uses an optimized implementation with partial funcs.</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  <span class="comment">// NOTE: The size of the input vector (u) must be padded using</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  <span class="comment">// RoundInputs above.</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  <span class="comment">// The input will be over-read to the extent of the padding. There are no</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  <span class="comment">// alignment requirements.</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  <span class="keyword">using</span> <a class="code" href="a02112.html#a4ad13c1cd9da4448795e63b51e2bcd97">MatrixDotVectorFunction</a> = void (*)(<a class="code" href="a01548.html#a09a009a90bfc702287cb52f5b818acda">int</a>, <a class="code" href="a01548.html#a09a009a90bfc702287cb52f5b818acda">int</a>, <span class="keyword">const</span> int8_t*,</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                                           <span class="keyword">const</span> <span class="keywordtype">double</span>*, <span class="keyword">const</span> int8_t*,</div>
-<div class="line"><a name="l00102"></a><span class="lineno"><a class="line" href="a02112.html#a4ad13c1cd9da4448795e63b51e2bcd97">  102</a></span>&#160;                                           <span class="keywordtype">double</span>*);</div>
-<div class="line"><a name="l00103"></a><span class="lineno"><a class="line" href="a02112.html#ab47a718a49438ac71fb32a02436e2f58">  103</a></span>&#160;  <a class="code" href="a02112.html#a4ad13c1cd9da4448795e63b51e2bcd97">MatrixDotVectorFunction</a> <a class="code" href="a02112.html#ab47a718a49438ac71fb32a02436e2f58">matrixDotVectorFunction</a>;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  <span class="comment">// Number of 32 bit outputs held in each register.</span></div>
-<div class="line"><a name="l00106"></a><span class="lineno"><a class="line" href="a02112.html#a8760aa1d64a18e46cc77698f2381177c">  106</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="a02112.html#a8760aa1d64a18e46cc77698f2381177c">num_outputs_per_register_</a>;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;  <span class="comment">// Maximum number of registers that we will use to hold outputs.</span></div>
-<div class="line"><a name="l00108"></a><span class="lineno"><a class="line" href="a02112.html#a6c071f8e8104b7f4ff744622fa21edc1">  108</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="a02112.html#a6c071f8e8104b7f4ff744622fa21edc1">max_output_registers_</a>;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;  <span class="comment">// Number of 8 bit inputs in the inputs register.</span></div>
-<div class="line"><a name="l00110"></a><span class="lineno"><a class="line" href="a02112.html#ad17ed5688109967a28d46853f5babbab">  110</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="a02112.html#ad17ed5688109967a28d46853f5babbab">num_inputs_per_register_</a>;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  <span class="comment">// Number of inputs in each weight group.</span></div>
-<div class="line"><a name="l00112"></a><span class="lineno"><a class="line" href="a02112.html#a23256c8836310012b8a80e61f9dd5a35">  112</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="a02112.html#a23256c8836310012b8a80e61f9dd5a35">num_inputs_per_group_</a>;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  <span class="comment">// Number of groups of inputs to be broadcast.</span></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  <span class="comment">// num_input_groups_ = num_inputs_per_register_ / num_inputs_per_group_</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="a02550.html#af2a1a0395542b9ccec4ed6da3a928416">   74</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="a02550.html#af2a1a0395542b9ccec4ed6da3a928416">IsBinary</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordflow">return</span> pix_channels_ == 0;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  }</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="a02550.html#adce88ad081b8ab379cb286a0dd0e8845">   78</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="a02550.html#adce88ad081b8ab379cb286a0dd0e8845">GetScaleFactor</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordflow">return</span> scale_;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  }</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <span class="comment">// Set the resolution of the source image in pixels per inch.</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  <span class="comment">// This should be called right after SetImage(), and will let us return</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  <span class="comment">// appropriate font sizes for the text.</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="a02550.html#af96fa2b6f4d1271640d5c8842f4fa9d6">   85</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a02550.html#af96fa2b6f4d1271640d5c8842f4fa9d6">SetSourceYResolution</a>(<span class="keywordtype">int</span> ppi) {</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    yres_ = ppi;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    estimated_res_ = ppi;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  }</div>
+<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="a02550.html#a39bd6e786e42ec230090189c9deb3657">   89</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="a02550.html#a39bd6e786e42ec230090189c9deb3657">GetSourceYResolution</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordflow">return</span> yres_;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  }</div>
+<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="a02550.html#a8e9f61a2ab3883e370cb91b870c3d4ec">   92</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="a02550.html#a8e9f61a2ab3883e370cb91b870c3d4ec">GetScaledYResolution</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordflow">return</span> scale_ * yres_;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  }</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  <span class="comment">// Set the resolution of the source image in pixels per inch, as estimated</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  <span class="comment">// by the thresholder from the text size found during thresholding.</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  <span class="comment">// This value will be used to set internal size thresholds during recognition</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  <span class="comment">// and will not influence the output &quot;point size.&quot; The default value is</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  <span class="comment">// the same as the source resolution. (yres_)</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno"><a class="line" href="a02550.html#a395de01694f9b1034d7349b736a4dac0">  100</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a02550.html#a395de01694f9b1034d7349b736a4dac0">SetEstimatedResolution</a>(<span class="keywordtype">int</span> ppi) {</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    estimated_res_ = ppi;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  }</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  <span class="comment">// Returns the estimated resolution, including any active scaling.</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  <span class="comment">// This value will be used to set internal size thresholds during recognition.</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="a02550.html#a02256722855a56bb2ee79238df990b3b">  105</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="a02550.html#a02256722855a56bb2ee79238df990b3b">GetScaledEstimatedResolution</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordflow">return</span> scale_ * estimated_res_;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;  }</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  <span class="keywordtype">void</span> SetImage(<span class="keyword">const</span> Pix* pix);</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
-<div class="line"><a name="l00116"></a><span class="lineno"><a class="line" href="a02112.html#ad7321e9f71f4d5e2c8920c370acb25ac">  116</a></span>&#160;  <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="a02112.html">IntSimdMatrix</a>* <a class="code" href="a02112.html#ad7321e9f71f4d5e2c8920c370acb25ac">intSimdMatrix</a>;</div>
-<div class="line"><a name="l00117"></a><span class="lineno"><a class="line" href="a02112.html#a503a9e29415ca20f74d48fd9665a0f0c">  117</a></span>&#160;  <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="a02112.html">IntSimdMatrix</a> <a class="code" href="a02112.html#a503a9e29415ca20f74d48fd9665a0f0c">intSimdMatrixAVX2</a>;</div>
-<div class="line"><a name="l00118"></a><span class="lineno"><a class="line" href="a02112.html#ad7aed52d7915512a59818a5efda68c1e">  118</a></span>&#160;  <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="a02112.html">IntSimdMatrix</a> <a class="code" href="a02112.html#ad7aed52d7915512a59818a5efda68c1e">intSimdMatrixSSE</a>;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;};</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;}  <span class="comment">// namespace tesseract</span></div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="preprocessor">#endif  // TESSERACT_ARCH_INTSIMDMATRIX_H_</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">bool</span> ThresholdToPix(<a class="code" href="a01818.html#a338d4c8b5d497b5ec3e6e4269d8ac66a">PageSegMode</a> pageseg_mode, Pix** pix);</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;  <span class="comment">// Gets a pix that contains an 8 bit threshold value at each pixel. The</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  <span class="comment">// returned pix may be an integer reduction of the binary image such that</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;  <span class="comment">// the scale factor may be inferred from the ratio of the sizes, even down</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;  <span class="comment">// to the extreme of a 1x1 pixel thresholds image.</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;  <span class="comment">// Ideally the 8 bit threshold should be the exact threshold used to generate</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;  <span class="comment">// the binary image in ThresholdToPix, but this is not a hard constraint.</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;  <span class="comment">// Returns nullptr if the input is binary. PixDestroy after use.</span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;  <span class="keyword">virtual</span> Pix* GetPixRectThresholds();</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;  Pix* GetPixRect();</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;  <span class="comment">// Get a clone/copy of the source image rectangle, reduced to greyscale,</span></div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;  <span class="comment">// and at the same resolution as the output binary.</span></div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;  <span class="comment">// The returned Pix must be pixDestroyed.</span></div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;  <span class="comment">// Provided to the classifier to extract features from the greyscale image.</span></div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;  <span class="keyword">virtual</span> Pix* GetPixRectGrey();</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;  <span class="comment">// ----------------------------------------------------------------------</span></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;  <span class="comment">// Utility functions that may be useful components for other thresholders.</span></div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160; </div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">void</span> Init();</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
+<div class="line"><a name="l00152"></a><span class="lineno"><a class="line" href="a02550.html#a5cf1c99da3146479f2822cfecc0e2d3a">  152</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="a02550.html#a5cf1c99da3146479f2822cfecc0e2d3a">IsFullImage</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <span class="keywordflow">return</span> rect_left_ == 0 &amp;&amp; rect_top_ == 0 &amp;&amp; rect_width_ == image_width_ &amp;&amp;</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;           rect_height_ == image_height_;</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;  }</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;  <span class="comment">// Otsu thresholds the rectangle, taking the rectangle from *this.</span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;  <span class="keywordtype">void</span> OtsuThresholdRectToPix(Pix* src_pix, Pix** out_pix) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;  <span class="comment">// arrays and also the bytes per pixel in src_pix.</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;  <span class="keywordtype">void</span> ThresholdRectToPix(Pix* src_pix, <span class="keywordtype">int</span> num_channels, <span class="keyword">const</span> <span class="keywordtype">int</span>* thresholds,</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;                          <span class="keyword">const</span> <span class="keywordtype">int</span>* hi_values, Pix** pix) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160; <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00170"></a><span class="lineno"><a class="line" href="a02550.html#a8ffaca2b9b8f5c01df4959d043564e44">  170</a></span>&#160;  Pix* <a class="code" href="a02550.html#a8ffaca2b9b8f5c01df4959d043564e44">pix_</a>;</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; </div>
+<div class="line"><a name="l00172"></a><span class="lineno"><a class="line" href="a02550.html#ad19482689e862049210ed12506e3e430">  172</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="a02550.html#ad19482689e862049210ed12506e3e430">image_width_</a>;   </div>
+<div class="line"><a name="l00173"></a><span class="lineno"><a class="line" href="a02550.html#af850057e6640359179bea0835254cc12">  173</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="a02550.html#af850057e6640359179bea0835254cc12">image_height_</a>;  </div>
+<div class="line"><a name="l00174"></a><span class="lineno"><a class="line" href="a02550.html#ac1e0c609f5468520746233102f4e654c">  174</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="a02550.html#ac1e0c609f5468520746233102f4e654c">pix_channels_</a>;  </div>
+<div class="line"><a name="l00175"></a><span class="lineno"><a class="line" href="a02550.html#a17a1faa196e7b195dc5ff5eec60e3814">  175</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="a02550.html#a17a1faa196e7b195dc5ff5eec60e3814">pix_wpl_</a>;       </div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;  <span class="comment">// Limits of image rectangle to be processed.</span></div>
+<div class="line"><a name="l00177"></a><span class="lineno"><a class="line" href="a02550.html#abf0aec155d23b51c245c4163582cd82c">  177</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="a02550.html#abf0aec155d23b51c245c4163582cd82c">scale_</a>;          </div>
+<div class="line"><a name="l00178"></a><span class="lineno"><a class="line" href="a02550.html#ac80aad234efc5a4102805a05d5825aa4">  178</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="a02550.html#ac80aad234efc5a4102805a05d5825aa4">yres_</a>;           </div>
+<div class="line"><a name="l00179"></a><span class="lineno"><a class="line" href="a02550.html#a7f6c21281f37d495ed2272e931e990ac">  179</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="a02550.html#a7f6c21281f37d495ed2272e931e990ac">estimated_res_</a>;  </div>
+<div class="line"><a name="l00180"></a><span class="lineno"><a class="line" href="a02550.html#abf7d4771ff09f7a3e6e45f20ed3bd531">  180</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="a02550.html#abf7d4771ff09f7a3e6e45f20ed3bd531">rect_left_</a>;</div>
+<div class="line"><a name="l00181"></a><span class="lineno"><a class="line" href="a02550.html#a46518f2527c1198bfc524b93aad56e72">  181</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="a02550.html#a46518f2527c1198bfc524b93aad56e72">rect_top_</a>;</div>
+<div class="line"><a name="l00182"></a><span class="lineno"><a class="line" href="a02550.html#a450cd3577eebea0e372b059b6d4cac7e">  182</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="a02550.html#a450cd3577eebea0e372b059b6d4cac7e">rect_width_</a>;</div>
+<div class="line"><a name="l00183"></a><span class="lineno"><a class="line" href="a02550.html#a8455c5c0f05f987a19b9cd1a250f6b1d">  183</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="a02550.html#a8455c5c0f05f987a19b9cd1a250f6b1d">rect_height_</a>;</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;};</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160; </div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;}  <span class="comment">// namespace tesseract.</span></div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160; </div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="preprocessor">#endif  // TESSERACT_CCMAIN_THRESHOLDER_H_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa02112_html_ad17ed5688109967a28d46853f5babbab"><div class="ttname"><a href="a02112.html#ad17ed5688109967a28d46853f5babbab">tesseract::IntSimdMatrix::num_inputs_per_register_</a></div><div class="ttdeci">int num_inputs_per_register_</div><div class="ttdef"><b>Definition:</b> <a href="a00047_source.html#l00110">intsimdmatrix.h:110</a></div></div>
-<div class="ttc" id="aa02112_html_a4ad13c1cd9da4448795e63b51e2bcd97"><div class="ttname"><a href="a02112.html#a4ad13c1cd9da4448795e63b51e2bcd97">tesseract::IntSimdMatrix::MatrixDotVectorFunction</a></div><div class="ttdeci">void(*)(int, int, const int8_t *, const double *, const int8_t *, double *) MatrixDotVectorFunction</div><div class="ttdef"><b>Definition:</b> <a href="a00047_source.html#l00102">intsimdmatrix.h:102</a></div></div>
-<div class="ttc" id="aa02112_html_a74a99972e32fe1659f839791bb7dde49"><div class="ttname"><a href="a02112.html#a74a99972e32fe1659f839791bb7dde49">tesseract::IntSimdMatrix::RoundOutputs</a></div><div class="ttdeci">int RoundOutputs(int size) const</div><div class="ttdef"><b>Definition:</b> <a href="a00047_source.html#l00073">intsimdmatrix.h:73</a></div></div>
-<div class="ttc" id="aa02108_html"><div class="ttname"><a href="a02108.html">GenericVector</a></div><div class="ttdef"><b>Definition:</b> <a href="a00047_source.html#l00028">intsimdmatrix.h:28</a></div></div>
-<div class="ttc" id="aa02112_html_ad7aed52d7915512a59818a5efda68c1e"><div class="ttname"><a href="a02112.html#ad7aed52d7915512a59818a5efda68c1e">tesseract::IntSimdMatrix::intSimdMatrixSSE</a></div><div class="ttdeci">static const IntSimdMatrix intSimdMatrixSSE</div><div class="ttdef"><b>Definition:</b> <a href="a00047_source.html#l00118">intsimdmatrix.h:118</a></div></div>
-<div class="ttc" id="aa02112_html_a8760aa1d64a18e46cc77698f2381177c"><div class="ttname"><a href="a02112.html#a8760aa1d64a18e46cc77698f2381177c">tesseract::IntSimdMatrix::num_outputs_per_register_</a></div><div class="ttdeci">int num_outputs_per_register_</div><div class="ttdef"><b>Definition:</b> <a href="a00047_source.html#l00106">intsimdmatrix.h:106</a></div></div>
-<div class="ttc" id="aa02104_html"><div class="ttname"><a href="a02104.html">GENERIC_2D_ARRAY</a></div><div class="ttdef"><b>Definition:</b> <a href="a00047_source.html#l00026">intsimdmatrix.h:26</a></div></div>
-<div class="ttc" id="aa02112_html_a6c071f8e8104b7f4ff744622fa21edc1"><div class="ttname"><a href="a02112.html#a6c071f8e8104b7f4ff744622fa21edc1">tesseract::IntSimdMatrix::max_output_registers_</a></div><div class="ttdeci">int max_output_registers_</div><div class="ttdef"><b>Definition:</b> <a href="a00047_source.html#l00108">intsimdmatrix.h:108</a></div></div>
-<div class="ttc" id="aa02112_html_ad7321e9f71f4d5e2c8920c370acb25ac"><div class="ttname"><a href="a02112.html#ad7321e9f71f4d5e2c8920c370acb25ac">tesseract::IntSimdMatrix::intSimdMatrix</a></div><div class="ttdeci">static const IntSimdMatrix * intSimdMatrix</div><div class="ttdef"><b>Definition:</b> <a href="a00047_source.html#l00116">intsimdmatrix.h:116</a></div></div>
-<div class="ttc" id="aa02112_html_a503a9e29415ca20f74d48fd9665a0f0c"><div class="ttname"><a href="a02112.html#a503a9e29415ca20f74d48fd9665a0f0c">tesseract::IntSimdMatrix::intSimdMatrixAVX2</a></div><div class="ttdeci">static const IntSimdMatrix intSimdMatrixAVX2</div><div class="ttdef"><b>Definition:</b> <a href="a00047_source.html#l00117">intsimdmatrix.h:117</a></div></div>
-<div class="ttc" id="aa01548_html_a09a009a90bfc702287cb52f5b818acda"><div class="ttname"><a href="a01548.html#a09a009a90bfc702287cb52f5b818acda">tesstrain_utils.int</a></div><div class="ttdeci">int</div><div class="ttdef"><b>Definition:</b> <a href="a01346_source.html#l00154">tesstrain_utils.py:154</a></div></div>
-<div class="ttc" id="aa01539_html"><div class="ttname"><a href="a01539.html">tesseract</a></div><div class="ttdef"><b>Definition:</b> <a href="a00002_source.html#l00025">altorenderer.cpp:25</a></div></div>
-<div class="ttc" id="aa02112_html"><div class="ttname"><a href="a02112.html">tesseract::IntSimdMatrix</a></div><div class="ttdef"><b>Definition:</b> <a href="a00047_source.html#l00063">intsimdmatrix.h:63</a></div></div>
-<div class="ttc" id="aa02112_html_ab47a718a49438ac71fb32a02436e2f58"><div class="ttname"><a href="a02112.html#ab47a718a49438ac71fb32a02436e2f58">tesseract::IntSimdMatrix::matrixDotVectorFunction</a></div><div class="ttdeci">MatrixDotVectorFunction matrixDotVectorFunction</div><div class="ttdef"><b>Definition:</b> <a href="a00047_source.html#l00103">intsimdmatrix.h:103</a></div></div>
-<div class="ttc" id="aa02112_html_acf9f1a5093e7fa9de9c107b543404d0f"><div class="ttname"><a href="a02112.html#acf9f1a5093e7fa9de9c107b543404d0f">tesseract::IntSimdMatrix::Roundup</a></div><div class="ttdeci">static int Roundup(int input, int factor)</div><div class="ttdef"><b>Definition:</b> <a href="a00047_source.html#l00087">intsimdmatrix.h:87</a></div></div>
-<div class="ttc" id="aa02112_html_a23256c8836310012b8a80e61f9dd5a35"><div class="ttname"><a href="a02112.html#a23256c8836310012b8a80e61f9dd5a35">tesseract::IntSimdMatrix::num_inputs_per_group_</a></div><div class="ttdeci">int num_inputs_per_group_</div><div class="ttdef"><b>Definition:</b> <a href="a00047_source.html#l00112">intsimdmatrix.h:112</a></div></div>
-<div class="ttc" id="aa02112_html_a5d4937d3e1f64e131bc2add26478500a"><div class="ttname"><a href="a02112.html#a5d4937d3e1f64e131bc2add26478500a">tesseract::IntSimdMatrix::MatrixDotVector</a></div><div class="ttdeci">static void MatrixDotVector(const GENERIC_2D_ARRAY&lt; int8_t &gt; &amp;w, const GenericVector&lt; double &gt; &amp;scales, const int8_t *u, double *v)</div><div class="ttdef"><b>Definition:</b> <a href="a00044_source.html#l00079">intsimdmatrix.cpp:79</a></div></div>
-<div class="ttc" id="aa02112_html_ae5a22fcb2e02cf42b16ca3e49673460a"><div class="ttname"><a href="a02112.html#ae5a22fcb2e02cf42b16ca3e49673460a">tesseract::IntSimdMatrix::Init</a></div><div class="ttdeci">void Init(const GENERIC_2D_ARRAY&lt; int8_t &gt; &amp;w, std::vector&lt; int8_t &gt; &amp;shaped_w) const</div><div class="ttdef"><b>Definition:</b> <a href="a00044_source.html#l00029">intsimdmatrix.cpp:29</a></div></div>
-<div class="ttc" id="aa02112_html_aa1f04190c56fc632d8da1a35caf496a5"><div class="ttname"><a href="a02112.html#aa1f04190c56fc632d8da1a35caf496a5">tesseract::IntSimdMatrix::RoundInputs</a></div><div class="ttdeci">int RoundInputs(int size) const</div><div class="ttdef"><b>Definition:</b> <a href="a00047_source.html#l00069">intsimdmatrix.h:69</a></div></div>
+<div class="ttc" id="aa02550_html_a17a1faa196e7b195dc5ff5eec60e3814"><div class="ttname"><a href="a02550.html#a17a1faa196e7b195dc5ff5eec60e3814">tesseract::ImageThresholder::pix_wpl_</a></div><div class="ttdeci">int pix_wpl_</div><div class="ttdoc">Words per line of pix_.</div><div class="ttdef"><b>Definition:</b> <a href="a00047_source.html#l00175">thresholder.h:175</a></div></div>
+<div class="ttc" id="aa02550_html_abf7d4771ff09f7a3e6e45f20ed3bd531"><div class="ttname"><a href="a02550.html#abf7d4771ff09f7a3e6e45f20ed3bd531">tesseract::ImageThresholder::rect_left_</a></div><div class="ttdeci">int rect_left_</div><div class="ttdef"><b>Definition:</b> <a href="a00047_source.html#l00180">thresholder.h:180</a></div></div>
+<div class="ttc" id="aa02550_html_a8455c5c0f05f987a19b9cd1a250f6b1d"><div class="ttname"><a href="a02550.html#a8455c5c0f05f987a19b9cd1a250f6b1d">tesseract::ImageThresholder::rect_height_</a></div><div class="ttdeci">int rect_height_</div><div class="ttdef"><b>Definition:</b> <a href="a00047_source.html#l00183">thresholder.h:183</a></div></div>
+<div class="ttc" id="aa02550_html_a5cf1c99da3146479f2822cfecc0e2d3a"><div class="ttname"><a href="a02550.html#a5cf1c99da3146479f2822cfecc0e2d3a">tesseract::ImageThresholder::IsFullImage</a></div><div class="ttdeci">bool IsFullImage() const</div><div class="ttdoc">Return true if we are processing the full image.</div><div class="ttdef"><b>Definition:</b> <a href="a00047_source.html#l00152">thresholder.h:152</a></div></div>
+<div class="ttc" id="aa02550_html_af2a1a0395542b9ccec4ed6da3a928416"><div class="ttname"><a href="a02550.html#af2a1a0395542b9ccec4ed6da3a928416">tesseract::ImageThresholder::IsBinary</a></div><div class="ttdeci">bool IsBinary() const</div><div class="ttdoc">Returns true if the source image is binary.</div><div class="ttdef"><b>Definition:</b> <a href="a00047_source.html#l00074">thresholder.h:74</a></div></div>
+<div class="ttc" id="aa02550_html_af850057e6640359179bea0835254cc12"><div class="ttname"><a href="a02550.html#af850057e6640359179bea0835254cc12">tesseract::ImageThresholder::image_height_</a></div><div class="ttdeci">int image_height_</div><div class="ttdoc">Height of source pix_.</div><div class="ttdef"><b>Definition:</b> <a href="a00047_source.html#l00173">thresholder.h:173</a></div></div>
+<div class="ttc" id="aa02550_html_ad19482689e862049210ed12506e3e430"><div class="ttname"><a href="a02550.html#ad19482689e862049210ed12506e3e430">tesseract::ImageThresholder::image_width_</a></div><div class="ttdeci">int image_width_</div><div class="ttdoc">Width of source pix_.</div><div class="ttdef"><b>Definition:</b> <a href="a00047_source.html#l00172">thresholder.h:172</a></div></div>
+<div class="ttc" id="aa00029_html"><div class="ttname"><a href="a00029.html">platform.h</a></div></div>
+<div class="ttc" id="aa02550_html_af96fa2b6f4d1271640d5c8842f4fa9d6"><div class="ttname"><a href="a02550.html#af96fa2b6f4d1271640d5c8842f4fa9d6">tesseract::ImageThresholder::SetSourceYResolution</a></div><div class="ttdeci">void SetSourceYResolution(int ppi)</div><div class="ttdef"><b>Definition:</b> <a href="a00047_source.html#l00085">thresholder.h:85</a></div></div>
+<div class="ttc" id="aa02550_html_a7f6c21281f37d495ed2272e931e990ac"><div class="ttname"><a href="a02550.html#a7f6c21281f37d495ed2272e931e990ac">tesseract::ImageThresholder::estimated_res_</a></div><div class="ttdeci">int estimated_res_</div><div class="ttdoc">Resolution estimate from text size.</div><div class="ttdef"><b>Definition:</b> <a href="a00047_source.html#l00179">thresholder.h:179</a></div></div>
+<div class="ttc" id="aa02550_html_a8ffaca2b9b8f5c01df4959d043564e44"><div class="ttname"><a href="a02550.html#a8ffaca2b9b8f5c01df4959d043564e44">tesseract::ImageThresholder::pix_</a></div><div class="ttdeci">Pix * pix_</div><div class="ttdef"><b>Definition:</b> <a href="a00047_source.html#l00170">thresholder.h:170</a></div></div>
+<div class="ttc" id="aa02550_html_a39bd6e786e42ec230090189c9deb3657"><div class="ttname"><a href="a02550.html#a39bd6e786e42ec230090189c9deb3657">tesseract::ImageThresholder::GetSourceYResolution</a></div><div class="ttdeci">int GetSourceYResolution() const</div><div class="ttdef"><b>Definition:</b> <a href="a00047_source.html#l00089">thresholder.h:89</a></div></div>
+<div class="ttc" id="aa02550_html_a46518f2527c1198bfc524b93aad56e72"><div class="ttname"><a href="a02550.html#a46518f2527c1198bfc524b93aad56e72">tesseract::ImageThresholder::rect_top_</a></div><div class="ttdeci">int rect_top_</div><div class="ttdef"><b>Definition:</b> <a href="a00047_source.html#l00181">thresholder.h:181</a></div></div>
+<div class="ttc" id="aa02550_html_a395de01694f9b1034d7349b736a4dac0"><div class="ttname"><a href="a02550.html#a395de01694f9b1034d7349b736a4dac0">tesseract::ImageThresholder::SetEstimatedResolution</a></div><div class="ttdeci">void SetEstimatedResolution(int ppi)</div><div class="ttdef"><b>Definition:</b> <a href="a00047_source.html#l00100">thresholder.h:100</a></div></div>
+<div class="ttc" id="aa02550_html_ac1e0c609f5468520746233102f4e654c"><div class="ttname"><a href="a02550.html#ac1e0c609f5468520746233102f4e654c">tesseract::ImageThresholder::pix_channels_</a></div><div class="ttdeci">int pix_channels_</div><div class="ttdoc">Number of 8-bit channels in pix_.</div><div class="ttdef"><b>Definition:</b> <a href="a00047_source.html#l00174">thresholder.h:174</a></div></div>
+<div class="ttc" id="aa00032_html"><div class="ttname"><a href="a00032.html">publictypes.h</a></div></div>
+<div class="ttc" id="aa02550_html_ac80aad234efc5a4102805a05d5825aa4"><div class="ttname"><a href="a02550.html#ac80aad234efc5a4102805a05d5825aa4">tesseract::ImageThresholder::yres_</a></div><div class="ttdeci">int yres_</div><div class="ttdoc">y pixels/inch in source image.</div><div class="ttdef"><b>Definition:</b> <a href="a00047_source.html#l00178">thresholder.h:178</a></div></div>
+<div class="ttc" id="aa01818_html"><div class="ttname"><a href="a01818.html">tesseract</a></div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00065">baseapi.h:65</a></div></div>
+<div class="ttc" id="aa02550_html_a02256722855a56bb2ee79238df990b3b"><div class="ttname"><a href="a02550.html#a02256722855a56bb2ee79238df990b3b">tesseract::ImageThresholder::GetScaledEstimatedResolution</a></div><div class="ttdeci">int GetScaledEstimatedResolution() const</div><div class="ttdef"><b>Definition:</b> <a href="a00047_source.html#l00105">thresholder.h:105</a></div></div>
+<div class="ttc" id="aa01818_html_a338d4c8b5d497b5ec3e6e4269d8ac66a"><div class="ttname"><a href="a01818.html#a338d4c8b5d497b5ec3e6e4269d8ac66a">tesseract::PageSegMode</a></div><div class="ttdeci">PageSegMode</div><div class="ttdef"><b>Definition:</b> <a href="a00032_source.html#l00159">publictypes.h:159</a></div></div>
+<div class="ttc" id="aa02550_html_adce88ad081b8ab379cb286a0dd0e8845"><div class="ttname"><a href="a02550.html#adce88ad081b8ab379cb286a0dd0e8845">tesseract::ImageThresholder::GetScaleFactor</a></div><div class="ttdeci">int GetScaleFactor() const</div><div class="ttdef"><b>Definition:</b> <a href="a00047_source.html#l00078">thresholder.h:78</a></div></div>
+<div class="ttc" id="aa00029_html_a86e51270628c53ce7e2c23b1c2b4490e"><div class="ttname"><a href="a00029.html#a86e51270628c53ce7e2c23b1c2b4490e">TESS_API</a></div><div class="ttdeci">#define TESS_API</div><div class="ttdef"><b>Definition:</b> <a href="a00029_source.html#l00054">platform.h:54</a></div></div>
+<div class="ttc" id="aa02550_html_abf0aec155d23b51c245c4163582cd82c"><div class="ttname"><a href="a02550.html#abf0aec155d23b51c245c4163582cd82c">tesseract::ImageThresholder::scale_</a></div><div class="ttdeci">int scale_</div><div class="ttdoc">Scale factor from original image.</div><div class="ttdef"><b>Definition:</b> <a href="a00047_source.html#l00177">thresholder.h:177</a></div></div>
+<div class="ttc" id="aa02550_html"><div class="ttname"><a href="a02550.html">tesseract::ImageThresholder</a></div><div class="ttdef"><b>Definition:</b> <a href="a00047_source.html#l00035">thresholder.h:35</a></div></div>
+<div class="ttc" id="aa02550_html_a8e9f61a2ab3883e370cb91b870c3d4ec"><div class="ttname"><a href="a02550.html#a8e9f61a2ab3883e370cb91b870c3d4ec">tesseract::ImageThresholder::GetScaledYResolution</a></div><div class="ttdeci">int GetScaledYResolution() const</div><div class="ttdef"><b>Definition:</b> <a href="a00047_source.html#l00092">thresholder.h:92</a></div></div>
+<div class="ttc" id="aa02550_html_a5f22084ceecb9a9efbd7dccb36f05f90"><div class="ttname"><a href="a02550.html#a5f22084ceecb9a9efbd7dccb36f05f90">tesseract::ImageThresholder::IsColor</a></div><div class="ttdeci">bool IsColor() const</div><div class="ttdoc">Return true if the source image is color.</div><div class="ttdef"><b>Definition:</b> <a href="a00047_source.html#l00069">thresholder.h:69</a></div></div>
+<div class="ttc" id="aa02550_html_a450cd3577eebea0e372b059b6d4cac7e"><div class="ttname"><a href="a02550.html#a450cd3577eebea0e372b059b6d4cac7e">tesseract::ImageThresholder::rect_width_</a></div><div class="ttdeci">int rect_width_</div><div class="ttdef"><b>Definition:</b> <a href="a00047_source.html#l00182">thresholder.h:182</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_70d5e250c66d001b18da37689179cade.html">arch</a></li><li class="navelem"><a class="el" href="a00047.html">intsimdmatrix.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:13 for tesseract by
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_00200a555532e7ec3afbcddd6091e65a.html">tesseract</a></li><li class="navelem"><a class="el" href="a00047.html">thresholder.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:19 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

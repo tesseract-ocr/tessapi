@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/textord/gap_map.cpp File Reference</title>
+<title>tesseract: /tesseract/src/textord/colpartition.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,107 +87,66 @@ $(document).ready(function(){initNavTree('a01037.html','');});
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
-<div class="title">gap_map.cpp File Reference</div>  </div>
+<div class="title">colpartition.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="a00404_source.html">statistc.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a01040_source.html">gap_map.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a01001_source.html">bbgrid.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00254_source.html">blobbox.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00350_source.html">ocrblock.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00431_source.html">rect.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a01469_source.html">scrollview.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a01151_source.html">tabfind.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a01169_source.html">tabvector.h</a>&quot;</code><br />
+<code>#include &lt;algorithm&gt;</code><br />
 </div>
 <p><a href="a01037_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03702.html">tesseract::ColPartition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:a01818"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html">tesseract</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a6cc911ad03714739d928e16b5f25e126"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a6cc911ad03714739d928e16b5f25e126">tesseract::ColPartitionGridSearch</a> = GridSearch&lt; ColPartition, ColPartition_CLIST, ColPartition_C_IT &gt;</td></tr>
+<tr class="separator:a6cc911ad03714739d928e16b5f25e126"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a1c442f32007891bd4ea6e885b34cc06a"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a1c442f32007891bd4ea6e885b34cc06a">tesseract::ColumnSpanningType</a> { <br />
+&#160;&#160;<a class="el" href="a01818.html#a1c442f32007891bd4ea6e885b34cc06aad17bb659c6735f37306a6161f4013416">tesseract::CST_NOISE</a>, 
+<a class="el" href="a01818.html#a1c442f32007891bd4ea6e885b34cc06aa53dd9af51c333b786fe51bd5f01543d6">tesseract::CST_FLOWING</a>, 
+<a class="el" href="a01818.html#a1c442f32007891bd4ea6e885b34cc06aacf3616b52ca15a43ddfd40b9c91c9cd5">tesseract::CST_HEADING</a>, 
+<a class="el" href="a01818.html#a1c442f32007891bd4ea6e885b34cc06aa8c1a2f43d95cbf09416204e1f5e04163">tesseract::CST_PULLOUT</a>, 
+<br />
+&#160;&#160;<a class="el" href="a01818.html#a1c442f32007891bd4ea6e885b34cc06aa9f98f32893c3f27ef2373aec2d9f7205">tesseract::CST_COUNT</a>
+<br />
+ }</td></tr>
+<tr class="separator:a1c442f32007891bd4ea6e885b34cc06a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:af720b5cfe44125a48dd3048c5aa0dd32"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01037.html#af720b5cfe44125a48dd3048c5aa0dd32">gapmap_debug</a> = false</td></tr>
-<tr class="separator:af720b5cfe44125a48dd3048c5aa0dd32"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad3f62bb2f522988ffb694c7fa03f34e9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01037.html#ad3f62bb2f522988ffb694c7fa03f34e9">gapmap_use_ends</a> = false</td></tr>
-<tr class="separator:ad3f62bb2f522988ffb694c7fa03f34e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1ac2a0845f4d95719172970fcc1c2237"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01037.html#a1ac2a0845f4d95719172970fcc1c2237">gapmap_no_isolated_quanta</a> = false</td></tr>
-<tr class="separator:a1ac2a0845f4d95719172970fcc1c2237"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c7263c53035c8c49430590764e30a4a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01037.html#a1c7263c53035c8c49430590764e30a4a">gapmap_big_gaps</a> = 1.75</td></tr>
-<tr class="separator:a1c7263c53035c8c49430590764e30a4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd090245debb6dcc506aba8f62da938b"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#abd090245debb6dcc506aba8f62da938b">tesseract::kRGBRMSColors</a> = 4</td></tr>
+<tr class="separator:abd090245debb6dcc506aba8f62da938b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="a1c7263c53035c8c49430590764e30a4a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1c7263c53035c8c49430590764e30a4a">&#9670;&nbsp;</a></span>gapmap_big_gaps</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double gapmap_big_gaps = 1.75</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>"xht multiplier" <br  />
- </p>
-
-<p class="definition">Definition at line <a class="el" href="a01037_source.html#l00018">18</a> of file <a class="el" href="a01037_source.html">gap_map.cpp</a>.</p>
-
-</div>
-</div>
-<a id="af720b5cfe44125a48dd3048c5aa0dd32"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af720b5cfe44125a48dd3048c5aa0dd32">&#9670;&nbsp;</a></span>gapmap_debug</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool gapmap_debug = false</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>"Say which blocks have tables" <br  />
- </p>
-
-<p class="definition">Definition at line <a class="el" href="a01037_source.html#l00014">14</a> of file <a class="el" href="a01037_source.html">gap_map.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a1ac2a0845f4d95719172970fcc1c2237"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1ac2a0845f4d95719172970fcc1c2237">&#9670;&nbsp;</a></span>gapmap_no_isolated_quanta</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool gapmap_no_isolated_quanta = false</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>"Ensure gaps not less than 2quanta wide" <br  />
- </p>
-
-<p class="definition">Definition at line <a class="el" href="a01037_source.html#l00017">17</a> of file <a class="el" href="a01037_source.html">gap_map.cpp</a>.</p>
-
-</div>
-</div>
-<a id="ad3f62bb2f522988ffb694c7fa03f34e9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad3f62bb2f522988ffb694c7fa03f34e9">&#9670;&nbsp;</a></span>gapmap_use_ends</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool gapmap_use_ends = false</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>"Use large space at start and end of rows" <br  />
- </p>
-
-<p class="definition">Definition at line <a class="el" href="a01037_source.html#l00015">15</a> of file <a class="el" href="a01037_source.html">gap_map.cpp</a>.</p>
-
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_930fe0a3c40775bbdbdb97cea0f56396.html">textord</a></li><li class="navelem"><a class="el" href="a01037.html">gap_map.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_930fe0a3c40775bbdbdb97cea0f56396.html">textord</a></li><li class="navelem"><a class="el" href="a01037.html">colpartition.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

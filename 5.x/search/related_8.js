@@ -1,4 +1,20 @@
 var searchData=
 [
-  ['recachepagesfunc_15228',['ReCachePagesFunc',['../a02312.html#ad44955894e12e700e648af3a60305946',1,'tesseract::DocumentData']]]
+  ['operator_21_16770',['operator!',['../a02858.html#a6920ed83b652f0bfc41b9881a04e6614',1,'ICOORD::operator!()'],['../a02866.html#a93fc41bdafc5fe67e5d076302168c048',1,'FCOORD::operator!()']]],
+  ['operator_21_3d_16771',['operator!=',['../a02558.html#ae9378c0da555cd681c15943b2aa4e10a',1,'tesseract::UNICHAR::const_iterator::operator!=()'],['../a04346.html#ae3bdbd18f4b760c3e4b684240d26da5f',1,'UnicodeText::operator!=()'],['../a04350.html#ae9378c0da555cd681c15943b2aa4e10a',1,'UnicodeText::const_iterator::operator!=()']]],
+  ['operator_25_16772',['operator%',['../a02858.html#a30e428741b8e4a8edda1c9cc3e027992',1,'ICOORD::operator%()'],['../a02866.html#a09f2228a2c4e7eddb4efa190506b4229',1,'FCOORD::operator%()']]],
+  ['operator_26_3d_16773',['operator&amp;=',['../a02898.html#a133f7448a4cbb7bc1cc0338b683fcb78',1,'TBOX']]],
+  ['operator_2a_16774',['operator*',['../a02858.html#a0df4f9bb83cf552ab0b3e9dc1f920097',1,'ICOORD::operator*()'],['../a02858.html#ab33a93256f1e3a48f74a09a2c2b2c739',1,'ICOORD::operator*()'],['../a02858.html#adc774b8df3b14495609cba7f9f6bbbc7',1,'ICOORD::operator*()'],['../a02866.html#a7519309ad5346ca46b2e06b060775bf3',1,'FCOORD::operator*()'],['../a02866.html#ae6e75d4fe10fa8d978de07430025343f',1,'FCOORD::operator*()'],['../a02866.html#a7bf09001b60d368e9e05c131843e4cf7',1,'FCOORD::operator*()']]],
+  ['operator_2a_3d_16775',['operator*=',['../a02858.html#aa974802aebdf17fb7a285034833ce7f3',1,'ICOORD::operator*=()'],['../a02866.html#ad2bd6e89980328124567d1a30c320653',1,'FCOORD::operator*=()']]],
+  ['operator_2b_16776',['operator+',['../a02858.html#ad37d779b26849253e46e1a10b7588bb8',1,'ICOORD::operator+()'],['../a02866.html#a967005610313518ff204a7666c139b17',1,'FCOORD::operator+()']]],
+  ['operator_2b_3d_16777',['operator+=',['../a02858.html#a5df23d19207ded41b99bb3ec1e86c775',1,'ICOORD::operator+=()'],['../a02866.html#a06a7274fa65d08c12e2a6b889d8aa57e',1,'FCOORD::operator+=()'],['../a02898.html#aaf7b9efe1a330c91ea7193af78dec553',1,'TBOX::operator+=()']]],
+  ['operator_2d_16778',['operator-',['../a02858.html#accf0afc79f4a7c8dca9c2dcafbd58028',1,'ICOORD::operator-()'],['../a02858.html#a069d4ec67114d5761434ccf56ef0b724',1,'ICOORD::operator-()'],['../a02866.html#aa9c251947d512d66a63a597a8b5ced90',1,'FCOORD::operator-()'],['../a02866.html#aaa8661637d35806c17ad14838869f269',1,'FCOORD::operator-()']]],
+  ['operator_2d_3d_16779',['operator-=',['../a02858.html#a1ddaa32bd3eeea96468076b3f3277e63',1,'ICOORD::operator-=()'],['../a02866.html#a29e44d3df611db560d524640ea5961d9',1,'FCOORD::operator-=()']]],
+  ['operator_2f_16780',['operator/',['../a02858.html#af9ef0df45bb0a13bf75aeea9ae87f17e',1,'ICOORD::operator/()'],['../a02866.html#a2eea256cd15417121152f09ada4e8fa7',1,'FCOORD::operator/()']]],
+  ['operator_2f_3d_16781',['operator/=',['../a02858.html#ae9a7d3df8d072a557fe0375a73cc9c5b',1,'ICOORD::operator/=()'],['../a02866.html#a10d0bca7ebef641fd17e18f1836ec02e',1,'FCOORD::operator/=()']]],
+  ['operator_3c_16782',['operator&lt;',['../a04350.html#aea925a309e2dbc1856d9324f41963cea',1,'UnicodeText::const_iterator']]],
+  ['operator_3c_3d_16783',['operator&lt;=',['../a04350.html#a0abd2ac87535373d63a44fb83c693c1e',1,'UnicodeText::const_iterator']]],
+  ['operator_3d_3d_16784',['operator==',['../a02558.html#af6b1615999d88d4ce7a36de6f84ed51c',1,'tesseract::UNICHAR::const_iterator::operator==()'],['../a04346.html#a93c576ef12c5a23d4dd278acc7843495',1,'UnicodeText::operator==()'],['../a04350.html#af6b1615999d88d4ce7a36de6f84ed51c',1,'UnicodeText::const_iterator::operator==()']]],
+  ['operator_3e_16785',['operator&gt;',['../a04350.html#a0784b013d480cc408d581ea74b64178a',1,'UnicodeText::const_iterator']]],
+  ['operator_3e_3d_16786',['operator&gt;=',['../a04350.html#a7eac99415afe3e61e708baf8b4342941',1,'UnicodeText::const_iterator']]]
 ];

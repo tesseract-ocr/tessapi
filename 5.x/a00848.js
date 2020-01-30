@@ -1,7 +1,7 @@
 var a00848 =
 [
-    [ "kMaxWinSize", "a00848.html#ac43151bf661eb8f367839b5445259c33", null ],
-    [ "kMinWinSize", "a00848.html#a89817907d2a6030d612c78ea0ab4c7ed", null ],
-    [ "kXWinFrameSize", "a00848.html#a5a01e40add07ba22a97d835a8931d82e", null ],
-    [ "kYWinFrameSize", "a00848.html#a81bcdb7bddbedd7bfedb1a3118a834da", null ]
+    [ "kDoNotReverse", "a00848.html#a0db2198747060995d61a01dcfac97eb7", null ],
+    [ "kForceReverse", "a00848.html#a597d22620e40ecc0ec38dfa4f65a9d85", null ],
+    [ "kReverseIfHasRTL", "a00848.html#a402a13eb2d1593daed0190a118f23d88", null ],
+    [ "RTLReversePolicyNames", "a00848.html#af5c5a40d574f6ab56726b8b2f963f65c", null ]
 ];

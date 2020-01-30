@@ -1,10 +1,6 @@
 var a00590 =
 [
-    [ "Classify", "a02708.html", "a02708" ],
-    [ "CharSegmentationType", "a00590.html#afe12112c1ca56d41c919d0f18dfdf240", [
-      [ "CST_FRAGMENT", "a00590.html#afe12112c1ca56d41c919d0f18dfdf240af7f038dab34772b9ddb631d46aa4126a", null ],
-      [ "CST_WHOLE", "a00590.html#afe12112c1ca56d41c919d0f18dfdf240ab74e41d8efe1a9beae832eb1652096f5", null ],
-      [ "CST_IMPROPER", "a00590.html#afe12112c1ca56d41c919d0f18dfdf240a9395c1832262d72b28dd6461c334f207", null ],
-      [ "CST_NGRAM", "a00590.html#afe12112c1ca56d41c919d0f18dfdf240a9757169f767169fe9fea1f62ab9ba17b", null ]
-    ] ]
+    [ "RSCounts", "a00590.html#a474c83e45e23b095f4e4f0964c55088f", null ],
+    [ "RSMap", "a00590.html#a30a7244d45a567b0861117d7552234fe", null ],
+    [ "kRadicalRadix", "a00590.html#a2738132c216bcc67a245095afdb0fe4e", null ]
 ];

@@ -1,7 +1,13 @@
 var a01037 =
 [
-    [ "gapmap_big_gaps", "a01037.html#a1c7263c53035c8c49430590764e30a4a", null ],
-    [ "gapmap_debug", "a01037.html#af720b5cfe44125a48dd3048c5aa0dd32", null ],
-    [ "gapmap_no_isolated_quanta", "a01037.html#a1ac2a0845f4d95719172970fcc1c2237", null ],
-    [ "gapmap_use_ends", "a01037.html#ad3f62bb2f522988ffb694c7fa03f34e9", null ]
+    [ "ColPartition", "a03702.html", "a03702" ],
+    [ "ColPartitionGridSearch", "a01037.html#a6cc911ad03714739d928e16b5f25e126", null ],
+    [ "ColumnSpanningType", "a01037.html#a1c442f32007891bd4ea6e885b34cc06a", [
+      [ "CST_NOISE", "a01037.html#a1c442f32007891bd4ea6e885b34cc06aad17bb659c6735f37306a6161f4013416", null ],
+      [ "CST_FLOWING", "a01037.html#a1c442f32007891bd4ea6e885b34cc06aa53dd9af51c333b786fe51bd5f01543d6", null ],
+      [ "CST_HEADING", "a01037.html#a1c442f32007891bd4ea6e885b34cc06aacf3616b52ca15a43ddfd40b9c91c9cd5", null ],
+      [ "CST_PULLOUT", "a01037.html#a1c442f32007891bd4ea6e885b34cc06aa8c1a2f43d95cbf09416204e1f5e04163", null ],
+      [ "CST_COUNT", "a01037.html#a1c442f32007891bd4ea6e885b34cc06aa9f98f32893c3f27ef2373aec2d9f7205", null ]
+    ] ],
+    [ "kRGBRMSColors", "a01037.html#abd090245debb6dcc506aba8f62da938b", null ]
 ];

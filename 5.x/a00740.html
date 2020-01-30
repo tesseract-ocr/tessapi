@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/cutil/bitvec.h File Reference</title>
+<title>tesseract: /tesseract/src/classify/normmatch.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,159 +87,66 @@ $(document).ready(function(){initNavTree('a00740.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#define-members">Macros</a> &#124;
-<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
-<div class="title">bitvec.h File Reference</div>  </div>
+<div class="title">normmatch.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;cstddef&gt;</code><br />
-<code>#include &lt;cstdint&gt;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a00836_source.html">matchdefs.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00746_source.html">ocrfeatures.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00554_source.html">params.h</a>&quot;</code><br />
 </div>
 <p><a href="a00740_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:ab02d606cf8dca49ccadb00248bdbafe9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00740.html#ab02d606cf8dca49ccadb00248bdbafe9">SET_BIT</a>(array,  bit)&#160;&#160;&#160;(array[bit/<a class="el" href="a00740.html#abccec99edd5254252f6792a0e28a203e">BITSINLONG</a>]|=1&lt;&lt;(bit&amp;(<a class="el" href="a00740.html#abccec99edd5254252f6792a0e28a203e">BITSINLONG</a>-1)))</td></tr>
-<tr class="separator:ab02d606cf8dca49ccadb00248bdbafe9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1209b8bb0fa7e6e7323cdb48b4165f0d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00740.html#a1209b8bb0fa7e6e7323cdb48b4165f0d">reset_bit</a>(array,  bit)&#160;&#160;&#160;(array[bit/<a class="el" href="a00740.html#abccec99edd5254252f6792a0e28a203e">BITSINLONG</a>]&amp;=~(1&lt;&lt;(bit&amp;(<a class="el" href="a00740.html#abccec99edd5254252f6792a0e28a203e">BITSINLONG</a>-1))))</td></tr>
-<tr class="separator:a1209b8bb0fa7e6e7323cdb48b4165f0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a76a50c5a99dea7be5315fe76246036ce"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00740.html#a76a50c5a99dea7be5315fe76246036ce">test_bit</a>(array,  bit)&#160;&#160;&#160;(array[bit/<a class="el" href="a00740.html#abccec99edd5254252f6792a0e28a203e">BITSINLONG</a>] &amp; (1&lt;&lt;(bit&amp;(<a class="el" href="a00740.html#abccec99edd5254252f6792a0e28a203e">BITSINLONG</a>-1))))</td></tr>
-<tr class="separator:a76a50c5a99dea7be5315fe76246036ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:a3ac8e43e611208cef7a7169e0058a3c2"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00740.html#a3ac8e43e611208cef7a7169e0058a3c2">BIT_VECTOR</a> = uint32_t *</td></tr>
-<tr class="separator:a3ac8e43e611208cef7a7169e0058a3c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:abccec99edd5254252f6792a0e28a203e"><td class="memItemLeft" align="right" valign="top">const size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00740.html#abccec99edd5254252f6792a0e28a203e">BITSINLONG</a> = 8 * sizeof(uint32_t)</td></tr>
-<tr class="separator:abccec99edd5254252f6792a0e28a203e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b39e06af338d5d0623762a84246e7a6"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00740.html#a5b39e06af338d5d0623762a84246e7a6">classify_norm_adj_midpoint</a> = 32.0</td></tr>
+<tr class="separator:a5b39e06af338d5d0623762a84246e7a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9f63df566aa3f4d4405918d1b1af0b3"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00740.html#ae9f63df566aa3f4d4405918d1b1af0b3">classify_norm_adj_curl</a> = 2.0</td></tr>
+<tr class="separator:ae9f63df566aa3f4d4405918d1b1af0b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a1209b8bb0fa7e6e7323cdb48b4165f0d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1209b8bb0fa7e6e7323cdb48b4165f0d">&#9670;&nbsp;</a></span>reset_bit</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define reset_bit</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">array, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">bit&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>&#160;&#160;&#160;(array[bit/<a class="el" href="a00740.html#abccec99edd5254252f6792a0e28a203e">BITSINLONG</a>]&amp;=~(1&lt;&lt;(bit&amp;(<a class="el" href="a00740.html#abccec99edd5254252f6792a0e28a203e">BITSINLONG</a>-1))))</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00740_source.html#l00056">56</a> of file <a class="el" href="a00740_source.html">bitvec.h</a>.</p>
-
-</div>
-</div>
-<a id="ab02d606cf8dca49ccadb00248bdbafe9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab02d606cf8dca49ccadb00248bdbafe9">&#9670;&nbsp;</a></span>SET_BIT</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define SET_BIT</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">array, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">bit&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>&#160;&#160;&#160;(array[bit/<a class="el" href="a00740.html#abccec99edd5254252f6792a0e28a203e">BITSINLONG</a>]|=1&lt;&lt;(bit&amp;(<a class="el" href="a00740.html#abccec99edd5254252f6792a0e28a203e">BITSINLONG</a>-1)))</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00740_source.html#l00054">54</a> of file <a class="el" href="a00740_source.html">bitvec.h</a>.</p>
-
-</div>
-</div>
-<a id="a76a50c5a99dea7be5315fe76246036ce"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a76a50c5a99dea7be5315fe76246036ce">&#9670;&nbsp;</a></span>test_bit</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define test_bit</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">array, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">bit&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>&#160;&#160;&#160;(array[bit/<a class="el" href="a00740.html#abccec99edd5254252f6792a0e28a203e">BITSINLONG</a>] &amp; (1&lt;&lt;(bit&amp;(<a class="el" href="a00740.html#abccec99edd5254252f6792a0e28a203e">BITSINLONG</a>-1))))</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00740_source.html#l00058">58</a> of file <a class="el" href="a00740_source.html">bitvec.h</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Typedef Documentation</h2>
-<a id="a3ac8e43e611208cef7a7169e0058a3c2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3ac8e43e611208cef7a7169e0058a3c2">&#9670;&nbsp;</a></span>BIT_VECTOR</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="a00740.html#a3ac8e43e611208cef7a7169e0058a3c2">BIT_VECTOR</a> =  uint32_t*</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00740_source.html#l00027">27</a> of file <a class="el" href="a00740_source.html">bitvec.h</a>.</p>
-
-</div>
-</div>
 <h2 class="groupheader">Variable Documentation</h2>
-<a id="abccec99edd5254252f6792a0e28a203e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abccec99edd5254252f6792a0e28a203e">&#9670;&nbsp;</a></span>BITSINLONG</h2>
+<a id="ae9f63df566aa3f4d4405918d1b1af0b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9f63df566aa3f4d4405918d1b1af0b3">&#9670;&nbsp;</a></span>classify_norm_adj_curl</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const size_t BITSINLONG = 8 * sizeof(uint32_t)</td>
+          <td class="memname">double classify_norm_adj_curl = 2.0</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>"Norm adjust curl ..." <br  />
+ </p>
 
-<p class="definition">Definition at line <a class="el" href="a00740_source.html#l00030">30</a> of file <a class="el" href="a00740_source.html">bitvec.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00737_source.html#l00071">71</a> of file <a class="el" href="a00737_source.html">normmatch.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a5b39e06af338d5d0623762a84246e7a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b39e06af338d5d0623762a84246e7a6">&#9670;&nbsp;</a></span>classify_norm_adj_midpoint</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double classify_norm_adj_midpoint = 32.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<hr  />
+ <h2><a class="anchor" id="autotoc_md27"></a>
+Include Files and Type Defines</h2>
+<hr  />
+ <h2><a class="anchor" id="autotoc_md28"></a>
+Variables</h2>
+<p>"Norm adjust midpoint ..." <br  />
+</p>
+<p>control knobs used to control the normalization adjustment process "Norm adjust midpoint ..." <br  />
+ </p>
+
+<p class="definition">Definition at line <a class="el" href="a00737_source.html#l00070">70</a> of file <a class="el" href="a00737_source.html">normmatch.cpp</a>.</p>
 
 </div>
 </div>
@@ -248,8 +155,8 @@ Variables</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_26a98b1b7a71b8b8c9c7d7743e94ea74.html">cutil</a></li><li class="navelem"><a class="el" href="a00740.html">bitvec.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b8f5fb7b736ee5431a221bc7b817d6e0.html">classify</a></li><li class="navelem"><a class="el" href="a00740.html">normmatch.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

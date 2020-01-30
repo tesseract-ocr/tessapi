@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/lstm/maxpool.h Source File</title>
+<title>tesseract: /tesseract/src/dict/stopper.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,100 +87,81 @@ $(document).ready(function(){initNavTree('a00845_source.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">maxpool.h</div>  </div>
+<div class="title">stopper.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00845.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// File:        maxpool.h</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// Description: Standard Max-Pooling layer.</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// Author:      Ray Smith</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">// Created:     Tue Mar 18 16:28:18 PST 2014</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">//</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">// (C) Copyright 2014, Google Inc.</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">// you may not use this file except in compliance with the License.</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// You may obtain a copy of the License at</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">// http://www.apache.org/licenses/LICENSE-2.0</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// Unless required by applicable law or agreed to in writing, software</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">// See the License for the specific language governing permissions and</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">// limitations under the License.</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#ifndef TESSERACT_LSTM_MAXPOOL_H_</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#define TESSERACT_LSTM_MAXPOOL_H_</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00884.html">reconfig.h</a>&quot;</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">namespace </span><a class="code" href="a01539.html">tesseract</a> {</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">// Maxpooling reduction. Independently for each input, selects the location</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">// in the rectangle that contains the max value.</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">// Backprop propagates only to the position that was the max.</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="a03056.html">   29</a></span>&#160;<span class="keyword">class </span><a class="code" href="a03056.html">Maxpool</a> : <span class="keyword">public</span> <a class="code" href="a03112.html">Reconfig</a> {</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <a class="code" href="a03056.html#a7f78f9b7873fb826dd4aad6e0c91b96d">Maxpool</a>(<span class="keyword">const</span> STRING&amp; <a class="code" href="a03060.html#ab5af1ed13f949340c43d062dc06be3d2">name</a>, <span class="keywordtype">int</span> ni, <span class="keywordtype">int</span> x_scale, <span class="keywordtype">int</span> y_scale);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <a class="code" href="a03056.html#a23267abec7074992e0ccab1d096ef9ce">~Maxpool</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <span class="comment">// Accessors.</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="a03056.html#a5e5f01a0e51378b0adc43ee13238f959">   35</a></span>&#160;  STRING <a class="code" href="a03056.html#a5e5f01a0e51378b0adc43ee13238f959">spec</a>()<span class="keyword"> const override </span>{</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    STRING <a class="code" href="a03056.html#a5e5f01a0e51378b0adc43ee13238f959">spec</a>;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <a class="code" href="a03056.html#a5e5f01a0e51378b0adc43ee13238f959">spec</a>.add_str_int(<span class="stringliteral">&quot;Mp&quot;</span>, <a class="code" href="a03112.html#a8707508d19b1ec35ccfcadfd8f99008d">y_scale_</a>);</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="a03056.html#a5e5f01a0e51378b0adc43ee13238f959">spec</a>.add_str_int(<span class="stringliteral">&quot;,&quot;</span>, <a class="code" href="a03112.html#ae023a442605554c4c46688833afc57bf">x_scale_</a>);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="a03056.html#a5e5f01a0e51378b0adc43ee13238f959">spec</a>;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  }</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <span class="comment">// Reads from the given file. Returns false in case of error.</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="a03056.html#a30c30fae5179fa53a6dca942fef690e9">DeSerialize</a>(TFile* fp) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <span class="comment">// Runs forward propagation of activations on the input line.</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="comment">// See Network for a detailed discussion of the arguments.</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a03056.html#adbbe1c0e1e08f5aff031434c32d0a01d">Forward</a>(<span class="keywordtype">bool</span> debug, <span class="keyword">const</span> <a class="code" href="a03064.html">NetworkIO</a>&amp; input,</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;               <span class="keyword">const</span> <a class="code" href="a03152.html">TransposedArray</a>* input_transpose,</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;               <a class="code" href="a03068.html">NetworkScratch</a>* scratch, <a class="code" href="a03064.html">NetworkIO</a>* output) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <span class="comment">// Runs backward propagation of errors on the deltas line.</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="comment">// See Network for a detailed discussion of the arguments.</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="a03056.html#a0f2e7a192689d9a7523a90b36bca0a03">Backward</a>(<span class="keywordtype">bool</span> debug, <span class="keyword">const</span> <a class="code" href="a03064.html">NetworkIO</a>&amp; fwd_deltas,</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                <a class="code" href="a03068.html">NetworkScratch</a>* scratch,</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                <a class="code" href="a03064.html">NetworkIO</a>* back_deltas) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="comment">// Memory of which input was the max.</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <a class="code" href="a02104.html">GENERIC_2D_ARRAY&lt;int&gt;</a> maxes_;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;};</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;}  <span class="comment">// namespace tesseract.</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="preprocessor">#endif  // TESSERACT_LSTM_MAXPOOL_H_</span></div>
+<a href="a00845.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/******************************************************************************</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> ** Filename:    stopper.h</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> ** Purpose:     Stopping criteria for word classifier.</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> ** Author:      Dan Johnson</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> ** History:     Wed May  1 09:42:57 1991, DSJ, Created.</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> **</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> ** (c) Copyright Hewlett-Packard Company, 1988.</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> ** Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> ** you may not use this file except in compliance with the License.</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> ** You may obtain a copy of the License at</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> ** http://www.apache.org/licenses/LICENSE-2.0</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> ** Unless required by applicable law or agreed to in writing, software</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> ** distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> ** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> ** See the License for the specific language governing permissions and</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> ** limitations under the License.</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> ******************************************************************************/</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#ifndef   STOPPER_H</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#define   STOPPER_H</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">/*----------------------------------------------------------------------------</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">          Include Files and Type Defines</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">----------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00011.html">tesseract/genericvector.h</a>&gt;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00554.html">params.h</a>&quot;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00425.html">ratngs.h</a>&quot;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00050.html">tesseract/unichar.h</a>&gt;</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">class </span><a class="code" href="a02894.html">WERD_CHOICE</a>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="a00845.html#af5f37aa612be5b5d3563816d12defe94">   31</a></span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">using</span> <a class="code" href="a00845.html#af5f37aa612be5b5d3563816d12defe94">BLOB_WIDTH</a> = uint8_t;</div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="a03422.html">   33</a></span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="a03422.html#a84f9091bf2031485313a01c27acadba6">   34</a></span>&#160;<span class="keyword">struct </span><a class="code" href="a03422.html">DANGERR_INFO</a> {</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <a class="code" href="a03422.html#a84f9091bf2031485313a01c27acadba6">DANGERR_INFO</a>() :</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="a03422.html#a7fb0c9a1b1a22a2b3c308011a207e2c0">begin</a>(-1), <a class="code" href="a03422.html#adfaf65ffc0f21a2fa0cbc56817b2549a">end</a>(-1), <a class="code" href="a03422.html#af8bd75c848bf8c8c43b4d6ae8350c96b">dangerous</a>(<span class="keyword">false</span>), <a class="code" href="a03422.html#a6aa009d85760b7acc7bf50158d64a143">correct_is_ngram</a>(<span class="keyword">false</span>),</div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="a03422.html#aaef16575b8b0d298f1dcb4f56299f815">   37</a></span>&#160;    <a class="code" href="a03422.html#abe509f094f3675bb73f82ce17fc703bc">leftmost</a>(INVALID_UNICHAR_ID) {}</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <a class="code" href="a03422.html#a84f9091bf2031485313a01c27acadba6">DANGERR_INFO</a>(<span class="keywordtype">int</span> b, <span class="keywordtype">int</span> e, <span class="keywordtype">bool</span> d, <span class="keywordtype">bool</span> n, <a class="code" href="a00050.html#afedceee7ea132dae3d224db2cf8b5618">UNICHAR_ID</a> l) :</div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="a03422.html#a7fb0c9a1b1a22a2b3c308011a207e2c0">   39</a></span>&#160;    <a class="code" href="a03422.html#a7fb0c9a1b1a22a2b3c308011a207e2c0">begin</a>(b), <a class="code" href="a03422.html#adfaf65ffc0f21a2fa0cbc56817b2549a">end</a>(e), <a class="code" href="a03422.html#af8bd75c848bf8c8c43b4d6ae8350c96b">dangerous</a>(d), <a class="code" href="a03422.html#a6aa009d85760b7acc7bf50158d64a143">correct_is_ngram</a>(n), <a class="code" href="a03422.html#abe509f094f3675bb73f82ce17fc703bc">leftmost</a>(l) {}</div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="a03422.html#adfaf65ffc0f21a2fa0cbc56817b2549a">   40</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="a03422.html#a7fb0c9a1b1a22a2b3c308011a207e2c0">begin</a>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="a03422.html#af8bd75c848bf8c8c43b4d6ae8350c96b">   41</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="a03422.html#adfaf65ffc0f21a2fa0cbc56817b2549a">end</a>;</div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="a03422.html#a6aa009d85760b7acc7bf50158d64a143">   42</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="a03422.html#af8bd75c848bf8c8c43b4d6ae8350c96b">dangerous</a>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="a03422.html#abe509f094f3675bb73f82ce17fc703bc">   43</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="a03422.html#a6aa009d85760b7acc7bf50158d64a143">correct_is_ngram</a>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <a class="code" href="a00050.html#afedceee7ea132dae3d224db2cf8b5618">UNICHAR_ID</a> <a class="code" href="a03422.html#abe509f094f3675bb73f82ce17fc703bc">leftmost</a>;   <span class="comment">// in the replacement, what&#39;s the leftmost character?</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;};</div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="a00845.html#a83aebc66a5c063bfae114275effe34b2">   46</a></span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">using</span> <a class="code" href="a02434.html">DANGERR</a> = <a class="code" href="a02434.html">GenericVector&lt;DANGERR_INFO&gt;</a>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa03056_html_a30c30fae5179fa53a6dca942fef690e9"><div class="ttname"><a href="a03056.html#a30c30fae5179fa53a6dca942fef690e9">tesseract::Maxpool::DeSerialize</a></div><div class="ttdeci">bool DeSerialize(TFile *fp) override</div><div class="ttdef"><b>Definition:</b> <a href="a00842_source.html#l00029">maxpool.cpp:29</a></div></div>
-<div class="ttc" id="aa03056_html_a0f2e7a192689d9a7523a90b36bca0a03"><div class="ttname"><a href="a03056.html#a0f2e7a192689d9a7523a90b36bca0a03">tesseract::Maxpool::Backward</a></div><div class="ttdeci">bool Backward(bool debug, const NetworkIO &amp;fwd_deltas, NetworkScratch *scratch, NetworkIO *back_deltas) override</div><div class="ttdef"><b>Definition:</b> <a href="a00842_source.html#l00071">maxpool.cpp:71</a></div></div>
-<div class="ttc" id="aa03152_html"><div class="ttname"><a href="a03152.html">tesseract::TransposedArray</a></div><div class="ttdef"><b>Definition:</b> <a href="a00923_source.html#l00032">weightmatrix.h:32</a></div></div>
-<div class="ttc" id="aa02104_html"><div class="ttname"><a href="a02104.html">GENERIC_2D_ARRAY&lt; int &gt;</a></div></div>
-<div class="ttc" id="aa03056_html_a7f78f9b7873fb826dd4aad6e0c91b96d"><div class="ttname"><a href="a03056.html#a7f78f9b7873fb826dd4aad6e0c91b96d">tesseract::Maxpool::Maxpool</a></div><div class="ttdeci">Maxpool(const STRING &amp;name, int ni, int x_scale, int y_scale)</div><div class="ttdef"><b>Definition:</b> <a href="a00842_source.html#l00022">maxpool.cpp:22</a></div></div>
-<div class="ttc" id="aa03112_html_ae023a442605554c4c46688833afc57bf"><div class="ttname"><a href="a03112.html#ae023a442605554c4c46688833afc57bf">tesseract::Reconfig::x_scale_</a></div><div class="ttdeci">int32_t x_scale_</div><div class="ttdef"><b>Definition:</b> <a href="a00884_source.html#l00082">reconfig.h:82</a></div></div>
-<div class="ttc" id="aa03056_html_a23267abec7074992e0ccab1d096ef9ce"><div class="ttname"><a href="a03056.html#a23267abec7074992e0ccab1d096ef9ce">tesseract::Maxpool::~Maxpool</a></div><div class="ttdeci">~Maxpool() override=default</div></div>
-<div class="ttc" id="aa00884_html"><div class="ttname"><a href="a00884.html">reconfig.h</a></div></div>
-<div class="ttc" id="aa03056_html_adbbe1c0e1e08f5aff031434c32d0a01d"><div class="ttname"><a href="a03056.html#adbbe1c0e1e08f5aff031434c32d0a01d">tesseract::Maxpool::Forward</a></div><div class="ttdeci">void Forward(bool debug, const NetworkIO &amp;input, const TransposedArray *input_transpose, NetworkScratch *scratch, NetworkIO *output) override</div><div class="ttdef"><b>Definition:</b> <a href="a00842_source.html#l00037">maxpool.cpp:37</a></div></div>
-<div class="ttc" id="aa03068_html"><div class="ttname"><a href="a03068.html">tesseract::NetworkScratch</a></div><div class="ttdef"><b>Definition:</b> <a href="a00860_source.html#l00034">networkscratch.h:34</a></div></div>
-<div class="ttc" id="aa03056_html"><div class="ttname"><a href="a03056.html">tesseract::Maxpool</a></div><div class="ttdef"><b>Definition:</b> <a href="a00845_source.html#l00029">maxpool.h:29</a></div></div>
-<div class="ttc" id="aa03112_html"><div class="ttname"><a href="a03112.html">tesseract::Reconfig</a></div><div class="ttdef"><b>Definition:</b> <a href="a00884_source.html#l00032">reconfig.h:32</a></div></div>
-<div class="ttc" id="aa01539_html"><div class="ttname"><a href="a01539.html">tesseract</a></div><div class="ttdef"><b>Definition:</b> <a href="a00002_source.html#l00025">altorenderer.cpp:25</a></div></div>
-<div class="ttc" id="aa03060_html_ab5af1ed13f949340c43d062dc06be3d2"><div class="ttname"><a href="a03060.html#ab5af1ed13f949340c43d062dc06be3d2">tesseract::Network::name</a></div><div class="ttdeci">const STRING &amp; name() const</div><div class="ttdef"><b>Definition:</b> <a href="a00851_source.html#l00138">network.h:138</a></div></div>
-<div class="ttc" id="aa03064_html"><div class="ttname"><a href="a03064.html">tesseract::NetworkIO</a></div><div class="ttdef"><b>Definition:</b> <a href="a00857_source.html#l00039">networkio.h:39</a></div></div>
-<div class="ttc" id="aa03056_html_a5e5f01a0e51378b0adc43ee13238f959"><div class="ttname"><a href="a03056.html#a5e5f01a0e51378b0adc43ee13238f959">tesseract::Maxpool::spec</a></div><div class="ttdeci">STRING spec() const override</div><div class="ttdef"><b>Definition:</b> <a href="a00845_source.html#l00035">maxpool.h:35</a></div></div>
-<div class="ttc" id="aa03112_html_a8707508d19b1ec35ccfcadfd8f99008d"><div class="ttname"><a href="a03112.html#a8707508d19b1ec35ccfcadfd8f99008d">tesseract::Reconfig::y_scale_</a></div><div class="ttdeci">int32_t y_scale_</div><div class="ttdef"><b>Definition:</b> <a href="a00884_source.html#l00083">reconfig.h:83</a></div></div>
+<div class="ttc" id="aa00845_html_af5f37aa612be5b5d3563816d12defe94"><div class="ttname"><a href="a00845.html#af5f37aa612be5b5d3563816d12defe94">BLOB_WIDTH</a></div><div class="ttdeci">uint8_t BLOB_WIDTH</div><div class="ttdef"><b>Definition:</b> <a href="a00845_source.html#l00031">stopper.h:31</a></div></div>
+<div class="ttc" id="aa02894_html"><div class="ttname"><a href="a02894.html">WERD_CHOICE</a></div><div class="ttdef"><b>Definition:</b> <a href="a00425_source.html#l00261">ratngs.h:261</a></div></div>
+<div class="ttc" id="aa03422_html_a84f9091bf2031485313a01c27acadba6"><div class="ttname"><a href="a03422.html#a84f9091bf2031485313a01c27acadba6">DANGERR_INFO::DANGERR_INFO</a></div><div class="ttdeci">DANGERR_INFO()</div><div class="ttdef"><b>Definition:</b> <a href="a00845_source.html#l00034">stopper.h:34</a></div></div>
+<div class="ttc" id="aa00554_html"><div class="ttname"><a href="a00554.html">params.h</a></div></div>
+<div class="ttc" id="aa03422_html"><div class="ttname"><a href="a03422.html">DANGERR_INFO</a></div><div class="ttdef"><b>Definition:</b> <a href="a00845_source.html#l00033">stopper.h:33</a></div></div>
+<div class="ttc" id="aa03422_html_af8bd75c848bf8c8c43b4d6ae8350c96b"><div class="ttname"><a href="a03422.html#af8bd75c848bf8c8c43b4d6ae8350c96b">DANGERR_INFO::dangerous</a></div><div class="ttdeci">bool dangerous</div><div class="ttdef"><b>Definition:</b> <a href="a00845_source.html#l00041">stopper.h:41</a></div></div>
+<div class="ttc" id="aa00425_html"><div class="ttname"><a href="a00425.html">ratngs.h</a></div></div>
+<div class="ttc" id="aa00011_html"><div class="ttname"><a href="a00011.html">genericvector.h</a></div></div>
+<div class="ttc" id="aa03422_html_a7fb0c9a1b1a22a2b3c308011a207e2c0"><div class="ttname"><a href="a03422.html#a7fb0c9a1b1a22a2b3c308011a207e2c0">DANGERR_INFO::begin</a></div><div class="ttdeci">int begin</div><div class="ttdef"><b>Definition:</b> <a href="a00845_source.html#l00039">stopper.h:39</a></div></div>
+<div class="ttc" id="aa00050_html_afedceee7ea132dae3d224db2cf8b5618"><div class="ttname"><a href="a00050.html#afedceee7ea132dae3d224db2cf8b5618">UNICHAR_ID</a></div><div class="ttdeci">int UNICHAR_ID</div><div class="ttdef"><b>Definition:</b> <a href="a00050_source.html#l00036">unichar.h:36</a></div></div>
+<div class="ttc" id="aa02434_html"><div class="ttname"><a href="a02434.html">GenericVector&lt; DANGERR_INFO &gt;</a></div></div>
+<div class="ttc" id="aa03422_html_abe509f094f3675bb73f82ce17fc703bc"><div class="ttname"><a href="a03422.html#abe509f094f3675bb73f82ce17fc703bc">DANGERR_INFO::leftmost</a></div><div class="ttdeci">UNICHAR_ID leftmost</div><div class="ttdef"><b>Definition:</b> <a href="a00845_source.html#l00043">stopper.h:43</a></div></div>
+<div class="ttc" id="aa00050_html"><div class="ttname"><a href="a00050.html">unichar.h</a></div></div>
+<div class="ttc" id="aa03422_html_adfaf65ffc0f21a2fa0cbc56817b2549a"><div class="ttname"><a href="a03422.html#adfaf65ffc0f21a2fa0cbc56817b2549a">DANGERR_INFO::end</a></div><div class="ttdeci">int end</div><div class="ttdef"><b>Definition:</b> <a href="a00845_source.html#l00040">stopper.h:40</a></div></div>
+<div class="ttc" id="aa03422_html_a6aa009d85760b7acc7bf50158d64a143"><div class="ttname"><a href="a03422.html#a6aa009d85760b7acc7bf50158d64a143">DANGERR_INFO::correct_is_ngram</a></div><div class="ttdeci">bool correct_is_ngram</div><div class="ttdef"><b>Definition:</b> <a href="a00845_source.html#l00042">stopper.h:42</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_57c32823bf7301c39893cc8d5b3eca8e.html">lstm</a></li><li class="navelem"><a class="el" href="a00845.html">maxpool.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:15 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_2d55640c0a15c59e1d7c66cdbf3fd5ea.html">dict</a></li><li class="navelem"><a class="el" href="a00845.html">stopper.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:20 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/training/unicharset_extractor.cpp File Reference</title>
+<title>tesseract: /tesseract/src/training/pango_font_info.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -88,52 +88,71 @@ $(document).ready(function(){initNavTree('a01364.html','');});
 <div class="header">
   <div class="summary">
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
-<div class="title">unicharset_extractor.cpp File Reference</div>  </div>
+<div class="title">pango_font_info.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;cstdlib&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00221_source.html">boxread.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a01196_source.html">commandlineflags.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a01202_source.html">commontraining.h</a>&quot;</code><br />
-<code>#include &lt;tesseract/genericvector.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="a01253_source.html">lang_model_helpers.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a01310_source.html">normstrngs.h</a>&quot;</code><br />
-<code>#include &lt;tesseract/strngs.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00554_source.html">unicharset.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a01370_source.html">unicharset_training_utils.h</a>&quot;</code><br />
+<code>#include &lt;cstdio&gt;</code><br />
+<code>#include &lt;cstring&gt;</code><br />
+<code>#include &lt;sys/param.h&gt;</code><br />
+<code>#include &lt;algorithm&gt;</code><br />
+<code>#include &quot;<a class="el" href="a01367_source.html">pango_font_info.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a01247_source.html">commandlineflags.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a01280_source.html">fileio.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a01361_source.html">normstrngs.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a01406_source.html">tlog.h</a>&quot;</code><br />
+<code>#include &lt;<a class="el" href="a00050_source.html">tesseract/unichar.h</a>&gt;</code><br />
+<code>#include &quot;<a class="el" href="a01424_source.html">util.h</a>&quot;</code><br />
+<code>#include &quot;pango/pango.h&quot;</code><br />
+<code>#include &quot;pango/pangocairo.h&quot;</code><br />
+<code>#include &quot;pango/pangofc-font.h&quot;</code><br />
 </div>
 <p><a href="a01364_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a01539"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html">tesseract</a></td></tr>
+<tr class="memitem:a01818"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html">tesseract</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01364.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
-<tr class="separator:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a856e74bc6126d335e59d1cdb6917c38e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01364.html#a856e74bc6126d335e59d1cdb6917c38e">STRING_PARAM_FLAG</a> (fontconfig_tmpdir, &quot;/tmp&quot;, &quot;Overrides fontconfig default temporary dir&quot;)</td></tr>
+<tr class="separator:a856e74bc6126d335e59d1cdb6917c38e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d85e4f98ad5b547ec10c471fb4c7eec"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01364.html#a5d85e4f98ad5b547ec10c471fb4c7eec">STRING_PARAM_FLAG</a> (fonts_dir, &quot;&quot;, &quot;If empty it use system default. Otherwise it overrides&quot; &quot; system default font location&quot;)</td></tr>
+<tr class="separator:a5d85e4f98ad5b547ec10c471fb4c7eec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a406162a590788c2b370a74745eb376f1"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a406162a590788c2b370a74745eb376f1">tesseract::kDefaultResolution</a> = 300</td></tr>
+<tr class="separator:a406162a590788c2b370a74745eb376f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a3c04138a5bfe5d72780bb7e82a18e627"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3c04138a5bfe5d72780bb7e82a18e627">&#9670;&nbsp;</a></span>main()</h2>
+<a id="a856e74bc6126d335e59d1cdb6917c38e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a856e74bc6126d335e59d1cdb6917c38e">&#9670;&nbsp;</a></span>STRING_PARAM_FLAG() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int main </td>
+          <td class="memname">STRING_PARAM_FLAG </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>argc</em>, </td>
+          <td class="paramtype">fontconfig_tmpdir&#160;</td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">char **&#160;</td>
-          <td class="paramname"><em>argv</em>&#160;</td>
+          <td class="paramtype">&quot;/tmp&quot;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&quot;Overrides fontconfig default temporary dir&quot;&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -143,38 +162,49 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a01364_source.html#l00096">96</a> of file <a class="el" href="a01364_source.html">unicharset_extractor.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                                {</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  tesseract::CheckSharedLibraryVersion();</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  <span class="keywordflow">if</span> (argc &gt; 1) {</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <a class="code" href="a01539.html#a07614d344b574ebcc2d3ae4d68fad1d5">tesseract::ParseCommandLineFlags</a>(argv[0], &amp;argc, &amp;argv, <span class="keyword">true</span>);</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  }</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  <span class="keywordflow">if</span> (argc &lt; 2) {</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <span class="stringliteral">&quot;Usage: %s [--output_unicharset filename] [--norm_mode mode]&quot;</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        <span class="stringliteral">&quot; box_or_text_file [...]\n&quot;</span>,</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        argv[0]);</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Where mode means:\n&quot;</span>);</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot; 1=combine graphemes (use for Latin and other simple scripts)\n&quot;</span>);</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot; 2=split graphemes (use for Indic/Khmer/Myanmar)\n&quot;</span>);</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot; 3=pure unicode (use for Arabic/Hebrew/Thai/Tibetan)\n&quot;</span>);</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Reads box or plain text files to extract the unicharset.\n&quot;</span>);</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keywordflow">return</span> EXIT_FAILURE;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  }</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  <span class="keywordflow">return</span> tesseract::Main(argc, argv);</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;}</div>
-</div><!-- fragment -->
+</div>
+</div>
+<a id="a5d85e4f98ad5b547ec10c471fb4c7eec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d85e4f98ad5b547ec10c471fb4c7eec">&#9670;&nbsp;</a></span>STRING_PARAM_FLAG() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">STRING_PARAM_FLAG </td>
+          <td>(</td>
+          <td class="paramtype">fonts_dir&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&quot;&quot;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&quot;If empty it use system default. Otherwise it overrides&quot; &quot; system default font location&quot;&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
 </div>
 </div>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa01539_html_a07614d344b574ebcc2d3ae4d68fad1d5"><div class="ttname"><a href="a01539.html#a07614d344b574ebcc2d3ae4d68fad1d5">tesseract::ParseCommandLineFlags</a></div><div class="ttdeci">void ParseCommandLineFlags(const char *usage, int *argc, char ***argv, const bool remove_flags)</div><div class="ttdef"><b>Definition:</b> <a href="a01193_source.html#l00166">commandlineflags.cpp:166</a></div></div>
-<div class="ttc" id="aa00530_html_a0c2bcd4462ec67ab0971b34a0f610f55"><div class="ttname"><a href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a></div><div class="ttdeci">DLLSYM void tprintf(const char *format,...)</div><div class="ttdef"><b>Definition:</b> <a href="a00530_source.html#l00034">tprintf.cpp:34</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7c7ae07dd2a999045cb78bf7ff8dcbc7.html">training</a></li><li class="navelem"><a class="el" href="a01364.html">unicharset_extractor.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7c7ae07dd2a999045cb78bf7ff8dcbc7.html">training</a></li><li class="navelem"><a class="el" href="a01364.html">pango_font_info.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

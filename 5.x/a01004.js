@@ -1,7 +1,5 @@
 var a01004 =
 [
-    [ "PixelHistogram", "a03260.html", "a03260" ],
-    [ "ShiroRekhaSplitter", "a03264.html", "a03264" ],
-    [ "devanagari_split_debugimage", "a01004.html#a9687e850f464694be20c21d93e891801", null ],
-    [ "devanagari_split_debuglevel", "a01004.html#ad6b4d3ded1df0799766c874662d63050", null ]
+    [ "test_underline", "a01004.html#a1606f49c0410481c7cbc52a45e1422b3", null ],
+    [ "textord_underline_threshold", "a01004.html#a1cb0deabd2c5a114d01553973c68301c", null ]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/training/icuerrorcode.cpp Source File</title>
+<title>tesseract: /tesseract/src/training/classifier_tester.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,46 +87,186 @@ $(document).ready(function(){initNavTree('a01232_source.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">icuerrorcode.cpp</div>  </div>
+<div class="title">classifier_tester.cpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a01232.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// you may not use this file except in compliance with the License.</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">// You may obtain a copy of the License at</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">// http://www.apache.org/licenses/LICENSE-2.0</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">// Unless required by applicable law or agreed to in writing, software</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// See the License for the specific language governing permissions and</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">// limitations under the License.</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">//</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a01235.html">icuerrorcode.h</a>&quot;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">namespace </span><a class="code" href="a01539.html">tesseract</a> {</div>
+<a href="a01232.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// Copyright 2011 Google Inc. All Rights Reserved.</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Author: rays@google.com (Ray Smith)</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">// you may not use this file except in compliance with the License.</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">// You may obtain a copy of the License at</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">// http://www.apache.org/licenses/LICENSE-2.0</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// Unless required by applicable law or agreed to in writing, software</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">// distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">// See the License for the specific language governing permissions and</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// limitations under the License.</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">//  Filename: classifier_tester.cpp</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">//  Purpose:  Tests a character classifier on data as formatted for training,</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//            but doesn&#39;t have to be the same as the training data.</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">//  Author:   Ray Smith</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">// Destructor.</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">// It is defined here, so the compiler can create a single vtable</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">// instead of weak vtables in every compilation unit.</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="a03408.html#a626c4ec683d858054d9adc53502820d8">   22</a></span>&#160;<a class="code" href="a03408.html#a626c4ec683d858054d9adc53502820d8">IcuErrorCode::~IcuErrorCode</a>() {</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <span class="keywordflow">if</span> (isFailure()) {</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="a03408.html#a3f106f0734e5f2c4b3f92198604ddc4b">handleFailure</a>();</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  }</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;}</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;}  <span class="comment">// namespace tesseract.</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;algorithm&gt;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;cstdio&gt;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#ifdef GOOGLE_TESSERACT</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;base/commandlineflags.h&quot;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#endif  // GOOGLE_TESSERACT</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00005.html">tesseract/baseapi.h</a>&gt;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a01253.html">commontraining.h</a>&quot;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a01337.html">mastertrainer.h</a>&quot;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00554.html">params.h</a>&quot;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00044.html">tesseract/strngs.h</a>&gt;</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00782.html">tessclassifier.h</a>&quot;</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00224.html">tesseractclass.h</a>&quot;</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">static</span> <a class="code" href="a01247.html#ae27a3cb8977a05a660ea49ebece9f518">STRING_PARAM_FLAG</a>(classifier, <span class="stringliteral">&quot;&quot;</span>, <span class="stringliteral">&quot;Classifier to test&quot;</span>);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">static</span> <a class="code" href="a01247.html#ae27a3cb8977a05a660ea49ebece9f518">STRING_PARAM_FLAG</a>(lang, <span class="stringliteral">&quot;eng&quot;</span>, <span class="stringliteral">&quot;Language to test&quot;</span>);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">static</span> <a class="code" href="a01247.html#ae27a3cb8977a05a660ea49ebece9f518">STRING_PARAM_FLAG</a>(tessdata_dir, <span class="stringliteral">&quot;&quot;</span>, <span class="stringliteral">&quot;Directory of traineddata files&quot;</span>);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="a01232.html#a87c21c76ec4382d7198af1742eef44f6">   36</a></span>&#160;<span class="keyword">enum</span> <a class="code" href="a01232.html#a87c21c76ec4382d7198af1742eef44f6">ClassifierName</a> {</div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="a01232.html#a87c21c76ec4382d7198af1742eef44f6a31b46596c5b8ddd5c28b43d3164b6430">   37</a></span>&#160;  <a class="code" href="a01232.html#a87c21c76ec4382d7198af1742eef44f6a31b46596c5b8ddd5c28b43d3164b6430">CN_PRUNER</a>,</div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="a01232.html#a87c21c76ec4382d7198af1742eef44f6a1e554cbfcb457dd689fed35534aabb5b">   38</a></span>&#160;  <a class="code" href="a01232.html#a87c21c76ec4382d7198af1742eef44f6a1e554cbfcb457dd689fed35534aabb5b">CN_FULL</a>,</div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="a01232.html#a87c21c76ec4382d7198af1742eef44f6a7ff10b528f0218e5f5a6e09119423563">   39</a></span>&#160;  <a class="code" href="a01232.html#a87c21c76ec4382d7198af1742eef44f6a7ff10b528f0218e5f5a6e09119423563">CN_COUNT</a></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;};</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* names[] = {<span class="stringliteral">&quot;pruner&quot;</span>, <span class="stringliteral">&quot;full&quot;</span>};</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">static</span> <a class="code" href="a03338.html">tesseract::ShapeClassifier</a>* InitializeClassifier(</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span>* classifer_name, <span class="keyword">const</span> <a class="code" href="a03118.html">UNICHARSET</a>&amp; unicharset,</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv,</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <a class="code" href="a02438.html">tesseract::TessBaseAPI</a>** api) {</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <span class="comment">// Decode the classifier string.</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <a class="code" href="a01232.html#a87c21c76ec4382d7198af1742eef44f6">ClassifierName</a> classifier = <a class="code" href="a01232.html#a87c21c76ec4382d7198af1742eef44f6a7ff10b528f0218e5f5a6e09119423563">CN_COUNT</a>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> c = 0; c &lt; <a class="code" href="a01232.html#a87c21c76ec4382d7198af1742eef44f6a7ff10b528f0218e5f5a6e09119423563">CN_COUNT</a>; ++c) {</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordflow">if</span> (strcmp(classifer_name, names[c]) == 0) {</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;      classifier = static_cast&lt;ClassifierName&gt;(c);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;      <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    }</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  }</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="keywordflow">if</span> (classifier == <a class="code" href="a01232.html#a87c21c76ec4382d7198af1742eef44f6a7ff10b528f0218e5f5a6e09119423563">CN_COUNT</a>) {</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;Invalid classifier name:%s\n&quot;</span>, FLAGS_classifier.c_str());</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  }</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <span class="comment">// We need to initialize tesseract to test.</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  *api = <span class="keyword">new</span> <a class="code" href="a00008.html#a47436d31525552f08492b8dcdfc12755">tesseract::TessBaseAPI</a>;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <a class="code" href="a01818.html#a04550a0ed1279562027bf2fc92c421ae">tesseract::OcrEngineMode</a> engine_mode = <a class="code" href="a01818.html#a04550a0ed1279562027bf2fc92c421aeaea8028f61e76a0f4def7cbe7905206cf">tesseract::OEM_TESSERACT_ONLY</a>;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <a class="code" href="a02658.html">tesseract::Tesseract</a>* <a class="code" href="a01818.html">tesseract</a> = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <a class="code" href="a03166.html">tesseract::Classify</a>* classify = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <span class="keywordflow">if</span> (</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;      classifier == <a class="code" href="a01232.html#a87c21c76ec4382d7198af1742eef44f6a31b46596c5b8ddd5c28b43d3164b6430">CN_PRUNER</a> || classifier == <a class="code" href="a01232.html#a87c21c76ec4382d7198af1742eef44f6a1e554cbfcb457dd689fed35534aabb5b">CN_FULL</a>) {</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordflow">if</span> ((*api)-&gt;Init(FLAGS_tessdata_dir.c_str(), FLAGS_lang.c_str(),</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                 engine_mode) &lt; 0) {</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;      fprintf(stderr, <span class="stringliteral">&quot;Tesseract initialization failed!\n&quot;</span>);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;      <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    }</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <a class="code" href="a01818.html">tesseract</a> = const_cast&lt;tesseract::Tesseract*&gt;((*api)-&gt;tesseract());</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    classify = static_cast&lt;tesseract::Classify*&gt;(<a class="code" href="a01818.html">tesseract</a>);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordflow">if</span> (classify-&gt;shape_table() == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;      fprintf(stderr, <span class="stringliteral">&quot;Tesseract must contain a ShapeTable!\n&quot;</span>);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;      <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    }</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  }</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  <a class="code" href="a03338.html">tesseract::ShapeClassifier</a>* shape_classifier = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <span class="keywordflow">if</span> (classifier == <a class="code" href="a01232.html#a87c21c76ec4382d7198af1742eef44f6a31b46596c5b8ddd5c28b43d3164b6430">CN_PRUNER</a>) {</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    shape_classifier = <span class="keyword">new</span> <a class="code" href="a03366.html">tesseract::TessClassifier</a>(<span class="keyword">true</span>, classify);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (classifier == <a class="code" href="a01232.html#a87c21c76ec4382d7198af1742eef44f6a1e554cbfcb457dd689fed35534aabb5b">CN_FULL</a>) {</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    shape_classifier = <span class="keyword">new</span> <a class="code" href="a03366.html">tesseract::TessClassifier</a>(<span class="keyword">false</span>, classify);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  }</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Testing classifier %s:\n&quot;</span>, classifer_name);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  <span class="keywordflow">return</span> shape_classifier;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;}</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">// This program has complex setup requirements, so here is some help:</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">// Two different modes, tr files and serialized mastertrainer.</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">// From tr files:</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">//   classifier_tester -U unicharset -F font_properties -X xheights</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">//     -classifier x -lang lang [-output_trainer trainer] *.tr</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">// From a serialized trainer:</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">//  classifier_tester -input_trainer trainer [-lang lang] -classifier x</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">// In the first case, the unicharset must be the unicharset from within</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">// the classifier under test, and the font_properties and xheights files must</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">// match the files used during training.</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment">// In the second case, the trainer file must have been prepared from</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment">// some previous run of shapeclustering, mftraining, or classifier_tester</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">// using the same conditions as above, ie matching unicharset/font_properties.</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">// Available values of classifier (x above) are:</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">// pruner   : Tesseract class pruner only.</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">// full     : Tesseract full classifier.</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">//            with an input trainer.)</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno"><a class="line" href="a01232.html#a3c04138a5bfe5d72780bb7e82a18e627">  110</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="a01232.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv) {</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  tesseract::CheckSharedLibraryVersion();</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  <a class="code" href="a01250.html#a5177d61ebf73a60571198cb6eaa753ac">ParseArguments</a>(&amp;argc, &amp;argv);</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  <a class="code" href="a02542.html">STRING</a> file_prefix;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  <a class="code" href="a03890.html">tesseract::MasterTrainer</a>* trainer =</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;      <a class="code" href="a01818.html#a2af3b74c1139cfc070d17e947f212b58">tesseract::LoadTrainingData</a>(argc, argv, <span class="keyword">false</span>, <span class="keyword">nullptr</span>, &amp;file_prefix);</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  <a class="code" href="a02438.html">tesseract::TessBaseAPI</a>* api;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  <span class="comment">// Decode the classifier string.</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  <a class="code" href="a03338.html">tesseract::ShapeClassifier</a>* shape_classifier = InitializeClassifier(</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;      FLAGS_classifier.c_str(), trainer-&gt;<a class="code" href="a03890.html#a07d08cdd2d8914cc2d432836b278fc8b">unicharset</a>(), argc, argv, &amp;api);</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  <span class="keywordflow">if</span> (shape_classifier == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;Classifier init failed!:%s\n&quot;</span>, FLAGS_classifier.c_str());</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  }</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;  <span class="comment">// We want to test junk as well if it is available.</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;  <span class="comment">// trainer-&gt;IncludeJunk();</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;  <span class="comment">// We want to test with replicated samples too.</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;  trainer-&gt;<a class="code" href="a03890.html#a251f235cdf45e1f66d08d4bc27dc71d7">ReplicateAndRandomizeSamplesIfRequired</a>();</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;  trainer-&gt;<a class="code" href="a03890.html#abf120fc0227a34de4df107b7a09eaad8">TestClassifierOnSamples</a>(<a class="code" href="a01818.html#acb0bc20d78b75745c9aa3832a619f4fda4fbb2b48a2fae3c2a8be73d82702d9ca">tesseract::CT_UNICHAR_TOP1_ERR</a>,</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                                   std::max(3, static_cast&lt;int&gt;(FLAGS_debug_level)), <span class="keyword">false</span>,</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;                                   shape_classifier, <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;  <span class="keyword">delete</span> shape_classifier;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;  <span class="keyword">delete</span> api;</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;  <span class="keyword">delete</span> trainer;</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;  <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;} <span class="comment">/* main */</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa03408_html_a3f106f0734e5f2c4b3f92198604ddc4b"><div class="ttname"><a href="a03408.html#a3f106f0734e5f2c4b3f92198604ddc4b">tesseract::IcuErrorCode::handleFailure</a></div><div class="ttdeci">virtual void handleFailure() const</div><div class="ttdef"><b>Definition:</b> <a href="a01235_source.html#l00116">icuerrorcode.h:116</a></div></div>
-<div class="ttc" id="aa03408_html_a626c4ec683d858054d9adc53502820d8"><div class="ttname"><a href="a03408.html#a626c4ec683d858054d9adc53502820d8">tesseract::IcuErrorCode::~IcuErrorCode</a></div><div class="ttdeci">virtual ~IcuErrorCode()</div><div class="ttdef"><b>Definition:</b> <a href="a01232_source.html#l00022">icuerrorcode.cpp:22</a></div></div>
-<div class="ttc" id="aa01539_html"><div class="ttname"><a href="a01539.html">tesseract</a></div><div class="ttdef"><b>Definition:</b> <a href="a00002_source.html#l00025">altorenderer.cpp:25</a></div></div>
-<div class="ttc" id="aa01235_html"><div class="ttname"><a href="a01235.html">icuerrorcode.h</a></div></div>
+<div class="ttc" id="aa00044_html"><div class="ttname"><a href="a00044.html">strngs.h</a></div></div>
+<div class="ttc" id="aa01253_html"><div class="ttname"><a href="a01253.html">commontraining.h</a></div></div>
+<div class="ttc" id="aa01247_html_ae27a3cb8977a05a660ea49ebece9f518"><div class="ttname"><a href="a01247.html#ae27a3cb8977a05a660ea49ebece9f518">STRING_PARAM_FLAG</a></div><div class="ttdeci">#define STRING_PARAM_FLAG(name, val, comment)</div><div class="ttdef"><b>Definition:</b> <a href="a01247_source.html#l00037">commandlineflags.h:37</a></div></div>
+<div class="ttc" id="aa00224_html"><div class="ttname"><a href="a00224.html">tesseractclass.h</a></div></div>
+<div class="ttc" id="aa00554_html"><div class="ttname"><a href="a00554.html">params.h</a></div></div>
+<div class="ttc" id="aa02658_html"><div class="ttname"><a href="a02658.html">tesseract::Tesseract</a></div><div class="ttdef"><b>Definition:</b> <a href="a00224_source.html#l00172">tesseractclass.h:172</a></div></div>
+<div class="ttc" id="aa03366_html"><div class="ttname"><a href="a03366.html">tesseract::TessClassifier</a></div><div class="ttdef"><b>Definition:</b> <a href="a00782_source.html#l00036">tessclassifier.h:36</a></div></div>
+<div class="ttc" id="aa02542_html"><div class="ttname"><a href="a02542.html">STRING</a></div><div class="ttdef"><b>Definition:</b> <a href="a00044_source.html#l00045">strngs.h:45</a></div></div>
+<div class="ttc" id="aa03166_html"><div class="ttname"><a href="a03166.html">tesseract::Classify</a></div><div class="ttdef"><b>Definition:</b> <a href="a00641_source.html#l00103">classify.h:103</a></div></div>
+<div class="ttc" id="aa01337_html"><div class="ttname"><a href="a01337.html">mastertrainer.h</a></div></div>
+<div class="ttc" id="aa01232_html_a87c21c76ec4382d7198af1742eef44f6a31b46596c5b8ddd5c28b43d3164b6430"><div class="ttname"><a href="a01232.html#a87c21c76ec4382d7198af1742eef44f6a31b46596c5b8ddd5c28b43d3164b6430">CN_PRUNER</a></div><div class="ttdef"><b>Definition:</b> <a href="a01232_source.html#l00037">classifier_tester.cpp:37</a></div></div>
+<div class="ttc" id="aa01818_html_a04550a0ed1279562027bf2fc92c421ae"><div class="ttname"><a href="a01818.html#a04550a0ed1279562027bf2fc92c421ae">tesseract::OcrEngineMode</a></div><div class="ttdeci">OcrEngineMode</div><div class="ttdef"><b>Definition:</b> <a href="a00032_source.html#l00265">publictypes.h:265</a></div></div>
+<div class="ttc" id="aa03338_html"><div class="ttname"><a href="a03338.html">tesseract::ShapeClassifier</a></div><div class="ttdef"><b>Definition:</b> <a href="a00770_source.html#l00043">shapeclassifier.h:43</a></div></div>
+<div class="ttc" id="aa00005_html"><div class="ttname"><a href="a00005.html">baseapi.h</a></div></div>
+<div class="ttc" id="aa01232_html_a87c21c76ec4382d7198af1742eef44f6a1e554cbfcb457dd689fed35534aabb5b"><div class="ttname"><a href="a01232.html#a87c21c76ec4382d7198af1742eef44f6a1e554cbfcb457dd689fed35534aabb5b">CN_FULL</a></div><div class="ttdef"><b>Definition:</b> <a href="a01232_source.html#l00038">classifier_tester.cpp:38</a></div></div>
+<div class="ttc" id="aa03890_html_a07d08cdd2d8914cc2d432836b278fc8b"><div class="ttname"><a href="a03890.html#a07d08cdd2d8914cc2d432836b278fc8b">tesseract::MasterTrainer::unicharset</a></div><div class="ttdeci">const UNICHARSET &amp; unicharset() const</div><div class="ttdef"><b>Definition:</b> <a href="a01337_source.html#l00186">mastertrainer.h:186</a></div></div>
+<div class="ttc" id="aa02438_html"><div class="ttname"><a href="a02438.html">tesseract::TessBaseAPI</a></div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00098">baseapi.h:98</a></div></div>
+<div class="ttc" id="aa03118_html"><div class="ttname"><a href="a03118.html">UNICHARSET</a></div><div class="ttdef"><b>Definition:</b> <a href="a00605_source.html#l00145">unicharset.h:145</a></div></div>
+<div class="ttc" id="aa01818_html"><div class="ttname"><a href="a01818.html">tesseract</a></div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00065">baseapi.h:65</a></div></div>
+<div class="ttc" id="aa03890_html"><div class="ttname"><a href="a03890.html">tesseract::MasterTrainer</a></div><div class="ttdef"><b>Definition:</b> <a href="a01337_source.html#l00069">mastertrainer.h:69</a></div></div>
+<div class="ttc" id="aa00782_html"><div class="ttname"><a href="a00782.html">tessclassifier.h</a></div></div>
+<div class="ttc" id="aa01818_html_a2af3b74c1139cfc070d17e947f212b58"><div class="ttname"><a href="a01818.html#a2af3b74c1139cfc070d17e947f212b58">tesseract::LoadTrainingData</a></div><div class="ttdeci">MasterTrainer * LoadTrainingData(int argc, const char *const *argv, bool replication, ShapeTable **shape_table, STRING *file_prefix)</div><div class="ttdef"><b>Definition:</b> <a href="a01250_source.html#l00211">commontraining.cpp:211</a></div></div>
+<div class="ttc" id="aa01250_html_a5177d61ebf73a60571198cb6eaa753ac"><div class="ttname"><a href="a01250.html#a5177d61ebf73a60571198cb6eaa753ac">ParseArguments</a></div><div class="ttdeci">void ParseArguments(int *argc, char ***argv)</div><div class="ttdef"><b>Definition:</b> <a href="a01250_source.html#l00122">commontraining.cpp:122</a></div></div>
+<div class="ttc" id="aa03890_html_a251f235cdf45e1f66d08d4bc27dc71d7"><div class="ttname"><a href="a03890.html#a251f235cdf45e1f66d08d4bc27dc71d7">tesseract::MasterTrainer::ReplicateAndRandomizeSamplesIfRequired</a></div><div class="ttdeci">void ReplicateAndRandomizeSamplesIfRequired()</div><div class="ttdef"><b>Definition:</b> <a href="a01334_source.html#l00320">mastertrainer.cpp:320</a></div></div>
+<div class="ttc" id="aa00581_html_a0c2bcd4462ec67ab0971b34a0f610f55"><div class="ttname"><a href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a></div><div class="ttdeci">DLLSYM void tprintf(const char *format,...)</div><div class="ttdef"><b>Definition:</b> <a href="a00581_source.html#l00034">tprintf.cpp:34</a></div></div>
+<div class="ttc" id="aa00008_html_a47436d31525552f08492b8dcdfc12755"><div class="ttname"><a href="a00008.html#a47436d31525552f08492b8dcdfc12755">TessBaseAPI</a></div><div class="ttdeci">struct TessBaseAPI TessBaseAPI</div><div class="ttdef"><b>Definition:</b> <a href="a00008_source.html#l00072">capi.h:72</a></div></div>
+<div class="ttc" id="aa01232_html_a87c21c76ec4382d7198af1742eef44f6a7ff10b528f0218e5f5a6e09119423563"><div class="ttname"><a href="a01232.html#a87c21c76ec4382d7198af1742eef44f6a7ff10b528f0218e5f5a6e09119423563">CN_COUNT</a></div><div class="ttdef"><b>Definition:</b> <a href="a01232_source.html#l00039">classifier_tester.cpp:39</a></div></div>
+<div class="ttc" id="aa01818_html_a04550a0ed1279562027bf2fc92c421aeaea8028f61e76a0f4def7cbe7905206cf"><div class="ttname"><a href="a01818.html#a04550a0ed1279562027bf2fc92c421aeaea8028f61e76a0f4def7cbe7905206cf">tesseract::OEM_TESSERACT_ONLY</a></div><div class="ttdef"><b>Definition:</b> <a href="a00032_source.html#l00266">publictypes.h:266</a></div></div>
+<div class="ttc" id="aa01818_html_acb0bc20d78b75745c9aa3832a619f4fda4fbb2b48a2fae3c2a8be73d82702d9ca"><div class="ttname"><a href="a01818.html#acb0bc20d78b75745c9aa3832a619f4fda4fbb2b48a2fae3c2a8be73d82702d9ca">tesseract::CT_UNICHAR_TOP1_ERR</a></div><div class="ttdef"><b>Definition:</b> <a href="a01274_source.html#l00074">errorcounter.h:74</a></div></div>
+<div class="ttc" id="aa01232_html_a87c21c76ec4382d7198af1742eef44f6"><div class="ttname"><a href="a01232.html#a87c21c76ec4382d7198af1742eef44f6">ClassifierName</a></div><div class="ttdeci">ClassifierName</div><div class="ttdef"><b>Definition:</b> <a href="a01232_source.html#l00036">classifier_tester.cpp:36</a></div></div>
+<div class="ttc" id="aa03890_html_abf120fc0227a34de4df107b7a09eaad8"><div class="ttname"><a href="a03890.html#abf120fc0227a34de4df107b7a09eaad8">tesseract::MasterTrainer::TestClassifierOnSamples</a></div><div class="ttdeci">void TestClassifierOnSamples(CountTypes error_mode, int report_level, bool replicate_samples, ShapeClassifier *test_classifier, STRING *report_string)</div><div class="ttdef"><b>Definition:</b> <a href="a01334_source.html#l00760">mastertrainer.cpp:760</a></div></div>
+<div class="ttc" id="aa01232_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="a01232.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdef"><b>Definition:</b> <a href="a01232_source.html#l00110">classifier_tester.cpp:110</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7c7ae07dd2a999045cb78bf7ff8dcbc7.html">training</a></li><li class="navelem"><a class="el" href="a01232.html">icuerrorcode.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:15 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7c7ae07dd2a999045cb78bf7ff8dcbc7.html">training</a></li><li class="navelem"><a class="el" href="a01232.html">classifier_tester.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:21 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

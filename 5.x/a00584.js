@@ -1,4 +1,4 @@
 var a00584 =
 [
-    [ "ExtractFontName", "a00584.html#aa011b40b5e90b4087d0e42ea5fcce12c", null ]
+    [ "tprintf", "a00584.html#a0c012ad70a57d03771394370a06e57cf", null ]
 ];

@@ -1,15 +1,10 @@
 var a00950 =
 [
-    [ "GridSearch", "a03180.html", "a03180" ],
-    [ "GridBase", "a03184.html", "a03184" ],
-    [ "IntGrid", "a03188.html", "a03188" ],
-    [ "BBGrid", "a03192.html", "a03192" ],
-    [ "PtrHash", "a03196.html", "a03196" ],
-    [ "GridSearch", "a03180.html", "a03180" ],
-    [ "TabEventHandler", "a03200.html", "a03200" ],
-    [ "SortByBoxBottom", "a00950.html#a531d67167395e03fae5373a3b45539c0", null ],
-    [ "SortByBoxLeft", "a00950.html#a78a7f55303493ead36192ae0c6aaaf87", null ],
-    [ "SortRightToLeft", "a00950.html#afa6a2fa0337896bda9eebeaa226b2da4", null ],
-    [ "TraceBlockOnReducedPix", "a00950.html#a6cee1dea0a3fdece76728ad65ab48563", null ],
-    [ "TraceOutlineOnReducedPix", "a00950.html#a904ab4d9c9e49e83c5d3800d57d433cb", null ]
+    [ "StaticShape", "a03578.html", "a03578" ],
+    [ "LossType", "a00950.html#a13a7c99e617b2f9428673e71bd29359b", [
+      [ "LT_NONE", "a00950.html#a13a7c99e617b2f9428673e71bd29359bae8dd985d351d9f45b42398cbdedf19dd", null ],
+      [ "LT_CTC", "a00950.html#a13a7c99e617b2f9428673e71bd29359badd4b4b91a0a5e3db81e2a0973af19b88", null ],
+      [ "LT_SOFTMAX", "a00950.html#a13a7c99e617b2f9428673e71bd29359bafe3fbdf6fcc74fc6bf28b1ae48498430", null ],
+      [ "LT_LOGISTIC", "a00950.html#a13a7c99e617b2f9428673e71bd29359ba2cf2190fb7b0d9f87e08900c3d0a4410", null ]
+    ] ]
 ];

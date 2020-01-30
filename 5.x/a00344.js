@@ -1,17 +1,13 @@
 var a00344 =
 [
-    [ "approx_dist", "a00344.html#afa413dfb9511b562aa24ab973dd539e9", null ],
-    [ "DIR", "a00344.html#a6c8de73bb604d91743c7f6f356eb171e", null ],
-    [ "FASTEDGELENGTH", "a00344.html#af363537e00fa145a0f83685b7699843f", null ],
-    [ "FIXED", "a00344.html#a20207ffc8e6f0bdcefb5c42a5b5c3fb8", null ],
-    [ "fixed_dist", "a00344.html#ab32cccc51ac6f93001591f058666730b", null ],
-    [ "FLAGS", "a00344.html#a6ccad09b4a2a06ae178418fdccf5940d", null ],
-    [ "RUNLENGTH", "a00344.html#a0a5d3a40dd240416eac380c183d95419", null ],
-    [ "ApproximateOutline", "a00344.html#a95836c79b09910877bd1b39a59c7d5a0", null ],
-    [ "cutline", "a00344.html#aa0f03bd75099af8feca58259b9f3f48d", null ],
-    [ "edgesteps_to_edgepts", "a00344.html#aa63082dea164750c7abb7944becd6f5e", null ],
-    [ "fix2", "a00344.html#a90ebde0147c2a36a0b1a216645a4eed8", null ],
-    [ "poly2", "a00344.html#ab1a151f8dbd379f2ecf2d59f9ce2bc23", null ],
-    [ "par1", "a00344.html#af48d60ada722514c300ec13eb809b23c", null ],
-    [ "par2", "a00344.html#aa2560a18739e37081028f530cdd91caf", null ]
+    [ "GenericVector", "a02434.html", "a02434" ],
+    [ "DENORM", "a02798.html", "a02798" ],
+    [ "NormalizationMode", "a00344.html#ad3e7916f0120e26e7b4e0f830784194a", [
+      [ "NM_BASELINE", "a00344.html#ad3e7916f0120e26e7b4e0f830784194aa643bd757ce3d9647d68aae97256d0233", null ],
+      [ "NM_CHAR_ISOTROPIC", "a00344.html#ad3e7916f0120e26e7b4e0f830784194aa856806160022221f012f954a60601b74", null ],
+      [ "NM_CHAR_ANISOTROPIC", "a00344.html#ad3e7916f0120e26e7b4e0f830784194aa81bec0cd85211e03befb611fa7003180", null ]
+    ] ],
+    [ "kBlnBaselineOffset", "a00344.html#abe10ce41bf7240ae8a053dea471d6ed5", null ],
+    [ "kBlnCellHeight", "a00344.html#af0751b110da1f0bbd3068aa0d7eac955", null ],
+    [ "kBlnXHeight", "a00344.html#af974e6755e636c8bc7cbe57e3bcbdd73", null ]
 ];

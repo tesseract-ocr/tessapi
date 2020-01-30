@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/cutil/emalloc.cpp Source File</title>
+<title>tesseract: /tesseract/src/classify/outfeat.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,61 +87,188 @@ $(document).ready(function(){initNavTree('a00749_source.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">emalloc.cpp</div>  </div>
+<div class="title">outfeat.cpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00749.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**************************************************************************</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * Filename:    emalloc.cpp</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * Purpose:     Routines for trapping memory allocation errors.</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * Author:      Dan Johnson</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">**</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">**  (c) Copyright Hewlett-Packard Company, 1988.</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">** Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">** you may not use this file except in compliance with the License.</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">** You may obtain a copy of the License at</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">** http://www.apache.org/licenses/LICENSE-2.0</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">** Unless required by applicable law or agreed to in writing, software</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">** distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">** See the License for the specific language governing permissions and</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">** limitations under the License.</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">******************************************************************************/</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00752.html">emalloc.h</a>&quot;</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;cstdlib&gt;</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00464.html">errcode.h</a>&quot;</span>    <span class="comment">// for ASSERT_HOST</span></div>
+<a href="a00749.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/******************************************************************************</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> ** Filename:    outfeat.c</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> ** Purpose:     Definition of outline-features.</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> ** Author:      Dan Johnson</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> **</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> ** (c) Copyright Hewlett-Packard Company, 1988.</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> ** Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> ** you may not use this file except in compliance with the License.</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> ** You may obtain a copy of the License at</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> ** http://www.apache.org/licenses/LICENSE-2.0</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> ** Unless required by applicable law or agreed to in writing, software</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> ** distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> ** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> ** See the License for the specific language governing permissions and</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> ** limitations under the License.</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> ******************************************************************************/</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">/*----------------------------------------------------------------------------</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">          Include Files and Type Defines</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">----------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00752.html">outfeat.h</a>&quot;</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="a00752.html#a9bdc0885c33bbb5b062c77b1d90e2305">   31</a></span>&#160;<span class="keywordtype">void</span> *<a class="code" href="a00749.html#a9bdc0885c33bbb5b062c77b1d90e2305">Emalloc</a>(<span class="keywordtype">int</span> Size) {</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <a class="code" href="a00464.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a>(Size &gt; 0);</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <span class="keywordtype">void</span>* Buffer = malloc(Size);</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <a class="code" href="a00464.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a>(Buffer != <span class="keyword">nullptr</span>);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <span class="keywordflow">return</span> Buffer;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;}</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="a00752.html#a2bd9b4f7899f8798018497faa3b12eed">   38</a></span>&#160;<span class="keywordtype">void</span> *<a class="code" href="a00749.html#a2bd9b4f7899f8798018497faa3b12eed">Erealloc</a>(<span class="keywordtype">void</span> *ptr, <span class="keywordtype">int</span> size) {</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <a class="code" href="a00464.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a>(size &gt; 0 || (size == 0 &amp;&amp; ptr != <span class="keyword">nullptr</span>));</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <span class="keywordtype">void</span>* Buffer = realloc(ptr, size);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <a class="code" href="a00464.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a>(Buffer != <span class="keyword">nullptr</span> || size == 0);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <span class="keywordflow">return</span> Buffer;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;}</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="a00752.html#af846576ae65dc13e49ddc616e17baa27">   45</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00749.html#af846576ae65dc13e49ddc616e17baa27">Efree</a>(<span class="keywordtype">void</span> *ptr) {</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <a class="code" href="a00464.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a>(ptr != <span class="keyword">nullptr</span>);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  free(ptr);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;}</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00641.html">classify.h</a>&quot;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00662.html">featdefs.h</a>&quot;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00722.html">mfoutline.h</a>&quot;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00746.html">ocrfeatures.h</a>&quot;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &lt;cstdio&gt;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">/*----------------------------------------------------------------------------</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">              Public Code</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">----------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">namespace </span><a class="code" href="a01818.html">tesseract</a> {</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<a class="code" href="a03326.html">FEATURE_SET</a> <a class="code" href="a03166.html#af1ef43f77139dc879d27a510adcb4bb3">Classify::ExtractOutlineFeatures</a>(<a class="code" href="a02690.html">TBLOB</a> *Blob) {</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <a class="code" href="a03374.html">LIST</a> Outlines;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <a class="code" href="a03374.html">LIST</a> RemainingOutlines;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <a class="code" href="a03374.html">MFOUTLINE</a> Outline;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <a class="code" href="a03326.html">FEATURE_SET</a> FeatureSet;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="keywordtype">float</span> XScale, YScale;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  FeatureSet = <a class="code" href="a00743.html#acdf1bcf73857cfc37fe8d667203bc875">NewFeatureSet</a> (<a class="code" href="a00752.html#ac29e72cf5bfbadc9a7b2490ffdda297f">MAX_OUTLINE_FEATURES</a>);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keywordflow">if</span> (Blob == <span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">return</span> (FeatureSet);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  Outlines = <a class="code" href="a00719.html#a4acb6328d74e385e88c02c45e1306b97">ConvertBlob</a> (Blob);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="a03166.html#af1ef43f77139dc879d27a510adcb4bb3">   54</a></span>&#160;  <a class="code" href="a03166.html#aee305138bbdca470c5f8b88412db0e44">NormalizeOutlines</a>(Outlines, &amp;XScale, &amp;YScale);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  RemainingOutlines = Outlines;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <a class="code" href="a00809.html#a2cf19ba78be6b54f66823d58f34f2a53">iterate</a>(RemainingOutlines) {</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    Outline = <span class="keyword">static_cast&lt;</span><a class="code" href="a03374.html">MFOUTLINE</a><span class="keyword">&gt;</span><a class="code" href="a00809.html#a69547be764424f18b0be535400747978">first_node</a> (RemainingOutlines);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <a class="code" href="a00749.html#a46e551093fc5d100adbb071067948bd9">ConvertToOutlineFeatures</a>(Outline, FeatureSet);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  }</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <span class="keywordflow">if</span> (<a class="code" href="a03166.html#aa92ef2f6a1f0e726d576a59644c3cc63">classify_norm_method</a> == <a class="code" href="a00722.html#a2a4b69f9a2827dc98bc4cbc233118865a83297de004f4e58b9be2108c6cd08a23">baseline</a>)</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <a class="code" href="a00749.html#a31e740a46d077ad41735bbd17b0bef34">NormalizeOutlineX</a>(FeatureSet);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <a class="code" href="a00719.html#a553352ad44661adad2a80a24ac78aeaf">FreeOutlines</a>(Outlines);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <span class="keywordflow">return</span> (FeatureSet);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;}                                <span class="comment">/* ExtractOutlineFeatures */</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;}  <span class="comment">// namespace tesseract</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">/*----------------------------------------------------------------------------</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">              Private Code</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">----------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00749.html#a7a23f0f713121c5a61e7f96df94d6ced">AddOutlineFeatureToSet</a>(<a class="code" href="a03222.html">FPOINT</a> *Start,</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                            <a class="code" href="a03222.html">FPOINT</a> *End,</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                            <a class="code" href="a03326.html">FEATURE_SET</a> FeatureSet) {</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  <a class="code" href="a03322.html">FEATURE</a> Feature;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  Feature = <a class="code" href="a00743.html#a32a08c42617c8dd6a156c1c8d7fb2cbb">NewFeature</a>(&amp;<a class="code" href="a00662.html#a72a26e08f0fd9771c2b6af211bb1a6c3">OutlineFeatDesc</a>);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  Feature-&gt;<a class="code" href="a03322.html#acdddc3235f689b0d45574003fc3e3b1b">Params</a>[<a class="code" href="a00752.html#ab73697b859e4921472c6cf1de43267a1a0bb02f3ddb0f407e51cbf8967c3d78cb">OutlineFeatDir</a>] = <a class="code" href="a00671.html#af6cb732ba6e4cf3abb6be826c7b74b49">NormalizedAngleFrom</a>(Start, End, 1.0);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  Feature-&gt;<a class="code" href="a03322.html#acdddc3235f689b0d45574003fc3e3b1b">Params</a>[<a class="code" href="a00752.html#ab73697b859e4921472c6cf1de43267a1ab72d959dbf0e92bfdb6f3ebf9d0b35e6">OutlineFeatX</a>] = <a class="code" href="a00722.html#a3bebacc8131f75b46dc7a107d22fcae2">AverageOf</a>(Start-&gt;<a class="code" href="a03222.html#add242df27ddbc90edf732823e38eb844">x</a>, End-&gt;<a class="code" href="a03222.html#add242df27ddbc90edf732823e38eb844">x</a>);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  Feature-&gt;<a class="code" href="a03322.html#acdddc3235f689b0d45574003fc3e3b1b">Params</a>[<a class="code" href="a00752.html#ab73697b859e4921472c6cf1de43267a1ae64bdd03ed6e7dd59482f7e2d8054379">OutlineFeatY</a>] = <a class="code" href="a00722.html#a3bebacc8131f75b46dc7a107d22fcae2">AverageOf</a>(Start-&gt;<a class="code" href="a03222.html#ac396edee922ba896114b00d8715dd207">y</a>, End-&gt;<a class="code" href="a03222.html#ac396edee922ba896114b00d8715dd207">y</a>);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  Feature-&gt;<a class="code" href="a03322.html#acdddc3235f689b0d45574003fc3e3b1b">Params</a>[<a class="code" href="a00752.html#ab73697b859e4921472c6cf1de43267a1afc77106ded4ebd69ae6c596a2536e741">OutlineFeatLength</a>] = <a class="code" href="a00671.html#ab85e87f52e61d4a180dda1d1789df9f9">DistanceBetween</a>(*Start, *End);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <a class="code" href="a00743.html#a88ff5e23ace03b3fbfbb891604dd5bc6">AddFeature</a>(FeatureSet, Feature);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;}                                <span class="comment">/* AddOutlineFeatureToSet */</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00749.html#a46e551093fc5d100adbb071067948bd9">ConvertToOutlineFeatures</a>(<a class="code" href="a03374.html">MFOUTLINE</a> Outline, <a class="code" href="a03326.html">FEATURE_SET</a> FeatureSet) {</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  <a class="code" href="a03374.html">MFOUTLINE</a> Next;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;  <a class="code" href="a03374.html">MFOUTLINE</a> First;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  <a class="code" href="a03222.html">FPOINT</a> FeatureStart;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  <a class="code" href="a03222.html">FPOINT</a> FeatureEnd;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  <span class="keywordflow">if</span> (DegenerateOutline (Outline))</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  First = Outline;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  Next = First;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  <span class="keywordflow">do</span> {</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    FeatureStart = PointAt(Next)-&gt;Point;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    Next = NextPointAfter(Next);</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <span class="comment">/* note that an edge is hidden if the ending point of the edge is</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">       marked as hidden.  This situation happens because the order of</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment">       the outlines is reversed when they are converted from the old</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">       format.  In the old format, a hidden edge is marked by the</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment">       starting point for that edge. */</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keywordflow">if</span> (!PointAt(Next)-&gt;Hidden) {</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;      FeatureEnd = PointAt(Next)-&gt;Point;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;      <a class="code" href="a00749.html#a7a23f0f713121c5a61e7f96df94d6ced">AddOutlineFeatureToSet</a>(&amp;FeatureStart, &amp;FeatureEnd, FeatureSet);</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    }</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;  }</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;  <span class="keywordflow">while</span> (Next != First);</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;}                                <span class="comment">/* ConvertToOutlineFeatures */</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="comment">/*---------------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00749.html#a31e740a46d077ad41735bbd17b0bef34">NormalizeOutlineX</a>(<a class="code" href="a03326.html">FEATURE_SET</a> FeatureSet) {</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;  <span class="keywordtype">int</span> i;</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;  <a class="code" href="a03322.html">FEATURE</a> Feature;</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;  <span class="keywordtype">float</span> Length;</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;  <span class="keywordtype">float</span> TotalX = 0.0;</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;  <span class="keywordtype">float</span> TotalWeight = 0.0;</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;  <span class="keywordtype">float</span> Origin;</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; </div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;  <span class="keywordflow">if</span> (FeatureSet-&gt;<a class="code" href="a03326.html#af5f8cefc59003cce4cc41164e914bd4b">NumFeatures</a> &lt;= 0)</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160; </div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;  <span class="keywordflow">for</span> (i = 0; i &lt; FeatureSet-&gt;<a class="code" href="a03326.html#af5f8cefc59003cce4cc41164e914bd4b">NumFeatures</a>; i++) {</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    Feature = FeatureSet-&gt;<a class="code" href="a03326.html#a4664d6a22a9d12f4011de4d877664c45">Features</a>[i];</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    Length = Feature-&gt;<a class="code" href="a03322.html#acdddc3235f689b0d45574003fc3e3b1b">Params</a>[<a class="code" href="a00752.html#ab73697b859e4921472c6cf1de43267a1afc77106ded4ebd69ae6c596a2536e741">OutlineFeatLength</a>];</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    TotalX += Feature-&gt;<a class="code" href="a03322.html#acdddc3235f689b0d45574003fc3e3b1b">Params</a>[<a class="code" href="a00752.html#ab73697b859e4921472c6cf1de43267a1ab72d959dbf0e92bfdb6f3ebf9d0b35e6">OutlineFeatX</a>] * Length;</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    TotalWeight += Length;</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;  }</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;  Origin = TotalX / TotalWeight;</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160; </div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;  <span class="keywordflow">for</span> (i = 0; i &lt; FeatureSet-&gt;<a class="code" href="a03326.html#af5f8cefc59003cce4cc41164e914bd4b">NumFeatures</a>; i++) {</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    Feature = FeatureSet-&gt;<a class="code" href="a03326.html#a4664d6a22a9d12f4011de4d877664c45">Features</a>[i];</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    Feature-&gt;<a class="code" href="a03322.html#acdddc3235f689b0d45574003fc3e3b1b">Params</a>[<a class="code" href="a00752.html#ab73697b859e4921472c6cf1de43267a1ab72d959dbf0e92bfdb6f3ebf9d0b35e6">OutlineFeatX</a>] -= Origin;</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;  }</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;}                                <span class="comment">/* NormalizeOutlineX */</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa00749_html_a2bd9b4f7899f8798018497faa3b12eed"><div class="ttname"><a href="a00749.html#a2bd9b4f7899f8798018497faa3b12eed">Erealloc</a></div><div class="ttdeci">void * Erealloc(void *ptr, int size)</div><div class="ttdef"><b>Definition:</b> <a href="a00749_source.html#l00038">emalloc.cpp:38</a></div></div>
-<div class="ttc" id="aa00752_html"><div class="ttname"><a href="a00752.html">emalloc.h</a></div></div>
-<div class="ttc" id="aa00749_html_a9bdc0885c33bbb5b062c77b1d90e2305"><div class="ttname"><a href="a00749.html#a9bdc0885c33bbb5b062c77b1d90e2305">Emalloc</a></div><div class="ttdeci">void * Emalloc(int Size)</div><div class="ttdef"><b>Definition:</b> <a href="a00749_source.html#l00031">emalloc.cpp:31</a></div></div>
-<div class="ttc" id="aa00464_html"><div class="ttname"><a href="a00464.html">errcode.h</a></div></div>
-<div class="ttc" id="aa00464_html_a93a603f4063a6b9403d81caa245a583b"><div class="ttname"><a href="a00464.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a></div><div class="ttdeci">#define ASSERT_HOST(x)</div><div class="ttdef"><b>Definition:</b> <a href="a00464_source.html#l00087">errcode.h:87</a></div></div>
-<div class="ttc" id="aa00749_html_af846576ae65dc13e49ddc616e17baa27"><div class="ttname"><a href="a00749.html#af846576ae65dc13e49ddc616e17baa27">Efree</a></div><div class="ttdeci">void Efree(void *ptr)</div><div class="ttdef"><b>Definition:</b> <a href="a00749_source.html#l00045">emalloc.cpp:45</a></div></div>
+<div class="ttc" id="aa00743_html_a88ff5e23ace03b3fbfbb891604dd5bc6"><div class="ttname"><a href="a00743.html#a88ff5e23ace03b3fbfbb891604dd5bc6">AddFeature</a></div><div class="ttdeci">bool AddFeature(FEATURE_SET FeatureSet, FEATURE Feature)</div><div class="ttdef"><b>Definition:</b> <a href="a00743_source.html#l00039">ocrfeatures.cpp:39</a></div></div>
+<div class="ttc" id="aa03166_html_aa92ef2f6a1f0e726d576a59644c3cc63"><div class="ttname"><a href="a03166.html#aa92ef2f6a1f0e726d576a59644c3cc63">tesseract::Classify::classify_norm_method</a></div><div class="ttdeci">int classify_norm_method</div><div class="ttdef"><b>Definition:</b> <a href="a00641_source.html#l00434">classify.h:434</a></div></div>
+<div class="ttc" id="aa00809_html_a69547be764424f18b0be535400747978"><div class="ttname"><a href="a00809.html#a69547be764424f18b0be535400747978">first_node</a></div><div class="ttdeci">#define first_node(l)</div><div class="ttdef"><b>Definition:</b> <a href="a00809_source.html#l00084">oldlist.h:84</a></div></div>
+<div class="ttc" id="aa00749_html_a7a23f0f713121c5a61e7f96df94d6ced"><div class="ttname"><a href="a00749.html#a7a23f0f713121c5a61e7f96df94d6ced">AddOutlineFeatureToSet</a></div><div class="ttdeci">void AddOutlineFeatureToSet(FPOINT *Start, FPOINT *End, FEATURE_SET FeatureSet)</div><div class="ttdef"><b>Definition:</b> <a href="a00749_source.html#l00082">outfeat.cpp:82</a></div></div>
+<div class="ttc" id="aa03222_html_ac396edee922ba896114b00d8715dd207"><div class="ttname"><a href="a03222.html#ac396edee922ba896114b00d8715dd207">FPOINT::y</a></div><div class="ttdeci">float y</div><div class="ttdef"><b>Definition:</b> <a href="a00674_source.html#l00044">fpoint.h:44</a></div></div>
+<div class="ttc" id="aa03374_html"><div class="ttname"><a href="a03374.html">list_rec</a></div><div class="ttdef"><b>Definition:</b> <a href="a00809_source.html#l00073">oldlist.h:73</a></div></div>
+<div class="ttc" id="aa00722_html_a2a4b69f9a2827dc98bc4cbc233118865a83297de004f4e58b9be2108c6cd08a23"><div class="ttname"><a href="a00722.html#a2a4b69f9a2827dc98bc4cbc233118865a83297de004f4e58b9be2108c6cd08a23">baseline</a></div><div class="ttdef"><b>Definition:</b> <a href="a00722_source.html#l00062">mfoutline.h:62</a></div></div>
+<div class="ttc" id="aa00722_html"><div class="ttname"><a href="a00722.html">mfoutline.h</a></div></div>
+<div class="ttc" id="aa00752_html"><div class="ttname"><a href="a00752.html">outfeat.h</a></div></div>
+<div class="ttc" id="aa00752_html_ab73697b859e4921472c6cf1de43267a1afc77106ded4ebd69ae6c596a2536e741"><div class="ttname"><a href="a00752.html#ab73697b859e4921472c6cf1de43267a1afc77106ded4ebd69ae6c596a2536e741">OutlineFeatLength</a></div><div class="ttdef"><b>Definition:</b> <a href="a00752_source.html#l00044">outfeat.h:44</a></div></div>
+<div class="ttc" id="aa00671_html_af6cb732ba6e4cf3abb6be826c7b74b49"><div class="ttname"><a href="a00671.html#af6cb732ba6e4cf3abb6be826c7b74b49">NormalizedAngleFrom</a></div><div class="ttdeci">float NormalizedAngleFrom(FPOINT *Point1, FPOINT *Point2, float FullScale)</div><div class="ttdef"><b>Definition:</b> <a href="a00671_source.html#l00043">fpoint.cpp:43</a></div></div>
+<div class="ttc" id="aa03322_html"><div class="ttname"><a href="a03322.html">FEATURE_STRUCT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00746_source.html#l00058">ocrfeatures.h:58</a></div></div>
+<div class="ttc" id="aa03222_html"><div class="ttname"><a href="a03222.html">FPOINT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00674_source.html#l00028">fpoint.h:28</a></div></div>
+<div class="ttc" id="aa03166_html_aee305138bbdca470c5f8b88412db0e44"><div class="ttname"><a href="a03166.html#aee305138bbdca470c5f8b88412db0e44">tesseract::Classify::NormalizeOutlines</a></div><div class="ttdeci">void NormalizeOutlines(LIST Outlines, float *XScale, float *YScale)</div><div class="ttdef"><b>Definition:</b> <a href="a00719_source.html#l00275">mfoutline.cpp:275</a></div></div>
+<div class="ttc" id="aa03222_html_add242df27ddbc90edf732823e38eb844"><div class="ttname"><a href="a03222.html#add242df27ddbc90edf732823e38eb844">FPOINT::x</a></div><div class="ttdeci">float x</div><div class="ttdef"><b>Definition:</b> <a href="a00674_source.html#l00044">fpoint.h:44</a></div></div>
+<div class="ttc" id="aa00752_html_ab73697b859e4921472c6cf1de43267a1a0bb02f3ddb0f407e51cbf8967c3d78cb"><div class="ttname"><a href="a00752.html#ab73697b859e4921472c6cf1de43267a1a0bb02f3ddb0f407e51cbf8967c3d78cb">OutlineFeatDir</a></div><div class="ttdef"><b>Definition:</b> <a href="a00752_source.html#l00045">outfeat.h:45</a></div></div>
+<div class="ttc" id="aa00662_html_a72a26e08f0fd9771c2b6af211bb1a6c3"><div class="ttname"><a href="a00662.html#a72a26e08f0fd9771c2b6af211bb1a6c3">OutlineFeatDesc</a></div><div class="ttdeci">const FEATURE_DESC_STRUCT OutlineFeatDesc</div></div>
+<div class="ttc" id="aa00746_html"><div class="ttname"><a href="a00746.html">ocrfeatures.h</a></div></div>
+<div class="ttc" id="aa00671_html_ab85e87f52e61d4a180dda1d1789df9f9"><div class="ttname"><a href="a00671.html#ab85e87f52e61d4a180dda1d1789df9f9">DistanceBetween</a></div><div class="ttdeci">float DistanceBetween(FPOINT A, FPOINT B)</div><div class="ttdef"><b>Definition:</b> <a href="a00671_source.html#l00028">fpoint.cpp:28</a></div></div>
+<div class="ttc" id="aa00719_html_a4acb6328d74e385e88c02c45e1306b97"><div class="ttname"><a href="a00719.html#a4acb6328d74e385e88c02c45e1306b97">ConvertBlob</a></div><div class="ttdeci">LIST ConvertBlob(TBLOB *blob)</div><div class="ttdef"><b>Definition:</b> <a href="a00719_source.html#l00036">mfoutline.cpp:36</a></div></div>
+<div class="ttc" id="aa03326_html_a4664d6a22a9d12f4011de4d877664c45"><div class="ttname"><a href="a03326.html#a4664d6a22a9d12f4011de4d877664c45">FEATURE_SET_STRUCT::Features</a></div><div class="ttdeci">FEATURE Features[1]</div><div class="ttdef"><b>Definition:</b> <a href="a00746_source.html#l00067">ocrfeatures.h:67</a></div></div>
+<div class="ttc" id="aa00752_html_ab73697b859e4921472c6cf1de43267a1ae64bdd03ed6e7dd59482f7e2d8054379"><div class="ttname"><a href="a00752.html#ab73697b859e4921472c6cf1de43267a1ae64bdd03ed6e7dd59482f7e2d8054379">OutlineFeatY</a></div><div class="ttdef"><b>Definition:</b> <a href="a00752_source.html#l00043">outfeat.h:43</a></div></div>
+<div class="ttc" id="aa03166_html_af1ef43f77139dc879d27a510adcb4bb3"><div class="ttname"><a href="a03166.html#af1ef43f77139dc879d27a510adcb4bb3">tesseract::Classify::ExtractOutlineFeatures</a></div><div class="ttdeci">FEATURE_SET ExtractOutlineFeatures(TBLOB *Blob)</div><div class="ttdef"><b>Definition:</b> <a href="a00749_source.html#l00054">outfeat.cpp:54</a></div></div>
+<div class="ttc" id="aa01818_html"><div class="ttname"><a href="a01818.html">tesseract</a></div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00065">baseapi.h:65</a></div></div>
+<div class="ttc" id="aa03322_html_acdddc3235f689b0d45574003fc3e3b1b"><div class="ttname"><a href="a03322.html#acdddc3235f689b0d45574003fc3e3b1b">FEATURE_STRUCT::Params</a></div><div class="ttdeci">float Params[1]</div><div class="ttdef"><b>Definition:</b> <a href="a00746_source.html#l00060">ocrfeatures.h:60</a></div></div>
+<div class="ttc" id="aa00743_html_a32a08c42617c8dd6a156c1c8d7fb2cbb"><div class="ttname"><a href="a00743.html#a32a08c42617c8dd6a156c1c8d7fb2cbb">NewFeature</a></div><div class="ttdeci">FEATURE NewFeature(const FEATURE_DESC_STRUCT *FeatureDesc)</div><div class="ttdef"><b>Definition:</b> <a href="a00743_source.html#l00077">ocrfeatures.cpp:77</a></div></div>
+<div class="ttc" id="aa03326_html"><div class="ttname"><a href="a03326.html">FEATURE_SET_STRUCT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00746_source.html#l00064">ocrfeatures.h:64</a></div></div>
+<div class="ttc" id="aa00719_html_a553352ad44661adad2a80a24ac78aeaf"><div class="ttname"><a href="a00719.html#a553352ad44661adad2a80a24ac78aeaf">FreeOutlines</a></div><div class="ttdeci">void FreeOutlines(LIST Outlines)</div><div class="ttdef"><b>Definition:</b> <a href="a00719_source.html#l00166">mfoutline.cpp:166</a></div></div>
+<div class="ttc" id="aa00743_html_acdf1bcf73857cfc37fe8d667203bc875"><div class="ttname"><a href="a00743.html#acdf1bcf73857cfc37fe8d667203bc875">NewFeatureSet</a></div><div class="ttdeci">FEATURE_SET NewFeatureSet(int NumFeatures)</div><div class="ttdef"><b>Definition:</b> <a href="a00743_source.html#l00093">ocrfeatures.cpp:93</a></div></div>
+<div class="ttc" id="aa02690_html"><div class="ttname"><a href="a02690.html">TBLOB</a></div><div class="ttdef"><b>Definition:</b> <a href="a00260_source.html#l00282">blobs.h:282</a></div></div>
+<div class="ttc" id="aa00662_html"><div class="ttname"><a href="a00662.html">featdefs.h</a></div></div>
+<div class="ttc" id="aa00809_html_a2cf19ba78be6b54f66823d58f34f2a53"><div class="ttname"><a href="a00809.html#a2cf19ba78be6b54f66823d58f34f2a53">iterate</a></div><div class="ttdeci">#define iterate(l)</div><div class="ttdef"><b>Definition:</b> <a href="a00809_source.html#l00092">oldlist.h:92</a></div></div>
+<div class="ttc" id="aa00749_html_a31e740a46d077ad41735bbd17b0bef34"><div class="ttname"><a href="a00749.html#a31e740a46d077ad41735bbd17b0bef34">NormalizeOutlineX</a></div><div class="ttdeci">void NormalizeOutlineX(FEATURE_SET FeatureSet)</div><div class="ttdef"><b>Definition:</b> <a href="a00749_source.html#l00144">outfeat.cpp:144</a></div></div>
+<div class="ttc" id="aa00752_html_ab73697b859e4921472c6cf1de43267a1ab72d959dbf0e92bfdb6f3ebf9d0b35e6"><div class="ttname"><a href="a00752.html#ab73697b859e4921472c6cf1de43267a1ab72d959dbf0e92bfdb6f3ebf9d0b35e6">OutlineFeatX</a></div><div class="ttdef"><b>Definition:</b> <a href="a00752_source.html#l00042">outfeat.h:42</a></div></div>
+<div class="ttc" id="aa00641_html"><div class="ttname"><a href="a00641.html">classify.h</a></div></div>
+<div class="ttc" id="aa03326_html_af5f8cefc59003cce4cc41164e914bd4b"><div class="ttname"><a href="a03326.html#af5f8cefc59003cce4cc41164e914bd4b">FEATURE_SET_STRUCT::NumFeatures</a></div><div class="ttdeci">uint16_t NumFeatures</div><div class="ttdef"><b>Definition:</b> <a href="a00746_source.html#l00065">ocrfeatures.h:65</a></div></div>
+<div class="ttc" id="aa00749_html_a46e551093fc5d100adbb071067948bd9"><div class="ttname"><a href="a00749.html#a46e551093fc5d100adbb071067948bd9">ConvertToOutlineFeatures</a></div><div class="ttdeci">void ConvertToOutlineFeatures(MFOUTLINE Outline, FEATURE_SET FeatureSet)</div><div class="ttdef"><b>Definition:</b> <a href="a00749_source.html#l00106">outfeat.cpp:106</a></div></div>
+<div class="ttc" id="aa00722_html_a3bebacc8131f75b46dc7a107d22fcae2"><div class="ttname"><a href="a00722.html#a3bebacc8131f75b46dc7a107d22fcae2">AverageOf</a></div><div class="ttdeci">#define AverageOf(A, B)</div><div class="ttdef"><b>Definition:</b> <a href="a00722_source.html#l00067">mfoutline.h:67</a></div></div>
+<div class="ttc" id="aa00752_html_ac29e72cf5bfbadc9a7b2490ffdda297f"><div class="ttname"><a href="a00752.html#ac29e72cf5bfbadc9a7b2490ffdda297f">MAX_OUTLINE_FEATURES</a></div><div class="ttdeci">#define MAX_OUTLINE_FEATURES</div><div class="ttdef"><b>Definition:</b> <a href="a00752_source.html#l00034">outfeat.h:34</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_26a98b1b7a71b8b8c9c7d7743e94ea74.html">cutil</a></li><li class="navelem"><a class="el" href="a00749.html">emalloc.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:14 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b8f5fb7b736ee5431a221bc7b817d6e0.html">classify</a></li><li class="navelem"><a class="el" href="a00749.html">outfeat.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:20 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

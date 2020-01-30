@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/textord/linefind.cpp File Reference</title>
+<title>tesseract: /tesseract/src/textord/colpartitionset.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,61 +87,42 @@ $(document).ready(function(){initNavTree('a01049.html','');});
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#typedef-members">Typedefs</a>  </div>
   <div class="headertitle">
-<div class="title">linefind.cpp File Reference</div>  </div>
+<div class="title">colpartitionset.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="a01052_source.html">linefind.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00938_source.html">alignedblob.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a01118_source.html">tabvector.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00203_source.html">blobbox.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a01016_source.html">edgblob.h</a>&quot;</code><br />
-<code>#include &quot;allheaders.h&quot;</code><br />
-<code>#include &lt;algorithm&gt;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a01037_source.html">colpartition.h</a>&quot;</code><br />
+<code>#include &lt;<a class="el" href="a00011_source.html">tesseract/genericvector.h</a>&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00431_source.html">rect.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a01169_source.html">tabvector.h</a>&quot;</code><br />
 </div>
 <p><a href="a01049_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:a01539"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html">tesseract</a></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03710.html">tesseract::ColPartitionSet</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:af5a3375be81da4b1d09d654fed77617a"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#af5a3375be81da4b1d09d654fed77617a">tesseract::kThinLineFraction</a> = 20</td></tr>
-<tr class="memdesc:af5a3375be81da4b1d09d654fed77617a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Denominator of resolution makes max pixel width to allow thin lines.  <a href="a01539.html#af5a3375be81da4b1d09d654fed77617a">More...</a><br /></td></tr>
-<tr class="separator:af5a3375be81da4b1d09d654fed77617a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab1ecce6329628c52853d15330697b9a5"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#ab1ecce6329628c52853d15330697b9a5">tesseract::kMinLineLengthFraction</a> = 4</td></tr>
-<tr class="memdesc:ab1ecce6329628c52853d15330697b9a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Denominator of resolution makes min pixels to demand line lengths to be.  <a href="a01539.html#ab1ecce6329628c52853d15330697b9a5">More...</a><br /></td></tr>
-<tr class="separator:ab1ecce6329628c52853d15330697b9a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67e1606288499ff9e08833b9c2a1ded8"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#a67e1606288499ff9e08833b9c2a1ded8">tesseract::kCrackSpacing</a> = 100</td></tr>
-<tr class="memdesc:a67e1606288499ff9e08833b9c2a1ded8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Spacing of cracks across the page to break up tall vertical lines.  <a href="a01539.html#a67e1606288499ff9e08833b9c2a1ded8">More...</a><br /></td></tr>
-<tr class="separator:a67e1606288499ff9e08833b9c2a1ded8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acbcf973384ce439c1b3ab4decf0c383c"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#acbcf973384ce439c1b3ab4decf0c383c">tesseract::kLineFindGridSize</a> = 50</td></tr>
-<tr class="memdesc:acbcf973384ce439c1b3ab4decf0c383c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grid size used by line finder. Not very critical.  <a href="a01539.html#acbcf973384ce439c1b3ab4decf0c383c">More...</a><br /></td></tr>
-<tr class="separator:acbcf973384ce439c1b3ab4decf0c383c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8109c0293738c5b8a499baf96e6191e2"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#a8109c0293738c5b8a499baf96e6191e2">tesseract::kMinThickLineWidth</a> = 12</td></tr>
-<tr class="separator:a8109c0293738c5b8a499baf96e6191e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab97d7447e46667c618a568b97b96bb3c"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#ab97d7447e46667c618a568b97b96bb3c">tesseract::kMaxLineResidue</a> = 6</td></tr>
-<tr class="separator:ab97d7447e46667c618a568b97b96bb3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6978c95cbd05d6aef11ca4b7850a1a6b"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#a6978c95cbd05d6aef11ca4b7850a1a6b">tesseract::kThickLengthMultiple</a> = 0.75</td></tr>
-<tr class="separator:a6978c95cbd05d6aef11ca4b7850a1a6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a88f852ceee95241622ec0f837dbfeff8"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#a88f852ceee95241622ec0f837dbfeff8">tesseract::kMaxNonLineDensity</a> = 0.25</td></tr>
-<tr class="separator:a88f852ceee95241622ec0f837dbfeff8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a40e2e4747be3bc8a6358a023e2e3a001"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#a40e2e4747be3bc8a6358a023e2e3a001">tesseract::kMaxStaveHeight</a> = 1.0</td></tr>
-<tr class="separator:a40e2e4747be3bc8a6358a023e2e3a001"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a064746ea8b34175e6f12ce364c8d6414"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#a064746ea8b34175e6f12ce364c8d6414">tesseract::kMinMusicPixelFraction</a> = 0.75</td></tr>
-<tr class="separator:a064746ea8b34175e6f12ce364c8d6414"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:a01818"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html">tesseract</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a6fb32beebbc5c707d14869180acab99c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a6fb32beebbc5c707d14869180acab99c">tesseract::PartSetVector</a> = <a class="el" href="a02434.html">GenericVector</a>&lt; ColPartitionSet * &gt;</td></tr>
+<tr class="separator:a6fb32beebbc5c707d14869180acab99c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_930fe0a3c40775bbdbdb97cea0f56396.html">textord</a></li><li class="navelem"><a class="el" href="a01049.html">linefind.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_930fe0a3c40775bbdbdb97cea0f56396.html">textord</a></li><li class="navelem"><a class="el" href="a01049.html">colpartitionset.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

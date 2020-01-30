@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/ccutil/unicharcompress.cpp Source File</title>
+<title>tesseract: /tesseract/src/ccutil/kdpair.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,481 +87,247 @@ $(document).ready(function(){initNavTree('a00539_source.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">unicharcompress.cpp</div>  </div>
+<div class="title">kdpair.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00539.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// File:        unicharcompress.cpp</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// Description: Unicode re-encoding using a sequence of smaller numbers in</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//              place of a single large code for CJK, similarly for Indic,</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//              and dissection of ligatures for other scripts.</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">// Author:      Ray Smith</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">//</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// (C) Copyright 2015, Google Inc.</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// you may not use this file except in compliance with the License.</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">// You may obtain a copy of the License at</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// http://www.apache.org/licenses/LICENSE-2.0</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// Unless required by applicable law or agreed to in writing, software</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">// distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">// See the License for the specific language governing permissions and</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">// limitations under the License.</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">//</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00542.html">unicharcompress.h</a>&quot;</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;algorithm&gt;</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00533.html">tprintf.h</a>&quot;</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">namespace </span><a class="code" href="a01539.html">tesseract</a> {</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">// String used to represent the null_id in direct_set.</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* kNullChar = <span class="stringliteral">&quot;&lt;nul&gt;&quot;</span>;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">// Radix to make unique values from the stored radical codes.</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="a01539.html#a2738132c216bcc67a245095afdb0fe4e">   31</a></span>&#160;<span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="a01539.html#a2738132c216bcc67a245095afdb0fe4e">kRadicalRadix</a> = 29;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">// &quot;Hash&quot; function for const std::vector&lt;int&gt; computes the sum of elements.</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">// Build a unique number for each code sequence that we can use as the index in</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">// a hash map of ints instead of trying to hash the vectors.</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">static</span> <span class="keywordtype">int</span> RadicalPreHash(<span class="keyword">const</span> std::vector&lt;int&gt;&amp; rs) {</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <span class="keywordtype">size_t</span> result = 0;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> radical : rs) {</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    result *= <a class="code" href="a01539.html#a2738132c216bcc67a245095afdb0fe4e">kRadicalRadix</a>;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    result += radical;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  }</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;}</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">// A hash map to convert unicodes to radical encoding.</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="a01539.html#a30a7244d45a567b0861117d7552234fe">   46</a></span>&#160;<span class="keyword">using</span> <a class="code" href="a01539.html#a30a7244d45a567b0861117d7552234fe">RSMap</a> = std::unordered_map&lt;int, std::unique_ptr&lt;std::vector&lt;int&gt;&gt;&gt;;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">// A hash map to count occurrences of each radical encoding.</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="a01539.html#a474c83e45e23b095f4e4f0964c55088f">   48</a></span>&#160;<span class="keyword">using</span> <a class="code" href="a01539.html#a474c83e45e23b095f4e4f0964c55088f">RSCounts</a> = std::unordered_map&lt;int, int&gt;;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">static</span> <span class="keywordtype">bool</span> DecodeRadicalLine(STRING* radical_data_line, <a class="code" href="a01539.html#a30a7244d45a567b0861117d7552234fe">RSMap</a>* radical_map) {</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <span class="keywordflow">if</span> (radical_data_line-&gt;length() == 0 || (*radical_data_line)[0] == <span class="charliteral">&#39;#&#39;</span>)</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <a class="code" href="a02108.html">GenericVector&lt;STRING&gt;</a> entries;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  radical_data_line-&gt;split(<span class="charliteral">&#39; &#39;</span>, &amp;entries);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <span class="keywordflow">if</span> (entries.size() &lt; 2) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="keywordtype">char</span>* end = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="keywordtype">int</span> unicode = strtol(&amp;entries[0][0], &amp;end, 10);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="keywordflow">if</span> (*end != <span class="charliteral">&#39;\0&#39;</span>) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  std::unique_ptr&lt;std::vector&lt;int&gt;&gt; radicals(<span class="keyword">new</span> std::vector&lt;int&gt;);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 1; i &lt; entries.size(); ++i) {</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordtype">int</span> radical = strtol(&amp;entries[i][0], &amp;end, 10);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">if</span> (*end != <span class="charliteral">&#39;\0&#39;</span>) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    radicals-&gt;push_back(radical);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  }</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  (*radical_map)[unicode] = std::move(radicals);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;}</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">// Helper function builds the RSMap from the radical-stroke file, which has</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">// already been read into a STRING. Returns false on error.</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">// The radical_stroke_table is non-const because it gets split and the caller</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">// is unlikely to want to use it again.</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="keyword">static</span> <span class="keywordtype">bool</span> DecodeRadicalTable(STRING* radical_data, <a class="code" href="a01539.html#a30a7244d45a567b0861117d7552234fe">RSMap</a>* radical_map) {</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <a class="code" href="a02108.html">GenericVector&lt;STRING&gt;</a> lines;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  radical_data-&gt;split(<span class="charliteral">&#39;\n&#39;</span>, &amp;lines);</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; lines.size(); ++i) {</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordflow">if</span> (!DecodeRadicalLine(&amp;lines[i], radical_map)) {</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;      <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Invalid format in radical table at line %d: %s\n&quot;</span>, i,</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;              lines[i].c_str());</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    }</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  }</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;}</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="a02640.html#ad13539ee3894c6f60168e08b0d82dca7">   86</a></span>&#160;<a class="code" href="a02640.html#ad13539ee3894c6f60168e08b0d82dca7">UnicharCompress::UnicharCompress</a>() : code_range_(0) {}</div>
-<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="a02640.html#a7bd11b6be6aaec295c2cc3ff0a8838f4">   87</a></span>&#160;<a class="code" href="a02640.html#ad13539ee3894c6f60168e08b0d82dca7">UnicharCompress::UnicharCompress</a>(<span class="keyword">const</span> <a class="code" href="a02640.html">UnicharCompress</a>&amp; src) { *<span class="keyword">this</span> = src; }</div>
-<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="a02640.html#af12c9cd895ba4bce9b72ebd1d0ede999">   88</a></span>&#160;<a class="code" href="a02640.html#af12c9cd895ba4bce9b72ebd1d0ede999">UnicharCompress::~UnicharCompress</a>() { Cleanup(); }</div>
-<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="a02640.html#a5567b92ea92badc8b5d1df7e53597193">   89</a></span>&#160;<a class="code" href="a02640.html">UnicharCompress</a>&amp; <a class="code" href="a02640.html#a5567b92ea92badc8b5d1df7e53597193">UnicharCompress::operator=</a>(<span class="keyword">const</span> <a class="code" href="a02640.html">UnicharCompress</a>&amp; src) {</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  Cleanup();</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  encoder_ = src.encoder_;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  code_range_ = src.code_range_;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  SetupDecoder();</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;}</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">// Computes the encoding for the given unicharset. It is a requirement that</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">// the file training/langdata/radical-stroke.txt have been read into the</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">// input string radical_stroke_table.</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">// Returns false if the encoding cannot be constructed.</span></div>
-<div class="line"><a name="l00101"></a><span class="lineno"><a class="line" href="a02640.html#aa12a59d53189f280301137fb0a2dd89b">  101</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a02640.html#aa12a59d53189f280301137fb0a2dd89b">UnicharCompress::ComputeEncoding</a>(<span class="keyword">const</span> <a class="code" href="a02660.html">UNICHARSET</a>&amp; unicharset, <span class="keywordtype">int</span> null_id,</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                                      STRING* radical_stroke_table) {</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  <a class="code" href="a01539.html#a30a7244d45a567b0861117d7552234fe">RSMap</a> radical_map;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  <span class="keywordflow">if</span> (radical_stroke_table != <span class="keyword">nullptr</span> &amp;&amp;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;      !DecodeRadicalTable(radical_stroke_table, &amp;radical_map))</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;  encoder_.clear();</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  <a class="code" href="a02660.html">UNICHARSET</a> direct_set;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;  <span class="comment">// To avoid unused codes, clear the special codes from the direct_set.</span></div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  direct_set.<a class="code" href="a02660.html#ad9060160cd52065e89cbc8927454f525">clear</a>();</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;  <span class="comment">// Always keep space as 0;</span></div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  direct_set.<a class="code" href="a02660.html#a530f4509dd75dccb3c9b4d84ad9eb6c7">unichar_insert</a>(<span class="stringliteral">&quot; &quot;</span>, <a class="code" href="a00554.html#ac02dd4bef57fd7a3804c1ce60e9ea867a66e2fa9ba4f5420341b16f9d6365f428">OldUncleanUnichars::kTrue</a>);</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  <span class="comment">// Null char is next if we have one.</span></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  <span class="keywordflow">if</span> (null_id &gt;= 0) {</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    direct_set.<a class="code" href="a02660.html#a530f4509dd75dccb3c9b4d84ad9eb6c7">unichar_insert</a>(kNullChar);</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  }</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  <a class="code" href="a01539.html#a474c83e45e23b095f4e4f0964c55088f">RSCounts</a> radical_counts;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  <span class="comment">// In the initial map, codes [0, unicharset.size()) are</span></div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;  <span class="comment">// reserved for non-han/hangul sequences of 1 or more unicodes.</span></div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  <span class="keywordtype">int</span> hangul_offset = unicharset.<a class="code" href="a02660.html#adb332692009836a2d89e5fdf63f9765f">size</a>();</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;  <span class="comment">// Hangul takes the next range [hangul_offset, hangul_offset + kTotalJamos).</span></div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">int</span> kTotalJamos = <a class="code" href="a02640.html#ac6520b8037498fe1f70ecf68046c1ac9">kLCount</a> + <a class="code" href="a02640.html#a4f308dd69ffad28d5aaff5ab3a75315b">kVCount</a> + <a class="code" href="a02640.html#a8605805f057f5e5ac2b5e295210a35ad">kTCount</a>;</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  <span class="comment">// Han takes the codes beyond hangul_offset + kTotalJamos. Since it is hard</span></div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;  <span class="comment">// to measure the number of radicals and strokes, initially we use the same</span></div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;  <span class="comment">// code range for all 3 Han code positions, and fix them after.</span></div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;  <span class="keywordtype">int</span> han_offset = hangul_offset + kTotalJamos;</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> u = 0; u &lt;= unicharset.<a class="code" href="a02660.html#adb332692009836a2d89e5fdf63f9765f">size</a>(); ++u) {</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    <span class="comment">// We special-case allow null_id to be equal to unicharset.size() in case</span></div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="comment">// there is no space in unicharset for it.</span></div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <span class="keywordflow">if</span> (u == unicharset.<a class="code" href="a02660.html#adb332692009836a2d89e5fdf63f9765f">size</a>() &amp;&amp; u != null_id) <span class="keywordflow">break</span>;  <span class="comment">// Finished</span></div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <a class="code" href="a02632.html">RecodedCharID</a> code;</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <span class="comment">// Convert to unicodes.</span></div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    std::vector&lt;char32&gt; unicodes;</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    std::string cleaned;</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="keywordflow">if</span> (u &lt; unicharset.<a class="code" href="a02660.html#adb332692009836a2d89e5fdf63f9765f">size</a>())</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;      cleaned = <a class="code" href="a02660.html#ad86de791b6cc9379ad7aa23cb4865693">UNICHARSET::CleanupString</a>(unicharset.<a class="code" href="a02660.html#aa19fb595808fe4688c580334937dfa45">id_to_unichar</a>(u));</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    <span class="keywordflow">if</span> (u &lt; unicharset.<a class="code" href="a02660.html#adb332692009836a2d89e5fdf63f9765f">size</a>() &amp;&amp;</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        (unicodes = UNICHAR::UTF8ToUTF32(cleaned.c_str())).size() == 1) {</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;      <span class="comment">// Check single unicodes for Hangul/Han and encode if so.</span></div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;      <span class="keywordtype">int</span> unicode = unicodes[0];</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;      <span class="keywordtype">int</span> leading, vowel, trailing;</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;      <span class="keyword">auto</span> it = radical_map.find(unicode);</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;      <span class="keywordflow">if</span> (it != radical_map.end()) {</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        <span class="comment">// This is Han. Use the radical codes directly.</span></div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        <span class="keywordtype">int</span> num_radicals = it-&gt;second-&gt;size();</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> c = 0; c &lt; num_radicals; ++c) {</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;          code.<a class="code" href="a02632.html#a816743e98acb17b9314bddb510ee84d1">Set</a>(c, han_offset + (*it-&gt;second)[c]);</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        }</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        <span class="keywordtype">int</span> pre_hash = RadicalPreHash(*it-&gt;second);</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        <span class="keywordtype">int</span> num_samples = radical_counts[pre_hash]++;</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        <span class="keywordflow">if</span> (num_samples &gt; 0)</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;          code.<a class="code" href="a02632.html#a816743e98acb17b9314bddb510ee84d1">Set</a>(num_radicals, han_offset + num_samples + <a class="code" href="a01539.html#a2738132c216bcc67a245095afdb0fe4e">kRadicalRadix</a>);</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;      } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code" href="a02640.html#a455997987cd56c9ee3f82560b6cf34f5">DecomposeHangul</a>(unicode, &amp;leading, &amp;vowel, &amp;trailing)) {</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        <span class="comment">// This is Hangul. Since we know the exact size of each part at compile</span></div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        <span class="comment">// time, it gets the bottom set of codes.</span></div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        code.<a class="code" href="a02632.html#ae787729a3fc850a2d64513723f6335fa">Set3</a>(leading + hangul_offset, vowel + <a class="code" href="a02640.html#ac6520b8037498fe1f70ecf68046c1ac9">kLCount</a> + hangul_offset,</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;                  trailing + <a class="code" href="a02640.html#ac6520b8037498fe1f70ecf68046c1ac9">kLCount</a> + <a class="code" href="a02640.html#a4f308dd69ffad28d5aaff5ab3a75315b">kVCount</a> + hangul_offset);</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;      }</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    }</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    <span class="comment">// If the code is still empty, it wasn&#39;t Han or Hangul.</span></div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    <span class="keywordflow">if</span> (code.<a class="code" href="a02632.html#a396517c98d5df536951c45995ca9a5eb">length</a>() == 0) {</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;      <span class="comment">// Special cases.</span></div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;      <span class="keywordflow">if</span> (u == <a class="code" href="a00554.html#a08fdf52fb8650b2a0752cfd7bd236871af05dfe36988b7a26764e26e820873a71">UNICHAR_SPACE</a>) {</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        code.<a class="code" href="a02632.html#a816743e98acb17b9314bddb510ee84d1">Set</a>(0, 0);  <span class="comment">// Space.</span></div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;      } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (u == null_id || (unicharset.<a class="code" href="a02660.html#ae73eb409dc9bdc965a572c4fdd010e62">has_special_codes</a>() &amp;&amp;</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                                  u &lt; <a class="code" href="a00554.html#a08fdf52fb8650b2a0752cfd7bd236871a8540b0ebc6d41518429e513986a2e522">SPECIAL_UNICHAR_CODES_COUNT</a>)) {</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        code.<a class="code" href="a02632.html#a816743e98acb17b9314bddb510ee84d1">Set</a>(0, direct_set.<a class="code" href="a02660.html#aeb2253dcb5f01c81fcba5f4af417eadf">unichar_to_id</a>(kNullChar));</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;      } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        <span class="comment">// Add the direct_set unichar-ids of the unicodes in sequence to the</span></div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        <span class="comment">// code.</span></div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> uni : unicodes) {</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;          <span class="keywordtype">int</span> position = code.<a class="code" href="a02632.html#a396517c98d5df536951c45995ca9a5eb">length</a>();</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;          <span class="keywordflow">if</span> (position &gt;= <a class="code" href="a02632.html#ab14d83aeda6b05089481d8a49c22705e">RecodedCharID::kMaxCodeLen</a>) {</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;            <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Unichar %d=%s is too long to encode!!\n&quot;</span>, u,</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;                    unicharset.<a class="code" href="a02660.html#aa19fb595808fe4688c580334937dfa45">id_to_unichar</a>(u));</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;          }</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;          UNICHAR unichar(uni);</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;          <span class="keywordtype">char</span>* utf8 = unichar.utf8_str();</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;          <span class="keywordflow">if</span> (!direct_set.<a class="code" href="a02660.html#a7b52b091edd0c1f5e17539f0d6af0e88">contains_unichar</a>(utf8))</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;            direct_set.<a class="code" href="a02660.html#a530f4509dd75dccb3c9b4d84ad9eb6c7">unichar_insert</a>(utf8);</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;          code.<a class="code" href="a02632.html#a816743e98acb17b9314bddb510ee84d1">Set</a>(position, direct_set.<a class="code" href="a02660.html#aeb2253dcb5f01c81fcba5f4af417eadf">unichar_to_id</a>(utf8));</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;          <span class="keyword">delete</span>[] utf8;</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;          <span class="keywordflow">if</span> (direct_set.<a class="code" href="a02660.html#adb332692009836a2d89e5fdf63f9765f">size</a>() &gt;</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;              unicharset.<a class="code" href="a02660.html#adb332692009836a2d89e5fdf63f9765f">size</a>() + !unicharset.<a class="code" href="a02660.html#ae73eb409dc9bdc965a572c4fdd010e62">has_special_codes</a>()) {</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;            <span class="comment">// Code space got bigger!</span></div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;            <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Code space expanded from original unicharset!!\n&quot;</span>);</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;          }</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;        }</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;      }</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    }</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    encoder_.push_back(code);</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;  }</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;  <span class="comment">// Now renumber Han to make all codes unique. We already added han_offset to</span></div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;  <span class="comment">// all Han. Now separate out the radical, stroke, and count codes for Han.</span></div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;  <span class="keywordtype">int</span> code_offset = 0;</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="a02632.html#ab14d83aeda6b05089481d8a49c22705e">RecodedCharID::kMaxCodeLen</a>; ++i) {</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    <span class="keywordtype">int</span> max_offset = 0;</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> u = 0; u &lt; unicharset.<a class="code" href="a02660.html#adb332692009836a2d89e5fdf63f9765f">size</a>(); ++u) {</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;      <a class="code" href="a02632.html">RecodedCharID</a>* code = &amp;encoder_[u];</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;      <span class="keywordflow">if</span> (code-&gt;<a class="code" href="a02632.html#a396517c98d5df536951c45995ca9a5eb">length</a>() &lt;= i) <span class="keywordflow">continue</span>;</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;      max_offset = std::max(max_offset, (*code)(i)-han_offset);</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;      code-&gt;<a class="code" href="a02632.html#a816743e98acb17b9314bddb510ee84d1">Set</a>(i, (*code)(i) + code_offset);</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    }</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    <span class="keywordflow">if</span> (max_offset == 0) <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    code_offset += max_offset + 1;</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;  }</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;  DefragmentCodeValues(null_id &gt;= 0 ? 1 : -1);</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;  SetupDecoder();</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;}</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160; </div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="comment">// Sets up an encoder that doesn&#39;t change the unichars at all, so it just</span></div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="comment">// passes them through unchanged.</span></div>
-<div class="line"><a name="l00216"></a><span class="lineno"><a class="line" href="a02640.html#ad6f515f8cfe34171e6c3004ecbab7257">  216</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02640.html#ad6f515f8cfe34171e6c3004ecbab7257">UnicharCompress::SetupPassThrough</a>(<span class="keyword">const</span> <a class="code" href="a02660.html">UNICHARSET</a>&amp; unicharset) {</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;  <a class="code" href="a02108.html">GenericVector&lt;RecodedCharID&gt;</a> codes;</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> u = 0; u &lt; unicharset.<a class="code" href="a02660.html#adb332692009836a2d89e5fdf63f9765f">size</a>(); ++u) {</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    <a class="code" href="a02632.html">RecodedCharID</a> code;</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    code.<a class="code" href="a02632.html#a816743e98acb17b9314bddb510ee84d1">Set</a>(0, u);</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    codes.push_back(code);</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;  }</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;  <span class="keywordflow">if</span> (!unicharset.<a class="code" href="a02660.html#ae73eb409dc9bdc965a572c4fdd010e62">has_special_codes</a>()) {</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    <a class="code" href="a02632.html">RecodedCharID</a> code;</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    code.<a class="code" href="a02632.html#a816743e98acb17b9314bddb510ee84d1">Set</a>(0, unicharset.<a class="code" href="a02660.html#adb332692009836a2d89e5fdf63f9765f">size</a>());</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    codes.push_back(code);</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;  }</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;  <a class="code" href="a02640.html#a0d14d5a45539ccf5ac7915c722147279">SetupDirect</a>(codes);</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;}</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160; </div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="comment">// Sets up an encoder directly using the given encoding vector, which maps</span></div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="comment">// unichar_ids to the given codes.</span></div>
-<div class="line"><a name="l00233"></a><span class="lineno"><a class="line" href="a02640.html#a0d14d5a45539ccf5ac7915c722147279">  233</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="a02640.html#a0d14d5a45539ccf5ac7915c722147279">UnicharCompress::SetupDirect</a>(<span class="keyword">const</span> <a class="code" href="a02108.html">GenericVector&lt;RecodedCharID&gt;</a>&amp; codes) {</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;  encoder_ = codes;</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;  ComputeCodeRange();</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;  SetupDecoder();</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;}</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160; </div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;<span class="comment">// Renumbers codes to eliminate unused values.</span></div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;<span class="keywordtype">void</span> UnicharCompress::DefragmentCodeValues(<span class="keywordtype">int</span> encoded_null) {</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;  <span class="comment">// There may not be any Hangul, but even if there is, it is possible that not</span></div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;  <span class="comment">// all codes are used. Likewise with the Han encoding, it is possible that not</span></div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;  <span class="comment">// all numbers of strokes are used.</span></div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;  ComputeCodeRange();</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;  <a class="code" href="a02108.html">GenericVector&lt;int&gt;</a> offsets;</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;  offsets.init_to_size(code_range_, 0);</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;  <span class="comment">// Find which codes are used</span></div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> c = 0; c &lt; encoder_.size(); ++c) {</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    <span class="keyword">const</span> <a class="code" href="a02632.html">RecodedCharID</a>&amp; code = encoder_[c];</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; code.<a class="code" href="a02632.html#a396517c98d5df536951c45995ca9a5eb">length</a>(); ++i) {</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;      offsets[code(i)] = 1;</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    }</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;  }</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;  <span class="comment">// Compute offsets based on code use.</span></div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;  <span class="keywordtype">int</span> offset = 0;</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; offsets.size(); ++i) {</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    <span class="comment">// If not used, decrement everything above here.</span></div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    <span class="comment">// We are moving encoded_null to the end, so it is not &quot;used&quot;.</span></div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    <span class="keywordflow">if</span> (offsets[i] == 0 || i == encoded_null) {</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;      --offset;</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;      offsets[i] = offset;</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    }</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;  }</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;  <span class="keywordflow">if</span> (encoded_null &gt;= 0) {</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    <span class="comment">// The encoded_null is moving to the end, for the benefit of TensorFlow,</span></div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    <span class="comment">// which is offsets.size() + offsets.back().</span></div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    offsets[encoded_null] = offsets.size() + offsets.back() - encoded_null;</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;  }</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;  <span class="comment">// Now apply the offsets.</span></div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> c = 0; c &lt; encoder_.size(); ++c) {</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    RecodedCharID* code = &amp;encoder_[c];</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; code-&gt;length(); ++i) {</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;      <span class="keywordtype">int</span> value = (*code)(i);</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;      code-&gt;Set(i, value + offsets[value]);</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    }</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;  }</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;  ComputeCodeRange();</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;}</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160; </div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;<span class="comment">// Encodes a single unichar_id. Returns the length of the code, or zero if</span></div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;<span class="comment">// invalid input, and the encoding itself</span></div>
-<div class="line"><a name="l00283"></a><span class="lineno"><a class="line" href="a02640.html#a1344fd6a906976847f768c5e19616fec">  283</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="a02640.html#a1344fd6a906976847f768c5e19616fec">UnicharCompress::EncodeUnichar</a>(<span class="keywordtype">int</span> unichar_id, <a class="code" href="a02632.html">RecodedCharID</a>* code)<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;  <span class="keywordflow">if</span> (unichar_id &lt; 0 || unichar_id &gt;= encoder_.size()) <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;  *code = encoder_[unichar_id];</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;  <span class="keywordflow">return</span> code-&gt;<a class="code" href="a02632.html#a396517c98d5df536951c45995ca9a5eb">length</a>();</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;}</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160; </div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;<span class="comment">// Decodes code, returning the original unichar-id, or</span></div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;<span class="comment">// INVALID_UNICHAR_ID if the input is invalid.</span></div>
-<div class="line"><a name="l00291"></a><span class="lineno"><a class="line" href="a02640.html#adc5e7879cb94c13e3be16b3d78d8bee7">  291</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="a02640.html#adc5e7879cb94c13e3be16b3d78d8bee7">UnicharCompress::DecodeUnichar</a>(<span class="keyword">const</span> <a class="code" href="a02632.html">RecodedCharID</a>&amp; code)<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;  <span class="keywordtype">int</span> len = code.<a class="code" href="a02632.html#a396517c98d5df536951c45995ca9a5eb">length</a>();</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;  <span class="keywordflow">if</span> (len &lt;= 0 || len &gt; <a class="code" href="a02632.html#ab14d83aeda6b05089481d8a49c22705e">RecodedCharID::kMaxCodeLen</a>) <span class="keywordflow">return</span> INVALID_UNICHAR_ID;</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;  <span class="keyword">auto</span> it = decoder_.find(code);</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;  <span class="keywordflow">if</span> (it == decoder_.end()) <span class="keywordflow">return</span> INVALID_UNICHAR_ID;</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;  <span class="keywordflow">return</span> it-&gt;second;</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;}</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160; </div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;<span class="comment">// Writes to the given file. Returns false in case of error.</span></div>
-<div class="line"><a name="l00300"></a><span class="lineno"><a class="line" href="a02640.html#ae8f6ab9d2f6664a20dbd4298e9676b8d">  300</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a02640.html#ae8f6ab9d2f6664a20dbd4298e9676b8d">UnicharCompress::Serialize</a>(TFile* fp)<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;  <span class="keywordflow">return</span> encoder_.SerializeClasses(fp);</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;}</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160; </div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;<span class="comment">// Reads from the given file. Returns false in case of error.</span></div>
-<div class="line"><a name="l00305"></a><span class="lineno"><a class="line" href="a02640.html#a4f4bd237a3483cd76152bccd83fcd95c">  305</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a02640.html#a4f4bd237a3483cd76152bccd83fcd95c">UnicharCompress::DeSerialize</a>(TFile* fp) {</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;  <span class="keywordflow">if</span> (!encoder_.DeSerializeClasses(fp)) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;  ComputeCodeRange();</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;  SetupDecoder();</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;}</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160; </div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;<span class="comment">// Returns a STRING containing a text file that describes the encoding thus:</span></div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;<span class="comment">// &lt;index&gt;[,&lt;index&gt;]*&lt;tab&gt;&lt;UTF8-str&gt;&lt;newline&gt;</span></div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;<span class="comment">// In words, a comma-separated list of one or more indices, followed by a tab</span></div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;<span class="comment">// and the UTF-8 string that the code represents per line. Most simple scripts</span></div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;<span class="comment">// will encode a single index to a UTF8-string, but Chinese, Japanese, Korean</span></div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;<span class="comment">// and the Indic scripts will contain a many-to-many mapping.</span></div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;<span class="comment">// See the class comment above for details.</span></div>
-<div class="line"><a name="l00319"></a><span class="lineno"><a class="line" href="a02640.html#a2605df3e09ca2bac04ea7dc645907cac">  319</a></span>&#160;STRING <a class="code" href="a02640.html#a2605df3e09ca2bac04ea7dc645907cac">UnicharCompress::GetEncodingAsString</a>(</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;    <span class="keyword">const</span> <a class="code" href="a02660.html">UNICHARSET</a>&amp; unicharset)<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;  STRING encoding;</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> c = 0; c &lt; encoder_.size(); ++c) {</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;    <span class="keyword">const</span> <a class="code" href="a02632.html">RecodedCharID</a>&amp; code = encoder_[c];</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    <span class="keywordflow">if</span> (0 &lt; c &amp;&amp; c &lt; <a class="code" href="a00554.html#a08fdf52fb8650b2a0752cfd7bd236871a8540b0ebc6d41518429e513986a2e522">SPECIAL_UNICHAR_CODES_COUNT</a> &amp;&amp; code == encoder_[c - 1]) {</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;      <span class="comment">// Don&#39;t show the duplicate entry.</span></div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;      <span class="keywordflow">continue</span>;</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    }</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;    encoding.add_str_int(<span class="stringliteral">&quot;&quot;</span>, code(0));</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 1; i &lt; code.<a class="code" href="a02632.html#a396517c98d5df536951c45995ca9a5eb">length</a>(); ++i) {</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;      encoding.add_str_int(<span class="stringliteral">&quot;,&quot;</span>, code(i));</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;    }</div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    encoding += <span class="stringliteral">&quot;\t&quot;</span>;</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    <span class="keywordflow">if</span> (c &gt;= unicharset.<a class="code" href="a02660.html#adb332692009836a2d89e5fdf63f9765f">size</a>() || (0 &lt; c &amp;&amp; c &lt; <a class="code" href="a00554.html#a08fdf52fb8650b2a0752cfd7bd236871a8540b0ebc6d41518429e513986a2e522">SPECIAL_UNICHAR_CODES_COUNT</a> &amp;&amp;</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;                                   unicharset.<a class="code" href="a02660.html#ae73eb409dc9bdc965a572c4fdd010e62">has_special_codes</a>())) {</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;      encoding += kNullChar;</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;      encoding += unicharset.<a class="code" href="a02660.html#aa19fb595808fe4688c580334937dfa45">id_to_unichar</a>(c);</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;    }</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;    encoding += <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;  }</div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;  <span class="keywordflow">return</span> encoding;</div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;}</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160; </div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;<span class="comment">// Helper decomposes a Hangul unicode to 3 parts, leading, vowel, trailing.</span></div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;<span class="comment">// Note that the returned values are 0-based indices, NOT unicode Jamo.</span></div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;<span class="comment">// Returns false if the input is not in the Hangul unicode range.</span></div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;<span class="comment">/* static */</span></div>
-<div class="line"><a name="l00348"></a><span class="lineno"><a class="line" href="a02640.html#a455997987cd56c9ee3f82560b6cf34f5">  348</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a02640.html#a455997987cd56c9ee3f82560b6cf34f5">UnicharCompress::DecomposeHangul</a>(<span class="keywordtype">int</span> unicode, <span class="keywordtype">int</span>* leading, <span class="keywordtype">int</span>* vowel,</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;                                      <span class="keywordtype">int</span>* trailing) {</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;  <span class="keywordflow">if</span> (unicode &lt; <a class="code" href="a02640.html#a76e362bb4f5c745e29a98cf72638f366">kFirstHangul</a>) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;  <span class="keywordtype">int</span> offset = unicode - <a class="code" href="a02640.html#a76e362bb4f5c745e29a98cf72638f366">kFirstHangul</a>;</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;  <span class="keywordflow">if</span> (offset &gt;= <a class="code" href="a02640.html#a5118c20c52f90fd9f707bad710234481">kNumHangul</a>) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">int</span> kNCount = <a class="code" href="a02640.html#a4f308dd69ffad28d5aaff5ab3a75315b">kVCount</a> * <a class="code" href="a02640.html#a8605805f057f5e5ac2b5e295210a35ad">kTCount</a>;</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;  *leading = offset / kNCount;</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;  *vowel = (offset % kNCount) / <a class="code" href="a02640.html#a8605805f057f5e5ac2b5e295210a35ad">kTCount</a>;</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;  *trailing = offset % <a class="code" href="a02640.html#a8605805f057f5e5ac2b5e295210a35ad">kTCount</a>;</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;}</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160; </div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;<span class="comment">// Computes the value of code_range_ from the encoder_.</span></div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;<span class="keywordtype">void</span> UnicharCompress::ComputeCodeRange() {</div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;  code_range_ = -1;</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> c = 0; c &lt; encoder_.size(); ++c) {</div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;    <span class="keyword">const</span> <a class="code" href="a02632.html">RecodedCharID</a>&amp; code = encoder_[c];</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; code.<a class="code" href="a02632.html#a396517c98d5df536951c45995ca9a5eb">length</a>(); ++i) {</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;      <span class="keywordflow">if</span> (code(i) &gt; code_range_) code_range_ = code(i);</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;    }</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;  }</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;  ++code_range_;</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;}</div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160; </div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;<span class="comment">// Initializes the decoding hash_map from the encoding array.</span></div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;<span class="keywordtype">void</span> UnicharCompress::SetupDecoder() {</div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;  Cleanup();</div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;  is_valid_start_.init_to_size(code_range_, <span class="keyword">false</span>);</div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> c = 0; c &lt; encoder_.size(); ++c) {</div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;    <span class="keyword">const</span> RecodedCharID&amp; code = encoder_[c];</div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;    decoder_[code] = c;</div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;    is_valid_start_[code(0)] = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;    RecodedCharID prefix = code;</div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;    <span class="keywordtype">int</span> len = code.length() - 1;</div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;    prefix.Truncate(len);</div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;    <span class="keyword">auto</span> final_it = final_codes_.find(prefix);</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;    <span class="keywordflow">if</span> (final_it == final_codes_.end()) {</div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;      <span class="keyword">auto</span>* code_list = <span class="keyword">new</span> GenericVectorEqEq&lt;int&gt;;</div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;      code_list-&gt;push_back(code(len));</div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;      final_codes_[prefix] = code_list;</div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;      <span class="keywordflow">while</span> (--len &gt;= 0) {</div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;        prefix.Truncate(len);</div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;        <span class="keyword">auto</span> next_it = next_codes_.find(prefix);</div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;        <span class="keywordflow">if</span> (next_it == next_codes_.end()) {</div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;          <span class="keyword">auto</span>* code_list = <span class="keyword">new</span> GenericVectorEqEq&lt;int&gt;;</div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;          code_list-&gt;push_back(code(len));</div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;          next_codes_[prefix] = code_list;</div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;          <span class="comment">// We still have to search the list as we may get here via multiple</span></div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;          <span class="comment">// lengths of code.</span></div>
-<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;          <span class="keywordflow">if</span> (!next_it-&gt;second-&gt;contains(code(len)))</div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;            next_it-&gt;second-&gt;push_back(code(len));</div>
-<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;          <span class="keywordflow">break</span>;  <span class="comment">// This prefix has been processed.</span></div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;        }</div>
-<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;      }</div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;      <span class="keywordflow">if</span> (!final_it-&gt;second-&gt;contains(code(len)))</div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;        final_it-&gt;second-&gt;push_back(code(len));</div>
-<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;    }</div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;  }</div>
-<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;}</div>
-<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160; </div>
-<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;<span class="comment">// Frees allocated memory.</span></div>
-<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;<span class="keywordtype">void</span> UnicharCompress::Cleanup() {</div>
-<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;  decoder_.clear();</div>
-<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;  is_valid_start_.clear();</div>
-<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;  <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; next_code : next_codes_) {</div>
-<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;    <span class="keyword">delete</span> next_code.second;</div>
-<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;  }</div>
-<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;  <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; final_code : final_codes_) {</div>
-<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;    <span class="keyword">delete</span> final_code.second;</div>
-<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;  }</div>
-<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;  next_codes_.clear();</div>
-<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;  final_codes_.clear();</div>
-<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;}</div>
-<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160; </div>
-<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;}  <span class="comment">// namespace tesseract.</span></div>
+<a href="a00539.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// Copyright 2012 Google Inc. All Rights Reserved.</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Author: rays@google.com (Ray Smith)</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"></span><span class="comment">// File:        kdpair.h</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">// Description: Template pair class like STL pair but geared towards</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">//              the Key+Data design pattern in which some data needs</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">//              to be sorted or kept in a heap sorted on some separate key.</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// Author:      Ray Smith.</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">// Created:     Thu Mar 15 14:48:05 PDT 2012</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">// (C) Copyright 2012, Google Inc.</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// you may not use this file except in compliance with the License.</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">// You may obtain a copy of the License at</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">// http://www.apache.org/licenses/LICENSE-2.0</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">// Unless required by applicable law or agreed to in writing, software</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">// distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">// See the License for the specific language governing permissions and</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">// limitations under the License.</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#ifndef TESSERACT_CCUTIL_KDPAIR_H_</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#define TESSERACT_CCUTIL_KDPAIR_H_</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00011.html">tesseract/genericvector.h</a>&gt;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">namespace </span><a class="code" href="a01818.html">tesseract</a> {</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">// A useful base struct to facilitate the common operation of sorting a vector</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">// of simple or smart-pointer data using a separate key. Similar to STL pair.</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> Key, <span class="keyword">typename</span> Data&gt;</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="a03010.html">   34</a></span>&#160;<span class="keyword">struct </span><a class="code" href="a03010.html">KDPair</a> {</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <a class="code" href="a03010.html#ab9a4d0d89058ac11b5d8b9752a53df18">KDPair</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="a03010.html#aaaf889a954d5385eb495bd560d7d9ccc">   36</a></span>&#160;  <a class="code" href="a03010.html#aaaf889a954d5385eb495bd560d7d9ccc">KDPair</a>(Key k, Data d) : <a class="code" href="a03010.html#a1eb0fe4be23a765672c220d76d3a9569">data</a>(d), <a class="code" href="a03010.html#a0d26774f49567160f75fb9ad422f86db">key</a>(k) {}</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="a03010.html#a4ddfb0e9f7e0ade504bd26c566b0be2a">   38</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="a03010.html#a4ddfb0e9f7e0ade504bd26c566b0be2a">operator==</a>(<span class="keyword">const</span> <a class="code" href="a03010.html">KDPair&lt;Key, Data&gt;</a>&amp; other)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="a03010.html#a0d26774f49567160f75fb9ad422f86db">key</a> == other.<a class="code" href="a03010.html#a0d26774f49567160f75fb9ad422f86db">key</a>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  }</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <span class="comment">// WARNING! Keep data as the first element! KDPairInc and KDPairDec depend</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="comment">// on the order of these elements so they can downcast pointers appropriately</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <span class="comment">// for use by GenericHeap::Reshuffle.</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="a03010.html#a1eb0fe4be23a765672c220d76d3a9569">   45</a></span>&#160;  Data <a class="code" href="a03010.html#a1eb0fe4be23a765672c220d76d3a9569">data</a>;</div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="a03010.html#a0d26774f49567160f75fb9ad422f86db">   46</a></span>&#160;  Key <a class="code" href="a03010.html#a0d26774f49567160f75fb9ad422f86db">key</a>;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;};</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">// Specialization of KDPair to provide operator&lt; for sorting in increasing order</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">// and recasting of data pointers for use with DoublePtr.</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> Key, <span class="keyword">typename</span> Data&gt;</div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="a03014.html">   51</a></span>&#160;<span class="keyword">struct </span><a class="code" href="a03014.html">KDPairInc</a> : <span class="keyword">public</span> <a class="code" href="a03010.html">KDPair</a>&lt;Key, Data&gt; {</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <a class="code" href="a03014.html#afbbd183338cc5ef9524b696a1053bdf3">KDPairInc</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="a03014.html#a7eaa49d49e9ed9cb8cc978894abad937">   53</a></span>&#160;  <a class="code" href="a03014.html#a7eaa49d49e9ed9cb8cc978894abad937">KDPairInc</a>(Key k, Data d) : <a class="code" href="a03010.html">KDPair</a>&lt;Key, Data&gt;(k, d) {}</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="comment">// Operator&lt; facilitates sorting in increasing order.</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="a03014.html#a1057084a80e4feca7aeedac5a5b77727">   55</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="a03014.html#a1057084a80e4feca7aeedac5a5b77727">operator&lt;</a>(<span class="keyword">const</span> <a class="code" href="a03014.html">KDPairInc&lt;Key, Data&gt;</a>&amp; other)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">return</span> this-&gt;<a class="code" href="a03010.html#a0d26774f49567160f75fb9ad422f86db">key</a> &lt; other.<a class="code" href="a03010.html#a0d26774f49567160f75fb9ad422f86db">key</a>;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  }</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="comment">// Returns the input Data pointer recast to a KDPairInc pointer.</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="comment">// Just casts a pointer to the first element to a pointer to the whole struct.</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="a03014.html#abfbfb5f2a09b4436553abd75b978e899">   60</a></span>&#160;  <span class="keyword">static</span> <a class="code" href="a03014.html">KDPairInc</a>* <a class="code" href="a03014.html#abfbfb5f2a09b4436553abd75b978e899">RecastDataPointer</a>(Data* data_ptr) {</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordflow">return</span> reinterpret_cast&lt;KDPairInc*&gt;(data_ptr);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  }</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;};</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">// Specialization of KDPair to provide operator&lt; for sorting in decreasing order</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">// and recasting of data pointers for use with DoublePtr.</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> Key, <span class="keyword">typename</span> Data&gt;</div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="a03018.html">   67</a></span>&#160;<span class="keyword">struct </span><a class="code" href="a03018.html">KDPairDec</a> : <span class="keyword">public</span> <a class="code" href="a03010.html">KDPair</a>&lt;Key, Data&gt; {</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <a class="code" href="a03018.html#a5c5e7590f785582c4480b4a590edec38">KDPairDec</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="a03018.html#a10ca5a57df855e898889c9f318df915b">   69</a></span>&#160;  <a class="code" href="a03018.html#a10ca5a57df855e898889c9f318df915b">KDPairDec</a>(Key k, Data d) : <a class="code" href="a03010.html">KDPair</a>&lt;Key, Data&gt;(k, d) {}</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="comment">// Operator&lt; facilitates sorting in decreasing order by using operator&gt; on</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <span class="comment">// the key values.</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="a03018.html#a1d2d29e340a35bcf4004bb9b4d0115ab">   72</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="a03018.html#a1d2d29e340a35bcf4004bb9b4d0115ab">operator&lt;</a>(<span class="keyword">const</span> <a class="code" href="a03018.html">KDPairDec&lt;Key, Data&gt;</a>&amp; other)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">return</span> this-&gt;<a class="code" href="a03010.html#a0d26774f49567160f75fb9ad422f86db">key</a> &gt; other.<a class="code" href="a03010.html#a0d26774f49567160f75fb9ad422f86db">key</a>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  }</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <span class="comment">// Returns the input Data pointer recast to a KDPairDec pointer.</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  <span class="comment">// Just casts a pointer to the first element to a pointer to the whole struct.</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="a03018.html#acea957c3b0021c7ff5bc440782e8555d">   77</a></span>&#160;  <span class="keyword">static</span> <a class="code" href="a03018.html">KDPairDec</a>* <a class="code" href="a03018.html#acea957c3b0021c7ff5bc440782e8555d">RecastDataPointer</a>(Data* data_ptr) {</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordflow">return</span> reinterpret_cast&lt;KDPairDec*&gt;(data_ptr);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  }</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;};</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">// A useful base class to facilitate the common operation of sorting a vector</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">// of owned pointer data using a separate key. This class owns its data pointer,</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">// deleting it when it has finished with it, and providing copy constructor and</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">// operator= that have move semantics so that the data does not get copied and</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment">// only a single instance of KDPtrPair holds a specific data pointer.</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> Key, <span class="keyword">typename</span> Data&gt;</div>
+<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="a03022.html">   88</a></span>&#160;<span class="keyword">class </span><a class="code" href="a03022.html">KDPtrPair</a> {</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="a03022.html#a3b351c5190e9502fa1b5f88cb6bb6468">   90</a></span>&#160;  <a class="code" href="a03022.html#a3b351c5190e9502fa1b5f88cb6bb6468">KDPtrPair</a>() : data_(nullptr) {}</div>
+<div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="a03022.html#afeb98f739f769c74b27e91b70f5b3374">   91</a></span>&#160;  <a class="code" href="a03022.html#afeb98f739f769c74b27e91b70f5b3374">KDPtrPair</a>(Key k, Data* d) : data_(d), key_(k) {}</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  <span class="comment">// Copy constructor steals the pointer from src and nulls it in src, thereby</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <span class="comment">// moving the (single) ownership of the data.</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="a03022.html#a474b5a9ff4bdffa2bb37bb7b9bd0e3f0">   94</a></span>&#160;  <a class="code" href="a03022.html#a474b5a9ff4bdffa2bb37bb7b9bd0e3f0">KDPtrPair</a>(<a class="code" href="a03022.html">KDPtrPair</a>&amp; src) : data_(src.data_), key_(src.key_) {</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    src.data_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  }</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  <span class="comment">// Destructor deletes data, assuming it is the sole owner.</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="a03022.html#a0dd5aa44f67c73eac209a6d360223a3b">   98</a></span>&#160;  <a class="code" href="a03022.html#a0dd5aa44f67c73eac209a6d360223a3b">~KDPtrPair</a>() {</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keyword">delete</span> this-&gt;data_;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    this-&gt;data_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  }</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  <span class="comment">// Operator= steals the pointer from src and nulls it in src, thereby</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  <span class="comment">// moving the (single) ownership of the data.</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno"><a class="line" href="a03022.html#ae35002534ea37b0cbd3eb40f4279242e">  104</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a03022.html#ae35002534ea37b0cbd3eb40f4279242e">operator=</a>(<a class="code" href="a03022.html">KDPtrPair</a>&amp; src) {</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keyword">delete</span> this-&gt;data_;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    this-&gt;data_ = src.data_;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    src.data_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    this-&gt;key_ = src.key_;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;  }</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="a03022.html#ad2a67d82aea71a7c40e44046f81a14eb">  111</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="a03022.html#ad2a67d82aea71a7c40e44046f81a14eb">operator==</a>(<span class="keyword">const</span> <a class="code" href="a03022.html">KDPtrPair&lt;Key, Data&gt;</a>&amp; other)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordflow">return</span> key_ == other.key_;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  }</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;  <span class="comment">// Accessors.</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno"><a class="line" href="a03022.html#a3939a49da305c180c0cebe3c3908536a">  116</a></span>&#160;  <span class="keyword">const</span> Key&amp; <a class="code" href="a03022.html#a3939a49da305c180c0cebe3c3908536a">key</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keywordflow">return</span> key_;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  }</div>
+<div class="line"><a name="l00119"></a><span class="lineno"><a class="line" href="a03022.html#a66952a7e1b678e2fbd830a0431743f01">  119</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a03022.html#a66952a7e1b678e2fbd830a0431743f01">set_key</a>(<span class="keyword">const</span> Key&amp; new_key) {</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    key_ = new_key;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;  }</div>
+<div class="line"><a name="l00122"></a><span class="lineno"><a class="line" href="a03022.html#ae52998914f73b2c6478a249aa051e829">  122</a></span>&#160;  <span class="keyword">const</span> Data* <a class="code" href="a03022.html#ae52998914f73b2c6478a249aa051e829">data</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="keywordflow">return</span> data_;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;  }</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;  <span class="comment">// Sets the data pointer, taking ownership of the data.</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno"><a class="line" href="a03022.html#a31f9e6ac64804372c9ffa62fa19a917e">  126</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a03022.html#a31f9e6ac64804372c9ffa62fa19a917e">set_data</a>(Data* new_data) {</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keyword">delete</span> data_;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    data_ = new_data;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;  }</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;  <span class="comment">// Relinquishes ownership of the data pointer (setting it to nullptr).</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno"><a class="line" href="a03022.html#a96830e91a71998656a657f2fea34e02e">  131</a></span>&#160;  Data* <a class="code" href="a03022.html#a96830e91a71998656a657f2fea34e02e">extract_data</a>() {</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    Data* result = data_;</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    data_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;  }</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;  <span class="comment">// Data members are private to keep deletion of data_ encapsulated.</span></div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;  Data* data_;</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;  Key key_;</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;};</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="comment">// Specialization of KDPtrPair to provide operator&lt; for sorting in increasing</span></div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="comment">// order.</span></div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> Key, <span class="keyword">typename</span> Data&gt;</div>
+<div class="line"><a name="l00145"></a><span class="lineno"><a class="line" href="a03026.html">  145</a></span>&#160;<span class="keyword">struct </span><a class="code" href="a03026.html">KDPtrPairInc</a> : <span class="keyword">public</span> <a class="code" href="a03022.html">KDPtrPair</a>&lt;Key, Data&gt; {</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;  <span class="comment">// Since we are doing non-standard stuff we have to duplicate *all* the</span></div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;  <span class="comment">// constructors and operator=.</span></div>
+<div class="line"><a name="l00148"></a><span class="lineno"><a class="line" href="a03026.html#a0c175b237de7ccf3b5dca5fb7c4d3f0a">  148</a></span>&#160;  <a class="code" href="a03026.html#a0c175b237de7ccf3b5dca5fb7c4d3f0a">KDPtrPairInc</a>() : <a class="code" href="a03022.html">KDPtrPair</a>&lt;Key, Data&gt;() {}</div>
+<div class="line"><a name="l00149"></a><span class="lineno"><a class="line" href="a03026.html#ae4981bd9170f69ba3df8ffa4eccc0c3e">  149</a></span>&#160;  <a class="code" href="a03026.html#ae4981bd9170f69ba3df8ffa4eccc0c3e">KDPtrPairInc</a>(Key k, Data* d) : <a class="code" href="a03022.html">KDPtrPair</a>&lt;Key, Data&gt;(k, d) {}</div>
+<div class="line"><a name="l00150"></a><span class="lineno"><a class="line" href="a03026.html#ad9ebc2b73d9a992744014b1ca4403fec">  150</a></span>&#160;  <a class="code" href="a03026.html#ad9ebc2b73d9a992744014b1ca4403fec">KDPtrPairInc</a>(<a class="code" href="a03026.html">KDPtrPairInc</a>&amp; src) : <a class="code" href="a03022.html">KDPtrPair</a>&lt;Key, Data&gt;(src) {}</div>
+<div class="line"><a name="l00151"></a><span class="lineno"><a class="line" href="a03026.html#a32b11c56e00528acfd1179312906ca9c">  151</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a03026.html#a32b11c56e00528acfd1179312906ca9c">operator=</a>(<a class="code" href="a03026.html">KDPtrPairInc</a>&amp; src) {</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <a class="code" href="a03022.html#ae35002534ea37b0cbd3eb40f4279242e">KDPtrPair&lt;Key, Data&gt;::operator=</a>(src);</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;  }</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;  <span class="comment">// Operator&lt; facilitates sorting in increasing order.</span></div>
+<div class="line"><a name="l00155"></a><span class="lineno"><a class="line" href="a03026.html#a0dec01a4fae079a3a5ae1ee0829c4f46">  155</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="a03026.html#a0dec01a4fae079a3a5ae1ee0829c4f46">operator&lt;</a>(<span class="keyword">const</span> <a class="code" href="a03026.html">KDPtrPairInc&lt;Key, Data&gt;</a>&amp; other)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    <span class="keywordflow">return</span> this-&gt;<a class="code" href="a03022.html#a3939a49da305c180c0cebe3c3908536a">key</a>() &lt; other.<a class="code" href="a03022.html#a3939a49da305c180c0cebe3c3908536a">key</a>();</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;  }</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;};</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="comment">// Specialization of KDPtrPair to provide operator&lt; for sorting in decreasing</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="comment">// order.</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> Key, <span class="keyword">typename</span> Data&gt;</div>
+<div class="line"><a name="l00162"></a><span class="lineno"><a class="line" href="a03030.html">  162</a></span>&#160;<span class="keyword">struct </span><a class="code" href="a03030.html">KDPtrPairDec</a> : <span class="keyword">public</span> <a class="code" href="a03022.html">KDPtrPair</a>&lt;Key, Data&gt; {</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;  <span class="comment">// Since we are doing non-standard stuff we have to duplicate *all* the</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;  <span class="comment">// constructors and operator=.</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno"><a class="line" href="a03030.html#a88576381c9b70ceba4588c15afe87ba6">  165</a></span>&#160;  <a class="code" href="a03030.html#a88576381c9b70ceba4588c15afe87ba6">KDPtrPairDec</a>() : <a class="code" href="a03022.html">KDPtrPair</a>&lt;Key, Data&gt;() {}</div>
+<div class="line"><a name="l00166"></a><span class="lineno"><a class="line" href="a03030.html#afd878d7982c9034e7f74ccc25afa3a06">  166</a></span>&#160;  <a class="code" href="a03030.html#afd878d7982c9034e7f74ccc25afa3a06">KDPtrPairDec</a>(Key k, Data* d) : <a class="code" href="a03022.html">KDPtrPair</a>&lt;Key, Data&gt;(k, d) {}</div>
+<div class="line"><a name="l00167"></a><span class="lineno"><a class="line" href="a03030.html#a9e37786e520622d6f83af69ee0e23626">  167</a></span>&#160;  <a class="code" href="a03030.html#a9e37786e520622d6f83af69ee0e23626">KDPtrPairDec</a>(<a class="code" href="a03030.html">KDPtrPairDec</a>&amp; src) : <a class="code" href="a03022.html">KDPtrPair</a>&lt;Key, Data&gt;(src) {}</div>
+<div class="line"><a name="l00168"></a><span class="lineno"><a class="line" href="a03030.html#adf0d49eaa0bcecc420df97ca60203513">  168</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a03030.html#adf0d49eaa0bcecc420df97ca60203513">operator=</a>(<a class="code" href="a03030.html">KDPtrPairDec</a>&amp; src) {</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    <a class="code" href="a03022.html#ae35002534ea37b0cbd3eb40f4279242e">KDPtrPair&lt;Key, Data&gt;::operator=</a>(src);</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;  }</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;  <span class="comment">// Operator&lt; facilitates sorting in decreasing order by using operator&gt; on</span></div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;  <span class="comment">// the key values.</span></div>
+<div class="line"><a name="l00173"></a><span class="lineno"><a class="line" href="a03030.html#a1bb105fd17702d12a268b746c9402a03">  173</a></span>&#160;  <span class="keywordtype">int</span> <a class="code" href="a03030.html#a1bb105fd17702d12a268b746c9402a03">operator&lt;</a>(<span class="keyword">const</span> <a class="code" href="a03030.html">KDPtrPairDec&lt;Key, Data&gt;</a>&amp; other)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    <span class="keywordflow">return</span> this-&gt;<a class="code" href="a03022.html#a3939a49da305c180c0cebe3c3908536a">key</a>() &gt; other.<a class="code" href="a03022.html#a3939a49da305c180c0cebe3c3908536a">key</a>();</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;  }</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;};</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; </div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="comment">// Specialization for a pair of ints in increasing order.</span></div>
+<div class="line"><a name="l00179"></a><span class="lineno"><a class="line" href="a01818.html#a61d3dfb89c07a224b04301e626217590">  179</a></span>&#160;<span class="keyword">using</span> <a class="code" href="a03014.html">IntKDPair</a> = <a class="code" href="a03014.html">KDPairInc&lt;int, int&gt;</a>;</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; </div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="comment">// Vector of IntKDPair.</span></div>
+<div class="line"><a name="l00182"></a><span class="lineno"><a class="line" href="a03034.html">  182</a></span>&#160;<span class="keyword">class </span><a class="code" href="a03034.html">KDVector</a> : <span class="keyword">public</span> <a class="code" href="a02434.html">GenericVector</a>&lt;IntKDPair&gt; {</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;  <span class="comment">// TODO(rays) Add some code to manipulate a KDVector. For now there</span></div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;  <span class="comment">// is nothing and this class is effectively a specialization typedef.</span></div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;};</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160; </div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;}  <span class="comment">// namespace tesseract</span></div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; </div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="preprocessor">#endif  // TESSERACT_CCUTIL_KDPAIR_H_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa01539_html_a2738132c216bcc67a245095afdb0fe4e"><div class="ttname"><a href="a01539.html#a2738132c216bcc67a245095afdb0fe4e">tesseract::kRadicalRadix</a></div><div class="ttdeci">const int kRadicalRadix</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00031">unicharcompress.cpp:31</a></div></div>
-<div class="ttc" id="aa02660_html_aeb2253dcb5f01c81fcba5f4af417eadf"><div class="ttname"><a href="a02660.html#aeb2253dcb5f01c81fcba5f4af417eadf">UNICHARSET::unichar_to_id</a></div><div class="ttdeci">UNICHAR_ID unichar_to_id(const char *const unichar_repr) const</div><div class="ttdef"><b>Definition:</b> <a href="a00551_source.html#l00209">unicharset.cpp:209</a></div></div>
-<div class="ttc" id="aa02632_html_a396517c98d5df536951c45995ca9a5eb"><div class="ttname"><a href="a02632.html#a396517c98d5df536951c45995ca9a5eb">tesseract::RecodedCharID::length</a></div><div class="ttdeci">int length() const</div><div class="ttdef"><b>Definition:</b> <a href="a00542_source.html#l00057">unicharcompress.h:57</a></div></div>
-<div class="ttc" id="aa02640_html_adc5e7879cb94c13e3be16b3d78d8bee7"><div class="ttname"><a href="a02640.html#adc5e7879cb94c13e3be16b3d78d8bee7">tesseract::UnicharCompress::DecodeUnichar</a></div><div class="ttdeci">int DecodeUnichar(const RecodedCharID &amp;code) const</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00291">unicharcompress.cpp:291</a></div></div>
-<div class="ttc" id="aa02660_html_a7b52b091edd0c1f5e17539f0d6af0e88"><div class="ttname"><a href="a02660.html#a7b52b091edd0c1f5e17539f0d6af0e88">UNICHARSET::contains_unichar</a></div><div class="ttdeci">bool contains_unichar(const char *const unichar_repr) const</div><div class="ttdef"><b>Definition:</b> <a href="a00551_source.html#l00670">unicharset.cpp:670</a></div></div>
-<div class="ttc" id="aa02640_html_a76e362bb4f5c745e29a98cf72638f366"><div class="ttname"><a href="a02640.html#a76e362bb4f5c745e29a98cf72638f366">tesseract::UnicharCompress::kFirstHangul</a></div><div class="ttdeci">static const int kFirstHangul</div><div class="ttdef"><b>Definition:</b> <a href="a00542_source.html#l00136">unicharcompress.h:136</a></div></div>
-<div class="ttc" id="aa02632_html_a816743e98acb17b9314bddb510ee84d1"><div class="ttname"><a href="a02632.html#a816743e98acb17b9314bddb510ee84d1">tesseract::RecodedCharID::Set</a></div><div class="ttdeci">void Set(int index, int value)</div><div class="ttdef"><b>Definition:</b> <a href="a00542_source.html#l00044">unicharcompress.h:44</a></div></div>
-<div class="ttc" id="aa00542_html"><div class="ttname"><a href="a00542.html">unicharcompress.h</a></div></div>
-<div class="ttc" id="aa02640_html_ae8f6ab9d2f6664a20dbd4298e9676b8d"><div class="ttname"><a href="a02640.html#ae8f6ab9d2f6664a20dbd4298e9676b8d">tesseract::UnicharCompress::Serialize</a></div><div class="ttdeci">bool Serialize(TFile *fp) const</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00300">unicharcompress.cpp:300</a></div></div>
-<div class="ttc" id="aa02660_html_ae73eb409dc9bdc965a572c4fdd010e62"><div class="ttname"><a href="a02660.html#ae73eb409dc9bdc965a572c4fdd010e62">UNICHARSET::has_special_codes</a></div><div class="ttdeci">bool has_special_codes() const</div><div class="ttdef"><b>Definition:</b> <a href="a00554_source.html#l00712">unicharset.h:712</a></div></div>
-<div class="ttc" id="aa02632_html_ae787729a3fc850a2d64513723f6335fa"><div class="ttname"><a href="a02632.html#ae787729a3fc850a2d64513723f6335fa">tesseract::RecodedCharID::Set3</a></div><div class="ttdeci">void Set3(int code0, int code1, int code2)</div><div class="ttdef"><b>Definition:</b> <a href="a00542_source.html#l00050">unicharcompress.h:50</a></div></div>
-<div class="ttc" id="aa02640_html_a455997987cd56c9ee3f82560b6cf34f5"><div class="ttname"><a href="a02640.html#a455997987cd56c9ee3f82560b6cf34f5">tesseract::UnicharCompress::DecomposeHangul</a></div><div class="ttdeci">static bool DecomposeHangul(int unicode, int *leading, int *vowel, int *trailing)</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00348">unicharcompress.cpp:348</a></div></div>
-<div class="ttc" id="aa02660_html_adb332692009836a2d89e5fdf63f9765f"><div class="ttname"><a href="a02660.html#adb332692009836a2d89e5fdf63f9765f">UNICHARSET::size</a></div><div class="ttdeci">int size() const</div><div class="ttdef"><b>Definition:</b> <a href="a00554_source.html#l00341">unicharset.h:341</a></div></div>
-<div class="ttc" id="aa00554_html_a08fdf52fb8650b2a0752cfd7bd236871a8540b0ebc6d41518429e513986a2e522"><div class="ttname"><a href="a00554.html#a08fdf52fb8650b2a0752cfd7bd236871a8540b0ebc6d41518429e513986a2e522">SPECIAL_UNICHAR_CODES_COUNT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00554_source.html#l00038">unicharset.h:38</a></div></div>
-<div class="ttc" id="aa02660_html_a530f4509dd75dccb3c9b4d84ad9eb6c7"><div class="ttname"><a href="a02660.html#a530f4509dd75dccb3c9b4d84ad9eb6c7">UNICHARSET::unichar_insert</a></div><div class="ttdeci">void unichar_insert(const char *const unichar_repr, OldUncleanUnichars old_style)</div><div class="ttdef"><b>Definition:</b> <a href="a00551_source.html#l00625">unicharset.cpp:625</a></div></div>
-<div class="ttc" id="aa02660_html_ad86de791b6cc9379ad7aa23cb4865693"><div class="ttname"><a href="a02660.html#ad86de791b6cc9379ad7aa23cb4865693">UNICHARSET::CleanupString</a></div><div class="ttdeci">static std::string CleanupString(const char *utf8_str)</div><div class="ttdef"><b>Definition:</b> <a href="a00554_source.html#l00246">unicharset.h:246</a></div></div>
-<div class="ttc" id="aa02640_html_aa12a59d53189f280301137fb0a2dd89b"><div class="ttname"><a href="a02640.html#aa12a59d53189f280301137fb0a2dd89b">tesseract::UnicharCompress::ComputeEncoding</a></div><div class="ttdeci">bool ComputeEncoding(const UNICHARSET &amp;unicharset, int null_id, STRING *radical_stroke_table)</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00101">unicharcompress.cpp:101</a></div></div>
-<div class="ttc" id="aa02108_html"><div class="ttname"><a href="a02108.html">GenericVector&lt; STRING &gt;</a></div></div>
-<div class="ttc" id="aa00533_html"><div class="ttname"><a href="a00533.html">tprintf.h</a></div></div>
-<div class="ttc" id="aa02660_html_aa19fb595808fe4688c580334937dfa45"><div class="ttname"><a href="a02660.html#aa19fb595808fe4688c580334937dfa45">UNICHARSET::id_to_unichar</a></div><div class="ttdeci">const char * id_to_unichar(UNICHAR_ID id) const</div><div class="ttdef"><b>Definition:</b> <a href="a00551_source.html#l00290">unicharset.cpp:290</a></div></div>
-<div class="ttc" id="aa02640_html_a0d14d5a45539ccf5ac7915c722147279"><div class="ttname"><a href="a02640.html#a0d14d5a45539ccf5ac7915c722147279">tesseract::UnicharCompress::SetupDirect</a></div><div class="ttdeci">void SetupDirect(const GenericVector&lt; RecodedCharID &gt; &amp;codes)</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00233">unicharcompress.cpp:233</a></div></div>
-<div class="ttc" id="aa02640_html_ac6520b8037498fe1f70ecf68046c1ac9"><div class="ttname"><a href="a02640.html#ac6520b8037498fe1f70ecf68046c1ac9">tesseract::UnicharCompress::kLCount</a></div><div class="ttdeci">static const int kLCount</div><div class="ttdef"><b>Definition:</b> <a href="a00542_source.html#l00141">unicharcompress.h:141</a></div></div>
-<div class="ttc" id="aa02632_html_ab14d83aeda6b05089481d8a49c22705e"><div class="ttname"><a href="a02632.html#ab14d83aeda6b05089481d8a49c22705e">tesseract::RecodedCharID::kMaxCodeLen</a></div><div class="ttdeci">static const int kMaxCodeLen</div><div class="ttdef"><b>Definition:</b> <a href="a00542_source.html#l00037">unicharcompress.h:37</a></div></div>
-<div class="ttc" id="aa02640_html_a5118c20c52f90fd9f707bad710234481"><div class="ttname"><a href="a02640.html#a5118c20c52f90fd9f707bad710234481">tesseract::UnicharCompress::kNumHangul</a></div><div class="ttdeci">static const int kNumHangul</div><div class="ttdef"><b>Definition:</b> <a href="a00542_source.html#l00138">unicharcompress.h:138</a></div></div>
-<div class="ttc" id="aa02660_html"><div class="ttname"><a href="a02660.html">UNICHARSET</a></div><div class="ttdef"><b>Definition:</b> <a href="a00554_source.html#l00145">unicharset.h:145</a></div></div>
-<div class="ttc" id="aa00530_html_a0c2bcd4462ec67ab0971b34a0f610f55"><div class="ttname"><a href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a></div><div class="ttdeci">DLLSYM void tprintf(const char *format,...)</div><div class="ttdef"><b>Definition:</b> <a href="a00530_source.html#l00034">tprintf.cpp:34</a></div></div>
-<div class="ttc" id="aa02640_html_a4f308dd69ffad28d5aaff5ab3a75315b"><div class="ttname"><a href="a02640.html#a4f308dd69ffad28d5aaff5ab3a75315b">tesseract::UnicharCompress::kVCount</a></div><div class="ttdeci">static const int kVCount</div><div class="ttdef"><b>Definition:</b> <a href="a00542_source.html#l00142">unicharcompress.h:142</a></div></div>
-<div class="ttc" id="aa02660_html_ad9060160cd52065e89cbc8927454f525"><div class="ttname"><a href="a02660.html#ad9060160cd52065e89cbc8927454f525">UNICHARSET::clear</a></div><div class="ttdeci">void clear()</div><div class="ttdef"><b>Definition:</b> <a href="a00554_source.html#l00306">unicharset.h:306</a></div></div>
-<div class="ttc" id="aa02640_html_af12c9cd895ba4bce9b72ebd1d0ede999"><div class="ttname"><a href="a02640.html#af12c9cd895ba4bce9b72ebd1d0ede999">tesseract::UnicharCompress::~UnicharCompress</a></div><div class="ttdeci">~UnicharCompress()</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00088">unicharcompress.cpp:88</a></div></div>
-<div class="ttc" id="aa02640_html_ad13539ee3894c6f60168e08b0d82dca7"><div class="ttname"><a href="a02640.html#ad13539ee3894c6f60168e08b0d82dca7">tesseract::UnicharCompress::UnicharCompress</a></div><div class="ttdeci">UnicharCompress()</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00086">unicharcompress.cpp:86</a></div></div>
-<div class="ttc" id="aa02640_html_a4f4bd237a3483cd76152bccd83fcd95c"><div class="ttname"><a href="a02640.html#a4f4bd237a3483cd76152bccd83fcd95c">tesseract::UnicharCompress::DeSerialize</a></div><div class="ttdeci">bool DeSerialize(TFile *fp)</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00305">unicharcompress.cpp:305</a></div></div>
-<div class="ttc" id="aa02640_html_ad6f515f8cfe34171e6c3004ecbab7257"><div class="ttname"><a href="a02640.html#ad6f515f8cfe34171e6c3004ecbab7257">tesseract::UnicharCompress::SetupPassThrough</a></div><div class="ttdeci">void SetupPassThrough(const UNICHARSET &amp;unicharset)</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00216">unicharcompress.cpp:216</a></div></div>
-<div class="ttc" id="aa02632_html"><div class="ttname"><a href="a02632.html">tesseract::RecodedCharID</a></div><div class="ttdef"><b>Definition:</b> <a href="a00542_source.html#l00034">unicharcompress.h:34</a></div></div>
-<div class="ttc" id="aa02640_html_a8605805f057f5e5ac2b5e295210a35ad"><div class="ttname"><a href="a02640.html#a8605805f057f5e5ac2b5e295210a35ad">tesseract::UnicharCompress::kTCount</a></div><div class="ttdeci">static const int kTCount</div><div class="ttdef"><b>Definition:</b> <a href="a00542_source.html#l00143">unicharcompress.h:143</a></div></div>
-<div class="ttc" id="aa01539_html"><div class="ttname"><a href="a01539.html">tesseract</a></div><div class="ttdef"><b>Definition:</b> <a href="a00002_source.html#l00025">altorenderer.cpp:25</a></div></div>
-<div class="ttc" id="aa02640_html"><div class="ttname"><a href="a02640.html">tesseract::UnicharCompress</a></div><div class="ttdef"><b>Definition:</b> <a href="a00542_source.html#l00128">unicharcompress.h:128</a></div></div>
-<div class="ttc" id="aa00554_html_ac02dd4bef57fd7a3804c1ce60e9ea867a66e2fa9ba4f5420341b16f9d6365f428"><div class="ttname"><a href="a00554.html#ac02dd4bef57fd7a3804c1ce60e9ea867a66e2fa9ba4f5420341b16f9d6365f428">OldUncleanUnichars::kTrue</a></div></div>
-<div class="ttc" id="aa02640_html_a2605df3e09ca2bac04ea7dc645907cac"><div class="ttname"><a href="a02640.html#a2605df3e09ca2bac04ea7dc645907cac">tesseract::UnicharCompress::GetEncodingAsString</a></div><div class="ttdeci">STRING GetEncodingAsString(const UNICHARSET &amp;unicharset) const</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00319">unicharcompress.cpp:319</a></div></div>
-<div class="ttc" id="aa02640_html_a5567b92ea92badc8b5d1df7e53597193"><div class="ttname"><a href="a02640.html#a5567b92ea92badc8b5d1df7e53597193">tesseract::UnicharCompress::operator=</a></div><div class="ttdeci">UnicharCompress &amp; operator=(const UnicharCompress &amp;src)</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00089">unicharcompress.cpp:89</a></div></div>
-<div class="ttc" id="aa01539_html_a474c83e45e23b095f4e4f0964c55088f"><div class="ttname"><a href="a01539.html#a474c83e45e23b095f4e4f0964c55088f">tesseract::RSCounts</a></div><div class="ttdeci">std::unordered_map&lt; int, int &gt; RSCounts</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00048">unicharcompress.cpp:48</a></div></div>
-<div class="ttc" id="aa01539_html_a30a7244d45a567b0861117d7552234fe"><div class="ttname"><a href="a01539.html#a30a7244d45a567b0861117d7552234fe">tesseract::RSMap</a></div><div class="ttdeci">std::unordered_map&lt; int, std::unique_ptr&lt; std::vector&lt; int &gt; &gt;&gt; RSMap</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00046">unicharcompress.cpp:46</a></div></div>
-<div class="ttc" id="aa00554_html_a08fdf52fb8650b2a0752cfd7bd236871af05dfe36988b7a26764e26e820873a71"><div class="ttname"><a href="a00554.html#a08fdf52fb8650b2a0752cfd7bd236871af05dfe36988b7a26764e26e820873a71">UNICHAR_SPACE</a></div><div class="ttdef"><b>Definition:</b> <a href="a00554_source.html#l00034">unicharset.h:34</a></div></div>
-<div class="ttc" id="aa02640_html_a1344fd6a906976847f768c5e19616fec"><div class="ttname"><a href="a02640.html#a1344fd6a906976847f768c5e19616fec">tesseract::UnicharCompress::EncodeUnichar</a></div><div class="ttdeci">int EncodeUnichar(int unichar_id, RecodedCharID *code) const</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00283">unicharcompress.cpp:283</a></div></div>
+<div class="ttc" id="aa03022_html_a0dd5aa44f67c73eac209a6d360223a3b"><div class="ttname"><a href="a03022.html#a0dd5aa44f67c73eac209a6d360223a3b">tesseract::KDPtrPair::~KDPtrPair</a></div><div class="ttdeci">~KDPtrPair()</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00098">kdpair.h:98</a></div></div>
+<div class="ttc" id="aa03022_html_afeb98f739f769c74b27e91b70f5b3374"><div class="ttname"><a href="a03022.html#afeb98f739f769c74b27e91b70f5b3374">tesseract::KDPtrPair::KDPtrPair</a></div><div class="ttdeci">KDPtrPair(Key k, Data *d)</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00091">kdpair.h:91</a></div></div>
+<div class="ttc" id="aa03014_html_a7eaa49d49e9ed9cb8cc978894abad937"><div class="ttname"><a href="a03014.html#a7eaa49d49e9ed9cb8cc978894abad937">tesseract::KDPairInc::KDPairInc</a></div><div class="ttdeci">KDPairInc(Key k, Data d)</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00053">kdpair.h:53</a></div></div>
+<div class="ttc" id="aa03030_html_a88576381c9b70ceba4588c15afe87ba6"><div class="ttname"><a href="a03030.html#a88576381c9b70ceba4588c15afe87ba6">tesseract::KDPtrPairDec::KDPtrPairDec</a></div><div class="ttdeci">KDPtrPairDec()</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00165">kdpair.h:165</a></div></div>
+<div class="ttc" id="aa03030_html"><div class="ttname"><a href="a03030.html">tesseract::KDPtrPairDec</a></div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00162">kdpair.h:162</a></div></div>
+<div class="ttc" id="aa03022_html_a474b5a9ff4bdffa2bb37bb7b9bd0e3f0"><div class="ttname"><a href="a03022.html#a474b5a9ff4bdffa2bb37bb7b9bd0e3f0">tesseract::KDPtrPair::KDPtrPair</a></div><div class="ttdeci">KDPtrPair(KDPtrPair &amp;src)</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00094">kdpair.h:94</a></div></div>
+<div class="ttc" id="aa03022_html_a96830e91a71998656a657f2fea34e02e"><div class="ttname"><a href="a03022.html#a96830e91a71998656a657f2fea34e02e">tesseract::KDPtrPair::extract_data</a></div><div class="ttdeci">Data * extract_data()</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00131">kdpair.h:131</a></div></div>
+<div class="ttc" id="aa03022_html_a31f9e6ac64804372c9ffa62fa19a917e"><div class="ttname"><a href="a03022.html#a31f9e6ac64804372c9ffa62fa19a917e">tesseract::KDPtrPair::set_data</a></div><div class="ttdeci">void set_data(Data *new_data)</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00126">kdpair.h:126</a></div></div>
+<div class="ttc" id="aa03022_html"><div class="ttname"><a href="a03022.html">tesseract::KDPtrPair</a></div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00088">kdpair.h:88</a></div></div>
+<div class="ttc" id="aa03010_html"><div class="ttname"><a href="a03010.html">tesseract::KDPair</a></div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00034">kdpair.h:34</a></div></div>
+<div class="ttc" id="aa03026_html_ae4981bd9170f69ba3df8ffa4eccc0c3e"><div class="ttname"><a href="a03026.html#ae4981bd9170f69ba3df8ffa4eccc0c3e">tesseract::KDPtrPairInc::KDPtrPairInc</a></div><div class="ttdeci">KDPtrPairInc(Key k, Data *d)</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00149">kdpair.h:149</a></div></div>
+<div class="ttc" id="aa03014_html_a1057084a80e4feca7aeedac5a5b77727"><div class="ttname"><a href="a03014.html#a1057084a80e4feca7aeedac5a5b77727">tesseract::KDPairInc::operator&lt;</a></div><div class="ttdeci">int operator&lt;(const KDPairInc&lt; Key, Data &gt; &amp;other) const</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00055">kdpair.h:55</a></div></div>
+<div class="ttc" id="aa03010_html_a0d26774f49567160f75fb9ad422f86db"><div class="ttname"><a href="a03010.html#a0d26774f49567160f75fb9ad422f86db">tesseract::KDPair::key</a></div><div class="ttdeci">Key key</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00046">kdpair.h:46</a></div></div>
+<div class="ttc" id="aa03030_html_a1bb105fd17702d12a268b746c9402a03"><div class="ttname"><a href="a03030.html#a1bb105fd17702d12a268b746c9402a03">tesseract::KDPtrPairDec::operator&lt;</a></div><div class="ttdeci">int operator&lt;(const KDPtrPairDec&lt; Key, Data &gt; &amp;other) const</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00173">kdpair.h:173</a></div></div>
+<div class="ttc" id="aa00011_html"><div class="ttname"><a href="a00011.html">genericvector.h</a></div></div>
+<div class="ttc" id="aa03018_html_a5c5e7590f785582c4480b4a590edec38"><div class="ttname"><a href="a03018.html#a5c5e7590f785582c4480b4a590edec38">tesseract::KDPairDec::KDPairDec</a></div><div class="ttdeci">KDPairDec()=default</div></div>
+<div class="ttc" id="aa03030_html_adf0d49eaa0bcecc420df97ca60203513"><div class="ttname"><a href="a03030.html#adf0d49eaa0bcecc420df97ca60203513">tesseract::KDPtrPairDec::operator=</a></div><div class="ttdeci">void operator=(KDPtrPairDec &amp;src)</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00168">kdpair.h:168</a></div></div>
+<div class="ttc" id="aa03026_html_a32b11c56e00528acfd1179312906ca9c"><div class="ttname"><a href="a03026.html#a32b11c56e00528acfd1179312906ca9c">tesseract::KDPtrPairInc::operator=</a></div><div class="ttdeci">void operator=(KDPtrPairInc &amp;src)</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00151">kdpair.h:151</a></div></div>
+<div class="ttc" id="aa03026_html_a0dec01a4fae079a3a5ae1ee0829c4f46"><div class="ttname"><a href="a03026.html#a0dec01a4fae079a3a5ae1ee0829c4f46">tesseract::KDPtrPairInc::operator&lt;</a></div><div class="ttdeci">int operator&lt;(const KDPtrPairInc&lt; Key, Data &gt; &amp;other) const</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00155">kdpair.h:155</a></div></div>
+<div class="ttc" id="aa03010_html_a4ddfb0e9f7e0ade504bd26c566b0be2a"><div class="ttname"><a href="a03010.html#a4ddfb0e9f7e0ade504bd26c566b0be2a">tesseract::KDPair::operator==</a></div><div class="ttdeci">int operator==(const KDPair&lt; Key, Data &gt; &amp;other) const</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00038">kdpair.h:38</a></div></div>
+<div class="ttc" id="aa03022_html_ad2a67d82aea71a7c40e44046f81a14eb"><div class="ttname"><a href="a03022.html#ad2a67d82aea71a7c40e44046f81a14eb">tesseract::KDPtrPair::operator==</a></div><div class="ttdeci">int operator==(const KDPtrPair&lt; Key, Data &gt; &amp;other) const</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00111">kdpair.h:111</a></div></div>
+<div class="ttc" id="aa03018_html_acea957c3b0021c7ff5bc440782e8555d"><div class="ttname"><a href="a03018.html#acea957c3b0021c7ff5bc440782e8555d">tesseract::KDPairDec::RecastDataPointer</a></div><div class="ttdeci">static KDPairDec * RecastDataPointer(Data *data_ptr)</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00077">kdpair.h:77</a></div></div>
+<div class="ttc" id="aa03010_html_a1eb0fe4be23a765672c220d76d3a9569"><div class="ttname"><a href="a03010.html#a1eb0fe4be23a765672c220d76d3a9569">tesseract::KDPair::data</a></div><div class="ttdeci">Data data</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00045">kdpair.h:45</a></div></div>
+<div class="ttc" id="aa03018_html"><div class="ttname"><a href="a03018.html">tesseract::KDPairDec</a></div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00067">kdpair.h:67</a></div></div>
+<div class="ttc" id="aa03034_html"><div class="ttname"><a href="a03034.html">tesseract::KDVector</a></div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00182">kdpair.h:182</a></div></div>
+<div class="ttc" id="aa01818_html"><div class="ttname"><a href="a01818.html">tesseract</a></div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00065">baseapi.h:65</a></div></div>
+<div class="ttc" id="aa03026_html"><div class="ttname"><a href="a03026.html">tesseract::KDPtrPairInc</a></div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00145">kdpair.h:145</a></div></div>
+<div class="ttc" id="aa03022_html_a3b351c5190e9502fa1b5f88cb6bb6468"><div class="ttname"><a href="a03022.html#a3b351c5190e9502fa1b5f88cb6bb6468">tesseract::KDPtrPair::KDPtrPair</a></div><div class="ttdeci">KDPtrPair()</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00090">kdpair.h:90</a></div></div>
+<div class="ttc" id="aa02434_html"><div class="ttname"><a href="a02434.html">GenericVector</a></div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00040">baseapi.h:40</a></div></div>
+<div class="ttc" id="aa03014_html"><div class="ttname"><a href="a03014.html">tesseract::KDPairInc</a></div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00051">kdpair.h:51</a></div></div>
+<div class="ttc" id="aa03010_html_aaaf889a954d5385eb495bd560d7d9ccc"><div class="ttname"><a href="a03010.html#aaaf889a954d5385eb495bd560d7d9ccc">tesseract::KDPair::KDPair</a></div><div class="ttdeci">KDPair(Key k, Data d)</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00036">kdpair.h:36</a></div></div>
+<div class="ttc" id="aa03022_html_ae35002534ea37b0cbd3eb40f4279242e"><div class="ttname"><a href="a03022.html#ae35002534ea37b0cbd3eb40f4279242e">tesseract::KDPtrPair::operator=</a></div><div class="ttdeci">void operator=(KDPtrPair &amp;src)</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00104">kdpair.h:104</a></div></div>
+<div class="ttc" id="aa03022_html_ae52998914f73b2c6478a249aa051e829"><div class="ttname"><a href="a03022.html#ae52998914f73b2c6478a249aa051e829">tesseract::KDPtrPair::data</a></div><div class="ttdeci">const Data * data() const</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00122">kdpair.h:122</a></div></div>
+<div class="ttc" id="aa03018_html_a1d2d29e340a35bcf4004bb9b4d0115ab"><div class="ttname"><a href="a03018.html#a1d2d29e340a35bcf4004bb9b4d0115ab">tesseract::KDPairDec::operator&lt;</a></div><div class="ttdeci">int operator&lt;(const KDPairDec&lt; Key, Data &gt; &amp;other) const</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00072">kdpair.h:72</a></div></div>
+<div class="ttc" id="aa03022_html_a66952a7e1b678e2fbd830a0431743f01"><div class="ttname"><a href="a03022.html#a66952a7e1b678e2fbd830a0431743f01">tesseract::KDPtrPair::set_key</a></div><div class="ttdeci">void set_key(const Key &amp;new_key)</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00119">kdpair.h:119</a></div></div>
+<div class="ttc" id="aa03018_html_a10ca5a57df855e898889c9f318df915b"><div class="ttname"><a href="a03018.html#a10ca5a57df855e898889c9f318df915b">tesseract::KDPairDec::KDPairDec</a></div><div class="ttdeci">KDPairDec(Key k, Data d)</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00069">kdpair.h:69</a></div></div>
+<div class="ttc" id="aa03026_html_a0c175b237de7ccf3b5dca5fb7c4d3f0a"><div class="ttname"><a href="a03026.html#a0c175b237de7ccf3b5dca5fb7c4d3f0a">tesseract::KDPtrPairInc::KDPtrPairInc</a></div><div class="ttdeci">KDPtrPairInc()</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00148">kdpair.h:148</a></div></div>
+<div class="ttc" id="aa03014_html_afbbd183338cc5ef9524b696a1053bdf3"><div class="ttname"><a href="a03014.html#afbbd183338cc5ef9524b696a1053bdf3">tesseract::KDPairInc::KDPairInc</a></div><div class="ttdeci">KDPairInc()=default</div></div>
+<div class="ttc" id="aa03030_html_afd878d7982c9034e7f74ccc25afa3a06"><div class="ttname"><a href="a03030.html#afd878d7982c9034e7f74ccc25afa3a06">tesseract::KDPtrPairDec::KDPtrPairDec</a></div><div class="ttdeci">KDPtrPairDec(Key k, Data *d)</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00166">kdpair.h:166</a></div></div>
+<div class="ttc" id="aa03030_html_a9e37786e520622d6f83af69ee0e23626"><div class="ttname"><a href="a03030.html#a9e37786e520622d6f83af69ee0e23626">tesseract::KDPtrPairDec::KDPtrPairDec</a></div><div class="ttdeci">KDPtrPairDec(KDPtrPairDec &amp;src)</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00167">kdpair.h:167</a></div></div>
+<div class="ttc" id="aa03014_html_abfbfb5f2a09b4436553abd75b978e899"><div class="ttname"><a href="a03014.html#abfbfb5f2a09b4436553abd75b978e899">tesseract::KDPairInc::RecastDataPointer</a></div><div class="ttdeci">static KDPairInc * RecastDataPointer(Data *data_ptr)</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00060">kdpair.h:60</a></div></div>
+<div class="ttc" id="aa03026_html_ad9ebc2b73d9a992744014b1ca4403fec"><div class="ttname"><a href="a03026.html#ad9ebc2b73d9a992744014b1ca4403fec">tesseract::KDPtrPairInc::KDPtrPairInc</a></div><div class="ttdeci">KDPtrPairInc(KDPtrPairInc &amp;src)</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00150">kdpair.h:150</a></div></div>
+<div class="ttc" id="aa03022_html_a3939a49da305c180c0cebe3c3908536a"><div class="ttname"><a href="a03022.html#a3939a49da305c180c0cebe3c3908536a">tesseract::KDPtrPair::key</a></div><div class="ttdeci">const Key &amp; key() const</div><div class="ttdef"><b>Definition:</b> <a href="a00539_source.html#l00116">kdpair.h:116</a></div></div>
+<div class="ttc" id="aa03010_html_ab9a4d0d89058ac11b5d8b9752a53df18"><div class="ttname"><a href="a03010.html#ab9a4d0d89058ac11b5d8b9752a53df18">tesseract::KDPair::KDPair</a></div><div class="ttdeci">KDPair()=default</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_be21c9400dd14e513865608c9a8a7e5a.html">ccutil</a></li><li class="navelem"><a class="el" href="a00539.html">unicharcompress.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:14 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_be21c9400dd14e513865608c9a8a7e5a.html">ccutil</a></li><li class="navelem"><a class="el" href="a00539.html">kdpair.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:20 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/ccmain/paragraphs.cpp File Reference</title>
+<title>tesseract: /tesseract/src/ccmain/docqual.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,112 +87,122 @@ $(document).ready(function(){initNavTree('a00128.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a> &#124;
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">paragraphs.cpp File Reference</div>  </div>
+<div class="title">docqual.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="a00131_source.html">paragraphs.h</a>&quot;</code><br />
-<code>#include &lt;cctype&gt;</code><br />
-<code>#include &lt;cmath&gt;</code><br />
-<code>#include &lt;cstdio&gt;</code><br />
-<code>#include &lt;cstdlib&gt;</code><br />
-<code>#include &lt;cstring&gt;</code><br />
-<code>#include &lt;algorithm&gt;</code><br />
-<code>#include &lt;memory&gt;</code><br />
-<code>#include &lt;tesseract/genericvector.h&gt;</code><br />
-<code>#include &lt;tesseract/helpers.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00479_source.html">host.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00104_source.html">mutableiterator.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00299_source.html">ocrblock.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00305_source.html">ocrpara.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00311_source.html">ocrrow.h</a>&quot;</code><br />
-<code>#include &lt;tesseract/pageiterator.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00323_source.html">pageres.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00134_source.html">paragraphs_internal.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00335_source.html">pdblock.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00353_source.html">polyblk.h</a>&quot;</code><br />
-<code>#include &lt;tesseract/publictypes.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00374_source.html">ratngs.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00380_source.html">rect.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00404_source.html">statistc.h</a>&quot;</code><br />
-<code>#include &lt;tesseract/strngs.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00533_source.html">tprintf.h</a>&quot;</code><br />
-<code>#include &lt;tesseract/unichar.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00554_source.html">unicharset.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00563_source.html">unicodes.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00416_source.html">werd.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;cstdint&gt;</code><br />
 </div>
 <p><a href="a00128_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02132.html">tesseract::UnicodeSpanSkipper</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02136.html">tesseract::Cluster</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02140.html">tesseract::SimpleClusterer</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02144.html">tesseract::GeometricClassifierState</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02148.html">tesseract::Interval</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:a01539"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html">tesseract</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:ac4a411895d63e3bb0bea788e92894d42"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00128.html#ac4a411895d63e3bb0bea788e92894d42">GARBAGE_LEVEL</a> { <a class="el" href="a00128.html#ac4a411895d63e3bb0bea788e92894d42ac744add072d392855d098a995acb3751">G_NEVER_CRUNCH</a>, 
+<a class="el" href="a00128.html#ac4a411895d63e3bb0bea788e92894d42a46d03f2b7d080cc8319a43ef4bad82b3">G_OK</a>, 
+<a class="el" href="a00128.html#ac4a411895d63e3bb0bea788e92894d42a17acba0fc01478524c8214f0da82815a">G_DODGY</a>, 
+<a class="el" href="a00128.html#ac4a411895d63e3bb0bea788e92894d42a2400fb7991d9c94896464522e10c49ad">G_TERRIBLE</a>
+ }</td></tr>
+<tr class="separator:ac4a411895d63e3bb0bea788e92894d42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a4b153a6c7f9116c12cffe35964cf6ba3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#a4b153a6c7f9116c12cffe35964cf6ba3">tesseract::AsciiLikelyListItem</a> (const STRING &amp;word)</td></tr>
-<tr class="separator:a4b153a6c7f9116c12cffe35964cf6ba3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe22d992db19f44c79906b66dc846eaa"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#abe22d992db19f44c79906b66dc846eaa">tesseract::UnicodeFor</a> (const <a class="el" href="a02660.html">UNICHARSET</a> *u, const <a class="el" href="a02436.html">WERD_CHOICE</a> *werd, int pos)</td></tr>
-<tr class="separator:abe22d992db19f44c79906b66dc846eaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a04498cd763cc4a381f1b7c2d0e17f020"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#a04498cd763cc4a381f1b7c2d0e17f020">tesseract::LeftWordAttributes</a> (const <a class="el" href="a02660.html">UNICHARSET</a> *unicharset, const <a class="el" href="a02436.html">WERD_CHOICE</a> *werd, const STRING &amp;utf8, bool *is_list, bool *starts_idea, bool *ends_idea)</td></tr>
-<tr class="separator:a04498cd763cc4a381f1b7c2d0e17f020"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa0bc43fa3c52639420ed7eeb1093aa24"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#aa0bc43fa3c52639420ed7eeb1093aa24">tesseract::RightWordAttributes</a> (const <a class="el" href="a02660.html">UNICHARSET</a> *unicharset, const <a class="el" href="a02436.html">WERD_CHOICE</a> *werd, const STRING &amp;utf8, bool *is_list, bool *starts_idea, bool *ends_idea)</td></tr>
-<tr class="separator:aa0bc43fa3c52639420ed7eeb1093aa24"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f44dde2641dd1047debf38c4429dc2b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#a8f44dde2641dd1047debf38c4429dc2b">tesseract::ValidFirstLine</a> (const <a class="el" href="a02108.html">GenericVector</a>&lt; RowScratchRegisters &gt; *rows, int row, const <a class="el" href="a02352.html">ParagraphModel</a> *model)</td></tr>
-<tr class="separator:a8f44dde2641dd1047debf38c4429dc2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7933d5b144ff81c13320bfb6f32e0264"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#a7933d5b144ff81c13320bfb6f32e0264">tesseract::ValidBodyLine</a> (const <a class="el" href="a02108.html">GenericVector</a>&lt; RowScratchRegisters &gt; *rows, int row, const <a class="el" href="a02352.html">ParagraphModel</a> *model)</td></tr>
-<tr class="separator:a7933d5b144ff81c13320bfb6f32e0264"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2327e0fae9f7527a805d6cb2ac9bfc16"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#a2327e0fae9f7527a805d6cb2ac9bfc16">tesseract::CrownCompatible</a> (const <a class="el" href="a02108.html">GenericVector</a>&lt; RowScratchRegisters &gt; *rows, int a, int b, const <a class="el" href="a02352.html">ParagraphModel</a> *model)</td></tr>
-<tr class="separator:a2327e0fae9f7527a805d6cb2ac9bfc16"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f083a56b3a7be7431cea88c86f49216"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#a8f083a56b3a7be7431cea88c86f49216">tesseract::RecomputeMarginsAndClearHypotheses</a> (<a class="el" href="a02108.html">GenericVector</a>&lt; RowScratchRegisters &gt; *rows, int start, int end, int percentile)</td></tr>
-<tr class="separator:a8f083a56b3a7be7431cea88c86f49216"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf0128a0f8d13a8183820ce034d56122"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#adf0128a0f8d13a8183820ce034d56122">tesseract::InterwordSpace</a> (const <a class="el" href="a02108.html">GenericVector</a>&lt; RowScratchRegisters &gt; &amp;rows, int row_start, int row_end)</td></tr>
-<tr class="separator:adf0128a0f8d13a8183820ce034d56122"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d73136a6cc816e7f51fcfbfe99d52c1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#a5d73136a6cc816e7f51fcfbfe99d52c1">tesseract::FirstWordWouldHaveFit</a> (const RowScratchRegisters &amp;before, const RowScratchRegisters &amp;after, tesseract::ParagraphJustification justification)</td></tr>
-<tr class="separator:a5d73136a6cc816e7f51fcfbfe99d52c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95092769d51f59c291291e7397895a23"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#a95092769d51f59c291291e7397895a23">tesseract::FirstWordWouldHaveFit</a> (const RowScratchRegisters &amp;before, const RowScratchRegisters &amp;after)</td></tr>
-<tr class="separator:a95092769d51f59c291291e7397895a23"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac1812316831faad241ffadb840e9a21e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#ac1812316831faad241ffadb840e9a21e">tesseract::RowsFitModel</a> (const <a class="el" href="a02108.html">GenericVector</a>&lt; RowScratchRegisters &gt; *rows, int start, int end, const <a class="el" href="a02352.html">ParagraphModel</a> *model)</td></tr>
-<tr class="separator:ac1812316831faad241ffadb840e9a21e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9cafdf34c1f6a37446d3e656da69afdc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#a9cafdf34c1f6a37446d3e656da69afdc">tesseract::CanonicalizeDetectionResults</a> (<a class="el" href="a02108.html">GenericVector</a>&lt; <a class="el" href="a02348.html">PARA</a> * &gt; *row_owners, PARA_LIST *paragraphs)</td></tr>
-<tr class="separator:a9cafdf34c1f6a37446d3e656da69afdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac3edfcbb6042dffc461c6e5737c72643"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#ac3edfcbb6042dffc461c6e5737c72643">tesseract::DetectParagraphs</a> (int debug_level, <a class="el" href="a02108.html">GenericVector</a>&lt; RowInfo &gt; *row_infos, <a class="el" href="a02108.html">GenericVector</a>&lt; <a class="el" href="a02348.html">PARA</a> * &gt; *row_owners, PARA_LIST *paragraphs, <a class="el" href="a02108.html">GenericVector</a>&lt; <a class="el" href="a02352.html">ParagraphModel</a> * &gt; *models)</td></tr>
-<tr class="separator:ac3edfcbb6042dffc461c6e5737c72643"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7fb9da5e21dab182f4ac89730a421443"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#a7fb9da5e21dab182f4ac89730a421443">tesseract::DetectParagraphs</a> (int debug_level, bool after_text_recognition, const MutableIterator *block_start, <a class="el" href="a02108.html">GenericVector</a>&lt; <a class="el" href="a02352.html">ParagraphModel</a> * &gt; *models)</td></tr>
-<tr class="separator:a7fb9da5e21dab182f4ac89730a421443"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:a98233252a018dc9eb158c8223e2db208"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="a02352.html">ParagraphModel</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#a98233252a018dc9eb158c8223e2db208">tesseract::kCrownLeft</a> = reinterpret_cast&lt;<a class="el" href="a02352.html">ParagraphModel</a> *&gt;(static_cast&lt;uintptr_t&gt;(0xDEAD111F))</td></tr>
-<tr class="separator:a98233252a018dc9eb158c8223e2db208"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9fec475017947c91c5cdb29b160f4453"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="a02352.html">ParagraphModel</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#a9fec475017947c91c5cdb29b160f4453">tesseract::kCrownRight</a> = reinterpret_cast&lt;<a class="el" href="a02352.html">ParagraphModel</a> *&gt;(static_cast&lt;uintptr_t&gt;(0xDEAD888F))</td></tr>
-<tr class="separator:a9fec475017947c91c5cdb29b160f4453"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af942d4c69c0e2d00791b102e310ebb22"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00128.html#af942d4c69c0e2d00791b102e310ebb22">word_blob_quality</a> (<a class="el" href="a02830.html">WERD_RES</a> *word)</td></tr>
+<tr class="separator:af942d4c69c0e2d00791b102e310ebb22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b9934928e2b953ee5e91abb58cf043f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00128.html#a1b9934928e2b953ee5e91abb58cf043f">reject_whole_page</a> (<a class="el" href="a02834.html">PAGE_RES_IT</a> &amp;page_res_it)</td></tr>
+<tr class="separator:a1b9934928e2b953ee5e91abb58cf043f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="ac4a411895d63e3bb0bea788e92894d42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4a411895d63e3bb0bea788e92894d42">&#9670;&nbsp;</a></span>GARBAGE_LEVEL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="a00128.html#ac4a411895d63e3bb0bea788e92894d42">GARBAGE_LEVEL</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ac4a411895d63e3bb0bea788e92894d42ac744add072d392855d098a995acb3751"></a>G_NEVER_CRUNCH&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ac4a411895d63e3bb0bea788e92894d42a46d03f2b7d080cc8319a43ef4bad82b3"></a>G_OK&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ac4a411895d63e3bb0bea788e92894d42a17acba0fc01478524c8214f0da82815a"></a>G_DODGY&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ac4a411895d63e3bb0bea788e92894d42a2400fb7991d9c94896464522e10c49ad"></a>G_TERRIBLE&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="a00128_source.html#l00027">27</a> of file <a class="el" href="a00128_source.html">docqual.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <a class="code" href="a00128.html#ac4a411895d63e3bb0bea788e92894d42ac744add072d392855d098a995acb3751">G_NEVER_CRUNCH</a>,</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <a class="code" href="a00128.html#ac4a411895d63e3bb0bea788e92894d42a46d03f2b7d080cc8319a43ef4bad82b3">G_OK</a>,</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <a class="code" href="a00128.html#ac4a411895d63e3bb0bea788e92894d42a17acba0fc01478524c8214f0da82815a">G_DODGY</a>,</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <a class="code" href="a00128.html#ac4a411895d63e3bb0bea788e92894d42a2400fb7991d9c94896464522e10c49ad">G_TERRIBLE</a></div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a1b9934928e2b953ee5e91abb58cf043f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b9934928e2b953ee5e91abb58cf043f">&#9670;&nbsp;</a></span>reject_whole_page()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void reject_whole_page </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a02834.html">PAGE_RES_IT</a> &amp;&#160;</td>
+          <td class="paramname"><em>page_res_it</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00125_source.html#l00385">385</a> of file <a class="el" href="a00125_source.html">docqual.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;                                                 {</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;  page_res_it.<a class="code" href="a02834.html#a15febd45d0904bb3c5f7d506368177f0">restart_page</a> ();</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;  <span class="keywordflow">while</span> (page_res_it.<a class="code" href="a02834.html#a6cdcdaa4b0b1250ab7e14760d4b5f113">word</a> () != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;    page_res_it.<a class="code" href="a02834.html#a6cdcdaa4b0b1250ab7e14760d4b5f113">word</a> ()-&gt;<a class="code" href="a02830.html#ae24eb58be06cf275aee411d947fd31ef">reject_map</a>.<a class="code" href="a02906.html#a9fb4a691f24ea06370b55650c197db8b">rej_word_doc_rej</a> ();</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;    page_res_it.<a class="code" href="a02834.html#ab29005f235cc738eebafb7d9ed6fe70b">forward</a> ();</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;  }</div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;                                 <span class="comment">//whole page is rejected</span></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="af942d4c69c0e2d00791b102e310ebb22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af942d4c69c0e2d00791b102e310ebb22">&#9670;&nbsp;</a></span>word_blob_quality()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int16_t word_blob_quality </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a02830.html">WERD_RES</a> *&#160;</td>
+          <td class="paramname"><em>word</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="aa00128_html_ac4a411895d63e3bb0bea788e92894d42ac744add072d392855d098a995acb3751"><div class="ttname"><a href="a00128.html#ac4a411895d63e3bb0bea788e92894d42ac744add072d392855d098a995acb3751">G_NEVER_CRUNCH</a></div><div class="ttdef"><b>Definition:</b> <a href="a00128_source.html#l00029">docqual.h:29</a></div></div>
+<div class="ttc" id="aa02834_html_ab29005f235cc738eebafb7d9ed6fe70b"><div class="ttname"><a href="a02834.html#ab29005f235cc738eebafb7d9ed6fe70b">PAGE_RES_IT::forward</a></div><div class="ttdeci">WERD_RES * forward()</div><div class="ttdef"><b>Definition:</b> <a href="a00374_source.html#l00728">pageres.h:728</a></div></div>
+<div class="ttc" id="aa00128_html_ac4a411895d63e3bb0bea788e92894d42a2400fb7991d9c94896464522e10c49ad"><div class="ttname"><a href="a00128.html#ac4a411895d63e3bb0bea788e92894d42a2400fb7991d9c94896464522e10c49ad">G_TERRIBLE</a></div><div class="ttdef"><b>Definition:</b> <a href="a00128_source.html#l00032">docqual.h:32</a></div></div>
+<div class="ttc" id="aa02834_html_a15febd45d0904bb3c5f7d506368177f0"><div class="ttname"><a href="a02834.html#a15febd45d0904bb3c5f7d506368177f0">PAGE_RES_IT::restart_page</a></div><div class="ttdeci">WERD_RES * restart_page()</div><div class="ttdef"><b>Definition:</b> <a href="a00374_source.html#l00695">pageres.h:695</a></div></div>
+<div class="ttc" id="aa02830_html_ae24eb58be06cf275aee411d947fd31ef"><div class="ttname"><a href="a02830.html#ae24eb58be06cf275aee411d947fd31ef">WERD_RES::reject_map</a></div><div class="ttdeci">REJMAP reject_map</div><div class="ttdef"><b>Definition:</b> <a href="a00374_source.html#l00288">pageres.h:288</a></div></div>
+<div class="ttc" id="aa02834_html_a6cdcdaa4b0b1250ab7e14760d4b5f113"><div class="ttname"><a href="a02834.html#a6cdcdaa4b0b1250ab7e14760d4b5f113">PAGE_RES_IT::word</a></div><div class="ttdeci">WERD_RES * word() const</div><div class="ttdef"><b>Definition:</b> <a href="a00374_source.html#l00748">pageres.h:748</a></div></div>
+<div class="ttc" id="aa02906_html_a9fb4a691f24ea06370b55650c197db8b"><div class="ttname"><a href="a02906.html#a9fb4a691f24ea06370b55650c197db8b">REJMAP::rej_word_doc_rej</a></div><div class="ttdeci">void rej_word_doc_rej()</div><div class="ttdef"><b>Definition:</b> <a href="a00434_source.html#l00423">rejctmap.cpp:423</a></div></div>
+<div class="ttc" id="aa00128_html_ac4a411895d63e3bb0bea788e92894d42a46d03f2b7d080cc8319a43ef4bad82b3"><div class="ttname"><a href="a00128.html#ac4a411895d63e3bb0bea788e92894d42a46d03f2b7d080cc8319a43ef4bad82b3">G_OK</a></div><div class="ttdef"><b>Definition:</b> <a href="a00128_source.html#l00030">docqual.h:30</a></div></div>
+<div class="ttc" id="aa00128_html_ac4a411895d63e3bb0bea788e92894d42a17acba0fc01478524c8214f0da82815a"><div class="ttname"><a href="a00128.html#ac4a411895d63e3bb0bea788e92894d42a17acba0fc01478524c8214f0da82815a">G_DODGY</a></div><div class="ttdef"><b>Definition:</b> <a href="a00128_source.html#l00031">docqual.h:31</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_43edf6714a3bf7b9dbcd0e0e50a1a1a7.html">ccmain</a></li><li class="navelem"><a class="el" href="a00128.html">paragraphs.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_43edf6714a3bf7b9dbcd0e0e50a1a1a7.html">ccmain</a></li><li class="navelem"><a class="el" href="a00128.html">docqual.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

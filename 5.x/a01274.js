@@ -1,18 +1,23 @@
 var a01274 =
 [
-    [ "_USE_MATH_DEFINES", "a01274.html#a525335710b53cb064ca56b936120431e", null ],
-    [ "kBestCheckpointFraction", "a01274.html#ace3348db5810947a333aa9de52715e04", null ],
-    [ "kErrorGraphInterval", "a01274.html#a77db3a2a0c07e893147eb25687c2ec9f", null ],
-    [ "kHighConfidence", "a01274.html#ac589c4b21447b8766fe3bb5f43e31c32", null ],
-    [ "kImprovementFraction", "a01274.html#a290732139a5dafdc651fb19d5aa2e9b8", null ],
-    [ "kLearningRateDecay", "a01274.html#a1a4450d93ccbbd9f06071d5a1015fda8", null ],
-    [ "kMinDivergenceRate", "a01274.html#ab5e80b8d6628e59795fec00865cb989b", null ],
-    [ "kMinStallIterations", "a01274.html#ad8b9c2b4f27c9ebf37f7f8db6f29e059", null ],
-    [ "kMinStartedErrorRate", "a01274.html#a2fe54b7a35f437f4a6e332d1b83e9bd0", null ],
-    [ "kNumAdjustmentIterations", "a01274.html#ac2419fecb4d77e28982e293e80a386d7", null ],
-    [ "kNumPagesPerBatch", "a01274.html#acfe2ffaceeb8113813bffadf39e5edb4", null ],
-    [ "kStageTransitionThreshold", "a01274.html#ae24af6624854987b6f5e06acded45ebd", null ],
-    [ "kSubTrainerMarginFraction", "a01274.html#a6ad641ea13ebbb61cbfe9bc5744015a0", null ],
-    [ "kTargetXScale", "a01274.html#ad18b21092c0c5481d359190f4ea86c4e", null ],
-    [ "kTargetYScale", "a01274.html#a293b323afa17fa5f42458ddc971e5812", null ]
+    [ "UnicityTable", "a02734.html", "a02734" ],
+    [ "ErrorCounter", "a03842.html", null ],
+    [ "CountTypes", "a01274.html#acb0bc20d78b75745c9aa3832a619f4fd", [
+      [ "CT_UNICHAR_TOP_OK", "a01274.html#acb0bc20d78b75745c9aa3832a619f4fda4cd30609e7f407ef5c27c46426d43ae7", null ],
+      [ "CT_UNICHAR_TOP1_ERR", "a01274.html#acb0bc20d78b75745c9aa3832a619f4fda4fbb2b48a2fae3c2a8be73d82702d9ca", null ],
+      [ "CT_UNICHAR_TOP2_ERR", "a01274.html#acb0bc20d78b75745c9aa3832a619f4fda695227fd1cabdbcf6421beaee60e7e3c", null ],
+      [ "CT_UNICHAR_TOPN_ERR", "a01274.html#acb0bc20d78b75745c9aa3832a619f4fda4649b3e172660074d3255fd5f1f5c850", null ],
+      [ "CT_UNICHAR_TOPTOP_ERR", "a01274.html#acb0bc20d78b75745c9aa3832a619f4fda935156e7dc8245e295f843cad20b6529", null ],
+      [ "CT_OK_MULTI_UNICHAR", "a01274.html#acb0bc20d78b75745c9aa3832a619f4fdaab5d38d92964a3603dd577180571243b", null ],
+      [ "CT_OK_JOINED", "a01274.html#acb0bc20d78b75745c9aa3832a619f4fda76f794141618a9653b968ecfa4cb2533", null ],
+      [ "CT_OK_BROKEN", "a01274.html#acb0bc20d78b75745c9aa3832a619f4fdaad4be874d81f4a34324f4a9b5714a390", null ],
+      [ "CT_REJECT", "a01274.html#acb0bc20d78b75745c9aa3832a619f4fda89ab4937a98054f1c525755ce6ae36c8", null ],
+      [ "CT_FONT_ATTR_ERR", "a01274.html#acb0bc20d78b75745c9aa3832a619f4fdaa1c74855ce10eb780dabadbf54eb7b8a", null ],
+      [ "CT_OK_MULTI_FONT", "a01274.html#acb0bc20d78b75745c9aa3832a619f4fda6eb2e47e1b22e65e71950db585efd624", null ],
+      [ "CT_NUM_RESULTS", "a01274.html#acb0bc20d78b75745c9aa3832a619f4fdafe639ee6eab2f5503df027e13dc3d776", null ],
+      [ "CT_RANK", "a01274.html#acb0bc20d78b75745c9aa3832a619f4fdacf1cf7811b8c6938a7097cc30f56d991", null ],
+      [ "CT_REJECTED_JUNK", "a01274.html#acb0bc20d78b75745c9aa3832a619f4fda8b7c62ce93360d39e8a8204c0cd77f45", null ],
+      [ "CT_ACCEPTED_JUNK", "a01274.html#acb0bc20d78b75745c9aa3832a619f4fdaa3bba775583d2acab58b3543043ab591", null ],
+      [ "CT_SIZE", "a01274.html#acb0bc20d78b75745c9aa3832a619f4fdabb745ecf0c26d7e73f8c4e29e5988100", null ]
+    ] ]
 ];

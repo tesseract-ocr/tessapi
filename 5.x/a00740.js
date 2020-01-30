@@ -1,8 +1,5 @@
 var a00740 =
 [
-    [ "reset_bit", "a00740.html#a1209b8bb0fa7e6e7323cdb48b4165f0d", null ],
-    [ "SET_BIT", "a00740.html#ab02d606cf8dca49ccadb00248bdbafe9", null ],
-    [ "test_bit", "a00740.html#a76a50c5a99dea7be5315fe76246036ce", null ],
-    [ "BIT_VECTOR", "a00740.html#a3ac8e43e611208cef7a7169e0058a3c2", null ],
-    [ "BITSINLONG", "a00740.html#abccec99edd5254252f6792a0e28a203e", null ]
+    [ "classify_norm_adj_curl", "a00740.html#ae9f63df566aa3f4d4405918d1b1af0b3", null ],
+    [ "classify_norm_adj_midpoint", "a00740.html#a5b39e06af338d5d0623762a84246e7a6", null ]
 ];

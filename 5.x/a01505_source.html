@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/wordrec/params_model.h Source File</title>
+<title>tesseract: /tesseract/src/wordrec/drawfx.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,124 +87,119 @@ $(document).ready(function(){initNavTree('a01505_source.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">params_model.h</div>  </div>
+<div class="title">drawfx.cpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a01505.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// File:        params_model.h</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// Description: Trained feature serialization for language parameter training.</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// Author:      David Eger</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">// (C) Copyright 2011, Google Inc.</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// you may not use this file except in compliance with the License.</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">// You may obtain a copy of the License at</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// http://www.apache.org/licenses/LICENSE-2.0</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">// Unless required by applicable law or agreed to in writing, software</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">// See the License for the specific language governing permissions and</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">// limitations under the License.</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#ifndef TESSERACT_WORDREC_PARAMS_MODEL_H_</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#define TESSERACT_WORDREC_PARAMS_MODEL_H_</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;tesseract/genericvector.h&gt;</span>              <span class="comment">// for GenericVector</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00329.html">params_training_featdef.h</a>&quot;</span>    <span class="comment">// for PTRAIN_NUM_FEATURE_TYPES</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &lt;tesseract/strngs.h&gt;</span>                     <span class="comment">// for STRING</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">namespace </span><a class="code" href="a01539.html">tesseract</a> {</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">class </span>TFile;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">// Represents the learned weights for a given language.</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="a03592.html">   31</a></span>&#160;<span class="keyword">class </span><a class="code" href="a03592.html">ParamsModel</a> {</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <span class="comment">// Enum for expressing OCR pass.</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="a03592.html#af1ac568aa510bbcd30ff34da3d0037f2">   34</a></span>&#160;  <span class="keyword">enum</span> <a class="code" href="a03592.html#af1ac568aa510bbcd30ff34da3d0037f2">PassEnum</a> {</div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="a03592.html#af1ac568aa510bbcd30ff34da3d0037f2a5931b6d2adc45720602cb1d3a42a0a28">   35</a></span>&#160;    <a class="code" href="a03592.html#af1ac568aa510bbcd30ff34da3d0037f2a5931b6d2adc45720602cb1d3a42a0a28">PTRAIN_PASS1</a>,</div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="a03592.html#af1ac568aa510bbcd30ff34da3d0037f2abfb2f56c5a42f83aa4afc26d19ec9d24">   36</a></span>&#160;    <a class="code" href="a03592.html#af1ac568aa510bbcd30ff34da3d0037f2abfb2f56c5a42f83aa4afc26d19ec9d24">PTRAIN_PASS2</a>,</div>
+<a href="a01505.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**********************************************************************</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * File:        drawfx.cpp  (Formerly drawfx.c)</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * Description: Draw things to do with feature extraction.</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * Author:      Ray Smith</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> * (C) Copyright 1992, Hewlett-Packard Ltd.</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> ** Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> ** you may not use this file except in compliance with the License.</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> ** You may obtain a copy of the License at</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> ** http://www.apache.org/licenses/LICENSE-2.0</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> ** Unless required by applicable law or agreed to in writing, software</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> ** distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> ** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> ** See the License for the specific language governing permissions and</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> ** limitations under the License.</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> **********************************************************************/</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#ifdef HAVE_CONFIG_H</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &quot;config_auto.h&quot;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include          &quot;<a class="code" href="a01508.html">drawfx.h</a>&quot;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include          &quot;<a class="code" href="a00344.html">normalis.h</a>&quot;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include          &quot;<a class="code" href="a00467.html">werd.h</a>&quot;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#ifndef GRAPHICS_DISABLED</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="a01505.html#a598328cfb77c3b70aa688624e73a1e1d">   28</a></span>&#160;<span class="preprocessor">#define FXDEMOWIN     &quot;FXDemo&quot;</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="a01505.html#ab91ddd2c62da43060f703b7b5945e60e">   29</a></span>&#160;<span class="preprocessor">#define FXDEMOXPOS      250</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="a01505.html#adcd9274df0c3dc448de7bc90ba59c627">   30</a></span>&#160;<span class="preprocessor">#define FXDEMOYPOS      0</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="a01505.html#a7ccaf3bfa2be233bc9e06de45417f3f0">   31</a></span>&#160;<span class="preprocessor">#define FXDEMOXSIZE     600</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="a01505.html#a06dd189f4dca5fe669a1d30a836ec4cb">   32</a></span>&#160;<span class="preprocessor">#define FXDEMOYSIZE     256</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="a01505.html#acaf0299e0b31c57e0dd971319b31bb81">   33</a></span>&#160;<span class="preprocessor">#define BLN_MAX       512        //max coord for bln</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="a01505.html#a006f74e514199ed33d09c64fcc8439da">   34</a></span>&#160;<span class="preprocessor">#define WERDWIDTH       (BLN_MAX*20)</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                                 <span class="comment">//title of window</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="a01505.html#ab6aba1c8ae753116a3baeaf4a0603155">   36</a></span>&#160;<span class="preprocessor">#define DEBUG_WIN_NAME    &quot;FXDebug&quot;</span></div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="a03592.html#af1ac568aa510bbcd30ff34da3d0037f2a09645783fadb30ad8a72455b4d0c5496">   38</a></span>&#160;    <a class="code" href="a03592.html#af1ac568aa510bbcd30ff34da3d0037f2a09645783fadb30ad8a72455b4d0c5496">PTRAIN_NUM_PASSES</a></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  };</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="a03592.html#aafeab9959cac899236b065d390965662">   41</a></span>&#160;  <a class="code" href="a03592.html#aafeab9959cac899236b065d390965662">ParamsModel</a>() : pass_(<a class="code" href="a03592.html#af1ac568aa510bbcd30ff34da3d0037f2a5931b6d2adc45720602cb1d3a42a0a28">PTRAIN_PASS1</a>) {}</div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="a03592.html#a6aada97119632e8272d3c84c017fcd11">   42</a></span>&#160;  <a class="code" href="a03592.html#a6aada97119632e8272d3c84c017fcd11">ParamsModel</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *lang, <span class="keyword">const</span> <a class="code" href="a02108.html">GenericVector&lt;float&gt;</a> &amp;<a class="code" href="a03592.html#a938ad92352d5082120c1fa3745635b18">weights</a>) :</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    lang_(lang), pass_(<a class="code" href="a03592.html#af1ac568aa510bbcd30ff34da3d0037f2a5931b6d2adc45720602cb1d3a42a0a28">PTRAIN_PASS1</a>) { weights_vec_[pass_] = <a class="code" href="a03592.html#a938ad92352d5082120c1fa3745635b18">weights</a>; }</div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="a03592.html#ac036ef2452f225ed63806e24f34cc6c3">   44</a></span>&#160;  <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="a03592.html#ac036ef2452f225ed63806e24f34cc6c3">Initialized</a>() {</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordflow">return</span> weights_vec_[pass_].size() == <a class="code" href="a01539.html#a996f57000ba7e945e304ca3a5268b467a1f9a0441244ce25f22a62f3b17cf9d2e">PTRAIN_NUM_FEATURE_TYPES</a>;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  }</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="comment">// Prints out feature weights.</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a03592.html#ae4572db84f4263b4e7111fc17e7d1726">Print</a>();</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="comment">// Clears weights for all passes.</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="a03592.html#aa98a7e6d4ad2a2c0320a0715c6d290da">   50</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a03592.html#aa98a7e6d4ad2a2c0320a0715c6d290da">Clear</a>() {</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span> &amp; p : weights_vec_) p.clear();</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  }</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="comment">// Copies the weights of the given params model.</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a03592.html#ae78fb426936c3ec0a6b5d902edce465a">Copy</a>(<span class="keyword">const</span> <a class="code" href="a03592.html">ParamsModel</a> &amp;other_model);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <span class="comment">// Applies params model weights to the given features.</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="comment">// Assumes that features is an array of size PTRAIN_NUM_FEATURE_TYPES.</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="keywordtype">float</span> <a class="code" href="a03592.html#a3e48946a4022ea94079c4d50d2c58dfa">ComputeCost</a>(<span class="keyword">const</span> <span class="keywordtype">float</span> features[]) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="a03592.html#aa409f271bccb6261b1a33455c8b3ba76">Equivalent</a>(<span class="keyword">const</span> <a class="code" href="a03592.html">ParamsModel</a> &amp;that) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <span class="comment">// Returns true on success.</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="a03592.html#a13f0d644bd93105520384e80753b7771">SaveToFile</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *full_path) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <span class="comment">// Returns true on success.</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="a03592.html#a59386952347c9b91827977549ab38db9">LoadFromFp</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *lang, TFile *fp);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="a03592.html#a938ad92352d5082120c1fa3745635b18">   66</a></span>&#160;  <span class="keyword">const</span> <a class="code" href="a02108.html">GenericVector&lt;float&gt;</a>&amp; <a class="code" href="a03592.html#a938ad92352d5082120c1fa3745635b18">weights</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordflow">return</span> weights_vec_[pass_];</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  }</div>
-<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="a03592.html#abf17ad0cfc4873545896af20d7959c29">   69</a></span>&#160;  <span class="keyword">const</span> <a class="code" href="a02108.html">GenericVector&lt;float&gt;</a>&amp; <a class="code" href="a03592.html#abf17ad0cfc4873545896af20d7959c29">weights_for_pass</a>(<a class="code" href="a03592.html#af1ac568aa510bbcd30ff34da3d0037f2">PassEnum</a> pass)<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordflow">return</span> weights_vec_[pass];</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  }</div>
-<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="a03592.html#a3bbd9220cc12e682d17f557956d070d0">   72</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a03592.html#a3bbd9220cc12e682d17f557956d070d0">SetPass</a>(<a class="code" href="a03592.html#af1ac568aa510bbcd30ff34da3d0037f2">PassEnum</a> pass) { pass_ = pass; }</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <span class="keywordtype">bool</span> ParseLine(<span class="keywordtype">char</span> *line, <span class="keywordtype">char</span> **key, <span class="keywordtype">float</span> *val);</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  STRING lang_;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  <span class="comment">// Set to the current pass type and used to determine which set of weights</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <span class="comment">// should be used for ComputeCost() and other functions.</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  <a class="code" href="a03592.html#af1ac568aa510bbcd30ff34da3d0037f2">PassEnum</a> pass_;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  <span class="comment">// Several sets of weights for various OCR passes (e.g. pass1 with adaption,</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <span class="comment">// pass2 without adaption, etc).</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  <a class="code" href="a02108.html">GenericVector&lt;float&gt;</a> weights_vec_[<a class="code" href="a03592.html#af1ac568aa510bbcd30ff34da3d0037f2a09645783fadb30ad8a72455b4d0c5496">PTRAIN_NUM_PASSES</a>];</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;};</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;}  <span class="comment">// namespace tesseract</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="preprocessor">#endif  // TESSERACT_WORDREC_PARAMS_MODEL_H_</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="a01508.html#aafd93dea58b33bc6c4245aaa39e8e9ee">   38</a></span>&#160;<a class="code" href="a00554.html#abaa7778083ba376d8c70a59631d4a6ab">STRING_VAR</a>(<a class="code" href="a01505.html#aafd93dea58b33bc6c4245aaa39e8e9ee">fx_debugfile</a>, <a class="code" href="a01505.html#ab6aba1c8ae753116a3baeaf4a0603155">DEBUG_WIN_NAME</a>, <span class="stringliteral">&quot;Name of debugfile&quot;</span>);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="a01508.html#a32821715e23d2e2666ba66b2a9d2ee8b">   40</a></span>&#160;<a class="code" href="a03978.html">ScrollView</a>* <a class="code" href="a01505.html#a32821715e23d2e2666ba66b2a9d2ee8b">fx_win</a> = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="a01508.html#a914f797563b0dc5f5d3f13f521e307a5">   41</a></span>&#160;FILE* <a class="code" href="a01505.html#a914f797563b0dc5f5d3f13f521e307a5">fx_debug</a> = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">/**********************************************************************</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment"> * create_fx_win</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment"> * Create the fx window used to show the fit.</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment"> **********************************************************************/</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="a01508.html#ae31e31904810bc4e3407c2f324cf7edb">   48</a></span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a01505.html#ae31e31904810bc4e3407c2f324cf7edb">create_fx_win</a>() {  <span class="comment">//make features win</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <a class="code" href="a01505.html#a32821715e23d2e2666ba66b2a9d2ee8b">fx_win</a> = <span class="keyword">new</span> <a class="code" href="a03978.html">ScrollView</a> (<a class="code" href="a01505.html#a598328cfb77c3b70aa688624e73a1e1d">FXDEMOWIN</a>,</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="code" href="a01505.html#ab91ddd2c62da43060f703b7b5945e60e">FXDEMOXPOS</a>, <a class="code" href="a01505.html#adcd9274df0c3dc448de7bc90ba59c627">FXDEMOYPOS</a>, <a class="code" href="a01505.html#a7ccaf3bfa2be233bc9e06de45417f3f0">FXDEMOXSIZE</a>, <a class="code" href="a01505.html#a06dd189f4dca5fe669a1d30a836ec4cb">FXDEMOYSIZE</a>,</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <a class="code" href="a01505.html#a006f74e514199ed33d09c64fcc8439da">WERDWIDTH</a>*2, <a class="code" href="a01505.html#acaf0299e0b31c57e0dd971319b31bb81">BLN_MAX</a>*2, <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;}</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">/**********************************************************************</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment"> * clear_fx_win</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment"> * Clear the fx window and draw on the base/mean lines.</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="a01508.html#aa3294a99fe8ad4b74a1e8577b89e3eff">   60</a></span>&#160;<span class="comment"> **********************************************************************/</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a01505.html#aa3294a99fe8ad4b74a1e8577b89e3eff">clear_fx_win</a>() {  <span class="comment">//make features win</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <a class="code" href="a01505.html#a32821715e23d2e2666ba66b2a9d2ee8b">fx_win</a>-&gt;<a class="code" href="a03978.html#a5386b0da16d7cbdd33044e53b95313ac">Clear</a>();</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <a class="code" href="a01505.html#a32821715e23d2e2666ba66b2a9d2ee8b">fx_win</a>-&gt;<a class="code" href="a03978.html#a79855c525ec660b452382e9813d2edb5">Pen</a>(64,64,64);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <a class="code" href="a01505.html#a32821715e23d2e2666ba66b2a9d2ee8b">fx_win</a>-&gt;<a class="code" href="a03978.html#a2ba16f17fc401bb28be1a08160207e45">Line</a>(-<a class="code" href="a01505.html#a006f74e514199ed33d09c64fcc8439da">WERDWIDTH</a>, <a class="code" href="a00344.html#abe10ce41bf7240ae8a053dea471d6ed5">kBlnBaselineOffset</a>, <a class="code" href="a01505.html#a006f74e514199ed33d09c64fcc8439da">WERDWIDTH</a>, <a class="code" href="a00344.html#abe10ce41bf7240ae8a053dea471d6ed5">kBlnBaselineOffset</a>);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <a class="code" href="a01505.html#a32821715e23d2e2666ba66b2a9d2ee8b">fx_win</a>-&gt;<a class="code" href="a03978.html#a2ba16f17fc401bb28be1a08160207e45">Line</a>(-<a class="code" href="a01505.html#a006f74e514199ed33d09c64fcc8439da">WERDWIDTH</a>, <a class="code" href="a00344.html#af974e6755e636c8bc7cbe57e3bcbdd73">kBlnXHeight</a> + <a class="code" href="a00344.html#abe10ce41bf7240ae8a053dea471d6ed5">kBlnBaselineOffset</a>, <a class="code" href="a01505.html#a006f74e514199ed33d09c64fcc8439da">WERDWIDTH</a>,</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;               <a class="code" href="a00344.html#af974e6755e636c8bc7cbe57e3bcbdd73">kBlnXHeight</a> + <a class="code" href="a00344.html#abe10ce41bf7240ae8a053dea471d6ed5">kBlnBaselineOffset</a>);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;}</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="preprocessor">#endif  // GRAPHICS_DISABLED</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">/**********************************************************************</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment"> * create_fxdebug_win</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="a01508.html#acb1c409d6a6de9cd0988e873ff68fd70">   75</a></span>&#160;<span class="comment"> * Create the fx window used to show the fit.</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment"> **********************************************************************/</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a01505.html#acb1c409d6a6de9cd0988e873ff68fd70">create_fxdebug_win</a>() {  <span class="comment">//make gradients win</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa03592_html"><div class="ttname"><a href="a03592.html">tesseract::ParamsModel</a></div><div class="ttdef"><b>Definition:</b> <a href="a01505_source.html#l00031">params_model.h:31</a></div></div>
-<div class="ttc" id="aa03592_html_a59386952347c9b91827977549ab38db9"><div class="ttname"><a href="a03592.html#a59386952347c9b91827977549ab38db9">tesseract::ParamsModel::LoadFromFp</a></div><div class="ttdeci">bool LoadFromFp(const char *lang, TFile *fp)</div><div class="ttdef"><b>Definition:</b> <a href="a01502_source.html#l00102">params_model.cpp:102</a></div></div>
-<div class="ttc" id="aa03592_html_aa98a7e6d4ad2a2c0320a0715c6d290da"><div class="ttname"><a href="a03592.html#aa98a7e6d4ad2a2c0320a0715c6d290da">tesseract::ParamsModel::Clear</a></div><div class="ttdeci">void Clear()</div><div class="ttdef"><b>Definition:</b> <a href="a01505_source.html#l00050">params_model.h:50</a></div></div>
-<div class="ttc" id="aa03592_html_af1ac568aa510bbcd30ff34da3d0037f2a09645783fadb30ad8a72455b4d0c5496"><div class="ttname"><a href="a03592.html#af1ac568aa510bbcd30ff34da3d0037f2a09645783fadb30ad8a72455b4d0c5496">tesseract::ParamsModel::PTRAIN_NUM_PASSES</a></div><div class="ttdef"><b>Definition:</b> <a href="a01505_source.html#l00038">params_model.h:38</a></div></div>
-<div class="ttc" id="aa00329_html"><div class="ttname"><a href="a00329.html">params_training_featdef.h</a></div></div>
-<div class="ttc" id="aa02108_html"><div class="ttname"><a href="a02108.html">GenericVector&lt; float &gt;</a></div></div>
-<div class="ttc" id="aa03592_html_af1ac568aa510bbcd30ff34da3d0037f2a5931b6d2adc45720602cb1d3a42a0a28"><div class="ttname"><a href="a03592.html#af1ac568aa510bbcd30ff34da3d0037f2a5931b6d2adc45720602cb1d3a42a0a28">tesseract::ParamsModel::PTRAIN_PASS1</a></div><div class="ttdef"><b>Definition:</b> <a href="a01505_source.html#l00035">params_model.h:35</a></div></div>
-<div class="ttc" id="aa03592_html_a13f0d644bd93105520384e80753b7771"><div class="ttname"><a href="a03592.html#a13f0d644bd93105520384e80753b7771">tesseract::ParamsModel::SaveToFile</a></div><div class="ttdeci">bool SaveToFile(const char *full_path) const</div><div class="ttdef"><b>Definition:</b> <a href="a01502_source.html#l00140">params_model.cpp:140</a></div></div>
-<div class="ttc" id="aa03592_html_a6aada97119632e8272d3c84c017fcd11"><div class="ttname"><a href="a03592.html#a6aada97119632e8272d3c84c017fcd11">tesseract::ParamsModel::ParamsModel</a></div><div class="ttdeci">ParamsModel(const char *lang, const GenericVector&lt; float &gt; &amp;weights)</div><div class="ttdef"><b>Definition:</b> <a href="a01505_source.html#l00042">params_model.h:42</a></div></div>
-<div class="ttc" id="aa03592_html_ae4572db84f4263b4e7111fc17e7d1726"><div class="ttname"><a href="a03592.html#ae4572db84f4263b4e7111fc17e7d1726">tesseract::ParamsModel::Print</a></div><div class="ttdeci">void Print()</div><div class="ttdef"><b>Definition:</b> <a href="a01502_source.html#l00037">params_model.cpp:37</a></div></div>
-<div class="ttc" id="aa03592_html_ac036ef2452f225ed63806e24f34cc6c3"><div class="ttname"><a href="a03592.html#ac036ef2452f225ed63806e24f34cc6c3">tesseract::ParamsModel::Initialized</a></div><div class="ttdeci">bool Initialized()</div><div class="ttdef"><b>Definition:</b> <a href="a01505_source.html#l00044">params_model.h:44</a></div></div>
-<div class="ttc" id="aa03592_html_aa409f271bccb6261b1a33455c8b3ba76"><div class="ttname"><a href="a03592.html#aa409f271bccb6261b1a33455c8b3ba76">tesseract::ParamsModel::Equivalent</a></div><div class="ttdeci">bool Equivalent(const ParamsModel &amp;that) const</div><div class="ttdef"><b>Definition:</b> <a href="a01502_source.html#l00089">params_model.cpp:89</a></div></div>
-<div class="ttc" id="aa03592_html_a3e48946a4022ea94079c4d50d2c58dfa"><div class="ttname"><a href="a03592.html#a3e48946a4022ea94079c4d50d2c58dfa">tesseract::ParamsModel::ComputeCost</a></div><div class="ttdeci">float ComputeCost(const float features[]) const</div><div class="ttdef"><b>Definition:</b> <a href="a01502_source.html#l00080">params_model.cpp:80</a></div></div>
-<div class="ttc" id="aa03592_html_a3bbd9220cc12e682d17f557956d070d0"><div class="ttname"><a href="a03592.html#a3bbd9220cc12e682d17f557956d070d0">tesseract::ParamsModel::SetPass</a></div><div class="ttdeci">void SetPass(PassEnum pass)</div><div class="ttdef"><b>Definition:</b> <a href="a01505_source.html#l00072">params_model.h:72</a></div></div>
-<div class="ttc" id="aa03592_html_a938ad92352d5082120c1fa3745635b18"><div class="ttname"><a href="a03592.html#a938ad92352d5082120c1fa3745635b18">tesseract::ParamsModel::weights</a></div><div class="ttdeci">const GenericVector&lt; float &gt; &amp; weights() const</div><div class="ttdef"><b>Definition:</b> <a href="a01505_source.html#l00066">params_model.h:66</a></div></div>
-<div class="ttc" id="aa03592_html_abf17ad0cfc4873545896af20d7959c29"><div class="ttname"><a href="a03592.html#abf17ad0cfc4873545896af20d7959c29">tesseract::ParamsModel::weights_for_pass</a></div><div class="ttdeci">const GenericVector&lt; float &gt; &amp; weights_for_pass(PassEnum pass) const</div><div class="ttdef"><b>Definition:</b> <a href="a01505_source.html#l00069">params_model.h:69</a></div></div>
-<div class="ttc" id="aa03592_html_ae78fb426936c3ec0a6b5d902edce465a"><div class="ttname"><a href="a03592.html#ae78fb426936c3ec0a6b5d902edce465a">tesseract::ParamsModel::Copy</a></div><div class="ttdeci">void Copy(const ParamsModel &amp;other_model)</div><div class="ttdef"><b>Definition:</b> <a href="a01502_source.html#l00047">params_model.cpp:47</a></div></div>
-<div class="ttc" id="aa01539_html"><div class="ttname"><a href="a01539.html">tesseract</a></div><div class="ttdef"><b>Definition:</b> <a href="a00002_source.html#l00025">altorenderer.cpp:25</a></div></div>
-<div class="ttc" id="aa03592_html_af1ac568aa510bbcd30ff34da3d0037f2abfb2f56c5a42f83aa4afc26d19ec9d24"><div class="ttname"><a href="a03592.html#af1ac568aa510bbcd30ff34da3d0037f2abfb2f56c5a42f83aa4afc26d19ec9d24">tesseract::ParamsModel::PTRAIN_PASS2</a></div><div class="ttdef"><b>Definition:</b> <a href="a01505_source.html#l00036">params_model.h:36</a></div></div>
-<div class="ttc" id="aa03592_html_aafeab9959cac899236b065d390965662"><div class="ttname"><a href="a03592.html#aafeab9959cac899236b065d390965662">tesseract::ParamsModel::ParamsModel</a></div><div class="ttdeci">ParamsModel()</div><div class="ttdef"><b>Definition:</b> <a href="a01505_source.html#l00041">params_model.h:41</a></div></div>
-<div class="ttc" id="aa01539_html_a996f57000ba7e945e304ca3a5268b467a1f9a0441244ce25f22a62f3b17cf9d2e"><div class="ttname"><a href="a01539.html#a996f57000ba7e945e304ca3a5268b467a1f9a0441244ce25f22a62f3b17cf9d2e">tesseract::PTRAIN_NUM_FEATURE_TYPES</a></div><div class="ttdef"><b>Definition:</b> <a href="a00329_source.html#l00070">params_training_featdef.h:70</a></div></div>
-<div class="ttc" id="aa03592_html_af1ac568aa510bbcd30ff34da3d0037f2"><div class="ttname"><a href="a03592.html#af1ac568aa510bbcd30ff34da3d0037f2">tesseract::ParamsModel::PassEnum</a></div><div class="ttdeci">PassEnum</div><div class="ttdef"><b>Definition:</b> <a href="a01505_source.html#l00034">params_model.h:34</a></div></div>
+<div class="ttc" id="aa03978_html"><div class="ttname"><a href="a03978.html">ScrollView</a></div><div class="ttdef"><b>Definition:</b> <a href="a01469_source.html#l00097">scrollview.h:97</a></div></div>
+<div class="ttc" id="aa01505_html_adcd9274df0c3dc448de7bc90ba59c627"><div class="ttname"><a href="a01505.html#adcd9274df0c3dc448de7bc90ba59c627">FXDEMOYPOS</a></div><div class="ttdeci">#define FXDEMOYPOS</div><div class="ttdef"><b>Definition:</b> <a href="a01505_source.html#l00030">drawfx.cpp:30</a></div></div>
+<div class="ttc" id="aa00344_html"><div class="ttname"><a href="a00344.html">normalis.h</a></div></div>
+<div class="ttc" id="aa01505_html_aa3294a99fe8ad4b74a1e8577b89e3eff"><div class="ttname"><a href="a01505.html#aa3294a99fe8ad4b74a1e8577b89e3eff">clear_fx_win</a></div><div class="ttdeci">void clear_fx_win()</div><div class="ttdef"><b>Definition:</b> <a href="a01505_source.html#l00060">drawfx.cpp:60</a></div></div>
+<div class="ttc" id="aa00344_html_af974e6755e636c8bc7cbe57e3bcbdd73"><div class="ttname"><a href="a00344.html#af974e6755e636c8bc7cbe57e3bcbdd73">kBlnXHeight</a></div><div class="ttdeci">const int kBlnXHeight</div><div class="ttdef"><b>Definition:</b> <a href="a00344_source.html#l00023">normalis.h:23</a></div></div>
+<div class="ttc" id="aa01505_html_a006f74e514199ed33d09c64fcc8439da"><div class="ttname"><a href="a01505.html#a006f74e514199ed33d09c64fcc8439da">WERDWIDTH</a></div><div class="ttdeci">#define WERDWIDTH</div><div class="ttdef"><b>Definition:</b> <a href="a01505_source.html#l00034">drawfx.cpp:34</a></div></div>
+<div class="ttc" id="aa01505_html_a32821715e23d2e2666ba66b2a9d2ee8b"><div class="ttname"><a href="a01505.html#a32821715e23d2e2666ba66b2a9d2ee8b">fx_win</a></div><div class="ttdeci">ScrollView * fx_win</div><div class="ttdef"><b>Definition:</b> <a href="a01505_source.html#l00040">drawfx.cpp:40</a></div></div>
+<div class="ttc" id="aa01505_html_ae31e31904810bc4e3407c2f324cf7edb"><div class="ttname"><a href="a01505.html#ae31e31904810bc4e3407c2f324cf7edb">create_fx_win</a></div><div class="ttdeci">void create_fx_win()</div><div class="ttdef"><b>Definition:</b> <a href="a01505_source.html#l00048">drawfx.cpp:48</a></div></div>
+<div class="ttc" id="aa01505_html_ab6aba1c8ae753116a3baeaf4a0603155"><div class="ttname"><a href="a01505.html#ab6aba1c8ae753116a3baeaf4a0603155">DEBUG_WIN_NAME</a></div><div class="ttdeci">#define DEBUG_WIN_NAME</div><div class="ttdef"><b>Definition:</b> <a href="a01505_source.html#l00036">drawfx.cpp:36</a></div></div>
+<div class="ttc" id="aa03978_html_a5386b0da16d7cbdd33044e53b95313ac"><div class="ttname"><a href="a03978.html#a5386b0da16d7cbdd33044e53b95313ac">ScrollView::Clear</a></div><div class="ttdeci">void Clear()</div><div class="ttdef"><b>Definition:</b> <a href="a01466_source.html#l00588">scrollview.cpp:588</a></div></div>
+<div class="ttc" id="aa01508_html"><div class="ttname"><a href="a01508.html">drawfx.h</a></div></div>
+<div class="ttc" id="aa00554_html_abaa7778083ba376d8c70a59631d4a6ab"><div class="ttname"><a href="a00554.html#abaa7778083ba376d8c70a59631d4a6ab">STRING_VAR</a></div><div class="ttdeci">#define STRING_VAR(name, val, comment)</div><div class="ttdef"><b>Definition:</b> <a href="a00554_source.html#l00306">params.h:306</a></div></div>
+<div class="ttc" id="aa03978_html_a79855c525ec660b452382e9813d2edb5"><div class="ttname"><a href="a03978.html#a79855c525ec660b452382e9813d2edb5">ScrollView::Pen</a></div><div class="ttdeci">void Pen(Color color)</div><div class="ttdef"><b>Definition:</b> <a href="a01466_source.html#l00717">scrollview.cpp:717</a></div></div>
+<div class="ttc" id="aa01505_html_a914f797563b0dc5f5d3f13f521e307a5"><div class="ttname"><a href="a01505.html#a914f797563b0dc5f5d3f13f521e307a5">fx_debug</a></div><div class="ttdeci">FILE * fx_debug</div><div class="ttdef"><b>Definition:</b> <a href="a01505_source.html#l00041">drawfx.cpp:41</a></div></div>
+<div class="ttc" id="aa00467_html"><div class="ttname"><a href="a00467.html">werd.h</a></div></div>
+<div class="ttc" id="aa01505_html_aafd93dea58b33bc6c4245aaa39e8e9ee"><div class="ttname"><a href="a01505.html#aafd93dea58b33bc6c4245aaa39e8e9ee">fx_debugfile</a></div><div class="ttdeci">char * fx_debugfile</div><div class="ttdef"><b>Definition:</b> <a href="a01505_source.html#l00038">drawfx.cpp:38</a></div></div>
+<div class="ttc" id="aa01505_html_a7ccaf3bfa2be233bc9e06de45417f3f0"><div class="ttname"><a href="a01505.html#a7ccaf3bfa2be233bc9e06de45417f3f0">FXDEMOXSIZE</a></div><div class="ttdeci">#define FXDEMOXSIZE</div><div class="ttdef"><b>Definition:</b> <a href="a01505_source.html#l00031">drawfx.cpp:31</a></div></div>
+<div class="ttc" id="aa01505_html_ab91ddd2c62da43060f703b7b5945e60e"><div class="ttname"><a href="a01505.html#ab91ddd2c62da43060f703b7b5945e60e">FXDEMOXPOS</a></div><div class="ttdeci">#define FXDEMOXPOS</div><div class="ttdef"><b>Definition:</b> <a href="a01505_source.html#l00029">drawfx.cpp:29</a></div></div>
+<div class="ttc" id="aa01505_html_a06dd189f4dca5fe669a1d30a836ec4cb"><div class="ttname"><a href="a01505.html#a06dd189f4dca5fe669a1d30a836ec4cb">FXDEMOYSIZE</a></div><div class="ttdeci">#define FXDEMOYSIZE</div><div class="ttdef"><b>Definition:</b> <a href="a01505_source.html#l00032">drawfx.cpp:32</a></div></div>
+<div class="ttc" id="aa01505_html_acb1c409d6a6de9cd0988e873ff68fd70"><div class="ttname"><a href="a01505.html#acb1c409d6a6de9cd0988e873ff68fd70">create_fxdebug_win</a></div><div class="ttdeci">void create_fxdebug_win()</div><div class="ttdef"><b>Definition:</b> <a href="a01505_source.html#l00075">drawfx.cpp:75</a></div></div>
+<div class="ttc" id="aa01505_html_acaf0299e0b31c57e0dd971319b31bb81"><div class="ttname"><a href="a01505.html#acaf0299e0b31c57e0dd971319b31bb81">BLN_MAX</a></div><div class="ttdeci">#define BLN_MAX</div><div class="ttdef"><b>Definition:</b> <a href="a01505_source.html#l00033">drawfx.cpp:33</a></div></div>
+<div class="ttc" id="aa01505_html_a598328cfb77c3b70aa688624e73a1e1d"><div class="ttname"><a href="a01505.html#a598328cfb77c3b70aa688624e73a1e1d">FXDEMOWIN</a></div><div class="ttdeci">#define FXDEMOWIN</div><div class="ttdef"><b>Definition:</b> <a href="a01505_source.html#l00028">drawfx.cpp:28</a></div></div>
+<div class="ttc" id="aa03978_html_a2ba16f17fc401bb28be1a08160207e45"><div class="ttname"><a href="a03978.html#a2ba16f17fc401bb28be1a08160207e45">ScrollView::Line</a></div><div class="ttdeci">void Line(int x1, int y1, int x2, int y2)</div><div class="ttdef"><b>Definition:</b> <a href="a01466_source.html#l00531">scrollview.cpp:531</a></div></div>
+<div class="ttc" id="aa00344_html_abe10ce41bf7240ae8a053dea471d6ed5"><div class="ttname"><a href="a00344.html#abe10ce41bf7240ae8a053dea471d6ed5">kBlnBaselineOffset</a></div><div class="ttdeci">const int kBlnBaselineOffset</div><div class="ttdef"><b>Definition:</b> <a href="a00344_source.html#l00024">normalis.h:24</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7b2482c39089bf50e281ccfac06b23cd.html">wordrec</a></li><li class="navelem"><a class="el" href="a01505.html">params_model.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7b2482c39089bf50e281ccfac06b23cd.html">wordrec</a></li><li class="navelem"><a class="el" href="a01505.html">drawfx.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:21 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

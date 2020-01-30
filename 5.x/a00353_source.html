@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/ccstruct/polyblk.h Source File</title>
+<title>tesseract: /tesseract/src/ccstruct/ocrpara.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,138 +87,135 @@ $(document).ready(function(){initNavTree('a00353_source.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">polyblk.h</div>  </div>
+<div class="title">ocrpara.cpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00353.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**********************************************************************</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * File:        polyblk.h  (Formerly poly_block.h)</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * Description: Polygonal blocks</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * (C) Copyright 1993, Hewlett-Packard Ltd.</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> ** Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> ** you may not use this file except in compliance with the License.</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> ** You may obtain a copy of the License at</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> ** http://www.apache.org/licenses/LICENSE-2.0</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> ** Unless required by applicable law or agreed to in writing, software</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> ** distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> ** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> ** See the License for the specific language governing permissions and</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> ** limitations under the License.</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> **********************************************************************/</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#ifndef POLYBLK_H</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#define POLYBLK_H</span></div>
+<a href="a00353.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// File:        ocrpara.cpp</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// Description: OCR Paragraph Output Type</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// Author:      David Eger</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">// (C) Copyright 2010, Google Inc.</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// you may not use this file except in compliance with the License.</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">// You may obtain a copy of the License at</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// http://www.apache.org/licenses/LICENSE-2.0</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">// Unless required by applicable law or agreed to in writing, software</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">// See the License for the specific language governing permissions and</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">// limitations under the License.</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;cstdio&gt;</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;tesseract/publictypes.h&gt;</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00452.html">elst.h</a>&quot;</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00341.html">points.h</a>&quot;</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00380.html">rect.h</a>&quot;</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a01418.html">scrollview.h</a>&quot;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="a02412.html">   26</a></span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">class </span>DLLSYM <a class="code" href="a02412.html">POLY_BLOCK</a> {</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <a class="code" href="a02412.html">POLY_BLOCK</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <span class="comment">// Initialize from box coordinates.</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <a class="code" href="a02412.html">POLY_BLOCK</a>(<span class="keyword">const</span> <a class="code" href="a02440.html">TBOX</a>&amp; tbox, PolyBlockType <a class="code" href="a01548.html#a2aec20b482a80e7f8b08bd60ef53bd44">type</a>);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <a class="code" href="a02412.html">POLY_BLOCK</a>(ICOORDELT_LIST *points, PolyBlockType <a class="code" href="a01548.html#a2aec20b482a80e7f8b08bd60ef53bd44">type</a>);</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  ~<a class="code" href="a02412.html">POLY_BLOCK</a> () = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <a class="code" href="a02440.html">TBOX</a> *bounding_box() {  <span class="comment">// access function</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordflow">return</span> &amp;box;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  }</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  ICOORDELT_LIST *points() {  <span class="comment">// access function</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordflow">return</span> &amp;vertices;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  }</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="keywordtype">void</span> compute_bb();</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00356.html">ocrpara.h</a>&quot;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00530.html">host.h</a>&quot;</span>  <span class="comment">// For NearlyEqual()</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<a class="code" href="a00503.html#ab54325a3cfcd9bee58697d77e1902240">ELISTIZE</a>(<a class="code" href="a02806.html">PARA</a>)</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">using</span> <a class="code" href="a01818.html#a550970d1662b3ac5830c6a28dba676b1a0141f695e0959de2dc43e0eb94023ff6">tesseract::JUSTIFICATION_LEFT</a>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">using</span> <a class="code" href="a01818.html#a550970d1662b3ac5830c6a28dba676b1a93a23b19fec3ebdb587df6e0aa9e9fce">tesseract::JUSTIFICATION_RIGHT</a>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">using</span> <a class="code" href="a01818.html#a550970d1662b3ac5830c6a28dba676b1aa9a39d3bca308f650f8c75b0c14f6838">tesseract::JUSTIFICATION_CENTER</a>;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">using</span> <a class="code" href="a01818.html#a550970d1662b3ac5830c6a28dba676b1a90150303905fef6037adc10dc2aa3689">tesseract::JUSTIFICATION_UNKNOWN</a>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">static</span> <a class="code" href="a02542.html">STRING</a> ParagraphJustificationToString(</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="a01818.html#a550970d1662b3ac5830c6a28dba676b1">tesseract::ParagraphJustification</a> justification) {</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <span class="keywordflow">switch</span> (justification) {</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordflow">case</span> <a class="code" href="a00008.html#a144959d83226444ee72a074994f6d68ca6a982cb44dd7011cf8e46c8318e14692">JUSTIFICATION_LEFT</a>:</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;      <span class="keywordflow">return</span> <span class="stringliteral">&quot;LEFT&quot;</span>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordflow">case</span> <a class="code" href="a00008.html#a144959d83226444ee72a074994f6d68cac18a4dd3261b7f695a451467eae911a5">JUSTIFICATION_RIGHT</a>:</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;      <span class="keywordflow">return</span> <span class="stringliteral">&quot;RIGHT&quot;</span>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordflow">case</span> <a class="code" href="a00008.html#a144959d83226444ee72a074994f6d68cac5918f666adc8c35350637963ea22770">JUSTIFICATION_CENTER</a>:</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;      <span class="keywordflow">return</span> <span class="stringliteral">&quot;CENTER&quot;</span>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;      <span class="keywordflow">return</span> <span class="stringliteral">&quot;UNKNOWN&quot;</span>;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  }</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;}</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  PolyBlockType isA()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="a01548.html#a2aec20b482a80e7f8b08bd60ef53bd44">type</a>;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  }</div>
-<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="a02412.html#a093b9ddca1b40d5eae1b211bed47da09">   48</a></span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keywordtype">bool</span> IsText()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">return</span> PTIsTextType(<a class="code" href="a01548.html#a2aec20b482a80e7f8b08bd60ef53bd44">type</a>);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  }</div>
-<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="a02412.html#a0835a8ea39e763d6a229603d5532c879">   52</a></span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="comment">// Rotate about the origin by the given rotation. (Analogous to</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="comment">// multiplying by a complex number.</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <span class="keywordtype">void</span> rotate(<a class="code" href="a02408.html">FCOORD</a> rotation);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="comment">// Reflect the coords of the polygon in the y-axis. (Flip the sign of x.)</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="keywordtype">void</span> reflect_in_y_axis();</div>
-<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="a02412.html#a8a28b31c2bfa53533a23acf1d7679cca">   58</a></span>&#160;  <span class="comment">// Move by adding shift to all coordinates.</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="keywordtype">void</span> move(<a class="code" href="a02400.html">ICOORD</a> shift);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <span class="keywordtype">void</span> plot(<a class="code" href="a03524.html">ScrollView</a>* window, int32_t num);</div>
-<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="a02412.html#a4eb55be5fc2ed33312e4410f5ee2cf88">   62</a></span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">  #ifndef GRAPHICS_DISABLED</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="keywordtype">void</span> fill(<a class="code" href="a03524.html">ScrollView</a>* window, <a class="code" href="a03524.html#a100504544a5423a94222149ee9ed0fe8">ScrollView::Color</a> colour);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">  #endif  // GRAPHICS_DISABLED</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <span class="comment">// Returns true if other is inside this.</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <span class="keywordtype">bool</span> contains(<a class="code" href="a02412.html">POLY_BLOCK</a> *other);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="comment">// Returns true if the polygons of other and this overlap.</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <span class="keywordtype">bool</span> overlap(<a class="code" href="a02412.html">POLY_BLOCK</a> *other);</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  <span class="comment">// Returns the winding number of this around the test_pt.</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <span class="comment">// Positive for anticlockwise, negative for clockwise, and zero for</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <span class="comment">// test_pt outside this.</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  int16_t winding_number(<span class="keyword">const</span> <a class="code" href="a02400.html">ICOORD</a> &amp;test_pt);</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">  #ifndef GRAPHICS_DISABLED</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <span class="comment">// Static utility functions to handle the PolyBlockType.</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  <span class="comment">// Returns a color to draw the given type.</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  <span class="keyword">static</span> <a class="code" href="a03524.html#a100504544a5423a94222149ee9ed0fe8">ScrollView::Color</a> ColorForPolyBlockType(PolyBlockType <a class="code" href="a01548.html#a2aec20b482a80e7f8b08bd60ef53bd44">type</a>);</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">  #endif  // GRAPHICS_DISABLED</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  ICOORDELT_LIST vertices;     <span class="comment">// vertices</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  <a class="code" href="a02440.html">TBOX</a> box;                     <span class="comment">// bounding box</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  PolyBlockType <a class="code" href="a01548.html#a2aec20b482a80e7f8b08bd60ef53bd44">type</a>;              <span class="comment">// Type of this region.</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;};</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
-<div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="a02416.html">   90</a></span>&#160;<span class="comment">// Class to iterate the scanlines of a polygon.</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="keyword">class </span>DLLSYM <a class="code" href="a02416.html">PB_LINE_IT</a> {</div>
-<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="a02416.html#af16844a810674c1c47bb40dc421699e0">   92</a></span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <a class="code" href="a02416.html">PB_LINE_IT</a>(<a class="code" href="a02412.html">POLY_BLOCK</a> *blkptr) {</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    block = blkptr;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  }</div>
-<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="a02416.html#ad6a9527a4f5875609c1b1d10a58ce92d">   96</a></span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  <span class="keywordtype">void</span> set_to_block(<a class="code" href="a02412.html">POLY_BLOCK</a> * blkptr) {</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    block = blkptr;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  }</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  <span class="comment">// Returns a list of runs of pixels for the given y coord.</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  <span class="comment">// Each element of the returned list is the start (x) and extent(y) of</span></div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  <span class="comment">// a run inside the region.</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  <span class="comment">// Delete the returned list after use.</span></div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  ICOORDELT_LIST *get_line(int16_t y);</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  <a class="code" href="a02412.html">POLY_BLOCK</a> * block;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;};</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="a02810.html#ae97cf55d97f27d8ff0adfd812b464951">   45</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a02810.html#ae97cf55d97f27d8ff0adfd812b464951">ParagraphModel::ValidFirstLine</a>(<span class="keywordtype">int</span> lmargin, <span class="keywordtype">int</span> lindent,</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                                    <span class="keywordtype">int</span> rindent, <span class="keywordtype">int</span> rmargin)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="keywordflow">switch</span> (justification_) {</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordflow">case</span> <a class="code" href="a00008.html#a144959d83226444ee72a074994f6d68ca6a982cb44dd7011cf8e46c8318e14692">JUSTIFICATION_LEFT</a>:</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;      <span class="keywordflow">return</span> <a class="code" href="a00530.html#a80998b3d098c50b53b1f275adeafe267">NearlyEqual</a>(lmargin + lindent, margin_ + first_indent_,</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                         tolerance_);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordflow">case</span> <a class="code" href="a00008.html#a144959d83226444ee72a074994f6d68cac18a4dd3261b7f695a451467eae911a5">JUSTIFICATION_RIGHT</a>:</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;      <span class="keywordflow">return</span> <a class="code" href="a00530.html#a80998b3d098c50b53b1f275adeafe267">NearlyEqual</a>(rmargin + rindent, margin_ + first_indent_,</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                         tolerance_);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordflow">case</span> <a class="code" href="a00008.html#a144959d83226444ee72a074994f6d68cac5918f666adc8c35350637963ea22770">JUSTIFICATION_CENTER</a>:</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;      <span class="keywordflow">return</span> <a class="code" href="a00530.html#a80998b3d098c50b53b1f275adeafe267">NearlyEqual</a>(lindent, rindent, tolerance_ * 2);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;      <span class="comment">// shouldn&#39;t happen</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  }</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;}</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="a02810.html#a839656e5e1b792f103bdaf9d005b1bc4">   62</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a02810.html#a839656e5e1b792f103bdaf9d005b1bc4">ParagraphModel::ValidBodyLine</a>(<span class="keywordtype">int</span> lmargin, <span class="keywordtype">int</span> lindent,</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                                   <span class="keywordtype">int</span> rindent, <span class="keywordtype">int</span> rmargin)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="keywordflow">switch</span> (justification_) {</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">case</span> <a class="code" href="a00008.html#a144959d83226444ee72a074994f6d68ca6a982cb44dd7011cf8e46c8318e14692">JUSTIFICATION_LEFT</a>:</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;      <span class="keywordflow">return</span> <a class="code" href="a00530.html#a80998b3d098c50b53b1f275adeafe267">NearlyEqual</a>(lmargin + lindent, margin_ + body_indent_,</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                         tolerance_);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordflow">case</span> <a class="code" href="a00008.html#a144959d83226444ee72a074994f6d68cac18a4dd3261b7f695a451467eae911a5">JUSTIFICATION_RIGHT</a>:</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;      <span class="keywordflow">return</span> <a class="code" href="a00530.html#a80998b3d098c50b53b1f275adeafe267">NearlyEqual</a>(rmargin + rindent, margin_ + body_indent_,</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                         tolerance_);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordflow">case</span> <a class="code" href="a00008.html#a144959d83226444ee72a074994f6d68cac5918f666adc8c35350637963ea22770">JUSTIFICATION_CENTER</a>:</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;      <span class="keywordflow">return</span> <a class="code" href="a00530.html#a80998b3d098c50b53b1f275adeafe267">NearlyEqual</a>(lindent, rindent, tolerance_ * 2);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;      <span class="comment">// shouldn&#39;t happen</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  }</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;}</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="a02810.html#a35afbd4ff6280e30fb335c0bd0e00edc">   79</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a02810.html#a35afbd4ff6280e30fb335c0bd0e00edc">ParagraphModel::Comparable</a>(<span class="keyword">const</span> <a class="code" href="a02810.html">ParagraphModel</a> &amp;other)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  <span class="keywordflow">if</span> (justification_ != other.justification_)</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <span class="keywordflow">if</span> (justification_ == <a class="code" href="a00008.html#a144959d83226444ee72a074994f6d68cac5918f666adc8c35350637963ea22770">JUSTIFICATION_CENTER</a> ||</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;      justification_ == <a class="code" href="a00008.html#a144959d83226444ee72a074994f6d68cacd570e111ff2a3a686de1160842a0a52">JUSTIFICATION_UNKNOWN</a>)</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  <span class="keywordtype">int</span> <a class="code" href="a02810.html#acc9e1aae208c1e92c8eabcfb8f52fd02">tolerance</a> = (tolerance_ + other.tolerance_) / 4;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="a00530.html#a80998b3d098c50b53b1f275adeafe267">NearlyEqual</a>(margin_ + first_indent_,</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                     other.margin_ + other.first_indent_, <a class="code" href="a02810.html#acc9e1aae208c1e92c8eabcfb8f52fd02">tolerance</a>) &amp;&amp;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;         <a class="code" href="a00530.html#a80998b3d098c50b53b1f275adeafe267">NearlyEqual</a>(margin_ + body_indent_,</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                     other.margin_ + other.body_indent_, <a class="code" href="a02810.html#acc9e1aae208c1e92c8eabcfb8f52fd02">tolerance</a>);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;}</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="a02810.html#ad030949d5c4f5fb31c43b08b8921fdfa">   92</a></span>&#160;<a class="code" href="a02542.html">STRING</a> <a class="code" href="a02810.html#ad030949d5c4f5fb31c43b08b8921fdfa">ParagraphModel::ToString</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <span class="keywordtype">char</span> buffer[200];</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  <span class="keyword">const</span> <a class="code" href="a02542.html">STRING</a> &amp;alignment = ParagraphJustificationToString(justification_);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  snprintf(buffer, <span class="keyword">sizeof</span>(buffer),</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;           <span class="stringliteral">&quot;margin: %d, first_indent: %d, body_indent: %d, alignment: %s&quot;</span>,</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;           margin_, first_indent_, body_indent_, alignment.<a class="code" href="a02542.html#a552838a146145cb7993f42aefb740ea4">c_str</a>());</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="a02542.html">STRING</a>(buffer);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa02416_html"><div class="ttname"><a href="a02416.html">PB_LINE_IT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00353_source.html#l00090">polyblk.h:90</a></div></div>
-<div class="ttc" id="aa00452_html"><div class="ttname"><a href="a00452.html">elst.h</a></div></div>
-<div class="ttc" id="aa00380_html"><div class="ttname"><a href="a00380.html">rect.h</a></div></div>
-<div class="ttc" id="aa03524_html"><div class="ttname"><a href="a03524.html">ScrollView</a></div><div class="ttdef"><b>Definition:</b> <a href="a01418_source.html#l00097">scrollview.h:97</a></div></div>
-<div class="ttc" id="aa02408_html"><div class="ttname"><a href="a02408.html">FCOORD</a></div><div class="ttdef"><b>Definition:</b> <a href="a00341_source.html#l00187">points.h:187</a></div></div>
-<div class="ttc" id="aa03524_html_a100504544a5423a94222149ee9ed0fe8"><div class="ttname"><a href="a03524.html#a100504544a5423a94222149ee9ed0fe8">ScrollView::Color</a></div><div class="ttdeci">Color</div><div class="ttdef"><b>Definition:</b> <a href="a01418_source.html#l00100">scrollview.h:100</a></div></div>
-<div class="ttc" id="aa01548_html_a2aec20b482a80e7f8b08bd60ef53bd44"><div class="ttname"><a href="a01548.html#a2aec20b482a80e7f8b08bd60ef53bd44">tesstrain_utils.type</a></div><div class="ttdeci">type</div><div class="ttdef"><b>Definition:</b> <a href="a01346_source.html#l00141">tesstrain_utils.py:141</a></div></div>
-<div class="ttc" id="aa01418_html"><div class="ttname"><a href="a01418.html">scrollview.h</a></div></div>
-<div class="ttc" id="aa02412_html"><div class="ttname"><a href="a02412.html">POLY_BLOCK</a></div><div class="ttdef"><b>Definition:</b> <a href="a00353_source.html#l00026">polyblk.h:26</a></div></div>
-<div class="ttc" id="aa02440_html"><div class="ttname"><a href="a02440.html">TBOX</a></div><div class="ttdef"><b>Definition:</b> <a href="a00380_source.html#l00033">rect.h:33</a></div></div>
-<div class="ttc" id="aa00341_html"><div class="ttname"><a href="a00341.html">points.h</a></div></div>
-<div class="ttc" id="aa02400_html"><div class="ttname"><a href="a02400.html">ICOORD</a></div><div class="ttdoc">integer coordinate</div><div class="ttdef"><b>Definition:</b> <a href="a00341_source.html#l00030">points.h:30</a></div></div>
+<div class="ttc" id="aa00008_html_a144959d83226444ee72a074994f6d68cacd570e111ff2a3a686de1160842a0a52"><div class="ttname"><a href="a00008.html#a144959d83226444ee72a074994f6d68cacd570e111ff2a3a686de1160842a0a52">JUSTIFICATION_UNKNOWN</a></div><div class="ttdef"><b>Definition:</b> <a href="a00008_source.html#l00132">capi.h:132</a></div></div>
+<div class="ttc" id="aa00530_html"><div class="ttname"><a href="a00530.html">host.h</a></div></div>
+<div class="ttc" id="aa02810_html_a839656e5e1b792f103bdaf9d005b1bc4"><div class="ttname"><a href="a02810.html#a839656e5e1b792f103bdaf9d005b1bc4">ParagraphModel::ValidBodyLine</a></div><div class="ttdeci">bool ValidBodyLine(int lmargin, int lindent, int rindent, int rmargin) const</div><div class="ttdef"><b>Definition:</b> <a href="a00353_source.html#l00062">ocrpara.cpp:62</a></div></div>
+<div class="ttc" id="aa01818_html_a550970d1662b3ac5830c6a28dba676b1a93a23b19fec3ebdb587df6e0aa9e9fce"><div class="ttname"><a href="a01818.html#a550970d1662b3ac5830c6a28dba676b1a93a23b19fec3ebdb587df6e0aa9e9fce">tesseract::JUSTIFICATION_RIGHT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00032_source.html#l00252">publictypes.h:252</a></div></div>
+<div class="ttc" id="aa00530_html_a80998b3d098c50b53b1f275adeafe267"><div class="ttname"><a href="a00530.html#a80998b3d098c50b53b1f275adeafe267">NearlyEqual</a></div><div class="ttdeci">bool NearlyEqual(T x, T y, T tolerance)</div><div class="ttdef"><b>Definition:</b> <a href="a00530_source.html#l00036">host.h:36</a></div></div>
+<div class="ttc" id="aa02810_html_a35afbd4ff6280e30fb335c0bd0e00edc"><div class="ttname"><a href="a02810.html#a35afbd4ff6280e30fb335c0bd0e00edc">ParagraphModel::Comparable</a></div><div class="ttdeci">bool Comparable(const ParagraphModel &amp;other) const</div><div class="ttdef"><b>Definition:</b> <a href="a00353_source.html#l00079">ocrpara.cpp:79</a></div></div>
+<div class="ttc" id="aa01818_html_a550970d1662b3ac5830c6a28dba676b1"><div class="ttname"><a href="a01818.html#a550970d1662b3ac5830c6a28dba676b1">tesseract::ParagraphJustification</a></div><div class="ttdeci">ParagraphJustification</div><div class="ttdef"><b>Definition:</b> <a href="a00032_source.html#l00248">publictypes.h:248</a></div></div>
+<div class="ttc" id="aa02542_html"><div class="ttname"><a href="a02542.html">STRING</a></div><div class="ttdef"><b>Definition:</b> <a href="a00044_source.html#l00045">strngs.h:45</a></div></div>
+<div class="ttc" id="aa00008_html_a144959d83226444ee72a074994f6d68ca6a982cb44dd7011cf8e46c8318e14692"><div class="ttname"><a href="a00008.html#a144959d83226444ee72a074994f6d68ca6a982cb44dd7011cf8e46c8318e14692">JUSTIFICATION_LEFT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00008_source.html#l00133">capi.h:133</a></div></div>
+<div class="ttc" id="aa02810_html_ae97cf55d97f27d8ff0adfd812b464951"><div class="ttname"><a href="a02810.html#ae97cf55d97f27d8ff0adfd812b464951">ParagraphModel::ValidFirstLine</a></div><div class="ttdeci">bool ValidFirstLine(int lmargin, int lindent, int rindent, int rmargin) const</div><div class="ttdef"><b>Definition:</b> <a href="a00353_source.html#l00045">ocrpara.cpp:45</a></div></div>
+<div class="ttc" id="aa02810_html"><div class="ttname"><a href="a02810.html">ParagraphModel</a></div><div class="ttdef"><b>Definition:</b> <a href="a00356_source.html#l00114">ocrpara.h:114</a></div></div>
+<div class="ttc" id="aa01818_html_a550970d1662b3ac5830c6a28dba676b1a0141f695e0959de2dc43e0eb94023ff6"><div class="ttname"><a href="a01818.html#a550970d1662b3ac5830c6a28dba676b1a0141f695e0959de2dc43e0eb94023ff6">tesseract::JUSTIFICATION_LEFT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00032_source.html#l00250">publictypes.h:250</a></div></div>
+<div class="ttc" id="aa02810_html_acc9e1aae208c1e92c8eabcfb8f52fd02"><div class="ttname"><a href="a02810.html#acc9e1aae208c1e92c8eabcfb8f52fd02">ParagraphModel::tolerance</a></div><div class="ttdeci">int tolerance() const</div><div class="ttdef"><b>Definition:</b> <a href="a00356_source.html#l00170">ocrpara.h:170</a></div></div>
+<div class="ttc" id="aa02542_html_a552838a146145cb7993f42aefb740ea4"><div class="ttname"><a href="a02542.html#a552838a146145cb7993f42aefb740ea4">STRING::c_str</a></div><div class="ttdeci">const char * c_str() const</div><div class="ttdef"><b>Definition:</b> <a href="a00572_source.html#l00192">strngs.cpp:192</a></div></div>
+<div class="ttc" id="aa01818_html_a550970d1662b3ac5830c6a28dba676b1a90150303905fef6037adc10dc2aa3689"><div class="ttname"><a href="a01818.html#a550970d1662b3ac5830c6a28dba676b1a90150303905fef6037adc10dc2aa3689">tesseract::JUSTIFICATION_UNKNOWN</a></div><div class="ttdef"><b>Definition:</b> <a href="a00032_source.html#l00249">publictypes.h:249</a></div></div>
+<div class="ttc" id="aa00356_html"><div class="ttname"><a href="a00356.html">ocrpara.h</a></div></div>
+<div class="ttc" id="aa00008_html_a144959d83226444ee72a074994f6d68cac5918f666adc8c35350637963ea22770"><div class="ttname"><a href="a00008.html#a144959d83226444ee72a074994f6d68cac5918f666adc8c35350637963ea22770">JUSTIFICATION_CENTER</a></div><div class="ttdef"><b>Definition:</b> <a href="a00008_source.html#l00134">capi.h:134</a></div></div>
+<div class="ttc" id="aa02810_html_ad030949d5c4f5fb31c43b08b8921fdfa"><div class="ttname"><a href="a02810.html#ad030949d5c4f5fb31c43b08b8921fdfa">ParagraphModel::ToString</a></div><div class="ttdeci">STRING ToString() const</div><div class="ttdef"><b>Definition:</b> <a href="a00353_source.html#l00092">ocrpara.cpp:92</a></div></div>
+<div class="ttc" id="aa00008_html_a144959d83226444ee72a074994f6d68cac18a4dd3261b7f695a451467eae911a5"><div class="ttname"><a href="a00008.html#a144959d83226444ee72a074994f6d68cac18a4dd3261b7f695a451467eae911a5">JUSTIFICATION_RIGHT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00008_source.html#l00135">capi.h:135</a></div></div>
+<div class="ttc" id="aa02806_html"><div class="ttname"><a href="a02806.html">PARA</a></div><div class="ttdef"><b>Definition:</b> <a href="a00356_source.html#l00029">ocrpara.h:29</a></div></div>
+<div class="ttc" id="aa01818_html_a550970d1662b3ac5830c6a28dba676b1aa9a39d3bca308f650f8c75b0c14f6838"><div class="ttname"><a href="a01818.html#a550970d1662b3ac5830c6a28dba676b1aa9a39d3bca308f650f8c75b0c14f6838">tesseract::JUSTIFICATION_CENTER</a></div><div class="ttdef"><b>Definition:</b> <a href="a00032_source.html#l00251">publictypes.h:251</a></div></div>
+<div class="ttc" id="aa00503_html_ab54325a3cfcd9bee58697d77e1902240"><div class="ttname"><a href="a00503.html#ab54325a3cfcd9bee58697d77e1902240">ELISTIZE</a></div><div class="ttdeci">#define ELISTIZE(CLASSNAME)</div><div class="ttdef"><b>Definition:</b> <a href="a00503_source.html#l00919">elst.h:919</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_27285da2200a3bef8a8e2dba4d21412a.html">ccstruct</a></li><li class="navelem"><a class="el" href="a00353.html">polyblk.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:14 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_27285da2200a3bef8a8e2dba4d21412a.html">ccstruct</a></li><li class="navelem"><a class="el" href="a00353.html">ocrpara.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:20 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

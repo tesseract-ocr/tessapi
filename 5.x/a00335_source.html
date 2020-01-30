@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/ccstruct/pdblock.h Source File</title>
+<title>tesseract: /tesseract/src/ccstruct/mod128.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,13 +87,13 @@ $(document).ready(function(){initNavTree('a00335_source.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">pdblock.h</div>  </div>
+<div class="title">mod128.cpp</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="a00335.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**********************************************************************</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * File:        pdblock.h  (Formerly pdblk.h)</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * Description: Page block class definition.</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * Author:      Ray Smith</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * File:        mod128.cpp  (Formerly dir128.c)</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * Description: Code to convert a DIR128 to an ICOORD.</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * Author:          Ray Smith</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> * (C) Copyright 1991, Hewlett-Packard Ltd.</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> ** Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
@@ -108,149 +108,89 @@ $(document).ready(function(){initNavTree('a00335_source.html','');});
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> **********************************************************************/</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#ifndef           PDBLOCK_H</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#define           PDBLOCK_H</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include          &quot;<a class="code" href="a00443.html">clst.h</a>&quot;</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include          &lt;tesseract/strngs.h&gt;</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include          &quot;<a class="code" href="a00353.html">polyblk.h</a>&quot;</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="a00335.html#aedc6a690b03da0d4f84ba90a25b287ab">   25</a></span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">class </span>DLLSYM <a class="code" href="a02388.html">PDBLK</a>;              <span class="comment">//forward decl</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">struct </span>Pix;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<a class="code" href="a00152.html#a1f7e3099e20129096036e0edad5592e9">CLISTIZEH</a> (<a class="code" href="a02388.html">PDBLK</a>)</div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="a02388.html#ad858d9adefd50f00fb20c85fcdfb0c95">   31</a></span>&#160;class <a class="code" href="a02388.html">PDBLK</a> {</div>
-<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="a02388.html#a911a93ed8e1e920b209d7aca8bfd7c97">   32</a></span>&#160;  <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="a02392.html">BLOCK_RECT_IT</a>;    </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="a02344.html">BLOCK</a>;            </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <a class="code" href="a00335.html#aedc6a690b03da0d4f84ba90a25b287ab">PDBLK</a>() {</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    hand_poly = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    index_ = 0;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  }</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <a class="code" href="a00335.html#aedc6a690b03da0d4f84ba90a25b287ab">PDBLK</a>(int16_t xmin,  </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        int16_t ymin,</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        int16_t xmax,  </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        int16_t ymax);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keywordtype">void</span> set_sides(ICOORDELT_LIST *left, ICOORDELT_LIST *right);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  ~<a class="code" href="a02388.html">PDBLK</a>() { <span class="keyword">delete</span> hand_poly; }</div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="a02388.html#a87856f8400f0629dc761fec0f7a17b57">   54</a></span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <a class="code" href="a02412.html">POLY_BLOCK</a> *poly_block()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> hand_poly; }</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="keywordtype">void</span> set_poly_block(<a class="code" href="a02412.html">POLY_BLOCK</a> *blk) { hand_poly = blk; }</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="keywordtype">void</span> bounding_box(<a class="code" href="a02400.html">ICOORD</a> &amp;bottom_left,        <span class="comment">// bottom left</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                    <a class="code" href="a02400.html">ICOORD</a> &amp;top_right)<span class="keyword"> const </span>{  <span class="comment">// topright</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    bottom_left = box.botleft();</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    top_right = box.topright();</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  }</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="keyword">const</span> <a class="code" href="a02440.html">TBOX</a> &amp;bounding_box()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> box; }</div>
-<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="a02388.html#a6a88fdbd4c9b9c23e17181202575d106">   66</a></span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="a02388.html#a788cc0cf8ac2ccc71748904c8788e82d">   67</a></span>&#160;  <span class="keywordtype">int</span> index()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> index_; }</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <span class="keywordtype">void</span> set_index(<span class="keywordtype">int</span> value) { index_ = value; }</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <span class="keywordtype">bool</span> contains(<a class="code" href="a02400.html">ICOORD</a> pt);</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <span class="keywordtype">void</span> move(<span class="keyword">const</span> <a class="code" href="a02400.html">ICOORD</a> vec);  <span class="comment">// by vector</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  <span class="comment">// Returns a binary Pix mask with a 1 pixel for every pixel within the</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  <span class="comment">// block. Rotates the coordinate system by rerotation prior to rendering.</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  <span class="comment">// If not nullptr, mask_box is filled with the position box of the returned</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <span class="comment">// mask image.</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  Pix *<a class="code" href="a02344.html#ad97b7844202f2194fe31411a598ffa24">render_mask</a>(<span class="keyword">const</span> <a class="code" href="a02408.html">FCOORD</a> &amp;rerotation, <a class="code" href="a02440.html">TBOX</a> *mask_box);</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">#ifndef GRAPHICS_DISABLED</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  <span class="keywordtype">void</span> plot(<a class="code" href="a03524.html">ScrollView</a> *window, int32_t serial, <a class="code" href="a03524.html#a100504544a5423a94222149ee9ed0fe8">ScrollView::Color</a> colour);</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="preprocessor">#endif  // GRAPHICS_DISABLED</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;  <a class="code" href="a02388.html">PDBLK</a> &amp;<a class="code" href="a02344.html#a14b8aec10599ac57c5ef9938a59fff27">operator=</a>(<span class="keyword">const</span> <a class="code" href="a02388.html">PDBLK</a> &amp;source);</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="a02388.html#a4c1b3a88242771bf55372f44c0d4ca88">   94</a></span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="a02388.html#af00bb4a4ee2e805324672b19e088e06a">   95</a></span>&#160;  <a class="code" href="a02412.html">POLY_BLOCK</a> *hand_poly;     </div>
-<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="a02388.html#a87a08537c120e669c825d147a5650a55">   96</a></span>&#160;  ICOORDELT_LIST leftside;   </div>
-<div class="line"><a name="l00097"></a><span class="lineno"><a class="line" href="a02388.html#ac59bc5dc2b038f44294271a6356cbff6">   97</a></span>&#160;  ICOORDELT_LIST rightside;  </div>
-<div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="a02388.html#ab760851a1a4866f053ea020a02350467">   98</a></span>&#160;  <a class="code" href="a02440.html">TBOX</a> box;                  </div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  <span class="keywordtype">int</span> index_;                </div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;};</div>
-<div class="line"><a name="l00101"></a><span class="lineno"><a class="line" href="a02392.html">  101</a></span>&#160; </div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="keyword">class </span>DLLSYM <a class="code" href="a02392.html">BLOCK_RECT_IT</a>       <span class="comment">//rectangle iterator</span></div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;{</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <a class="code" href="a02392.html">BLOCK_RECT_IT</a>(<a class="code" href="a02388.html">PDBLK</a> *blkptr);</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordtype">void</span> set_to_block (</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;      <a class="code" href="a02388.html">PDBLK</a> * blkptr);           <span class="comment">//block to iterate</span></div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordtype">void</span> start_block();</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keywordtype">void</span> forward();</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="keywordtype">bool</span> cycled_rects() {</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;      <span class="keywordflow">return</span> left_it.cycled_list() &amp;&amp; right_it.cycled_list();</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    }</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keywordtype">void</span> bounding_box(<a class="code" href="a02400.html">ICOORD</a> &amp;bleft,</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                      <a class="code" href="a02400.html">ICOORD</a> &amp;tright) {</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                                 <span class="comment">//bottom left</span></div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;      bleft = <a class="code" href="a02400.html">ICOORD</a> (left_it.data ()-&gt;x (), ymin);</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                                 <span class="comment">//top right</span></div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;      tright = <a class="code" href="a02400.html">ICOORD</a> (right_it.data ()-&gt;x (), ymax);</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    }</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;  <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    int16_t ymin = 0;            </div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    int16_t ymax = 0;            </div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <a class="code" href="a02388.html">PDBLK</a>* block = <span class="keyword">nullptr</span>;      </div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    ICOORDELT_IT left_it;        </div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    ICOORDELT_IT right_it;</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;};</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160; </div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="keyword">class </span>DLLSYM <a class="code" href="a02396.html">BLOCK_LINE_IT</a></div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;{</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;  <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    <a class="code" href="a02396.html">BLOCK_LINE_IT</a> (<a class="code" href="a02388.html">PDBLK</a> * blkptr)</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    :rect_it (blkptr) {</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;      block = blkptr;            <span class="comment">//remember block</span></div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    }</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; </div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    <span class="keywordtype">void</span> set_to_block (<a class="code" href="a02388.html">PDBLK</a> * blkptr) {</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;      block = blkptr;            <span class="comment">//remember block</span></div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                                 <span class="comment">//set iterator</span></div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;      rect_it.set_to_block (blkptr);</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    }</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160; </div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    int16_t get_line(int16_t y,</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                   int16_t &amp;xext);</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160; </div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;  <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    <a class="code" href="a02388.html">PDBLK</a> * block;               </div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    <a class="code" href="a02392.html">BLOCK_RECT_IT</a> rect_it;       </div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;};</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160; </div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00338.html">mod128.h</a>&quot;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> int16_t idirtab[] = {</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  1000, 0, 998, 49, 995, 98, 989, 146,</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  980, 195, 970, 242, 956, 290, 941, 336,</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  923, 382, 903, 427, 881, 471, 857, 514,</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  831, 555, 803, 595, 773, 634, 740, 671,</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  707, 707, 671, 740, 634, 773, 595, 803,</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  555, 831, 514, 857, 471, 881, 427, 903,</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  382, 923, 336, 941, 290, 956, 242, 970,</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  195, 980, 146, 989, 98, 995, 49, 998,</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  0, 1000, -49, 998, -98, 995, -146, 989,</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  -195, 980, -242, 970, -290, 956, -336, 941,</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  -382, 923, -427, 903, -471, 881, -514, 857,</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  -555, 831, -595, 803, -634, 773, -671, 740,</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  -707, 707, -740, 671, -773, 634, -803, 595,</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  -831, 555, -857, 514, -881, 471, -903, 427,</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  -923, 382, -941, 336, -956, 290, -970, 242,</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  -980, 195, -989, 146, -995, 98, -998, 49,</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  -1000, 0, -998, -49, -995, -98, -989, -146,</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  -980, -195, -970, -242, -956, -290, -941, -336,</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  -923, -382, -903, -427, -881, -471, -857, -514,</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  -831, -555, -803, -595, -773, -634, -740, -671,</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  -707, -707, -671, -740, -634, -773, -595, -803,</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  -555, -831, -514, -857, -471, -881, -427, -903,</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  -382, -923, -336, -941, -290, -956, -242, -970,</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  -195, -980, -146, -989, -98, -995, -49, -998,</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  0, -1000, 49, -998, 98, -995, 146, -989,</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  195, -980, 242, -970, 290, -956, 336, -941,</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  382, -923, 427, -903, 471, -881, 514, -857,</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  555, -831, 595, -803, 634, -773, 671, -740,</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  707, -707, 740, -671, 773, -634, 803, -595,</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  831, -555, 857, -514, 881, -471, 903, -427,</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  923, -382, 941, -336, 956, -290, 970, -242,</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  980, -195, 989, -146, 995, -98, 998, -49</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;};</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="a02858.html">ICOORD</a>* dirtab = reinterpret_cast&lt;const ICOORD*&gt;(idirtab);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">/**********************************************************************</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment"> * DIR128::DIR128</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment"> * Quantize the direction of an FCOORD to make a DIR128.</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="a02794.html#a3205d8518dd0ffd6df641a910d979774">   62</a></span>&#160;<span class="comment"> **********************************************************************/</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<a class="code" href="a02794.html#a17872a498b45153b56e789b80ef6e18b">DIR128::DIR128</a>(                 <span class="comment">//from fcoord</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;               <span class="keyword">const</span> <a class="code" href="a02866.html">FCOORD</a> fc  <span class="comment">//vector to quantize</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;              ) {</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <span class="keywordtype">int</span> high, low, current;        <span class="comment">//binary search</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  low = 0;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="keywordflow">if</span> (fc.<a class="code" href="a02866.html#abb9516f874133b689b0e62ac70874385">y</a> () == 0) {</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordflow">if</span> (fc.<a class="code" href="a02866.html#aecd85311c159bcd52b485a97a8dcc901">x</a> () &gt;= 0)</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;      dir = 0;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;      dir = <a class="code" href="a00338.html#a9bc1fe94bf8c1b9aaef3dade106b6304">MODULUS</a> / 2;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  }</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  high = <a class="code" href="a00338.html#a9bc1fe94bf8c1b9aaef3dade106b6304">MODULUS</a>;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  <span class="keywordflow">do</span> {</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    current = (high + low) / 2;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordflow">if</span> (dirtab[current] * fc &gt;= 0)</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;      low = current;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;      high = current;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  }</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  <span class="keywordflow">while</span> (high - low &gt; 1);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  dir = low;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa02392_html"><div class="ttname"><a href="a02392.html">BLOCK_RECT_IT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00335_source.html#l00101">pdblock.h:101</a></div></div>
-<div class="ttc" id="aa02344_html"><div class="ttname"><a href="a02344.html">BLOCK</a></div><div class="ttdef"><b>Definition:</b> <a href="a00299_source.html#l00028">ocrblock.h:28</a></div></div>
-<div class="ttc" id="aa03524_html"><div class="ttname"><a href="a03524.html">ScrollView</a></div><div class="ttdef"><b>Definition:</b> <a href="a01418_source.html#l00097">scrollview.h:97</a></div></div>
-<div class="ttc" id="aa02408_html"><div class="ttname"><a href="a02408.html">FCOORD</a></div><div class="ttdef"><b>Definition:</b> <a href="a00341_source.html#l00187">points.h:187</a></div></div>
-<div class="ttc" id="aa00152_html_a1f7e3099e20129096036e0edad5592e9"><div class="ttname"><a href="a00152.html#a1f7e3099e20129096036e0edad5592e9">CLISTIZEH</a></div><div class="ttdeci">CLISTIZEH(STRING) CLISTIZE(STRING) namespace tesseract</div><div class="ttdef"><b>Definition:</b> <a href="a00152_source.html#l00050">reject.cpp:50</a></div></div>
-<div class="ttc" id="aa03524_html_a100504544a5423a94222149ee9ed0fe8"><div class="ttname"><a href="a03524.html#a100504544a5423a94222149ee9ed0fe8">ScrollView::Color</a></div><div class="ttdeci">Color</div><div class="ttdef"><b>Definition:</b> <a href="a01418_source.html#l00100">scrollview.h:100</a></div></div>
-<div class="ttc" id="aa02396_html"><div class="ttname"><a href="a02396.html">BLOCK_LINE_IT</a></div><div class="ttdoc">rectangle iterator</div><div class="ttdef"><b>Definition:</b> <a href="a00335_source.html#l00143">pdblock.h:143</a></div></div>
-<div class="ttc" id="aa02388_html"><div class="ttname"><a href="a02388.html">PDBLK</a></div><div class="ttdoc">page block</div><div class="ttdef"><b>Definition:</b> <a href="a00335_source.html#l00030">pdblock.h:30</a></div></div>
-<div class="ttc" id="aa02344_html_ad97b7844202f2194fe31411a598ffa24"><div class="ttname"><a href="a02344.html#ad97b7844202f2194fe31411a598ffa24">BLOCK::render_mask</a></div><div class="ttdeci">Pix * render_mask(TBOX *mask_box)</div><div class="ttdef"><b>Definition:</b> <a href="a00299_source.html#l00159">ocrblock.h:159</a></div></div>
-<div class="ttc" id="aa00335_html_aedc6a690b03da0d4f84ba90a25b287ab"><div class="ttname"><a href="a00335.html#aedc6a690b03da0d4f84ba90a25b287ab">PDBLK</a></div><div class="ttdeci">class DLLSYM PDBLK</div><div class="ttdef"><b>Definition:</b> <a href="a00335_source.html#l00025">pdblock.h:25</a></div></div>
-<div class="ttc" id="aa02344_html_a14b8aec10599ac57c5ef9938a59fff27"><div class="ttname"><a href="a02344.html#a14b8aec10599ac57c5ef9938a59fff27">BLOCK::operator=</a></div><div class="ttdeci">BLOCK &amp; operator=(const BLOCK &amp;source)</div><div class="ttdef"><b>Definition:</b> <a href="a00296_source.html#l00221">ocrblock.cpp:221</a></div></div>
-<div class="ttc" id="aa02412_html"><div class="ttname"><a href="a02412.html">POLY_BLOCK</a></div><div class="ttdef"><b>Definition:</b> <a href="a00353_source.html#l00026">polyblk.h:26</a></div></div>
-<div class="ttc" id="aa02440_html"><div class="ttname"><a href="a02440.html">TBOX</a></div><div class="ttdef"><b>Definition:</b> <a href="a00380_source.html#l00033">rect.h:33</a></div></div>
-<div class="ttc" id="aa00443_html"><div class="ttname"><a href="a00443.html">clst.h</a></div></div>
-<div class="ttc" id="aa00353_html"><div class="ttname"><a href="a00353.html">polyblk.h</a></div></div>
-<div class="ttc" id="aa02400_html"><div class="ttname"><a href="a02400.html">ICOORD</a></div><div class="ttdoc">integer coordinate</div><div class="ttdef"><b>Definition:</b> <a href="a00341_source.html#l00030">points.h:30</a></div></div>
+<div class="ttc" id="aa02866_html_abb9516f874133b689b0e62ac70874385"><div class="ttname"><a href="a02866.html#abb9516f874133b689b0e62ac70874385">FCOORD::y</a></div><div class="ttdeci">float y() const</div><div class="ttdef"><b>Definition:</b> <a href="a00392_source.html#l00209">points.h:209</a></div></div>
+<div class="ttc" id="aa02858_html"><div class="ttname"><a href="a02858.html">ICOORD</a></div><div class="ttdoc">integer coordinate</div><div class="ttdef"><b>Definition:</b> <a href="a00392_source.html#l00030">points.h:30</a></div></div>
+<div class="ttc" id="aa00338_html_a9bc1fe94bf8c1b9aaef3dade106b6304"><div class="ttname"><a href="a00338.html#a9bc1fe94bf8c1b9aaef3dade106b6304">MODULUS</a></div><div class="ttdeci">#define MODULUS</div><div class="ttdef"><b>Definition:</b> <a href="a00338_source.html#l00024">mod128.h:24</a></div></div>
+<div class="ttc" id="aa02866_html_aecd85311c159bcd52b485a97a8dcc901"><div class="ttname"><a href="a02866.html#aecd85311c159bcd52b485a97a8dcc901">FCOORD::x</a></div><div class="ttdeci">float x() const</div><div class="ttdef"><b>Definition:</b> <a href="a00392_source.html#l00206">points.h:206</a></div></div>
+<div class="ttc" id="aa02866_html"><div class="ttname"><a href="a02866.html">FCOORD</a></div><div class="ttdef"><b>Definition:</b> <a href="a00392_source.html#l00187">points.h:187</a></div></div>
+<div class="ttc" id="aa00338_html"><div class="ttname"><a href="a00338.html">mod128.h</a></div></div>
+<div class="ttc" id="aa02794_html_a17872a498b45153b56e789b80ef6e18b"><div class="ttname"><a href="a02794.html#a17872a498b45153b56e789b80ef6e18b">DIR128::DIR128</a></div><div class="ttdeci">DIR128()=default</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_27285da2200a3bef8a8e2dba4d21412a.html">ccstruct</a></li><li class="navelem"><a class="el" href="a00335.html">pdblock.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:14 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_27285da2200a3bef8a8e2dba4d21412a.html">ccstruct</a></li><li class="navelem"><a class="el" href="a00335.html">mod128.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:20 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

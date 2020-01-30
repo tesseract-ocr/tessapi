@@ -1,14 +1,29 @@
 var a00659 =
 [
-    [ "MicroFeature", "a00659.html#a29d1eef9328292867329303f9f60c5cb", null ],
-    [ "MF_PARAM_NAME", "a00659.html#a0ae9eb66d190c70000f710f7c11977af", [
-      [ "MFXPosition", "a00659.html#a0ae9eb66d190c70000f710f7c11977afa6e5b6d39513820252795a81c22a85094", null ],
-      [ "MFYPosition", "a00659.html#a0ae9eb66d190c70000f710f7c11977afa86c3fede274bd6e6fad789032ba86695", null ],
-      [ "MFLength", "a00659.html#a0ae9eb66d190c70000f710f7c11977afa29b85f8df2366e185699f12117ed1b54", null ],
-      [ "MFDirection", "a00659.html#a0ae9eb66d190c70000f710f7c11977afa6bbdda7793b58667c8ffbf57a38e7436", null ],
-      [ "MFBulge1", "a00659.html#a0ae9eb66d190c70000f710f7c11977afa84f738cc38f82afce789bb6e9908a2cd", null ],
-      [ "MFBulge2", "a00659.html#a0ae9eb66d190c70000f710f7c11977afa11c81e882c3753f597780e69582c06b1", null ],
-      [ "MFCount", "a00659.html#a0ae9eb66d190c70000f710f7c11977afa1c44793580a78fadeffdefc28065e682", null ]
-    ] ],
-    [ "ExtractMicros", "a00659.html#a65d3fa9ad9b625a37b5b5a8254156bac", null ]
+    [ "PICO_FEATURE_LENGTH", "a00659.html#af9508e257a32a6046ee5b30079a50bdb", null ],
+    [ "DefineFeature", "a00659.html#a8bc7713319fd0ff0cd7244c2b83555c8", null ],
+    [ "DefineFeature", "a00659.html#ac9154045a33d045767f7e0a92ac37596", null ],
+    [ "DefineFeature", "a00659.html#a706f32aa234bf681c3715e8468b81db9", null ],
+    [ "DefineParam", "a00659.html#afc1cf15a6fd4a1161be29c328e942d25", null ],
+    [ "DefineParam", "a00659.html#adf274205cc6296b659f347eeeb815940", null ],
+    [ "DefineParam", "a00659.html#a5c66efdc737240df00ed0d838fd59da9", null ],
+    [ "DefineParam", "a00659.html#ac61e64e99b291ed5bb191d4f0bf75dfa", null ],
+    [ "DefineParam", "a00659.html#af359af8506f7c961611c66d558172b2a", null ],
+    [ "DefineParam", "a00659.html#a1e77b2e42e66195c1a624288bd20add3", null ],
+    [ "FreeCharDescription", "a00659.html#ae2a92eefc3755300284119692527e3b9", null ],
+    [ "InitFeatureDefs", "a00659.html#a6e4c84ab01e39577e4a74d9ab1eff68b", null ],
+    [ "NewCharDescription", "a00659.html#a860f7517bac9477e79551e501df549ed", null ],
+    [ "ReadCharDescription", "a00659.html#ae1558f5d4119a9e651a85e10887be9f3", null ],
+    [ "ShortNameToFeatureType", "a00659.html#a96bfe8f02db0cc4dea42e9a9e9a98630", null ],
+    [ "StartParamDesc", "a00659.html#a52df1ab71d4c360f26c4b861f80114f8", null ],
+    [ "StartParamDesc", "a00659.html#aea810284238bb167236b049d2416f548", null ],
+    [ "StartParamDesc", "a00659.html#ae28e25123f88c90765e80e52f1ec4699", null ],
+    [ "StartParamDesc", "a00659.html#afd240004143ead168c277545dde0491d", null ],
+    [ "ValidCharDescription", "a00659.html#af8fa799b7b0c0c8e18648a521ef2775f", null ],
+    [ "WriteCharDescription", "a00659.html#a7ec256eeb477e0fd9bb2124e54c13f34", null ],
+    [ "kCNFeatureType", "a00659.html#a5f5743c5da72cfdc8eb87e4f2504b2d6", null ],
+    [ "kGeoFeatureType", "a00659.html#a2f437cdeef08c6b8ce741925fb39e1e0", null ],
+    [ "kIntFeatureType", "a00659.html#a0360637d48d03b92c8dd981266febb86", null ],
+    [ "kMicroFeatureType", "a00659.html#ae706c172f0e1ba7f7cf1a99c560fd99a", null ],
+    [ "of", "a00659.html#a66c7f757ef35e33a52ac2efe3f4e8247", null ]
 ];

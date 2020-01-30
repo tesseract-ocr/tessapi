@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/training/tessopt.cpp File Reference</title>
+<title>tesseract: /tesseract/src/training/mastertrainer.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,130 +87,50 @@ $(document).ready(function(){initNavTree('a01337.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a>  </div>
   <div class="headertitle">
-<div class="title">tessopt.cpp File Reference</div>  </div>
+<div class="title">mastertrainer.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;cstring&gt;</code><br />
-<code>#include &lt;cstdio&gt;</code><br />
-<code>#include &quot;<a class="el" href="a01340_source.html">tessopt.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a00641_source.html">classify.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00647_source.html">cluster.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00686_source.html">intfx.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00503_source.html">elst.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a01274_source.html">errorcounter.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00662_source.html">featdefs.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00314_source.html">fontinfo.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00536_source.html">indexmapbidi.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00680_source.html">intfeaturespace.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a01298_source.html">intfeaturemap.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00692_source.html">intmatcher.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00554_source.html">params.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00776_source.html">shapetable.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00788_source.html">trainingsample.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a01412_source.html">trainingsampleset.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00605_source.html">unicharset.h</a>&quot;</code><br />
 </div>
 <p><a href="a01337_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:aeed1faf3ce2036da8fbd8ce3567f372c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01337.html#aeed1faf3ce2036da8fbd8ce3567f372c">tessopt</a> (int32_t argc, char *argv[], const char *arglist)</td></tr>
-<tr class="separator:aeed1faf3ce2036da8fbd8ce3567f372c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03886.html">tesseract::ShapeDist</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03890.html">tesseract::MasterTrainer</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:aef382bc42a86adef688f3b7901cc9593"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01337.html#aef382bc42a86adef688f3b7901cc9593">tessoptind</a></td></tr>
-<tr class="separator:aef382bc42a86adef688f3b7901cc9593"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae2c7e7835346e9460d1534ecc3ba3f2f"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01337.html#ae2c7e7835346e9460d1534ecc3ba3f2f">tessoptarg</a></td></tr>
-<tr class="separator:ae2c7e7835346e9460d1534ecc3ba3f2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:a01818"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html">tesseract</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="aeed1faf3ce2036da8fbd8ce3567f372c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeed1faf3ce2036da8fbd8ce3567f372c">&#9670;&nbsp;</a></span>tessopt()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int tessopt </td>
-          <td>(</td>
-          <td class="paramtype">int32_t&#160;</td>
-          <td class="paramname"><em>argc</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>argv</em>[], </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>arglist</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a01337_source.html#l00031">31</a> of file <a class="el" href="a01337_source.html">tessopt.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  {</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <span class="keyword">const</span> <span class="keywordtype">char</span> *arg;                     <span class="comment">//arg char</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <span class="keywordflow">if</span> (<a class="code" href="a01337.html#aef382bc42a86adef688f3b7901cc9593">tessoptind</a> == 0)</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <a class="code" href="a01337.html#aef382bc42a86adef688f3b7901cc9593">tessoptind</a> = 1;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <span class="keywordflow">if</span> (<a class="code" href="a01337.html#aef382bc42a86adef688f3b7901cc9593">tessoptind</a> &lt; argc &amp;&amp; argv[<a class="code" href="a01337.html#aef382bc42a86adef688f3b7901cc9593">tessoptind</a>][0] == <span class="charliteral">&#39;-&#39;</span>) {</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    arg = strchr (arglist, argv[<a class="code" href="a01337.html#aef382bc42a86adef688f3b7901cc9593">tessoptind</a>][1]);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordflow">if</span> (arg == <span class="keyword">nullptr</span> || *arg == <span class="charliteral">&#39;:&#39;</span>)</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;      <span class="keywordflow">return</span> <span class="charliteral">&#39;?&#39;</span>;                <span class="comment">//dud option</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <a class="code" href="a01337.html#aef382bc42a86adef688f3b7901cc9593">tessoptind</a>++;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <a class="code" href="a01337.html#ae2c7e7835346e9460d1534ecc3ba3f2f">tessoptarg</a> = argv[<a class="code" href="a01337.html#aef382bc42a86adef688f3b7901cc9593">tessoptind</a>];</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordflow">if</span> (arg[1] == <span class="charliteral">&#39;:&#39;</span>) {</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;      <span class="keywordflow">if</span> (argv[<a class="code" href="a01337.html#aef382bc42a86adef688f3b7901cc9593">tessoptind</a> - 1][2] != <span class="charliteral">&#39;\0&#39;</span>)</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                                 <span class="comment">//immediately after</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <a class="code" href="a01337.html#ae2c7e7835346e9460d1534ecc3ba3f2f">tessoptarg</a> = argv[<a class="code" href="a01337.html#aef382bc42a86adef688f3b7901cc9593">tessoptind</a> - 1] + 2;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;      <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <a class="code" href="a01337.html#aef382bc42a86adef688f3b7901cc9593">tessoptind</a>++;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    }</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordflow">return</span> *arg;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  }</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="keywordflow">else</span></div>
-</div><!-- fragment -->
-</div>
-</div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="ae2c7e7835346e9460d1534ecc3ba3f2f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae2c7e7835346e9460d1534ecc3ba3f2f">&#9670;&nbsp;</a></span>tessoptarg</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">char* tessoptarg</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a01337_source.html#l00024">24</a> of file <a class="el" href="a01337_source.html">tessopt.cpp</a>.</p>
-
-</div>
-</div>
-<a id="aef382bc42a86adef688f3b7901cc9593"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aef382bc42a86adef688f3b7901cc9593">&#9670;&nbsp;</a></span>tessoptind</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int tessoptind</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a01337_source.html#l00023">23</a> of file <a class="el" href="a01337_source.html">tessopt.cpp</a>.</p>
-
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa01337_html_ae2c7e7835346e9460d1534ecc3ba3f2f"><div class="ttname"><a href="a01337.html#ae2c7e7835346e9460d1534ecc3ba3f2f">tessoptarg</a></div><div class="ttdeci">char * tessoptarg</div><div class="ttdef"><b>Definition:</b> <a href="a01337_source.html#l00024">tessopt.cpp:24</a></div></div>
-<div class="ttc" id="aa01337_html_aef382bc42a86adef688f3b7901cc9593"><div class="ttname"><a href="a01337.html#aef382bc42a86adef688f3b7901cc9593">tessoptind</a></div><div class="ttdeci">int tessoptind</div><div class="ttdef"><b>Definition:</b> <a href="a01337_source.html#l00023">tessopt.cpp:23</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7c7ae07dd2a999045cb78bf7ff8dcbc7.html">training</a></li><li class="navelem"><a class="el" href="a01337.html">tessopt.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7c7ae07dd2a999045cb78bf7ff8dcbc7.html">training</a></li><li class="navelem"><a class="el" href="a01337.html">mastertrainer.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

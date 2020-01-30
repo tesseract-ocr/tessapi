@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/ccmain/docqual.h Source File</title>
+<title>tesseract: /tesseract/src/api/wordstrboxrenderer.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,15 +87,15 @@ $(document).ready(function(){initNavTree('a00077_source.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">docqual.h</div>  </div>
+<div class="title">wordstrboxrenderer.cpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00077.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/******************************************************************</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * File:        docqual.h  (Formerly docqual.h)</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * Description: Document Quality Metrics</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * Author:      Phil Cheatle</span></div>
+<a href="a00077.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**********************************************************************</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * File:        wordstrboxrenderer.cpp</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * Description: Renderer for creating box file with WordStr strings.</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *              based on the tsv renderer.</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> * (C) Copyright 1994, Hewlett-Packard Ltd.</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> * (C) Copyright 2019, Google Inc.</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> ** Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> ** you may not use this file except in compliance with the License.</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> ** You may obtain a copy of the License at</span></div>
@@ -108,45 +108,114 @@ $(document).ready(function(){initNavTree('a00077_source.html','');});
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> **********************************************************************/</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#ifndef DOCQUAL_H</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#define DOCQUAL_H</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;cstdint&gt;</span>  <span class="comment">// for int16_t</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">class </span><a class="code" href="a02376.html">PAGE_RES_IT</a>;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">class </span><a class="code" href="a02356.html">ROW</a>;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">class </span><a class="code" href="a02372.html">WERD_RES</a>;</div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="a00077.html#ac4a411895d63e3bb0bea788e92894d42">   27</a></span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">enum</span> <a class="code" href="a00077.html#ac4a411895d63e3bb0bea788e92894d42">GARBAGE_LEVEL</a></div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="a00077.html#ac4a411895d63e3bb0bea788e92894d42ac744add072d392855d098a995acb3751">   29</a></span>&#160;{</div>
-<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="a00077.html#ac4a411895d63e3bb0bea788e92894d42a46d03f2b7d080cc8319a43ef4bad82b3">   30</a></span>&#160;  <a class="code" href="a00077.html#ac4a411895d63e3bb0bea788e92894d42ac744add072d392855d098a995acb3751">G_NEVER_CRUNCH</a>,</div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="a00077.html#ac4a411895d63e3bb0bea788e92894d42a17acba0fc01478524c8214f0da82815a">   31</a></span>&#160;  <a class="code" href="a00077.html#ac4a411895d63e3bb0bea788e92894d42a46d03f2b7d080cc8319a43ef4bad82b3">G_OK</a>,</div>
-<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="a00077.html#ac4a411895d63e3bb0bea788e92894d42a2400fb7991d9c94896464522e10c49ad">   32</a></span>&#160;  <a class="code" href="a00077.html#ac4a411895d63e3bb0bea788e92894d42a17acba0fc01478524c8214f0da82815a">G_DODGY</a>,</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <a class="code" href="a00077.html#ac4a411895d63e3bb0bea788e92894d42a2400fb7991d9c94896464522e10c49ad">G_TERRIBLE</a></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;};</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;int16_t <a class="code" href="a00077.html#af942d4c69c0e2d00791b102e310ebb22">word_blob_quality</a>(<a class="code" href="a02372.html">WERD_RES</a>* <a class="code" href="a02372.html#afc15fa7c1b5ad55d6772dea0d6865df1">word</a>);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00077.html#a1b9934928e2b953ee5e91abb58cf043f">reject_whole_page</a>(<a class="code" href="a02376.html">PAGE_RES_IT</a> &amp;page_res_it);</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00005.html">tesseract/baseapi.h</a>&gt;</span>  <span class="comment">// for TessBaseAPI</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00035.html">tesseract/renderer.h</a>&gt;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00224.html">tesseractclass.h</a>&quot;</span>  <span class="comment">// for Tesseract</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">namespace </span><a class="code" href="a01818.html">tesseract</a> {</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keywordtype">char</span>* <a class="code" href="a02438.html#aa45bc5ee67de0bf66112165ca93399ff">TessBaseAPI::GetWordStrBoxText</a>(<span class="keywordtype">int</span> page_number=0) {</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <span class="keywordflow">if</span> (<a class="code" href="a02438.html#a247f50792f581df05afe336a2aeda402">tesseract_</a> == <span class="keyword">nullptr</span> || (<a class="code" href="a02438.html#a12dda612630eba40e15f9d0b9955a04c">page_res_</a> == <span class="keyword">nullptr</span> &amp;&amp; <a class="code" href="a02438.html#a0e4065c20b142d69a2324ee0c74ae0b0">Recognize</a>(<span class="keyword">nullptr</span>) &lt; 0))</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <a class="code" href="a02542.html">STRING</a> wordstr_box_str(<span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <span class="keywordtype">int</span> left = 0, top = 0, right = 0, bottom = 0;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <span class="keywordtype">bool</span> first_line = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  LTRResultIterator* res_it = <a class="code" href="a02438.html#ad7a9b7f45f94801d7891035bf38d4861">GetLTRIterator</a>();</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <span class="keywordflow">while</span> (!res_it-&gt;Empty(<a class="code" href="a01818.html#aa26c22b65cc9765a0e747120f4287fd7a2dcea8d4208c16055353029d26f9bf49">RIL_BLOCK</a>)) {</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordflow">if</span> (res_it-&gt;Empty(<a class="code" href="a01818.html#aa26c22b65cc9765a0e747120f4287fd7afd466aec253e5daa6f0c112b0f0e0610">RIL_WORD</a>)) {</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;      res_it-&gt;Next(<a class="code" href="a01818.html#aa26c22b65cc9765a0e747120f4287fd7afd466aec253e5daa6f0c112b0f0e0610">RIL_WORD</a>);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;      <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="a02438.html#aa45bc5ee67de0bf66112165ca93399ff">   45</a></span>&#160;    }</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordflow">if</span> (res_it-&gt;IsAtBeginningOf(<a class="code" href="a01818.html#aa26c22b65cc9765a0e747120f4287fd7a5e87a35f16de644593c353159ede11d1">RIL_TEXTLINE</a>)) {</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;      <span class="keywordflow">if</span> (!first_line) {</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        wordstr_box_str.add_str_int(<span class="stringliteral">&quot;\n\t &quot;</span>, right + 1);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        wordstr_box_str.add_str_int(<span class="stringliteral">&quot; &quot;</span>, <a class="code" href="a02438.html#ab7d24a78f3565c5bfb42b2592b9e8df0">image_height_</a> - bottom);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        wordstr_box_str.add_str_int(<span class="stringliteral">&quot; &quot;</span>, right + 5);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        wordstr_box_str.add_str_int(<span class="stringliteral">&quot; &quot;</span>, <a class="code" href="a02438.html#ab7d24a78f3565c5bfb42b2592b9e8df0">image_height_</a> - top);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        wordstr_box_str.add_str_int(<span class="stringliteral">&quot; &quot;</span>, page_number);  <span class="comment">// row for tab for EOL</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        wordstr_box_str += <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;      } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        first_line = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;      }</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;     <span class="comment">// Use bounding box for whole line for WordStr</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;     res_it-&gt;BoundingBox(<a class="code" href="a01818.html#aa26c22b65cc9765a0e747120f4287fd7a5e87a35f16de644593c353159ede11d1">RIL_TEXTLINE</a>, &amp;left, &amp;top, &amp;right, &amp;bottom);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;      wordstr_box_str.add_str_int(<span class="stringliteral">&quot;WordStr &quot;</span>, left);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;      wordstr_box_str.add_str_int(<span class="stringliteral">&quot; &quot;</span>, <a class="code" href="a02438.html#ab7d24a78f3565c5bfb42b2592b9e8df0">image_height_</a> - bottom);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;      wordstr_box_str.add_str_int(<span class="stringliteral">&quot; &quot;</span>, right);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;      wordstr_box_str.add_str_int(<span class="stringliteral">&quot; &quot;</span>, <a class="code" href="a02438.html#ab7d24a78f3565c5bfb42b2592b9e8df0">image_height_</a> - top);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;      wordstr_box_str.add_str_int(<span class="stringliteral">&quot; &quot;</span>, page_number);  <span class="comment">// word</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;      wordstr_box_str += <span class="stringliteral">&quot; #&quot;</span>;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    }</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordflow">do</span> {</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;      wordstr_box_str +=</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;          std::unique_ptr&lt;const char[]&gt;(res_it-&gt;GetUTF8Text(<a class="code" href="a01818.html#aa26c22b65cc9765a0e747120f4287fd7afd466aec253e5daa6f0c112b0f0e0610">RIL_WORD</a>)).get();</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;      wordstr_box_str += <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;      res_it-&gt;Next(<a class="code" href="a01818.html#aa26c22b65cc9765a0e747120f4287fd7afd466aec253e5daa6f0c112b0f0e0610">RIL_WORD</a>);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    } <span class="keywordflow">while</span> (!res_it-&gt;Empty(<a class="code" href="a01818.html#aa26c22b65cc9765a0e747120f4287fd7a2dcea8d4208c16055353029d26f9bf49">RIL_BLOCK</a>) &amp;&amp; !res_it-&gt;IsAtBeginningOf(<a class="code" href="a01818.html#aa26c22b65cc9765a0e747120f4287fd7afd466aec253e5daa6f0c112b0f0e0610">RIL_WORD</a>));</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  }</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <span class="keywordflow">if</span> (left != 0 &amp;&amp; top != 0 &amp;&amp; right != 0 &amp;&amp; bottom != 0) {</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    wordstr_box_str.add_str_int(<span class="stringliteral">&quot;\n\t &quot;</span>, right + 1);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    wordstr_box_str.add_str_int(<span class="stringliteral">&quot; &quot;</span>, <a class="code" href="a02438.html#ab7d24a78f3565c5bfb42b2592b9e8df0">image_height_</a> - bottom);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    wordstr_box_str.add_str_int(<span class="stringliteral">&quot; &quot;</span>, right + 5);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    wordstr_box_str.add_str_int(<span class="stringliteral">&quot; &quot;</span>, <a class="code" href="a02438.html#ab7d24a78f3565c5bfb42b2592b9e8df0">image_height_</a> - top);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    wordstr_box_str.add_str_int(<span class="stringliteral">&quot; &quot;</span>, page_number);  <span class="comment">// row for tab for EOL</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    wordstr_box_str += <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  }</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  <span class="keywordtype">char</span>* ret = <span class="keyword">new</span> <span class="keywordtype">char</span>[wordstr_box_str.length() + 1];</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  strcpy(ret, wordstr_box_str.c_str());</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  <span class="keyword">delete</span> res_it;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  <span class="keywordflow">return</span> ret;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;}</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">/**********************************************************************</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment"> * WordStrBox Renderer interface implementation</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment"> **********************************************************************/</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<a class="code" href="a02526.html#ae22151c1feee64f4c139f3e9a082b305">TessWordStrBoxRenderer::TessWordStrBoxRenderer</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* outputbase)</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    : <a class="code" href="a00008.html#a79b401fe19433464a13b416108deb755">TessResultRenderer</a>(outputbase, <span class="stringliteral">&quot;box&quot;</span>) {}</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="a02526.html#a878ecd214e751328bef36b19e12c16c5">TessWordStrBoxRenderer::AddImageHandler</a>(<a class="code" href="a00008.html#a47436d31525552f08492b8dcdfc12755">TessBaseAPI</a>* api) {</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;  <span class="keyword">const</span> std::unique_ptr&lt;const char[]&gt; wordstrbox(</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;      api-&gt;GetWordStrBoxText(<a class="code" href="a02490.html#a2682a4f6c8bc6671baa0ca7336178b08">imagenum</a>()));</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  <span class="keywordflow">if</span> (wordstrbox == <span class="keyword">nullptr</span>) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  <a class="code" href="a02490.html#a9d903a379bfc1467618b8ee616ba64b6">AppendString</a>(wordstrbox.get());</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;}</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="a02526.html#ae22151c1feee64f4c139f3e9a082b305">  105</a></span>&#160;}  <span class="comment">// namespace tesseract.</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa00077_html_ac4a411895d63e3bb0bea788e92894d42"><div class="ttname"><a href="a00077.html#ac4a411895d63e3bb0bea788e92894d42">GARBAGE_LEVEL</a></div><div class="ttdeci">GARBAGE_LEVEL</div><div class="ttdef"><b>Definition:</b> <a href="a00077_source.html#l00027">docqual.h:27</a></div></div>
-<div class="ttc" id="aa00077_html_af942d4c69c0e2d00791b102e310ebb22"><div class="ttname"><a href="a00077.html#af942d4c69c0e2d00791b102e310ebb22">word_blob_quality</a></div><div class="ttdeci">int16_t word_blob_quality(WERD_RES *word)</div></div>
-<div class="ttc" id="aa02372_html"><div class="ttname"><a href="a02372.html">WERD_RES</a></div><div class="ttdef"><b>Definition:</b> <a href="a00323_source.html#l00160">pageres.h:160</a></div></div>
-<div class="ttc" id="aa00077_html_ac4a411895d63e3bb0bea788e92894d42a17acba0fc01478524c8214f0da82815a"><div class="ttname"><a href="a00077.html#ac4a411895d63e3bb0bea788e92894d42a17acba0fc01478524c8214f0da82815a">G_DODGY</a></div><div class="ttdef"><b>Definition:</b> <a href="a00077_source.html#l00031">docqual.h:31</a></div></div>
-<div class="ttc" id="aa00077_html_a1b9934928e2b953ee5e91abb58cf043f"><div class="ttname"><a href="a00077.html#a1b9934928e2b953ee5e91abb58cf043f">reject_whole_page</a></div><div class="ttdeci">void reject_whole_page(PAGE_RES_IT &amp;page_res_it)</div><div class="ttdef"><b>Definition:</b> <a href="a00074_source.html#l00385">docqual.cpp:385</a></div></div>
-<div class="ttc" id="aa00077_html_ac4a411895d63e3bb0bea788e92894d42ac744add072d392855d098a995acb3751"><div class="ttname"><a href="a00077.html#ac4a411895d63e3bb0bea788e92894d42ac744add072d392855d098a995acb3751">G_NEVER_CRUNCH</a></div><div class="ttdef"><b>Definition:</b> <a href="a00077_source.html#l00029">docqual.h:29</a></div></div>
-<div class="ttc" id="aa00077_html_ac4a411895d63e3bb0bea788e92894d42a2400fb7991d9c94896464522e10c49ad"><div class="ttname"><a href="a00077.html#ac4a411895d63e3bb0bea788e92894d42a2400fb7991d9c94896464522e10c49ad">G_TERRIBLE</a></div><div class="ttdef"><b>Definition:</b> <a href="a00077_source.html#l00032">docqual.h:32</a></div></div>
-<div class="ttc" id="aa02372_html_afc15fa7c1b5ad55d6772dea0d6865df1"><div class="ttname"><a href="a02372.html#afc15fa7c1b5ad55d6772dea0d6865df1">WERD_RES::word</a></div><div class="ttdeci">WERD * word</div><div class="ttdef"><b>Definition:</b> <a href="a00323_source.html#l00180">pageres.h:180</a></div></div>
-<div class="ttc" id="aa02376_html"><div class="ttname"><a href="a02376.html">PAGE_RES_IT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00323_source.html#l00668">pageres.h:668</a></div></div>
-<div class="ttc" id="aa02356_html"><div class="ttname"><a href="a02356.html">ROW</a></div><div class="ttdef"><b>Definition:</b> <a href="a00311_source.html#l00035">ocrrow.h:35</a></div></div>
-<div class="ttc" id="aa00077_html_ac4a411895d63e3bb0bea788e92894d42a46d03f2b7d080cc8319a43ef4bad82b3"><div class="ttname"><a href="a00077.html#ac4a411895d63e3bb0bea788e92894d42a46d03f2b7d080cc8319a43ef4bad82b3">G_OK</a></div><div class="ttdef"><b>Definition:</b> <a href="a00077_source.html#l00030">docqual.h:30</a></div></div>
+<div class="ttc" id="aa01818_html_aa26c22b65cc9765a0e747120f4287fd7afd466aec253e5daa6f0c112b0f0e0610"><div class="ttname"><a href="a01818.html#aa26c22b65cc9765a0e747120f4287fd7afd466aec253e5daa6f0c112b0f0e0610">tesseract::RIL_WORD</a></div><div class="ttdef"><b>Definition:</b> <a href="a00032_source.html#l00220">publictypes.h:220</a></div></div>
+<div class="ttc" id="aa02438_html_a12dda612630eba40e15f9d0b9955a04c"><div class="ttname"><a href="a02438.html#a12dda612630eba40e15f9d0b9955a04c">tesseract::TessBaseAPI::page_res_</a></div><div class="ttdeci">PAGE_RES * page_res_</div><div class="ttdoc">The page-level data.</div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00893">baseapi.h:893</a></div></div>
+<div class="ttc" id="aa02438_html_ab7d24a78f3565c5bfb42b2592b9e8df0"><div class="ttname"><a href="a02438.html#ab7d24a78f3565c5bfb42b2592b9e8df0">tesseract::TessBaseAPI::image_height_</a></div><div class="ttdeci">int image_height_</div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00912">baseapi.h:912</a></div></div>
+<div class="ttc" id="aa02526_html_ae22151c1feee64f4c139f3e9a082b305"><div class="ttname"><a href="a02526.html#ae22151c1feee64f4c139f3e9a082b305">tesseract::TessWordStrBoxRenderer::TessWordStrBoxRenderer</a></div><div class="ttdeci">TessWordStrBoxRenderer(const char *outputbase)</div><div class="ttdef"><b>Definition:</b> <a href="a00077_source.html#l00105">wordstrboxrenderer.cpp:105</a></div></div>
+<div class="ttc" id="aa00224_html"><div class="ttname"><a href="a00224.html">tesseractclass.h</a></div></div>
+<div class="ttc" id="aa01818_html_aa26c22b65cc9765a0e747120f4287fd7a2dcea8d4208c16055353029d26f9bf49"><div class="ttname"><a href="a01818.html#aa26c22b65cc9765a0e747120f4287fd7a2dcea8d4208c16055353029d26f9bf49">tesseract::RIL_BLOCK</a></div><div class="ttdef"><b>Definition:</b> <a href="a00032_source.html#l00217">publictypes.h:217</a></div></div>
+<div class="ttc" id="aa02542_html"><div class="ttname"><a href="a02542.html">STRING</a></div><div class="ttdef"><b>Definition:</b> <a href="a00044_source.html#l00045">strngs.h:45</a></div></div>
+<div class="ttc" id="aa02490_html_a9d903a379bfc1467618b8ee616ba64b6"><div class="ttname"><a href="a02490.html#a9d903a379bfc1467618b8ee616ba64b6">tesseract::TessResultRenderer::AppendString</a></div><div class="ttdeci">void AppendString(const char *s)</div><div class="ttdef"><b>Definition:</b> <a href="a00071_source.html#l00101">renderer.cpp:101</a></div></div>
+<div class="ttc" id="aa00005_html"><div class="ttname"><a href="a00005.html">baseapi.h</a></div></div>
+<div class="ttc" id="aa02438_html_a247f50792f581df05afe336a2aeda402"><div class="ttname"><a href="a02438.html#a247f50792f581df05afe336a2aeda402">tesseract::TessBaseAPI::tesseract_</a></div><div class="ttdeci">Tesseract * tesseract_</div><div class="ttdoc">The underlying data object.</div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00886">baseapi.h:886</a></div></div>
+<div class="ttc" id="aa01818_html"><div class="ttname"><a href="a01818.html">tesseract</a></div><div class="ttdef"><b>Definition:</b> <a href="a00005_source.html#l00065">baseapi.h:65</a></div></div>
+<div class="ttc" id="aa01818_html_aa26c22b65cc9765a0e747120f4287fd7a5e87a35f16de644593c353159ede11d1"><div class="ttname"><a href="a01818.html#aa26c22b65cc9765a0e747120f4287fd7a5e87a35f16de644593c353159ede11d1">tesseract::RIL_TEXTLINE</a></div><div class="ttdef"><b>Definition:</b> <a href="a00032_source.html#l00219">publictypes.h:219</a></div></div>
+<div class="ttc" id="aa02438_html_ad7a9b7f45f94801d7891035bf38d4861"><div class="ttname"><a href="a02438.html#ad7a9b7f45f94801d7891035bf38d4861">tesseract::TessBaseAPI::GetLTRIterator</a></div><div class="ttdeci">TESS_LOCAL LTRResultIterator * GetLTRIterator()</div><div class="ttdef"><b>Definition:</b> <a href="a00056_source.html#l01304">baseapi.cpp:1304</a></div></div>
+<div class="ttc" id="aa00035_html"><div class="ttname"><a href="a00035.html">renderer.h</a></div></div>
+<div class="ttc" id="aa02438_html_aa45bc5ee67de0bf66112165ca93399ff"><div class="ttname"><a href="a02438.html#aa45bc5ee67de0bf66112165ca93399ff">tesseract::TessBaseAPI::GetWordStrBoxText</a></div><div class="ttdeci">char * GetWordStrBoxText(int page_number)</div><div class="ttdef"><b>Definition:</b> <a href="a00077_source.html#l00045">wordstrboxrenderer.cpp:45</a></div></div>
+<div class="ttc" id="aa02490_html_a2682a4f6c8bc6671baa0ca7336178b08"><div class="ttname"><a href="a02490.html#a2682a4f6c8bc6671baa0ca7336178b08">tesseract::TessResultRenderer::imagenum</a></div><div class="ttdeci">int imagenum() const</div><div class="ttdef"><b>Definition:</b> <a href="a00035_source.html#l00107">renderer.h:107</a></div></div>
+<div class="ttc" id="aa00008_html_a47436d31525552f08492b8dcdfc12755"><div class="ttname"><a href="a00008.html#a47436d31525552f08492b8dcdfc12755">TessBaseAPI</a></div><div class="ttdeci">struct TessBaseAPI TessBaseAPI</div><div class="ttdef"><b>Definition:</b> <a href="a00008_source.html#l00072">capi.h:72</a></div></div>
+<div class="ttc" id="aa00008_html_a79b401fe19433464a13b416108deb755"><div class="ttname"><a href="a00008.html#a79b401fe19433464a13b416108deb755">TessResultRenderer</a></div><div class="ttdeci">struct TessResultRenderer TessResultRenderer</div><div class="ttdef"><b>Definition:</b> <a href="a00008_source.html#l00071">capi.h:71</a></div></div>
+<div class="ttc" id="aa02438_html_a0e4065c20b142d69a2324ee0c74ae0b0"><div class="ttname"><a href="a02438.html#a0e4065c20b142d69a2324ee0c74ae0b0">tesseract::TessBaseAPI::Recognize</a></div><div class="ttdeci">int Recognize(ETEXT_DESC *monitor)</div><div class="ttdef"><b>Definition:</b> <a href="a00056_source.html#l00827">baseapi.cpp:827</a></div></div>
+<div class="ttc" id="aa02526_html_a878ecd214e751328bef36b19e12c16c5"><div class="ttname"><a href="a02526.html#a878ecd214e751328bef36b19e12c16c5">tesseract::TessWordStrBoxRenderer::AddImageHandler</a></div><div class="ttdeci">bool AddImageHandler(TessBaseAPI *api) override</div><div class="ttdef"><b>Definition:</b> <a href="a00077_source.html#l00108">wordstrboxrenderer.cpp:108</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_43edf6714a3bf7b9dbcd0e0e50a1a1a7.html">ccmain</a></li><li class="navelem"><a class="el" href="a00077.html">docqual.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:14 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_da61e3e9a357748887e3ca8d7c5a0c16.html">api</a></li><li class="navelem"><a class="el" href="a00077.html">wordstrboxrenderer.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:19 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

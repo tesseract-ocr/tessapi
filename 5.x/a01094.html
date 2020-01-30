@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/textord/strokewidth.h File Reference</title>
+<title>tesseract: /tesseract/src/textord/imagefind.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,49 +87,49 @@ $(document).ready(function(){initNavTree('a01094.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#enum-members">Enumerations</a>  </div>
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
-<div class="title">strokewidth.h File Reference</div>  </div>
+<div class="title">imagefind.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="a00203_source.html">blobbox.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00962_source.html">blobgrid.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00992_source.html">colpartitiongrid.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a01124_source.html">textlineprojection.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a01097_source.html">imagefind.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a01043_source.html">colpartitiongrid.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00326_source.html">linlsq.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00455_source.html">statistc.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00554_source.html">params.h</a>&quot;</code><br />
+<code>#include &quot;allheaders.h&quot;</code><br />
+<code>#include &lt;algorithm&gt;</code><br />
 </div>
 <p><a href="a01094_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03312.html">tesseract::StrokeWidth</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a01539"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html">tesseract</a></td></tr>
+<tr class="memitem:a01818"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html">tesseract</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:acd121b57d321ca8511db069f603d071f"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#acd121b57d321ca8511db069f603d071f">tesseract::LeftOrRight</a> { <a class="el" href="a01539.html#acd121b57d321ca8511db069f603d071fa83d27ea7b63eb91b9feed005a2f46ec9">tesseract::LR_LEFT</a>, 
-<a class="el" href="a01539.html#acd121b57d321ca8511db069f603d071facb1914d58c6a7acb6ddb9563a46a1046">tesseract::LR_RIGHT</a>
- }</td></tr>
-<tr class="separator:acd121b57d321ca8511db069f603d071f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2987d37792e5b3297193091de3911634"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#a2987d37792e5b3297193091de3911634">tesseract::PartitionFindResult</a> { <a class="el" href="a01539.html#a2987d37792e5b3297193091de3911634a0a35bbb694c579efc7e7ded8a8a63e73">tesseract::PFR_OK</a>, 
-<a class="el" href="a01539.html#a2987d37792e5b3297193091de3911634a60a7950f62d772f395a6f1a404f4b8b6">tesseract::PFR_SKEW</a>, 
-<a class="el" href="a01539.html#a2987d37792e5b3297193091de3911634af5682e259ea2132d1705be1dc1ddebe1">tesseract::PFR_NOISE</a>
- }</td></tr>
-<tr class="separator:a2987d37792e5b3297193091de3911634"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a1f21fe8acb13b4e1904e1d1157183d0d"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a1f21fe8acb13b4e1904e1d1157183d0d">tesseract::kMinRectangularFraction</a> = 0.125</td></tr>
+<tr class="separator:a1f21fe8acb13b4e1904e1d1157183d0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6dc7638052b18db703d824259f9d39e"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#ae6dc7638052b18db703d824259f9d39e">tesseract::kMaxRectangularFraction</a> = 0.75</td></tr>
+<tr class="separator:ae6dc7638052b18db703d824259f9d39e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac980c05231fe3f7a8cb4c7ed7f9b6516"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#ac980c05231fe3f7a8cb4c7ed7f9b6516">tesseract::kMaxRectangularGradient</a> = 0.1</td></tr>
+<tr class="separator:ac980c05231fe3f7a8cb4c7ed7f9b6516"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad923bf9132f3e7cfd57199a3190c446c"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#ad923bf9132f3e7cfd57199a3190c446c">tesseract::kMinImageFindSize</a> = 100</td></tr>
+<tr class="separator:ad923bf9132f3e7cfd57199a3190c446c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a351af5b8ad4d2b3fd95e59d758f13e7a"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a351af5b8ad4d2b3fd95e59d758f13e7a">tesseract::kRMSFitScaling</a> = 8.0</td></tr>
+<tr class="separator:a351af5b8ad4d2b3fd95e59d758f13e7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa76be4c175875d95748cec9f9d5467e3"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#aa76be4c175875d95748cec9f9d5467e3">tesseract::kMinColorDifference</a> = 16</td></tr>
+<tr class="separator:aa76be4c175875d95748cec9f9d5467e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_930fe0a3c40775bbdbdb97cea0f56396.html">textord</a></li><li class="navelem"><a class="el" href="a01094.html">strokewidth.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_930fe0a3c40775bbdbdb97cea0f56396.html">textord</a></li><li class="navelem"><a class="el" href="a01094.html">imagefind.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

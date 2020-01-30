@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/ccutil/globaloc.h Source File</title>
+<title>tesseract: /tesseract/src/ccutil/bits16.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,15 +87,15 @@ $(document).ready(function(){initNavTree('a00476_source.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">globaloc.h</div>  </div>
+<div class="title">bits16.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="a00476.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**********************************************************************</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * File:        globaloc.h  (Formerly error.h)</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * Description: Header file for generic error handler class</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * Author:      Ray Smith</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * File:        bits16.h  (Formerly bits8.h)</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * Description: Code for 8 bit field class.</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * Author:      Phil Cheatle</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> * (C) Copyright 1990, Hewlett-Packard Ltd.</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> * (C) Copyright 1991, Hewlett-Packard Ltd.</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> ** Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> ** you may not use this file except in compliance with the License.</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> ** You may obtain a copy of the License at</span></div>
@@ -108,27 +108,55 @@ $(document).ready(function(){initNavTree('a00476_source.html','');});
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> **********************************************************************/</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#ifndef GLOBALOC_H</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#define GLOBALOC_H</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#ifndef BITS16_H</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#define BITS16_H</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00476.html#ae281080023125653d85cd946e95f626c">set_global_loc_code</a>(<span class="keywordtype">int</span> loc_code);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00476.html#a87d586caeb936d763514af2bbba8cab6">set_global_subloc_code</a>(<span class="keywordtype">int</span> loc_code);</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00476.html#a683cb64eb69da4200257e0468b4347a0">set_global_subsubloc_code</a>(<span class="keywordtype">int</span> loc_code);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;cstdint&gt;</span>    <span class="comment">// for uint8_t, ...</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="a00029.html">tesseract/platform.h</a>&gt;</span> <span class="comment">// for DLLSYM</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="a02942.html">   24</a></span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">class </span><a class="code" href="a00029.html#ab90d161af4ce92c48d61bb06c325308f">DLLSYM</a> <a class="code" href="a02942.html">BITS16</a> {</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  uint16_t val = 0;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <a class="code" href="a02942.html">BITS16</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <a class="code" href="a02942.html">BITS16</a>(uint16_t init) : val(init) {}</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <span class="keywordtype">void</span> turn_on_bit(       <span class="comment">// flip specified bit</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;      uint8_t bit_num) {  <span class="comment">// bit to flip 0..7</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    val = static_cast&lt;uint16_t&gt;(val | 01 &lt;&lt; bit_num);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  }</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <span class="keywordtype">void</span> turn_off_bit(      <span class="comment">// flip specified bit</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;      uint8_t bit_num) {  <span class="comment">// bit to flip 0..7</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    val = static_cast&lt;uint16_t&gt;(val &amp; ~(01 &lt;&lt; bit_num));</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  }</div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="a02942.html#a052686a8db31565de328613ec4679c81">   41</a></span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <span class="keywordtype">void</span> set_bit(         <span class="comment">// flip specified bit</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;      uint8_t bit_num,  <span class="comment">// bit to flip 0..7</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="a02942.html#afe0f2a5424a846ea137c81a8f442fef4">   44</a></span>&#160;      <span class="keywordtype">bool</span> value) {     <span class="comment">// value to flip to</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordflow">if</span> (value)</div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="a02942.html#a2feef0c8adf0930adf31afb0eb8c7b7c">   46</a></span>&#160;      val = static_cast&lt;uint16_t&gt;(val | 01 &lt;&lt; bit_num);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;      val = static_cast&lt;uint16_t&gt;(val &amp; ~(01 &lt;&lt; bit_num));</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  }</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="a02942.html#ae6af75a723487534b8765efdcfcfe4d0">   51</a></span>&#160;  <span class="keywordtype">bool</span> bit(                     <span class="comment">// access bit</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;      uint8_t bit_num)<span class="keyword"> const </span>{  <span class="comment">// bit to access</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordflow">return</span> (val &gt;&gt; bit_num) &amp; 01;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  }</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;};</div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="a02942.html#a25edec235c9c27ff811f78f6cecf9c00">   56</a></span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa00476_html_a683cb64eb69da4200257e0468b4347a0"><div class="ttname"><a href="a00476.html#a683cb64eb69da4200257e0468b4347a0">set_global_subsubloc_code</a></div><div class="ttdeci">void set_global_subsubloc_code(int loc_code)</div><div class="ttdef"><b>Definition:</b> <a href="a00473_source.html#l00035">globaloc.cpp:35</a></div></div>
-<div class="ttc" id="aa00476_html_a87d586caeb936d763514af2bbba8cab6"><div class="ttname"><a href="a00476.html#a87d586caeb936d763514af2bbba8cab6">set_global_subloc_code</a></div><div class="ttdeci">void set_global_subloc_code(int loc_code)</div><div class="ttdef"><b>Definition:</b> <a href="a00473_source.html#l00030">globaloc.cpp:30</a></div></div>
-<div class="ttc" id="aa00476_html_ae281080023125653d85cd946e95f626c"><div class="ttname"><a href="a00476.html#ae281080023125653d85cd946e95f626c">set_global_loc_code</a></div><div class="ttdeci">void set_global_loc_code(int loc_code)</div><div class="ttdef"><b>Definition:</b> <a href="a00473_source.html#l00025">globaloc.cpp:25</a></div></div>
+<div class="ttc" id="aa00029_html"><div class="ttname"><a href="a00029.html">platform.h</a></div></div>
+<div class="ttc" id="aa02942_html"><div class="ttname"><a href="a02942.html">BITS16</a></div><div class="ttdef"><b>Definition:</b> <a href="a00476_source.html#l00024">bits16.h:24</a></div></div>
+<div class="ttc" id="aa00029_html_ab90d161af4ce92c48d61bb06c325308f"><div class="ttname"><a href="a00029.html#ab90d161af4ce92c48d61bb06c325308f">DLLSYM</a></div><div class="ttdeci">#define DLLSYM</div><div class="ttdef"><b>Definition:</b> <a href="a00029_source.html#l00021">platform.h:21</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_be21c9400dd14e513865608c9a8a7e5a.html">ccutil</a></li><li class="navelem"><a class="el" href="a00476.html">globaloc.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:14 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_be21c9400dd14e513865608c9a8a7e5a.html">ccutil</a></li><li class="navelem"><a class="el" href="a00476.html">bits16.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:20 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

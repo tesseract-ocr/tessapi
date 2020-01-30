@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/ccutil/clst.h File Reference</title>
+<title>tesseract: /tesseract/src/ccstruct/seam.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -88,200 +88,111 @@ $(document).ready(function(){initNavTree('a00443.html','');});
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#define-members">Macros</a>  </div>
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">clst.h File Reference</div>  </div>
+<div class="title">seam.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="a00491_source.html">lsterr.h</a>&quot;</code><br />
-<code>#include &lt;tesseract/serialis.h&gt;</code><br />
-<code>#include &lt;cstdio&gt;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a00260_source.html">blobs.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00449_source.html">split.h</a>&quot;</code><br />
 </div>
 <p><a href="a00443_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02496.html">CLIST_LINK</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02500.html">CLIST</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02504.html">CLIST_ITERATOR</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02910.html">SEAM</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:adc858fd865cb4f529784fbc52d4d2b87"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00443.html#adc858fd865cb4f529784fbc52d4d2b87">QUOTE_IT</a>(parm)&#160;&#160;&#160;#parm</td></tr>
-<tr class="separator:adc858fd865cb4f529784fbc52d4d2b87"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad7192f84af8c075b0af63983f8b5257d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00443.html#ad7192f84af8c075b0af63983f8b5257d">CLISTIZEH_A</a>(CLASSNAME)</td></tr>
-<tr class="separator:ad7192f84af8c075b0af63983f8b5257d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab8b579be7f8c3f327aa5e05be8f5c5b7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00443.html#ab8b579be7f8c3f327aa5e05be8f5c5b7">CLISTIZEH_B</a>(CLASSNAME)</td></tr>
-<tr class="separator:ab8b579be7f8c3f327aa5e05be8f5c5b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9f58a7d9d3bc7ca09a4d08cbd9ea0513"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00443.html#a9f58a7d9d3bc7ca09a4d08cbd9ea0513">CLISTIZEH_C</a>(CLASSNAME)</td></tr>
-<tr class="separator:a9f58a7d9d3bc7ca09a4d08cbd9ea0513"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a253f497a3c8fd08cdc6ff8a785b00349"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00443.html#a253f497a3c8fd08cdc6ff8a785b00349">CLISTIZEH</a>(CLASSNAME)</td></tr>
-<tr class="separator:a253f497a3c8fd08cdc6ff8a785b00349"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a721c1e0acc4a882f9ea934613aee64be"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00443.html#a721c1e0acc4a882f9ea934613aee64be">CLISTIZE</a>(CLASSNAME)</td></tr>
-<tr class="separator:a721c1e0acc4a882f9ea934613aee64be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a64c977704107e265e5997b915a83ccf2"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00443.html#a64c977704107e265e5997b915a83ccf2">PRIORITY</a> = float</td></tr>
+<tr class="separator:a64c977704107e265e5997b915a83ccf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a7a7eb511f9a83da65455fe0a2668bc6b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00443.html#a7a7eb511f9a83da65455fe0a2668bc6b">start_seam_list</a> (<a class="el" href="a02694.html">TWERD</a> *word, <a class="el" href="a02434.html">GenericVector</a>&lt; <a class="el" href="a02910.html">SEAM</a> * &gt; *seam_array)</td></tr>
+<tr class="separator:a7a7eb511f9a83da65455fe0a2668bc6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a721c1e0acc4a882f9ea934613aee64be"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a721c1e0acc4a882f9ea934613aee64be">&#9670;&nbsp;</a></span>CLISTIZE</h2>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="a64c977704107e265e5997b915a83ccf2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64c977704107e265e5997b915a83ccf2">&#9670;&nbsp;</a></span>PRIORITY</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define CLISTIZE</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">CLASSNAME</td><td>)</td>
-          <td></td>
+          <td class="memname">using <a class="el" href="a00443.html#a64c977704107e265e5997b915a83ccf2">PRIORITY</a> =  float</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">\</div>
-<div class="line"><span class="comment">  /***********************************************************************   \</span></div>
-<div class="line"><span class="comment">  *             CLASSNAME##_c1_zapper                                        \</span></div>
-<div class="line"><span class="comment">  *                                                                          \</span></div>
-<div class="line"><span class="comment">  *  A function which can delete a CLASSNAME element.  This is passed to the \</span></div>
-<div class="line"><span class="comment">  *  generic deep_clear list member function so that when a list is cleared  \</span></div>
-<div class="line"><span class="comment">  *the                                                                       \</span></div>
-<div class="line"><span class="comment">  *  elements on the list are properly destroyed from the base class, even   \</span></div>
-<div class="line"><span class="comment">  *  though we don&#39;t use a virtual destructor function.                      \</span></div>
-<div class="line"><span class="comment">  **********************************************************************/</span>    \</div>
-<div class="line">                                                                             \</div>
-<div class="line">  DLLSYM <span class="keywordtype">void</span> CLASSNAME##_c1_zapper(            <span class="comment">/*delete a link*/</span>            \</div>
-<div class="line">                                    <span class="keywordtype">void</span> *link) <span class="comment">/*link to delete*/</span>           \</div>
-<div class="line">  {                                                                          \</div>
-<div class="line">    delete (CLASSNAME *)link;                                                \</div>
-<div class="line">  }</div>
+
+<p class="definition">Definition at line <a class="el" href="a00443_source.html#l00034">34</a> of file <a class="el" href="a00443_source.html">seam.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a7a7eb511f9a83da65455fe0a2668bc6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a7eb511f9a83da65455fe0a2668bc6b">&#9670;&nbsp;</a></span>start_seam_list()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void start_seam_list </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a02694.html">TWERD</a> *&#160;</td>
+          <td class="paramname"><em>word</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a02434.html">GenericVector</a>&lt; <a class="el" href="a02910.html">SEAM</a> * &gt; *&#160;</td>
+          <td class="paramname"><em>seam_array</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00440_source.html#l00261">261</a> of file <a class="el" href="a00440_source.html">seam.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;                                                                    {</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;  seam_array-&gt;<a class="code" href="a02434.html#a980882b5ebc3e72fdedbdbe345196f21">truncate</a>(0);</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;  <a class="code" href="a02678.html">TPOINT</a> location;</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160; </div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> b = 1; b &lt; word-&gt;<a class="code" href="a02694.html#a0d5347723ece084faf8f3d0dba6dd219">NumBlobs</a>(); ++b) {</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    <a class="code" href="a02898.html">TBOX</a> bbox = word-&gt;<a class="code" href="a02694.html#a52fba22521039a79d8c1c8182f602dcc">blobs</a>[b - 1]-&gt;bounding_box();</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    <a class="code" href="a02898.html">TBOX</a> nbox = word-&gt;<a class="code" href="a02694.html#a52fba22521039a79d8c1c8182f602dcc">blobs</a>[b]-&gt;bounding_box();</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    location.<a class="code" href="a02678.html#a5ed4f3edb251c99c2de6cb33645af1fe">x</a> = (bbox.<a class="code" href="a02898.html#af74fa3bf628c9426cd6f1141a87dc2e0">right</a>() + nbox.<a class="code" href="a02898.html#a8e9dce0d30d2213598cd4befe0028c99">left</a>()) / 2;</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    location.<a class="code" href="a02678.html#a82f12e26621cfe8386bf08d11e9819c1">y</a> = (bbox.<a class="code" href="a02898.html#a9fee4521e71300975cb34ebb21e3fca5">bottom</a>() + bbox.<a class="code" href="a02898.html#a5dc64d0677b5d65385bc07a78cf49c4d">top</a>() + nbox.<a class="code" href="a02898.html#a9fee4521e71300975cb34ebb21e3fca5">bottom</a>() + nbox.<a class="code" href="a02898.html#a5dc64d0677b5d65385bc07a78cf49c4d">top</a>()) / 4;</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    seam_array-&gt;<a class="code" href="a02434.html#a0dc89fe2a365b04a61017f9d78c1a303">push_back</a>(<span class="keyword">new</span> <a class="code" href="a02910.html">SEAM</a>(0.0f, location));</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;  }</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="a00443_source.html#l00884">884</a> of file <a class="el" href="a00443_source.html">clst.h</a>.</p>
-
-</div>
-</div>
-<a id="a253f497a3c8fd08cdc6ff8a785b00349"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a253f497a3c8fd08cdc6ff8a785b00349">&#9670;&nbsp;</a></span>CLISTIZEH</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CLISTIZEH</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">CLASSNAME</td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">\</div>
-<div class="line">  CLISTIZEH_A(CLASSNAME)     <a class="code" href="a00443.html#ab8b579be7f8c3f327aa5e05be8f5c5b7">\</a></div>
-<div class="line"><a class="code" href="a00443.html#ab8b579be7f8c3f327aa5e05be8f5c5b7">                             \</a></div>
-<div class="line"><a class="code" href="a00443.html#ab8b579be7f8c3f327aa5e05be8f5c5b7">  CLISTIZEH_B</a>(CLASSNAME)     <a class="code" href="a00443.html#a9f58a7d9d3bc7ca09a4d08cbd9ea0513">\</a></div>
-<div class="line"><a class="code" href="a00443.html#a9f58a7d9d3bc7ca09a4d08cbd9ea0513">                             \</a></div>
-<div class="line"><a class="code" href="a00443.html#a9f58a7d9d3bc7ca09a4d08cbd9ea0513">  CLISTIZEH_C</a>(CLASSNAME)</div>
-</div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="a00443_source.html#l00873">873</a> of file <a class="el" href="a00443_source.html">clst.h</a>.</p>
-
-</div>
-</div>
-<a id="ad7192f84af8c075b0af63983f8b5257d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad7192f84af8c075b0af63983f8b5257d">&#9670;&nbsp;</a></span>CLISTIZEH_A</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CLISTIZEH_A</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">CLASSNAME</td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">\</div>
-<div class="line">  extern DLLSYM <span class="keywordtype">void</span> CLASSNAME##_c1_zapper(             <span class="comment">/*delete a link*/</span>  \</div>
-<div class="line">                                           <span class="keywordtype">void</span> *link); <span class="comment">/*link to delete*/</span> \</div>
-<div class="line">                                                                           \</div>
-<div class="line">  extern DLLSYM <span class="keywordtype">void</span>                                                       \</div>
-<div class="line">      *CLASSNAME##_c1_copier(                    <span class="comment">/*deep copy a link*/</span>      \</div>
-<div class="line">                             <span class="keywordtype">void</span> *old_element); <span class="comment">/*source link */</span></div>
-</div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="a00443_source.html#l00791">791</a> of file <a class="el" href="a00443_source.html">clst.h</a>.</p>
-
-</div>
-</div>
-<a id="ab8b579be7f8c3f327aa5e05be8f5c5b7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab8b579be7f8c3f327aa5e05be8f5c5b7">&#9670;&nbsp;</a></span>CLISTIZEH_B</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CLISTIZEH_B</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">CLASSNAME</td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00443_source.html#l00800">800</a> of file <a class="el" href="a00443_source.html">clst.h</a>.</p>
-
-</div>
-</div>
-<a id="a9f58a7d9d3bc7ca09a4d08cbd9ea0513"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9f58a7d9d3bc7ca09a4d08cbd9ea0513">&#9670;&nbsp;</a></span>CLISTIZEH_C</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CLISTIZEH_C</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">CLASSNAME</td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00443_source.html#l00833">833</a> of file <a class="el" href="a00443_source.html">clst.h</a>.</p>
-
-</div>
-</div>
-<a id="adc858fd865cb4f529784fbc52d4d2b87"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adc858fd865cb4f529784fbc52d4d2b87">&#9670;&nbsp;</a></span>QUOTE_IT</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define QUOTE_IT</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">parm</td><td>)</td>
-          <td>&#160;&#160;&#160;#parm</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00443_source.html#l00759">759</a> of file <a class="el" href="a00443_source.html">clst.h</a>.</p>
-
 </div>
 </div>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa00443_html_a9f58a7d9d3bc7ca09a4d08cbd9ea0513"><div class="ttname"><a href="a00443.html#a9f58a7d9d3bc7ca09a4d08cbd9ea0513">CLISTIZEH_C</a></div><div class="ttdeci">#define CLISTIZEH_C(CLASSNAME)</div><div class="ttdef"><b>Definition:</b> <a href="a00443_source.html#l00833">clst.h:833</a></div></div>
-<div class="ttc" id="aa00443_html_ab8b579be7f8c3f327aa5e05be8f5c5b7"><div class="ttname"><a href="a00443.html#ab8b579be7f8c3f327aa5e05be8f5c5b7">CLISTIZEH_B</a></div><div class="ttdeci">#define CLISTIZEH_B(CLASSNAME)</div><div class="ttdef"><b>Definition:</b> <a href="a00443_source.html#l00800">clst.h:800</a></div></div>
+<div class="ttc" id="aa02678_html"><div class="ttname"><a href="a02678.html">TPOINT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00260_source.html#l00049">blobs.h:49</a></div></div>
+<div class="ttc" id="aa02898_html_a5dc64d0677b5d65385bc07a78cf49c4d"><div class="ttname"><a href="a02898.html#a5dc64d0677b5d65385bc07a78cf49c4d">TBOX::top</a></div><div class="ttdeci">int16_t top() const</div><div class="ttdef"><b>Definition:</b> <a href="a00431_source.html#l00057">rect.h:57</a></div></div>
+<div class="ttc" id="aa02910_html"><div class="ttname"><a href="a02910.html">SEAM</a></div><div class="ttdef"><b>Definition:</b> <a href="a00443_source.html#l00036">seam.h:36</a></div></div>
+<div class="ttc" id="aa02434_html_a0dc89fe2a365b04a61017f9d78c1a303"><div class="ttname"><a href="a02434.html#a0dc89fe2a365b04a61017f9d78c1a303">GenericVector::push_back</a></div><div class="ttdeci">int push_back(T object)</div><div class="ttdef"><b>Definition:</b> <a href="a00011_source.html#l00799">genericvector.h:799</a></div></div>
+<div class="ttc" id="aa02678_html_a5ed4f3edb251c99c2de6cb33645af1fe"><div class="ttname"><a href="a02678.html#a5ed4f3edb251c99c2de6cb33645af1fe">TPOINT::x</a></div><div class="ttdeci">int16_t x</div><div class="ttdef"><b>Definition:</b> <a href="a00260_source.html#l00091">blobs.h:91</a></div></div>
+<div class="ttc" id="aa02678_html_a82f12e26621cfe8386bf08d11e9819c1"><div class="ttname"><a href="a02678.html#a82f12e26621cfe8386bf08d11e9819c1">TPOINT::y</a></div><div class="ttdeci">int16_t y</div><div class="ttdef"><b>Definition:</b> <a href="a00260_source.html#l00092">blobs.h:92</a></div></div>
+<div class="ttc" id="aa02694_html_a52fba22521039a79d8c1c8182f602dcc"><div class="ttname"><a href="a02694.html#a52fba22521039a79d8c1c8182f602dcc">TWERD::blobs</a></div><div class="ttdeci">GenericVector&lt; TBLOB * &gt; blobs</div><div class="ttdef"><b>Definition:</b> <a href="a00260_source.html#l00457">blobs.h:457</a></div></div>
+<div class="ttc" id="aa02898_html_a9fee4521e71300975cb34ebb21e3fca5"><div class="ttname"><a href="a02898.html#a9fee4521e71300975cb34ebb21e3fca5">TBOX::bottom</a></div><div class="ttdeci">int16_t bottom() const</div><div class="ttdef"><b>Definition:</b> <a href="a00431_source.html#l00064">rect.h:64</a></div></div>
+<div class="ttc" id="aa02434_html_a980882b5ebc3e72fdedbdbe345196f21"><div class="ttname"><a href="a02434.html#a980882b5ebc3e72fdedbdbe345196f21">GenericVector::truncate</a></div><div class="ttdeci">void truncate(int size)</div><div class="ttdef"><b>Definition:</b> <a href="a00011_source.html#l00132">genericvector.h:132</a></div></div>
+<div class="ttc" id="aa02898_html_a8e9dce0d30d2213598cd4befe0028c99"><div class="ttname"><a href="a02898.html#a8e9dce0d30d2213598cd4befe0028c99">TBOX::left</a></div><div class="ttdeci">int16_t left() const</div><div class="ttdef"><b>Definition:</b> <a href="a00431_source.html#l00071">rect.h:71</a></div></div>
+<div class="ttc" id="aa02898_html_af74fa3bf628c9426cd6f1141a87dc2e0"><div class="ttname"><a href="a02898.html#af74fa3bf628c9426cd6f1141a87dc2e0">TBOX::right</a></div><div class="ttdeci">int16_t right() const</div><div class="ttdef"><b>Definition:</b> <a href="a00431_source.html#l00078">rect.h:78</a></div></div>
+<div class="ttc" id="aa02694_html_a0d5347723ece084faf8f3d0dba6dd219"><div class="ttname"><a href="a02694.html#a0d5347723ece084faf8f3d0dba6dd219">TWERD::NumBlobs</a></div><div class="ttdeci">int NumBlobs() const</div><div class="ttdef"><b>Definition:</b> <a href="a00260_source.html#l00446">blobs.h:446</a></div></div>
+<div class="ttc" id="aa02898_html"><div class="ttname"><a href="a02898.html">TBOX</a></div><div class="ttdef"><b>Definition:</b> <a href="a00431_source.html#l00033">rect.h:33</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_be21c9400dd14e513865608c9a8a7e5a.html">ccutil</a></li><li class="navelem"><a class="el" href="a00443.html">clst.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_27285da2200a3bef8a8e2dba4d21412a.html">ccstruct</a></li><li class="navelem"><a class="el" href="a00443.html">seam.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

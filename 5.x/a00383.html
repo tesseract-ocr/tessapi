@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/ccstruct/rejctmap.cpp File Reference</title>
+<title>tesseract: /tesseract/src/ccstruct/pdblock.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -86,21 +86,110 @@ $(document).ready(function(){initNavTree('a00383.html','');});
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#define-members">Macros</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">rejctmap.cpp File Reference</div>  </div>
+<div class="title">pdblock.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="a00386_source.html">rejctmap.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00503_source.html">params.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;allheaders.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00386_source.html">pdblock.h</a>&quot;</code><br />
+<code>#include &lt;cstdlib&gt;</code><br />
+<code>#include &lt;memory&gt;</code><br />
+<code>#include &lt;cinttypes&gt;</code><br />
 </div>
 <p><a href="a00383_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:ad0e3ca9368f7687b1a72cf083cad3033"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00383.html#ad0e3ca9368f7687b1a72cf083cad3033">BLOCK_LABEL_HEIGHT</a>&#160;&#160;&#160;150</td></tr>
+<tr class="separator:ad0e3ca9368f7687b1a72cf083cad3033"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ac2ef5a666afa27f1bc7a1847459dc0b9"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a02994.html">ERRCODE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00383.html#ac2ef5a666afa27f1bc7a1847459dc0b9">BADBLOCKLINE</a> (&quot;Y coordinate in block out <a class="el" href="a00659.html#a66c7f757ef35e33a52ac2efe3f4e8247">of</a> bounds&quot;)</td></tr>
+<tr class="separator:ac2ef5a666afa27f1bc7a1847459dc0b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef554a002a62904bb697a6f6fa99985c"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a02994.html">ERRCODE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00383.html#aef554a002a62904bb697a6f6fa99985c">LOSTBLOCKLINE</a> (&quot;Can't find rectangle for line&quot;)</td></tr>
+<tr class="separator:aef554a002a62904bb697a6f6fa99985c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="ad0e3ca9368f7687b1a72cf083cad3033"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0e3ca9368f7687b1a72cf083cad3033">&#9670;&nbsp;</a></span>BLOCK_LABEL_HEIGHT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLOCK_LABEL_HEIGHT&#160;&#160;&#160;150</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00383_source.html#l00029">29</a> of file <a class="el" href="a00383_source.html">pdblock.cpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="ac2ef5a666afa27f1bc7a1847459dc0b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2ef5a666afa27f1bc7a1847459dc0b9">&#9670;&nbsp;</a></span>BADBLOCKLINE()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="a02994.html">ERRCODE</a> BADBLOCKLINE </td>
+          <td>(</td>
+          <td class="paramtype">&quot;Y coordinate in block out <a class="el" href="a00659.html#a66c7f757ef35e33a52ac2efe3f4e8247">of</a> bounds&quot;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aef554a002a62904bb697a6f6fa99985c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef554a002a62904bb697a6f6fa99985c">&#9670;&nbsp;</a></span>LOSTBLOCKLINE()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="a02994.html">ERRCODE</a> LOSTBLOCKLINE </td>
+          <td>(</td>
+          <td class="paramtype">&quot;Can't find rectangle for line&quot;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_27285da2200a3bef8a8e2dba4d21412a.html">ccstruct</a></li><li class="navelem"><a class="el" href="a00383.html">rejctmap.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_27285da2200a3bef8a8e2dba4d21412a.html">ccstruct</a></li><li class="navelem"><a class="el" href="a00383.html">pdblock.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

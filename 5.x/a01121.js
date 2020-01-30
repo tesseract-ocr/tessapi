@@ -1,9 +1,6 @@
 var a01121 =
 [
-    [ "kDefaultPadFactor", "a01121.html#ae4596a15ea8f66612a71bec5254c0462", null ],
-    [ "kMaxTabStopOverrun", "a01121.html#a64d2e9156d75dc23cf000d5a51a87e8a", null ],
-    [ "kMinLineSpacingFactor", "a01121.html#ace97a5f2c6d12302036b0ae9630a5bcb", null ],
-    [ "kOrientedPadFactor", "a01121.html#ad44742ad860d606b8afb227717532d73", null ],
-    [ "kParaPerpDistRatio", "a01121.html#a6bff85a79d3b0f4a9f27b9e290b5cd68", null ],
-    [ "kWrongWayPenalty", "a01121.html#a092bd18070934c5079ce09f4cf3cf403", null ]
+    [ "FPCUTPT", "a03746.html", "a03746" ],
+    [ "check_pitch_sync2", "a01121.html#ae7f609989fe2f9abecbebbd6c4ded665", null ],
+    [ "check_pitch_sync3", "a01121.html#a393be41deafc890bf9dc5ef3131bb2d0", null ]
 ];

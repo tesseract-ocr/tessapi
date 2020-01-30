@@ -1,12 +1,14 @@
 var a00710 =
 [
-    [ "_USE_MATH_DEFINES", "a00710.html#a525335710b53cb064ca56b936120431e", null ],
-    [ "CONFIG_INCREMENT", "a00710.html#aab82a0eabce6034ba0e416fb1cd4757d", null ],
-    [ "PROTO_INCREMENT", "a00710.html#a84b07ab4cf4e8b013de05ee603af79e8", null ],
-    [ "AddConfigToClass", "a00710.html#a922ce6793eb82e1f8224ed372b75aa24", null ],
-    [ "AddProtoToClass", "a00710.html#a8a197adbd5718ec39c2b6a4a74694aa4", null ],
-    [ "FillABC", "a00710.html#ac0d58978bbcf0c732ae94fb554bccd3b", null ],
-    [ "FreeClass", "a00710.html#a751a34c0eb8b7dcba1439287dd3eb3d5", null ],
-    [ "FreeClassFields", "a00710.html#a8c42a896530af773ecb7de6ea5186b40", null ],
-    [ "NewClass", "a00710.html#ae1b779964924a618a307d8d6f0ec6dff", null ]
+    [ "MicroFeature", "a00710.html#a29d1eef9328292867329303f9f60c5cb", null ],
+    [ "MF_PARAM_NAME", "a00710.html#a0ae9eb66d190c70000f710f7c11977af", [
+      [ "MFXPosition", "a00710.html#a0ae9eb66d190c70000f710f7c11977afa6e5b6d39513820252795a81c22a85094", null ],
+      [ "MFYPosition", "a00710.html#a0ae9eb66d190c70000f710f7c11977afa86c3fede274bd6e6fad789032ba86695", null ],
+      [ "MFLength", "a00710.html#a0ae9eb66d190c70000f710f7c11977afa29b85f8df2366e185699f12117ed1b54", null ],
+      [ "MFDirection", "a00710.html#a0ae9eb66d190c70000f710f7c11977afa6bbdda7793b58667c8ffbf57a38e7436", null ],
+      [ "MFBulge1", "a00710.html#a0ae9eb66d190c70000f710f7c11977afa84f738cc38f82afce789bb6e9908a2cd", null ],
+      [ "MFBulge2", "a00710.html#a0ae9eb66d190c70000f710f7c11977afa11c81e882c3753f597780e69582c06b1", null ],
+      [ "MFCount", "a00710.html#a0ae9eb66d190c70000f710f7c11977afa1c44793580a78fadeffdefc28065e682", null ]
+    ] ],
+    [ "ExtractMicros", "a00710.html#a65d3fa9ad9b625a37b5b5a8254156bac", null ]
 ];

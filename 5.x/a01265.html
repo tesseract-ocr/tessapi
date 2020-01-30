@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/training/lstmeval.cpp File Reference</title>
+<title>tesseract: /tesseract/src/training/degradeimage.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,115 +87,75 @@ $(document).ready(function(){initNavTree('a01265.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
-<div class="title">lstmeval.cpp File Reference</div>  </div>
+<div class="title">degradeimage.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="a01202_source.html">commontraining.h</a>&quot;</code><br />
-<code>#include &lt;tesseract/genericvector.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="a01271_source.html">lstmtester.h</a>&quot;</code><br />
-<code>#include &lt;tesseract/strngs.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00533_source.html">tprintf.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a01268_source.html">degradeimage.h</a>&quot;</code><br />
+<code>#include &lt;cstdlib&gt;</code><br />
+<code>#include &quot;allheaders.h&quot;</code><br />
+<code>#include &lt;<a class="el" href="a00011_source.html">tesseract/genericvector.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="a00014_source.html">tesseract/helpers.h</a>&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00431_source.html">rect.h</a>&quot;</code><br />
 </div>
 <p><a href="a01265_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:a01818"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html">tesseract</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a8b8b0d5c539e2b26665765631049ab4e"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a8b8b0d5c539e2b26665765631049ab4e">tesseract::FactorNames</a> { <br />
+&#160;&#160;<a class="el" href="a01818.html#a8b8b0d5c539e2b26665765631049ab4ea43fd216f2c0ccfc41dd29d0b3fd57a76">tesseract::FN_INCOLOR</a>, 
+<a class="el" href="a01818.html#a8b8b0d5c539e2b26665765631049ab4eaeabce7fefc3c8f0420a4d18c6c6bd76e">tesseract::FN_Y0</a>, 
+<a class="el" href="a01818.html#a8b8b0d5c539e2b26665765631049ab4eae64b9b1a489d42a4bf12dd301707b1a0">tesseract::FN_Y1</a>, 
+<a class="el" href="a01818.html#a8b8b0d5c539e2b26665765631049ab4eaa65d219cd03592084efa5d36d4e21be3">tesseract::FN_Y2</a>, 
+<br />
+&#160;&#160;<a class="el" href="a01818.html#a8b8b0d5c539e2b26665765631049ab4ea063a0d06701e1f962c5266a278777567">tesseract::FN_Y3</a>, 
+<a class="el" href="a01818.html#a8b8b0d5c539e2b26665765631049ab4ea519f0a8c73a0c496e29204f344a5ad1e">tesseract::FN_X0</a>, 
+<a class="el" href="a01818.html#a8b8b0d5c539e2b26665765631049ab4ea8c82a37219424c60b42325121a00ce5c">tesseract::FN_X1</a>, 
+<a class="el" href="a01818.html#a8b8b0d5c539e2b26665765631049ab4ea503b1ef4d897275ede3ce1559ea2f0ce">tesseract::FN_SHEAR</a>, 
+<br />
+&#160;&#160;<a class="el" href="a01818.html#a8b8b0d5c539e2b26665765631049ab4eac768d3f719278f03c8c48359b352b8ea">tesseract::FN_NUM_FACTORS</a>
+<br />
+ }</td></tr>
+<tr class="separator:a8b8b0d5c539e2b26665765631049ab4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01265.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
-<tr class="separator:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ec70b0b405809ad2ae1c11779b92b0c"><td class="memItemLeft" align="right" valign="top">Pix *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a5ec70b0b405809ad2ae1c11779b92b0c">tesseract::DegradeImage</a> (Pix *input, int exposure, TRand *randomizer, float *rotation)</td></tr>
+<tr class="separator:a5ec70b0b405809ad2ae1c11779b92b0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86417193af3bfa69d20ce6dbe2af1261"><td class="memItemLeft" align="right" valign="top">Pix *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a86417193af3bfa69d20ce6dbe2af1261">tesseract::PrepareDistortedPix</a> (const Pix *pix, bool perspective, bool invert, bool white_noise, bool smooth_noise, bool blur, int box_reduction, TRand *randomizer, <a class="el" href="a02434.html">GenericVector</a>&lt; <a class="el" href="a02898.html">TBOX</a> &gt; *boxes)</td></tr>
+<tr class="separator:a86417193af3bfa69d20ce6dbe2af1261"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08d1fd9e0a884d83f8921058cb83652e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a08d1fd9e0a884d83f8921058cb83652e">tesseract::GeneratePerspectiveDistortion</a> (int width, int height, TRand *randomizer, Pix **pix, <a class="el" href="a02434.html">GenericVector</a>&lt; <a class="el" href="a02898.html">TBOX</a> &gt; *boxes)</td></tr>
+<tr class="separator:a08d1fd9e0a884d83f8921058cb83652e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaaf7fc93d2ee7ab611ecf8f9863d8806"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#aaaf7fc93d2ee7ab611ecf8f9863d8806">tesseract::ProjectiveCoeffs</a> (int width, int height, TRand *randomizer, float **im_coeffs, float **box_coeffs)</td></tr>
+<tr class="separator:aaaf7fc93d2ee7ab611ecf8f9863d8806"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a071851e783e15faecdae5d243c7c7c98"><td class="memItemLeft" align="right" valign="top">const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a071851e783e15faecdae5d243c7c7c98">tesseract::kRotationRange</a> = 0.02f</td></tr>
+<tr class="separator:a071851e783e15faecdae5d243c7c7c98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b686fae6a2068a34ba2b249e00e626a"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a2b686fae6a2068a34ba2b249e00e626a">tesseract::kExposureFactor</a> = 16</td></tr>
+<tr class="separator:a2b686fae6a2068a34ba2b249e00e626a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52a77f40077fb14cf8b612d23dc1386a"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a52a77f40077fb14cf8b612d23dc1386a">tesseract::kSaltnPepper</a> = 5</td></tr>
+<tr class="separator:a52a77f40077fb14cf8b612d23dc1386a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3cdf13f551014b8c398df242dcad5da"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#aa3cdf13f551014b8c398df242dcad5da">tesseract::kMinRampSize</a> = 1000</td></tr>
+<tr class="separator:aa3cdf13f551014b8c398df242dcad5da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="a3c04138a5bfe5d72780bb7e82a18e627"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3c04138a5bfe5d72780bb7e82a18e627">&#9670;&nbsp;</a></span>main()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int main </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>argc</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char **&#160;</td>
-          <td class="paramname"><em>argv</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a01265_source.html#l00037">37</a> of file <a class="el" href="a01265_source.html">lstmeval.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                                {</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  tesseract::CheckSharedLibraryVersion();</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <a class="code" href="a01199.html#a5177d61ebf73a60571198cb6eaa753ac">ParseArguments</a>(&amp;argc, &amp;argv);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <span class="keywordflow">if</span> (FLAGS_model.empty()) {</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Must provide a --model!\n&quot;</span>);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordflow">return</span> 1;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  }</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <span class="keywordflow">if</span> (FLAGS_eval_listfile.empty()) {</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Must provide a --eval_listfile!\n&quot;</span>);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordflow">return</span> 1;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  }</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <a class="code" href="a02628.html">tesseract::TessdataManager</a> mgr;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keywordflow">if</span> (!mgr.<a class="code" href="a02628.html#ae070706240e9b479dcbb3a561b962d34">Init</a>(FLAGS_model.c_str())) {</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">if</span> (FLAGS_traineddata.empty()) {</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;      <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Must supply --traineddata to eval a training checkpoint!\n&quot;</span>);</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;      <span class="keywordflow">return</span> 1;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    }</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;%s is not a recognition model, trying training checkpoint...\n&quot;</span>,</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            FLAGS_model.c_str());</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">if</span> (!mgr.<a class="code" href="a02628.html#ae070706240e9b479dcbb3a561b962d34">Init</a>(FLAGS_traineddata.c_str())) {</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;      <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Failed to load language model from %s!\n&quot;</span>,</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;              FLAGS_traineddata.c_str());</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;      <span class="keywordflow">return</span> 1;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    }</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <a class="code" href="a02108.html">GenericVector&lt;char&gt;</a> model_data;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">if</span> (!tesseract::LoadDataFromFile(FLAGS_model.c_str(), &amp;model_data)) {</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;      <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Failed to load model from: %s\n&quot;</span>, FLAGS_model.c_str());</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;      <span class="keywordflow">return</span> 1;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    }</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    mgr.<a class="code" href="a02628.html#a0213a816f84d5f6bb500903aa3861d7b">OverwriteEntry</a>(<a class="code" href="a01539.html#a5f278974ef80900b460194614d4f1899a42b3faa90f5e5f117788cc38a7478521">tesseract::TESSDATA_LSTM</a>, &amp;model_data[0],</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                       model_data.size());</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  }</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <a class="code" href="a03424.html">tesseract::LSTMTester</a> tester(static_cast&lt;int64_t&gt;(FLAGS_max_image_MB) *</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                               1048576);</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <span class="keywordflow">if</span> (!tester.LoadAllEvalData(FLAGS_eval_listfile.c_str())) {</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Failed to load eval data from: %s\n&quot;</span>, FLAGS_eval_listfile.c_str());</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">return</span> 1;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  }</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <span class="keywordtype">double</span> errs = 0.0;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  STRING result =</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;      tester.RunEvalSync(0, &amp;errs, mgr,</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                         <span class="comment">/*training_stage (irrelevant)*/</span> 0, FLAGS_verbosity);</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;%s\n&quot;</span>, result.c_str());</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;} <span class="comment">/* main */</span></div>
-</div><!-- fragment -->
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa02628_html_a0213a816f84d5f6bb500903aa3861d7b"><div class="ttname"><a href="a02628.html#a0213a816f84d5f6bb500903aa3861d7b">tesseract::TessdataManager::OverwriteEntry</a></div><div class="ttdeci">void OverwriteEntry(TessdataType type, const char *data, int size)</div><div class="ttdef"><b>Definition:</b> <a href="a00524_source.html#l00145">tessdatamanager.cpp:145</a></div></div>
-<div class="ttc" id="aa02628_html"><div class="ttname"><a href="a02628.html">tesseract::TessdataManager</a></div><div class="ttdef"><b>Definition:</b> <a href="a00527_source.html#l00126">tessdatamanager.h:126</a></div></div>
-<div class="ttc" id="aa03424_html"><div class="ttname"><a href="a03424.html">tesseract::LSTMTester</a></div><div class="ttdef"><b>Definition:</b> <a href="a01271_source.html#l00028">lstmtester.h:28</a></div></div>
-<div class="ttc" id="aa02108_html"><div class="ttname"><a href="a02108.html">GenericVector&lt; char &gt;</a></div></div>
-<div class="ttc" id="aa01199_html_a5177d61ebf73a60571198cb6eaa753ac"><div class="ttname"><a href="a01199.html#a5177d61ebf73a60571198cb6eaa753ac">ParseArguments</a></div><div class="ttdeci">void ParseArguments(int *argc, char ***argv)</div><div class="ttdef"><b>Definition:</b> <a href="a01199_source.html#l00122">commontraining.cpp:122</a></div></div>
-<div class="ttc" id="aa01539_html_a5f278974ef80900b460194614d4f1899a42b3faa90f5e5f117788cc38a7478521"><div class="ttname"><a href="a01539.html#a5f278974ef80900b460194614d4f1899a42b3faa90f5e5f117788cc38a7478521">tesseract::TESSDATA_LSTM</a></div><div class="ttdef"><b>Definition:</b> <a href="a00527_source.html#l00074">tessdatamanager.h:74</a></div></div>
-<div class="ttc" id="aa00530_html_a0c2bcd4462ec67ab0971b34a0f610f55"><div class="ttname"><a href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a></div><div class="ttdeci">DLLSYM void tprintf(const char *format,...)</div><div class="ttdef"><b>Definition:</b> <a href="a00530_source.html#l00034">tprintf.cpp:34</a></div></div>
-<div class="ttc" id="aa02628_html_ae070706240e9b479dcbb3a561b962d34"><div class="ttname"><a href="a02628.html#ae070706240e9b479dcbb3a561b962d34">tesseract::TessdataManager::Init</a></div><div class="ttdeci">bool Init(const char *data_file_name)</div><div class="ttdef"><b>Definition:</b> <a href="a00524_source.html#l00097">tessdatamanager.cpp:97</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7c7ae07dd2a999045cb78bf7ff8dcbc7.html">training</a></li><li class="navelem"><a class="el" href="a01265.html">lstmeval.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7c7ae07dd2a999045cb78bf7ff8dcbc7.html">training</a></li><li class="navelem"><a class="el" href="a01265.html">degradeimage.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

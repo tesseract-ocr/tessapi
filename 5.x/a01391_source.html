@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/training/validate_javanese.h Source File</title>
+<title>tesseract: /tesseract/src/training/tessopt.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,90 +87,52 @@ $(document).ready(function(){initNavTree('a01391_source.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">validate_javanese.h</div>  </div>
+<div class="title">tessopt.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="a01391.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/**********************************************************************</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * File:        validate_javanese.h</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * Description: Text validator for Javanese Script - aksara jawa.</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * Author:      Shree Devi Kumar</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * Created:     August 03, 2018</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> * you may not use this file except in compliance with the License.</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> * You may obtain a copy of the License at</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> * http://www.apache.org/licenses/LICENSE-2.0</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> * Unless required by applicable law or agreed to in writing, software</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> * See the License for the specific language governing permissions and</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> * limitations under the License.</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * File:        tessopt.h</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> * Description: Re-implementation of the unix code.</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * Author:      Ray Smith</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> * (C) Copyright 1995, Hewlett-Packard Co.</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> ** Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> ** you may not use this file except in compliance with the License.</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> ** You may obtain a copy of the License at</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> ** http://www.apache.org/licenses/LICENSE-2.0</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> ** Unless required by applicable law or agreed to in writing, software</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> ** distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> ** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> ** See the License for the specific language governing permissions and</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> ** limitations under the License.</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> *</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> **********************************************************************/</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#ifndef TESSERACT_TRAINING_VALIDATE_JAVANESE_H_</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#define TESSERACT_TRAINING_VALIDATE_JAVANESE_H_</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#ifndef TESSERACT_TRAINING_TESSOPT_H_</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#define TESSERACT_TRAINING_TESSOPT_H_</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a01409.html">validator.h</a>&quot;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;cstdint&gt;</span>      <span class="comment">// for int32_t</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">namespace </span><a class="code" href="a01539.html">tesseract</a> {</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code" href="a01391.html#aef382bc42a86adef688f3b7901cc9593">tessoptind</a>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">char</span> *<a class="code" href="a01391.html#ae2c7e7835346e9460d1534ecc3ba3f2f">tessoptarg</a>;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">// Subclass of Validator that validates and segments Javanese scripts</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">class </span>ValidateJavanese : <span class="keyword">public</span> Validator {</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  <a class="code" href="a03496.html#aba59d68ce5a2fc4e11117a780ae0efad">ValidateJavanese</a>(<a class="code" href="a01539.html#ac6cc6bc2b0c67458c52c7f5f419fddd4">ViramaScript</a> script, <span class="keywordtype">bool</span> report_errors)</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;      : <a class="code" href="a03508.html#af19925e1ddc1caccdfd243f5ef582705">Validator</a>(script, report_errors) {}</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <a class="code" href="a03496.html#ab480d870f31420597dc2d7d9c5f93f38">~ValidateJavanese</a>() {}</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <span class="comment">// Returns whether codes matches the pattern for an Javanese Grapheme.</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <span class="comment">// Consumes the next Grapheme in codes_[codes_used_++...] and copies it to</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <span class="comment">// parts_ and output_. Returns true if a valid Grapheme was consumed,</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  <span class="comment">// otherwise does not increment codes_used_.</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="a03496.html#a1eb5edbe1a808abb847d73de5ce50766">ConsumeGraphemeIfValid</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <span class="comment">// Returns the CharClass corresponding to the given Unicode ch.</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <a class="code" href="a03508.html#a91b43d3a4def0cb3af167f53dd5d520f">Validator::CharClass</a> <a class="code" href="a03496.html#a839f7a7144691dabd1b6a67733687c27">UnicodeToCharClass</a>(<a class="code" href="a01316.html#aecc7a1742fed875e05210e995739f10c">char32</a> ch) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="a03496.html">   43</a></span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <span class="comment">// Helper consumes/copies a virama and any associated post-virama joiners.</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="keywordtype">bool</span> ConsumeViramaIfValid(<a class="code" href="a03508.html#a97b14dc9b408e951794c28a8bcef47f2">IndicPair</a> joiner, <span class="keywordtype">bool</span> post_matra);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="comment">// Helper consumes/copies a series of consonants separated by viramas while</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <span class="comment">// valid, but not any vowel or other modifiers.</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keywordtype">bool</span> ConsumeConsonantHeadIfValid();</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="comment">// Helper consumes/copies a tail part of a consonant, comprising optional</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <span class="comment">// matra/piece, vowel modifier, vedic mark, terminating virama.</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="keywordtype">bool</span> ConsumeConsonantTailIfValid();</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="comment">// Helper consumes/copies a vowel and optional modifiers.</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="keywordtype">bool</span> ConsumeVowelIfValid();</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <span class="comment">// Some special unicodes used only for Javanese processing.</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="a01316.html#aecc7a1742fed875e05210e995739f10c">char32</a> kPengkal = 0xa9be;  <span class="comment">// Javanese Ya</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="keyword">static</span> <span class="keyword">const</span> <a class="code" href="a01316.html#aecc7a1742fed875e05210e995739f10c">char32</a> kCakra = 0xa9bf;  <span class="comment">// Javanese Ra</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;};</div>
-<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="a03496.html#aba59d68ce5a2fc4e11117a780ae0efad">   60</a></span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;}  <span class="comment">// namespace tesseract</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="a03496.html#ab480d870f31420597dc2d7d9c5f93f38">   62</a></span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">#endif  // TESSERACT_TRAINING_VALIDATE_JAVANESE_H_</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keywordtype">int</span> <a class="code" href="a01391.html#aeed1faf3ce2036da8fbd8ce3567f372c">tessopt</a> (                     <span class="comment">//parse args</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;int32_t argc,                      <span class="comment">//arg count</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keywordtype">char</span> *argv[],                    <span class="comment">//args</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">const</span> <span class="keywordtype">char</span> *arglist                    <span class="comment">//string of arg chars</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#endif  // TESSERACT_TRAINING_TESSOPT_H_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa03508_html_a91b43d3a4def0cb3af167f53dd5d520f"><div class="ttname"><a href="a03508.html#a91b43d3a4def0cb3af167f53dd5d520f">tesseract::Validator::CharClass</a></div><div class="ttdeci">CharClass</div><div class="ttdef"><b>Definition:</b> <a href="a01409_source.html#l00126">validator.h:126</a></div></div>
-<div class="ttc" id="aa01316_html_aecc7a1742fed875e05210e995739f10c"><div class="ttname"><a href="a01316.html#aecc7a1742fed875e05210e995739f10c">char32</a></div><div class="ttdeci">signed int char32</div><div class="ttdef"><b>Definition:</b> <a href="a01316_source.html#l00033">pango_font_info.h:33</a></div></div>
-<div class="ttc" id="aa03496_html_a839f7a7144691dabd1b6a67733687c27"><div class="ttname"><a href="a03496.html#a839f7a7144691dabd1b6a67733687c27">tesseract::ValidateJavanese::UnicodeToCharClass</a></div><div class="ttdeci">Validator::CharClass UnicodeToCharClass(char32 ch) const override</div><div class="ttdef"><b>Definition:</b> <a href="a01388_source.html#l00270">validate_javanese.cpp:270</a></div></div>
-<div class="ttc" id="aa03496_html_a1eb5edbe1a808abb847d73de5ce50766"><div class="ttname"><a href="a03496.html#a1eb5edbe1a808abb847d73de5ce50766">tesseract::ValidateJavanese::ConsumeGraphemeIfValid</a></div><div class="ttdeci">bool ConsumeGraphemeIfValid() override</div><div class="ttdef"><b>Definition:</b> <a href="a01388_source.html#l00053">validate_javanese.cpp:53</a></div></div>
-<div class="ttc" id="aa03508_html_af19925e1ddc1caccdfd243f5ef582705"><div class="ttname"><a href="a03508.html#af19925e1ddc1caccdfd243f5ef582705">tesseract::Validator::Validator</a></div><div class="ttdeci">Validator(ViramaScript script, bool report_errors)</div><div class="ttdef"><b>Definition:</b> <a href="a01409_source.html#l00150">validator.h:150</a></div></div>
-<div class="ttc" id="aa03508_html_a97b14dc9b408e951794c28a8bcef47f2"><div class="ttname"><a href="a03508.html#a97b14dc9b408e951794c28a8bcef47f2">tesseract::Validator::IndicPair</a></div><div class="ttdeci">std::pair&lt; CharClass, char32 &gt; IndicPair</div><div class="ttdef"><b>Definition:</b> <a href="a01409_source.html#l00148">validator.h:148</a></div></div>
-<div class="ttc" id="aa03496_html_ab480d870f31420597dc2d7d9c5f93f38"><div class="ttname"><a href="a03496.html#ab480d870f31420597dc2d7d9c5f93f38">tesseract::ValidateJavanese::~ValidateJavanese</a></div><div class="ttdeci">~ValidateJavanese()</div><div class="ttdef"><b>Definition:</b> <a href="a01391_source.html#l00062">validate_javanese.h:62</a></div></div>
-<div class="ttc" id="aa01409_html"><div class="ttname"><a href="a01409.html">validator.h</a></div></div>
-<div class="ttc" id="aa03496_html_aba59d68ce5a2fc4e11117a780ae0efad"><div class="ttname"><a href="a03496.html#aba59d68ce5a2fc4e11117a780ae0efad">tesseract::ValidateJavanese::ValidateJavanese</a></div><div class="ttdeci">ValidateJavanese(ViramaScript script, bool report_errors)</div><div class="ttdef"><b>Definition:</b> <a href="a01391_source.html#l00060">validate_javanese.h:60</a></div></div>
-<div class="ttc" id="aa01539_html_ac6cc6bc2b0c67458c52c7f5f419fddd4"><div class="ttname"><a href="a01539.html#ac6cc6bc2b0c67458c52c7f5f419fddd4">tesseract::ViramaScript</a></div><div class="ttdeci">ViramaScript</div><div class="ttdef"><b>Definition:</b> <a href="a01409_source.html#l00067">validator.h:67</a></div></div>
-<div class="ttc" id="aa01539_html"><div class="ttname"><a href="a01539.html">tesseract</a></div><div class="ttdef"><b>Definition:</b> <a href="a00002_source.html#l00025">altorenderer.cpp:25</a></div></div>
+<div class="ttc" id="aa01391_html_ae2c7e7835346e9460d1534ecc3ba3f2f"><div class="ttname"><a href="a01391.html#ae2c7e7835346e9460d1534ecc3ba3f2f">tessoptarg</a></div><div class="ttdeci">char * tessoptarg</div><div class="ttdef"><b>Definition:</b> <a href="a01388_source.html#l00024">tessopt.cpp:24</a></div></div>
+<div class="ttc" id="aa01391_html_aeed1faf3ce2036da8fbd8ce3567f372c"><div class="ttname"><a href="a01391.html#aeed1faf3ce2036da8fbd8ce3567f372c">tessopt</a></div><div class="ttdeci">int tessopt(int32_t argc, char *argv[], const char *arglist)</div><div class="ttdef"><b>Definition:</b> <a href="a01388_source.html#l00031">tessopt.cpp:31</a></div></div>
+<div class="ttc" id="aa01391_html_aef382bc42a86adef688f3b7901cc9593"><div class="ttname"><a href="a01391.html#aef382bc42a86adef688f3b7901cc9593">tessoptind</a></div><div class="ttdeci">int tessoptind</div><div class="ttdef"><b>Definition:</b> <a href="a01388_source.html#l00023">tessopt.cpp:23</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7c7ae07dd2a999045cb78bf7ff8dcbc7.html">training</a></li><li class="navelem"><a class="el" href="a01391.html">validate_javanese.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:15 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7c7ae07dd2a999045cb78bf7ff8dcbc7.html">training</a></li><li class="navelem"><a class="el" href="a01391.html">tessopt.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:21 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

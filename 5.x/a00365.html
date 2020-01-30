@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/ccstruct/quspline.cpp File Reference</title>
+<title>tesseract: /tesseract/src/ccstruct/otsuthr.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,49 +87,40 @@ $(document).ready(function(){initNavTree('a00365.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#define-members">Macros</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">quspline.cpp File Reference</div>  </div>
+<div class="title">otsuthr.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="a00368_source.html">quspline.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a00368_source.html">otsuthr.h</a>&quot;</code><br />
+<code>#include &lt;cstring&gt;</code><br />
 <code>#include &quot;allheaders.h&quot;</code><br />
-<code>#include &quot;pix.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00341_source.html">points.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00359_source.html">quadlsq.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00362_source.html">quadratc.h</a>&quot;</code><br />
+<code>#include &lt;<a class="el" href="a00014_source.html">tesseract/helpers.h</a>&gt;</code><br />
 </div>
 <p><a href="a00365_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:a5c2f35a8400249d498f29982dfc63bf7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00365.html#a5c2f35a8400249d498f29982dfc63bf7">QSPLINE_PRECISION</a>&#160;&#160;&#160;16</td></tr>
-<tr class="separator:a5c2f35a8400249d498f29982dfc63bf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:a01818"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html">tesseract</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a865a6eb28d729e208b513acbe716f22d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a865a6eb28d729e208b513acbe716f22d">tesseract::OtsuThreshold</a> (Pix *src_pix, int left, int top, int width, int height, int **thresholds, int **hi_values)</td></tr>
+<tr class="separator:a865a6eb28d729e208b513acbe716f22d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6601a260946a730407fc6ef4f69d8725"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a6601a260946a730407fc6ef4f69d8725">tesseract::HistogramRect</a> (Pix *src_pix, int channel, int left, int top, int width, int height, int *histogram)</td></tr>
+<tr class="separator:a6601a260946a730407fc6ef4f69d8725"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa38847c682089329f7cec83a5bcb714b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#aa38847c682089329f7cec83a5bcb714b">tesseract::OtsuStats</a> (const int *histogram, int *H_out, int *omega0_out)</td></tr>
+<tr class="separator:aa38847c682089329f7cec83a5bcb714b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a5c2f35a8400249d498f29982dfc63bf7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5c2f35a8400249d498f29982dfc63bf7">&#9670;&nbsp;</a></span>QSPLINE_PRECISION</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define QSPLINE_PRECISION&#160;&#160;&#160;16</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="a00365_source.html#l00031">31</a> of file <a class="el" href="a00365_source.html">quspline.cpp</a>.</p>
-
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_27285da2200a3bef8a8e2dba4d21412a.html">ccstruct</a></li><li class="navelem"><a class="el" href="a00365.html">quspline.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_27285da2200a3bef8a8e2dba4d21412a.html">ccstruct</a></li><li class="navelem"><a class="el" href="a00365.html">otsuthr.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

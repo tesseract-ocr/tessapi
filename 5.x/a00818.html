@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/lstm/functions.h File Reference</title>
+<title>tesseract: /tesseract/src/dict/dawg.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,112 +90,315 @@ $(document).ready(function(){initNavTree('a00818.html','');});
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#define-members">Macros</a> &#124;
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#enum-members">Enumerations</a>  </div>
   <div class="headertitle">
-<div class="title">functions.h File Reference</div>  </div>
+<div class="title">dawg.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;tesseract/helpers.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;cinttypes&gt;</code><br />
+<code>#include &lt;functional&gt;</code><br />
+<code>#include &lt;memory&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00503_source.html">elst.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00554_source.html">params.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00425_source.html">ratngs.h</a>&quot;</code><br />
 </div>
 <p><a href="a00818_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02988.html">tesseract::FFunc</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03378.html">tesseract::NodeChild</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02992.html">tesseract::FPrime</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03382.html">tesseract::Dawg</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02996.html">tesseract::ClipFFunc</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03386.html">tesseract::DawgPosition</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03000.html">tesseract::ClipFPrime</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03390.html">tesseract::DawgPositionVector</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03004.html">tesseract::Relu</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03008.html">tesseract::ReluPrime</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03012.html">tesseract::GFunc</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03016.html">tesseract::GPrime</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03020.html">tesseract::ClipGFunc</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03024.html">tesseract::ClipGPrime</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03028.html">tesseract::HFunc</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03032.html">tesseract::HPrime</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03036.html">tesseract::UnityFunc</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03040.html">tesseract::IdentityFunc</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a03394.html">tesseract::SquishedDawg</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:a01539"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html">tesseract</a></td></tr>
+<tr class="memitem:a01818"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html">tesseract</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a32bda381eb3fed8144a88bdf79c348a6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00818.html#a32bda381eb3fed8144a88bdf79c348a6">DEBUG_DETAIL</a>&#160;&#160;&#160;0</td></tr>
-<tr class="separator:a32bda381eb3fed8144a88bdf79c348a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e19d6a48aa61d422cce885b812bb733"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00818.html#a1e19d6a48aa61d422cce885b812bb733">FORWARD_EDGE</a>&#160;&#160;&#160;(int32_t) 0</td></tr>
+<tr class="separator:a1e19d6a48aa61d422cce885b812bb733"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b595d17c69b114ee1042e96e51a19bd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00818.html#a1b595d17c69b114ee1042e96e51a19bd">BACKWARD_EDGE</a>&#160;&#160;&#160;(int32_t) 1</td></tr>
+<tr class="separator:a1b595d17c69b114ee1042e96e51a19bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d04619cb05b140c086f2ec13778d235"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00818.html#a2d04619cb05b140c086f2ec13778d235">MAX_NODE_EDGES_DISPLAY</a>&#160;&#160;&#160;(int64_t) 100</td></tr>
+<tr class="separator:a2d04619cb05b140c086f2ec13778d235"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e0df79bf5779569d0c9f325216e7613"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00818.html#a7e0df79bf5779569d0c9f325216e7613">MARKER_FLAG</a>&#160;&#160;&#160;(int64_t) 1</td></tr>
+<tr class="separator:a7e0df79bf5779569d0c9f325216e7613"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc8f59f76bf176bfc7ee72f7f96bcc7a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00818.html#afc8f59f76bf176bfc7ee72f7f96bcc7a">DIRECTION_FLAG</a>&#160;&#160;&#160;(int64_t) 2</td></tr>
+<tr class="separator:afc8f59f76bf176bfc7ee72f7f96bcc7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fe1bde7916f6e5869319634b341449d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00818.html#a0fe1bde7916f6e5869319634b341449d">WERD_END_FLAG</a>&#160;&#160;&#160;(int64_t) 4</td></tr>
+<tr class="separator:a0fe1bde7916f6e5869319634b341449d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd290e0ea4e54e330815019aae6148aa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00818.html#abd290e0ea4e54e330815019aae6148aa">LETTER_START_BIT</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:abd290e0ea4e54e330815019aae6148aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4e00364d8957bd37d5f641879ecc37a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00818.html#af4e00364d8957bd37d5f641879ecc37a">NUM_FLAG_BITS</a>&#160;&#160;&#160;3</td></tr>
+<tr class="separator:af4e00364d8957bd37d5f641879ecc37a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85a5bf216156dfa399c5edd26f3694db"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00818.html#a85a5bf216156dfa399c5edd26f3694db">REFFORMAT</a>&#160;&#160;&#160;&quot;%&quot; PRId64</td></tr>
+<tr class="separator:a85a5bf216156dfa399c5edd26f3694db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:acee86620294db47b3b09477dabd67363"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#acee86620294db47b3b09477dabd67363">tesseract::Tanh</a> (double x)</td></tr>
-<tr class="separator:acee86620294db47b3b09477dabd67363"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a72eed9bd9f10c8c87cde9eb041e58f6c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#a72eed9bd9f10c8c87cde9eb041e58f6c">tesseract::Logistic</a> (double x)</td></tr>
-<tr class="separator:a72eed9bd9f10c8c87cde9eb041e58f6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab012d9679386280423faa901b7c0f14c"><td class="memTemplParams" colspan="2">template&lt;class Func &gt; </td></tr>
-<tr class="memitem:ab012d9679386280423faa901b7c0f14c"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a01539.html#ab012d9679386280423faa901b7c0f14c">tesseract::FuncInplace</a> (int n, double *inout)</td></tr>
-<tr class="separator:ab012d9679386280423faa901b7c0f14c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3d532b4ba4ef60ba5edbc1a11db9145e"><td class="memTemplParams" colspan="2">template&lt;class Func &gt; </td></tr>
-<tr class="memitem:a3d532b4ba4ef60ba5edbc1a11db9145e"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a01539.html#a3d532b4ba4ef60ba5edbc1a11db9145e">tesseract::FuncMultiply</a> (const double *u, const double *v, int n, double *out)</td></tr>
-<tr class="separator:a3d532b4ba4ef60ba5edbc1a11db9145e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65a7d7d845913850ca0df042d53fec23"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a65a7d7d845913850ca0df042d53fec23"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a01539.html#a65a7d7d845913850ca0df042d53fec23">tesseract::SoftmaxInPlace</a> (int n, T *inout)</td></tr>
-<tr class="separator:a65a7d7d845913850ca0df042d53fec23"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad6cbe2757a3123ace511cbd6b5d159c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#ad6cbe2757a3123ace511cbd6b5d159c6">tesseract::CopyVector</a> (int n, const double *src, double *dest)</td></tr>
-<tr class="separator:ad6cbe2757a3123ace511cbd6b5d159c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a46d55f52219b3fabab74cf7a5e42dff7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#a46d55f52219b3fabab74cf7a5e42dff7">tesseract::AccumulateVector</a> (int n, const double *src, double *dest)</td></tr>
-<tr class="separator:a46d55f52219b3fabab74cf7a5e42dff7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac0938bae167b62f05d8220345ec83631"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#ac0938bae167b62f05d8220345ec83631">tesseract::MultiplyVectorsInPlace</a> (int n, const double *src, double *inout)</td></tr>
-<tr class="separator:ac0938bae167b62f05d8220345ec83631"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae773484d15c3015527af6ba4e5e1b0c0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#ae773484d15c3015527af6ba4e5e1b0c0">tesseract::MultiplyAccumulate</a> (int n, const double *u, const double *v, double *out)</td></tr>
-<tr class="separator:ae773484d15c3015527af6ba4e5e1b0c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a32bdd84df61f0f5ec77b076783a33af0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#a32bdd84df61f0f5ec77b076783a33af0">tesseract::SumVectors</a> (int n, const double *v1, const double *v2, const double *v3, const double *v4, const double *v5, double *sum)</td></tr>
-<tr class="separator:a32bdd84df61f0f5ec77b076783a33af0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef214bcf70936c92bcbf8f63566603e7"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:aef214bcf70936c92bcbf8f63566603e7"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a01539.html#aef214bcf70936c92bcbf8f63566603e7">tesseract::ZeroVector</a> (int n, T *vec)</td></tr>
-<tr class="separator:aef214bcf70936c92bcbf8f63566603e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1f299de70937f07317c923b8907958c"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:ae1f299de70937f07317c923b8907958c"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a01539.html#ae1f299de70937f07317c923b8907958c">tesseract::ClipVector</a> (int n, T lower, T upper, T *vec)</td></tr>
-<tr class="separator:ae1f299de70937f07317c923b8907958c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69edc86184a96e1bccf08e88baab1e87"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#a69edc86184a96e1bccf08e88baab1e87">tesseract::CodeInBinary</a> (int n, int nf, double *vec)</td></tr>
-<tr class="separator:a69edc86184a96e1bccf08e88baab1e87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:ac49a2017de57ddd4abd4ff07e91e2e4b"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00818.html#ac49a2017de57ddd4abd4ff07e91e2e4b">EDGE_RECORD</a> = uint64_t</td></tr>
+<tr class="separator:ac49a2017de57ddd4abd4ff07e91e2e4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55706b9e674564b826bbd93f03812f5d"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00818.html#a55706b9e674564b826bbd93f03812f5d">EDGE_ARRAY</a> = <a class="el" href="a00818.html#ac49a2017de57ddd4abd4ff07e91e2e4b">EDGE_RECORD</a> *</td></tr>
+<tr class="separator:a55706b9e674564b826bbd93f03812f5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff972a2dc9ce96f0507f40ac1fc57ab7"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00818.html#aff972a2dc9ce96f0507f40ac1fc57ab7">EDGE_REF</a> = int64_t</td></tr>
+<tr class="separator:aff972a2dc9ce96f0507f40ac1fc57ab7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2dae42e8033c5e1a0abd1bb90446a105"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00818.html#a2dae42e8033c5e1a0abd1bb90446a105">NODE_REF</a> = int64_t</td></tr>
+<tr class="separator:a2dae42e8033c5e1a0abd1bb90446a105"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45c76558fd622726402917010e263036"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00818.html#a45c76558fd622726402917010e263036">NODE_MAP</a> = <a class="el" href="a00818.html#aff972a2dc9ce96f0507f40ac1fc57ab7">EDGE_REF</a> *</td></tr>
+<tr class="separator:a45c76558fd622726402917010e263036"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48a16e430d43b82af15134dfa4d42840"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a48a16e430d43b82af15134dfa4d42840">tesseract::NodeChildVector</a> = <a class="el" href="a02434.html">GenericVector</a>&lt; NodeChild &gt;</td></tr>
+<tr class="separator:a48a16e430d43b82af15134dfa4d42840"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbcb88ad726dd6494791b98926e6d1da"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#afbcb88ad726dd6494791b98926e6d1da">tesseract::SuccessorList</a> = <a class="el" href="a02434.html">GenericVector</a>&lt; int &gt;</td></tr>
+<tr class="separator:afbcb88ad726dd6494791b98926e6d1da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ba77fa8c5c5ee1c2067ccd8d9568c37"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a4ba77fa8c5c5ee1c2067ccd8d9568c37">tesseract::SuccessorListsVector</a> = <a class="el" href="a02434.html">GenericVector</a>&lt; SuccessorList * &gt;</td></tr>
+<tr class="separator:a4ba77fa8c5c5ee1c2067ccd8d9568c37"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:ad93a766761bb5a56422d5090ff8d4540"><td class="memItemLeft" align="right" valign="top">constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#ad93a766761bb5a56422d5090ff8d4540">tesseract::kTableSize</a> = 4096</td></tr>
-<tr class="separator:ad93a766761bb5a56422d5090ff8d4540"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a29b8b612b2fab38fece9a52a27f56b4e"><td class="memItemLeft" align="right" valign="top">constexpr double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html#a29b8b612b2fab38fece9a52a27f56b4e">tesseract::kScaleFactor</a> = 256.0</td></tr>
-<tr class="separator:a29b8b612b2fab38fece9a52a27f56b4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a07c41f251f1782c60df4e626c35d2151"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01818.html#a07c41f251f1782c60df4e626c35d2151">tesseract::DawgType</a> { <br />
+&#160;&#160;<a class="el" href="a01818.html#a07c41f251f1782c60df4e626c35d2151aa8e8b65bf32d2884c0bab5fb8223c6eb">tesseract::DAWG_TYPE_PUNCTUATION</a>, 
+<a class="el" href="a01818.html#a07c41f251f1782c60df4e626c35d2151a9c67e397ff6d57a705cd4cd4524a2b34">tesseract::DAWG_TYPE_WORD</a>, 
+<a class="el" href="a01818.html#a07c41f251f1782c60df4e626c35d2151a16f2414a05db0ec4b7e1b266052a966f">tesseract::DAWG_TYPE_NUMBER</a>, 
+<a class="el" href="a01818.html#a07c41f251f1782c60df4e626c35d2151a4e994eccb48eec56bb31bccd8bbb3cef">tesseract::DAWG_TYPE_PATTERN</a>, 
+<br />
+&#160;&#160;<a class="el" href="a01818.html#a07c41f251f1782c60df4e626c35d2151ac823345423c28fc2793bfdb0db9f9942">tesseract::DAWG_TYPE_COUNT</a>
+<br />
+ }</td></tr>
+<tr class="separator:a07c41f251f1782c60df4e626c35d2151"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a32bda381eb3fed8144a88bdf79c348a6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a32bda381eb3fed8144a88bdf79c348a6">&#9670;&nbsp;</a></span>DEBUG_DETAIL</h2>
+<a id="a1b595d17c69b114ee1042e96e51a19bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b595d17c69b114ee1042e96e51a19bd">&#9670;&nbsp;</a></span>BACKWARD_EDGE</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define DEBUG_DETAIL&#160;&#160;&#160;0</td>
+          <td class="memname">#define BACKWARD_EDGE&#160;&#160;&#160;(int32_t) 1</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00818_source.html#l00026">26</a> of file <a class="el" href="a00818_source.html">functions.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00818_source.html#l00080">80</a> of file <a class="el" href="a00818_source.html">dawg.h</a>.</p>
+
+</div>
+</div>
+<a id="afc8f59f76bf176bfc7ee72f7f96bcc7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc8f59f76bf176bfc7ee72f7f96bcc7a">&#9670;&nbsp;</a></span>DIRECTION_FLAG</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DIRECTION_FLAG&#160;&#160;&#160;(int64_t) 2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00818_source.html#l00083">83</a> of file <a class="el" href="a00818_source.html">dawg.h</a>.</p>
+
+</div>
+</div>
+<a id="a1e19d6a48aa61d422cce885b812bb733"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e19d6a48aa61d422cce885b812bb733">&#9670;&nbsp;</a></span>FORWARD_EDGE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define FORWARD_EDGE&#160;&#160;&#160;(int32_t) 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00818_source.html#l00079">79</a> of file <a class="el" href="a00818_source.html">dawg.h</a>.</p>
+
+</div>
+</div>
+<a id="abd290e0ea4e54e330815019aae6148aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd290e0ea4e54e330815019aae6148aa">&#9670;&nbsp;</a></span>LETTER_START_BIT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LETTER_START_BIT&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00818_source.html#l00085">85</a> of file <a class="el" href="a00818_source.html">dawg.h</a>.</p>
+
+</div>
+</div>
+<a id="a7e0df79bf5779569d0c9f325216e7613"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e0df79bf5779569d0c9f325216e7613">&#9670;&nbsp;</a></span>MARKER_FLAG</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MARKER_FLAG&#160;&#160;&#160;(int64_t) 1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00818_source.html#l00082">82</a> of file <a class="el" href="a00818_source.html">dawg.h</a>.</p>
+
+</div>
+</div>
+<a id="a2d04619cb05b140c086f2ec13778d235"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d04619cb05b140c086f2ec13778d235">&#9670;&nbsp;</a></span>MAX_NODE_EDGES_DISPLAY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MAX_NODE_EDGES_DISPLAY&#160;&#160;&#160;(int64_t) 100</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00818_source.html#l00081">81</a> of file <a class="el" href="a00818_source.html">dawg.h</a>.</p>
+
+</div>
+</div>
+<a id="af4e00364d8957bd37d5f641879ecc37a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4e00364d8957bd37d5f641879ecc37a">&#9670;&nbsp;</a></span>NUM_FLAG_BITS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NUM_FLAG_BITS&#160;&#160;&#160;3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00818_source.html#l00086">86</a> of file <a class="el" href="a00818_source.html">dawg.h</a>.</p>
+
+</div>
+</div>
+<a id="a85a5bf216156dfa399c5edd26f3694db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85a5bf216156dfa399c5edd26f3694db">&#9670;&nbsp;</a></span>REFFORMAT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define REFFORMAT&#160;&#160;&#160;&quot;%&quot; PRId64</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00818_source.html#l00087">87</a> of file <a class="el" href="a00818_source.html">dawg.h</a>.</p>
+
+</div>
+</div>
+<a id="a0fe1bde7916f6e5869319634b341449d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0fe1bde7916f6e5869319634b341449d">&#9670;&nbsp;</a></span>WERD_END_FLAG</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define WERD_END_FLAG&#160;&#160;&#160;(int64_t) 4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00818_source.html#l00084">84</a> of file <a class="el" href="a00818_source.html">dawg.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="a55706b9e674564b826bbd93f03812f5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55706b9e674564b826bbd93f03812f5d">&#9670;&nbsp;</a></span>EDGE_ARRAY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="a00818.html#a55706b9e674564b826bbd93f03812f5d">EDGE_ARRAY</a> =  <a class="el" href="a00818.html#ac49a2017de57ddd4abd4ff07e91e2e4b">EDGE_RECORD</a> *</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00818_source.html#l00048">48</a> of file <a class="el" href="a00818_source.html">dawg.h</a>.</p>
+
+</div>
+</div>
+<a id="ac49a2017de57ddd4abd4ff07e91e2e4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac49a2017de57ddd4abd4ff07e91e2e4b">&#9670;&nbsp;</a></span>EDGE_RECORD</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="a00818.html#ac49a2017de57ddd4abd4ff07e91e2e4b">EDGE_RECORD</a> =  uint64_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00818_source.html#l00047">47</a> of file <a class="el" href="a00818_source.html">dawg.h</a>.</p>
+
+</div>
+</div>
+<a id="aff972a2dc9ce96f0507f40ac1fc57ab7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff972a2dc9ce96f0507f40ac1fc57ab7">&#9670;&nbsp;</a></span>EDGE_REF</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="a00818.html#aff972a2dc9ce96f0507f40ac1fc57ab7">EDGE_REF</a> =  int64_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00818_source.html#l00049">49</a> of file <a class="el" href="a00818_source.html">dawg.h</a>.</p>
+
+</div>
+</div>
+<a id="a45c76558fd622726402917010e263036"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45c76558fd622726402917010e263036">&#9670;&nbsp;</a></span>NODE_MAP</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="a00818.html#a45c76558fd622726402917010e263036">NODE_MAP</a> =  <a class="el" href="a00818.html#aff972a2dc9ce96f0507f40ac1fc57ab7">EDGE_REF</a> *</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00818_source.html#l00051">51</a> of file <a class="el" href="a00818_source.html">dawg.h</a>.</p>
+
+</div>
+</div>
+<a id="a2dae42e8033c5e1a0abd1bb90446a105"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2dae42e8033c5e1a0abd1bb90446a105">&#9670;&nbsp;</a></span>NODE_REF</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="a00818.html#a2dae42e8033c5e1a0abd1bb90446a105">NODE_REF</a> =  int64_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00818_source.html#l00050">50</a> of file <a class="el" href="a00818_source.html">dawg.h</a>.</p>
 
 </div>
 </div>
@@ -204,8 +407,8 @@ Variables</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_57c32823bf7301c39893cc8d5b3eca8e.html">lstm</a></li><li class="navelem"><a class="el" href="a00818.html">functions.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_2d55640c0a15c59e1d7c66cdbf3fd5ea.html">dict</a></li><li class="navelem"><a class="el" href="a00818.html">dawg.h</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

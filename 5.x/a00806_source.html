@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/lstm/convolve.h Source File</title>
+<title>tesseract: /tesseract/src/cutil/oldlist.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,110 +87,256 @@ $(document).ready(function(){initNavTree('a00806_source.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">convolve.h</div>  </div>
+<div class="title">oldlist.cpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="a00806.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// File:        convolve.h</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// Description: Convolutional layer that stacks the inputs over its rectangle</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//              and pulls in random data to fill out-of-input inputs.</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//              Output is therefore same size as its input, but deeper.</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">// Author:      Ray Smith</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">//</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// (C) Copyright 2014, Google Inc.</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// you may not use this file except in compliance with the License.</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">// You may obtain a copy of the License at</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// http://www.apache.org/licenses/LICENSE-2.0</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// Unless required by applicable law or agreed to in writing, software</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">// distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">// See the License for the specific language governing permissions and</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">// limitations under the License.</span></div>
+<a href="a00806.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/******************************************************************************</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">#</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"># File:         oldlist.cpp</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"># Description:  List processing procedures.</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"># Author:       Mark Seaman, Software Productivity</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">#</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"># (c) Copyright 1987, Hewlett-Packard Company.</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">** Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">** you may not use this file except in compliance with the License.</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">** You may obtain a copy of the License at</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">** http://www.apache.org/licenses/LICENSE-2.0</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">** Unless required by applicable law or agreed to in writing, software</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">** distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">** See the License for the specific language governing permissions and</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">** limitations under the License.</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">#</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">###############################################################################</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#ifndef TESSERACT_LSTM_CONVOLVE_H_</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#define TESSERACT_LSTM_CONVOLVE_H_</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;tesseract/genericvector.h&gt;</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00281.html">matrix.h</a>&quot;</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00851.html">network.h</a>&quot;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">namespace </span><a class="code" href="a01539.html">tesseract</a> {</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">// Makes each time-step deeper by stacking inputs over its rectangle. Does not</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">// affect the size of its input. Achieves this by bringing in random values in</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">// out-of-input areas.</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="a02980.html">   32</a></span>&#160;<span class="keyword">class </span><a class="code" href="a02980.html">Convolve</a> : <span class="keyword">public</span> <a class="code" href="a03060.html">Network</a> {</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <span class="comment">// The area of convolution is 2*half_x + 1 by 2*half_y + 1, forcing it to</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <span class="comment">// always be odd, so the center is the current pixel.</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <a class="code" href="a02980.html#a43dc5a3ee340111a240b29c201291351">Convolve</a>(<span class="keyword">const</span> STRING&amp; <a class="code" href="a03060.html#ab5af1ed13f949340c43d062dc06be3d2">name</a>, <span class="keywordtype">int</span> ni, <span class="keywordtype">int</span> half_x, <span class="keywordtype">int</span> half_y);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <a class="code" href="a02980.html#a0c63d23d00134ff2ac3683a914cb6777">~Convolve</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="a02980.html#a5392770d080e11fcec02baf92fd6b133">   39</a></span>&#160;  STRING <a class="code" href="a02980.html#a5392770d080e11fcec02baf92fd6b133">spec</a>()<span class="keyword"> const override </span>{</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    STRING <a class="code" href="a02980.html#a5392770d080e11fcec02baf92fd6b133">spec</a>;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <a class="code" href="a02980.html#a5392770d080e11fcec02baf92fd6b133">spec</a>.add_str_int(<span class="stringliteral">&quot;C&quot;</span>, <a class="code" href="a02980.html#aa48363af09de6a338fa8dc31960fec8e">half_x_</a> * 2 + 1);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="a02980.html#a5392770d080e11fcec02baf92fd6b133">spec</a>.add_str_int(<span class="stringliteral">&quot;,&quot;</span>, <a class="code" href="a02980.html#ada765c0ccc9bd90455267503e5a52d9c">half_y_</a> * 2 + 1);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="a02980.html#a5392770d080e11fcec02baf92fd6b133">spec</a>;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  }</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="comment">// Writes to the given file. Returns false in case of error.</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="a02980.html#a702297e470bda078ac73cd2a48ff2eb8">Serialize</a>(TFile* fp) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <span class="comment">// Reads from the given file. Returns false in case of error.</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="a02980.html#afd3a9b5f8e9062bd101fdc133fee9251">DeSerialize</a>(TFile* fp) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <span class="comment">// Runs forward propagation of activations on the input line.</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="comment">// See Network for a detailed discussion of the arguments.</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a02980.html#a4b6bb93067539229c4032fa73b1d3a6a">Forward</a>(<span class="keywordtype">bool</span> debug, <span class="keyword">const</span> <a class="code" href="a03064.html">NetworkIO</a>&amp; input,</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;               <span class="keyword">const</span> <a class="code" href="a03152.html">TransposedArray</a>* input_transpose,</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;               <a class="code" href="a03068.html">NetworkScratch</a>* scratch, <a class="code" href="a03064.html">NetworkIO</a>* output) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="comment">// Runs backward propagation of errors on the deltas line.</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <span class="comment">// See Network for a detailed discussion of the arguments.</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="a02980.html#a7dc5a08297a9591a78ef5cbf2113b0ce">Backward</a>(<span class="keywordtype">bool</span> debug, <span class="keyword">const</span> <a class="code" href="a03064.html">NetworkIO</a>&amp; fwd_deltas,</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                <a class="code" href="a03068.html">NetworkScratch</a>* scratch,</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                <a class="code" href="a03064.html">NetworkIO</a>* back_deltas) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="keywordtype">void</span> DebugWeights()<span class="keyword"> override </span>{</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <a class="code" href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Must override Network::DebugWeights for type %d\n&quot;</span>, <a class="code" href="a03060.html#a1bdf9fdfb7ed0d4962f4193dff5cd5ee">type_</a>);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  }</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <span class="comment">// Serialized data.</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="a02980.html#aa48363af09de6a338fa8dc31960fec8e">   70</a></span>&#160;  int32_t <a class="code" href="a02980.html#aa48363af09de6a338fa8dc31960fec8e">half_x_</a>;</div>
-<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="a02980.html#ada765c0ccc9bd90455267503e5a52d9c">   71</a></span>&#160;  int32_t <a class="code" href="a02980.html#ada765c0ccc9bd90455267503e5a52d9c">half_y_</a>;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;};</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;}  <span class="comment">// namespace tesseract.</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">  This file contains a set of general purpose list manipulation routines.</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">  These routines can be used in a wide variety of ways to provide several</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">  different popular data structures. A new list can be created by declaring</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">  a variable of type &#39;LIST&#39;, and can be initialized with the value &#39;NIL_LIST&#39;.</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">  All of these routines check for the NIL_LIST condition before dereferencing</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">  pointers.  NOTE:  There is a users&#39; manual available in printed form from</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">  Mark Seaman at (303) 350-4492 at Greeley Hard Copy.</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">  To implement a STACK use:</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">  push         to add to the Stack             l = push(l, (LIST)&quot;jim&quot;);</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">  pop          to remove items from the Stack  l = pop(l);</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">  first_node   to access the head              name = (char *)first_node(l);</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">  To implement a QUEUE use:</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">  push_last    to add to the Queue              l = push_last(l, (LIST)&quot;x&quot;);</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">  pop          remove items from the Queue      l = pop(l);</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">  first_node   to access the head               name = (char *)first_node (l);</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">  To implement LISP like functions use:</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">  first_node   CAR                              x = (int)first_node(l);</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">  rest         CDR                              l = list_rest (l);</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">  push         CONS                             l = push(l, (LIST)this);</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">  last         LAST                             x = last(l);</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">  concat       APPEND                           l = concat(r, s);</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">  count        LENGTH                           x = count(l);</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">  search       MEMBER                           if (search(l, x, nullptr))</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">  The following rules of closure exist for the functions provided.</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">  a = first_node (push (a, b))</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">  b = list_rest (push (a, b))</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">  a = push (pop (a), a))        For all a &lt;&gt; NIL_LIST</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">  a = reverse (reverse (a))</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">******************************************************************************/</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00809.html">oldlist.h</a>&quot;</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">#include &lt;cstdio&gt;</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#include &lt;cstring&gt;</span>      <span class="comment">// for strcmp</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="a00515.html">errcode.h</a>&quot;</span>    <span class="comment">// for ASSERT_HOST</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">/*----------------------------------------------------------------------</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">              F u n c t i o n s</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">----------------------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">/**********************************************************************</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment"> *  i s   s a m e</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment"> *  Compare the list node with the key value return true (non-zero)</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment"> *  if they are equivalent strings.  (Return false if not)</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment"> **********************************************************************/</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="keyword">static</span> <span class="keywordtype">int</span> is_same(<span class="keywordtype">void</span> *item1, <span class="keywordtype">void</span> *item2) {</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  <span class="keywordflow">return</span> strcmp(static_cast&lt;char *&gt;(item1), static_cast&lt;char *&gt;(item2)) == 0;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;}</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor">#endif  // TESSERACT_LSTM_SUBSAMPLE_H_</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">/**********************************************************************</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment"> *  c o u n t</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="a00809.html#acd4ea858d7133e40518e0832ff9d94b2">   79</a></span>&#160;<span class="comment"> *  Recursively count the elements in  a list.  Return the count.</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment"> **********************************************************************/</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keywordtype">int</span> <a class="code" href="a00806.html#acd4ea858d7133e40518e0832ff9d94b2">count</a>(<a class="code" href="a03374.html">LIST</a> var_list) {</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <span class="keywordtype">int</span> temp = 0;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  <a class="code" href="a00809.html#a2cf19ba78be6b54f66823d58f34f2a53">iterate</a>(var_list) temp += 1;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  <span class="keywordflow">return</span> (temp);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;}</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">/**********************************************************************</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment"> *  d e l e t e    d</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment"> *  Delete all the elements out of the current list that match the key.</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment"> *  This operation destroys the original list.  The caller will supply a</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="a00809.html#a1fa3ecce52a0563f595b8f1428cc1211">   93</a></span>&#160;<span class="comment"> *  routine that will compare each node to the</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment"> *  key, and return a non-zero value when they match.</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment"> **********************************************************************/</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<a class="code" href="a03374.html">LIST</a> <a class="code" href="a00806.html#a1fa3ecce52a0563f595b8f1428cc1211">delete_d</a>(<a class="code" href="a03374.html">LIST</a> list, <span class="keywordtype">void</span> *key, <a class="code" href="a00809.html#a7fbe993c37b3887d37d12ef37484dcc3">int_compare</a> <a class="code" href="a01550.html#a7ee72f89f415da05b3dec8190ba140ef">is_equal</a>) {</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  <a class="code" href="a03374.html">LIST</a> result = <a class="code" href="a00809.html#ae212530ca629c67513698e988c705a5a">NIL_LIST</a>;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  <a class="code" href="a03374.html">LIST</a> last_one = <a class="code" href="a00809.html#ae212530ca629c67513698e988c705a5a">NIL_LIST</a>;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  <span class="keywordflow">if</span> (<a class="code" href="a01550.html#a7ee72f89f415da05b3dec8190ba140ef">is_equal</a> == <span class="keyword">nullptr</span>) <a class="code" href="a01550.html#a7ee72f89f415da05b3dec8190ba140ef">is_equal</a> = is_same;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  <span class="keywordflow">while</span> (list != <a class="code" href="a00809.html#ae212530ca629c67513698e988c705a5a">NIL_LIST</a>) {</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keywordflow">if</span> (!(*<a class="code" href="a01550.html#a7ee72f89f415da05b3dec8190ba140ef">is_equal</a>)(<a class="code" href="a00809.html#a69547be764424f18b0be535400747978">first_node</a>(list), key)) {</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;      <span class="keywordflow">if</span> (last_one == <a class="code" href="a00809.html#ae212530ca629c67513698e988c705a5a">NIL_LIST</a>) {</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        last_one = list;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        list = <a class="code" href="a00809.html#adb120d4c08ce52b5dfe524f0419a9154">list_rest</a>(list);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        result = last_one;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        <a class="code" href="a00809.html#a42cc2d9c5eabb2193e2e64df41adedf4">set_rest</a>(last_one, <a class="code" href="a00809.html#ae212530ca629c67513698e988c705a5a">NIL_LIST</a>);</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;      } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        <a class="code" href="a00809.html#a42cc2d9c5eabb2193e2e64df41adedf4">set_rest</a>(last_one, list);</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        last_one = list;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        list = <a class="code" href="a00809.html#adb120d4c08ce52b5dfe524f0419a9154">list_rest</a>(list);</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        <a class="code" href="a00809.html#a42cc2d9c5eabb2193e2e64df41adedf4">set_rest</a>(last_one, <a class="code" href="a00809.html#ae212530ca629c67513698e988c705a5a">NIL_LIST</a>);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;      }</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;      list = <a class="code" href="a00806.html#a4a16ea0d766f4b3bc697142d5303a62c">pop</a>(list);</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    }</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  }</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;  <span class="keywordflow">return</span> (result);</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;}</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment">/**********************************************************************</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno"><a class="line" href="a00809.html#a338e68bdadcbdf51db4c7268c4529409">  123</a></span>&#160;<span class="comment"> *  d e s t r o y</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment"> *  Return the space taken by a list to the heap.</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment"> **********************************************************************/</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<a class="code" href="a03374.html">LIST</a> <a class="code" href="a00806.html#a338e68bdadcbdf51db4c7268c4529409">destroy</a>(<a class="code" href="a03374.html">LIST</a> list) {</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;  <a class="code" href="a03374.html">LIST</a> next;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;  <span class="keywordflow">while</span> (list != <a class="code" href="a00809.html#ae212530ca629c67513698e988c705a5a">NIL_LIST</a>) {</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    next = <a class="code" href="a00809.html#adb120d4c08ce52b5dfe524f0419a9154">list_rest</a>(list);</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <span class="keyword">delete</span> list;</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    list = next;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;  }</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;  <span class="keywordflow">return</span> (<a class="code" href="a00809.html#ae212530ca629c67513698e988c705a5a">NIL_LIST</a>);</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;}</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
+<div class="line"><a name="l00138"></a><span class="lineno"><a class="line" href="a00809.html#a1a1efc1a269e5bb5bf16c1a174363ba4">  138</a></span>&#160;<span class="comment">/**********************************************************************</span></div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="comment"> *  d e s t r o y   n o d e s</span></div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="comment"> *  Return the space taken by the LISTs of a list to the heap.</span></div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="comment"> **********************************************************************/</span></div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="keywordtype">void</span> <a class="code" href="a00806.html#a1a1efc1a269e5bb5bf16c1a174363ba4">destroy_nodes</a>(<a class="code" href="a03374.html">LIST</a> list, <a class="code" href="a00809.html#a1323134202faaef1ddc50eab59bafa33">void_dest</a> destructor) {</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;  <a class="code" href="a00515.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a>(destructor != <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;  <span class="keywordflow">while</span> (list != <a class="code" href="a00809.html#ae212530ca629c67513698e988c705a5a">NIL_LIST</a>) {</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="a00809.html#a69547be764424f18b0be535400747978">first_node</a>(list) != <span class="keyword">nullptr</span>) (*destructor)(<a class="code" href="a00809.html#a69547be764424f18b0be535400747978">first_node</a>(list));</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    list = <a class="code" href="a00806.html#a4a16ea0d766f4b3bc697142d5303a62c">pop</a>(list);</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;  }</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;}</div>
+<div class="line"><a name="l00151"></a><span class="lineno"><a class="line" href="a00809.html#ad9ec1d10cbd07fc3376ef300df603418">  151</a></span>&#160; </div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="comment">/**********************************************************************</span></div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="comment"> *  l a s t</span></div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="comment"> *  Return the last list item (this is list type).</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="comment"> **********************************************************************/</span></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<a class="code" href="a03374.html">LIST</a> <a class="code" href="a00806.html#ad9ec1d10cbd07fc3376ef300df603418">last</a>(<a class="code" href="a03374.html">LIST</a> var_list) {</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;  <span class="keywordflow">while</span> (<a class="code" href="a00809.html#adb120d4c08ce52b5dfe524f0419a9154">list_rest</a>(var_list) != <a class="code" href="a00809.html#ae212530ca629c67513698e988c705a5a">NIL_LIST</a>) var_list = <a class="code" href="a00809.html#adb120d4c08ce52b5dfe524f0419a9154">list_rest</a>(var_list);</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;  <span class="keywordflow">return</span> (var_list);</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;}</div>
+<div class="line"><a name="l00161"></a><span class="lineno"><a class="line" href="a00809.html#a4a16ea0d766f4b3bc697142d5303a62c">  161</a></span>&#160; </div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="comment">/**********************************************************************</span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="comment"> *  p o p</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="comment"> *  Return the list with the first element removed.  Destroy the space</span></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="comment"> *  that it occupied in the list.</span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="comment"> **********************************************************************/</span></div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<a class="code" href="a03374.html">LIST</a> <a class="code" href="a00806.html#a4a16ea0d766f4b3bc697142d5303a62c">pop</a>(<a class="code" href="a03374.html">LIST</a> list) {</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;  <a class="code" href="a03374.html">LIST</a> temp = <a class="code" href="a00809.html#adb120d4c08ce52b5dfe524f0419a9154">list_rest</a>(list);</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;  <span class="keyword">delete</span> list;</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;  <span class="keywordflow">return</span> (temp);</div>
+<div class="line"><a name="l00172"></a><span class="lineno"><a class="line" href="a00809.html#a9c4294375af81ab4c133b6b5a3679a16">  172</a></span>&#160;}</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160; </div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="comment">/**********************************************************************</span></div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="comment"> *  p u s h</span></div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="comment"> *  Create a list element.  Push the second parameter (the node) onto</span></div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="comment"> *  the first parameter (the list). Return the new list to the caller.</span></div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="comment"> **********************************************************************/</span></div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<a class="code" href="a03374.html">LIST</a> <a class="code" href="a00806.html#a9c4294375af81ab4c133b6b5a3679a16">push</a>(<a class="code" href="a03374.html">LIST</a> list, <span class="keywordtype">void</span> *element) {</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;  <a class="code" href="a03374.html">LIST</a> t;</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160; </div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;  t = <span class="keyword">new</span> <a class="code" href="a03374.html">list_rec</a>;</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;  t-&gt;<a class="code" href="a03374.html#a75e5285c6f302ef37bb66ef781b87566">node</a> = static_cast&lt;LIST&gt;(element);</div>
+<div class="line"><a name="l00185"></a><span class="lineno"><a class="line" href="a00809.html#a1019c2e1108695bb4f33f83e02ee62ad">  185</a></span>&#160;  <a class="code" href="a00809.html#a42cc2d9c5eabb2193e2e64df41adedf4">set_rest</a>(t, list);</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;  <span class="keywordflow">return</span> (t);</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;}</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; </div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="comment">/**********************************************************************</span></div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="comment"> *  p u s h   l a s t</span></div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="comment"> *  Create a list element. Add the element onto the end of the list.</span></div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="comment"> **********************************************************************/</span></div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<a class="code" href="a03374.html">LIST</a> <a class="code" href="a00806.html#a1019c2e1108695bb4f33f83e02ee62ad">push_last</a>(<a class="code" href="a03374.html">LIST</a> list, <span class="keywordtype">void</span> *item) {</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;  <a class="code" href="a03374.html">LIST</a> t;</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160; </div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;  <span class="keywordflow">if</span> (list != <a class="code" href="a00809.html#ae212530ca629c67513698e988c705a5a">NIL_LIST</a>) {</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    t = <a class="code" href="a00806.html#ad9ec1d10cbd07fc3376ef300df603418">last</a>(list);</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    t-&gt;<a class="code" href="a03374.html#ad4e1a2bdaf3b0acf38ea4e02c5c463ae">next</a> = <a class="code" href="a00806.html#a9c4294375af81ab4c133b6b5a3679a16">push</a>(<a class="code" href="a00809.html#ae212530ca629c67513698e988c705a5a">NIL_LIST</a>, item);</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    <span class="keywordflow">return</span> (list);</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;  } <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00202"></a><span class="lineno"><a class="line" href="a00809.html#a1d8af9328f064a9df6d6f88336dd054e">  202</a></span>&#160;    <span class="keywordflow">return</span> (<a class="code" href="a00806.html#a9c4294375af81ab4c133b6b5a3679a16">push</a>(<a class="code" href="a00809.html#ae212530ca629c67513698e988c705a5a">NIL_LIST</a>, item));</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;}</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160; </div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="comment">/**********************************************************************</span></div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="comment"> *   s e a r c h</span></div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="comment"> *  Search list, return NIL_LIST if not found. Return the list starting from</span></div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;<span class="comment"> *  the item if found.  The compare routine &quot;is_equal&quot; is passed in as</span></div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="comment"> *  the third parameter to this routine.</span></div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;<span class="comment"> **********************************************************************/</span></div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;<a class="code" href="a03374.html">LIST</a> <a class="code" href="a00806.html#a1d8af9328f064a9df6d6f88336dd054e">search</a>(<a class="code" href="a03374.html">LIST</a> list, <span class="keywordtype">void</span> *key, <a class="code" href="a00809.html#a7fbe993c37b3887d37d12ef37484dcc3">int_compare</a> <a class="code" href="a01550.html#a7ee72f89f415da05b3dec8190ba140ef">is_equal</a>) {</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;  <span class="keywordflow">if</span> (<a class="code" href="a01550.html#a7ee72f89f415da05b3dec8190ba140ef">is_equal</a> == <span class="keyword">nullptr</span>) <a class="code" href="a01550.html#a7ee72f89f415da05b3dec8190ba140ef">is_equal</a> = is_same;</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160; </div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;  <a class="code" href="a00809.html#a2cf19ba78be6b54f66823d58f34f2a53">iterate</a>(list) <span class="keywordflow">if</span> ((*<a class="code" href="a01550.html#a7ee72f89f415da05b3dec8190ba140ef">is_equal</a>)(<a class="code" href="a00809.html#a69547be764424f18b0be535400747978">first_node</a>(list), key)) <span class="keywordflow">return</span> (list);</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;  <span class="keywordflow">return</span> (<a class="code" href="a00809.html#ae212530ca629c67513698e988c705a5a">NIL_LIST</a>);</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aa03060_html_a1bdf9fdfb7ed0d4962f4193dff5cd5ee"><div class="ttname"><a href="a03060.html#a1bdf9fdfb7ed0d4962f4193dff5cd5ee">tesseract::Network::type_</a></div><div class="ttdeci">NetworkType type_</div><div class="ttdef"><b>Definition:</b> <a href="a00851_source.html#l00293">network.h:293</a></div></div>
-<div class="ttc" id="aa02980_html_a5392770d080e11fcec02baf92fd6b133"><div class="ttname"><a href="a02980.html#a5392770d080e11fcec02baf92fd6b133">tesseract::Convolve::spec</a></div><div class="ttdeci">STRING spec() const override</div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00039">convolve.h:39</a></div></div>
-<div class="ttc" id="aa02980_html_a43dc5a3ee340111a240b29c201291351"><div class="ttname"><a href="a02980.html#a43dc5a3ee340111a240b29c201291351">tesseract::Convolve::Convolve</a></div><div class="ttdeci">Convolve(const STRING &amp;name, int ni, int half_x, int half_y)</div><div class="ttdef"><b>Definition:</b> <a href="a00803_source.html#l00028">convolve.cpp:28</a></div></div>
-<div class="ttc" id="aa02980_html_aa48363af09de6a338fa8dc31960fec8e"><div class="ttname"><a href="a02980.html#aa48363af09de6a338fa8dc31960fec8e">tesseract::Convolve::half_x_</a></div><div class="ttdeci">int32_t half_x_</div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00070">convolve.h:70</a></div></div>
-<div class="ttc" id="aa03152_html"><div class="ttname"><a href="a03152.html">tesseract::TransposedArray</a></div><div class="ttdef"><b>Definition:</b> <a href="a00923_source.html#l00032">weightmatrix.h:32</a></div></div>
-<div class="ttc" id="aa03060_html"><div class="ttname"><a href="a03060.html">tesseract::Network</a></div><div class="ttdef"><b>Definition:</b> <a href="a00851_source.html#l00105">network.h:105</a></div></div>
-<div class="ttc" id="aa02980_html"><div class="ttname"><a href="a02980.html">tesseract::Convolve</a></div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00032">convolve.h:32</a></div></div>
-<div class="ttc" id="aa00281_html"><div class="ttname"><a href="a00281.html">matrix.h</a></div></div>
-<div class="ttc" id="aa00530_html_a0c2bcd4462ec67ab0971b34a0f610f55"><div class="ttname"><a href="a00530.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a></div><div class="ttdeci">DLLSYM void tprintf(const char *format,...)</div><div class="ttdef"><b>Definition:</b> <a href="a00530_source.html#l00034">tprintf.cpp:34</a></div></div>
-<div class="ttc" id="aa02980_html_a4b6bb93067539229c4032fa73b1d3a6a"><div class="ttname"><a href="a02980.html#a4b6bb93067539229c4032fa73b1d3a6a">tesseract::Convolve::Forward</a></div><div class="ttdeci">void Forward(bool debug, const NetworkIO &amp;input, const TransposedArray *input_transpose, NetworkScratch *scratch, NetworkIO *output) override</div><div class="ttdef"><b>Definition:</b> <a href="a00803_source.html#l00050">convolve.cpp:50</a></div></div>
-<div class="ttc" id="aa02980_html_a702297e470bda078ac73cd2a48ff2eb8"><div class="ttname"><a href="a02980.html#a702297e470bda078ac73cd2a48ff2eb8">tesseract::Convolve::Serialize</a></div><div class="ttdeci">bool Serialize(TFile *fp) const override</div><div class="ttdef"><b>Definition:</b> <a href="a00803_source.html#l00034">convolve.cpp:34</a></div></div>
-<div class="ttc" id="aa02980_html_ada765c0ccc9bd90455267503e5a52d9c"><div class="ttname"><a href="a02980.html#ada765c0ccc9bd90455267503e5a52d9c">tesseract::Convolve::half_y_</a></div><div class="ttdeci">int32_t half_y_</div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00071">convolve.h:71</a></div></div>
-<div class="ttc" id="aa03068_html"><div class="ttname"><a href="a03068.html">tesseract::NetworkScratch</a></div><div class="ttdef"><b>Definition:</b> <a href="a00860_source.html#l00034">networkscratch.h:34</a></div></div>
-<div class="ttc" id="aa01539_html"><div class="ttname"><a href="a01539.html">tesseract</a></div><div class="ttdef"><b>Definition:</b> <a href="a00002_source.html#l00025">altorenderer.cpp:25</a></div></div>
-<div class="ttc" id="aa02980_html_a7dc5a08297a9591a78ef5cbf2113b0ce"><div class="ttname"><a href="a02980.html#a7dc5a08297a9591a78ef5cbf2113b0ce">tesseract::Convolve::Backward</a></div><div class="ttdeci">bool Backward(bool debug, const NetworkIO &amp;fwd_deltas, NetworkScratch *scratch, NetworkIO *back_deltas) override</div><div class="ttdef"><b>Definition:</b> <a href="a00803_source.html#l00084">convolve.cpp:84</a></div></div>
-<div class="ttc" id="aa03060_html_ab5af1ed13f949340c43d062dc06be3d2"><div class="ttname"><a href="a03060.html#ab5af1ed13f949340c43d062dc06be3d2">tesseract::Network::name</a></div><div class="ttdeci">const STRING &amp; name() const</div><div class="ttdef"><b>Definition:</b> <a href="a00851_source.html#l00138">network.h:138</a></div></div>
-<div class="ttc" id="aa03064_html"><div class="ttname"><a href="a03064.html">tesseract::NetworkIO</a></div><div class="ttdef"><b>Definition:</b> <a href="a00857_source.html#l00039">networkio.h:39</a></div></div>
-<div class="ttc" id="aa02980_html_afd3a9b5f8e9062bd101fdc133fee9251"><div class="ttname"><a href="a02980.html#afd3a9b5f8e9062bd101fdc133fee9251">tesseract::Convolve::DeSerialize</a></div><div class="ttdeci">bool DeSerialize(TFile *fp) override</div><div class="ttdef"><b>Definition:</b> <a href="a00803_source.html#l00041">convolve.cpp:41</a></div></div>
-<div class="ttc" id="aa02980_html_a0c63d23d00134ff2ac3683a914cb6777"><div class="ttname"><a href="a02980.html#a0c63d23d00134ff2ac3683a914cb6777">tesseract::Convolve::~Convolve</a></div><div class="ttdeci">~Convolve() override=default</div></div>
-<div class="ttc" id="aa00851_html"><div class="ttname"><a href="a00851.html">network.h</a></div></div>
+<div class="ttc" id="aa03374_html_ad4e1a2bdaf3b0acf38ea4e02c5c463ae"><div class="ttname"><a href="a03374.html#ad4e1a2bdaf3b0acf38ea4e02c5c463ae">list_rec::next</a></div><div class="ttdeci">list_rec * next</div><div class="ttdef"><b>Definition:</b> <a href="a00809_source.html#l00075">oldlist.h:75</a></div></div>
+<div class="ttc" id="aa00809_html_a69547be764424f18b0be535400747978"><div class="ttname"><a href="a00809.html#a69547be764424f18b0be535400747978">first_node</a></div><div class="ttdeci">#define first_node(l)</div><div class="ttdef"><b>Definition:</b> <a href="a00809_source.html#l00084">oldlist.h:84</a></div></div>
+<div class="ttc" id="aa00806_html_a1a1efc1a269e5bb5bf16c1a174363ba4"><div class="ttname"><a href="a00806.html#a1a1efc1a269e5bb5bf16c1a174363ba4">destroy_nodes</a></div><div class="ttdeci">void destroy_nodes(LIST list, void_dest destructor)</div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00138">oldlist.cpp:138</a></div></div>
+<div class="ttc" id="aa00515_html_a93a603f4063a6b9403d81caa245a583b"><div class="ttname"><a href="a00515.html#a93a603f4063a6b9403d81caa245a583b">ASSERT_HOST</a></div><div class="ttdeci">#define ASSERT_HOST(x)</div><div class="ttdef"><b>Definition:</b> <a href="a00515_source.html#l00087">errcode.h:87</a></div></div>
+<div class="ttc" id="aa03374_html"><div class="ttname"><a href="a03374.html">list_rec</a></div><div class="ttdef"><b>Definition:</b> <a href="a00809_source.html#l00073">oldlist.h:73</a></div></div>
+<div class="ttc" id="aa00809_html_adb120d4c08ce52b5dfe524f0419a9154"><div class="ttname"><a href="a00809.html#adb120d4c08ce52b5dfe524f0419a9154">list_rest</a></div><div class="ttdeci">#define list_rest(l)</div><div class="ttdef"><b>Definition:</b> <a href="a00809_source.html#l00083">oldlist.h:83</a></div></div>
+<div class="ttc" id="aa00809_html_ae212530ca629c67513698e988c705a5a"><div class="ttname"><a href="a00809.html#ae212530ca629c67513698e988c705a5a">NIL_LIST</a></div><div class="ttdeci">#define NIL_LIST</div><div class="ttdef"><b>Definition:</b> <a href="a00809_source.html#l00068">oldlist.h:68</a></div></div>
+<div class="ttc" id="aa03374_html_a75e5285c6f302ef37bb66ef781b87566"><div class="ttname"><a href="a03374.html#a75e5285c6f302ef37bb66ef781b87566">list_rec::node</a></div><div class="ttdeci">list_rec * node</div><div class="ttdef"><b>Definition:</b> <a href="a00809_source.html#l00074">oldlist.h:74</a></div></div>
+<div class="ttc" id="aa00809_html_a7fbe993c37b3887d37d12ef37484dcc3"><div class="ttname"><a href="a00809.html#a7fbe993c37b3887d37d12ef37484dcc3">int_compare</a></div><div class="ttdeci">int(*)(void *, void *) int_compare</div><div class="ttdef"><b>Definition:</b> <a href="a00809_source.html#l00070">oldlist.h:70</a></div></div>
+<div class="ttc" id="aa00809_html"><div class="ttname"><a href="a00809.html">oldlist.h</a></div></div>
+<div class="ttc" id="aa00806_html_ad9ec1d10cbd07fc3376ef300df603418"><div class="ttname"><a href="a00806.html#ad9ec1d10cbd07fc3376ef300df603418">last</a></div><div class="ttdeci">LIST last(LIST var_list)</div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00151">oldlist.cpp:151</a></div></div>
+<div class="ttc" id="aa00806_html_a1fa3ecce52a0563f595b8f1428cc1211"><div class="ttname"><a href="a00806.html#a1fa3ecce52a0563f595b8f1428cc1211">delete_d</a></div><div class="ttdeci">LIST delete_d(LIST list, void *key, int_compare is_equal)</div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00093">oldlist.cpp:93</a></div></div>
+<div class="ttc" id="aa00806_html_a9c4294375af81ab4c133b6b5a3679a16"><div class="ttname"><a href="a00806.html#a9c4294375af81ab4c133b6b5a3679a16">push</a></div><div class="ttdeci">LIST push(LIST list, void *element)</div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00172">oldlist.cpp:172</a></div></div>
+<div class="ttc" id="aa00806_html_acd4ea858d7133e40518e0832ff9d94b2"><div class="ttname"><a href="a00806.html#acd4ea858d7133e40518e0832ff9d94b2">count</a></div><div class="ttdeci">int count(LIST var_list)</div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00079">oldlist.cpp:79</a></div></div>
+<div class="ttc" id="aa01550_html_a7ee72f89f415da05b3dec8190ba140ef"><div class="ttname"><a href="a01550.html#a7ee72f89f415da05b3dec8190ba140ef">is_equal</a></div><div class="ttdeci">#define is_equal(p1, p2)</div><div class="ttdef"><b>Definition:</b> <a href="a01550_source.html#l00097">outlines.h:97</a></div></div>
+<div class="ttc" id="aa00809_html_a2cf19ba78be6b54f66823d58f34f2a53"><div class="ttname"><a href="a00809.html#a2cf19ba78be6b54f66823d58f34f2a53">iterate</a></div><div class="ttdeci">#define iterate(l)</div><div class="ttdef"><b>Definition:</b> <a href="a00809_source.html#l00092">oldlist.h:92</a></div></div>
+<div class="ttc" id="aa00806_html_a338e68bdadcbdf51db4c7268c4529409"><div class="ttname"><a href="a00806.html#a338e68bdadcbdf51db4c7268c4529409">destroy</a></div><div class="ttdeci">LIST destroy(LIST list)</div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00123">oldlist.cpp:123</a></div></div>
+<div class="ttc" id="aa00806_html_a4a16ea0d766f4b3bc697142d5303a62c"><div class="ttname"><a href="a00806.html#a4a16ea0d766f4b3bc697142d5303a62c">pop</a></div><div class="ttdeci">LIST pop(LIST list)</div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00161">oldlist.cpp:161</a></div></div>
+<div class="ttc" id="aa00515_html"><div class="ttname"><a href="a00515.html">errcode.h</a></div></div>
+<div class="ttc" id="aa00809_html_a1323134202faaef1ddc50eab59bafa33"><div class="ttname"><a href="a00809.html#a1323134202faaef1ddc50eab59bafa33">void_dest</a></div><div class="ttdeci">void(*)(void *) void_dest</div><div class="ttdef"><b>Definition:</b> <a href="a00809_source.html#l00071">oldlist.h:71</a></div></div>
+<div class="ttc" id="aa00806_html_a1019c2e1108695bb4f33f83e02ee62ad"><div class="ttname"><a href="a00806.html#a1019c2e1108695bb4f33f83e02ee62ad">push_last</a></div><div class="ttdeci">LIST push_last(LIST list, void *item)</div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00185">oldlist.cpp:185</a></div></div>
+<div class="ttc" id="aa00806_html_a1d8af9328f064a9df6d6f88336dd054e"><div class="ttname"><a href="a00806.html#a1d8af9328f064a9df6d6f88336dd054e">search</a></div><div class="ttdeci">LIST search(LIST list, void *key, int_compare is_equal)</div><div class="ttdef"><b>Definition:</b> <a href="a00806_source.html#l00202">oldlist.cpp:202</a></div></div>
+<div class="ttc" id="aa00809_html_a42cc2d9c5eabb2193e2e64df41adedf4"><div class="ttname"><a href="a00809.html#a42cc2d9c5eabb2193e2e64df41adedf4">set_rest</a></div><div class="ttdeci">#define set_rest(l, cell)</div><div class="ttdef"><b>Definition:</b> <a href="a00809_source.html#l00101">oldlist.h:101</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_57c32823bf7301c39893cc8d5b3eca8e.html">lstm</a></li><li class="navelem"><a class="el" href="a00806.html">convolve.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:15 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_26a98b1b7a71b8b8c9c7d7743e94ea74.html">cutil</a></li><li class="navelem"><a class="el" href="a00806.html">oldlist.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:20 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

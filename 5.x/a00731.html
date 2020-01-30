@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/classify/tessclassifier.h File Reference</title>
+<title>tesseract: /tesseract/src/classify/normfeat.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,33 +87,132 @@ $(document).ready(function(){initNavTree('a00731.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">tessclassifier.h File Reference</div>  </div>
+<div class="title">normfeat.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="a00719_source.html">shapeclassifier.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a00734_source.html">normfeat.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00686_source.html">intfx.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00662_source.html">featdefs.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00722_source.html">mfoutline.h</a>&quot;</code><br />
 </div>
 <p><a href="a00731_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a02912.html">tesseract::TessClassifier</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:a01539"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html">tesseract</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ae041c2fcb5bad1199852858f38aaa17a"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00731.html#ae041c2fcb5bad1199852858f38aaa17a">ActualOutlineLength</a> (<a class="el" href="a00746.html#a4834c45436ab672288f286fa1cea8bf5">FEATURE</a> Feature)</td></tr>
+<tr class="separator:ae041c2fcb5bad1199852858f38aaa17a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a809c040b2d2dbb0ce82c124e0787e06c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00746.html#a6ceed548fc087d83d8e21bf17b199f6a">FEATURE_SET</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00731.html#a809c040b2d2dbb0ce82c124e0787e06c">ExtractCharNormFeatures</a> (const <a class="el" href="a03230.html">INT_FX_RESULT_STRUCT</a> &amp;fx_info)</td></tr>
+<tr class="separator:a809c040b2d2dbb0ce82c124e0787e06c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="ae041c2fcb5bad1199852858f38aaa17a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae041c2fcb5bad1199852858f38aaa17a">&#9670;&nbsp;</a></span>ActualOutlineLength()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float ActualOutlineLength </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00746.html#a4834c45436ab672288f286fa1cea8bf5">FEATURE</a>&#160;</td>
+          <td class="paramname"><em>Feature</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Return the length of the outline in baseline normalized form. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00731_source.html#l00031">31</a> of file <a class="el" href="a00731_source.html">normfeat.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                                           {</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <span class="keywordflow">return</span> (Feature-&gt;<a class="code" href="a03322.html#acdddc3235f689b0d45574003fc3e3b1b">Params</a>[<a class="code" href="a00734.html#ab5ff0a2380362fa488e17c0c1b858506af859d8f455da531fb41201c80187dccf">CharNormLength</a>] * <a class="code" href="a00734.html#a528f356e3cb082911b33645da06ccf04">LENGTH_COMPRESSION</a>);</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a809c040b2d2dbb0ce82c124e0787e06c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a809c040b2d2dbb0ce82c124e0787e06c">&#9670;&nbsp;</a></span>ExtractCharNormFeatures()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00746.html#a6ceed548fc087d83d8e21bf17b199f6a">FEATURE_SET</a> ExtractCharNormFeatures </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="a03230.html">INT_FX_RESULT_STRUCT</a> &amp;&#160;</td>
+          <td class="paramname"><em>fx_info</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Return the character normalization feature for a blob.</p>
+<p>The features returned are in a scale where the x-height has been normalized to live in the region y = [-0.25 .. 0.25]. Example ranges for English below are based on the Linux font collection on 2009-12-04:</p>
+<ul>
+<li>Params[CharNormY]<ul>
+<li>The y coordinate of the grapheme's centroid.</li>
+<li>English: [-0.27, 0.71]</li>
+</ul>
+</li>
+<li>Params[CharNormLength]<ul>
+<li>The length of the grapheme's outline (tiny segments discarded), divided by 10.0=LENGTH_COMPRESSION.</li>
+<li>English: [0.16, 0.85]</li>
+</ul>
+</li>
+<li>Params[CharNormRx]<ul>
+<li>The radius of gyration about the x axis, as measured from CharNormY.</li>
+<li>English: [0.011, 0.34]</li>
+</ul>
+</li>
+<li>Params[CharNormRy]<ul>
+<li>The radius of gyration about the y axis, as measured from the x center of the grapheme's bounding box.</li>
+<li>English: [0.011, 0.31] </li>
+</ul>
+</li>
+</ul>
+
+<p class="definition">Definition at line <a class="el" href="a00731_source.html#l00060">60</a> of file <a class="el" href="a00731_source.html">normfeat.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                                                                         {</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <a class="code" href="a03326.html">FEATURE_SET</a> feature_set = <a class="code" href="a00743.html#acdf1bcf73857cfc37fe8d667203bc875">NewFeatureSet</a>(1);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <a class="code" href="a03322.html">FEATURE</a> feature = <a class="code" href="a00743.html#a32a08c42617c8dd6a156c1c8d7fb2cbb">NewFeature</a>(&amp;<a class="code" href="a00662.html#aeaae0c3ba332fe6addd19ed202a3ecb7">CharNormDesc</a>);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  feature-&gt;<a class="code" href="a03322.html#acdddc3235f689b0d45574003fc3e3b1b">Params</a>[<a class="code" href="a00734.html#ab5ff0a2380362fa488e17c0c1b858506a9309b18966f93d05a857e8ee0f81c557">CharNormY</a>] =</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;      <a class="code" href="a00722.html#a2fe8b8a3fa428a5955d5fbfeafc4dba3">MF_SCALE_FACTOR</a> * (fx_info.<a class="code" href="a03230.html#a1cbbead5cdcfca7796fec69cac6564da">Ymean</a> - <a class="code" href="a00344.html#abe10ce41bf7240ae8a053dea471d6ed5">kBlnBaselineOffset</a>);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  feature-&gt;<a class="code" href="a03322.html#acdddc3235f689b0d45574003fc3e3b1b">Params</a>[<a class="code" href="a00734.html#ab5ff0a2380362fa488e17c0c1b858506af859d8f455da531fb41201c80187dccf">CharNormLength</a>] =</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;      <a class="code" href="a00722.html#a2fe8b8a3fa428a5955d5fbfeafc4dba3">MF_SCALE_FACTOR</a> * fx_info.<a class="code" href="a03230.html#aec4db97b1c2821754a9413e4b1eabd6a">Length</a> / <a class="code" href="a00734.html#a528f356e3cb082911b33645da06ccf04">LENGTH_COMPRESSION</a>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  feature-&gt;<a class="code" href="a03322.html#acdddc3235f689b0d45574003fc3e3b1b">Params</a>[<a class="code" href="a00734.html#ab5ff0a2380362fa488e17c0c1b858506a5a6745d4958b44c8c3481742021428f9">CharNormRx</a>] = <a class="code" href="a00722.html#a2fe8b8a3fa428a5955d5fbfeafc4dba3">MF_SCALE_FACTOR</a> * fx_info.<a class="code" href="a03230.html#a3b493419f1ae76f1adb1dbfa2c8df099">Rx</a>;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  feature-&gt;<a class="code" href="a03322.html#acdddc3235f689b0d45574003fc3e3b1b">Params</a>[<a class="code" href="a00734.html#ab5ff0a2380362fa488e17c0c1b858506ac21a54078a6ec6e1470a21d65feb58d5">CharNormRy</a>] = <a class="code" href="a00722.html#a2fe8b8a3fa428a5955d5fbfeafc4dba3">MF_SCALE_FACTOR</a> * fx_info.<a class="code" href="a03230.html#a5af65ad9a78dcbbb0bc41c391e3cd0be">Ry</a>;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <a class="code" href="a00743.html#a88ff5e23ace03b3fbfbb891604dd5bc6">AddFeature</a>(feature_set, feature);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <span class="keywordflow">return</span> feature_set;</div>
+</div><!-- fragment -->
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="aa00743_html_a88ff5e23ace03b3fbfbb891604dd5bc6"><div class="ttname"><a href="a00743.html#a88ff5e23ace03b3fbfbb891604dd5bc6">AddFeature</a></div><div class="ttdeci">bool AddFeature(FEATURE_SET FeatureSet, FEATURE Feature)</div><div class="ttdef"><b>Definition:</b> <a href="a00743_source.html#l00039">ocrfeatures.cpp:39</a></div></div>
+<div class="ttc" id="aa03322_html"><div class="ttname"><a href="a03322.html">FEATURE_STRUCT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00746_source.html#l00058">ocrfeatures.h:58</a></div></div>
+<div class="ttc" id="aa00722_html_a2fe8b8a3fa428a5955d5fbfeafc4dba3"><div class="ttname"><a href="a00722.html#a2fe8b8a3fa428a5955d5fbfeafc4dba3">MF_SCALE_FACTOR</a></div><div class="ttdeci">const float MF_SCALE_FACTOR</div><div class="ttdef"><b>Definition:</b> <a href="a00722_source.html#l00070">mfoutline.h:70</a></div></div>
+<div class="ttc" id="aa03230_html_a5af65ad9a78dcbbb0bc41c391e3cd0be"><div class="ttname"><a href="a03230.html#a5af65ad9a78dcbbb0bc41c391e3cd0be">INT_FX_RESULT_STRUCT::Ry</a></div><div class="ttdeci">int16_t Ry</div><div class="ttdef"><b>Definition:</b> <a href="a00686_source.html#l00037">intfx.h:37</a></div></div>
+<div class="ttc" id="aa03230_html_a1cbbead5cdcfca7796fec69cac6564da"><div class="ttname"><a href="a03230.html#a1cbbead5cdcfca7796fec69cac6564da">INT_FX_RESULT_STRUCT::Ymean</a></div><div class="ttdeci">int16_t Ymean</div><div class="ttdef"><b>Definition:</b> <a href="a00686_source.html#l00036">intfx.h:36</a></div></div>
+<div class="ttc" id="aa03230_html_a3b493419f1ae76f1adb1dbfa2c8df099"><div class="ttname"><a href="a03230.html#a3b493419f1ae76f1adb1dbfa2c8df099">INT_FX_RESULT_STRUCT::Rx</a></div><div class="ttdeci">int16_t Rx</div><div class="ttdef"><b>Definition:</b> <a href="a00686_source.html#l00037">intfx.h:37</a></div></div>
+<div class="ttc" id="aa00734_html_ab5ff0a2380362fa488e17c0c1b858506af859d8f455da531fb41201c80187dccf"><div class="ttname"><a href="a00734.html#ab5ff0a2380362fa488e17c0c1b858506af859d8f455da531fb41201c80187dccf">CharNormLength</a></div><div class="ttdef"><b>Definition:</b> <a href="a00734_source.html#l00029">normfeat.h:29</a></div></div>
+<div class="ttc" id="aa00734_html_a528f356e3cb082911b33645da06ccf04"><div class="ttname"><a href="a00734.html#a528f356e3cb082911b33645da06ccf04">LENGTH_COMPRESSION</a></div><div class="ttdeci">#define LENGTH_COMPRESSION</div><div class="ttdef"><b>Definition:</b> <a href="a00734_source.html#l00026">normfeat.h:26</a></div></div>
+<div class="ttc" id="aa03322_html_acdddc3235f689b0d45574003fc3e3b1b"><div class="ttname"><a href="a03322.html#acdddc3235f689b0d45574003fc3e3b1b">FEATURE_STRUCT::Params</a></div><div class="ttdeci">float Params[1]</div><div class="ttdef"><b>Definition:</b> <a href="a00746_source.html#l00060">ocrfeatures.h:60</a></div></div>
+<div class="ttc" id="aa00743_html_a32a08c42617c8dd6a156c1c8d7fb2cbb"><div class="ttname"><a href="a00743.html#a32a08c42617c8dd6a156c1c8d7fb2cbb">NewFeature</a></div><div class="ttdeci">FEATURE NewFeature(const FEATURE_DESC_STRUCT *FeatureDesc)</div><div class="ttdef"><b>Definition:</b> <a href="a00743_source.html#l00077">ocrfeatures.cpp:77</a></div></div>
+<div class="ttc" id="aa03326_html"><div class="ttname"><a href="a03326.html">FEATURE_SET_STRUCT</a></div><div class="ttdef"><b>Definition:</b> <a href="a00746_source.html#l00064">ocrfeatures.h:64</a></div></div>
+<div class="ttc" id="aa00662_html_aeaae0c3ba332fe6addd19ed202a3ecb7"><div class="ttname"><a href="a00662.html#aeaae0c3ba332fe6addd19ed202a3ecb7">CharNormDesc</a></div><div class="ttdeci">const FEATURE_DESC_STRUCT CharNormDesc</div></div>
+<div class="ttc" id="aa00743_html_acdf1bcf73857cfc37fe8d667203bc875"><div class="ttname"><a href="a00743.html#acdf1bcf73857cfc37fe8d667203bc875">NewFeatureSet</a></div><div class="ttdeci">FEATURE_SET NewFeatureSet(int NumFeatures)</div><div class="ttdef"><b>Definition:</b> <a href="a00743_source.html#l00093">ocrfeatures.cpp:93</a></div></div>
+<div class="ttc" id="aa03230_html_aec4db97b1c2821754a9413e4b1eabd6a"><div class="ttname"><a href="a03230.html#aec4db97b1c2821754a9413e4b1eabd6a">INT_FX_RESULT_STRUCT::Length</a></div><div class="ttdeci">int32_t Length</div><div class="ttdef"><b>Definition:</b> <a href="a00686_source.html#l00035">intfx.h:35</a></div></div>
+<div class="ttc" id="aa00734_html_ab5ff0a2380362fa488e17c0c1b858506a9309b18966f93d05a857e8ee0f81c557"><div class="ttname"><a href="a00734.html#ab5ff0a2380362fa488e17c0c1b858506a9309b18966f93d05a857e8ee0f81c557">CharNormY</a></div><div class="ttdef"><b>Definition:</b> <a href="a00734_source.html#l00029">normfeat.h:29</a></div></div>
+<div class="ttc" id="aa00344_html_abe10ce41bf7240ae8a053dea471d6ed5"><div class="ttname"><a href="a00344.html#abe10ce41bf7240ae8a053dea471d6ed5">kBlnBaselineOffset</a></div><div class="ttdeci">const int kBlnBaselineOffset</div><div class="ttdef"><b>Definition:</b> <a href="a00344_source.html#l00024">normalis.h:24</a></div></div>
+<div class="ttc" id="aa00734_html_ab5ff0a2380362fa488e17c0c1b858506a5a6745d4958b44c8c3481742021428f9"><div class="ttname"><a href="a00734.html#ab5ff0a2380362fa488e17c0c1b858506a5a6745d4958b44c8c3481742021428f9">CharNormRx</a></div><div class="ttdef"><b>Definition:</b> <a href="a00734_source.html#l00029">normfeat.h:29</a></div></div>
+<div class="ttc" id="aa00734_html_ab5ff0a2380362fa488e17c0c1b858506ac21a54078a6ec6e1470a21d65feb58d5"><div class="ttname"><a href="a00734.html#ab5ff0a2380362fa488e17c0c1b858506ac21a54078a6ec6e1470a21d65feb58d5">CharNormRy</a></div><div class="ttdef"><b>Definition:</b> <a href="a00734_source.html#l00029">normfeat.h:29</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b8f5fb7b736ee5431a221bc7b817d6e0.html">classify</a></li><li class="navelem"><a class="el" href="a00731.html">tessclassifier.h</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b8f5fb7b736ee5431a221bc7b817d6e0.html">classify</a></li><li class="navelem"><a class="el" href="a00731.html">normfeat.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>

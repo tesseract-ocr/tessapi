@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tesseract: /home/stweil/src/github/tesseract-ocr/tesseract/src/training/intfeaturedist.cpp File Reference</title>
+<title>tesseract: /tesseract/src/training/combine_lang_model.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,28 +87,112 @@ $(document).ready(function(){initNavTree('a01238.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">intfeaturedist.cpp File Reference</div>  </div>
+<div class="title">combine_lang_model.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="a01241_source.html">intfeaturedist.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a01247_source.html">intfeaturemap.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a01247_source.html">commandlineflags.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a01253_source.html">commontraining.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a01304_source.html">lang_model_helpers.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00584_source.html">tprintf.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a01421_source.html">unicharset_training_utils.h</a>&quot;</code><br />
 </div>
 <p><a href="a01238_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:a01539"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01539.html">tesseract</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01238.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
+<tr class="separator:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a3c04138a5bfe5d72780bb7e82a18e627"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c04138a5bfe5d72780bb7e82a18e627">&#9670;&nbsp;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>argv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a01238_source.html#l00042">42</a> of file <a class="el" href="a01238_source.html">combine_lang_model.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                                {</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="comment">// Sets properties on the input unicharset file, and writes:</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;  <span class="comment">//   rootdir/lang/lang.charset_size=ddd.txt</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <span class="comment">//   rootdir/lang/lang.traineddata</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <span class="comment">//   rootdir/lang/lang.unicharset</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="comment">// If the 3 word lists are provided, the dawgs are also added</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <span class="comment">// to the traineddata file.</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="comment">// The output unicharset and charset_size files are just for</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="comment">// human readability.</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  tesseract::CheckSharedLibraryVersion();</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <a class="code" href="a01818.html#a07614d344b574ebcc2d3ae4d68fad1d5">tesseract::ParseCommandLineFlags</a>(argv[0], &amp;argc, &amp;argv, <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <a class="code" href="a02434.html">GenericVector&lt;STRING&gt;</a> words, puncs, numbers;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  <span class="comment">// If these reads fail, we get a warning message and an empty list of words.</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  <a class="code" href="a01818.html#aec6dc666e8de0ec1964846bb7b809673">tesseract::ReadFile</a>(FLAGS_words.c_str(), <span class="keyword">nullptr</span>).split(<span class="charliteral">&#39;\n&#39;</span>, &amp;words);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <a class="code" href="a01818.html#aec6dc666e8de0ec1964846bb7b809673">tesseract::ReadFile</a>(FLAGS_puncs.c_str(), <span class="keyword">nullptr</span>).split(<span class="charliteral">&#39;\n&#39;</span>, &amp;puncs);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  <a class="code" href="a01818.html#aec6dc666e8de0ec1964846bb7b809673">tesseract::ReadFile</a>(FLAGS_numbers.c_str(), <span class="keyword">nullptr</span>).split(<span class="charliteral">&#39;\n&#39;</span>, &amp;numbers);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  <span class="comment">// Load the input unicharset</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <a class="code" href="a03118.html">UNICHARSET</a> unicharset;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <span class="keywordflow">if</span> (!unicharset.<a class="code" href="a03118.html#af066ba55fdc20f996eaaed05618b377e">load_from_file</a>(FLAGS_input_unicharset.c_str(), <span class="keyword">false</span>)) {</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Failed to load unicharset from %s\n&quot;</span>,</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            FLAGS_input_unicharset.c_str());</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  }</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Loaded unicharset of size %d from file %s\n&quot;</span>, unicharset.<a class="code" href="a03118.html#adb332692009836a2d89e5fdf63f9765f">size</a>(),</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;          FLAGS_input_unicharset.c_str());</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <span class="comment">// Set unichar properties</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Setting unichar properties\n&quot;</span>);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <a class="code" href="a01818.html#ab00e04cc76f353812c8afed7117b7834">tesseract::SetupBasicProperties</a>(<span class="comment">/*report_errors*/</span> <span class="keyword">true</span>,</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                                  <span class="comment">/*decompose (NFD)*/</span> <span class="keyword">false</span>, &amp;unicharset);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  <a class="code" href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a>(<span class="stringliteral">&quot;Setting script properties\n&quot;</span>);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  <a class="code" href="a01818.html#a94833720955083038d6395dc5ca10559">tesseract::SetScriptProperties</a>(FLAGS_script_dir.c_str(), &amp;unicharset);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <span class="comment">// Combine everything into a traineddata file.</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  <span class="keywordflow">return</span> <a class="code" href="a01818.html#a385d919030eb88226e841faca38696e9">tesseract::CombineLangModel</a>(</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;      unicharset, FLAGS_script_dir.c_str(), FLAGS_version_str.c_str(),</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;      FLAGS_output_dir.c_str(), FLAGS_lang.c_str(), FLAGS_pass_through_recoder,</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;      words, puncs, numbers, FLAGS_lang_is_rtl, <span class="comment">/*reader*/</span> <span class="keyword">nullptr</span>,</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;      <span class="comment">/*writer*/</span> <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;}</div>
+</div><!-- fragment -->
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="aa03118_html_af066ba55fdc20f996eaaed05618b377e"><div class="ttname"><a href="a03118.html#af066ba55fdc20f996eaaed05618b377e">UNICHARSET::load_from_file</a></div><div class="ttdeci">bool load_from_file(const char *const filename, bool skip_fragments)</div><div class="ttdef"><b>Definition:</b> <a href="a00605_source.html#l00378">unicharset.h:378</a></div></div>
+<div class="ttc" id="aa01818_html_a385d919030eb88226e841faca38696e9"><div class="ttname"><a href="a01818.html#a385d919030eb88226e841faca38696e9">tesseract::CombineLangModel</a></div><div class="ttdeci">int CombineLangModel(const UNICHARSET &amp;unicharset, const std::string &amp;script_dir, const std::string &amp;version_str, const std::string &amp;output_dir, const std::string &amp;lang, bool pass_through_recoder, const GenericVector&lt; STRING &gt; &amp;words, const GenericVector&lt; STRING &gt; &amp;puncs, const GenericVector&lt; STRING &gt; &amp;numbers, bool lang_is_rtl, FileReader reader, FileWriter writer)</div><div class="ttdef"><b>Definition:</b> <a href="a01301_source.html#l00185">lang_model_helpers.cpp:185</a></div></div>
+<div class="ttc" id="aa01818_html_ab00e04cc76f353812c8afed7117b7834"><div class="ttname"><a href="a01818.html#ab00e04cc76f353812c8afed7117b7834">tesseract::SetupBasicProperties</a></div><div class="ttdeci">void SetupBasicProperties(bool report_errors, bool decompose, UNICHARSET *unicharset)</div><div class="ttdef"><b>Definition:</b> <a href="a01418_source.html#l00040">unicharset_training_utils.cpp:40</a></div></div>
+<div class="ttc" id="aa01818_html_a07614d344b574ebcc2d3ae4d68fad1d5"><div class="ttname"><a href="a01818.html#a07614d344b574ebcc2d3ae4d68fad1d5">tesseract::ParseCommandLineFlags</a></div><div class="ttdeci">void ParseCommandLineFlags(const char *usage, int *argc, char ***argv, const bool remove_flags)</div><div class="ttdef"><b>Definition:</b> <a href="a01244_source.html#l00166">commandlineflags.cpp:166</a></div></div>
+<div class="ttc" id="aa03118_html"><div class="ttname"><a href="a03118.html">UNICHARSET</a></div><div class="ttdef"><b>Definition:</b> <a href="a00605_source.html#l00145">unicharset.h:145</a></div></div>
+<div class="ttc" id="aa02434_html"><div class="ttname"><a href="a02434.html">GenericVector&lt; STRING &gt;</a></div></div>
+<div class="ttc" id="aa01818_html_a94833720955083038d6395dc5ca10559"><div class="ttname"><a href="a01818.html#a94833720955083038d6395dc5ca10559">tesseract::SetScriptProperties</a></div><div class="ttdeci">void SetScriptProperties(const std::string &amp;script_dir, UNICHARSET *unicharset)</div><div class="ttdef"><b>Definition:</b> <a href="a01418_source.html#l00143">unicharset_training_utils.cpp:143</a></div></div>
+<div class="ttc" id="aa01818_html_aec6dc666e8de0ec1964846bb7b809673"><div class="ttname"><a href="a01818.html#aec6dc666e8de0ec1964846bb7b809673">tesseract::ReadFile</a></div><div class="ttdeci">STRING ReadFile(const std::string &amp;filename, FileReader reader)</div><div class="ttdef"><b>Definition:</b> <a href="a01301_source.html#l00057">lang_model_helpers.cpp:57</a></div></div>
+<div class="ttc" id="aa00581_html_a0c2bcd4462ec67ab0971b34a0f610f55"><div class="ttname"><a href="a00581.html#a0c2bcd4462ec67ab0971b34a0f610f55">tprintf</a></div><div class="ttdeci">DLLSYM void tprintf(const char *format,...)</div><div class="ttdef"><b>Definition:</b> <a href="a00581_source.html#l00034">tprintf.cpp:34</a></div></div>
+<div class="ttc" id="aa03118_html_adb332692009836a2d89e5fdf63f9765f"><div class="ttname"><a href="a03118.html#adb332692009836a2d89e5fdf63f9765f">UNICHARSET::size</a></div><div class="ttdeci">int size() const</div><div class="ttdef"><b>Definition:</b> <a href="a00605_source.html#l00341">unicharset.h:341</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7c7ae07dd2a999045cb78bf7ff8dcbc7.html">training</a></li><li class="navelem"><a class="el" href="a01238.html">intfeaturedist.cpp</a></li>
-    <li class="footer">Generated on Thu Jan 30 2020 11:32:16 for tesseract by
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7c7ae07dd2a999045cb78bf7ff8dcbc7.html">training</a></li><li class="navelem"><a class="el" href="a01238.html">combine_lang_model.cpp</a></li>
+    <li class="footer">Generated on Thu Jan 30 2020 14:22:22 for tesseract by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
   </ul>
