@@ -1,0 +1,28 @@
+var searchData=
+[
+  ['icoord_7819',['ICOORD',['../a02400.html',1,'']]],
+  ['icoordelt_7820',['ICOORDELT',['../a02404.html',1,'']]],
+  ['icuerrorcode_7821',['IcuErrorCode',['../a03408.html',1,'tesseract']]],
+  ['identityfunc_7822',['IdentityFunc',['../a03040.html',1,'tesseract']]],
+  ['imagedata_7823',['ImageData',['../a02308.html',1,'tesseract']]],
+  ['imagefind_7824',['ImageFind',['../a03284.html',1,'tesseract']]],
+  ['index_7825',['Index',['../a03132.html',1,'tesseract::StrideMap']]],
+  ['indexmap_7826',['IndexMap',['../a02544.html',1,'tesseract']]],
+  ['indexmapbidi_7827',['IndexMapBiDi',['../a02548.html',1,'tesseract']]],
+  ['input_7828',['Input',['../a03044.html',1,'tesseract']]],
+  ['inputbuffer_7829',['InputBuffer',['../a03400.html',1,'tesseract']]],
+  ['int_5fclass_5fstruct_7830',['INT_CLASS_STRUCT',['../a02816.html',1,'']]],
+  ['int_5ffeature_5fstruct_7831',['INT_FEATURE_STRUCT',['../a02824.html',1,'']]],
+  ['int_5ffx_5fresult_5fstruct_7832',['INT_FX_RESULT_STRUCT',['../a02772.html',1,'']]],
+  ['int_5fproto_5fstruct_7833',['INT_PROTO_STRUCT',['../a02808.html',1,'']]],
+  ['int_5ftemplates_5fstruct_7834',['INT_TEMPLATES_STRUCT',['../a02820.html',1,'']]],
+  ['integermatcher_7835',['IntegerMatcher',['../a02788.html',1,'']]],
+  ['interval_7836',['Interval',['../a02148.html',1,'tesseract']]],
+  ['intfeaturedist_7837',['IntFeatureDist',['../a03412.html',1,'tesseract']]],
+  ['intfeaturemap_7838',['IntFeatureMap',['../a03416.html',1,'tesseract']]],
+  ['intfeaturespace_7839',['IntFeatureSpace',['../a02768.html',1,'tesseract']]],
+  ['intgrid_7840',['IntGrid',['../a03188.html',1,'tesseract']]],
+  ['intparam_7841',['IntParam',['../a02600.html',1,'tesseract']]],
+  ['intsimdmatrix_7842',['IntSimdMatrix',['../a02112.html',1,'tesseract']]],
+  ['io_7843',['IO',['../a03072.html',1,'tesseract::NetworkScratch']]]
+];

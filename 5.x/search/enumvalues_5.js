@@ -1,0 +1,23 @@
+var searchData=
+[
+  ['fd_5fbatch_14732',['FD_BATCH',['../a01539.html#aaa87baf6c9f3af8e6ab4dd61cf2bfe85a996324f141c5a6f3fe5828c837c03d51',1,'tesseract']]],
+  ['fd_5fdimsize_14733',['FD_DIMSIZE',['../a01539.html#aaa87baf6c9f3af8e6ab4dd61cf2bfe85a66d3b6aa5bc945465b376dbc09b27c56',1,'tesseract']]],
+  ['fd_5fheight_14734',['FD_HEIGHT',['../a01539.html#aaa87baf6c9f3af8e6ab4dd61cf2bfe85ab54b0f714629ea13eba06690d9005afd',1,'tesseract']]],
+  ['fd_5fwidth_14735',['FD_WIDTH',['../a01539.html#aaa87baf6c9f3af8e6ab4dd61cf2bfe85a4f3b5a320e8771ddafe87eaf5adaad08',1,'tesseract']]],
+  ['fl_5finv_14736',['FL_INV',['../a00509.html#aa705cf7e79a21c2352b00ffe20cd295fa25877a5731b46ebc3b2b7f4accc833b4',1,'scanutils.cpp']]],
+  ['fl_5fminus_14737',['FL_MINUS',['../a00509.html#aa705cf7e79a21c2352b00ffe20cd295fa202578abbb960bdab4babbe68bf9390e',1,'scanutils.cpp']]],
+  ['fl_5fsplat_14738',['FL_SPLAT',['../a00509.html#aa705cf7e79a21c2352b00ffe20cd295fa16e2deec2ffcd10b35b25e98d31f31f3',1,'scanutils.cpp']]],
+  ['fl_5fwidth_14739',['FL_WIDTH',['../a00509.html#aa705cf7e79a21c2352b00ffe20cd295fa2df3ca889266ab843730f4be43f97986',1,'scanutils.cpp']]],
+  ['fn_5fincolor_14740',['FN_INCOLOR',['../a01539.html#a8b8b0d5c539e2b26665765631049ab4ea43fd216f2c0ccfc41dd29d0b3fd57a76',1,'tesseract']]],
+  ['fn_5fnum_5ffactors_14741',['FN_NUM_FACTORS',['../a01539.html#a8b8b0d5c539e2b26665765631049ab4eac768d3f719278f03c8c48359b352b8ea',1,'tesseract']]],
+  ['fn_5fshear_14742',['FN_SHEAR',['../a01539.html#a8b8b0d5c539e2b26665765631049ab4ea503b1ef4d897275ede3ce1559ea2f0ce',1,'tesseract']]],
+  ['fn_5fx0_14743',['FN_X0',['../a01539.html#a8b8b0d5c539e2b26665765631049ab4ea519f0a8c73a0c496e29204f344a5ad1e',1,'tesseract']]],
+  ['fn_5fx1_14744',['FN_X1',['../a01539.html#a8b8b0d5c539e2b26665765631049ab4ea8c82a37219424c60b42325121a00ce5c',1,'tesseract']]],
+  ['fn_5fy0_14745',['FN_Y0',['../a01539.html#a8b8b0d5c539e2b26665765631049ab4eaeabce7fefc3c8f0420a4d18c6c6bd76e',1,'tesseract']]],
+  ['fn_5fy1_14746',['FN_Y1',['../a01539.html#a8b8b0d5c539e2b26665765631049ab4eae64b9b1a489d42a4bf12dd301707b1a0',1,'tesseract']]],
+  ['fn_5fy2_14747',['FN_Y2',['../a01539.html#a8b8b0d5c539e2b26665765631049ab4eaa65d219cd03592084efa5d36d4e21be3',1,'tesseract']]],
+  ['fn_5fy3_14748',['FN_Y3',['../a01539.html#a8b8b0d5c539e2b26665765631049ab4ea063a0d06701e1f962c5266a278777567',1,'tesseract']]],
+  ['forest_5fgreen_14749',['FOREST_GREEN',['../a03524.html#a100504544a5423a94222149ee9ed0fe8a6cc94ae9922b41ca42b6928cb12195b7',1,'ScrollView::FOREST_GREEN()'],['../a00746.html#a17bc059e437838f094a5a25c2d5ab88fa284e8c0fab8e99e4601d53fb4d79b1b7',1,'Forest_GREEN():&#160;callcpp.h']]],
+  ['freq_5fdawg_5fperm_14750',['FREQ_DAWG_PERM',['../a00374.html#a18e2c75cefe9e5b78e8ce41aa5fa25bca4fd9d3b025ecc5ea8f2248fea29543e4',1,'ratngs.h']]],
+  ['full_14751',['FULL',['../a01539.html#af87aace9f299daa18998c038689338e4a1db72ed682a44c48e501ec07816e4c45',1,'tesseract']]]
+];

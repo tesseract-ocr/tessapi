@@ -1,0 +1,22 @@
+var searchData=
+[
+  ['ocr_5fdevanagari_5fsplit_5fstrategy_13672',['ocr_devanagari_split_strategy',['../a02200.html#a76813b7659a7ba01ee372f5909341ca4',1,'tesseract::Tesseract']]],
+  ['odd_5fsize_13673',['odd_size',['../a02372.html#a91e519cd1df05f0e865218b0d6a0f9b9',1,'WERD_RES']]],
+  ['of_13674',['of',['../a00608.html#a66c7f757ef35e33a52ac2efe3f4e8247',1,'featdefs.cpp']]],
+  ['offset_5fnumerator_13675',['offset_numerator',['../a02248.html#a65bd7b120deee7f388691dfd720e05ff',1,'EdgeOffset']]],
+  ['offsets_13676',['offsets',['../a03144.html#a6a41bcf68bd9594c3988065b3ef7218a',1,'protobuf_tfnetwork_2eproto::TableStruct']]],
+  ['ok_5frepeated_5fch_5fnon_5falphanum_5fwds_13677',['ok_repeated_ch_non_alphanum_wds',['../a02200.html#ac793b80294ef8b02c78b154b03734b1a',1,'tesseract::Tesseract']]],
+  ['old_5fgeorgian_5ffonts_13678',['OLD_GEORGIAN_FONTS',['../a01546.html#ad054b11bd0c277c0e9b059d412273044',1,'language_specific']]],
+  ['oriya_5ffonts_13679',['ORIYA_FONTS',['../a01546.html#a945a55a852303f5104452819af7b5cb5',1,'language_specific']]],
+  ['other_5fend_13680',['other_end',['../a03276.html#af47b343a5b12475452c6ff6c14ea9d95',1,'C_OUTLINE_FRAG']]],
+  ['outline_5flength_13681',['outline_length',['../a03576.html#a0d9fd89bf692438d65cf25221f428752',1,'tesseract::ViterbiStateEntry']]],
+  ['outlinefeatdesc_13682',['OutlineFeatDesc',['../a00611.html#a72a26e08f0fd9771c2b6af211bb1a6c3',1,'featdefs.h']]],
+  ['outlines_13683',['outlines',['../a02232.html#a3c9282cad4102157d214bcc6311cda07',1,'TBLOB']]],
+  ['outlines_5f2_13684',['outlines_2',['../a02200.html#acb4b01dca8f419468e5ccf97c451e7cf',1,'tesseract::Tesseract']]],
+  ['outlines_5fodd_13685',['outlines_odd',['../a02200.html#a6c17b9a72b83394d218773f9a297b77a',1,'tesseract::Tesseract']]],
+  ['output_5f_13686',['output_',['../a03508.html#a367c2b4ec09574c84962a3e0837ff6e7',1,'tesseract::Validator']]],
+  ['output_5fambig_5fwords_5ffile_13687',['output_ambig_words_file',['../a02960.html#acae35981fc849d608182db8cfe881b0b',1,'tesseract::Dict']]],
+  ['output_5fused_5f_13688',['output_used_',['../a03508.html#a44e3e5973d2715c0d5e4a8225dbef396',1,'tesseract::Validator']]],
+  ['output_5fword_5fboxes_5f_13689',['output_word_boxes_',['../a03460.html#a15c430c28126631b01826eee1e8edcbb',1,'tesseract::StringRenderer']]],
+  ['overwrite_13690',['overwrite',['../a03464.html#a676ef55a820f9068f5af495546927346',1,'tesstrain_utils::TrainingArgs']]]
+];

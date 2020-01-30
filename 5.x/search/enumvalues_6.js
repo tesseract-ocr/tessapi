@@ -1,0 +1,20 @@
+var searchData=
+[
+  ['g_5fdodgy_14752',['G_DODGY',['../a00077.html#ac4a411895d63e3bb0bea788e92894d42a17acba0fc01478524c8214f0da82815a',1,'docqual.h']]],
+  ['g_5fnever_5fcrunch_14753',['G_NEVER_CRUNCH',['../a00077.html#ac4a411895d63e3bb0bea788e92894d42ac744add072d392855d098a995acb3751',1,'docqual.h']]],
+  ['g_5fok_14754',['G_OK',['../a00077.html#ac4a411895d63e3bb0bea788e92894d42a46d03f2b7d080cc8319a43ef4bad82b3',1,'docqual.h']]],
+  ['g_5fterrible_14755',['G_TERRIBLE',['../a00077.html#ac4a411895d63e3bb0bea788e92894d42a2400fb7991d9c94896464522e10c49ad',1,'docqual.h']]],
+  ['geobottom_14756',['GeoBottom',['../a00707.html#a41a4b5a66040b8b2deb004bd33909009a45ab6326da25c47511791071ad13f62a',1,'picofeat.h']]],
+  ['geocount_14757',['GeoCount',['../a00707.html#a41a4b5a66040b8b2deb004bd33909009af5bbc18811bb7a574c082e4a6f654db7',1,'picofeat.h']]],
+  ['geotop_14758',['GeoTop',['../a00707.html#a41a4b5a66040b8b2deb004bd33909009af270e2a7660aa4121f6693faa62de67c',1,'picofeat.h']]],
+  ['geowidth_14759',['GeoWidth',['../a00707.html#a41a4b5a66040b8b2deb004bd33909009a1840e5fe9bffa7db328236bd0ad20bd7',1,'picofeat.h']]],
+  ['gf1_14760',['GF1',['../a03048.html#aec1fe13e5f5290764b635dbe7b921941af7038e877122a0f21ac871891205d900',1,'tesseract::LSTM']]],
+  ['gfs_14761',['GFS',['../a03048.html#aec1fe13e5f5290764b635dbe7b921941a7a7e5f1ba4e2383d504456345cfdb3ed',1,'tesseract::LSTM']]],
+  ['gi_14762',['GI',['../a03048.html#aec1fe13e5f5290764b635dbe7b921941a558cff1f0fbed58a09d7b88389feb299',1,'tesseract::LSTM']]],
+  ['go_14763',['GO',['../a03048.html#aec1fe13e5f5290764b635dbe7b921941a8b76e4e83d49d439bd10a36c197ab042',1,'tesseract::LSTM']]],
+  ['gold_14764',['GOLD',['../a03524.html#a100504544a5423a94222149ee9ed0fe8ac125f54700f7aece2a4bf90e8cfed2fc',1,'ScrollView::GOLD()'],['../a00746.html#a17bc059e437838f094a5a25c2d5ab88fa4fe767077a795c957f76faf02f3ca765',1,'Gold():&#160;callcpp.h']]],
+  ['goldenrod_14765',['GOLDENROD',['../a03524.html#a100504544a5423a94222149ee9ed0fe8a8c6bd80ef295f1fcdb8e79549a0b9385',1,'ScrollView::GOLDENROD()'],['../a00746.html#a17bc059e437838f094a5a25c2d5ab88fa6240b68cc483b6d44a9383204bed1f91',1,'GoldENROD():&#160;callcpp.h']]],
+  ['green_14766',['GREEN',['../a03524.html#a100504544a5423a94222149ee9ed0fe8a9d8c87be486dead41d198d6b97a22174',1,'ScrollView::GREEN()'],['../a00746.html#a17bc059e437838f094a5a25c2d5ab88fad0784a3f969fe736e8b271a5a161d106',1,'Green():&#160;callcpp.h']]],
+  ['green_5fyellow_14767',['GREEN_YELLOW',['../a03524.html#a100504544a5423a94222149ee9ed0fe8a9a3622e1a820651d08bea683ca17f8c9',1,'ScrollView::GREEN_YELLOW()'],['../a00746.html#a17bc059e437838f094a5a25c2d5ab88fa10fd33e926d9f142cbaa1515b0fd1097',1,'Green_YELLOW():&#160;callcpp.h']]],
+  ['grey_14768',['GREY',['../a03524.html#a100504544a5423a94222149ee9ed0fe8a7bba33cbbab6aaa71dce1aad46ecc3a5',1,'ScrollView::GREY()'],['../a00746.html#a17bc059e437838f094a5a25c2d5ab88fa068417ac670c285e34e6e63a898e129b',1,'Grey():&#160;callcpp.h']]]
+];
