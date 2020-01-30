@@ -1,6 +1,6 @@
 # Tesseract Source Code Documentation
 
-This documentation was build with Doxygen from the
+This documentation was built with Doxygen from the
 [Tesseract source code](https://github.com/tesseract-ocr/tesseract).
 
 - [3.05.02](3.05.02/)
